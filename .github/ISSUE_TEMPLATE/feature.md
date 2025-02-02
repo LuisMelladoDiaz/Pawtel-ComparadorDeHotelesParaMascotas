@@ -7,19 +7,24 @@ assignees: ''
 
 ---
 
-### Feat
+### <Título de la feature>
 
-**Título:** [Feat] Nueva funcionalidad a implementar  
-**Descripción:** Explica la nueva funcionalidad propuesta.  
+### Descripción:
+<Explica la nueva funcionalidad propuesta>
+
 **Criterios de aceptación:**  
-- [ ] Debe permitir...
-- [ ] El usuario podrá...
+<
+- Debe permitir...
+- El usuario podrá...
+>
 
-**Subtareas:**  
-- [ ] Crear estructura de base de datos
-- [ ] Implementar API
-- [ ] Diseñar interfaz
+**Subtareas:** 
+<
+- Crear estructura de base de datos
+- Implementar API
+- Diseñar interfaz
+>
 
-**Dificultad:** Fácil | Media | Difícil  
-**Prioridad:** Baja | Media | Alta  
-**Tiempo estimado:** X horas/días
+**Dificultad:** <Fácil | Media | Difícil >
+**Prioridad:** <Baja | Media | Alta>
+**Tiempo estimado:** <X horas/días>
