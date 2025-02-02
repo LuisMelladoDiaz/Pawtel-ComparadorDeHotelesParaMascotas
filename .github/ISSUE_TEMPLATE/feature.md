@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-### <Título de la feature>
+## <Título de la feature>
 
 ### Descripción:
 <Explica la nueva funcionalidad propuesta>
@@ -15,15 +15,13 @@ assignees: ''
 **Criterios de aceptación:**  
 <
 - Debe permitir...
-- El usuario podrá...
->
+- El usuario podrá...>
 
 **Subtareas:** 
 <
 - Crear estructura de base de datos
 - Implementar API
-- Diseñar interfaz
->
+- Diseñar interfaz>
 
 **Dificultad:** <Fácil | Media | Difícil >
 **Prioridad:** <Baja | Media | Alta>
