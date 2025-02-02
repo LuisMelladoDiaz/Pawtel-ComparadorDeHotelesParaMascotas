@@ -8,20 +8,9 @@ assignees: ''
 ---
 
 ### Task
-```yaml
-name: Task
-description: Crea una nueva tarea simple para el proyecto.
-title: "[Task] "
-labels: ["task"]
-assignees: []
 
-body:
-  - type: textarea
-    id: description
-    attributes:
-      label: "Descripción"
-      description: "Describe la tarea a realizar."
-      placeholder: "Ejemplo: Redactar acta de reunión..."
-    validations:
-      required: true
-```
+**Título:** [Task] Descripción breve de la tarea  
+**Descripción:** Explica brevemente la tarea a realizar.  
+**Responsable:** @usuario-asignado  
+**Prioridad:** Baja | Media | Alta  
+**Tiempo estimado:** X horas/días
