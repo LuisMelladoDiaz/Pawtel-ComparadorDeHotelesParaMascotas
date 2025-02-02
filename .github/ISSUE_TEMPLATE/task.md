@@ -1,8 +1,8 @@
 ---
 name: Task
 about: Describe la tarea a realizar.
-title: Tarea_XYZ
-labels: ''
+title: 'Tarea: Nombre de la Tarea'
+labels: documentation
 assignees: ''
 
 ---

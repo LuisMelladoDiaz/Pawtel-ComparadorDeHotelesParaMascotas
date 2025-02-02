@@ -1,7 +1,7 @@
 ---
 name: Bug
 about: Reporta un error o problema en el proyecto.
-title: Bug_XYZ
+title: 'Bug: Nombre del Bug'
 labels: bug
 assignees: ''
 

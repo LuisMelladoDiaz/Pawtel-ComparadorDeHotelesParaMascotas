@@ -1,7 +1,7 @@
 ---
 name: Feature
 about: Nueva funcionalidad para el proyecto.
-title: Feature_XYZ
+title: 'Feature: <Nombre de la Feature>'
 labels: feature
 assignees: ''
 
