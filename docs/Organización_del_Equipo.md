@@ -9,11 +9,11 @@
 
 ## **Índice**
 1. [Tabla de Versiones](#tabla-de-versiones)
-2. [Equipos y Roles Propuestos](#equipos-y-roles-propuestos)
+2. [Miembros del Equipo](#miembros-del-equipo)
+3. [Equipos y Roles Propuestos](#equipos-y-roles-propuestos)
    - [Frontend](#frontend)
    - [Backend](#backend)
    - [Gestión](#gestión)
-3. [Miembros del Equipo](#miembros-del-equipo)
 
 ---
 
@@ -23,27 +23,8 @@
 |---------|------------|-------------|--------|
 | 1.0 | 02/02/2025 | Versión inicial del documento | Luis Mellado Díaz |
 | 1.1 | 03/02/2025 | Revisión general | Daniel Flores de Francisco |
+| 1.2 | 03/02/2025 | Reparto provisional de roles. | Daniel Flores de Francisco |
 
----
-
-## **Equipos y Roles Propuestos**
-
-### **Frontend**
-- **Líder frontend (1):** Sergio
-- **Desarrollo frontend (2):** Sergio
-- **Diseño de UI y UX (1):** Sergio
-
-### **Backend**
-- **Líder backend (1):** Luis, David, Dani, Rafael
-- **Desarrollo backend (3):** Dani, David, Rafael, Curro, Claudio
-- **DevOps (1):** Dani, David
-
-### **Gestión**
-- **Project Manager (PM) (1):** _Por asignar_
-- **Analista, Product Owner (PO) (1):** Luis, Rafael, Curro
-- **Publicidad y Marketing (1):** _Por asignar_
-- **Documentación (2):** Luis, Dani, Rafael, Claudio
-- **Encargado de QA y Pruebas (1):** Rafael (más o menos)
 
 ---
 
@@ -63,6 +44,34 @@
 | Rafael Castillo Cebolla | rafaelcastillocebolla@gmail.com | rafcasceb |
 | Fernando Castelló Sánchez | gferx87@gmail.com | feerk |
 | Javier García Sebastián | javigarciasebastian@icloud.com | JaviGarcia1 |
+
+---
+
+## **Equipos y Roles Propuestos**
+
+#### **Project Managers:**
+- PM_1: Luis
+- PM_2: Daniel
+
+#### **Frontend**
+- **Líder frontend (1):** Sergio
+- **Desarrollo frontend (3):** Javi G, Fernando, Luis
+- **Diseño de UI y UX (1):** Sergio
+  
+#### **Full Stack:** 
+- **Líder full stack (1):** David
+- **Desarrollo full stack (2):** Curro, Andrés
+
+#### **Backend**
+- **Líder backend (1):** Rafael
+- **Desarrollo backend (3):** Claudio, Jorge, Javi R
+- **DevOps (1):** Daniel
+
+#### **Gestión**
+- **Analista (3):** Rafael, Luis, Curro
+- **Publicidad y Marketing (1):** Javi G
+- **Documentación (2):** Luis, Daniel, Claudio
+- **Encargado de QA y Pruebas (1):** Rafael, Luis
 
 ---
 
