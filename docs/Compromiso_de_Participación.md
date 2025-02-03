@@ -79,7 +79,7 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [ ] David González Martínez  
 - [x] Fernando Castelló Sánchez  
 - [ ] Francisco Miguel Jiménez Morales  
-- [ ] Javier Ruiz Garrido  
+- [x] Javier Ruiz Garrido  
 - [ ] Jorge Gómez de Tovar  
 - [x] Luis Mellado Díaz  
 - [ ] Rafael Castillo Cebolla  
