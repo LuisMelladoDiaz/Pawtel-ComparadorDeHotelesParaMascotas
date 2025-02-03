@@ -26,6 +26,8 @@
 | Versión | Fecha | Descripción | Autor |
 |---------|------|-------------|-------|
 | 1.0 | 03/02/2025 | Creación del documento. Agenda. | Luis Mellado Díaz |
+| 1.1 | 03/02/2025 | Discusión y acuerdos. | Luis Mellado Díaz |
+
 
 ---
 
@@ -35,16 +37,16 @@
 | Nombre | Asistencia ✅/❌|
 |--------|------------|
 | Andrés Martínez Reviriego         | ❌ |
-| Claudio Cortés Carrasco           | ❌ |
-| Daniel Flores De Francisco        | ❌ |
-| David González Martínez           | ❌ |
-| Fernando Castelló Sánchez         | ❌ |
-| Francisco Miguel Jiménez Morales  | ❌ |
-| Javier Ruiz Garrido               | ❌ |
-| Jorge Gómez de Tovar              | ❌ |
-| Luis Mellado Díaz                 | ❌ |
-| Rafael Castillo Cebolla           | ❌ |
-| Sergio Trenado González           | ❌ |
+| Claudio Cortés Carrasco           | ✅ |
+| Daniel Flores De Francisco        | ✅ |
+| David González Martínez           | ✅ |
+| Fernando Castelló Sánchez         | ✅ |
+| Francisco Miguel Jiménez Morales  | ✅ |
+| Javier Ruiz Garrido               | ✅ |
+| Jorge Gómez de Tovar              | ✅ |
+| Luis Mellado Díaz                 | ✅ |
+| Rafael Castillo Cebolla           | ✅ |
+| Sergio Trenado González           | ✅ |
 
 ---
 ## Anuncios
@@ -67,26 +69,31 @@
 
 ## Discusión y Acuerdos
 
-**Elección de PM:**
-**Elección de portavoz:**
-**Presentador de la semana:**
+**Elección de PM:** Luis y Dani
+**Elección de portavoz:** Luis
+**Presentador de la semana:** Javi
 
 ### Reparto de los roles técnicos en el equipo.
+
 #### **Frontend**
 - **Líder frontend (1):** Sergio
-- **Desarrollo frontend (2):** Sergio
+- **Desarrollo frontend (3):** Javi G, Fernando, Luis
 - **Diseño de UI y UX (1):** Sergio
+  
+#### **Full Stack:** 
+- **Líder full stack (1):** David
+- **Desarrollo full stack (2):** Curro, Andrés
 
 #### **Backend**
-- **Líder backend (1):** Luis, David, Dani, Rafael
-- **Desarrollo backend (3):** Dani, David, Rafael, Curro, Claudio
-- **DevOps (1):** Dani, David
+- **Líder backend (1):** Rafael
+- **Desarrollo backend (3):** Claudio, Jorge, Javi R
+- **DevOps (1):** Dani
 
 #### **Gestión**
-- **Analista, Product Owner (PO) (1):** Luis, Rafael, Curro
-- **Publicidad y Marketing (1):** _Por asignar_
-- **Documentación (2):** Luis, Dani, Rafael, Claudio
-- **Encargado de QA y Pruebas (1):** Rafael (más o menos)
+- **Analista:** Rafael, Luis, Curro
+- **Publicidad y Marketing (1):** Javi G
+- **Documentación (2):** Luis, Dani, Claudio
+- **Encargado de QA y Pruebas (1):** Rafael, Luis
 
 ### Reparto de los puntos de la presentación
 
@@ -103,8 +110,8 @@
 3. organización de equipo -> habilidades
 
 ### Otras Tareas
-1. Informe de uso de la ia
-2. Gestión de conocimiento, base de lecciones aprendidas, feedback de clases anteriores.
+1. Informe de uso de la IA.
+2. Gestión de conocimiento, base de lecciones aprendidas, feedback de clases anteriores. -> Dani
 
 ----
 
