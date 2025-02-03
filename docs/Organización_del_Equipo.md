@@ -22,6 +22,7 @@
 | Versión | Fecha | Descripción | Autor |
 |---------|------------|-------------|--------|
 | 1.0 | 02/02/2025 | Versión inicial del documento | Luis Mellado Díaz |
+| 1.1 | 03/02/2025 | Revisión general | Daniel Flores de Francisco |
 
 ---
 
@@ -61,6 +62,7 @@
 | Javier Ruiz Garrido | 2210jrg@gmail.com | Javiruizg |
 | Rafael Castillo Cebolla | rafaelcastillocebolla@gmail.com | rafcasceb |
 | Fernando Castelló Sánchez | gferx87@gmail.com | feerk |
+| Javier García Sebastián | javigarciasebastian@icloud.com | JaviGarcia1 |
 
 ---
 

@@ -28,3 +28,4 @@ Descripción Provisional
 | Javier Ruiz Garrido | 2210jrg@gmail.com | Javiruizg |
 | Rafael Castillo Cebolla | rafaelcastillocebolla@gmail.com | rafcasceb |
 | Fernando Castelló Sánchez | gferx87@gmail.com | feerk |
+| Javier García Sebastián | javigarciasebastian@icloud.com | JaviGarcia1 |
