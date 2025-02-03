@@ -77,7 +77,7 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [ ] Claudio Cortés Carrasco  
 - [x] Daniel Flores De Francisco  
 - [ ] David González Martínez  
-- [ ] Fernando Castelló Sánchez  
+- [x] Fernando Castelló Sánchez  
 - [ ] Francisco Miguel Jiménez Morales  
 - [ ] Javier Ruiz Garrido  
 - [ ] Jorge Gómez de Tovar  
