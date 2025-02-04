@@ -80,7 +80,7 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [x] Fernando Castelló Sánchez  
 - [ ] Francisco Miguel Jiménez Morales  
 - [x] Javier Ruiz Garrido  
-- [ ] Jorge Gómez de Tovar  
+- [x] Jorge Gómez de Tovar  
 - [x] Luis Mellado Díaz  
 - [ ] Rafael Castillo Cebolla  
 - [ ] Sergio Trenado González  
