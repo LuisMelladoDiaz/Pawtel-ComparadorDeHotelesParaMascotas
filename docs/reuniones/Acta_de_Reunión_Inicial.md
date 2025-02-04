@@ -27,6 +27,8 @@
 |---------|------|-------------|-------|
 | 1.0 | 03/02/2025 | Creación del documento. Agenda. | Luis Mellado Díaz |
 | 1.1 | 03/02/2025 | Discusión y acuerdos. | Luis Mellado Díaz |
+| 1.2 | 03/02/2025 | Actualización del reparto de tareas. | Luis Mellado Díaz |
+
 
 
 ---
@@ -96,22 +98,30 @@
 - **Encargado de QA y Pruebas (1):** Rafael, Luis
 
 ### Reparto de los puntos de la presentación
+# Asignación de Tareas
 
-1. business idea
-	- negocio en 50 palabras
-	- tipo de negiocio, diferencia entre usuario cliente, negocios parecidos
-	- análisis de competidores
-	- como voy a ganar dinero, análisis de coste
-	- usuarios piloto
-	- matriz dafo, debilidades amenazas, fortalezas, oportunidades 
-2. producto mínimo viable
-  - tipo de cliente
-  - innovación tecnológica y de negocio
-3. organización de equipo -> habilidades
+| Miembro del equipo            | Tarea |
+|--------------------------------|--------------------------------------|
+| **Sergio Trenado González**    | Diseño del logo del grupo, usarlo de portada para la presentación y para los documentos. |
+| **Luis Mellado Díaz**          | Creación de la presentación e Índice |
+| **David González Martínez**    | Business idea, Negocio en 50 palabras |
+| **Andrés Martínez Reviriego**  | Tipo de negocio, diferencia entre usuario-cliente, negocios parecidos |
+| **Claudio Cortés Carrasco**    | Análisis de competidores |
+| **Jorge Gómez de Tovar**       | ómo voy a ganar dinero, análisis de coste |
+| **Javier Ruiz Garrido**        | Usuarios piloto |
+| **Fernando Castelló Sánchez**  | Matriz DAFO: debilidades, amenazas, fortalezas, oportunidades |
+| **Rafael Castillo Cebolla**    | Producto mínimo viable |
+| **Javier García Sebastián**    | Tipo de cliente |
+| **Claudio Cortés Carrasco**    | Innovación tecnológica y de negocio |
+| **Luis Mellado Díaz**          | Organización de equipo y habilidades |
 
 ### Otras Tareas
-1. Informe de uso de la IA.
-2. Gestión de conocimiento, base de lecciones aprendidas, feedback de clases anteriores. -> Dani
+# Asignación de Tareas
+
+| Miembro del equipo            | Tarea |
+|--------------------------------|--------------------------------------|
+| **Daniel Flores De Francisco** | Gestión de conocimiento, base de lecciones aprendidas, feedback de clases anteriores |
+| **Francisco Miguel Jiménez Morales** | Informe de uso de la IA |
 
 ----
 
