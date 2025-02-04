@@ -76,7 +76,7 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [x] Andrés Martínez Reviriego  
 - [ ] Claudio Cortés Carrasco  
 - [x] Daniel Flores De Francisco  
-- [ ] David González Martínez  
+- [x] David González Martínez  
 - [x] Fernando Castelló Sánchez  
 - [ ] Francisco Miguel Jiménez Morales  
 - [x] Javier Ruiz Garrido  
