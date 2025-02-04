@@ -74,7 +74,7 @@ Los alumnos que cumplan de manera destacada con sus compromisos recibirán benef
 Al firmar este documento, entiendo y acepto las responsabilidades que se me han asignado y me comprometo a cumplirlas según lo establecido en este documento.
 
 - [x] Andrés Martínez Reviriego  
-- [ ] Claudio Cortés Carrasco  
+- [x] Claudio Cortés Carrasco  
 - [x] Daniel Flores De Francisco  
 - [x] David González Martínez  
 - [x] Fernando Castelló Sánchez  
