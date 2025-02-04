@@ -98,7 +98,6 @@
 - **Encargado de QA y Pruebas (1):** Rafael, Luis
 
 ### Reparto de los puntos de la presentación
-# Asignación de Tareas
 
 | Miembro del equipo            | Tarea |
 |--------------------------------|--------------------------------------|
@@ -107,7 +106,7 @@
 | **David González Martínez**    | Business idea, Negocio en 50 palabras |
 | **Andrés Martínez Reviriego**  | Tipo de negocio, diferencia entre usuario-cliente, negocios parecidos |
 | **Claudio Cortés Carrasco**    | Análisis de competidores |
-| **Jorge Gómez de Tovar**       | ómo voy a ganar dinero, análisis de coste |
+| **Jorge Gómez de Tovar**       | Como voy a ganar dinero, análisis de coste |
 | **Javier Ruiz Garrido**        | Usuarios piloto |
 | **Fernando Castelló Sánchez**  | Matriz DAFO: debilidades, amenazas, fortalezas, oportunidades |
 | **Rafael Castillo Cebolla**    | Producto mínimo viable |
@@ -116,7 +115,6 @@
 | **Luis Mellado Díaz**          | Organización de equipo y habilidades |
 
 ### Otras Tareas
-# Asignación de Tareas
 
 | Miembro del equipo            | Tarea |
 |--------------------------------|--------------------------------------|
