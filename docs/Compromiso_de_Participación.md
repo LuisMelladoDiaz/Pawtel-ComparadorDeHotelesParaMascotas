@@ -78,7 +78,7 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [x] Daniel Flores De Francisco  
 - [x] David González Martínez  
 - [x] Fernando Castelló Sánchez  
-- [ ] Francisco Miguel Jiménez Morales  
+- [x] Francisco Miguel Jiménez Morales  
 - [x] Javier Ruiz Garrido  
 - [x] Jorge Gómez de Tovar  
 - [x] Luis Mellado Díaz  
