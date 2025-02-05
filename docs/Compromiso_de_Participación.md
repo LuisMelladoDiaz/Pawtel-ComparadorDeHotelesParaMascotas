@@ -82,7 +82,7 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [x] Javier Ruiz Garrido  
 - [x] Jorge Gómez de Tovar  
 - [x] Luis Mellado Díaz  
-- [ ] Rafael Castillo Cebolla  
+- [x] Rafael Castillo Cebolla  
 - [x] Sergio Trenado González  
 
 ---
