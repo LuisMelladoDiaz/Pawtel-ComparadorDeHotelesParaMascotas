@@ -35,8 +35,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Andrés Martínez Reviriego
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -45,8 +45,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Claudio Cortés Carrasco
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -55,8 +55,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Daniel Flores De Francisco
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -65,8 +65,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### David González Martínez
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -75,8 +75,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Fernando Castelló Sánchez
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -85,8 +85,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Francisco Miguel Jiménez Morales
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -95,8 +95,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Javier García Sebastián
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -105,8 +105,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Javier Ruiz Garrido
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -115,8 +115,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Jorge Gómez de Tovar
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -125,8 +125,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Luis Mellado Díaz
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -135,8 +135,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Manuel Castillejo Vela
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -145,8 +145,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Rafael Castillo Cebolla
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -155,8 +155,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Sergio Trenado González
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
@@ -165,8 +165,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Yesica Garate Fuentes
 
-| Negocio | Problema a solucionar | Propuestas o comentarios |
-|-------------|---------|----------------------|-------------------------|
+| Negocio  | Problema a solucionar  | Propuestas o comentarios  |
+|----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
