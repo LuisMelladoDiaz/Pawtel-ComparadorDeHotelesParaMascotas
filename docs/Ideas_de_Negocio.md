@@ -108,7 +108,7 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
+| Entradas discoteca | Tener que comprar las entradas teniendo que hablar con un rrpp e incluso teniendo que ir a recogerlas a algun sitio, o enterarte de las ofertas a través de historias de instagram.  | Crear un sitio de venta de las entradas. Podría ser para que los rrpp suban ahí sus ofertas y opción de comprarselas directamente o directamente las discotecas y que se compren ahí las entradas y tengas una wallet con un qr (que sería la mejor opción pero habría que contar con el okey de las discotecas). Se ganaría dinero con anuncios o incluso con una muy pequeña comisión por entrada vendida en nuestra plataforma.|
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 4] | [Problema identificado] | [Solución o comentario] |
