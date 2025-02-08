@@ -118,9 +118,9 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
+| Cuidado parques | La falta de monitoreo de parques y áreas naturales impide su buen mantenimiento. | App colaborativa donde los usuarios reportan problemas y mantenimiento necesario en parques. |
+| Organizador de Documentos Inteligente | Desorden con archivos digitales. | Clasificación automática de documentos con búsqueda avanzada. |
+| Comparador de Gasolina |No saber dónde está la gasolina más barata. | Muestra precios en gasolineras cercanas en tiempo real. |
 | [Negocio 4] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
