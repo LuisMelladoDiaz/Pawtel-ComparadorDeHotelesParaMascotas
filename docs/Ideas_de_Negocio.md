@@ -128,9 +128,9 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
+| Aceite | El aceite es practicamente un producto de lujo de cara al ciudadano pero los agricultores pierden dinero | e-commerce de aceite para los agricultores locales? |
+| Personalización | Personalizar ropa para animales? Parece que no es algo muy explorado | El mercado de personalización esta muy fuerte, desde personalizar camisetas a mandos de videojuegos. La idea sería explorar este nicho.|
+| Coleccionismo retro | Seguimiento del precio de un producto a lo largo de la historia | El coleccionismo de videojuegos y consolas retro mueve una cantidad de dinero mountruosa. Hay gente que lo usa como forma de inversión. Se podría exploarar el nicho en busca de otros problemas o forma de beneficiarse. |
 | [Negocio 4] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
