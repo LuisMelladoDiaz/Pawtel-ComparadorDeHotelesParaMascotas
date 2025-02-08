@@ -59,12 +59,12 @@
 
 #### **Frontend**
 - **Líder frontend (1):** Sergio
-- **Desarrollo frontend (3):** Javi G, Fernando, Luis
+- **Desarrollo frontend (3):** Javi G, Fernando, Luis, Yesica
 - **Diseño de UI y UX (1):** Sergio
   
 #### **Full Stack:** 
 - **Líder full stack (1):** David
-- **Desarrollo full stack (2):** Curro, Andrés
+- **Desarrollo full stack (2):** Curro, Andrés, Manuel
 
 #### **Backend**
 - **Líder backend (1):** Rafael

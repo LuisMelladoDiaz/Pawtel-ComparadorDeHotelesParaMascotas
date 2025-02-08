@@ -29,3 +29,5 @@ Descripción Provisional
 | Rafael Castillo Cebolla | rafaelcastillocebolla@gmail.com | rafcasceb |
 | Fernando Castelló Sánchez | gferx87@gmail.com | feerk |
 | Javier García Sebastián | javigarciasebastian@icloud.com | JaviGarcia1 |
+| Manuel Castillejo Vela | Mancasvel1@alum.us.es | Mancasvel |
+| Yesica Garate Fuentes | yesi.garate@gmail.com | yesgarfue |

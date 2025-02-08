@@ -84,6 +84,8 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [x] Luis Mellado Díaz  
 - [x] Rafael Castillo Cebolla  
 - [x] Sergio Trenado González  
+- [x] Manuel Castillejo Vela 
+- [x] Yesica Garate Fuentes 
 
 ---
 
