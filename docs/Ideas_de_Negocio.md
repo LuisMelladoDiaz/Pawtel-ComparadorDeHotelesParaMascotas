@@ -67,12 +67,13 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
+| Restaurantes saludables | Las plataformas de reviews actuales están ideadas para el público general. No disponen de la información remotamente necesaria para las personas interesadas en comer saludable. Si quiero saber si en 'restaurante x' podré disfrutar de un alimento de calidad, natural y nutritivo, me es imposible. | Se pueden utilizar conceptos sociales y de gamificación. Se puede monetizar mediante acuerdos con restaurantes para publicidad. |
+| Fishing Buddy/Group | Es complicado encontrar grupos o compañeros de pesca (o salidas). Actualmente, la información y organización de salidas está dispersa en varios sitios. | La solución es crear una app que reúna lo que los aficionados buscan en este sentido. Son adultos, por lo general, así que quizás se puede ver el tema de suscripción. En todo caso, se puede hacer tratos con tiendas relacionadas para incorporar anuncios (o incluso integrarlas) en la app. |
+| Hiking Buddy/Group | Similar al anterior. | Similar al anterior |
+| Recados para personas mayores | Las personas mayores suelen requerir de ayuda para distintos recados (hacer la compra en el supermercado, farmacia, limpieza, hacer x o hacer y). Es común que los hijos los ayuden o contraten a otros, pero esto suele ser complicado.  | App donde se puede gestionar todo esto. Se cobran comisiones. |
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
+*Nota*: el 2 y el 3 se pueden, probablemente, extender a otros nichos. Se puede buscar información sobre lo que la gente hace y busca para encontrar salidas o compañeros online.
 ### Fernando Castelló Sánchez
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
