@@ -57,10 +57,10 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
+| Canguros para niños y cuidadores | El hecho de que muchas familias no tengan con quién dejar  su hij@s es un problema. Tambien, las pesonas mayores o simplemente aquellas que estan solas. Necesito alguna forma de buscar gente de confianza | Plataforma que pone en contacto familiares con canguros/cuidadores/personas de compañía. Se podría innovar, pues ya existe alguna plataforma, por lo que hay mercado. No he visto una que recoja el cuidado de niños y personas mayores en una misma app. |
+| Hoteles para mascotas | Necesito una forma de buscar techo para mi mascota cuando voy de viaje o simplemente no puedo cuidarla. Un comparador de precios tampoco estaría mal, así puedo ahorrarme dinero. | Plataforma para buscar alojamiento para mascotas de forma económica. No os imaginais, el negocio de los hoteles para mascotas, sobretodo perros. Es de pijos, pero es totalmente algo que se utiliza. En Córdoba al menos hay 7 residencia de mascotas, en Sevilla ni te cuento... Es algo innovador y de nicho. |
+| Cocina privada | No te apetecería alguna vez que te cocinase un chef profesional? Y si voy al campo con mis amigos y quiero una paella, un paellero? Y si simplemente quiero ponerme en contácto de la mano de un chef para que me enseñe en mi propia casa.| Plataforma de chefs tanto privados, casuales y gente que quiere compartir su experiencia culinaria. Precio ajustable al consumidor. Tarifa fija por parte del chef + complementos: (comprar ingredientes, recoger la cocina, clase de cocina). Se cobraría comisión. Hay mercado pero no tantos competidores.|
+| Lavado de coches | El simple hecho de ir a lavar el coche, es un impedimento para precisamente lavarlo. Muchas veces da pereza, o no tienes tiempo. Estaría bien que alguien lo llevase a lavar por mi. | Plataforma para lavado de coche a domicilio. Viene un tipo de alguna lavandería, o autonomo y te lo lleva a algun sitio de lavado que tienen las herramientas necesarias. El problema que le veo es que pasa si te roban el coche. Si nos podemos asegurar que esa persona sea trackeable, no estaría tan mal. |
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
 ### David González Martínez
