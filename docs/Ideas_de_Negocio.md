@@ -139,10 +139,10 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
 | [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 5] | [Problema identificado] | [Solución o comentario] |
+| Someone to talk | Muchas personas en la actualidad sufren de soledad acompañado de problemas que se dan en la vida cotidiana, esta mezcla puede afectar severamente a la salud mental de los mismos | Peer support con personas con problemas similares. Se centrará en el chat con alguien al azar para darse apoyo emocional además de foros donde podrán publicar sus publicaciones con adición de expertos de ongs que se quieran involucrar para dar consejos sobre la salud mental. |
+| Investigadores privados| Tras un análisis vemos que las paginas de contacto con investigadores privados todas dejan gran ambigüedad y no dan información directa de casos de éxito, valoraciones de usuarios o servicios que ofrecen, simplemente te dejan un teléfono de contacto. | . Si nuestra app, pagina web se posicionase de las primeras gracias al seo está podría ser la página por la que todos querrían pasar a la hora de contratar a un investigador privado ya que sabrían de antemano los precios servicios y opiniones y podrían comparar un investigador con otro. |
+| Notarías | Grandes cantidades de información almacenada normalmente de una manera no ordenada y comunicación con los clientes por medios tradicionales | Sistema que organice por secciones la documentación además de una comunicación más rápida y organizada con los clientes|
+| Skill Swap | Muchas personas tienen distintas habilidades y podrían enseñarlas pero no a un nivel profesional, además estas personas suelen estar interesadas en aprender habilidades relacionadas. | Cada usuario pondría en que es experto y en que quiere aprender entonces se le emparejaría con ellos y podrían realizar chat resolviendo dudas, reservar una clase e incluso videollamadas. |
 
 ### Rafael Castillo Cebolla
 
