@@ -47,8 +47,8 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
+| [Intercambio de Objetos de Coleccionista] | [Coleccionistas de objetos extraños (taxidermias, artefactos históricos peculiares, etc) no tienen un espacio seguro y confiable para comprar.] | [Plataforma con verificación de autenticidad, subastas y foros de discusión.] |
+| [Banco Virtual de Leche Materna] | [Escasez de leche materna para bebés prematuros o con intolerancias, y poca coordinación entre donantes y hospitales] | [Plataforma para conectar donantes de leche materna con bancos y centros de salud] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 4] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
