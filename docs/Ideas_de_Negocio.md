@@ -126,12 +126,13 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Luis Mellado Díaz
 
+
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
 | Aceite | El aceite es practicamente un producto de lujo de cara al ciudadano pero los agricultores pierden dinero | e-commerce de aceite para los agricultores locales? |
 | Personalización | Personalizar ropa para animales? Parece que no es algo muy explorado | El mercado de personalización esta muy fuerte, desde personalizar camisetas a mandos de videojuegos. La idea sería explorar este nicho.|
-| Coleccionismo retro | Seguimiento del precio de un producto a lo largo de la historia | El coleccionismo de videojuegos y consolas retro mueve una cantidad de dinero mountruosa. Hay gente que lo usa como forma de inversión. Se podría exploarar el nicho en busca de otros problemas o forma de beneficiarse. |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
+| **Coleccionismo retro** | Los productos audiovisuales retro como los videojuegos son muy caros y su preservación es muy importante para los coleccionistas. Para guardar y proteger los juegos se usan cajas de plástico y soportes de exposición. Existen tiendas para los protectores de plástico pero no para los soportes. | Un e-commerce de venta de protectores para juegos, cartuchos, discos, vinilos asi como de los soportes. Sería buena adición una grafica que siga el precio del producto a lo largo de la historia ya que muchos coleccionistas se dedican a la compra venta de estos productos retro para lucrarse (como si invirtieran en bolsa) |
+| **IA** | Usamos muchas herramientas de IA diferentes. Cada vez que quiero una IA con un propósito concreto tengo que hacer la busqueda, elegir una, crearme una cuenta ... Tengo mis datos repartidos por muchas aplicaciones de IA. Algunas de ellas tienen limite de uso o políticas de pago diferentes. | Tienda de IAs OpenSource. Seleccionar las IA de codigo abierto más utiles (generadoras de texto, imagenes, video ...) y ponerlas en un solo lugar o "tienda". Solo tienes una cuenta, la cuenta de la tienda. Tus datos personales quedan en local y nunca en las aplicaciones. Una especia de cerebro o contexto común. Para el producto minimo viable usaríamos IAs de codigo libre y de cara al futuro podemos poner IAs de pago pero necesitamos acuerdos con los proveedores. Ganamos dinero con comisión por venta y publicidad de otras IAs. En principio la venta de datos del usuario es factible pero el principal atractivo de la app es proteger tus datos y que esten en un solo sitio en local.|
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
 ### Manuel Castillejo Vela
