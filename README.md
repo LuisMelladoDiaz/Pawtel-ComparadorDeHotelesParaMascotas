@@ -1,4 +1,3 @@
-# ISPP
 Descripción Provisional
 
 ## Índice
@@ -31,3 +30,10 @@ Descripción Provisional
 | Javier García Sebastián | javigarciasebastian@icloud.com | JaviGarcia1 |
 | Manuel Castillejo Vela | Mancasvel1@alum.us.es | Mancasvel |
 | Yesica Garate Fuentes | yesi.garate@gmail.com | yesgarfue |
+
+## Disponibilidad del Equipo
+La disponibilidad del equipo queda reflejada en la siguiente tabla. Para mas detalle acceda a [When2Meet](https://www.when2meet.com/?28930983-a2ebV).
+
+![disponibilidad](https://github.com/user-attachments/assets/8037ab77-5b83-45fa-997c-9fdc840064ad)
+
+
