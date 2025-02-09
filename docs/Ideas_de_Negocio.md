@@ -37,10 +37,10 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
+| App de reservas para negocios | Para reservar una cita tienes que llamar a cada sitio y cuadrar con el dueño del local (peluquería, dentista...) |Una plataforma que unifique esto ofreciendo a dueños la posibilidad de administrar automáticamente todas sus citas y a clientes encontrar todo en el mismo sitio. |
+| Cartera digital | Cada vez que salimos de casa tenemos que llevar con nosotros el DNI, el carnet de conducir... Existen aplicaciones oficiales para el DNI, otra para el carnet de conducir, pero son demasiadas aplicaciones | Con esta aplicación tendríamos todo unificado en el mismo sitio con todo tipo de tarjetas que queramos |
+| Banco de intercambio de horas de voluntariado | Muchas personas quieren ayudar, pero no saben cómo ni dónde. | Plataforma donde usuarios pueden intercambiar tiempo de voluntariado en diferentes proyectos según su disponibilidad. |
+| ¿Qué hay nuevo cerca de mí? | No sabemos que negocios nuevos abren cerca de dónde vivimos, como gimnasios, supermercados... | Aplicación que ofrece a los nuevos serevicios promocionarse y a los clientes conocer más sobre el futuro cercano de su zona.|
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
 ### Claudio Cortés Carrasco
@@ -108,7 +108,7 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| Entradas discoteca | Tener que comprar las entradas teniendo que hablar con un rrpp e incluso teniendo que ir a recogerlas a algun sitio, o enterarte de las ofertas a través de historias de instagram.  | Crear un sitio de venta de las entradas. Podría ser para que los rrpp suban ahí sus ofertas y opción de comprarselas directamente o directamente las discotecas y que se compren ahí las entradas y tengas una wallet con un qr (que sería la mejor opción pero habría que contar con el okey de las discotecas). Se ganaría dinero con anuncios o incluso con una muy pequeña comisión por entrada vendida en nuestra plataforma.|
+| Alquiler de objetos | Si quiero alquilar una pala de padel voy a decathlon, si quiero alquilar un videojuego no se ni a donde ir. Mucho menos hay una plataforma como vinted pero para alquiler de cualquier tipo de objetos.  | Plataforma similar a vinted pero sobre alquiler de literalmente cualquier tipo de objetos. Ganar dinero con una pequeña comision por transaccion entre usuarios. Se diferenciaria de un foro en que el dinero lo manejaria nuestra aplicacion para evitar estafas.|
 | [Negocio 2] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 3] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 4] | [Problema identificado] | [Solución o comentario] |
@@ -126,13 +126,14 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 ### Luis Mellado Díaz
 
+
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
 | Aceite | El aceite es practicamente un producto de lujo de cara al ciudadano pero los agricultores pierden dinero | e-commerce de aceite para los agricultores locales? |
 | Personalización | Personalizar ropa para animales? Parece que no es algo muy explorado | El mercado de personalización esta muy fuerte, desde personalizar camisetas a mandos de videojuegos. La idea sería explorar este nicho.|
-| Coleccionismo retro | Seguimiento del precio de un producto a lo largo de la historia | El coleccionismo de videojuegos y consolas retro mueve una cantidad de dinero mountruosa. Hay gente que lo usa como forma de inversión. Se podría exploarar el nicho en busca de otros problemas o forma de beneficiarse. |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 5] | [Problema identificado] | [Solución o comentario] |
+| **Coleccionismo retro** | Los productos audiovisuales retro como los videojuegos son muy caros y su preservación es muy importante para los coleccionistas. Para guardar y proteger los juegos se usan cajas de plástico y soportes de exposición. Existen tiendas para los protectores de plástico pero no para los soportes. | Un e-commerce de venta de protectores para juegos, cartuchos, discos, vinilos asi como de los soportes. Sería buena adición una grafica que siga el precio del producto a lo largo de la historia ya que muchos coleccionistas se dedican a la compra venta de estos productos retro para lucrarse (como si invirtieran en bolsa) |
+| **IA** | Usamos muchas herramientas de IA diferentes. Cada vez que quiero una IA con un propósito concreto tengo que hacer la busqueda, elegir una, crearme una cuenta ... Tengo mis datos repartidos por muchas aplicaciones de IA. Algunas de ellas tienen limite de uso o políticas de pago diferentes. | Tienda de IAs OpenSource. Seleccionar las IA de codigo abierto más utiles (generadoras de texto, imagenes, video ...) y ponerlas en un solo lugar o "tienda". Solo tienes una cuenta, la cuenta de la tienda. Tus datos personales quedan en local y nunca en las aplicaciones. Una especia de cerebro o contexto común. Para el producto minimo viable usaríamos IAs de codigo libre y de cara al futuro podemos poner IAs de pago pero necesitamos acuerdos con los proveedores. Ganamos dinero con comisión por venta y publicidad de otras IAs. En principio la venta de datos del usuario es factible pero el principal atractivo de la app es proteger tus datos y que esten en un solo sitio en local.|
+| **Herencia** | Mil millones de tramites, papeles e historias. | Guía para gestionar la herencia y testamento de manera sencilla e interactiva. Ahorrarse visitas al notario. Obtener el Certificado de Defunción. Obtener el Certificado de Últimas Voluntades. Obtener el Título Sucesorio (Testamento o Acta de Declaración de Herederos) .Recopilar Documentación de los Bienes. Recibir Asesoramiento Civil y Fiscal. Formalizar la Aceptación y Adjudicación de Herencia ante Notario. Pagar los Impuestos de la Herencia. Inscribir la Herencia en el Registro de la Propiedad y Entidades Bancarias|
 
 ### Manuel Castillejo Vela
 
@@ -178,10 +179,10 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Aparcar un coche] | [A diario es complicado encontrar un lugar donde puedes aparcar tu coche] | [La idea que he pensado es hacer una red social (tipo twitter) donde las personas puedan dejar referencias en tiempo real de donde hay algun sitio donde se puede aparcar.] |
-| [Marketplaces freelance] | [Desempleo y precariedad laboral] | [App que conecten a trabajadores independientes con proyectos puntuales, aprovechando el auge del trabajo por cuenta propia.] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
+| Aparcar un coche | A diario es complicado encontrar un lugar donde puedes aparcar tu coche | La idea que he pensado es hacer una red social (tipo twitter) donde las personas puedan dejar referencias en tiempo real de donde hay algun sitio donde se puede aparcar. |
+| Marketplaces freelance | Desempleo y precariedad laboral | App que conecten a trabajadores independientes con proyectos puntuales, aprovechando el auge del trabajo por cuenta propia. |
+| Gamificación de Apuestas | Muchos usuarios pierden interés rápidamente en las plataformas de apuestas tradicionales | Diseñar una plataforma que permita apostar a juegos que otros esten jugando de una manera mas informal tambien ofreciendo recompensas, niveles y desafíos para aumentar el engagement de los usuarios. |
+| Plataforma de Verificación de Imágenes y Autenticidad | Deepfakes y Manipulación Digital | Crear una plataforma que use una combinación de tecnologías para verificar la originalidad de una imagen y rastrear su autoría. |
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
 ---
