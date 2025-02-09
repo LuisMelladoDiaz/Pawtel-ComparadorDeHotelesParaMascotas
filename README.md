@@ -1,8 +1,8 @@
-Descripción Provisional
-
 ## Índice
 1. [Tabla de Versiones](#tabla-de-versiones)
 2. [Miembros del Equipo](#miembros-del-equipo)
+3. [Disponibilidad del Equipo](#disponibilidad-del-equipo)
+
 
 ---
 
@@ -11,6 +11,8 @@ Descripción Provisional
 | Versión | Fecha | Descripción | Autor |
 |---------|------------|-------------|--------|
 | 1.0 | 02/02/2025 | Versión inicial del documento | Luis Mellado Díaz |
+| 1.1 | 09/02/2025 | Disponibilidad del equipo | Luis Mellado Díaz |
+
 
 ## Miembros del Equipo
 
