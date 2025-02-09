@@ -37,10 +37,10 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Negocio 1] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 2] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
-| [Negocio 4] | [Problema identificado] | [Solución o comentario] |
+| App de reservas para negocios | Para reservar una cita tienes que llamar a cada sitio y cuadrar con el dueño del local (peluquería, dentista...) |Una plataforma que unifique esto ofreciendo a dueños la posibilidad de administrar automáticamente todas sus citas y a clientes encontrar todo en el mismo sitio. |
+| Cartera digital | Cada vez que salimos de casa tenemos que llevar con nosotros el DNI, el carnet de conducir... Existen aplicaciones oficiales para el DNI, otra para el carnet de conducir, pero son demasiadas aplicaciones | Con esta aplicación tendríamos todo unificado en el mismo sitio con todo tipo de tarjetas que queramos |
+| Banco de intercambio de horas de voluntariado | Muchas personas quieren ayudar, pero no saben cómo ni dónde. | Plataforma donde usuarios pueden intercambiar tiempo de voluntariado en diferentes proyectos según su disponibilidad. |
+| ¿Qué hay nuevo cerca de mí? | No sabemos que negocios nuevos abren cerca de dónde vivimos, como gimnasios, supermercados... | Aplicación que ofrece a los nuevos serevicios promocionarse y a los clientes conocer más sobre el futuro cercano de su zona.|
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
 ### Claudio Cortés Carrasco
