@@ -177,9 +177,9 @@ El propósito de este documento es que los miembros del equipo puedan poner en c
 
 | Negocio  | Problema a solucionar  | Propuestas o comentarios  |
 |----------|-----------------------|---------------------------|
-| [Aparcar un coche] | [A diario es complicado encontrar un lugar donde puedes aparcar tu coche] | [La idea que he pensado es hacer una red social (tipo twitter) donde las personas puedan dejar referencias en tiempo real de donde hay algun sitio donde se puede aparcar.] |
-| [Marketplaces freelance] | [Desempleo y precariedad laboral] | [App que conecten a trabajadores independientes con proyectos puntuales, aprovechando el auge del trabajo por cuenta propia.] |
-| [Negocio 3] | [Problema identificado] | [Solución o comentario] |
+| Aparcar un coche | A diario es complicado encontrar un lugar donde puedes aparcar tu coche | La idea que he pensado es hacer una red social (tipo twitter) donde las personas puedan dejar referencias en tiempo real de donde hay algun sitio donde se puede aparcar. |
+| Marketplaces freelance | Desempleo y precariedad laboral | App que conecten a trabajadores independientes con proyectos puntuales, aprovechando el auge del trabajo por cuenta propia. |
+| Gamificación de Apuestas | Muchos usuarios pierden interés rápidamente en las plataformas de apuestas tradicionales | Diseñar una plataforma que permita apostar a juegos que otros esten jugando de una manera mas informal tambien ofreciendo recompensas, niveles y desafíos para aumentar el engagement de los usuarios. |
 | [Negocio 4] | [Problema identificado] | [Solución o comentario] |
 | [Negocio 5] | [Problema identificado] | [Solución o comentario] |
 
