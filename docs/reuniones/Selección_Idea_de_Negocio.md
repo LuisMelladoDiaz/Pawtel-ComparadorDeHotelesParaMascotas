@@ -4,10 +4,10 @@
 
 **Título:** Reunión para la Selección de Idea de Negocio            
 **Fecha:** 10/02/2025                 
-**Hora:**                   
+**Hora:**  16:00                 
 **Equipo:** G11                            
 **Lugar:** Google Meets                               
-**Duración:**                             
+**Duración:** 1h 20min                         
 **Moderadores:** Luis Mellado Díaz, Daniel Flores de Francisco.                              
 
 ---
@@ -30,6 +30,8 @@
 | Versión | Fecha | Descripción | Autor |
 |---------|------|-------------|-------|
 | 1.0 | 09/02/2025 | Creación del documento. | Luis Mellado Díaz |
+| 1.1 | 10/02/2025 | Idea y reparto de tareas. | Luis Mellado Díaz |
+
 
 
 
@@ -40,17 +42,20 @@
 
 | Nombre | Asistencia ✅/❌|
 |--------|------------|
-| Andrés Martínez Reviriego         | ❌ |
-| Claudio Cortés Carrasco           | ❌ |
-| Daniel Flores De Francisco        | ❌ |
-| David González Martínez           | ❌ |
-| Fernando Castelló Sánchez         | ❌ |
-| Francisco Miguel Jiménez Morales  | ❌ |
-| Javier Ruiz Garrido               | ❌ |
-| Jorge Gómez de Tovar              | ❌ |
-| Luis Mellado Díaz                 | ❌ |
-| Rafael Castillo Cebolla           | ❌ |
-| Sergio Trenado González           | ❌ |
+| Andrés Martínez Reviriego         | ✅ |
+| Claudio Cortés Carrasco           | ✅ |
+| Daniel Flores De Francisco        | ✅ |
+| David González Martínez           | ✅ |
+| Fernando Castelló Sánchez         | ✅ |
+| Francisco Miguel Jiménez Morales  | ✅ |
+| Javier Ruiz Garrido               | ✅ |
+| Jorge Gómez de Tovar              | ✅ |
+| Luis Mellado Díaz                 | ✅ |
+| Rafael Castillo Cebolla           | ✅ |
+| Sergio Trenado González           | ✅ |
+| Manuel Castillejo Vela            | ✅ |
+| Yesica Garate Fuentes             | ✅ |
+
 
 ---
 ## Anuncios
@@ -75,14 +80,14 @@
 - David González Martínez  
 - Andrés Martínez Reviriego  
 - Claudio Cortés Carrasco  
-- Sergio Trenado González  
+- Rafael Castillo Cebolla 
 
 ### Grupo de Daniel Flores De Francisco  
 - Francisco Miguel Jiménez Morales  
 - Jorge Gómez de Tovar  
 - Javier Ruiz Garrido  
 
-### Grupo de Rafael Castillo Cebolla  
+### Grupo de Sergio Trenado González  
 - Javier García Sebastián  
 - Manuel Castillejo Vela  
 - Yesica Garate Fuentes
@@ -92,7 +97,9 @@
 
 | Idea | Autor | Votos |
 |-----|--------|-------|
-|idea|autor|0|
+|Papeleo coñazo| Todos |9|
+|Booking Perros| Daniel Flores de Francisco|14|
+
 
 ## Reparto de Tareas
 
@@ -157,24 +164,24 @@
 
 | Miembro del equipo            | Tarea |
 |--------------------------------|--------------------------------------|
-|         | 1. Introducción |
-|         | 2. Análisis del Mercado y Competencia  |
-|         | 3. Modelo de Negocio y Usuarios |
-|         | 4. Producto y Desarrollo  |
-|         | 5. Tecnología y Desarrollo del Proyecto  |
-|         | 6. Costes y Viabilidadn |
-|         | 7. Organización y Gestión del Proyecto |
-|         | 8. Análisis de Riesgos y Estrategia de Mitigación |
+|Fernando| 1. Introducción |
+|Daniel Flores| 2. Análisis del Mercado y Competencia  |
+|Rafa y Javi R| 3. Modelo de Negocio y Usuarios |
+|Luis y Sergio| 4. Producto y Desarrollo  |
+|Manuel y David| 5. Tecnología y Desarrollo del Proyecto  |
+|Andrés| 6. Costes y Viabilidadn |
+|Claudio y Curro| 7. Organización y Gestión del Proyecto |
+|Jorge         | 8. Análisis de Riesgos y Estrategia de Mitigación |
 
 
 ### Otras Tareas
 
 | Miembro del equipo            | Tarea |
 |-------------------------------|--------------------------------------|
-|  | Manual de Identidad Corporativa, Logos y Diseños |
-|  | Maquetación de la Presentación (Portada, Índice, Estilo, Plantila ...) |
-|  | Mockups con Balsamiq |
-|  | QA |
+| Sergio y Yesica | *Manual de Identidad Corporativa, Logos y Diseños* |
+| Yesica | Maquetación de la Presentación (Portada, Índice, Estilo, Plantila ...) |
+| Sergio | Mockups con Balsamiq |
+| Luis, Rafa y Dani | QA |
 
 
 
