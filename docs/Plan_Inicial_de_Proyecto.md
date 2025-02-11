@@ -39,10 +39,18 @@ Autores: [Nombres]
 ## 1. Introducción
 ### Key business idea
 **Explicación clara del negocio: qué es y qué no es.**
+Nuestra aplicación será una plataforma innovadora para la búsqueda y comparación de hoteles para mascotas, con un enfoque inicial en hoteles para perros pero con la idea de expandirse en siguientes iteraciones a alojamientos para todo tipo de mascotas y servicios complementarios.
+A través de un sistema intuitivo, los dueños de mascotas pueden encontrar opciones de alojamiento seguras y confiables para estas durante sus viajes o ausencias, además de poder leer información relevante sobre cada uno de los disponibles.
+
+Cabe destacar que el resultado no será la aplicación de un hotel o de una agencia de reservas exclusiva para un grupo de hoteles, sino un buscador y comparador de alojamientos ya existentes. Tampoco será una plataforma de cuidadores particulares o un servicio de paseo o guardería de día.
+Por último, resaltar que no nos dedicaremos a proporcionar servicios para mascotas ni a la adopción o bienestar animal.
 
 **La idea en una frase:**
+Un buscador y comparador de hoteles para mascotas que ayuda a los dueños a encontrar la mejor opción disponible según sus prioridades.
 
 **La idea en 50 palabras:**
+Una aplicación que permite la búsqueda y comparación de hoteles para mascotas, empezando por alojamientos para perros pero con planes de expansión a otros tipos de mascotas y servicios complementarios. No somos un hotel, sino un buscador y comparador de opciones ya existentes.
+
 
 ---
 
