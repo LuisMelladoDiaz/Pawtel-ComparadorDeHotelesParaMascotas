@@ -136,7 +136,13 @@ El objetivo es lanzar una versión inicial que ofrezca las funcionalidades clave
 
 ---
 
-## 7. Organización y Gestión del Proyecto
+## 7. Análisis de Riesgos y Estrategia de Mitigación
+### Análisis de riesgo preliminar (PMBOK)
+**Evaluación de riesgos en negocio y ejecución.**
+
+---
+
+## 8. Organización y Gestión del Proyecto
 
 En esta sección se describe la estructura organizativa del proyecto, detallando los equipos y los roles asignados a cada miembro. A continuación, se presenta un resumen de los grupos de trabajo organizados en función de sus especialidades, que incluyen Frontend, Full Stack, Backend, DevOps, y Gestión. También se ha proporcionado una tabla con las habilidades técnicas y sociales de cada miembro del equipo, con la información de contacto incluida para facilitar la comunicación.
 
@@ -245,7 +251,8 @@ Los alumnos que cumplan de manera destacada con sus compromisos recibirán benef
 ### Firmas de los Alumnos
 Al firmar este documento, entiendo y acepto las responsabilidades que se me han asignado y me comprometo a cumplirlas según lo establecido en este documento.
 
-- [x] Andrés Martínez Reviriego  
+- [x] Andrés Martínez Reviriego
+- [x] Javier García Sebastián  
 - [x] Claudio Cortés Carrasco  
 - [x] Daniel Flores De Francisco  
 - [x] David González Martínez  
@@ -259,8 +266,3 @@ Al firmar este documento, entiendo y acepto las responsabilidades que se me han 
 - [x] Manuel Castillejo Vela  
 - [x] Yesica Garate Fuentes
 
----
-
-## 8. Análisis de Riesgos y Estrategia de Mitigación
-### Análisis de riesgo preliminar (PMBOK)
-**Evaluación de riesgos en negocio y ejecución.**
