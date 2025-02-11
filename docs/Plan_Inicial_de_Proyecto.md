@@ -12,6 +12,8 @@ Autores: [Nombres]
 | Versión | Fecha       | Descripción de cambios               |
 |---------|-------------|--------------------------------------|
 | 1.0     | 11/02/2025  | Creación del documento. Índice. Organización del Equipo y Commitment. MVP y casos de uso.|
+| 1.1     | 11/02/2025  | Acotando el MVP|
+
 
 ---
 
@@ -67,33 +69,50 @@ Autores: [Nombres]
 ---
 
 ## 4. Producto y Desarrollo
+
+En esta sección se detallan las características principales del Producto Mínimo Viable (MVP) para la plataforma de búsqueda y comparación de **hoteles para mascotas**, con un enfoque especial en **hoteles para perros**, que es la opción más popular dentro de los alojamientos para mascotas. Este MVP está diseñado para validar rápidamente el concepto y cubrir las necesidades básicas de los usuarios que buscan alojamiento para sus mascotas, especialmente perros, durante sus viajes o ausencias.
+
+El objetivo es lanzar una versión inicial que ofrezca las funcionalidades clave para la búsqueda y comparación de **hoteles para perros**, incluyendo la comparación de opciones disponibles y la visualización de detalles esenciales como servicios y precios. El **buscador de hoteles para mascotas en general** y el **buscador de cuidadores de mascotas** estarán disponibles en futuras iteraciones, una vez validada la idea principal. Además, funcionalidades como el registro de usuarios, la integración de pagos y las reseñas se implementarán más adelante.
+
+---
+
 ### MVP
 **Prototipos de baja fidelidad y funcionalidades incluidas en el MVP.**
 
 | Funcionalidad                         | Incluida en MVP |
 |---------------------------------------|-----------------|
-| Buscador de hoteles para mascotas y cuidadores | ✅ |
+| Buscador de **hoteles para perros**   | ✅ |
+| Buscador de **hoteles para mascotas** (en general) | ❌ |
+| Buscador de **cuidadores de mascotas** | ❌ |
 | Algoritmo de comparación de opciones disponibles | ✅ |
 | Registro/Login de usuarios            | ❌ |
 | Pasarela de pagos                     | ❌ |
 | Vista de hoteles en mapa              | ❌ |
 | Reseñas y puntuaciones de usuarios    | ❌ |
-| Filtros avanzados                      | ❌ |
+| Filtros avanzados                     | ❌ |
 | Notificaciones y alertas              | ❌ |
+
+---
 
 ### Casos de uso y mockups
 **Interacciones principales del usuario.**
 
-| Caso de Uso | Descripción | Incluido en MVP | Mockup |
-|-------------|-------------|-----------------|--------|
-| Búsqueda de hoteles/cuidadores | Como usuario, quiero poder buscar hoteles o cuidadores para mascotas para un periodo de tiempo. | ✅ | ![Mockup](ruta_mockup) |
-| Comparación de opciones | Como usuario, quiero comparar diferentes opciones disponibles basadas en precio, servicios y opiniones. | ✅ | ![Mockup](ruta_mockup) |
-| Ver detalles de un hotel/cuidador | Como usuario, quiero ver la descripción, fotos y servicios de cada opción antes de decidir. | ✅ | ![Mockup](ruta_mockup) |
-| Contacto con el cuidador/hotel | Como usuario, quiero poder contactar con el cuidador/hotel para resolver dudas. | ❌ | ![Mockup](ruta_mockup) |
-| Registro/Login | Como usuario, quiero registrarme o iniciar sesión para guardar mis búsquedas y favoritos. | ❌ | ![Mockup](ruta_mockup) |
-| Reservar servicio | Como usuario, quiero reservar y pagar el servicio directamente desde la app. | ❌ | ![Mockup](ruta_mockup) |
-| Ver mapa de ubicaciones | Como usuario, quiero ver los hoteles/cuidadores en un mapa interactivo. | ❌ | ![Mockup](ruta_mockup) |
-| Dejar una reseña | Como usuario, quiero dejar una reseña sobre mi experiencia con un hotel/cuidador. | ❌ | ![Mockup](ruta_mockup) |
+| Caso de Uso                             | Descripción | Incluido en MVP | Mockup |
+|-----------------------------------------|-------------|-----------------|--------|
+| Búsqueda de **hoteles para perros**     | Como usuario, quiero poder buscar hoteles para perros disponibles dentro de un periodo de tiempo. | ✅ | ![Mockup](ruta_mockup) |
+| Búsqueda de **hoteles para mascotas** (en general) | Como usuario, quiero poder buscar hoteles para cualquier tipo de mascota (no solo perros) disponibles dentro de un periodo de tiempo. | ❌ | ![Mockup](ruta_mockup) |
+| Búsqueda de **cuidadores de mascotas** | Como usuario, quiero poder buscar cuidadores de mascotas disponibles dentro de un periodo de tiempo. | ❌ | ![Mockup](ruta_mockup) |
+| Comparación de opciones de **hoteles** | Como usuario, quiero comparar diferentes opciones de hoteles disponibles basados en precio, servicios y opiniones, sin importar si son para perros o cualquier otra mascota. | ✅ | ![Mockup](ruta_mockup) |
+| Comparación de opciones de **cuidadores** | Como usuario, quiero comparar diferentes opciones de cuidadores de mascotas disponibles. | ❌ | ![Mockup](ruta_mockup) |
+| Ver detalles de un **servicio**| Como usuario, quiero ver la descripción, fotos y opiniones de un servicio (hotel o cuidador) antes de decidir. | ✅ | ![Mockup](ruta_mockup) |
+| Contactar con un **servicio**| Como usuario, quiero poder contactar con el servicio (hotel o cuidador) para resolver dudas sobre sus servicios. | ❌ | ![Mockup](ruta_mockup) |
+| Registro/Login                          | Como usuario, quiero registrarme o iniciar sesión para guardar mis búsquedas y favoritos. | ❌ | ![Mockup](ruta_mockup) |
+| Reservar **servicio**                   | Como usuario, quiero reservar y pagar el servicio directamente desde la app. | ❌ | ![Mockup](ruta_mockup) |
+| Ver mapa de ubicaciones de **servicios** | Como usuario, quiero ver los servicios (hoteles o cuidadores) en un mapa interactivo. | ❌ | ![Mockup](ruta_mockup) |
+| Dejar una reseña sobre un **servicio**  | Como usuario, quiero dejar una reseña sobre mi experiencia con un servicio (hotel o cuidador). | ❌ | ![Mockup](ruta_mockup) |
+
+
+
 
 ---
 
