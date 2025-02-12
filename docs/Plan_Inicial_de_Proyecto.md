@@ -19,7 +19,7 @@ Autores: [Nombres]
 | 1.5     | 12/02/2025  | Uso de IA en el proyecto |
 | 1.6     | 12/02/2025  | Tratamiento de datos |
 | 1.7     | 12/02/2025  | Introducción completada |
-
+| 1.8     | 12/02/2025  | Añadir uso de TS en el stack tecnológico |
 
 ---
 
@@ -158,7 +158,7 @@ Podemos traducir lo anterior a los siguientes requisitos técnicos:
 Para el frontend, hemos considerado utilizar **Vue.js** o **React**. Para el backend, **NestJS** o **Django**. Tras consultarlo los compañeros de equipo, hemos hecho las elecciones expuestas a continuación:
 - **MySQL/MariaDB** como base de datos única. Es sencilla de utilizar, tiene soporte muy amplio y hay mucha experiencia previa por parte de los compañeros de equipo.
 - **Django** para el backend. Hay algo de experiencia previa por parte del equipo. Es un framework muy completo, y viene con soporte nativo para bases de datos MySQL/MariaDB, además de APIs REST. Ya que utilizaremos una SPA, optaremos por prescindir de su funcionalidad de plantillas, haciendo la comunicación exclusivamente mediante una API REST.
-- **Vue.js + Vite** para el frontend. Vue.js es un framework completo, ligero y sencillo de utilizar. Permite una separación por componentes, manejo del estado global y diferenciación entre código de lógica (por ejemplo, para la capa de datos) e interfaz. Vite fue elegido por ser la build tool más recomendada para una SPA con Vue.js. La dupla tiene soporte completo para PWAs mediante el uso de plugins.
+- **Vue.js + Vite** para el frontend. Vue.js es un framework completo, ligero y sencillo de utilizar. Permite una separación por componentes, manejo del estado global y diferenciación entre código de lógica (por ejemplo, para la capa de datos) e interfaz. Vite fue elegido por ser la build tool más recomendada para una SPA con Vue.js. La dupla tiene soporte completo para PWAs mediante el uso de plugins. Cabe destacar que utilizaremos TypeScript en lugar de JavaScript. Esta decisión se debe a su talante estricto, permitiendo describir con precisión las interfaces de distintos componentes lógicos (clases, funciones, etc.), algo que creemos beneficioso en un equipo numeroso.
 - Para la capa de datos, nos montaremos en los hombros de **TanStack Query**. Proporciona los ladrillos necesarios para diseñar una capa de datos elegante y eficiente. Tiene soporte nativo para el uso de caché, modo offline y recarga de datos automática, entre otros.
 - **Vue Router** para el enrutado. Vue.js es agnóstico en términos de enrutador, pero el más utilizado y recomendado es Vue Query. Es afín a una aplicación enlazable y descubrible.
 - Consideramos el uso de librerías adicionales para el estado de la aplicación. A priori, TanStack Query puede actuar como gestor del estado global de la aplicación en términos de datos. Si fuese necesario, se puede utilizar otra librería para lo que haga falta. **Pinia** es una elección popular.
