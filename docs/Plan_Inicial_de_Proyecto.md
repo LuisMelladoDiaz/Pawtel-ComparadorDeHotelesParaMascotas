@@ -18,6 +18,7 @@ Autores: [Nombres]
 | 1.4     | 12/02/2025  | Usuarios piloto potenciales y modelo de negocio |
 | 1.5     | 12/02/2025  | Uso de IA en el proyecto |
 | 1.6     | 12/02/2025  | Tratamiento de datos |
+| 1.7     | 12/02/2025  | Introducción completada |
 
 
 ---
@@ -44,17 +45,16 @@ Autores: [Nombres]
 ## 1. Introducción
 ### Key business idea
 **Explicación clara del negocio: qué es y qué no es.**
-Nuestra aplicación será una plataforma innovadora para la búsqueda y comparación de hoteles para mascotas, con un enfoque inicial en hoteles para perros pero con la idea de expandirse en siguientes iteraciones a alojamientos para todo tipo de mascotas y servicios complementarios.
-A través de un sistema intuitivo, los dueños de mascotas pueden encontrar opciones de alojamiento seguras y confiables para estas durante sus viajes o ausencias, además de poder leer información relevante sobre cada uno de los disponibles.
+Nuestra aplicación será una plataforma integral para la búsqueda, comparación y reserva de servicios de alojamiento y cuidado para mascotas. Permitirá a los dueños, además de buscar a cuidadores disponibles, encontrar hoteles comparando sus precios, ubicaciones u opiniones, con la posibilidad de visualizarlos en un mapa interactivo, contactar con ellos e incluso realizar reservas y pagos directamente desde la app. Además, los usuarios podrán registrarse de una manera sencilla para poder recibir notificaciones y alertas personalizadas o dejar reseñas y puntuar su experiencia, lo que garantizará un ecosistema de confianza y transparencia en el cuidado de sus mascotas. 
 
 Cabe destacar que el resultado no será la aplicación de un hotel o de una agencia de reservas exclusiva para un grupo de hoteles, sino un buscador y comparador de alojamientos ya existentes. Tampoco será una plataforma de cuidadores particulares o un servicio de paseo o guardería de día.
 Por último, resaltar que no nos dedicaremos a proporcionar servicios para mascotas ni a la adopción o bienestar animal.
 
 **La idea en una frase:**
-Un buscador y comparador de hoteles para mascotas que ayuda a los dueños a encontrar la mejor opción disponible según sus prioridades.
+La plataforma definitiva para buscar, comparar y reservar el mejor alojamiento o cuidador para tu mascota de forma fácil y segura.
 
 **La idea en 50 palabras:**
-Una aplicación que permite la búsqueda y comparación de hoteles para mascotas, empezando por alojamientos para perros pero con planes de expansión a otros tipos de mascotas y servicios complementarios. No somos un hotel, sino un buscador y comparador de opciones ya existentes.
+Nuestra plataforma conecta a dueños de mascotas con hoteles y cuidadores certificados. Permite comparar precios, ubicaciones y valoraciones, visualizar alojamientos en un mapa interactivo, contactar con proveedores y reservar con pago seguro. Además, fomenta la confianza entre usuarios a través de reseñas y puntuaciones verificadas.
 
 
 ---
