@@ -1,4 +1,4 @@
-# 🐾 PawTel - Hoteles para Mascotas
+# 🐾 PawTel - Comparador de Hoteles para Mascotas
 
 Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
@@ -25,6 +25,8 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 | 1.0 | 02/02/2025 | Versión inicial del documento | Luis Mellado Díaz |
 | 1.1 | 09/02/2025 | Disponibilidad del equipo | Luis Mellado Díaz |
 | 2.0 | 13/02/2025 | Pawtel hoteles para mascotas | Luis Mellado Díaz |
+| 2.1 | 13/02/2025 | Enlaces importantes y contribuidores | Luis Mellado Díaz |
+
 
 
 ---
@@ -77,10 +79,19 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 
 ## 🔗 Enlaces Importantes
 
-- 🔹 **Repositorio GitHub:** [Enlace](https://github.com/usuario/PawTel)
-- 🔹 **Documentación del Proyecto:** [Enlace](#)
-- 🔹 **Tablero de Tareas:** [Enlace](#)
-- 🔹 **Despliegue en Producción:** [Enlace](#)
+### Repositorios y Documentación
+- 🔹 **[Repositorio GitHub](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas)**
+- 🔹 **[Documentación del Proyecto](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/docs)**
+- 🔹 **[Plan Inicial de Proyecto](https://github.com/LuisMelladoDiaz/ISPP/blob/main/docs/Plan_Inicial_de_Proyecto.md)**
+- 🔹 **[Manual de Identidad Corporativa](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/borradores/Manual%20de%20identidad%20corporativa%20(paleta%20de%20colores%2C%20tipografia%20y%20logo).pdf)**
+
+### Contribución y Despliegue
+- 🔹 **Cómo Contribuir y Gestión de la Configuración:** *(Enlace por agregar)*
+- 🔹 **Despliegue en Producción:** *(Enlace por agregar)*
+
+### Presentaciones
+- 🔹 **[Semana 1](https://docs.google.com/presentation/d/1YIfkJfGKqe_43hg5v4Fm_qdwbAvd6D_e-aXp1oEHZfI/edit#slide=id.g32d71018c15_4_11)** (Idea descartada)
+- 🔹 **[Semana 2](https://docs.google.com/presentation/d/1-jI3r4i6FYvNZdV9Lfn6jm7cSdSyRFIKl9Dg0VnDaG0/edit#slide=id.g334114ffe31_4_5)**
 
 ---
 
