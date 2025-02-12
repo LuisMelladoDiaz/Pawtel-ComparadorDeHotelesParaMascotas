@@ -15,6 +15,8 @@ Autores: [Nombres]
 | 1.1     | 11/02/2025  | Acotando el MVP|
 | 1.2     | 12/02/2025  | Tabla de riesgos|
 | 1.3     | 12/02/2025  | Modificación a Discusión de la tecnología|
+| 1.4     | 12/02/2025  | Usuarios piloto potenciales y modelo de negocio |
+
 
 
 ---
@@ -71,7 +73,12 @@ Una aplicación que permite la búsqueda y comparación de hoteles para mascotas
 
 ## 3. Modelo de Negocio y Usuarios
 ### Usuarios piloto potenciales
-**Diversidad, planes de precios, cobertura de casos y segmentación de la población.**
+
+Esta aplicación estará dirigida a un grupo de personas muy focalizado, que serán todas aquellas que tengan un perro como mascota, y tengan la necesidad de dejarlo en un hotel o residencia para estos. Pueden existir múltiples casos por los que una persona dejaría a su mascota en uno de estos sitios, y sería incorrecto pensar que estos casos sólo serían muy puntuales, o frecuente en muy pocas personas, ya que los hoteles y residencias de mascotas es un tipo de negocio en auge debido a su alta demanda.
+
+En relación con todo lo anterior, se piensa firmemente que es un acierto ofrecer un servicio que actualmente no está en el mercado a todas estas personas, haciendo que se conviertan en potenciales usuarios sin importar directamente el motivo por el que deja su mascota en una residencia u hotel. Además, sea cual sea la mayor preocupación del dueño, ya sea el dinero, pudiendo comparar para encontrar el más económico, o por la comodidad de su mascota, pudiendo comparar reseñas y fotos de distintos sitios, hacen que nuestra aplicación sea ideal para cualquier persona que tenga un perro como mascota.
+
+Para atraer a todos estos usuarios potenciales a usar nuestra aplicación, se optará por hacerla de uso gratuito y sin limitaciones en cuanto a la funcionalidad principal. El modelo de negocio con el que se pretende ganar dinero es a través de comisiones en las reservas de los usuarios. También se pueden añadir otras fuentes de ingresos como anuncios en la aplicación o promociones a hoteles y residencias.
 
 ### Cómo trabajaremos con los usuarios piloto
 **Recopilación, almacenamiento y tratamiento de datos.**
