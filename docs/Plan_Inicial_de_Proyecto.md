@@ -17,7 +17,7 @@ Autores: [Nombres]
 | 1.3     | 12/02/2025  | Modificación a Discusión de la tecnología|
 | 1.4     | 12/02/2025  | Usuarios piloto potenciales y modelo de negocio |
 | 1.5     | 12/02/2025  | Uso de IA en el proyecto |
-
+| 1.6     | 12/02/2025  | Tratamiento de datos |
 
 
 ---
@@ -82,7 +82,13 @@ En relación con todo lo anterior, se piensa firmemente que es un acierto ofrece
 Para atraer a todos estos usuarios potenciales a usar nuestra aplicación, se optará por hacerla de uso gratuito y sin limitaciones en cuanto a la funcionalidad principal. El modelo de negocio con el que se pretende ganar dinero es a través de comisiones en las reservas de los usuarios. También se pueden añadir otras fuentes de ingresos como anuncios en la aplicación o promociones a hoteles y residencias.
 
 ### Cómo trabajaremos con los usuarios piloto
-**Recopilación, almacenamiento y tratamiento de datos.**
+Nuestra aplicación recopila y almacena únicamente los datos necesarios para su correcto funcionamiento. La información proporcionada por los usuarios será utilizada exclusivamente para mejorar la experiencia dentro de la aplicación.
+
+No compartiremos ni venderemos los datos a terceros. Toda la información será tratada con medidas de seguridad adecuadas para proteger la privacidad de nuestros usuarios.
+
+Al utilizar la aplicación, el usuario acepta estos términos sobre el manejo de sus datos.
+
+
 
 ---
 
