@@ -218,26 +218,26 @@ Además, prevemos emplear **Docker** para el empaquetado de la app y su fácil d
 
 ## 8. Organización y Gestión del Proyecto
 
-En esta sección se describe la estructura organizativa del proyecto, detallando los equipos y los roles asignados a cada miembro. A continuación, se presenta un resumen de los grupos de trabajo organizados en función de sus especialidades, que incluyen Frontend, Full Stack, Backend, DevOps, y Gestión. También se ha proporcionado una tabla con las habilidades técnicas y sociales de cada miembro del equipo, con la información de contacto incluida para facilitar la comunicación.
+En esta sección se describe la estructura organizativa del proyecto, detallando los equipos y los roles asignados a cada miembro. A continuación, se presenta un resumen de los grupos de trabajo organizados en función de sus especialidades, que incluyen Frontend, Full Stack, Backend, DevOps, y Gestión. También se ha proporcionado una tabla con las habilidades técnicas y sociales de cada miembro del equipo, con la información de contacto incluida para facilitar la comunicación. Para la selección de los distintos miembros del equipo, se procedió con una encuenta sobre las especialidades de cada miembro del equipo que se ven reflejadas a continuación. Tambien se hicieron encuestas para poder determinar cuales son las competencias de cada miembro, las cuales se ven reflejadas en la siguiente tabla.
 
 #### **Tabla de Participantes**
 
 | Participante (Nombre, Usuario GitHub, Correo Electrónico)      | Habilidades Técnicas | Soft Skills             |
 |---------------------------------------------------------------|----------------------|-------------------------|
-| - **Luis Mellado Díaz**<br>- **LuisMelladoDiaz**<br>- melladodiazluis@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Daniel Flores De Francisco**<br>- **DanielFloresDeFrancisco**<br>- danielfloresdefrancisco@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Sergio Trenado González**<br>- **Sergiotg03**<br>- sergiotg003@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Javier García Sebastián**<br>- **JaviGarcia1**<br>- javigarciasebastian@icloud.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Fernando Castelló Sánchez**<br>- **feerk**<br>- gferx87@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Yesica Garate Fuentes**<br>- **yesgarfue**<br>- yesi.garate@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **David González Martínez**<br>- **davidgonmar**<br>- dagoma0033@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Francisco Miguel Jiménez Morales**<br>- **frajimmor2**<br>- curritojimo@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Andrés Martínez Reviriego**<br>- **Andresmarevi**<br>- andresmarevi@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Manuel Castillejo Vela**<br>- **Mancasvel**<br>- Mancasvel1@alum.us.es | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Rafael Castillo Cebolla**<br>- **rafcasceb**<br>- rafaelcastillocebolla@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Claudio Cortés Carrasco**<br>- **claudiocortescarrasco**<br>- cortescarrascoclaudio@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Jorge Gómez de Tovar**<br>- **jorgomde**<br>- jorge.gomez.detovar@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Javier Ruiz Garrido**<br>- **Javiruizg**<br>- 2210jrg@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
+| - **Luis Mellado Díaz**<br>- **LuisMelladoDiaz**<br>- melladodiazluis@gmail.com | Especializado en Frontend | Liderazgo, Manejo del estrés           |
+| - **Daniel Flores De Francisco**<br>- **DanielFloresDeFrancisco**<br>- danielfloresdefrancisco@gmail.com | Especializado en DevOps | Liderazgo, adaptabilidad           |
+| - **Sergio Trenado González**<br>- **Sergiotg03**<br>- sergiotg003@gmail.com | Especializado en Frontend | Creatividad, resolutividad           |
+| - **Javier García Sebastián**<br>- **JaviGarcia1**<br>- javigarciasebastian@icloud.com | Especializado en Frontend | Empatía, creatividad           |
+| - **Fernando Castelló Sánchez**<br>- **feerk**<br>- gferx87@gmail.com | Especializado en Frontend | Pensamiento Crítico, resolutividad           |
+| - **Yesica Garate Fuentes**<br>- **yesgarfue**<br>- yesi.garate@gmail.com | Especializado en Frontend | [Soft Skills]           |
+| - **David González Martínez**<br>- **davidgonmar**<br>- dagoma0033@gmail.com | Programador Versátil | [Soft Skills]           |
+| - **Francisco Miguel Jiménez Morales**<br>- **frajimmor2**<br>- curritojimo@gmail.com | Programador Versátil | Adaptabilidad, autodisciplina           |
+| - **Andrés Martínez Reviriego**<br>- **Andresmarevi**<br>- andresmarevi@gmail.com | Programador Versátil | Pensamiento crítico, resolutividad           |
+| - **Manuel Castillejo Vela**<br>- **Mancasvel**<br>- Mancasvel1@alum.us.es | Programador Versátil |            |
+| - **Rafael Castillo Cebolla**<br>- **rafcasceb**<br>- rafaelcastillocebolla@gmail.com | Especializado en Backend | Liderazgo, pensamiento crítico           |
+| - **Claudio Cortés Carrasco**<br>- **claudiocortescarrasco**<br>- cortescarrascoclaudio@gmail.com | Especializado en Backend | Empatia, manejo del estrés           |
+| - **Jorge Gómez de Tovar**<br>- **jorgomde**<br>- jorge.gomez.detovar@gmail.com | Especializado en  Backend | Empatía, resolutividad           |
+| - **Javier Ruiz Garrido**<br>- **Javiruizg**<br>- 2210jrg@gmail.com | Especializado en Backend | Empatía, manejo del estrés           |
 
 #### **Equipos y Roles**
 
