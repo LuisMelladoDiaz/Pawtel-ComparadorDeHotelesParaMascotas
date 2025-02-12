@@ -13,6 +13,7 @@ Autores: [Nombres]
 |---------|-------------|--------------------------------------|
 | 1.0     | 11/02/2025  | Creación del documento. Índice. Organización del Equipo y Commitment. MVP y casos de uso.|
 | 1.1     | 11/02/2025  | Acotando el MVP|
+| 1.2     | 12/02/2025  | Tabla de riesgos 
 
 
 ---
@@ -172,6 +173,37 @@ Se puede visualizar la arquitectura general de la aplicación con el siguiente d
 ## 7. Análisis de Riesgos y Estrategia de Mitigación
 ### Análisis de riesgo preliminar (PMBOK)
 **Evaluación de riesgos en negocio y ejecución.**
+
+| ID   | Riesgo                                      | Probabilidad (1-5) | Impacto (1-5) | Factor (P x I) | Prioridad | Plan de Contingencia |
+|------|---------------------------------------------|--------------------|---------------|----------------|------------|---------------------------------------------|
+| R1   | Falta de experiencia en tecnologías        | 4                  | 4             | 16             | Alta       | Asignar tiempo para capacitación previa y tutorías entre compañeros. |
+| R2   | Problemas de integración entre módulos     | 3                  | 5             | 15             | Alta       | Definir estándares de desarrollo y realizar pruebas de integración periódicas. |
+| R3   | Baja calidad del código                    | 3                  | 4             | 12             | Media      | Implementar revisiones de código y pruebas automatizadas. |
+| R4   | Incompatibilidad con dispositivos móviles  | 3                  | 3             | 9              | Media      | Adoptar diseño responsivo y realizar pruebas en distintos dispositivos. |
+| R5   | Fallas en la seguridad                     | 2                  | 5             | 10             | Alta       | Implementar buenas prácticas de seguridad y auditorías de código. |
+| R6   | Falta de planificación adecuada            | 4                  | 5             | 20             | Alta       | Establecer un cronograma detallado con entregables claros. |
+| R7   | Cambios constantes en los requisitos       | 3                  | 4             | 12             | Media      | Documentar requisitos y definir un proceso de control de cambios. |
+| R8   | Falta de compromiso de algunos miembros    | 3                  | 4             | 12             | Media      | Realizar seguimiento individual y redistribuir tareas si es necesario. |
+| R9   | Mala comunicación interna                  | 4                  | 3             | 12             | Media      | Usar herramientas colaborativas y reuniones periódicas de seguimiento. |
+| R10  | Problemas con los servidores o infraestructura | 2              | 5             | 10             | Alta       | Usar servicios en la nube con redundancia y realizar copias de seguridad. |
+| R11  | Problemas en la experiencia de usuario     | 3                  | 3             | 9              | Media      | Hacer pruebas con usuarios y corregir errores de usabilidad. |
+| R12  | Disponibilidad limitada de datos de hoteles | 2                 | 4             | 8              | Media      | Explorar diferentes APIs o bases de datos alternativas. |
+
+
+## Leyenda de colores
+🟩 **Verde (Bajo)** → Riesgo con impacto mínimo, poca probabilidad de afectar el proyecto.  
+🟨 **Amarillo (Moderado)** → Riesgo que puede generar problemas, pero manejable con estrategias.  
+🟥 **Rojo (Alto)** → Riesgo significativo que requiere atención prioritaria para mitigación.  
+🟪 **Morado (Crítico)** → Riesgo grave que puede comprometer el éxito del proyecto, necesita intervención urgente.
+
+| Severidad ↓ / Probabilidad → | Rara (1) | Improbable (2) | Posible (3) | Probable (4) | Casi Cierta (5) |
+|------------------------------|----------|-----------------|-------------|--------------|-----------------|
+| **Catastrófico (5)**          | 🟨        | 🟨      R10        | 🟥     R2     | 🟪    R6       | 🟪              |
+| **Mayor (4)**                 | 🟩        | 🟨      R5        | 🟥      R3    | 🟪    R1       | 🟪              |
+| **Moderado (3)**              | 🟩        | 🟨     R12         | 🟨  R4,R7,R8      | 🟥   R9        | 🟪              |
+| **Menor (2)**                 | 🟩        | 🟩         R11     | 🟨          | 🟨           | 🟥              |
+| **Insignificante (1)**        | 🟩        | 🟩              | 🟩          | 🟨           | 🟨              |
+
 
 ---
 
