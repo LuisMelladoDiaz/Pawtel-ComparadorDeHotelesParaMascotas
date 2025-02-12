@@ -1,41 +1,108 @@
-## Índice
-1. [Tabla de Versiones](#tabla-de-versiones)
-2. [Miembros del Equipo](#miembros-del-equipo)
-3. [Disponibilidad del Equipo](#disponibilidad-del-equipo)
+# 🐾 PawTel - Hoteles para Mascotas
 
+Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 ---
 
-## Tabla de Versiones
+## 📖 Índice
+
+1. [📊 Tabla de Versiones](#-tabla-de-versiones)
+2. [📌 Acerca del Proyecto](#-acerca-del-proyecto)
+3. [🛠️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
+4. [🚀 Instalación](#-instalación)
+5. [📌 Uso](#-uso)
+6. [📂 Estructura del Proyecto](#-estructura-del-proyecto)
+7. [🔗 Enlaces Importantes](#-enlaces-importantes)
+8. [📜 Licencia](#-licencia)
+9. [👥 Contribuidores](#-contribuidores)
+
+---
+
+## 📊 Tabla de Versiones
 
 | Versión | Fecha | Descripción | Autor |
 |---------|------------|-------------|--------|
 | 1.0 | 02/02/2025 | Versión inicial del documento | Luis Mellado Díaz |
 | 1.1 | 09/02/2025 | Disponibilidad del equipo | Luis Mellado Díaz |
+| 2.0 | 13/02/2025 | Pawtel hoteles para mascotas | Luis Mellado Díaz |
 
 
-## Miembros del Equipo
+---
 
-| Nombre | Correo Electrónico | Usuario |
-|--------|--------------------|---------|
-| Luis Mellado Díaz | melladodiazluis@gmail.com | LuisMelladoDiaz |
-| David González Martínez | dagoma0033@gmail.com | davidgonmar |
-| Andrés Martínez Reviriego | andresmarevi@gmail.com | Andresmarevi |
-| Claudio Cortés Carrasco | cortescarrascoclaudio@gmail.com | claudiocortescarrasco |
-| Sergio Trenado González | sergiotg003@gmail.com | Sergiotg03 |
-| Daniel Flores De Francisco | danielfloresdefrancisco@gmail.com | DanielFloresDeFrancisco |
-| Francisco Miguel Jiménez Morales | curritojimo@gmail.com | frajimmor2 |
-| Jorge Gómez de Tovar | jorge.gomez.detovar@gmail.com | jorgomde |
-| Javier Ruiz Garrido | 2210jrg@gmail.com | Javiruizg |
-| Rafael Castillo Cebolla | rafaelcastillocebolla@gmail.com | rafcasceb |
-| Fernando Castelló Sánchez | gferx87@gmail.com | feerk |
-| Javier García Sebastián | javigarciasebastian@icloud.com | JaviGarcia1 |
-| Manuel Castillejo Vela | Mancasvel1@alum.us.es | Mancasvel |
-| Yesica Garate Fuentes | yesi.garate@gmail.com | yesgarfue |
+## 📌 Acerca del Proyecto
 
-## Disponibilidad del Equipo
-La disponibilidad del equipo queda reflejada en la siguiente tabla. Para mas detalle acceda a [When2Meet](https://www.when2meet.com/?28930983-a2ebV).
+**PawTel** es una plataforma digital diseñada para comparar hoteles para mascotas. Con PawTel, los dueños pueden encontrar hoteles confiables para sus mascotas, mientras que los hoteles pueden gestionar sus reservas de manera eficiente.
 
-![disponibilidad](https://github.com/user-attachments/assets/8037ab77-5b83-45fa-997c-9fdc840064ad)
+**Características clave:**
+- 🏨 Búsqueda y comparación de hoteles para mascotas con filtros personalizados.
+- 🐶 Perfiles detallados de cada hotel con fotos, precios y disponibilidad.
+- 📝 Sistema de reservas y gestión de citas.
+- ⭐ Reseñas y valoraciones de usuarios.
+- 🔔 Notificaciones para recordatorios y actualizaciones de reservas.
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Frontend:** Vue.js + Vite
+- **Backend:** Django
+- **Base de Datos:** MySQL/MariaDB
+- **DevOps:** Github Actions, Docker, Google Cloud
+- **Otros:** Vue Router, TanStack Query
+
+---
+## 🚀 Instalación
+
+⚠️ **Nota:** Completar esta sección con instrucciones detalladas.
+
+----
+
+## 📌 Uso
+
+⚠️ **Nota:** Completar con ejemplos de cómo utilizar la plataforma.
+
+1. **Registro e inicio de sesión.**
+2. **Búsqueda y filtrado de hoteles.**
+3. **Reserva de hospedaje.**
+4. **Gestión de reservas y pagos.**
+5. **Reseñas y calificaciones.**
+
+---
+
+## 📂 Estructura del Proyecto
+
+⚠️ **Nota:** Completar con la estructura real del proyecto.
+
+---
+
+## 🔗 Enlaces Importantes
+
+- 🔹 **Repositorio GitHub:** [Enlace](https://github.com/usuario/PawTel)
+- 🔹 **Documentación del Proyecto:** [Enlace](#)
+- 🔹 **Tablero de Tareas:** [Enlace](#)
+- 🔹 **Despliegue en Producción:** [Enlace](#)
+
+---
+
+## 📜 Licencia
+
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
+
+---
+
+## 👥 Contribuidores
+
+- **[Tu Nombre](https://github.com/tuusuario)**
+- **[Nombre del Contribuidor](https://github.com/otro-usuario)**
+- 🚀 ¡Y más personas increíbles que han contribuido!
+
+Si deseas contribuir, revisa nuestras [pautas de contribución](CONTRIBUTING.md).
+
+---
+
+🎉 _¡Gracias por visitar PawTel! Si te gusta el proyecto, no dudes en dejar una estrella ⭐ en GitHub._
+
+
+
 
 
