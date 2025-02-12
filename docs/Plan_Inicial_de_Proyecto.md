@@ -16,6 +16,7 @@ Autores: [Nombres]
 | 1.2     | 12/02/2025  | Tabla de riesgos|
 | 1.3     | 12/02/2025  | Modificación a Discusión de la tecnología|
 | 1.4     | 12/02/2025  | Usuarios piloto potenciales y modelo de negocio |
+| 1.5     | 12/02/2025  | Uso de IA en el proyecto |
 
 
 
@@ -171,12 +172,36 @@ Haremos uso de **GitHub** como repositorio central, y para el **CI/CD** tenemos 
 Además, prevemos emplear **Docker** para el empaquetado de la app y su fácil despliegue.
 
 ### Uso de IA
-**Implementación y ventajas de la inteligencia artificial en el producto.**
 
-- **Propósito de la IA**: Descripción del problema que resolverá la inteligencia artificial dentro del proyecto.
-- **Tipos de IA utilizadas**: Tecnologías específicas que se integrarán (ejemplo: modelos de machine learning para recomendaciones).
-- **Implementación técnica**: Explicación del flujo de trabajo de la IA en el sistema.
-- **Beneficios esperados**: Ventajas que aporta la IA a la experiencia del usuario y a la optimización del negocio.
+
+- **Propósito de la IA**:  
+El uso de la inteligencia artificial en este proyecto tiene como objetivo mejorar la calidad del código y la documentación técnica. 
+Específicamente, la IA se utilizará para estandarizar y corregir la documentación existente, asegurando coherencia y claridad. 
+Además, se aplicará para optimizar el código, reducir errores y mejorar la eficiencia del desarrollo.
+
+- **Tipos de IA utilizadas**  
+  - **ChatGPT**: Para la generación y corrección de documentación técnica.  
+  - **GitHub Copilot**: Para asistencia en la escritura y refactorización de código.  
+  - **Microsoft Copilot**: Para automatizar tareas repetitivas y mejorar la productividad en herramientas de desarrollo.
+
+- **Implementación técnica**:  
+  La inteligencia artificial se integrará en el flujo de trabajo del equipo de desarrollo de la siguiente manera:
+
+  - **Corrección y estandarización de la documentación**: Se utilizará ChatGPT para revisar la redacción, asegurando que los documentos sean claros, precisos y uniformes.  
+  - **Asistencia en el desarrollo de código**: GitHub Copilot, ChatGPT y Microsoft Copilot proporcionarán sugerencias de código, ayudando a los desarrolladores a escribir funciones más eficientes y bien estructuradas.  
+
+- **Beneficios esperados**:  
+  El uso de la IA en el desarrollo y documentación del proyecto traerá diversos beneficios enfocados en dos apartados principalmente:
+
+  - **En el código**:  
+    - **Optimización y refactorización**: El código será más eficiente, con una estructura más clara y mantenible.  
+    - **Aceleración del desarrollo**: Se reducirá el tiempo dedicado a la escritura de código repetitivo, permitiendo que los desarrolladores se enfoquen en lógica más compleja.  
+    - **Detección de errores y vulnerabilidades**: La IA ayudará a identificar problemas en el código que podrían pasar desapercibidos en una revisión manual.  
+
+  - **En la documentación**:  
+    - **Coherencia y cohesión**: Se garantizará un estilo uniforme en todos los documentos, evitando inconsistencias en la información.  
+    - **Corrección automática**: La IA revisará errores ortográficos y gramaticales, mejorando la calidad de los textos.  
+    - **Estandarización**: Se seguirá un formato definido por la IA que adaptaremos a nuestras necesidades, facilitando la comprensión de la documentación por parte de todos los miembros del equipo además de estableciendo un marco de trabajo para los miembros del equipo de trabajo.
 
 ---
 
