@@ -237,19 +237,19 @@ Además, se aplicará para optimizar el código, reducir errores y mejorar la ef
 | R12  | Disponibilidad limitada de datos de hoteles | 2                 | 4             | 8              | Media      | Explorar diferentes APIs o bases de datos alternativas. |
 
 
-## Leyenda de colores
-🟩 **Verde (Bajo)** → Riesgo con impacto mínimo, poca probabilidad de afectar el proyecto.  
+### Leyenda de colores
+🟩 **Verde (Bajo)** → Riesgo con impacto mínimo. Poca probabilidad de afectar el proyecto.  
 🟨 **Amarillo (Moderado)** → Riesgo que puede generar problemas, pero manejable con estrategias.  
 🟥 **Rojo (Alto)** → Riesgo significativo que requiere atención prioritaria para mitigación.  
-🟪 **Morado (Crítico)** → Riesgo grave que puede comprometer el éxito del proyecto, necesita intervención urgente.
+🟪 **Morado (Crítico)** → Riesgo grave que puede comprometer el éxito del proyecto. Necesita intervención urgente.
 
-| Severidad ↓ / Probabilidad → | Rara (1) | Improbable (2) | Posible (3) | Probable (4) | Casi Cierta (5) |
+| Impacto ↓ / Probabilidad →   | Rara (1) | Improbable (2)  | Posible (3) | Probable (4) | Casi Cierta (5) |
 |------------------------------|----------|-----------------|-------------|--------------|-----------------|
-| **Catastrófico (5)**          | 🟨        | 🟨      R10        | 🟥     R2     | 🟪    R6       | 🟪              |
-| **Mayor (4)**                 | 🟩        | 🟨      R5        | 🟥      R3    | 🟪    R1       | 🟪              |
-| **Moderado (3)**              | 🟩        | 🟨     R12         | 🟨  R4,R7,R8      | 🟥   R9        | 🟪              |
-| **Menor (2)**                 | 🟩        | 🟩         R11     | 🟨          | 🟨           | 🟥              |
-| **Insignificante (1)**        | 🟩        | 🟩              | 🟩          | 🟨           | 🟨              |
+| **Catastrófico (5)**         | 🟨      | 🟨      R10        | 🟥     R2     | 🟪    R6       | 🟪              |
+| **Mayor (4)**                | 🟩      | 🟨      R5        | 🟥      R3    | 🟪    R1       | 🟪              |
+| **Moderado (3)**             | 🟩      | 🟨     R12         | 🟨  R4,R7,R8      | 🟥   R9        | 🟪              |
+| **Menor (2)**                | 🟩      | 🟩         R11     | 🟨          | 🟨           | 🟥              |
+| **Insignificante (1)**       | 🟩      | 🟩              | 🟩          | 🟨           | 🟨              |
 
 
 ---
@@ -258,7 +258,7 @@ Además, se aplicará para optimizar el código, reducir errores y mejorar la ef
 
 En esta sección se describe la estructura organizativa del proyecto, detallando los equipos y los roles asignados a cada miembro. A continuación, se presenta un resumen de los grupos de trabajo organizados en función de sus especialidades, que incluyen Frontend, Full Stack, Backend, DevOps, y Gestión. También se ha proporcionado una tabla con las habilidades técnicas y sociales de cada miembro del equipo, con la información de contacto incluida para facilitar la comunicación. Para la selección de los distintos miembros del equipo, se procedió con una encuenta sobre las especialidades de cada miembro del equipo que se ven reflejadas a continuación. Tambien se hicieron encuestas para poder determinar cuales son las competencias de cada miembro, las cuales se ven reflejadas en la siguiente tabla.
 
-#### **Tabla de Participantes**
+### **Tabla de Participantes**
 
 | Participante (Nombre, Usuario GitHub, Correo Electrónico)      | Habilidades Técnicas | Soft Skills             |
 |---------------------------------------------------------------|----------------------|-------------------------|
@@ -277,41 +277,41 @@ En esta sección se describe la estructura organizativa del proyecto, detallando
 | - **Jorge Gómez de Tovar**<br>- **jorgomde**<br>- jorge.gomez.detovar@gmail.com | Especializado en  Backend | Empatía, resolutividad           |
 | - **Javier Ruiz Garrido**<br>- **Javiruizg**<br>- 2210jrg@gmail.com | Especializado en Backend | Empatía, manejo del estrés           |
 
-#### **Equipos y Roles**
+### **Equipos y Roles**
 
-##### **Dirección**
+#### **Dirección**
 | Rol               | Miembros |
 |-------------------|----------|
 | Project Manager   | - Luis Mellado Díaz<br>- Daniel Flores De Francisco |
 
-##### **Frontend**
+#### **Frontend**
 | Rol                   | Miembros |
 |-----------------------|----------|
 | Líder Frontend, UI/UX | - Sergio Trenado González |
 | Desarrollo Frontend   | - Javier García Sebastián<br>- Fernando Castelló Sánchez<br>- Luis Mellado Díaz<br>- Yesica Garate Fuentes |
 
-##### **Full Stack**
+#### **Full Stack**
 | Rol                 | Miembros |
 |---------------------|----------|
 | Líder Full Stack    | - David González Martínez |
 | Desarrollo Full Stack | - Francisco Miguel Jiménez Morales<br>- Andrés Martínez Reviriego<br>- Manuel Castillejo Vela |
 
-##### **Backend**
+#### **Backend**
 | Rol               | Miembros |
 |-------------------|----------|
 | Líder Backend     | - Rafael Castillo Cebolla |
 | Desarrollo Backend | - Claudio Cortés Carrasco<br>- Jorge Gómez de Tovar<br>- Javier Ruiz Garrido |
 
-##### **DevOps**
+#### **DevOps**
 | Rol         | Miembros |
 |-------------|----------|
 | DevOps      | - Daniel Flores De Francisco<br>- David González Martínez |
 
-##### **Gestión**
+#### **Gestión**
 | Rol                      | Miembros |
 |--------------------------|----------|
-| Analista, QA y Pruebas    | - Rafael Castillo Cebolla<br>- Luis Mellado Díaz |
-| Analista                 | - Francisco Miguel Jiménez Morales |
+| Analista | - Rafael Castillo Cebolla<br>- Luis Mellado Díaz<br>- Francisco Miguel Jiménez Morales |
+| QA y Pruebas                 | - Rafael Castillo Cebolla<br>- Luis Mellado Díaz |
 | Publicidad y Marketing    | - Javier García Sebastián |
 | Documentación            | - Luis Mellado Díaz<br>- Daniel Flores De Francisco<br>- Claudio Cortés Carrasco |
 
