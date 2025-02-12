@@ -261,11 +261,11 @@ En esta sección se describe la estructura organizativa del proyecto, detallando
 | - **Sergio Trenado González**<br>- **Sergiotg03**<br>- sergiotg003@gmail.com | Especializado en Frontend | Creatividad, resolutividad           |
 | - **Javier García Sebastián**<br>- **JaviGarcia1**<br>- javigarciasebastian@icloud.com | Especializado en Frontend | Empatía, creatividad           |
 | - **Fernando Castelló Sánchez**<br>- **feerk**<br>- gferx87@gmail.com | Especializado en Frontend | Pensamiento Crítico, resolutividad           |
-| - **Yesica Garate Fuentes**<br>- **yesgarfue**<br>- yesi.garate@gmail.com | Especializado en Frontend | [Soft Skills]           |
-| - **David González Martínez**<br>- **davidgonmar**<br>- dagoma0033@gmail.com | Programador Versátil | [Soft Skills]           |
+| - **Yesica Garate Fuentes**<br>- **yesgarfue**<br>- yesi.garate@gmail.com | Especializado en Frontend | Adaptabilidad, creatividad           |
+| - **David González Martínez**<br>- **davidgonmar**<br>- dagoma0033@gmail.com | Programador Versátil | Pensamiento crítico, adaptabilidad           |
 | - **Francisco Miguel Jiménez Morales**<br>- **frajimmor2**<br>- curritojimo@gmail.com | Programador Versátil | Adaptabilidad, autodisciplina           |
 | - **Andrés Martínez Reviriego**<br>- **Andresmarevi**<br>- andresmarevi@gmail.com | Programador Versátil | Pensamiento crítico, resolutividad           |
-| - **Manuel Castillejo Vela**<br>- **Mancasvel**<br>- Mancasvel1@alum.us.es | Programador Versátil |            |
+| - **Manuel Castillejo Vela**<br>- **Mancasvel**<br>- Mancasvel1@alum.us.es | Programador Versátil | Adaptabilidad, autodisciplina      |
 | - **Rafael Castillo Cebolla**<br>- **rafcasceb**<br>- rafaelcastillocebolla@gmail.com | Especializado en Backend | Liderazgo, pensamiento crítico           |
 | - **Claudio Cortés Carrasco**<br>- **claudiocortescarrasco**<br>- cortescarrascoclaudio@gmail.com | Especializado en Backend | Empatia, manejo del estrés           |
 | - **Jorge Gómez de Tovar**<br>- **jorgomde**<br>- jorge.gomez.detovar@gmail.com | Especializado en  Backend | Empatía, resolutividad           |
