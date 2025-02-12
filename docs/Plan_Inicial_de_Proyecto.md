@@ -13,7 +13,8 @@ Autores: [Nombres]
 |---------|-------------|--------------------------------------|
 | 1.0     | 11/02/2025  | Creación del documento. Índice. Organización del Equipo y Commitment. MVP y casos de uso.|
 | 1.1     | 11/02/2025  | Acotando el MVP|
-| 1.2     | 12/02/2025  | Tabla de riesgos 
+| 1.2     | 12/02/2025  | Tabla de riesgos|
+| 1.3     | 12/02/2025  | Modificación a Discusión de la tecnología|
 
 
 ---
@@ -127,32 +128,40 @@ El objetivo es lanzar una versión inicial que ofrezca las funcionalidades clave
 
 ## 5. Tecnología y Desarrollo del Proyecto
 ### Discusión de la tecnología
-*Versión preliminar*
-Se desea implementar una Progressive Web App (PWA). Se desea que tenga las características básicas de una (responsiva, con interacciones propias de una aplicación nativa, etc.), y que, adicionalmente, cumpla con los siguientes requisitos:
-- Enmascare lo mejor posible la carga de datos.
-- Funcione offline (mostrando datos cargados previamente, mediante el uso de un caché o similar).
-- Refresque los datos automáticamente, mostrando al usuario datos frescos.
+Se desea implementar una **Progressive Web App** (PWA). Se busca que tenga las características básicas de una (responsiva, con interacciones propias de una aplicación nativa, etc.), y que, adicionalmente, cumpla con los siguientes requisitos adicionales:
+- **Enmascare** lo mejor posible **la carga de datos**, proporcionando una experiencia fluida.
+- Funcione en modo **offline** (esto quiere decir que, si el usuario no dispone de una conexión a internet, debe utilizar datos cargados anteriormente, mediante el uso de un caché o similar).
+- **Refresque los datos automáticamente** de forma periódica, mostrando al usuario datos frescos.
 - Sea más rápida tras la primera carga de datos (mediante el uso de caché).
-- Sea enlazable. Cada 'pantalla' de la aplicación debe estar enlazada a una URL única, y esta URL debe incluir información sobre el estado de la app (búsqueda hecha por el usuario, hotel mostrado actualmente, etc.).
+- Sea **enlazable y descubrible**. Cada 'pantalla' de la aplicación debe estar enlazada a una URL única, y esta URL debe incluir información sobre el estado de la app (por ejemplo, búsqueda hecha por el usuario, hotel mostrado actualmente, etc.).
 
-Independientemente del stack tecnológico, podemos identificar los siguientes requisitos a nivel técnico:
-- Necesitamos una Single Page Application (SPA). Es crucial a la hora de diseñar una PWA y que esta proporcione una experiencia fluida. Esto, a su vez, conlleva el uso de un paradigma de comunicación del estilo REST (en realidad, esto es compatible con otras tecnologías, por ejemplo, GraphQL, pero que consideramos una API REST hará bien el trabajo).
-- La SPA debe ser enlazable. Por lo general, los frameworks de frontend soportan librerías para la enrutación que satisfacen esta necesidad.
-- Separación clara entre capa de datos e interfaz. Los requisitos de datos inducen una separación entre capa de datos (encargada de obtener datos del backend, gestionar el caché y la conexión, de refrescar datos, etc.) y una capa de interfaz (encargada de renderizar y mostrar la interfaz).
-- Los requisitos de producto hace el stack amenable a una base de datos relacional.
+Podemos traducir lo anterior a los siguientes requisitos técnicos:
+- Necesitamos una **Single Page Application** (SPA). Es necesaria a la hora de diseñar una PWA y que esta proporcione una experiencia fluida. Esto, a su vez, conlleva el uso de un paradigma de comunicación del estilo **REST** (en realidad, el requisito es compatible con otras tecnologías. Por ejemplo, podríamos utilizar GraphQL, pero que consideramos una API REST hará bien el trabajo).
+- La **SPA debe ser enlazable**. Por lo general, los frameworks de frontend soportan librerías para la enrutación que satisfacen esta necesidad.
+- **Separación clara entre capa de datos e interfaz**. Los requisitos de datos inducen una separación lógica entre capa de datos (encargada de obtener datos del backend, gestionar el caché y la conexión, de refrescar datos periódicamente, etc.) y una capa de interfaz (encargada de renderizar y mostrar la interfaz, además de la lógica necesaria).
+- Los requisitos de producto hace el stack amenable a una **base de datos relacional**.
 
-Para el frontend, hemos considerado utilizar VueJS o ReactJS. Para el backend, NestJS o Django. Por distintos motivos, hemos hecho las elecciones expuestas a continuación:
-- MySQL/MariaDB. Sencillo de utilizar, soporte muy amplio y mucha experiencia previa por parte de los compañeros de equipo.
-- Django para el backend. Experiencia previa por parte del equipo. Framework muy completo, y con soporte nativo para bases de dato MySQL/MariaDB, además de APIs REST. Ya que utilizaremos una SPA, optaremos por prescindir de su funcionalidad de plantillas.
-- VueJS + Vite para el frontend. Framework completo, ligero y sencillo de utilizar. Permite una separación por componentes, manejo del estado global y diferenciación entre código de lógica (por ejemplo, para la capa de datos) e interfaz. Adicionalmente, tiene soporte completo para PWA. Vite fue elegido por ser la build tool más recomendada para una SPA con Vue.
-- Para la capa de datos, nos montaremos en los hombros de TanStack Query. Proporciona una forma pragmática de separar la lógica de la capa de datos de los componentes. Tiene soporte nativo para el uso de caché, modo offline y recarga de datos automática. Proporciona los ladrillos necesarios para construir una capa de datos eficiente y elegante.
-- Vue Router para el enrutado. Vue es agnóstico en términos de enrutador, pero el más utilizado y recomendado es Vue Query. Es afín a una aplicación enlazable.
+Para el frontend, hemos considerado utilizar **Vue.js** o **React**. Para el backend, **NestJS** o **Django**. Tras consultarlo los compañeros de equipo, hemos hecho las elecciones expuestas a continuación:
+- **MySQL/MariaDB** como base de datos única. Es sencilla de utilizar, tiene soporte muy amplio y hay mucha experiencia previa por parte de los compañeros de equipo.
+- **Django** para el backend. Hay algo de experiencia previa por parte del equipo. Es un framework muy completo, y viene con soporte nativo para bases de datos MySQL/MariaDB, además de APIs REST. Ya que utilizaremos una SPA, optaremos por prescindir de su funcionalidad de plantillas, haciendo la comunicación exclusivamente mediante una API REST.
+- **Vue.js + Vite** para el frontend. Vue.js es un framework completo, ligero y sencillo de utilizar. Permite una separación por componentes, manejo del estado global y diferenciación entre código de lógica (por ejemplo, para la capa de datos) e interfaz. Vite fue elegido por ser la build tool más recomendada para una SPA con Vue.js. La dupla tiene soporte completo para PWAs mediante el uso de plugins.
+- Para la capa de datos, nos montaremos en los hombros de **TanStack Query**. Proporciona los ladrillos necesarios para diseñar una capa de datos elegante y eficiente. Tiene soporte nativo para el uso de caché, modo offline y recarga de datos automática, entre otros.
+- **Vue Router** para el enrutado. Vue.js es agnóstico en términos de enrutador, pero el más utilizado y recomendado es Vue Query. Es afín a una aplicación enlazable y descubrible.
+- Consideramos el uso de librerías adicionales para el estado de la aplicación. A priori, TanStack Query puede actuar como gestor del estado global de la aplicación en términos de datos. Si fuese necesario, se puede utilizar otra librería para lo que haga falta. **Pinia** es una elección popular.
 
 Se puede visualizar la arquitectura general de la aplicación con el siguiente diagrama:
-
 <div style="text-align: center;">
     <img src="https://github.com/user-attachments/assets/1b22a8c0-b6ca-4532-83fd-bf099c58fe6d" alt="Diagrama">
 </div>
+
+Es importante discutir, también, la forma en la que se despegará la app y cómo se gestionarán los despliegues. La asignatura propone el uso de **Google Cloud**. A priori, tenemos pensado su uso en distintos ámbitos:
+- Alojar la **base de datos**.
+- Alojar, como una **página web estática**, el frontend.
+- Alojar la **aplicación de Django**.
+- Opcionalmente, si las circunstancias lo requieren, se utilizará para **guardar imágenes** o similares.
+
+Haremos uso de **GitHub** como repositorio central, y para el **CI/CD** tenemos planificado emplear **Github Actions**. Esto último lo hemos decidido a partir de la experiencia pasada del equipo.
+Además, prevemos emplear **Docker** para el empaquetado de la app y su fácil despliegue.
 
 ### Uso de IA
 **Implementación y ventajas de la inteligencia artificial en el producto.**
