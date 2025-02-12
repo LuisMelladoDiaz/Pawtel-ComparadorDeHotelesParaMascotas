@@ -92,13 +92,25 @@ Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
 
 ## 👥 Contribuidores
 
-- **[Tu Nombre](https://github.com/tuusuario)**
-- **[Nombre del Contribuidor](https://github.com/otro-usuario)**
-- 🚀 ¡Y más personas increíbles que han contribuido!
+- **[Daniel Flores De Francisco](https://github.com/DanielFloresDeFrancisco)** (Director del Proyecto)
+- **[Luis Mellado Díaz](https://github.com/LuisMelladoDiaz)** (Director del Proyecto)
+- **[Andrés Martínez Reviriego](https://github.com/Andresmarevi)**
+- **[Claudio Cortés Carrasco](https://github.com/claudiocortescarrasco)**
+- **[David González Martínez](https://github.com/davidgonmar)**
+- **[Fernando Castelló Sánchez](https://github.com/feerk)**
+- **[Francisco Miguel Jiménez Morales](https://github.com/frajimmor2)**
+- **[Javier García Sebastián](https://github.com/JaviGarcia1)**
+- **[Javier Ruiz Garrido](https://github.com/Javiruizg)**
+- **[Jorge Gómez de Tovar](https://github.com/jorgomde)**
+- **[Manuel Castillejo Vela](https://github.com/Mancasvel)**
+- **[Rafael Castillo Cebolla](https://github.com/rafcasceb)**
+- **[Sergio Trenado González](https://github.com/Sergiotg03)**
+- **[Yesica Garate Fuentes](https://github.com/yesgarfue)**
+
+🚀 ¡Y más personas increíbles que han contribuido!
 
 Si deseas contribuir, revisa nuestras [pautas de contribución](CONTRIBUTING.md).
 
----
 
 🎉 _¡Gracias por visitar PawTel! Si te gusta el proyecto, no dudes en dejar una estrella ⭐ en GitHub._
 
