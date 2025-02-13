@@ -26,6 +26,8 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 | 1.1 | 09/02/2025 | Disponibilidad del equipo | Luis Mellado Díaz |
 | 2.0 | 13/02/2025 | Pawtel hoteles para mascotas | Luis Mellado Díaz |
 | 2.1 | 13/02/2025 | Enlaces importantes y contribuidores | Luis Mellado Díaz |
+| 2.2 | 13/02/2025 | Licencia | Luis Mellado Díaz |
+
 
 
 
@@ -86,7 +88,7 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 - 🔹 **[Manual de Identidad Corporativa](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/borradores/Manual%20de%20identidad%20corporativa%20(paleta%20de%20colores%2C%20tipografia%20y%20logo).pdf)**
 
 ### Contribución y Despliegue
-- 🔹 **Cómo Contribuir y Gestión de la Configuración:** *(Enlace por agregar)*
+- 🔹 **Cómo Contribuir y Gestión de la Configuración:**  [Pautas de contribución](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
 - 🔹 **Despliegue en Producción:** *(Enlace por agregar)*
 
 ### Presentaciones
@@ -97,7 +99,9 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 
 ## 📜 Licencia
 
-Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
+Este proyecto está protegido por derechos de autor. Todos los derechos están reservados. No se permite la copia, distribución, modificación ni sublicencia sin el permiso expreso del titular de los derechos de autor.
+
+Copyright (c) 2025 PawTel.
 
 ---
 
@@ -120,7 +124,9 @@ Este proyecto está licenciado bajo la [Licencia MIT](LICENSE).
 
 🚀 ¡Y más personas increíbles que han contribuido!
 
-Si deseas contribuir, revisa nuestras [pautas de contribución](CONTRIBUTING.md).
+Si deseas contribuir, revisa nuestras [pautas de contribución](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
+
+---
 
 
 🎉 _¡Gracias por visitar PawTel! Si te gusta el proyecto, no dudes en dejar una estrella ⭐ en GitHub._
