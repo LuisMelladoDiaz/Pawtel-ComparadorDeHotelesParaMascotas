@@ -1,41 +1,137 @@
-## Índice
-1. [Tabla de Versiones](#tabla-de-versiones)
-2. [Miembros del Equipo](#miembros-del-equipo)
-3. [Disponibilidad del Equipo](#disponibilidad-del-equipo)
+# 🐾 PawTel - Comparador de Hoteles para Mascotas
 
+Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 ---
 
-## Tabla de Versiones
+## 📖 Índice
+
+1. [📊 Tabla de Versiones](#-tabla-de-versiones)
+2. [📌 Acerca del Proyecto](#-acerca-del-proyecto)
+3. [🛠️ Tecnologías Utilizadas](#️-tecnologías-utilizadas)
+4. [🚀 Instalación](#-instalación)
+5. [📌 Uso](#-uso)
+6. [📂 Estructura del Proyecto](#-estructura-del-proyecto)
+7. [🔗 Enlaces Importantes](#-enlaces-importantes)
+8. [📜 Licencia](#-licencia)
+9. [👥 Contribuidores](#-contribuidores)
+
+---
+
+## 📊 Tabla de Versiones
 
 | Versión | Fecha | Descripción | Autor |
 |---------|------------|-------------|--------|
 | 1.0 | 02/02/2025 | Versión inicial del documento | Luis Mellado Díaz |
 | 1.1 | 09/02/2025 | Disponibilidad del equipo | Luis Mellado Díaz |
+| 2.0 | 13/02/2025 | Pawtel hoteles para mascotas | Luis Mellado Díaz |
+| 2.1 | 13/02/2025 | Enlaces importantes y contribuidores | Luis Mellado Díaz |
+| 2.2 | 13/02/2025 | Licencia | Luis Mellado Díaz |
 
 
-## Miembros del Equipo
 
-| Nombre | Correo Electrónico | Usuario |
-|--------|--------------------|---------|
-| Luis Mellado Díaz | melladodiazluis@gmail.com | LuisMelladoDiaz |
-| David González Martínez | dagoma0033@gmail.com | davidgonmar |
-| Andrés Martínez Reviriego | andresmarevi@gmail.com | Andresmarevi |
-| Claudio Cortés Carrasco | cortescarrascoclaudio@gmail.com | claudiocortescarrasco |
-| Sergio Trenado González | sergiotg003@gmail.com | Sergiotg03 |
-| Daniel Flores De Francisco | danielfloresdefrancisco@gmail.com | DanielFloresDeFrancisco |
-| Francisco Miguel Jiménez Morales | curritojimo@gmail.com | frajimmor2 |
-| Jorge Gómez de Tovar | jorge.gomez.detovar@gmail.com | jorgomde |
-| Javier Ruiz Garrido | 2210jrg@gmail.com | Javiruizg |
-| Rafael Castillo Cebolla | rafaelcastillocebolla@gmail.com | rafcasceb |
-| Fernando Castelló Sánchez | gferx87@gmail.com | feerk |
-| Javier García Sebastián | javigarciasebastian@icloud.com | JaviGarcia1 |
-| Manuel Castillejo Vela | Mancasvel1@alum.us.es | Mancasvel |
-| Yesica Garate Fuentes | yesi.garate@gmail.com | yesgarfue |
 
-## Disponibilidad del Equipo
-La disponibilidad del equipo queda reflejada en la siguiente tabla. Para mas detalle acceda a [When2Meet](https://www.when2meet.com/?28930983-a2ebV).
+---
 
-![disponibilidad](https://github.com/user-attachments/assets/8037ab77-5b83-45fa-997c-9fdc840064ad)
+## 📌 Acerca del Proyecto
+
+**PawTel** es una plataforma digital diseñada para comparar hoteles para mascotas. Con PawTel, los dueños pueden encontrar hoteles confiables para sus mascotas, mientras que los hoteles pueden gestionar sus reservas de manera eficiente.
+
+**Características clave:**
+- 🏨 Búsqueda y comparación de hoteles para mascotas con filtros personalizados.
+- 🐶 Perfiles detallados de cada hotel con fotos, precios y disponibilidad.
+- 📝 Sistema de reservas y gestión de citas.
+- ⭐ Reseñas y valoraciones de usuarios.
+- 🔔 Notificaciones para recordatorios y actualizaciones de reservas.
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+- **Frontend:** Vue.js + Vite
+- **Backend:** Django
+- **Base de Datos:** MySQL/MariaDB
+- **DevOps:** Github Actions, Docker, Google Cloud
+- **Otros:** Vue Router, TanStack Query
+
+---
+## 🚀 Instalación
+
+⚠️ **Nota:** Completar esta sección con instrucciones detalladas.
+
+----
+
+## 📌 Uso
+
+⚠️ **Nota:** Completar con ejemplos de cómo utilizar la plataforma.
+
+1. **Registro e inicio de sesión.**
+2. **Búsqueda y filtrado de hoteles.**
+3. **Reserva de hospedaje.**
+4. **Gestión de reservas y pagos.**
+5. **Reseñas y calificaciones.**
+
+---
+
+## 📂 Estructura del Proyecto
+
+⚠️ **Nota:** Completar con la estructura real del proyecto.
+
+---
+
+## 🔗 Enlaces Importantes
+
+### Repositorios y Documentación
+- 🔹 **[Repositorio GitHub](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas)**
+- 🔹 **[Documentación del Proyecto](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/docs)**
+- 🔹 **[Plan Inicial de Proyecto](https://github.com/LuisMelladoDiaz/ISPP/blob/main/docs/Plan_Inicial_de_Proyecto.md)**
+- 🔹 **[Manual de Identidad Corporativa](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/borradores/Manual%20de%20identidad%20corporativa%20(paleta%20de%20colores%2C%20tipografia%20y%20logo).pdf)**
+
+### Contribución y Despliegue
+- 🔹 **Cómo Contribuir y Gestión de la Configuración:**  [Pautas de contribución](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
+- 🔹 **Despliegue en Producción:** *(Enlace por agregar)*
+
+### Presentaciones
+- 🔹 **[Semana 1](https://docs.google.com/presentation/d/1YIfkJfGKqe_43hg5v4Fm_qdwbAvd6D_e-aXp1oEHZfI/edit#slide=id.g32d71018c15_4_11)** (Idea descartada)
+- 🔹 **[Semana 2](https://docs.google.com/presentation/d/1-jI3r4i6FYvNZdV9Lfn6jm7cSdSyRFIKl9Dg0VnDaG0/edit#slide=id.g334114ffe31_4_5)**
+
+---
+
+## 📜 Licencia
+
+Este proyecto está protegido por derechos de autor. Todos los derechos están reservados. No se permite la copia, distribución, modificación ni sublicencia sin el permiso expreso del titular de los derechos de autor.
+
+Copyright (c) 2025 PawTel.
+
+---
+
+## 👥 Contribuidores
+
+- **[Daniel Flores De Francisco](https://github.com/DanielFloresDeFrancisco)** (Director del Proyecto)
+- **[Luis Mellado Díaz](https://github.com/LuisMelladoDiaz)** (Director del Proyecto)
+- **[Andrés Martínez Reviriego](https://github.com/Andresmarevi)**
+- **[Claudio Cortés Carrasco](https://github.com/claudiocortescarrasco)**
+- **[David González Martínez](https://github.com/davidgonmar)**
+- **[Fernando Castelló Sánchez](https://github.com/feerk)**
+- **[Francisco Miguel Jiménez Morales](https://github.com/frajimmor2)**
+- **[Javier García Sebastián](https://github.com/JaviGarcia1)**
+- **[Javier Ruiz Garrido](https://github.com/Javiruizg)**
+- **[Jorge Gómez de Tovar](https://github.com/jorgomde)**
+- **[Manuel Castillejo Vela](https://github.com/Mancasvel)**
+- **[Rafael Castillo Cebolla](https://github.com/rafcasceb)**
+- **[Sergio Trenado González](https://github.com/Sergiotg03)**
+- **[Yesica Garate Fuentes](https://github.com/yesgarfue)**
+
+🚀 ¡Y más personas increíbles que han contribuido!
+
+Si deseas contribuir, revisa nuestras [pautas de contribución](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
+
+---
+
+
+🎉 _¡Gracias por visitar PawTel! Si te gusta el proyecto, no dudes en dejar una estrella ⭐ en GitHub._
+
+
+
 
 

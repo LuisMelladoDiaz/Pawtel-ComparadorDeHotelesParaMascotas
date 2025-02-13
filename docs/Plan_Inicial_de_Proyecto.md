@@ -14,7 +14,12 @@ Autores: [Nombres]
 | 1.0     | 11/02/2025  | Creación del documento. Índice. Organización del Equipo y Commitment. MVP y casos de uso.|
 | 1.1     | 11/02/2025  | Acotando el MVP|
 | 1.2     | 12/02/2025  | Tabla de riesgos|
-
+| 1.3     | 12/02/2025  | Modificación a Discusión de la tecnología|
+| 1.4     | 12/02/2025  | Usuarios piloto potenciales y modelo de negocio |
+| 1.5     | 12/02/2025  | Uso de IA en el proyecto |
+| 1.6     | 12/02/2025  | Tratamiento de datos |
+| 1.7     | 12/02/2025  | Introducción completada |
+| 1.8     | 12/02/2025  | Añadir uso de TS en el stack tecnológico |
 
 ---
 
@@ -40,17 +45,16 @@ Autores: [Nombres]
 ## 1. Introducción
 ### Key business idea
 **Explicación clara del negocio: qué es y qué no es.**
-Nuestra aplicación será una plataforma innovadora para la búsqueda y comparación de hoteles para mascotas, con un enfoque inicial en hoteles para perros pero con la idea de expandirse en siguientes iteraciones a alojamientos para todo tipo de mascotas y servicios complementarios.
-A través de un sistema intuitivo, los dueños de mascotas pueden encontrar opciones de alojamiento seguras y confiables para estas durante sus viajes o ausencias, además de poder leer información relevante sobre cada uno de los disponibles.
+Nuestra aplicación será una plataforma integral para la búsqueda, comparación y reserva de servicios de alojamiento y cuidado para mascotas. Permitirá a los dueños, además de buscar a cuidadores disponibles, encontrar hoteles comparando sus precios, ubicaciones u opiniones, con la posibilidad de visualizarlos en un mapa interactivo, contactar con ellos e incluso realizar reservas y pagos directamente desde la app. Además, los usuarios podrán registrarse de una manera sencilla para poder recibir notificaciones y alertas personalizadas o dejar reseñas y puntuar su experiencia, lo que garantizará un ecosistema de confianza y transparencia en el cuidado de sus mascotas. 
 
 Cabe destacar que el resultado no será la aplicación de un hotel o de una agencia de reservas exclusiva para un grupo de hoteles, sino un buscador y comparador de alojamientos ya existentes. Tampoco será una plataforma de cuidadores particulares o un servicio de paseo o guardería de día.
 Por último, resaltar que no nos dedicaremos a proporcionar servicios para mascotas ni a la adopción o bienestar animal.
 
 **La idea en una frase:**
-Un buscador y comparador de hoteles para mascotas que ayuda a los dueños a encontrar la mejor opción disponible según sus prioridades.
+La plataforma definitiva para buscar, comparar y reservar el mejor alojamiento o cuidador para tu mascota de forma fácil y segura.
 
 **La idea en 50 palabras:**
-Una aplicación que permite la búsqueda y comparación de hoteles para mascotas, empezando por alojamientos para perros pero con planes de expansión a otros tipos de mascotas y servicios complementarios. No somos un hotel, sino un buscador y comparador de opciones ya existentes.
+Nuestra plataforma conecta a dueños de mascotas con hoteles y cuidadores certificados. Permite comparar precios, ubicaciones y valoraciones, visualizar alojamientos en un mapa interactivo, contactar con proveedores y reservar con pago seguro. Además, fomenta la confianza entre usuarios a través de reseñas y puntuaciones verificadas.
 
 
 ---
@@ -83,10 +87,21 @@ Una aplicación que permite la búsqueda y comparación de hoteles para mascotas
 
 ## 3. Modelo de Negocio y Usuarios
 ### Usuarios piloto potenciales
-**Diversidad, planes de precios, cobertura de casos y segmentación de la población.**
+
+Esta aplicación estará dirigida a un grupo de personas muy focalizado, que serán todas aquellas que tengan un perro como mascota, y tengan la necesidad de dejarlo en un hotel o residencia para estos. Pueden existir múltiples casos por los que una persona dejaría a su mascota en uno de estos sitios, y sería incorrecto pensar que estos casos sólo serían muy puntuales, o frecuente en muy pocas personas, ya que los hoteles y residencias de mascotas es un tipo de negocio en auge debido a su alta demanda.
+
+En relación con todo lo anterior, se piensa firmemente que es un acierto ofrecer un servicio que actualmente no está en el mercado a todas estas personas, haciendo que se conviertan en potenciales usuarios sin importar directamente el motivo por el que deja su mascota en una residencia u hotel. Además, sea cual sea la mayor preocupación del dueño, ya sea el dinero, pudiendo comparar para encontrar el más económico, o por la comodidad de su mascota, pudiendo comparar reseñas y fotos de distintos sitios, hacen que nuestra aplicación sea ideal para cualquier persona que tenga un perro como mascota.
+
+Para atraer a todos estos usuarios potenciales a usar nuestra aplicación, se optará por hacerla de uso gratuito y sin limitaciones en cuanto a la funcionalidad principal. El modelo de negocio con el que se pretende ganar dinero es a través de comisiones en las reservas de los usuarios. También se pueden añadir otras fuentes de ingresos como anuncios en la aplicación o promociones a hoteles y residencias.
 
 ### Cómo trabajaremos con los usuarios piloto
-**Recopilación, almacenamiento y tratamiento de datos.**
+Nuestra aplicación recopila y almacena únicamente los datos necesarios para su correcto funcionamiento. La información proporcionada por los usuarios será utilizada exclusivamente para mejorar la experiencia dentro de la aplicación.
+
+No compartiremos ni venderemos los datos a terceros. Toda la información será tratada con medidas de seguridad adecuadas para proteger la privacidad de nuestros usuarios.
+
+Al utilizar la aplicación, el usuario acepta estos términos sobre el manejo de sus datos.
+
+
 
 ---
 
@@ -140,40 +155,72 @@ El objetivo es lanzar una versión inicial que ofrezca las funcionalidades clave
 
 ## 5. Tecnología y Desarrollo del Proyecto
 ### Discusión de la tecnología
-*Versión preliminar*
-Se desea implementar una Progressive Web App (PWA). Se desea que tenga las características básicas de una (responsiva, con interacciones propias de una aplicación nativa, etc.), y que, adicionalmente, cumpla con los siguientes requisitos:
-- Enmascare lo mejor posible la carga de datos.
-- Funcione offline (mostrando datos cargados previamente, mediante el uso de un caché o similar).
-- Refresque los datos automáticamente, mostrando al usuario datos frescos.
+Se desea implementar una **Progressive Web App** (PWA). Se busca que tenga las características básicas de una (responsiva, con interacciones propias de una aplicación nativa, etc.), y que, adicionalmente, cumpla con los siguientes requisitos adicionales:
+- **Enmascare** lo mejor posible **la carga de datos**, proporcionando una experiencia fluida.
+- Funcione en modo **offline** (esto quiere decir que, si el usuario no dispone de una conexión a internet, debe utilizar datos cargados anteriormente, mediante el uso de un caché o similar).
+- **Refresque los datos automáticamente** de forma periódica, mostrando al usuario datos frescos.
 - Sea más rápida tras la primera carga de datos (mediante el uso de caché).
-- Sea enlazable. Cada 'pantalla' de la aplicación debe estar enlazada a una URL única, y esta URL debe incluir información sobre el estado de la app (búsqueda hecha por el usuario, hotel mostrado actualmente, etc.).
+- Sea **enlazable y descubrible**. Cada 'pantalla' de la aplicación debe estar enlazada a una URL única, y esta URL debe incluir información sobre el estado de la app (por ejemplo, búsqueda hecha por el usuario, hotel mostrado actualmente, etc.).
 
-Independientemente del stack tecnológico, podemos identificar los siguientes requisitos a nivel técnico:
-- Necesitamos una Single Page Application (SPA). Es crucial a la hora de diseñar una PWA y que esta proporcione una experiencia fluida. Esto, a su vez, conlleva el uso de un paradigma de comunicación del estilo REST (en realidad, esto es compatible con otras tecnologías, por ejemplo, GraphQL, pero que consideramos una API REST hará bien el trabajo).
-- La SPA debe ser enlazable. Por lo general, los frameworks de frontend soportan librerías para la enrutación que satisfacen esta necesidad.
-- Separación clara entre capa de datos e interfaz. Los requisitos de datos inducen una separación entre capa de datos (encargada de obtener datos del backend, gestionar el caché y la conexión, de refrescar datos, etc.) y una capa de interfaz (encargada de renderizar y mostrar la interfaz).
-- Los requisitos de producto hace el stack amenable a una base de datos relacional.
+Podemos traducir lo anterior a los siguientes requisitos técnicos:
+- Necesitamos una **Single Page Application** (SPA). Es necesaria a la hora de diseñar una PWA y que esta proporcione una experiencia fluida. Esto, a su vez, conlleva el uso de un paradigma de comunicación del estilo **REST** (en realidad, el requisito es compatible con otras tecnologías. Por ejemplo, podríamos utilizar GraphQL, pero que consideramos una API REST hará bien el trabajo).
+- La **SPA debe ser enlazable**. Por lo general, los frameworks de frontend soportan librerías para la enrutación que satisfacen esta necesidad.
+- **Separación clara entre capa de datos e interfaz**. Los requisitos de datos inducen una separación lógica entre capa de datos (encargada de obtener datos del backend, gestionar el caché y la conexión, de refrescar datos periódicamente, etc.) y una capa de interfaz (encargada de renderizar y mostrar la interfaz, además de la lógica necesaria).
+- Los requisitos de producto hace el stack amenable a una **base de datos relacional**.
 
-Para el frontend, hemos considerado utilizar VueJS o ReactJS. Para el backend, NestJS o Django. Por distintos motivos, hemos hecho las elecciones expuestas a continuación:
-- MySQL/MariaDB. Sencillo de utilizar, soporte muy amplio y mucha experiencia previa por parte de los compañeros de equipo.
-- Django para el backend. Experiencia previa por parte del equipo. Framework muy completo, y con soporte nativo para bases de dato MySQL/MariaDB, además de APIs REST. Ya que utilizaremos una SPA, optaremos por prescindir de su funcionalidad de plantillas.
-- VueJS + Vite para el frontend. Framework completo, ligero y sencillo de utilizar. Permite una separación por componentes, manejo del estado global y diferenciación entre código de lógica (por ejemplo, para la capa de datos) e interfaz. Adicionalmente, tiene soporte completo para PWA. Vite fue elegido por ser la build tool más recomendada para una SPA con Vue.
-- Para la capa de datos, nos montaremos en los hombros de TanStack Query. Proporciona una forma pragmática de separar la lógica de la capa de datos de los componentes. Tiene soporte nativo para el uso de caché, modo offline y recarga de datos automática. Proporciona los ladrillos necesarios para construir una capa de datos eficiente y elegante.
-- Vue Router para el enrutado. Vue es agnóstico en términos de enrutador, pero el más utilizado y recomendado es Vue Query. Es afín a una aplicación enlazable.
+Para el frontend, hemos considerado utilizar **Vue.js** o **React**. Para el backend, **NestJS** o **Django**. Tras consultarlo los compañeros de equipo, hemos hecho las elecciones expuestas a continuación:
+- **MySQL/MariaDB** como base de datos única. Es sencilla de utilizar, tiene soporte muy amplio y hay mucha experiencia previa por parte de los compañeros de equipo.
+- **Django** para el backend. Hay algo de experiencia previa por parte del equipo. Es un framework muy completo, y viene con soporte nativo para bases de datos MySQL/MariaDB, además de APIs REST. Ya que utilizaremos una SPA, optaremos por prescindir de su funcionalidad de plantillas, haciendo la comunicación exclusivamente mediante una API REST.
+- **Vue.js + Vite** para el frontend. Vue.js es un framework completo, ligero y sencillo de utilizar. Permite una separación por componentes, manejo del estado global y diferenciación entre código de lógica (por ejemplo, para la capa de datos) e interfaz. Vite fue elegido por ser la build tool más recomendada para una SPA con Vue.js. La dupla tiene soporte completo para PWAs mediante el uso de plugins. Cabe destacar que utilizaremos TypeScript en lugar de JavaScript. Esta decisión se debe a su talante estricto, permitiendo describir con precisión las interfaces de distintos componentes lógicos (clases, funciones, etc.), algo que creemos beneficioso en un equipo numeroso.
+- Para la capa de datos, nos montaremos en los hombros de **TanStack Query**. Proporciona los ladrillos necesarios para diseñar una capa de datos elegante y eficiente. Tiene soporte nativo para el uso de caché, modo offline y recarga de datos automática, entre otros.
+- **Vue Router** para el enrutado. Vue.js es agnóstico en términos de enrutador, pero el más utilizado y recomendado es Vue Query. Es afín a una aplicación enlazable y descubrible.
+- Consideramos el uso de librerías adicionales para el estado de la aplicación. A priori, TanStack Query puede actuar como gestor del estado global de la aplicación en términos de datos. Si fuese necesario, se puede utilizar otra librería para lo que haga falta. **Pinia** es una elección popular.
 
 Se puede visualizar la arquitectura general de la aplicación con el siguiente diagrama:
-
 <div style="text-align: center;">
     <img src="https://github.com/user-attachments/assets/1b22a8c0-b6ca-4532-83fd-bf099c58fe6d" alt="Diagrama">
 </div>
 
-### Uso de IA
-**Implementación y ventajas de la inteligencia artificial en el producto.**
+Es importante discutir, también, la forma en la que se despegará la app y cómo se gestionarán los despliegues. La asignatura propone el uso de **Google Cloud**. A priori, tenemos pensado su uso en distintos ámbitos:
+- Alojar la **base de datos**.
+- Alojar, como una **página web estática**, el frontend.
+- Alojar la **aplicación de Django**.
+- Opcionalmente, si las circunstancias lo requieren, se utilizará para **guardar imágenes** o similares.
 
-- **Propósito de la IA**: Descripción del problema que resolverá la inteligencia artificial dentro del proyecto.
-- **Tipos de IA utilizadas**: Tecnologías específicas que se integrarán (ejemplo: modelos de machine learning para recomendaciones).
-- **Implementación técnica**: Explicación del flujo de trabajo de la IA en el sistema.
-- **Beneficios esperados**: Ventajas que aporta la IA a la experiencia del usuario y a la optimización del negocio.
+Haremos uso de **GitHub** como repositorio central, y para el **CI/CD** tenemos planificado emplear **Github Actions**. Esto último lo hemos decidido a partir de la experiencia pasada del equipo.
+Además, prevemos emplear **Docker** para el empaquetado de la app y su fácil despliegue.
+
+### Uso de IA
+
+
+- **Propósito de la IA**:  
+El uso de la inteligencia artificial en este proyecto tiene como objetivo mejorar la calidad del código y la documentación técnica. 
+Específicamente, la IA se utilizará para estandarizar y corregir la documentación existente, asegurando coherencia y claridad. 
+Además, se aplicará para optimizar el código, reducir errores y mejorar la eficiencia del desarrollo.
+
+- **Tipos de IA utilizadas**  
+  - **ChatGPT**: Para la generación y corrección de documentación técnica.  
+  - **GitHub Copilot**: Para asistencia en la escritura y refactorización de código.  
+  - **Microsoft Copilot**: Para automatizar tareas repetitivas y mejorar la productividad en herramientas de desarrollo.
+
+- **Implementación técnica**:  
+  La inteligencia artificial se integrará en el flujo de trabajo del equipo de desarrollo de la siguiente manera:
+
+  - **Corrección y estandarización de la documentación**: Se utilizará ChatGPT para revisar la redacción, asegurando que los documentos sean claros, precisos y uniformes.  
+  - **Asistencia en el desarrollo de código**: GitHub Copilot, ChatGPT y Microsoft Copilot proporcionarán sugerencias de código, ayudando a los desarrolladores a escribir funciones más eficientes y bien estructuradas.  
+
+- **Beneficios esperados**:  
+  El uso de la IA en el desarrollo y documentación del proyecto traerá diversos beneficios enfocados en dos apartados principalmente:
+
+  - **En el código**:  
+    - **Optimización y refactorización**: El código será más eficiente, con una estructura más clara y mantenible.  
+    - **Aceleración del desarrollo**: Se reducirá el tiempo dedicado a la escritura de código repetitivo, permitiendo que los desarrolladores se enfoquen en lógica más compleja.  
+    - **Detección de errores y vulnerabilidades**: La IA ayudará a identificar problemas en el código que podrían pasar desapercibidos en una revisión manual.  
+
+  - **En la documentación**:  
+    - **Coherencia y cohesión**: Se garantizará un estilo uniforme en todos los documentos, evitando inconsistencias en la información.  
+    - **Corrección automática**: La IA revisará errores ortográficos y gramaticales, mejorando la calidad de los textos.  
+    - **Estandarización**: Se seguirá un formato definido por la IA que adaptaremos a nuestras necesidades, facilitando la comprensión de la documentación por parte de todos los miembros del equipo además de estableciendo un marco de trabajo para los miembros del equipo de trabajo.
 
 ---
 
@@ -203,81 +250,81 @@ Se puede visualizar la arquitectura general de la aplicación con el siguiente d
 | R12  | Disponibilidad limitada de datos de hoteles | 2                 | 4             | 8              | Media      | Explorar diferentes APIs o bases de datos alternativas. |
 
 
-## Leyenda de colores
-🟩 **Verde (Bajo)** → Riesgo con impacto mínimo, poca probabilidad de afectar el proyecto.  
+### Leyenda de colores
+🟩 **Verde (Bajo)** → Riesgo con impacto mínimo. Poca probabilidad de afectar el proyecto.  
 🟨 **Amarillo (Moderado)** → Riesgo que puede generar problemas, pero manejable con estrategias.  
 🟥 **Rojo (Alto)** → Riesgo significativo que requiere atención prioritaria para mitigación.  
-🟪 **Morado (Crítico)** → Riesgo grave que puede comprometer el éxito del proyecto, necesita intervención urgente.
+🟪 **Morado (Crítico)** → Riesgo grave que puede comprometer el éxito del proyecto. Necesita intervención urgente.
 
-| Severidad ↓ / Probabilidad → | Rara (1) | Improbable (2) | Posible (3) | Probable (4) | Casi Cierta (5) |
+| Impacto ↓ / Probabilidad →   | Rara (1) | Improbable (2)  | Posible (3) | Probable (4) | Casi Cierta (5) |
 |------------------------------|----------|-----------------|-------------|--------------|-----------------|
-| **Catastrófico (5)**          | 🟨        | 🟨      R10        | 🟥     R2     | 🟪    R6       | 🟪              |
-| **Mayor (4)**                 | 🟩        | 🟨      R5        | 🟥      R3    | 🟪    R1       | 🟪              |
-| **Moderado (3)**              | 🟩        | 🟨     R12         | 🟨  R4,R7,R8      | 🟥   R9        | 🟪              |
-| **Menor (2)**                 | 🟩        | 🟩         R11     | 🟨          | 🟨           | 🟥              |
-| **Insignificante (1)**        | 🟩        | 🟩              | 🟩          | 🟨           | 🟨              |
+| **Catastrófico (5)**         | 🟨      | 🟨      R10        | 🟥     R2     | 🟪    R6       | 🟪              |
+| **Mayor (4)**                | 🟩      | 🟨      R5        | 🟥      R3    | 🟪    R1       | 🟪              |
+| **Moderado (3)**             | 🟩      | 🟨     R12         | 🟨  R4,R7,R8      | 🟥   R9        | 🟪              |
+| **Menor (2)**                | 🟩      | 🟩         R11     | 🟨          | 🟨           | 🟥              |
+| **Insignificante (1)**       | 🟩      | 🟩              | 🟩          | 🟨           | 🟨              |
 
 
 ---
 
 ## 8. Organización y Gestión del Proyecto
 
-En esta sección se describe la estructura organizativa del proyecto, detallando los equipos y los roles asignados a cada miembro. A continuación, se presenta un resumen de los grupos de trabajo organizados en función de sus especialidades, que incluyen Frontend, Full Stack, Backend, DevOps, y Gestión. También se ha proporcionado una tabla con las habilidades técnicas y sociales de cada miembro del equipo, con la información de contacto incluida para facilitar la comunicación.
+En esta sección se describe la estructura organizativa del proyecto, detallando los equipos y los roles asignados a cada miembro. A continuación, se presenta un resumen de los grupos de trabajo organizados en función de sus especialidades, que incluyen Frontend, Full Stack, Backend, DevOps, y Gestión. También se ha proporcionado una tabla con las habilidades técnicas y sociales de cada miembro del equipo, con la información de contacto incluida para facilitar la comunicación. Para la selección de los distintos miembros del equipo, se procedió con una encuenta sobre las especialidades de cada miembro del equipo que se ven reflejadas a continuación. Tambien se hicieron encuestas para poder determinar cuales son las competencias de cada miembro, las cuales se ven reflejadas en la siguiente tabla.
 
-#### **Tabla de Participantes**
+### **Tabla de Participantes**
 
 | Participante (Nombre, Usuario GitHub, Correo Electrónico)      | Habilidades Técnicas | Soft Skills             |
 |---------------------------------------------------------------|----------------------|-------------------------|
-| - **Luis Mellado Díaz**<br>- **LuisMelladoDiaz**<br>- melladodiazluis@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Daniel Flores De Francisco**<br>- **DanielFloresDeFrancisco**<br>- danielfloresdefrancisco@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Sergio Trenado González**<br>- **Sergiotg03**<br>- sergiotg003@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Javier García Sebastián**<br>- **JaviGarcia1**<br>- javigarciasebastian@icloud.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Fernando Castelló Sánchez**<br>- **feerk**<br>- gferx87@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Yesica Garate Fuentes**<br>- **yesgarfue**<br>- yesi.garate@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **David González Martínez**<br>- **davidgonmar**<br>- dagoma0033@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Francisco Miguel Jiménez Morales**<br>- **frajimmor2**<br>- curritojimo@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Andrés Martínez Reviriego**<br>- **Andresmarevi**<br>- andresmarevi@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Manuel Castillejo Vela**<br>- **Mancasvel**<br>- Mancasvel1@alum.us.es | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Rafael Castillo Cebolla**<br>- **rafcasceb**<br>- rafaelcastillocebolla@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Claudio Cortés Carrasco**<br>- **claudiocortescarrasco**<br>- cortescarrascoclaudio@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Jorge Gómez de Tovar**<br>- **jorgomde**<br>- jorge.gomez.detovar@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
-| - **Javier Ruiz Garrido**<br>- **Javiruizg**<br>- 2210jrg@gmail.com | [Habilidades Técnicas] | [Soft Skills]           |
+| - **Luis Mellado Díaz**<br>- **LuisMelladoDiaz**<br>- melladodiazluis@gmail.com | Especializado en Frontend | Liderazgo, Manejo del estrés           |
+| - **Daniel Flores De Francisco**<br>- **DanielFloresDeFrancisco**<br>- danielfloresdefrancisco@gmail.com | Especializado en DevOps | Liderazgo, adaptabilidad           |
+| - **Sergio Trenado González**<br>- **Sergiotg03**<br>- sergiotg003@gmail.com | Especializado en Frontend | Creatividad, resolutividad           |
+| - **Javier García Sebastián**<br>- **JaviGarcia1**<br>- javigarciasebastian@icloud.com | Especializado en Frontend | Empatía, creatividad           |
+| - **Fernando Castelló Sánchez**<br>- **feerk**<br>- gferx87@gmail.com | Especializado en Frontend | Pensamiento Crítico, resolutividad           |
+| - **Yesica Garate Fuentes**<br>- **yesgarfue**<br>- yesi.garate@gmail.com | Especializado en Frontend | Adaptabilidad, creatividad           |
+| - **David González Martínez**<br>- **davidgonmar**<br>- dagoma0033@gmail.com | Programador Versátil | Pensamiento crítico, adaptabilidad           |
+| - **Francisco Miguel Jiménez Morales**<br>- **frajimmor2**<br>- curritojimo@gmail.com | Programador Versátil | Adaptabilidad, autodisciplina           |
+| - **Andrés Martínez Reviriego**<br>- **Andresmarevi**<br>- andresmarevi@gmail.com | Programador Versátil | Pensamiento crítico, resolutividad           |
+| - **Manuel Castillejo Vela**<br>- **Mancasvel**<br>- Mancasvel1@alum.us.es | Programador Versátil | Adaptabilidad, autodisciplina      |
+| - **Rafael Castillo Cebolla**<br>- **rafcasceb**<br>- rafaelcastillocebolla@gmail.com | Especializado en Backend | Liderazgo, pensamiento crítico           |
+| - **Claudio Cortés Carrasco**<br>- **claudiocortescarrasco**<br>- cortescarrascoclaudio@gmail.com | Especializado en Backend | Empatia, manejo del estrés           |
+| - **Jorge Gómez de Tovar**<br>- **jorgomde**<br>- jorge.gomez.detovar@gmail.com | Especializado en  Backend | Empatía, resolutividad           |
+| - **Javier Ruiz Garrido**<br>- **Javiruizg**<br>- 2210jrg@gmail.com | Especializado en Backend | Empatía, manejo del estrés           |
 
-#### **Equipos y Roles**
+### **Equipos y Roles**
 
-##### **Dirección**
+#### **Dirección**
 | Rol               | Miembros |
 |-------------------|----------|
 | Project Manager   | - Luis Mellado Díaz<br>- Daniel Flores De Francisco |
 
-##### **Frontend**
+#### **Frontend**
 | Rol                   | Miembros |
 |-----------------------|----------|
 | Líder Frontend, UI/UX | - Sergio Trenado González |
 | Desarrollo Frontend   | - Javier García Sebastián<br>- Fernando Castelló Sánchez<br>- Luis Mellado Díaz<br>- Yesica Garate Fuentes |
 
-##### **Full Stack**
+#### **Full Stack**
 | Rol                 | Miembros |
 |---------------------|----------|
 | Líder Full Stack    | - David González Martínez |
 | Desarrollo Full Stack | - Francisco Miguel Jiménez Morales<br>- Andrés Martínez Reviriego<br>- Manuel Castillejo Vela |
 
-##### **Backend**
+#### **Backend**
 | Rol               | Miembros |
 |-------------------|----------|
 | Líder Backend     | - Rafael Castillo Cebolla |
 | Desarrollo Backend | - Claudio Cortés Carrasco<br>- Jorge Gómez de Tovar<br>- Javier Ruiz Garrido |
 
-##### **DevOps**
+#### **DevOps**
 | Rol         | Miembros |
 |-------------|----------|
 | DevOps      | - Daniel Flores De Francisco<br>- David González Martínez |
 
-##### **Gestión**
+#### **Gestión**
 | Rol                      | Miembros |
 |--------------------------|----------|
-| Analista, QA y Pruebas    | - Rafael Castillo Cebolla<br>- Luis Mellado Díaz |
-| Analista                 | - Francisco Miguel Jiménez Morales |
+| Analista | - Rafael Castillo Cebolla<br>- Luis Mellado Díaz<br>- Francisco Miguel Jiménez Morales |
+| QA y Pruebas                 | - Rafael Castillo Cebolla<br>- Luis Mellado Díaz |
 | Publicidad y Marketing    | - Javier García Sebastián |
 | Documentación            | - Luis Mellado Díaz<br>- Daniel Flores De Francisco<br>- Claudio Cortés Carrasco |
 
