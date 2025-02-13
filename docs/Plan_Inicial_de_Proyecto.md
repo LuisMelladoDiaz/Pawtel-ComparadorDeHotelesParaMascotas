@@ -67,9 +67,7 @@ Nuestra plataforma conecta a dueños de mascotas con hoteles y cuidadores certif
 ### Análisis de competidores
 **Evaluación rigurosa de todos los competidores relevantes.**
 
-| Competidor | Características | Fortalezas | Debilidades |
-|------------|-----------------|------------|-------------|
-| [Nombre]   | [Descripción]    | [Texto]    | [Texto]     |
+A nivel **competencia de negocio** tenemos las siguiente tabla comparativa:
 
 | Característica                | Booking | Trivago | Agoda | Airbnb | Pawtel
 |--------------------------------|---------|---------|-------|--------|--------|
@@ -83,6 +81,17 @@ Nuestra plataforma conecta a dueños de mascotas con hoteles y cuidadores certif
 | Busqueda de alojamiento de admisión de perros | ✅ | ❌ | ❌ | ✅ | ❌|
 | Busqueda de alojamiento de perros | ❌ | ❌ | ❌ | ❌ | ✅|
 | Aplicación móvil              | ✅       | ✅       | ✅     | ✅      | ✅|
+
+A nivel **competencia semántica** tenemos las siguiente tabla comparativa:
+
+| Característica                | Rover | TrustedHouseSitters | HotelesMascotas.com | Pawtel
+|--------------------------------|---------|---------|-------|--------|
+| Busqueda de alojamiento de admisión de perros | ❌ | ❌ | ✅ | ❌ |
+| Contacto con cuidadores de perros        | ✅       | ✅       | ❌     | ❌  |
+| Busqueda de alojamiento de perros | ❌ | ❌ | ❌ | ✅|
+| Servicios extra para mascotas (lavado, transporte...)       | ✅       | ✅       | ❌ | ❌  |
+| Reserva directa en la plataforma | ✅       |   ✅     | ❌     | ✅   
+| Aplicación móvil              | ✅       | ✅       | ❌     | ✅  |  
 
 ---
 
