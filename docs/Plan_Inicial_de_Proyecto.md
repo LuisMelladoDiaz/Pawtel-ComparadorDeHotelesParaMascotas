@@ -127,7 +127,11 @@ A nivel **competencia semántica** tenemos las siguiente tabla comparativa:
 ---
 
 ## 3. Modelo de Negocio y Usuarios
-### Usuarios piloto potenciales
+
+### Usuarios y clientes
+Tanto usuarios como clientes son personas que han hecho uso de nuestra aplicación. La diferencia entre ambos viene dada por la acción de reservar, siendo los clientes los que sí llegan a hacerlo desde nuestra aplicación, y siendo los usuarios los que han no han llegado a completar este proceso de reserva, ya sea por que lo hagan de forma externa o porque no lleguen a hacerlo.
+
+### Usuarios potenciales
 
 Esta aplicación estará dirigida a un grupo de personas muy focalizado, que serán todas aquellas que tengan un perro como mascota, y tengan la necesidad de dejarlo en un hotel o residencia para estos. Pueden existir múltiples casos por los que una persona dejaría a su mascota en uno de estos sitios, y sería incorrecto pensar que estos casos sólo serían muy puntuales, o frecuente en muy pocas personas, ya que los hoteles y residencias de mascotas es un tipo de negocio en auge debido a su alta demanda.
 
@@ -141,6 +145,38 @@ Nuestra aplicación recopila y almacena únicamente los datos necesarios para su
 No compartiremos ni venderemos los datos a terceros. Toda la información será tratada con medidas de seguridad adecuadas para proteger la privacidad de nuestros usuarios.
 
 Al utilizar la aplicación, el usuario acepta estos términos sobre el manejo de sus datos.
+
+### Usuarios piloto
+El trabajo que se realizará con los usuarios pilotos se dividirán en 6 etapas diferentes.
+
+#### 1. Definir enfoque
+El objetivo será validar la aplicación con usuarios reales, y recopilar problemas e ideas para mejorar la experiencia. Para ello contactaremos con usuarios potenciales para que prueben nuestra aplicación, y puedan darnos feedback mediante un cuestionario de google. Todos los resultados obtenidos serán estudiados y recogidos en un informe.
+
+#### 2. Diseñar prueba
+Se confeccionará el cuestionario que se le pasará al usuario tras probar la aplicación con los tiempos definidos y actividades particulares para el propio usuario piloto.
+
+#### 3. Selección de usuarios piloto
+Se elegirán siguiendo una variedad dada por los siguientes factores:
+- Edad
+- Género
+- Estado civil (soltero, casado, …)
+- Convivientes
+- Cercanía con familia
+- Experiencia con aplicaciones similares
+- Motivo de viaje (trabajo/placer)
+- Ubicación geográfica (pueblo, ciudades, interior, costa, …)
+- Número de mascotas
+- Nivel socioeconómico
+
+#### 4. Ejecutar pruebas
+Se enviarán y posteriormente se recogerán los cuestionarios a los usuarios piloto seleccionados. También se les enseñará la aplicación.
+
+#### 5. Analizar resultados
+Se revisarán todos los cuestionarios recogidos, identificando problemas clave y puntos fuerte. También se evaluará la propuesta de idea libre del usuario.
+
+#### 6. Realizar informe final
+Toda la información relevante recogida durante el proceso de analizar resultados, será recogido en un informe final.
+
 
 
 
