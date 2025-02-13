@@ -13,7 +13,7 @@ Autores: [Nombres]
 |---------|-------------|--------------------------------------|
 | 1.0     | 11/02/2025  | Creación del documento. Índice. Organización del Equipo y Commitment. MVP y casos de uso.|
 | 1.1     | 11/02/2025  | Acotando el MVP|
-| 1.2     | 12/02/2025  | Tabla de riesgos 
+| 1.2     | 12/02/2025  | Tabla de riesgos|
 
 
 ---
@@ -65,6 +65,19 @@ Una aplicación que permite la búsqueda y comparación de hoteles para mascotas
 | Competidor | Características | Fortalezas | Debilidades |
 |------------|-----------------|------------|-------------|
 | [Nombre]   | [Descripción]    | [Texto]    | [Texto]     |
+
+| Característica                | Booking | Trivago | Agoda | Airbnb | Pawtel
+|--------------------------------|---------|---------|-------|--------|--------|
+| Comparación de precios        | ✅       | ✅       | ✅     | ❌      |✅|
+| Gestión de transportes        | ✅       | ✅       | ✅     | ❌      |❌ | 
+| Reserva directa en la plataforma | ✅       | ❌       | ✅     | ✅   |✅|
+| Ofertas y descuentos          | ✅       | ✅       | ✅     | ✅      |✅|
+| Opiniones y valoraciones      | ✅       | ✅       | ✅     | ✅      |✅|
+| Plataforma para propietarios  | ❌       | ❌       | ❌     | ✅      | ❌|
+| Segmentación por tipo de alojamiento | ✅ | ✅ | ✅ | ✅ | ❌|
+| Busqueda de alojamiento de admisión de perros | ✅ | ❌ | ❌ | ✅ | ❌|
+| Busqueda de alojamiento de perros | ❌ | ❌ | ❌ | ❌ | ✅|
+| Aplicación móvil              | ✅       | ✅       | ✅     | ✅      | ✅|
 
 ---
 
