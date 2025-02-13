@@ -213,7 +213,89 @@ Además, se aplicará para optimizar el código, reducir errores y mejorar la ef
 
 ## 6. Costes y Viabilidad
 ### Análisis de coste TCO
-**Evaluación del costo total de propiedad.**
+Este apartado presenta los datos del estudio de mercado realizado para evaluar la viabilidad del proyecto, incluyendo análisis de costos, ingresos y el tiempo estimado para alcanzar el punto de equilibrio financiero.
+
+#### Costos
+
+Los costos del proyecto tienen en cuenta tanto las licencias de las tecnologías utilizadas como el costo del personal encargado de realizar el trabajo. 
+
+##### Coste tecnológico
+
+   | Tecnología                 |                                     | Coste de licencia | Motivo                                    | Coste total |
+|----------------------------|-------------------------------------|-------------------|-------------------------------------------|--------|
+| Frontend                   | TypeScript                          | Gratuita          | Open source                               | 0€    |
+|                            | Vue.js                              | Gratuita          | Open source                               | 0€    |
+| Backend                    | Python                              | Gratuita          | Open source                               | 0€    |
+|                            | Django                              | Gratuita          | Open source                               | 0€    |
+| Herramientas de desarrollo | Visual Studio Code + Github Copilot | Gratuita          | Plan start-up                             | 0€    |
+| Despliegue                 | Google Cloud                        | Gratuita          | Plan start-up                             | 0€    |
+| Reserva tecnológica        |                                     | Desconocido       | Futuras tecnologías / Rechazo plan start-up | 3000€  |
+| Total                      |                                     |                   |                                           | 3000€  |
+
+La reserva tecnológica se considera en caso de introducir nuevas tecnologías en el futuro que requieran de una licencia o el rechazo de los planes de suscripción start-up que ofrecen tanto Copilot como Google Cloud.
+
+##### Coste de personal
+
+| Rol             | Cantidad | Salario   | Coste total (16 semanas/10h) |
+|-----------------|----------|-----------|------------------------------|
+| Project Manager | 2        | 53,39 €/h | 17 085 €                     |
+| Team Leader     | 3        | 37,25 €/h | 17 880 €                     |
+| Developer       | 10       | 31,06 €/h | 49 696€                      |
+| Total           | 15       |           | 84 661 €                     |
+
+Los datos de salarios han sido obtenidos teniendo en cuenta el estudio INFORME FINAL SOBRE LA CONSULTA PRELIMINAR DEL MERCADO
+“PERFILES PROFESIONALES ÁMBITO INFORMÁTICO” realizado por la Consejería de Agricultura, Pesca y Desarrollo Rural, perteneciente a la Junta de Andalucía.
+
+#### Ingresos
+
+El modelo de ingresos del proyecto se basa en una comisión sobre cada reserva gestionada a través de la plataforma. A continuación, se desglosan los factores clave que justifican las proyecciones de ingresos mensuales.  
+
+##### Volumen estimado de reservas  
+
+Se proyecta un volumen de **1.000 reservas mensuales** basado en:  
+
+- Benchmarking del sector: Plataformas similares de comparación y reserva de alojamientos para mascotas (como Rover, Gudog y Holidog) gestionan miles de reservas al mes en función de la demanda y su alcance geográfico.  
+- Tendencia del mercado: Existe un crecimiento constante en la obtención de mascotas, lo que impulsa la demanda de servicios de hospedaje.  
+
+##### Precio medio por reserva  
+
+El precio promedio estimado por cada reserva es de **100 €**, considerando:  
+
+- Variabilidad en tarifas: Los precios de hospedaje para mascotas pueden oscilar entre 20 € y 50 € por noche en hoteles especializados.
+- Estancias prolongadas: Muchas reservas incluyen varios días, lo que genera tarifas acumuladas de entre 100 € y 300 € por servicio.  
+
+##### Comisión por reserva  
+
+Se aplicará una comisión del **10%** sobre cada reserva gestionada a través de la plataforma.
+
+Motivos de la elección del porcentaje de comisión:  
+
+- Competitividad: Un 10% es lo suficientemente atractivo para proveedores de servicios, garantizando su interés en listar sus alojamientos sin afectar drásticamente su margen de beneficio.  
+- Sostenibilidad financiera: Con 1.000 reservas mensuales a un precio promedio de 100 €, los ingresos proyectados son:  
+
+##### Beneficio económico mensual
+
+Teniendo en cuenta los ingresos del proyecto la proyección del beneficio económico mensual es la siguiente:  
+**1.000 x 100 x 0,1 = 10.000€/mes**
+
+
+#### Evaluación financiera
+
+El estudio de mercado realizado refleja la siguiente situación económica:
+
+Ingresos generados en los primeros 4 meses: 40.000 €
+
+Pérdidas en los primeros 4 meses: 47.661 €
+
+Costos iniciales ajustados: 87.661 €
+
+Punto de equilibrio: 8,8 meses (8 meses y 3 semanas)
+
+A pesar de las pérdidas iniciales, el modelo de negocio demuestra potencial de recuperación dentro del primer año de operación.
+
+#### Conclusión y Viabilidad del Proyecto
+
+Tras el análisis de mercado y la evaluación financiera, se concluye que el proyecto es viable. Aunque las pérdidas iniciales son significativas, los ingresos proyectados y la estrategia de recuperación financiera permiten prever un crecimiento sostenible.
 
 ---
 
