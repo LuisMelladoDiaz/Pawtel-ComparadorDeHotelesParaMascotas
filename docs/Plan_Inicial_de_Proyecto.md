@@ -20,6 +20,7 @@ Autores: [Nombres]
 | 1.6     | 12/02/2025  | Tratamiento de datos |
 | 1.7     | 12/02/2025  | Introducción completada |
 | 1.8     | 12/02/2025  | Añadir uso de TS en el stack tecnológico |
+| 1.9     | 13/02/2025  | Costes y viabilidad |
 
 ---
 
