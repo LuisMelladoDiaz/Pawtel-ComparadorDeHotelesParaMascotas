@@ -21,6 +21,7 @@ Autores: [Nombres]
 | 1.7     | 12/02/2025  | Introducción completada |
 | 1.8     | 12/02/2025  | Añadir uso de TS en el stack tecnológico |
 | 1.9     | 13/02/2025  | Costes y viabilidad |
+| 1.10     | 13/02/2025  | Análisis de la competencia. Tablas comparativas |
 
 ---
 
@@ -62,11 +63,39 @@ Nuestra plataforma conecta a dueños de mascotas con hoteles y cuidadores certif
 
 ## 2. Análisis del Mercado y Competencia
 ### Criterio de búsqueda
-**Cómo se identificaron los competidores, con criterios objetivos.**
+La metodología utilizada para el análisis de mercado y de la competencia es la siguiente: 
+- Viabilidad de la idea y mercado.
+- Identificación de la competencia.
+- Análisis de la competencia.
+- Tablas comparativas
+
+Para ello hemos utilizado la herramienta de Semrush, que la asignatura recomendaba, y hemos hecho un Keyword Research para buscar cuánta viabilidad tendríamos para hacernos un hueco en nuestro mercado, ver si los anunciantes pagarían, la dificultada para ascender en el ranking o incluso la intención del consultante. 
 
 ### Análisis de competidores
-**Evaluación rigurosa de todos los competidores relevantes.**
 
+Al realizar un análisis de los competidores dentro de un mercado nicho, puede ser buena idea segmentar los competidores y dividirlos en las siguientes categorías.
+
+- Competencia a nivel de negocio: Se trata de analizar e identificar a las empresas ograndes marcas establecidas que comparten el mismo modelo de negocio que Pawtel. En nuestro caso, al tratarse de un comparador de hospedaje, independientemente del target (humanos, perros) hemos decidido escoger todos los comparadores líderes en el mercado actual. Esto nos puede dar un indicativo de que tan bien da el mercado, quién es el lider, como aprovechar los cambios de tendencias u opotunidades y la evolución de estos a lo largo del tiempo. Para ello, hemos hecho un análisis de la evolución de los competidores usando Semrush. Como hay miles de comparadores, decidimos quedarnos con la siguiente lista, y en especial, lo compararemos con los que están en negrita: **Booking**, **Trivago**,
+Kayak,
+Rastreator,
+**Airbnb**,
+TripAdvisor,
+**Agoda**,
+Priceline,
+Atrápalo,
+… 
+
+- Competencia a nivel semántico/keyword: Se trata de identificar aquellas empresas que aunque no compartan nuestro modelo de negocio, se dirigen al mismo público que nuestra marca. En el caso de Pawtel, todas aquellas marcas o páginas reconocidas en cuidado de perros o mascotas. Es importante hacer este ejercicio, ya que a la hora del marketing, nuestro objetivo es aparecer primero en las busquedas y que las personas relacionen ciertas palabras clave del entorno con nuestra marca. Utilizando Semrush, podemos ver las palabras clave por donde estas empresas se mueven, dando tambien a entender, la necesidad de los usuarios quienes acuden a ellas. Hemos escogido las más relevantes, al igual que en la sección anterior: **HotelesMascotas.com**, **Rover**,
+Viaje4Patas.com,
+Gudog,
+Petbacker.es,
+**TrustedHouseSitters**,
+Milanuncios,
+Holidog.com,
+…
+
+
+ 
 A nivel **competencia de negocio** tenemos las siguiente tabla comparativa:
 
 | Característica                | Booking | Trivago | Agoda | Airbnb | Pawtel
