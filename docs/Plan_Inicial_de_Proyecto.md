@@ -21,8 +21,9 @@ Autores: [Nombres]
 | 1.7     | 12/02/2025  | Introducción completada |
 | 1.8     | 12/02/2025  | Añadir uso de TS en el stack tecnológico |
 | 1.9     | 13/02/2025  | Costes y viabilidad |
-| 1.10     | 13/02/2025  | Análisis de la competencia. Tablas comparativas |
-| 1.11     | 13/02/2025  | Corrección en la Introducción |
+| 1.10    | 13/02/2025  | Análisis de la competencia. Tablas comparativas |
+| 1.11    | 13/02/2025  | Corrección en la Introducción |
+| 1.12    | 13/02/2025  | Usuarios piloto, usuarios y clientes y tratamiento de datos |
 
 
 ---
