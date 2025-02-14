@@ -11,10 +11,10 @@ Autores: [Nombres]
 ## Tabla de Versiones
 | Versión | Fecha       | Descripción de cambios               |
 |---------|-------------|--------------------------------------|
-| 1.0     | 11/02/2025  | Creación del documento. Índice. Organización del Equipo y Commitment. MVP y casos de uso.|
-| 1.1     | 11/02/2025  | Acotando el MVP|
-| 1.2     | 12/02/2025  | Tabla de riesgos|
-| 1.3     | 12/02/2025  | Modificación a Discusión de la tecnología|
+| 1.0     | 11/02/2025  | Creación del documento. Índice. Organización del Equipo y Commitment. MVP y casos de uso |
+| 1.1     | 11/02/2025  | Acotando el MVP |
+| 1.2     | 12/02/2025  | Tabla de riesgos |
+| 1.3     | 12/02/2025  | Modificación a Discusión de la tecnología |
 | 1.4     | 12/02/2025  | Usuarios piloto potenciales y modelo de negocio |
 | 1.5     | 12/02/2025  | Uso de IA en el proyecto |
 | 1.6     | 12/02/2025  | Tratamiento de datos |
@@ -24,6 +24,7 @@ Autores: [Nombres]
 | 1.10    | 13/02/2025  | Análisis de la competencia. Tablas comparativas |
 | 1.11    | 13/02/2025  | Corrección en la Introducción |
 | 1.12    | 13/02/2025  | Usuarios piloto, usuarios y clientes y tratamiento de datos |
+| 1.13    | 14/02/2025  | Análisis pesimista y optimista en la viabilidad de costes del proyecto |
 
 
 ---
@@ -343,7 +344,7 @@ El modelo de ingresos del proyecto se basa en una comisión sobre cada reserva g
 
 ##### Volumen estimado de reservas  
 
-Se proyecta un volumen de **1.000 reservas mensuales** basado en:  
+Se proyectan dos volúmenes de **500 (pesimista) y 1.000 (optimista) reservas mensuales** basado en:  
 
 - Benchmarking del sector: Plataformas similares de comparación y reserva de alojamientos para mascotas (como Rover, Gudog y Holidog) gestionan miles de reservas al mes en función de la demanda y su alcance geográfico.  
 - Tendencia del mercado: Existe un crecimiento constante en la obtención de mascotas, lo que impulsa la demanda de servicios de hospedaje.  
@@ -366,7 +367,7 @@ Motivos de la elección del porcentaje de comisión:
 
 ##### Beneficio económico mensual
 
-Teniendo en cuenta los ingresos del proyecto la proyección del beneficio económico mensual es la siguiente:  
+Teniendo en cuenta los ingresos del proyecto las proyecciones del beneficio económico mensual son la siguiente:  
 **1.000 x 100 x 0,1 = 10.000€/mes**
 
 
@@ -374,15 +375,15 @@ Teniendo en cuenta los ingresos del proyecto la proyección del beneficio econó
 
 El estudio de mercado realizado refleja la siguiente situación económica:
 
-Ingresos generados en los primeros 4 meses: 40.000 €
+Ingresos generados en los primeros 4 meses: 20.000 €​ (pesimista) / 40.000 € (optimista)
 
-Pérdidas en los primeros 4 meses: 47.661 €
+Pérdidas en los primeros 4 meses: 67.661 €​ (pesimista) / 47.661 € (optimista)
 
 Costos iniciales ajustados: 87.661 €
 
-Punto de equilibrio: 8,8 meses (8 meses y 3 semanas)
+Punto de equilibrio: 17,5 meses = 17 meses y 2 semanas (pesimista) / 8,8 meses = 8 meses y 3 semanas (optimista)
 
-A pesar de las pérdidas iniciales, el modelo de negocio demuestra potencial de recuperación dentro del primer año de operación.
+A pesar de las pérdidas iniciales, el modelo de negocio demuestra potencial de recuperación dentro del primer año y medio de operación incluso en el análisis pesimista, mientras que el optimista lo muestra dentro del primer año de operación.
 
 #### Conclusión y Viabilidad del Proyecto
 
