@@ -93,7 +93,7 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 
 ### Presentaciones
 - 🔹 **[Semana 1](https://docs.google.com/presentation/d/1YIfkJfGKqe_43hg5v4Fm_qdwbAvd6D_e-aXp1oEHZfI/edit#slide=id.g32d71018c15_4_11)** (Idea descartada)
-- 🔹 **[Semana 2](https://docs.google.com/presentation/d/1-jI3r4i6FYvNZdV9Lfn6jm7cSdSyRFIKl9Dg0VnDaG0/edit#slide=id.g334114ffe31_4_5)**
+- 🔹 **[Semana 2](https://onedrive.live.com/edit?id=C3564B5138C1A24C!5804&resid=C3564B5138C1A24C!5804&ithint=file%2cpptx&authkey=!APEWh5z1LH8qmP8&wdo=2&cid=c3564b5138c1a24c)**
 
 ---
 
