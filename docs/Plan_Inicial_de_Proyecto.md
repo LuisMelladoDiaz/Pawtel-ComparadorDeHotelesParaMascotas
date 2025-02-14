@@ -367,8 +367,9 @@ Motivos de la elección del porcentaje de comisión:
 
 ##### Beneficio económico mensual
 
-Teniendo en cuenta los ingresos del proyecto las proyecciones del beneficio económico mensual son la siguiente:  
-**1.000 x 100 x 0,1 = 10.000€/mes**
+Teniendo en cuenta los ingresos del proyecto las proyecciones del beneficio económico mensual son las siguientes:  
+**500 x 100 x 0,1 = 5.000€/mes** (pesimista)  
+**1.000 x 100 x 0,1 = 10.000€/mes** (optimista)
 
 
 #### Evaluación financiera
