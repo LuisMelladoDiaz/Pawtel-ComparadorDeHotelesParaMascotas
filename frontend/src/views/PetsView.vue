@@ -35,7 +35,7 @@ const setCount = (event: Event) => {
       </div>
     </div>
 
-    
+
   </div>
 </template>
 
