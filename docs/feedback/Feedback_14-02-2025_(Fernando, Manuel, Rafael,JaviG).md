@@ -18,43 +18,13 @@ Es importante registrar los comentarios clave, observaciones adicionales y las t
 
 ## Feedback de las presentaciones
 
-+----------------------------+---------------------------------------------------------------------------------------------------------------------+---------------------------+
-| Grupo                      | Feedback recibido                                                                                                   | Observaciones adicionales |
-+============================+=====================================================================================================================+===========================+
-| **Grupo 7 - MapYouWorld**  | -   las presentaciones deben ser autocompletadas (se debe referenciar presentaciones anteriores) **lo tenemos**     |                           |
-|                            | -   indicar como hemos encontrado los competidores. **lo tenemos** \| \|                                            |                           |
-|                            | -   análisis de competidores debe ser completo. **lo tenemos**                                                      |                           |
-+----------------------------+---------------------------------------------------------------------------------------------------------------------+---------------------------+
-| **Grupo 8 - Nutribaby**    |                                                                                                                     |                           |
-+----------------------------+---------------------------------------------------------------------------------------------------------------------+---------------------------+
-| **Grupo 9 - Caronte**      |                                                                                                                     |                           |
-+----------------------------+---------------------------------------------------------------------------------------------------------------------+---------------------------+
-| **Grupo 10 - Go4Surprise** |                                                                                                                     |                           |
-+----------------------------+---------------------------------------------------------------------------------------------------------------------+---------------------------+
-| **Grupo 11 - Pawtel**      | -   lo de la comisión del 10% puede chocar un poco a los usuarios de primeras.                                      |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   residencia para mascotas no hoteles para mascotas. inequivoco.                                                  |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   ponemos encima de la mesa demasiado pronto el tema de posicionarnos                                             |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   el concepto es bueno pero ambiguo                                                                               |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   booking por ejemplo no es un modelo de competencia directa. tiene el mismo modelo de negocio pero no es directo |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   demasiados mensajes negativos                                                                                   |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   muy poco tiempo invertido en los mockups                                                                        |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   hay cosas que no se leen (tabla de riesgos)                                                                     |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   volumen de ventas aleatorio                                                                                     |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   no hemos explicado bien el tema de los strikes                                                                  |                           |
-|                            |                                                                                                                     |                           |
-|                            | -   algo similar a lo que hemos hecho con los soft skills pero con las habilidades tecnicas                         |                           |
-+----------------------------+---------------------------------------------------------------------------------------------------------------------+---------------------------+
-| **General**                |                                                                                                                     |                           |
-+----------------------------+---------------------------------------------------------------------------------------------------------------------+---------------------------+
+| Grupo | Feedback recibido | Observaciones adicionales |
+|-------|------------------|--------------------------|
+| **Grupo 7 - MapYouWorld** | - Las presentaciones deben ser autocompletivas (se debe referenciar a la presentación de la semana anterior) *Lo tenemos*.  <br> - Indicar como se han encontrado los competidores *Lo tenemos*  <br> - en análisis de competidores debe ser completo *lo tenemos*  |
+| **Grupo 8 - Nutribaby** |  |
+| **Grupo 9 - Caronte** |  |
+| **Grupo 10 - Go4Surprise** | |
+| **Grupo 11 - Pawtel** | - lo de la comisión del 10% puede chocar un poco a los usuarios de primeras.  <br> - residencia para mascotas no hoteles para mascotas. inequivoco.  <br> - ponemos encima de la mesa demasiado pronto el tema de posicionarnos.  <br> - el concepto es bueno pero ambiguo.  <br> - booking por ejemplo no es un modelo de competencia directa. tiene el mismo modelo de negocio pero no es directo  <br> - demasiados mensajes negativos  <br> - muy poco tiempo invertido en los mockups  <br> - hay cosas que no se leen (tabla de riesgos)  <br> - volumen de ventas  aleatorio  <br> - no hemos explicado bien el tema de los strikes  <br> - algo similar a lo que hemos hecho con los soft skills pero con las habilidades tecnicas |  
 
 ## Lista de tareas para la próxima semana
 
