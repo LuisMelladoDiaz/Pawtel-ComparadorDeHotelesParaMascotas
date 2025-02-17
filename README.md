@@ -57,7 +57,7 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 ---
 ## 🚀 Instalación
 
-⚠️ **Nota:** Completar esta sección con instrucciones detalladas.
+Para instalar y ejecutar el proyecto de **PawTel**, siga los pasos detallados en el archivo [docs/USAGE.md](docs/USAGE.md).
 
 ----
 
