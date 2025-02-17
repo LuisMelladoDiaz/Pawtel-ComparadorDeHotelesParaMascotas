@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/vue-query';
 import axios from 'axios';
 import { type MaybeRef, toValue } from 'vue';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 type Pet = {
   id: number;
@@ -11,7 +12,7 @@ type Pet = {
 };
 
 const fetchRandomPets = async (count?: number) => {
-  const url = count ? `http://localhost:8000/random-pets?count=${count}` : 'http://localhost:8000/random-pets';
+  const url = count ? `${API_BASE_URL}/random-pets?count=${count}` : `${API_BASE_URL}/random-pets`;
   const response = await axios.get(url);
   return response.data as Pet[];
 };
