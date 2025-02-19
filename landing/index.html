@@ -8,6 +8,10 @@
 
   <title>Pawtel - Encuentra el mejor hotel para tu mascota</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
     :root {
       --principal: #c36c6c;
       --secundario: #f4e2da;
@@ -401,6 +405,55 @@
         transition: background-color 0.3s ease;
         font-family: sans-serif;
     }
+
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--oscuro);
+    margin-left: auto;
+  }
+
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+    .navbar {
+      display: none;
+      position: absolute;
+      top: 70px;
+      right: 10px;
+      background-color: var(--blanco);
+      width: calc(100% - 20px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .navbar ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .navbar.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   </style>
 </head>
 <body>
@@ -411,8 +464,13 @@
       <a href="#" class="logo">
         <img src="./assets/logo.png" alt="Pawtel">
       </a>
+      
+      <button class="menu-toggle" aria-label="Abrir menú">
+        &#9776;
+      </button>
+      
       <nav class="navbar">
-        <ul>
+        <ul class="nav-links">
           <li><a href="#hero">Inicio</a></li>
           <li><a href="#about">Quiénes Somos</a></li>
           <li><a href="#contact">Contacto</a></li>
@@ -512,5 +570,17 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navbar = document.querySelector(".navbar");
+
+      menuToggle.addEventListener("click", function () {
+        navbar.classList.toggle("show");
+      });
+    });
+  </script>
+
+
 </body>
 </html>
