@@ -8,19 +8,14 @@
 
   <title>Pawtel - El mejor lugar para tu mascota</title>
   <style>
-    /* ---------------------------------
-       Variables de color (Branding)
-    ---------------------------------- */
     :root {
-      --principal: #c36c6c;    /* Tono rosado/salmón */
-      --secundario: #f4e2da;   /* Fondo claro */
-      --oscuro: #4e4e4e;       /* Texto oscuro */
+      --principal: #c36c6c;
+      --secundario: #f4e2da;
+      --oscuro: #4e4e4e;
       --blanco: #ffffff;
     }
 
-    /* ---------------------------------
-       Reset básico
-    ---------------------------------- */
+
     * {
       margin: 0;
       padding: 0;
@@ -32,9 +27,7 @@
       font-size: 1.2rem;
     }
 
-    /* ---------------------------------
-       Estilo General del Body
-    ---------------------------------- */
+
     body {
       background-color: var(--secundario);
       color: var(--oscuro);
@@ -45,16 +38,10 @@
         font-family: 'DM Serif Display', serif;
     }
 
-    /* ---------------------------------
-       Contenedor para el HEADER
-       - Sin margen superior
-       - Centrado horizontal
-       - Límite de ancho
-    ---------------------------------- */
     .header-container {
       max-width: 1200px;
-      margin: 0 auto;    /* Sin margen arriba ni abajo */
-      padding: 1rem;     /* Espacio interno */
+      margin: 0 auto;
+      padding: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -62,32 +49,25 @@
 
     @media (max-width: 768px) {
       .header-container {
-        padding: 1rem; /* Mantén un padding moderado en móvil */
+        padding: 1rem;
       }
     }
 
-    /* ---------------------------------
-       Contenedor general .container
-       - Con margen adaptativo
-       - Centrado horizontal
-       - Límite de ancho
-    ---------------------------------- */
+
     .container {
       max-width: 1200px;
-      margin: 0rem auto;  /* Márgenes verticales y centrado horizontal */
-      padding: 0 1rem;    /* Espacio interno horizontal */
+      margin: 0rem auto;
+      padding: 0 1rem;
     }
 
     @media (max-width: 768px) {
       .container {
-        margin: 1rem auto; /* Menor margen en pantallas pequeñas */
+        margin: 1rem auto;
         padding: 0 1rem;
       }
     }
 
-    /* ---------------------------------
-       Encabezado / Navbar
-    ---------------------------------- */
+
     header {
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
@@ -129,9 +109,6 @@
       color: var(--principal);
     }
 
-    /* ---------------------------------
-       Sección Hero
-    ---------------------------------- */
     .hero .container {
       display: flex;
       flex-direction: row;
@@ -180,9 +157,7 @@
       max-height: 400px;
     }
 
-    /* ---------------------------------
-       Sección "Quiénes somos"
-    ---------------------------------- */
+
     .about {
       background-color: var(--blanco);
       margin-top: 2rem; /* Espacio antes de la sección */
@@ -224,9 +199,7 @@
       max-height: 300px;
     }
 
-    /* ---------------------------------
-       Sección Servicios
-    ---------------------------------- */
+
     .services {
       margin-top: 2rem;
     }
@@ -267,9 +240,7 @@
       margin-bottom: 0.5rem;
     }
 
-    /* ---------------------------------
-       Llamado a la acción (CTA)
-    ---------------------------------- */
+
     .cta {
       background-color: var(--principal);
       color: var(--blanco);
@@ -313,9 +284,7 @@
       background-color: #ffdcdc;
     }
 
-    /* ---------------------------------
-       Sección de Contacto
-    ---------------------------------- */
+
     .contact {
       margin-top: 2rem;
     }
@@ -366,9 +335,7 @@
       background-color: #c06969;
     }
 
-    /* ---------------------------------
-       Footer
-    ---------------------------------- */
+
     footer {
       background-color: var(--blanco);
       text-align: center;
@@ -389,9 +356,7 @@
       color: var(--principal);
     }
 
-    /* ---------------------------------
-       Media Queries extra
-    ---------------------------------- */
+
     @media (max-width: 768px) {
       .hero .container {
         flex-direction: column;
@@ -435,13 +400,10 @@
 </head>
 <body>
 
-  <!-- ==========================
-       HEADER / NAVBAR
-  =========================== -->
+
   <header>
     <div class="header-container">
       <a href="#" class="logo">
-        <!-- Sustituye el src con tu imagen de logo definitiva -->
         <img src="./assets/logo.png" alt="Pawtel">
       </a>
       <nav class="navbar">
@@ -454,9 +416,7 @@
     </div>
   </header>
 
-  <!-- ==========================
-       SECCIÓN HERO
-  =========================== -->
+
   <section class="hero" id="hero">
     <div class="container">
         <div class="hero-text">
@@ -467,16 +427,13 @@
         <a href="#contact" class="btn" style="margin-top:10px">¡Reserva Ahora!</a>
         </div>
         <div class="hero-img">
-        <!-- Hero Image Placeholder -->
         <img src="assets/perros.png" alt="Mascotas en Pawtel">
         </div>
     </div>
   </section>
 
 
-  <!-- ==========================
-       SECCIÓN QUIÉNES SOMOS
-  =========================== -->
+
     <section class="about" id="about">
     <div class="container">
         <div class="about-text">
@@ -493,7 +450,6 @@
         </p>
         </div>
         <div class="about-img">
-        <!-- Imagen "Quiénes Somos" Placeholder (ilustración o similar) -->
         <img 
             class="about-img"
             src="./assets/perro.png"
@@ -502,9 +458,7 @@
     </div>
     </section>
 
-  <!-- ==========================
-       LLAMADO A LA ACCIÓN (CTA)
-  =========================== -->
+
   <section class="cta">
     <div class="container">
       <h2>¿Listo para consentir a tu mascota?</h2>
@@ -515,9 +469,7 @@
     </div>
   </section>
 
-  <!-- ==========================
-       SECCIÓN DE CONTACTO
-  =========================== -->
+
   <section class="contact" id="contact">
     <div class="container">
       <h2>Contáctanos</h2>
@@ -533,9 +485,6 @@
     </div>
   </section>
 
-  <!-- ==========================
-       FOOTER
-  =========================== -->
   <footer>
     <p>
       &copy; <span id="year"></span> Pawtel (Grupo 11).  
@@ -547,7 +496,6 @@
     </p>
   </footer>
 
-  <!-- Script para el año dinámico en el footer -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
