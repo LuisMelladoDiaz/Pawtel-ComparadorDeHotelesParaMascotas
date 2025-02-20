@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap">
+
+  <title>Pawtel - Encuentra la mejor residencia para tu mascota</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px;
+    }
+    :root {
+      --principal: #c36c6c;
+      --secundario: #f4e2da;
+      --oscuro: #4e4e4e;
+      --blanco: #ffffff;
+    }
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    p {
+      font-family: "Bree Serif", serif;
+      font-size: 1.2rem;
+    }
+
+
+    body {
+      background-color: var(--secundario);
+      color: var(--oscuro);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+        font-family: 'DM Serif Display', serif;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 1rem;
+      }
+    }
+
+
+    .container {
+      max-width: 1200px;
+      margin: 0rem auto;
+      padding: 0 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 1rem auto;
+        padding: 0 1rem;
+      }
+    }
+
+
+    header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background-color: var(--blanco);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--oscuro);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .logo img {
+      height: 50px;
+      width: auto;
+      margin-right: 0.5rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--oscuro);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--principal);
+    }
+
+    .hero .container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-text {
+      flex: 1;
+      padding-right: 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      color: var(--principal);
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+    }
+
+    .hero-text a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: var(--principal);
+      color: var(--blanco);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero-text a:hover {
+      background-color: #c06969;
+    }
+
+    .hero-img {
+      flex: 1;
+      text-align: center;
+    }
+
+    .hero-img img {
+      max-width: 100%;
+      height: auto;
+      max-height: 400px;
+    }
+
+
+    .about {
+      background-color: var(--blanco);
+      margin-top: 2rem; /* Espacio antes de la sección */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .about .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 1rem;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .about-text h2 {
+      color: var(--principal);
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1rem;
+    }
+
+    .about-img {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+    }
+
+    .about-img img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      max-height: 300px;
+    }
+
+
+    .services {
+      margin-top: 2rem;
+    }
+
+    .services .container {
+      text-align: center;
+      background-color: var(--blanco);
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 2rem 1rem;
+    }
+
+    .services-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background-color: var(--blanco);
+      padding: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .service-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      color: var(--principal);
+      margin-bottom: 0.5rem;
+    }
+
+
+    .cta {
+      background-color: var(--principal);
+      color: var(--blanco);
+      margin-top: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .cta .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 1rem;
+    }
+
+    .cta h2 {
+      flex: 1;
+      min-width: 200px;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta p {
+      flex: 2;
+      min-width: 200px;
+      margin-bottom: 1rem;
+    }
+
+    .cta a {
+      background-color: var(--blanco);
+      color: var(--principal);
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta a:hover {
+      background-color: #ffdcdc;
+    }
+
+
+    .contact {
+      margin-top: 2rem;
+    }
+
+    .contact .container {
+      background-color: var(--blanco);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .contact p {
+      margin-bottom: 1rem;
+    }
+
+    .contact form {
+      width: 100%;
+      max-width: 600px;
+      margin: 1rem auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      
+    }
+
+    .contact input, .contact textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-family: 'DM Serif Display', serif;
+    }
+
+    .contact button {
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--principal);
+      color: var(--blanco);
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .contact button:hover {
+      background-color: #c06969;
+    }
+
+
+    footer {
+      background-color: var(--blanco);
+      text-align: center;
+      color: #777;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+      padding: 1rem 1rem;
+      border-top: 1px solid #eee;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: var(--principal);
+    }
+
+    .email {
+      text-decoration: none;
+      color: var(--principal);
+    }
+
+
+    @media (max-width: 768px) {
+      .hero .container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .hero-text {
+        padding-right: 0;
+      }
+
+      .cta .container {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .navbar ul li a {
+      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: 'DM Serif Display', serif;
+    }
+
+    .btn {
+        background-color: var(--principal);
+        color: var(--blanco);
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        font-family: sans-serif;
+    }
+
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 1rem;
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--oscuro);
+    margin-left: auto;
+  }
+
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+    .navbar {
+      display: none;
+      position: absolute;
+      top: 70px;
+      right: 10px;
+      background-color: var(--blanco);
+      width: calc(100% - 20px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    .navbar ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .navbar.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  </style>
+</head>
+<body>
+
+
+  <header>
+    <div class="header-container">
+      <a href="#" class="logo">
+        <img src="./assets/logo.png" alt="Pawtel">
+      </a>
+      
+      <button class="menu-toggle" aria-label="Abrir menú">
+        &#9776;
+      </button>
+      
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#about">Quiénes Somos</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-text">
+        <h1>Pawtel</h1>
+        <p>
+            El comparador de <strong>residencias y hoteles</strong> para tu <strong>mascota</strong>. ¡Encuentra y reserva el mejor lugar para tu mejor amigo!
+        </p>
+        <a href="#contact" class="btn" style="margin-top:10px">¡Reserva Ahora!</a>
+        </div>
+        <div class="hero-img">
+        <img src="assets/perros.png" alt="Mascotas en Pawtel">
+        </div>
+    </div>
+  </section>
+
+
+
+    <section class="about" id="about">
+    <div class="container">
+        <div class="about-text">
+        <h2>Quiénes Somos</h2>
+        <p>
+            Somos un equipo apasionado por el bienestar de las mascotas. ¿Alguna vez has tenido que viajar sin tu mascota y no sabías dónde dejarla?
+            En <strong>Pawtel</strong> reunimos y comparamos las mejores opciones de hospedaje de mascotas para que puedas disfrutar de tus vacaciones sin preocuparte por tu amigo peludo.
+        </p>
+        <p>
+            Disponemos de información sobre todo tipo de residencias y hoteles para mascotas, desde alojamientos económicos hasta lujosas residencias. Podrás disfrutar de tu viaje sin preocupaciones.
+        </p>
+        </div>
+        <div class="about-img">
+        <img 
+            class="about-img"
+            src="./assets/perro.png"
+        >
+        </div>
+    </div>
+    </section>
+
+
+  <section class="cta">
+    <div class="container">
+      <h2>¿Listo para consentir a tu mascota?</h2>
+      <p>
+        En Pawtel encontraremos el lugar perfecto para tu mascota. ¡Disfruta de tu viaje sabiendo que tu mejor amigo está en buenas manos!
+      </p>
+      <a href="#contact" class="btn">Contáctanos</a>
+    </div>
+  </section>
+
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Contáctanos</h2>
+      <p>
+        Completa el formulario y nos pondremos en contacto contigo lo antes posible.
+      </p>
+      <form action="https://getform.io/f/ajjmjzza" method="POST">
+        <input type="text" name="nombre" placeholder="Tu nombre" required />
+        <input type="email" name="email" placeholder="Tu correo electrónico" required />
+        <textarea name="mensaje" rows="5" placeholder="Tu mensaje o consulta" required></textarea>
+        <button type="submit">Enviar Mensaje</button>
+      </form>
+      <p>
+        También puedes escribirnos directamente a: 
+        <a href="mailto:hello@pawtel.es" class="email">hello@pawtel.es</a> 
+      </p>
+    </div>
+  </section>
+
+
+  <footer>
+    <p>
+      &copy; <span id="year"></span> Pawtel (Grupo 11).  
+      Todos los derechos reservados.
+    </p>
+    <p>
+      <a href="#">Política de Privacidad</a> | 
+      <a href="#">Términos y Condiciones</a>
+    </p>
+    <p>
+      Contáctanos: <a href="mailto:hello@pawtel.es">hello@pawtel.es</a>
+    </p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navbar = document.querySelector(".navbar");
+
+      menuToggle.addEventListener("click", function () {
+        navbar.classList.toggle("show");
+      });
+    });
+  </script>
+
+
+</body>
+</html>
