@@ -1,3 +1,14 @@
+/* src/index.css o src/assets/styles/tailwind.css */
+@import "tailwindcss";
+
+@theme {
+  --color-terracota: #C36C6C;
+  --color-azul-suave: #6C8CC3;
+  --color-crema: #F4EDEA;
+  --color-beige: #D9B08C;
+  --color-oliva: #8A9A5B;
+}
+
 nav, main {
   border: 2px solid #000;
   margin-bottom: 10px;
