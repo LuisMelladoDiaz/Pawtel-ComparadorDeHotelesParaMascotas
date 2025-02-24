@@ -3,3 +3,4 @@ djangorestframework>=3.14
 djangorestframework-simplejwt>=5.0
 django-cors-headers>=4.0
 python-dotenv>=1.0
+mysqlclient>=2.0
