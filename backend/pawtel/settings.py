@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "sample",
-    "auth_app",
+    "authapp",
 ]
 
 MIDDLEWARE = [
