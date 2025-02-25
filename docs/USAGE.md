@@ -46,4 +46,3 @@ npm run dev
 ```
 
 4. Abre tu navegador en la dirección `http://localhost:3000` para ver la aplicación.
-
