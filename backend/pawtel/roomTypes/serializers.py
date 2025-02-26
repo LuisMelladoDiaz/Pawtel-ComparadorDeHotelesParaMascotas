@@ -9,7 +9,7 @@ class RoomTypeSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = RoomType  # Especificamos el modelo RoomType
+        model = RoomType  # Especificamos el modelo que es RoomType en este caso
         fields = [
             "id", "name", "description", "capacity", "price_per_night", "pet_type", "hotel"
         ]
