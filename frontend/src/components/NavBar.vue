@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar bg-white py-4">
-    <div class="navbar-content w-4/5 mx-auto flex justify-between items-center">
+    <div class="navbar-content max-w-7xl px-5 mx-auto flex justify-between items-center">
       <router-link to="/home" class="logo">
         <img src="../assets/pawtel-logo.png" alt="Logo" />
       </router-link>
@@ -78,7 +78,7 @@ export default {
 }
 
 .auth-buttons .auth-button:hover {
-  background-color: #a04c4c;
+  background-color: #C36C6C;
 }
 
 .search-bar input:focus,
