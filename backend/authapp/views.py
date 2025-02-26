@@ -14,23 +14,22 @@ class LoginView(APIView):
         username = request.data.get("username")
         password = request.data.get("password")
 
-        # Autenticación del usuario
+        # User authentication
         user = authenticate(request, username=username, password=password)
 
         if user is None:
             return Response({"error": "Invalid credentials"}, status=401)
 
-        # Crear el token de refresh
+        # Refresh token
         refresh = RefreshToken.for_user(user)
 
-        # Respuesta con los tokens
         response_data = {
             "message": "Login successful",
-            "access": str(refresh.access_token),  # Incluye el access_token
-            "refresh": str(refresh),  # Incluye el refresh_token
+            "access": str(refresh.access_token),  
+            "refresh": str(refresh), 
         }
 
-        # Establecer cookies para los tokens (si es necesario)
+        # Cookies tokens
         response = Response(response_data)
         response.set_cookie(
             key=settings.SIMPLE_JWT["AUTH_COOKIE"],
@@ -50,17 +49,14 @@ class LoginView(APIView):
         return response
 
 
-
 class LogoutView(APIView):
-    permission_classes = [IsAuthenticated]  # Aseguramos que el usuario está autenticado
+    permission_classes = [IsAuthenticated]  # User must be authenticated
 
     def post(self, request):
-        # Eliminar las cookies de los tokens
+        # Delete cookies tokens
         response = Response({"message": "Logged out"})
         response.delete_cookie("access_token")
         response.delete_cookie("refresh_token")
-
-        # Si quieres agregar más limpieza en sesión o alguna otra acción, también puedes hacerlo aquí
         return response
 
 
