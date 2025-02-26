@@ -1,0 +1,51 @@
+name: Weekly contributor report
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "3 2 * * 5"
+
+permissions:
+  contents: read
+
+jobs:
+  contributor_report:
+    name: Contributor Report
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+
+    steps:
+      - name: Get dates for last week (Friday to Thursday)
+        shell: bash
+        run: |
+          # Get last Friday
+          start_date=$(date -d "last friday -7 days" +%Y-%m-%d)
+          # Get last Thursday
+          end_date=$(date -d "last thursday" +%Y-%m-%d)
+          # Set environment variables
+          echo "START_DATE=$start_date" >> "$GITHUB_ENV"
+          echo "END_DATE=$end_date" >> "$GITHUB_ENV"
+
+      - name: Run contributor action
+        uses: github/contributors@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          START_DATE: ${{ env.START_DATE }}
+          END_DATE: ${{ env.END_DATE }}
+          REPOSITORY: LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas
+          SPONSOR_INFO: "false"
+
+      - name: Check if contributors.md exists
+        run: |
+          if [ ! -f ./contributors.md ]; then
+            echo "No contributors report found. Exiting."
+            exit 1
+          fi
+
+      - name: Create issue
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: Weekly contributor report
+          token: ${{ secrets.GITHUB_TOKEN }}
+          content-filepath: ./contributors.md
+          assignees: DanielFloresDeFrancisco
