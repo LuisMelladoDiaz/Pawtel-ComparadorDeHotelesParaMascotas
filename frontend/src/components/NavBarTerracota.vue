@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar bg-[#C36C6C] py-4">
-    <div class="navbar-content w-4/5 mx-auto flex justify-between items-center">
+    <div class="navbar-content max-w-7xl px-5 mx-auto flex justify-between items-center">
       <!-- Logo -->
       <router-link to="/home" class="logo">
         <img src="../assets/pawtel-logo-white.png" alt="Logo" />
