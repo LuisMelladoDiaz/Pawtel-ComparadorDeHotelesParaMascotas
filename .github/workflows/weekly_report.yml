@@ -4,6 +4,12 @@ on:
   schedule:
     - cron: "3 2 * * 5"
 
+  push:
+    branches:
+      - main
+      - build
+      - '**'
+
 permissions:
   contents: read
 
