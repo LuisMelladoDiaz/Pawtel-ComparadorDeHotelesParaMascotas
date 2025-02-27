@@ -12,4 +12,4 @@ class AppUser(AbstractUser):
     email = models.EmailField(unique=True, blank=False, max_length=100)
 
     def __str__(self):
-        return self.username
+        return f"{self.username}"

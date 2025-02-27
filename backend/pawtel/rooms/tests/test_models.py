@@ -2,17 +2,27 @@ from django.test import TestCase
 from rooms.models import Room
 from roomTypes.models import RoomType
 from hotels.models import Hotel
+from hotelOwners.models import HotelOwner
 from django.core.exceptions import ValidationError
 
 class RoomModelTest(TestCase):
 
     def setUp(self):
-        """Configuración inicial: Crear un hotel y un RoomType válidos"""
+        self.owner = HotelOwner.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
+            email="owner@example.com",
+            phone="+34987654321",
+            password="securepassword123"
+        )
+
         self.hotel = Hotel.objects.create(
             name="Hotel Test",
             address="Calle Principal 123",
             city="Madrid",
-            description="Un hotel de prueba."
+            description="Un hotel de prueba.",
+            hotel_owner=self.owner  
         )
 
         self.room_type = RoomType.objects.create(
@@ -25,29 +35,30 @@ class RoomModelTest(TestCase):
         )
 
     def test_create_valid_room(self):
-        """Prueba la creación de un Room válido"""
         room = Room.objects.create(
             name="Habitación 101",
             room_type=self.room_type
         )
         self.assertEqual(room.name, "Habitación 101")
         self.assertEqual(room.room_type, self.room_type)
+        self.assertEqual(room.room_type.hotel, self.hotel)  
+        self.assertEqual(room.room_type.hotel.hotel_owner, self.owner)  
 
+    
     def test_create_room_invalid_name(self):
-        """Intenta crear un Room sin nombre"""
+    
+        room = Room(
+            name="",  
+            room_type=self.room_type
+        )
         with self.assertRaises(ValidationError):
-            room = Room.objects.create(
-                name="",  # Nombre vacío
-                room_type=self.room_type
-            )
             room.full_clean()
 
-
+    
     def test_create_room_invalid_room_type(self):
-        """Intenta crear un Room sin un RoomType asignado (ForeignKey required)"""
+        room = Room(
+            name="Habitación sin Tipo",
+            room_type=None  
+        )
         with self.assertRaises(ValidationError):
-            room = Room.objects.create(
-                name="Habitación sin Tipo",
-                room_type=None  #No puede ser null
-            )
             room.full_clean()

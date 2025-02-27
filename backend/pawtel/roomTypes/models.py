@@ -9,11 +9,11 @@ class PetType(models.TextChoices):
     ANY = "ANY", "Any"
 
 class RoomType(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE) 
-    name = models.CharField(max_length=50, validators=[MinLengthValidator(1)], blank=False)
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=False, blank=False) 
+    name = models.CharField(max_length=50, blank=False)
     description = models.TextField(max_length=300, blank=False)
-    capacity = models.IntegerField(validators=[MinValueValidator(1)])
-    price_per_night = models.DecimalField(max_digits=6, decimal_places=2, validators=[MinValueValidator(1)])
+    capacity = models.IntegerField(validators=[MinValueValidator(1)], null=False)
+    price_per_night = models.DecimalField(max_digits=6, decimal_places=2, validators=[MinValueValidator(1)], null=False)
     pet_type = models.CharField(
         max_length=10,
         choices=PetType.choices,
@@ -22,4 +22,4 @@ class RoomType(models.Model):
     )
 
     def __str__(self):
-        return f"{self.name} {self.description} {self.capacity} {self.price_per_night} {self.pet_type}"
+        return f"{self.name}"
