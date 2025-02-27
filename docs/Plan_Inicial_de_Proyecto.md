@@ -1,10 +1,10 @@
 # [Nombre del Proyecto]
 
 ## Portada
-**[Nombre del Proyecto]**  
-Versión: [Número de versión]  
-Fecha: [Fecha de creación]  
-Autores: [Nombres]  
+**[Nombre del Proyecto]**
+Versión: [Número de versión]
+Fecha: [Fecha de creación]
+Autores: [Nombres]
 
 ---
 
@@ -33,25 +33,25 @@ Autores: [Nombres]
 1. [Introducción](#1-introducción)
 2. [Análisis del Mercado y Competencia](#2-análisis-del-mercado-y-competencia)
 3. [Modelo de Negocio y Usuarios](#3-modelo-de-negocio-y-usuarios)
-4. [Producto y Desarrollo](#4-producto-y-desarrollo)  
-   4.1. [MVP](#mvp)  
-   4.2. [Casos de uso y mockups](#casos-de-uso-y-mockups)  
-5. [Tecnología y Desarrollo del Proyecto](#5-tecnología-y-desarrollo-del-proyecto)  
-   5.1. [Uso de IA](#uso-de-ia)  
-6. [Costes y Viabilidad](#6-costes-y-viabilidad)  
-7. [Organización y Gestión del Proyecto](#7-organización-y-gestión-del-proyecto)  
-   7.1. [Commitment](#commitment)  
-   7.2. [Penalizaciones y Strikes](#penalizaciones-y-strikes)  
-   7.3. [Recompensas](#recompensas)  
-   7.4. [Firmas de los Alumnos](#firmas-de-los-alumnos)  
-8. [Análisis de Riesgos y Estrategia de Mitigación](#8-análisis-de-riesgos-y-estrategia-de-mitigación)  
+4. [Producto y Desarrollo](#4-producto-y-desarrollo)
+   4.1. [MVP](#mvp)
+   4.2. [Casos de uso y mockups](#casos-de-uso-y-mockups)
+5. [Tecnología y Desarrollo del Proyecto](#5-tecnología-y-desarrollo-del-proyecto)
+   5.1. [Uso de IA](#uso-de-ia)
+6. [Costes y Viabilidad](#6-costes-y-viabilidad)
+7. [Organización y Gestión del Proyecto](#7-organización-y-gestión-del-proyecto)
+   7.1. [Commitment](#commitment)
+   7.2. [Penalizaciones y Strikes](#penalizaciones-y-strikes)
+   7.3. [Recompensas](#recompensas)
+   7.4. [Firmas de los Alumnos](#firmas-de-los-alumnos)
+8. [Análisis de Riesgos y Estrategia de Mitigación](#8-análisis-de-riesgos-y-estrategia-de-mitigación)
 
 ---
 
 ## 1. Introducción
 ### Key business idea
 **Explicación clara del negocio: qué es y qué no es.**
-Nuestra aplicación será una plataforma integral para la búsqueda, comparación y reserva de servicios de alojamiento para mascotas. Permitirá a los dueños encontrar hoteles y residencias comparando sus precios, ubicaciones u opiniones, con la posibilidad de visualizarlos en un mapa interactivo, contactar con ellos e incluso realizar reservas y pagos directamente desde la app. Además, los usuarios podrán registrarse de una manera sencilla para poder recibir notificaciones y alertas personalizadas o dejar reseñas y puntuar su experiencia, lo que garantizará un ecosistema de confianza y transparencia en el cuidado de sus mascotas. 
+Nuestra aplicación será una plataforma integral para la búsqueda, comparación y reserva de servicios de alojamiento para mascotas. Permitirá a los dueños encontrar hoteles y residencias comparando sus precios, ubicaciones u opiniones, con la posibilidad de visualizarlos en un mapa interactivo, contactar con ellos e incluso realizar reservas y pagos directamente desde la app. Además, los usuarios podrán registrarse de una manera sencilla para poder recibir notificaciones y alertas personalizadas o dejar reseñas y puntuar su experiencia, lo que garantizará un ecosistema de confianza y transparencia en el cuidado de sus mascotas.
 
 Cabe destacar que el resultado no será la aplicación de un hotel o de una agencia de reservas exclusiva para un grupo de hoteles, sino un buscador y comparador de alojamientos ya existentes. Tampoco será una plataforma de cuidadores particulares o un servicio de paseo o guardería de día.
 Por último, resaltar que no nos dedicaremos a proporcionar servicios para mascotas ni a la adopción o bienestar animal.
@@ -67,13 +67,13 @@ Nuestra plataforma conecta a dueños de mascotas con hoteles y residencias certi
 
 ## 2. Análisis del Mercado y Competencia
 ### Criterio de búsqueda
-La metodología utilizada para el análisis de mercado y de la competencia es la siguiente: 
+La metodología utilizada para el análisis de mercado y de la competencia es la siguiente:
 - Viabilidad de la idea y mercado.
 - Identificación de la competencia.
 - Análisis de la competencia.
 - Tablas comparativas
 
-Para ello hemos utilizado la herramienta de Semrush, que la asignatura recomendaba, y hemos hecho un Keyword Research para buscar cuánta viabilidad tendríamos para hacernos un hueco en nuestro mercado, ver si los anunciantes pagarían, la dificultada para ascender en el ranking o incluso la intención del consultante. 
+Para ello hemos utilizado la herramienta de Semrush, que la asignatura recomendaba, y hemos hecho un Keyword Research para buscar cuánta viabilidad tendríamos para hacernos un hueco en nuestro mercado, ver si los anunciantes pagarían, la dificultada para ascender en el ranking o incluso la intención del consultante.
 
 ### Análisis de competidores
 
@@ -87,7 +87,7 @@ TripAdvisor,
 **Agoda**,
 Priceline,
 Atrápalo,
-… 
+…
 
 - Competencia a nivel semántico/keyword: Se trata de identificar aquellas empresas que aunque no compartan nuestro modelo de negocio, se dirigen al mismo público que nuestra marca. En el caso de Pawtel, todas aquellas marcas o páginas reconocidas en cuidado de perros o mascotas. Es importante hacer este ejercicio, ya que a la hora del marketing, nuestro objetivo es aparecer primero en las busquedas y que las personas relacionen ciertas palabras clave del entorno con nuestra marca. Utilizando Semrush, podemos ver las palabras clave por donde estas empresas se mueven, dando tambien a entender, la necesidad de los usuarios quienes acuden a ellas. Hemos escogido las más relevantes, al igual que en la sección anterior: **HotelesMascotas.com**, **Rover**,
 Viaje4Patas.com,
@@ -99,13 +99,13 @@ Holidog.com,
 …
 
 
- 
+
 A nivel **competencia de negocio** tenemos las siguiente tabla comparativa:
 
 | Característica                | Booking | Trivago | Agoda | Airbnb | Pawtel
 |--------------------------------|---------|---------|-------|--------|--------|
 | Comparación de precios        | ✅       | ✅       | ✅     | ❌      |✅|
-| Gestión de transportes        | ✅       | ✅       | ✅     | ❌      |❌ | 
+| Gestión de transportes        | ✅       | ✅       | ✅     | ❌      |❌ |
 | Reserva directa en la plataforma | ✅       | ❌       | ✅     | ✅   |✅|
 | Ofertas y descuentos          | ✅       | ✅       | ✅     | ✅      |✅|
 | Opiniones y valoraciones      | ✅       | ✅       | ✅     | ✅      |✅|
@@ -123,8 +123,8 @@ A nivel **competencia semántica** tenemos las siguiente tabla comparativa:
 | Contacto con cuidadores de perros        | ✅       | ✅       | ❌     | ❌  |
 | Busqueda de alojamiento de perros | ❌ | ❌ | ❌ | ✅|
 | Servicios extra para mascotas (lavado, transporte...)       | ✅       | ✅       | ❌ | ❌  |
-| Reserva directa en la plataforma | ✅       |   ✅     | ❌     | ✅   
-| Aplicación móvil              | ✅       | ✅       | ❌     | ✅  |  
+| Reserva directa en la plataforma | ✅       |   ✅     | ❌     | ✅
+| Aplicación móvil              | ✅       | ✅       | ❌     | ✅  |
 
 ---
 
@@ -272,33 +272,33 @@ Además, prevemos emplear **Docker** para el empaquetado de la app y su fácil d
 ### Uso de IA
 
 
-- **Propósito de la IA**:  
-El uso de la inteligencia artificial en este proyecto tiene como objetivo mejorar la calidad del código y la documentación técnica. 
-Específicamente, la IA se utilizará para estandarizar y corregir la documentación existente, asegurando coherencia y claridad. 
+- **Propósito de la IA**:
+El uso de la inteligencia artificial en este proyecto tiene como objetivo mejorar la calidad del código y la documentación técnica.
+Específicamente, la IA se utilizará para estandarizar y corregir la documentación existente, asegurando coherencia y claridad.
 Además, se aplicará para optimizar el código, reducir errores y mejorar la eficiencia del desarrollo.
 
-- **Tipos de IA utilizadas**  
-  - **ChatGPT**: Para la generación y corrección de documentación técnica.  
-  - **GitHub Copilot**: Para asistencia en la escritura y refactorización de código.  
+- **Tipos de IA utilizadas**
+  - **ChatGPT**: Para la generación y corrección de documentación técnica.
+  - **GitHub Copilot**: Para asistencia en la escritura y refactorización de código.
   - **Microsoft Copilot**: Para automatizar tareas repetitivas y mejorar la productividad en herramientas de desarrollo.
 
-- **Implementación técnica**:  
+- **Implementación técnica**:
   La inteligencia artificial se integrará en el flujo de trabajo del equipo de desarrollo de la siguiente manera:
 
-  - **Corrección y estandarización de la documentación**: Se utilizará ChatGPT para revisar la redacción, asegurando que los documentos sean claros, precisos y uniformes.  
-  - **Asistencia en el desarrollo de código**: GitHub Copilot, ChatGPT y Microsoft Copilot proporcionarán sugerencias de código, ayudando a los desarrolladores a escribir funciones más eficientes y bien estructuradas.  
+  - **Corrección y estandarización de la documentación**: Se utilizará ChatGPT para revisar la redacción, asegurando que los documentos sean claros, precisos y uniformes.
+  - **Asistencia en el desarrollo de código**: GitHub Copilot, ChatGPT y Microsoft Copilot proporcionarán sugerencias de código, ayudando a los desarrolladores a escribir funciones más eficientes y bien estructuradas.
 
-- **Beneficios esperados**:  
+- **Beneficios esperados**:
   El uso de la IA en el desarrollo y documentación del proyecto traerá diversos beneficios enfocados en dos apartados principalmente:
 
-  - **En el código**:  
-    - **Optimización y refactorización**: El código será más eficiente, con una estructura más clara y mantenible.  
-    - **Aceleración del desarrollo**: Se reducirá el tiempo dedicado a la escritura de código repetitivo, permitiendo que los desarrolladores se enfoquen en lógica más compleja.  
-    - **Detección de errores y vulnerabilidades**: La IA ayudará a identificar problemas en el código que podrían pasar desapercibidos en una revisión manual.  
+  - **En el código**:
+    - **Optimización y refactorización**: El código será más eficiente, con una estructura más clara y mantenible.
+    - **Aceleración del desarrollo**: Se reducirá el tiempo dedicado a la escritura de código repetitivo, permitiendo que los desarrolladores se enfoquen en lógica más compleja.
+    - **Detección de errores y vulnerabilidades**: La IA ayudará a identificar problemas en el código que podrían pasar desapercibidos en una revisión manual.
 
-  - **En la documentación**:  
-    - **Coherencia y cohesión**: Se garantizará un estilo uniforme en todos los documentos, evitando inconsistencias en la información.  
-    - **Corrección automática**: La IA revisará errores ortográficos y gramaticales, mejorando la calidad de los textos.  
+  - **En la documentación**:
+    - **Coherencia y cohesión**: Se garantizará un estilo uniforme en todos los documentos, evitando inconsistencias en la información.
+    - **Corrección automática**: La IA revisará errores ortográficos y gramaticales, mejorando la calidad de los textos.
     - **Estandarización**: Se seguirá un formato definido por la IA que adaptaremos a nuestras necesidades, facilitando la comprensión de la documentación por parte de todos los miembros del equipo además de estableciendo un marco de trabajo para los miembros del equipo de trabajo.
 
 ---
@@ -309,7 +309,7 @@ Este apartado presenta los datos del estudio de mercado realizado para evaluar l
 
 #### Costos
 
-Los costos del proyecto tienen en cuenta tanto las licencias de las tecnologías utilizadas como el costo del personal encargado de realizar el trabajo. 
+Los costos del proyecto tienen en cuenta tanto las licencias de las tecnologías utilizadas como el costo del personal encargado de realizar el trabajo.
 
 ##### Coste tecnológico
 
@@ -340,35 +340,35 @@ Los datos de salarios han sido obtenidos teniendo en cuenta el estudio INFORME F
 
 #### Ingresos
 
-El modelo de ingresos del proyecto se basa en una comisión sobre cada reserva gestionada a través de la plataforma. A continuación, se desglosan los factores clave que justifican las proyecciones de ingresos mensuales.  
+El modelo de ingresos del proyecto se basa en una comisión sobre cada reserva gestionada a través de la plataforma. A continuación, se desglosan los factores clave que justifican las proyecciones de ingresos mensuales.
 
-##### Volumen estimado de reservas  
+##### Volumen estimado de reservas
 
-Se proyectan dos volúmenes de **500 (pesimista) y 1.000 (optimista) reservas mensuales** basado en:  
+Se proyectan dos volúmenes de **500 (pesimista) y 1.000 (optimista) reservas mensuales** basado en:
 
-- Benchmarking del sector: Plataformas similares de comparación y reserva de alojamientos para mascotas (como Rover, Gudog y Holidog) gestionan miles de reservas al mes en función de la demanda y su alcance geográfico.  
-- Tendencia del mercado: Existe un crecimiento constante en la obtención de mascotas, lo que impulsa la demanda de servicios de hospedaje.  
+- Benchmarking del sector: Plataformas similares de comparación y reserva de alojamientos para mascotas (como Rover, Gudog y Holidog) gestionan miles de reservas al mes en función de la demanda y su alcance geográfico.
+- Tendencia del mercado: Existe un crecimiento constante en la obtención de mascotas, lo que impulsa la demanda de servicios de hospedaje.
 
-##### Precio medio por reserva  
+##### Precio medio por reserva
 
-El precio promedio estimado por cada reserva es de **100 €**, considerando:  
+El precio promedio estimado por cada reserva es de **100 €**, considerando:
 
 - Variabilidad en tarifas: Los precios de hospedaje para mascotas pueden oscilar entre 20 € y 50 € por noche en hoteles especializados.
-- Estancias prolongadas: Muchas reservas incluyen varios días, lo que genera tarifas acumuladas de entre 100 € y 300 € por servicio.  
+- Estancias prolongadas: Muchas reservas incluyen varios días, lo que genera tarifas acumuladas de entre 100 € y 300 € por servicio.
 
-##### Comisión por reserva  
+##### Comisión por reserva
 
 Se aplicará una comisión del **10%** sobre cada reserva gestionada a través de la plataforma.
 
-Motivos de la elección del porcentaje de comisión:  
+Motivos de la elección del porcentaje de comisión:
 
-- Competitividad: Un 10% es lo suficientemente atractivo para proveedores de servicios, garantizando su interés en listar sus alojamientos sin afectar drásticamente su margen de beneficio.  
-- Sostenibilidad financiera: Con 1.000 reservas mensuales a un precio promedio de 100 €, los ingresos proyectados son:  
+- Competitividad: Un 10% es lo suficientemente atractivo para proveedores de servicios, garantizando su interés en listar sus alojamientos sin afectar drásticamente su margen de beneficio.
+- Sostenibilidad financiera: Con 1.000 reservas mensuales a un precio promedio de 100 €, los ingresos proyectados son:
 
 ##### Beneficio económico mensual
 
-Teniendo en cuenta los ingresos del proyecto las proyecciones del beneficio económico mensual son las siguientes:  
-**500 x 100 x 0,1 = 5.000€/mes** (pesimista)  
+Teniendo en cuenta los ingresos del proyecto las proyecciones del beneficio económico mensual son las siguientes:
+**500 x 100 x 0,1 = 5.000€/mes** (pesimista)
 **1.000 x 100 x 0,1 = 10.000€/mes** (optimista)
 
 
@@ -413,9 +413,9 @@ Tras el análisis de mercado y la evaluación financiera, se concluye que el pro
 
 
 ### Leyenda de colores
-🟩 **Verde (Bajo)** → Riesgo con impacto mínimo. Poca probabilidad de afectar el proyecto.  
-🟨 **Amarillo (Moderado)** → Riesgo que puede generar problemas, pero manejable con estrategias.  
-🟥 **Rojo (Alto)** → Riesgo significativo que requiere atención prioritaria para mitigación.  
+🟩 **Verde (Bajo)** → Riesgo con impacto mínimo. Poca probabilidad de afectar el proyecto.
+🟨 **Amarillo (Moderado)** → Riesgo que puede generar problemas, pero manejable con estrategias.
+🟥 **Rojo (Alto)** → Riesgo significativo que requiere atención prioritaria para mitigación.
 🟪 **Morado (Crítico)** → Riesgo grave que puede comprometer el éxito del proyecto. Necesita intervención urgente.
 
 | Impacto ↓ / Probabilidad →   | Rara (1) | Improbable (2)  | Posible (3) | Probable (4) | Casi Cierta (5) |
@@ -494,7 +494,7 @@ En esta sección se describe la estructura organizativa del proyecto, detallando
 
 ## Commitment
 
-Este documento refleja un compromiso formal para participar activamente en la asignatura de Ingeniería de Software y Práctica Profesional (ISPP) durante el curso 2024-25.  
+Este documento refleja un compromiso formal para participar activamente en la asignatura de Ingeniería de Software y Práctica Profesional (ISPP) durante el curso 2024-25.
 El incumplimiento del mismo supondrá penalizaciones, incluyendo la expulsión de un miembro del grupo. Leer atentamente antes de firmar.
 
 ### Compromisos
@@ -512,12 +512,12 @@ Al incorporarme al grupo 11, me comprometo a cumplir con los siguientes requisit
 ---
 
 ### Penalizaciones y Strikes
-Tenga en cuenta que este sistema sirve para establecer y controlar un flujo sano de trabajo. Se penalizará a los que entorpezcan el rendimiento del equipo, así como los que se aprovechan del trabajo de otros.  
+Tenga en cuenta que este sistema sirve para establecer y controlar un flujo sano de trabajo. Se penalizará a los que entorpezcan el rendimiento del equipo, así como los que se aprovechan del trabajo de otros.
 Los alumnos que no cumplan con sus compromisos, y muy especialmente, los relacionados con las tareas, recibirán penalizaciones según el siguiente sistema:
 
 - **Strike 1:** Amonestación verbal y aviso formal dentro del equipo. Quedará registrado dentro de las presentaciones semanales.
 - **Strike 2:** El segundo incumplimiento de las normas del equipo quedará registrado y documentado.
-- **Strike 3:** A partir del tercer strike, el alumno será penalizado por sus compañeros haciendo uso del sistema de calificación individual propuesto por la asignatura.  
+- **Strike 3:** A partir del tercer strike, el alumno será penalizado por sus compañeros haciendo uso del sistema de calificación individual propuesto por la asignatura.
 Recuerde que su nota será multiplicada por un índice de rendimiento calculado por las calificaciones dadas por sus compañeros. Por lo cual, supondrá seguramente el suspenso de la asignatura.
 
 Un strike puede ser eliminado si el estudiante demuestra una mejora significativa en su compromiso dentro del equipo durante un período determinado.
@@ -539,17 +539,16 @@ Los alumnos que cumplan de manera destacada con sus compromisos recibirán benef
 Al firmar este documento, entiendo y acepto las responsabilidades que se me han asignado y me comprometo a cumplirlas según lo establecido en este documento.
 
 - [x] Andrés Martínez Reviriego
-- [x] Javier García Sebastián  
-- [x] Claudio Cortés Carrasco  
-- [x] Daniel Flores De Francisco  
-- [x] David González Martínez  
-- [x] Fernando Castelló Sánchez  
-- [x] Francisco Miguel Jiménez Morales  
-- [x] Javier Ruiz Garrido  
-- [x] Jorge Gómez de Tovar  
-- [x] Luis Mellado Díaz  
-- [x] Rafael Castillo Cebolla  
-- [x] Sergio Trenado González  
-- [x] Manuel Castillejo Vela  
+- [x] Javier García Sebastián
+- [x] Claudio Cortés Carrasco
+- [x] Daniel Flores De Francisco
+- [x] David González Martínez
+- [x] Fernando Castelló Sánchez
+- [x] Francisco Miguel Jiménez Morales
+- [x] Javier Ruiz Garrido
+- [x] Jorge Gómez de Tovar
+- [x] Luis Mellado Díaz
+- [x] Rafael Castillo Cebolla
+- [x] Sergio Trenado González
+- [x] Manuel Castillejo Vela
 - [x] Yesica Garate Fuentes
-
