@@ -11,9 +11,11 @@
   --color-crema-dark: #E1D7D3;
   --color-beige-dark: #B8926E;
   --color-oliva-dark: #6E7F45;
-  --font-titulos: 'DM Serif Display', serif;
-  --font-subtitulos: 'Merriweather', serif;
-  --font-complementario: 'Bree Serif', serif;
+  --color-pawtel-black: #333333;
+  --color-pawtel-gray: #A3A3A3;
+  --font-titulos: 'Poppins', sans-serif;
+  --font-subtitulos: 'Roboto', sans-serif;
+  --font-complementario: 'Open Sans', sans-serif;
 }
 
 nav, main {
@@ -24,11 +26,16 @@ nav > a + a {
   margin-left: 10px;
 }
 
+h1 {
+  font-family: var(--font-titulos);
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
 h2 {
   font-family: var(--font-titulos);
   font-weight: bold;
-  border-bottom: 1px solid #ccc;
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 }
 
 h3, h4 {
@@ -39,3 +46,14 @@ p, ul, li {
   font-family: var(--font-complementario);
 }
 
+
+
+/* FLATPICKR CALENDAR */
+.flatpickr-day.selected  {
+  background: #C36C6C !important;
+  border-color: #333 !important;
+}
+
+.flatpickr-weekday {
+  color: #C36C6C !important;
+}
