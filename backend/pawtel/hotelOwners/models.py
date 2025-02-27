@@ -1,5 +1,5 @@
 from django.db import models
-from accounts.models import AppUser  
+from appUsers.models import AppUser  
 
 class HotelOwner(AppUser):
     def __str__(self):
