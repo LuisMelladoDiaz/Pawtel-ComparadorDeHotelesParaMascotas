@@ -5,7 +5,7 @@
 
         <div class="max-w-7xl mx-auto px-5">
 
-            Aquí va el contenido
+            <!-- Aquí va el contenido -->
 
         </div>
 
@@ -14,6 +14,7 @@
 </template>
 
 <script setup>
+/* Aquí se deben importar los diferentes componentes y recursos */
 import { ref } from 'vue';
 import Navbar from '../components/Navbar.vue';
 import NavbarTerracota from '../components/NavbarTerracota.vue';
@@ -22,5 +23,17 @@ import Footer from '../components/Footer.vue';
 </script>
 
 <style scoped>
-/* Estilos adicionales */
+/* 
+Estilos de la versión móvil 
+(Para testearlo le dais a inspeccionar y arriba a la izq de la ventana podeis poner el navegador en versión móvil, eligiendo las dimensiones de un Iphone o Samsung por ejemplo) 
+La idea es que los estilos de la web de escritorio estén usando tailwind dentro del código, y los estilos de la versión móvil esten aquí. Por lo que aseguraos por favor
+de que las pantallas sean responsivas.
+*/
+
+@media (max-width: 900px) {
+
+    /* Aquí empiezan las clases CSS de la versión móvil */
+
+
+}
 </style>

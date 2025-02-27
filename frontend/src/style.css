@@ -18,10 +18,6 @@
   --font-complementario: 'Open Sans', sans-serif;
 }
 
-nav, main {
-  margin-bottom: 10px;
-}
-
 nav > a + a {
   margin-left: 10px;
 }
