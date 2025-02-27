@@ -9,8 +9,8 @@ assignees: ''
 
 ## <Título de la Tarea>
 
-**Descripción:** 
+**Descripción:**
 <Descripción del trabajo a realizar>
 
-**Prioridad:** <Baja | Media | Alta>  
+**Prioridad:** <Baja | Media | Alta>
 **Tiempo estimado:** <X horas/días>

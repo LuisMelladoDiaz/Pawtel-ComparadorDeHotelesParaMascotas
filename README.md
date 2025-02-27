@@ -130,8 +130,3 @@ Si deseas contribuir, revisa nuestras [pautas de contribución](https://github.c
 
 
 🎉 _¡Gracias por visitar PawTel! Si te gusta el proyecto, no dudes en dejar una estrella ⭐ en GitHub._
-
-
-
-
-

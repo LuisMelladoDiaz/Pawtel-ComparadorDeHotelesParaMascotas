@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -32,7 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
-    "sample"
+    "sample",
 ]
 
 MIDDLEWARE = [
@@ -70,8 +71,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "pawtel.wsgi.application"
-
-
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent

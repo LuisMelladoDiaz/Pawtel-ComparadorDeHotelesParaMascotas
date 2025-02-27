@@ -24,10 +24,10 @@ const setCount = (event: Event) => {
       <input id="count" type="number" :value="count" @input="setCount" min="1" />
     </div>
     <h2 class="title">Pets</h2>
-    
+
     <p v-if="isLoading" class="loading-text">Loading...</p>
     <p v-else-if="error" class="error-text">{{ error }}</p>
-    
+
     <div v-else class="grid">
       <div v-for="pet in pets" :key="pet.id" class="pet-card">
         <img :src="pet.image" :alt="pet.name" class="pet-image"/>
