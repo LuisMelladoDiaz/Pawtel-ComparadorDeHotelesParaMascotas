@@ -1,5 +1,4 @@
 <template>
-
   <div class="card-container flex flex-wrap box-border gap-4 max-w-[850px] w-full border mb-4 p-[15px] rounded-[5px] border-[#cc6a4e]">
 
     <div class="image-container flex-[1_1_25%] max-w-[200px] h-[200px] overflow-hidden">
@@ -10,12 +9,16 @@
       <h2 class="hotel-name text-[1.4rem] font-bold mb-4 border-b-[#ccc] border-b border-solid text-terracota">
         {{ name }}
       </h2>
-      <p class="hotel-location text-[1.1rem] mb-4 font-subtitulos underline text-pawtel-black">
-        {{ location }}
-      </p>
+      <div class="hotel-location text-[1.1rem] mb-4 font-subtitulos text-pawtel-black flex items-center">
+        <i class="fas fa-map-marker-alt text-[1.25rem] mr-2" style="text-decoration: none;"></i>
+        <p class="underline">
+          {{ location }}
+        </p>
+      </div>
+
       <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black">
         <li v-for="(detail, index) in details" :key="index">
-          ✓ {{ detail }}
+          <i class="fa-solid fa-check text-[1rem] text-terracota" style="text-decoration: none;"></i> {{ detail }}
         </li>
       </ul>
     </div>
@@ -33,7 +36,6 @@
     </div>
 
   </div>
-  
 </template>
 
 <script setup>
@@ -49,9 +51,6 @@ import Button from '../components/Button.vue';
 </script>
 
 <style scoped>
-
-
-
 @media (max-width: 900px) {
   .card-container {
     flex-direction: column;

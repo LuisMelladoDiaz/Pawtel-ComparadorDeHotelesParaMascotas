@@ -9,7 +9,7 @@
         <PetHotelCard
           :image="'/src/assets/hotel.jpg'"
           name="Residencia Feliz Pet"
-          location="Ciudad X"
+          location="Sevilla"
           :details="['Servicio 24h', 'Acceso a parque', 'Habitaciones amplias']"
           rating=8.1
           price="170€"
@@ -17,7 +17,7 @@
         <PetHotelCard
           image="/src/assets/hotel.jpg"
           name="Hotel Paws"
-          location="Ciudad Y"
+          location="Barcelona"
           :details="['Pet grooming', 'Transporte gratuito', 'Comida gourmet']"
           rating= 6.8
           price="25€"
@@ -25,7 +25,7 @@
         <PetHotelCard
           image="/src/assets/hotel.jpg"
           name="Hotel Mascotón"
-          location="Ciudad Z"
+          location="Madrid"
           :details="['Entrenamiento incluido', 'Zona de juegos', 'Cuidado personalizado']"
           rating=7.1
           price="40€"
