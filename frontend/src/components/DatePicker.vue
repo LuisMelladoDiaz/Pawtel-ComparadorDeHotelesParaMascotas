@@ -18,7 +18,7 @@
       @click="clearDate"
     ></i>
 
-    <!-- Mostrar la fecha -->
+    <!-- Mostrar fecha -->
     <p 
       :class="formattedDate ? 'text-pawtel-black' : 'text-pawtel-gray'" 
       class="text-[17px] absolute left-[40px] bottom-[7px] w-auto pointer-events-none inline-block">
@@ -40,16 +40,15 @@ const props = defineProps({
 // Define el evento para actualizar el v-model
 const emit = defineEmits(['update:modelValue']);
 
-const internalDate = ref(props.modelValue || ''); // Sincroniza con el modelo
+const internalDate = ref(props.modelValue || '');
 const formattedDate = ref('');
 const flatpickrRef = ref(null);
 
 // Método para limpiar la fecha
 const clearDate = () => {
-  internalDate.value = ''; // Borra la fecha interna
-  formattedDate.value = ''; // Borra la fecha formateada
-  emit('update:modelValue', ''); // Emitir el cambio al padre
-
+  internalDate.value = '';
+  formattedDate.value = '';
+  emit('update:modelValue', ''); // Emitir el cambio
 };
 
 // Inicializa Flatpickr y sincroniza con `internalDate`
@@ -79,7 +78,7 @@ watch(() => props.modelValue, (newVal) => {
   }
 });
 
-// Función para formatear la fecha
+// Formatear la fecha
 const formatDate = (date) => {
   const weekdays = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'];
   const months = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
