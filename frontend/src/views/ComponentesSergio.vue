@@ -55,7 +55,7 @@
 
 <script setup>
   import { ref } from 'vue';
-  import PetHotelCard from '../components/PetHotelCard.vue';
+  import PetHotelCard from '../components/HotelCard.vue';
   import LoadingSpinner from '../components/LoadingSpinner.vue';
   import DatePicker from '../components/DatePicker.vue';
   
