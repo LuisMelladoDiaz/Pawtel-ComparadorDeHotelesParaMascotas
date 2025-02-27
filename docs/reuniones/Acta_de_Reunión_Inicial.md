@@ -2,11 +2,11 @@
 
 ## Portada
 
-**Título:** Reunión Inicial  
-**Fecha:** 03/02/2025 
+**Título:** Reunión Inicial
+**Fecha:** 03/02/2025
 **Hora:** 20:30
-**Equipo:** G11 
-**Lugar:** Google Meets 
+**Equipo:** G11
+**Lugar:** Google Meets
 **Duración:**
 **Moderadores:** Luis Mellado Díaz, Daniel Flores de Francisco.
 
@@ -55,14 +55,14 @@
 
 1. Creado el WorkSpace de TimeCamp para registrar el esfuerzo del equipo.
 2. Creado el repositorio de GitHub para el grupo.
-   
+
 ## Agenda
 
 1. Presentación de los miembros del equipo.
 2. Elección de PM.
 3. Elección de portavoz y presentador de la semana.
 4. Reparto de los roles técnicos en el equipo.
-5. Firma de los compromisos de participación. 
+5. Firma de los compromisos de participación.
 6. Reparto de los puntos de la presentación.
 7. Discusión sobre la temática del proyecto.
 8. Otras tareas de la semana.
@@ -81,8 +81,8 @@
 - **Líder frontend (1):** Sergio
 - **Desarrollo frontend (3):** Javi G, Fernando, Luis
 - **Diseño de UI y UX (1):** Sergio
-  
-#### **Full Stack:** 
+
+#### **Full Stack:**
 - **Líder full stack (1):** David
 - **Desarrollo full stack (2):** Curro, Andrés
 
@@ -122,4 +122,3 @@
 | **Francisco Miguel Jiménez Morales** | Informe de uso de la IA |
 
 ----
-

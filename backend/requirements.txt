@@ -1,5 +1,10 @@
 django>=4.2
 djangorestframework>=3.14
 django-cors-headers>=4.0
-python-dotenv>=1.0
+dotenv>=0.9.9
+pre-commit>=3.0.0
+black>=23.12.1
+isort>=5.13.2
+autoflake>=2.2.1
 mysqlclient
+
