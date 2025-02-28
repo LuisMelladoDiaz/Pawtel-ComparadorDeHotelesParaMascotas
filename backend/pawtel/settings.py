@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from datetime import timedelta
 
 load_dotenv()
 
@@ -52,37 +51,34 @@ MIDDLEWARE = [
 
 # Configurar REST Framework para usar JWT
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",  # Clase de autenticación JWT
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",  # Requiere autenticación para acceder
+    ],
 }
 
 # Configurar SimpleJWT
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
-    "ROTATE_REFRESH_TOKENS": True,
-    "BLACKLIST_AFTER_ROTATION": True,
-    "AUTH_HEADER_TYPES": ("Bearer",),
-    "AUTH_COOKIE": "access_token",  # Nombre de la cookie
-    "AUTH_COOKIE_HTTP_ONLY": True,
-    "AUTH_COOKIE_SECURE": False,  # Cambiar a True en producción
-    "AUTH_COOKIE_SAMESITE": "Lax",
+    "AUTH_COOKIE": "access_token",  # Nombre de la cookie con el JWT
+    "AUTH_COOKIE_HTTP_ONLY": True,  # Seguridad para que no sea accesible por JavaScript
+    "AUTH_COOKIE_SAMESITE": "None",  # Configuración de SameSite para las cookies
+    "AUTH_COOKIE_SECURE": True,  # Puede ser True si usas HTTPS
 }
 
 # Configurar CORS para permitir peticiones del frontend
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", 
-]
 
 ROOT_URLCONF = "pawtel.urls"
 
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS").split(",")
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_HEADERS = ["Content-Type", "Authorization"]
 
 TEMPLATES = [
     {

@@ -63,7 +63,7 @@ import Button from '../components/Button.vue';
     height: 200px;
     overflow: hidden;
   }
-  
+
   .info-container {
     flex: 1 1 100%;
     min-width: 100px;

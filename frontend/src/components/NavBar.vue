@@ -5,7 +5,7 @@
       <div class="menu-icon md:hidden flex flex-col items-end" @click="toggleMenu">
         <i class="fas fa-bars text-terracota text-3xl"></i>
       </div>
-      
+
       <router-link to="/home">
         <img src="../assets/pawtel-logo.png" alt="Logo" class="logo h-[50px]" />
       </router-link>
@@ -24,7 +24,7 @@
         <button class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</button>
       </div>
 
-      
+
     </div>
 
     <!-- Menú desplegable en móvil -->

@@ -29,9 +29,9 @@ import Footer from '../components/Footer.vue';
 
 
 <style scoped>
-/* 
-Estilos de la versión móvil 
-(Para testearlo le dais a inspeccionar y arriba a la izq de la ventana podeis poner el navegador en versión móvil, eligiendo las dimensiones de un Iphone o Samsung por ejemplo. 
+/*
+Estilos de la versión móvil
+(Para testearlo le dais a inspeccionar y arriba a la izq de la ventana podeis poner el navegador en versión móvil, eligiendo las dimensiones de un Iphone o Samsung por ejemplo.
 También podeis verlo desde vuestro móvil iniciando el frontend con "npm run dev -- --host" y copiando la url que te sale en Network [ tu_ip:5173 ])
 La idea es que los estilos de la web de escritorio estén usando Tailwind dentro del <template>, y los estilos de la versión móvil esten aquí en <style scoped>. Por lo que aseguraos por favor
 de que las pantallas sean lo más responsivas posible.
@@ -43,7 +43,7 @@ de que las pantallas sean lo más responsivas posible.
     .example {
         display: flex;
     }
-    
+
     .example2 {
         display: flex;
     }
