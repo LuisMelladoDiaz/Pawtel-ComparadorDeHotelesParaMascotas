@@ -2,10 +2,11 @@
 import { ref } from 'vue';
 import InputText from './InputText.vue';
 import InputNumber from './InputNumber.vue';
+import DatePicker from '../components/DatePicker.vue';
 
 const city = ref('');
 const dateRange = ref('');
-const petCount = ref(1);
+const petCount = ref('');
 
 const onSearch = () => {
   console.log('Filtrando por:', { city: city.value, dateRange: dateRange.value, petCount: petCount.value });
@@ -13,49 +14,31 @@ const onSearch = () => {
 </script>
 
 <template>
-  <div class="filter-navbar">
-    <div class="filter-content">
-      <InputText id="city" v-model="city" placeholder="Sevilla" icon="📍" />
-      <InputText id="date-range" v-model="dateRange" placeholder="20 Junio - 23 Junio" icon="📅" />
-      <InputNumber id="petCount" v-model="petCount" placeholder="2 perros" icon="🐶" />
-      <button @click="onSearch" class="search-button">🔎 Buscar</button>
+  <div class="filter-navbar bg-terracota h-[100px]">
+    <div class="filter-content max-w-7xl mx-auto px-5 h-full flex items-center justify-between">
+      <InputText class="min-w-[300px]" id="city" v-model="city" placeholder="Ciudad" icon="fas fa-map-marker-alt" />
+      <DatePicker class="bg-white" v-model="dateSelected" />
+      <InputNumber class="min-w-[300px]" id="petCount" v-model="petCount" placeholder="Número de perros" icon="fa-solid fa-paw" />
+      <button @click="onSearch" class="bg-white rounded-lg cursor-pointer h-10 max-w-[150px] w-full flex items-center justify-between text-xl gap-1 font-bold text-pawtel-black hover:bg-terracota-dark hover:text-white hover:border hover:border-white">
+        <p class="grow text-center">Buscar</p>
+      </button>
     </div>
   </div>
 </template>
 
+
 <style scoped>
-.filter-navbar {
-  background-color: #C36C6C;
-  padding: 10px 20px;
-  width: 100%;
-}
+  @media (max-width: 900px) {
 
-.filter-content {
-  width: 80%;
-  height: 50px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-}
+    /* Aquí empiezan las clases CSS de la versión móvil */
+    .filter-navbar {
+      height: 220px;
+    }
 
-.search-button {
-  background-color: white;
-  color: #C36C6C;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  height: 30px;
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  gap: 5px;
-}
+    .filter-content {
+      flex-direction: column;
+      padding: 20px;
+    }
 
-.search-button:hover {
-  background-color: #D98C8C;
-}
+  }
 </style>

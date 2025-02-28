@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer bg-terracota">
     <p>© 2025 Pawtel (Grupo 11). Todos los derechos reservados.</p>
   </footer>
 </template>
@@ -9,7 +9,6 @@
 
 <style scoped>
 .footer {
-  background-color: #C36C6C; 
   color: white;
   text-align: center;
   padding: 15px;

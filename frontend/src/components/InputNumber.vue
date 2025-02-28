@@ -1,8 +1,8 @@
 <template>
-  <div class="input-container">
+  <div class="input-container font-complementario">
     <label :for="id">{{ label }}</label>
     <div class="input-wrapper">
-      <span v-if="icon" class="input-icon">{{ icon }}</span>
+      <span v-if="icon" :class="['input-icon text-pawtel-black', icon]"></span>
       <input 
         :id="id" 
         :value="modelValue" 
@@ -42,11 +42,11 @@ defineProps({
 .input-wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid #000;
-  border-radius: 4px;
+  border-radius: 8px;
   background-color: white;
-  width: 200px;
-  height: 30px;
+  max-width: 400px;
+  width: 100%;
+  height: 40px;
   padding-left: 8px;
 }
 
@@ -55,15 +55,20 @@ defineProps({
   padding: 5px;
   border: none;
   outline: none;
-  color: #888;
-  font-size: 14px;
+  color: #000000;
+  font-size: 18px;
   background-color: white;
   height: 25px;
-  width: 40px;
+  width: 100%;
+}
+
+.input-number::placeholder {
+  color: #A3A3A3;
+  opacity: 1;
 }
 
 .input-icon {
   margin-right: 8px;
-  color: #888;
+  margin-left: 2px;
 }
 </style>
