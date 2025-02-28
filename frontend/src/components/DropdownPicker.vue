@@ -1,7 +1,7 @@
 <template>
   <div class="relative inline-block text-left w-full" ref="dropdownRef">
     
-    <div class="flex items-center border border-gray-300 bg-white rounded-lg shadow-sm min-w-64 font-complementario">
+    <div class="flex items-center bg-white rounded-lg shadow-sm min-w-64 text-[18px] font-complementario">
 
       <button 
         @click="toggleDropdown" 

@@ -50,6 +50,17 @@ p, ul, li {
   border-color: #333 !important;
 }
 
+.flatpickr-day.startRange  {
+  background: #C36C6C !important;
+  border-color: #333 !important;
+}
+
+
+.flatpickr-day.endRange  {
+  background: #C36C6C !important;
+  border-color: #333 !important;
+}
+
 .flatpickr-weekday {
   color: #C36C6C !important;
 }

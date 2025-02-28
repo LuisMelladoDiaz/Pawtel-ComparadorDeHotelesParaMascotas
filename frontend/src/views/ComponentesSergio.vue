@@ -46,7 +46,8 @@
       <div class="mt-10 mb-30 flex flex-col">
         <h2 class="w-auto inline-block self-center">Date Picker</h2>
         <DatePicker v-model="dateSelected" />
-        <p class="mt-2 text-left">Fecha seleccionada: {{ dateSelected }}</p>
+        <p class="mt-2 text-left">Fecha seleccionada:</p>
+        <p class="mt-2 text-left">{{ dateSelected }}</p>
       </div>
       
   </div>
