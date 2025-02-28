@@ -39,9 +39,10 @@
         </div>
         
       </div>
+      
     </div>
 
-    <Footer />
+    
 
     <!-- Modal -->
     <Modal :isOpen="showModal" title="Ejemplo Modal" @close="showModal = false">
@@ -50,6 +51,7 @@
 
     <!-- Alertas -->
     <Alert v-if="showAlert" :type="showAlert">Este es un mensaje de {{ showAlert }}.</Alert>
+    <Footer />
   </div>
 </template>
 
