@@ -10,8 +10,8 @@ class PetType(models.TextChoices):
 
 class RoomType(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, null=False) 
-    name = models.CharField(max_length=50, blank=False)
-    description = models.TextField(max_length=300, blank=False)
+    name = models.CharField(max_length=50, blank=False, null=False)
+    description = models.TextField(max_length=300, blank=False, null=False)
     capacity = models.IntegerField(validators=[MinValueValidator(1)], null=False)
     price_per_night = models.DecimalField(max_digits=6, decimal_places=2, validators=[MinValueValidator(1)], null=False)
     pet_type = models.CharField(

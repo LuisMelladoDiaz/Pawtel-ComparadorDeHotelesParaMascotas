@@ -12,7 +12,8 @@ class HotelOwnerSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "id": {"read_only": True},
             "password": {"write_only": True},
-            "email": {"required": True, "max_length": 100},
+            "username": {"allow_null": False, "required": True}
+            "email": {"required": True, "max_length": 100, "allow_null": False},
             "phone": {"required": True, "max_length": 13, "validators": [AppUser.phone_regex], "allow_null": False},
         }
 

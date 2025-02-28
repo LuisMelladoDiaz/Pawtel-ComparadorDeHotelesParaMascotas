@@ -8,8 +8,8 @@ class AppUser(AbstractUser):
         message="Phone number must be in the format: +34XXXXXXXXX"
     )
     
-    phone = models.CharField(validators=[phone_regex], max_length=13, unique=True, blank=False)
-    email = models.EmailField(unique=True, blank=False, max_length=100)
+    phone = models.CharField(validators=[phone_regex], max_length=13, unique=True, blank=False, null=False)
+    email = models.EmailField(unique=True, blank=False, max_length=100, null=False)
 
     def __str__(self):
         return f"{self.username}"

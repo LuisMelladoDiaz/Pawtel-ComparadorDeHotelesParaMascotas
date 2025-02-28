@@ -11,7 +11,7 @@ class RoomSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {
             "id": {"read_only": True},
-            "name": {"required": True, "max_length": 50},
+            "name": {"required": True, "max_length": 50, "allow_null": False},
             "room_type": {"required": True, "allow_null": False},
         }
     
