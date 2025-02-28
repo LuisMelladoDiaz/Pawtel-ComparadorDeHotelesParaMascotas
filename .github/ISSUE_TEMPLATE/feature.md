@@ -12,12 +12,12 @@ assignees: ''
 ### Descripción:
 <Explica la nueva funcionalidad propuesta>
 
-**Criterios de aceptación:**  
+**Criterios de aceptación:**
 <
 - Debe permitir...
 - El usuario podrá...>
 
-**Subtareas:** 
+**Subtareas:**
 <
 - Crear estructura de base de datos
 - Implementar API
