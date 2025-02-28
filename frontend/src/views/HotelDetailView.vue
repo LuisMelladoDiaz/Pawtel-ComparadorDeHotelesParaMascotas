@@ -1,90 +1,64 @@
+<script setup>
+import { ref } from 'vue';
+import { useRoute } from 'vue-router';
+import Navbar from '../components/Navbar.vue';
+import FilterNavbar from '../components/FilterNavbar.vue';
+import Footer from '../components/Footer.vue';
+import HotelDetailCard from '../components/HotelDetailCard.vue';
+
+const route = useRoute();
+const hotel = ref({
+  image: '/src/assets/foto1.jpg',
+  name: 'Hotel Ejemplo',
+  location: '📍'+'Madrid, España',
+  details: ['WiFi gratis', 'Desayuno incluido', 'Piscina', 'Gimnasio'],
+  rating: 4.5,
+  price: '120€/noche',
+  imageGallery: [
+    '/src/assets/foto1.jpg',
+    '/src/assets/foto2.jpg',
+    '/src/assets/foto1.jpg',
+    '/src/assets/foto2.jpg'
+  ],
+  description: 'Un hotel increíble con todas las comodidades que necesitas para unas vacaciones perfectas.'
+});
+</script>
+
 <template>
-  <div class="hotel-detail-container">
-    <div class="hotel-header">
-      <h1>{{ hotel.name }}</h1>
-      <p class="location">{{ hotel.location }}</p>
+  <div>
+    <Navbar />
+    <FilterNavbar />
+
+    <!-- Barra de navegación entre pestañas -->
+    <div class="bg-white shadow-md py-2 flex justify-center gap-6 text-black text-lg border-b">
+      <a href="#" class="hover:underline">Vista General</a>
+      <a href="#" class="hover:underline">Información y Precios</a>
+      <a href="#" class="hover:underline">Servicios</a>
+      <a href="#" class="hover:underline">Requisitos</a>
+      <a href="#" class="hover:underline">A Tener en Cuenta</a>
+      <a href="#" class="hover:underline">Opiniones de Clientes</a>
     </div>
-    <div class="hotel-images">
-      <img :src="hotel.mainImage" alt="Hotel main view" class="main-image" />
-      <div class="thumbnail-images">
-        <img v-for="(image, index) in hotel.otherImages" :key="index" :src="image" alt="Hotel view" class="thumbnail" />
-      </div>
+
+    <div class="max-w-7xl mx-auto px-5 py-10">
+      <HotelDetailCard 
+        :image="hotel.image"
+        :name="hotel.name"
+        :location="hotel.location"
+        :details="hotel.details"
+        :rating="hotel.rating"
+        :price="hotel.price"
+        :imageGallery="hotel.imageGallery"
+        :description="hotel.description"
+      />
     </div>
-    <div class="hotel-info">
-      <p class="description">{{ hotel.description }}</p>
-      <div class="details">
-        <p><strong>Precio:</strong> {{ hotel.price }} € por noche</p>
-        <p><strong>Valoración:</strong> {{ hotel.rating }} / 5</p>
-      </div>
-    </div>
+    <Footer />
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      hotel: {
-        name: "Hotel Ejemplo",
-        location: "Madrid, España",
-        mainImage: "https://source.unsplash.com/800x500/?hotel",
-        otherImages: [
-          "https://source.unsplash.com/400x300/?hotel-room",
-          "https://source.unsplash.com/400x300/?hotel-lobby",
-          "https://source.unsplash.com/400x300/?hotel-pool"
-        ],
-        description: "Este es un hotel de lujo con todas las comodidades necesarias para una estancia placentera.",
-        price: 120,
-        rating: 4.5
-      }
-    };
-  }
-};
-</script>
-
 <style scoped>
-.hotel-detail-container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
-.hotel-header {
-  text-align: center;
-}
-.location {
-  font-size: 1.2em;
-  color: #777;
-}
-.hotel-images {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.main-image {
-  width: 100%;
-  max-height: 400px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.thumbnail-images {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-.thumbnail {
-  width: 120px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-.hotel-info {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f9f9f9;
-  border-radius: 10px;
-}
-.details {
-  margin-top: 10px;
-  font-size: 1.1em;
+@media (max-width: 900px) {
+  .text-lg {
+    font-size: 1rem;
+  }
 }
 </style>
