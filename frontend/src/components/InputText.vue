@@ -1,7 +1,7 @@
 <template>
   <div class="input-container font-complementario">
     <label :for="id">{{ label }}</label>
-    <div class="input-wrapper">
+    <div class="input-wrapper shadow-sm ">
       <span v-if="icon" :class="['input-icon text-pawtel-black', icon]"></span>
       <input 
         :id="id" 
