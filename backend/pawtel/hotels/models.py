@@ -3,7 +3,7 @@ from django.core.validators import MinLengthValidator
 from hotelOwners.models import HotelOwner
 
 class Hotel(models.Model):
-    hotel_owner = models.ForeignKey(HotelOwner, on_delete=models.CASCADE, null=False, blank=False)
+    hotel_owner = models.ForeignKey(HotelOwner, on_delete=models.CASCADE, null=False)
     name = models.CharField(max_length=100, unique=True, blank=False)
     address = models.CharField(max_length=100, blank=False)
     city = models.CharField(max_length=50, blank=False)
