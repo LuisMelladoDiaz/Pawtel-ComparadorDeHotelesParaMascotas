@@ -2,10 +2,8 @@
 <template>
       
     <div class="p-6 flex flex-col items-center">
-      <h1 class="text-2xl w-auto inline-block self-center">Componentes de Sergio</h1>
-
       <div class="mt-10 flex flex-col"> 
-        <h2 class="w-auto inline-block self-center">Hotel cards</h2>
+        <h2 class="text-xl w-auto inline-block self-center">Hotel cards</h2>
         <PetHotelCard
           :image="'/src/assets/hotel.jpg'"
           name="Residencia Feliz Pet"
@@ -33,18 +31,18 @@
       </div>
       
       <div class="mt-10 flex flex-col"> 
-        <h2 class="w-auto inline-block self-center">Loading Spinner</h2>
+        <h2 class="text-xl w-auto inline-block self-center">Loading Spinner</h2>
         <LoadingSpinner/>
       </div>
 
       <div class="mt-10 flex flex-col">
-        <h2 class="w-auto inline-block self-center">Dropdown Picker</h2>
+        <h2 class="text-xl w-auto inline-block self-center">Dropdown Picker</h2>
         <DropdownPicker v-model="selectedOption" :options="optionsList" />
         <p class="mt-2 text-left">Seleccionaste: {{ selectedOption }}</p>
       </div>
 
       <div class="mt-10 mb-30 flex flex-col">
-        <h2 class="w-auto inline-block self-center">Date Picker</h2>
+        <h2 class="text-xl w-auto inline-block self-center">Date Picker</h2>
         <DatePicker v-model="dateSelected" />
         <p class="mt-2 text-left">Fecha seleccionada:</p>
         <p class="mt-2 text-left">{{ dateSelected }}</p>
