@@ -26,8 +26,8 @@ import Footer from '../components/Footer.vue';
 /* 
 Estilos de la versión móvil 
 (Para testearlo le dais a inspeccionar y arriba a la izq de la ventana podeis poner el navegador en versión móvil, eligiendo las dimensiones de un Iphone o Samsung por ejemplo) 
-La idea es que los estilos de la web de escritorio estén usando tailwind dentro del código, y los estilos de la versión móvil esten aquí. Por lo que aseguraos por favor
-de que las pantallas sean responsivas.
+La idea es que los estilos de la web de escritorio estén usando Tailwind dentro del <template>, y los estilos de la versión móvil esten aquí en <style scoped>. Por lo que aseguraos por favor
+de que las pantallas sean lo más responsivas posible.
 */
 
 @media (max-width: 900px) {
