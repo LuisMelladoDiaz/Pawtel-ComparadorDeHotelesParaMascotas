@@ -6,7 +6,7 @@
         <i class="fas fa-bars text-white text-3xl"></i>
       </div>
       
-      <router-link to="/home">
+      <router-link to="/">
         <img src="../assets/pawtel-logo-white.png" alt="Logo" class="logo h-[50px]" />
       </router-link>
 
