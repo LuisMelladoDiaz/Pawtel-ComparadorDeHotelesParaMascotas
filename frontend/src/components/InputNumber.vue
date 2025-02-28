@@ -23,7 +23,7 @@ defineProps({
   id: { type: String, required: true },
   label: { type: String, required: true },
   placeholder: { type: String, default: '' },
-  modelValue: { type: Number, default: 1 },
+  modelValue: { type: Number, default: '' },
   icon: { type: String, default: '' } // Nuevo prop para el ícono
 });
 </script>
@@ -46,7 +46,7 @@ defineProps({
   background-color: white;
   max-width: 400px;
   width: 100%;
-  height: 40px;
+  height: 42px;
   padding-left: 8px;
 }
 

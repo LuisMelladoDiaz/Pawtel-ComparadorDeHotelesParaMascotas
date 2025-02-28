@@ -5,7 +5,7 @@
         <img src="../assets/pawtel-logo-white.png" alt="Logo" class="h-[50px]" />
       </router-link>
 
-      <SearchBar />
+      <SearchBar class="border border-white"/>
 
       <div class="nav-links flex gap-6 no-underline text-white font-bold text-base">
         <router-link to="/sobre_nosotros" class="hover:underline">Sobre Nosotros</router-link>

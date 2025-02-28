@@ -1,5 +1,5 @@
 <template>
-  <div class="search-bar flex items-center border border-terracota rounded-full">
+  <div class="search-bar flex items-center border rounded-full">
     <!-- Icono de lupa -->
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" class="search-icon">
       <circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -28,7 +28,6 @@ const searchQuery = ref('');
   display: flex;
   align-items: center;
   border-radius: 10px;
-  border: 1.5px solid #C36C6C;
   background-color: #fff;
 }
 

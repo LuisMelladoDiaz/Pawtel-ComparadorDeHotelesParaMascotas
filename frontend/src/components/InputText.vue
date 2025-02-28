@@ -52,7 +52,7 @@ defineProps({
   background-color: white;
   max-width: 400px;
   width: 100%;
-  height: 40px;
+  height: 42px;
   position: relative;
   padding-left: 8px;
 }
