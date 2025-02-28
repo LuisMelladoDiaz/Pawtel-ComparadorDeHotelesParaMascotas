@@ -6,12 +6,17 @@ const router = useRouter();
 const goToPets = () => {
   router.push('/pets');
 };
+
+const goToHotels = () => {
+  router.push('/hoteles');
+};
 </script>
 
 <template>
   <div class="container">
     <h2 class="title">HomeView. Hey!</h2>
     <button class="styled-button" @click="goToPets">Go to Pets</button>
+    <button class="styled-button hotels-btn" @click="goToHotels">Go to Hotels</button>
   </div>
 </template>
 
@@ -41,6 +46,7 @@ const goToPets = () => {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s;
+  margin: 10px;
 }
 
 .styled-button:hover {

@@ -1,77 +1,62 @@
-<script setup lang="ts">
-import { defineProps } from 'vue';
-
-const props = defineProps<{
-  hotel: {
-    id: number;
-    name: string;
-    location: string;
-    image: string;
-    rating: number;
-  };
-}>();
-
-const editHotel = () => {
-  console.log(`Editar hotel con ID: ${props.hotel.id}`);
-};
-
-const deleteHotel = () => {
-  console.log(`Eliminar hotel con ID: ${props.hotel.id}`);
-};
-</script>
-
 <template>
-  <div class="hotel-card">
-    <img :src="hotel.image" :alt="hotel.name" class="hotel-image" />
-    <div class="hotel-info">
-      <h3>{{ hotel.name }}</h3>
-      <p>{{ hotel.location }}</p>
-      <p>⭐ {{ hotel.rating }}</p>
-      <button @click="editHotel" class="edit-btn">Editar</button>
-      <button @click="deleteHotel" class="delete-btn">Eliminar</button>
+    <div class="hotel-card">
+      <img :src="hotel.imagen" alt="Imagen del hotel" class="hotel-img">
+      <div class="hotel-info">
+        <h3 class="hotel-name">{{ hotel.nombre }}</h3>
+        <p class="hotel-location">{{ hotel.ciudad }}</p>
+        <p class="hotel-price">Desde <strong>{{ hotel.precio }}€</strong> por noche</p>
+        <button class="btn" @click.stop="$emit('click')">Ver detalles</button>
+      </div>
     </div>
-  </div>
-</template>
-
-<style scoped>
-.hotel-card {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  background: #fff;
-}
-
-.hotel-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-right: 15px;
-}
-
-.hotel-info {
-  flex: 1;
-}
-
-.edit-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-right: 5px;
-}
-
-.delete-btn {
-  background-color: #ff4d4d;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-</style>
+  </template>
+  
+  <script setup>
+  defineProps({ hotel: Object });
+  </script>
+  
+  <style scoped>
+  .hotel-card {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  .hotel-card:hover {
+    transform: scale(1.03);
+  }
+  .hotel-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  .hotel-info {
+    padding: 10px;
+    flex: 1;
+  }
+  .hotel-name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .hotel-location {
+    color: #777;
+  }
+  .hotel-price {
+    margin: 10px 0;
+    font-size: 16px;
+  }
+  .btn {
+    background: #0071c2;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: #005999;
+  }
+  </style>
+  
