@@ -112,7 +112,7 @@ class RoomTypeModelTest(TestCase):
             price_per_night=90.00,
             pet_type="FISH"  
         )
-        with self.assertRaises(ValueError):
+        with self.assertRaises(ValidationError):
             room_type.full_clean()
 
     

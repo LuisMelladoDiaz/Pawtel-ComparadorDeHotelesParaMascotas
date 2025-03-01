@@ -1,4 +1,5 @@
 from django.core.exceptions import ValidationError
+from django.db import IntegrityError
 from django.test import TestCase
 from pawtel.appUsers.models import AppUser
 
@@ -43,14 +44,14 @@ class AppUserModelTest(TestCase):
             phone="+34987654321",
             password="securepass"
         )
-        user = AppUser.objects.create_user(
+
+        with self.assertRaises(IntegrityError):
+            user = AppUser.objects.create_user(
             username="user2",
             email="duplicate@example.com",
             phone="+34987654322",
             password="securepass12"
         )
-        with self.assertRaises(ValidationError):
-            user.full_clean()
 
     def test_create_appuser_blank_email(self):
         user = AppUser.objects.create_user(
