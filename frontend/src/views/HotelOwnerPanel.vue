@@ -20,6 +20,14 @@
         </thead>
         <tbody>
           <tr v-for="hotel in hotels" :key="hotel.id" class="border">
+            <!-- Al hacer la PR se deberá cambiar la línea de hotel.name por estas, para que al pulsar el nombre
+             de un hotel te lleve a la pantalla con sus detalles (para que el dueño pueda comprobar como quedan
+             los cambios que ha hecho, por ejemplo)
+             <td class="border px-4 py-2">
+              <router-link :to="{ name: 'HotelDetail', params: { id: hotel.id } }" class="text-blue-500 hover:underline">
+                {{ hotel.name }}
+              </router-link>
+            </td> -->
             <td class="border px-4 py-2">{{ hotel.name }}</td>
             <td class="border px-4 py-2">{{ hotel.address }}</td>
             <td class="border px-4 py-2">{{ hotel.city }}</td>
