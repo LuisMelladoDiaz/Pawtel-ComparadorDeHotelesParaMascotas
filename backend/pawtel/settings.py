@@ -34,6 +34,11 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "sample",
+    "pawtel.appUsers.apps.AppUsersConfig",
+    "pawtel.hotelOwners.apps.HotelOwnersConfig",
+    "pawtel.hotels.apps.HotelsConfig",
+    "pawtel.rooms.apps.RoomsConfig",
+    "pawtel.roomTypes.apps.RoomTypesConfig",
 ]
 
 MIDDLEWARE = [
