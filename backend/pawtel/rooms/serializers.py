@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from rooms.models import Room
-from roomTypes.models import RoomType 
+from pawtel.rooms.models import Room
 
 
 class RoomSerializer(serializers.ModelSerializer):

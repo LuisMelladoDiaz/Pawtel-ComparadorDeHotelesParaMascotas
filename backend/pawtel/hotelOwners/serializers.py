@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from hotelOwners.models import HotelOwner
-from appUsers.models import AppUser 
+from pawtel.appUsers.models import AppUser
+from pawtel.hotelOwners.models import HotelOwner
+
 
 class HotelOwnerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -12,7 +13,7 @@ class HotelOwnerSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "id": {"read_only": True},
             "password": {"write_only": True},
-            "username": {"allow_null": False, "required": True}
+            "username": {"allow_null": False, "required": True},
             "email": {"required": True, "max_length": 100, "allow_null": False},
             "phone": {"required": True, "max_length": 13, "validators": [AppUser.phone_regex], "allow_null": False},
         }

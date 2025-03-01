@@ -1,5 +1,6 @@
 from django.test import TestCase
-from hotelOwners.models import HotelOwner
+from pawtel.hotelOwners.models import HotelOwner
+
 
 class HotelOwnerModelTest(TestCase):
 

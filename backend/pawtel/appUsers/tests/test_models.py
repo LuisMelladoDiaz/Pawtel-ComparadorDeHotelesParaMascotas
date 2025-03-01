@@ -1,6 +1,7 @@
-from django.test import TestCase
-from appUsers.models import AppUser
 from django.core.exceptions import ValidationError
+from django.test import TestCase
+from pawtel.appUsers.models import AppUser
+
 
 class AppUserModelTest(TestCase):
 

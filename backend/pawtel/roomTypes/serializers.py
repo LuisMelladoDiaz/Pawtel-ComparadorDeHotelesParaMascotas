@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from roomTypes.models import RoomType
-from hotels.models import Hotel
+from pawtel.roomTypes.models import RoomType
+
 
 class RoomTypeSerializer(serializers.ModelSerializer):
     class Meta:

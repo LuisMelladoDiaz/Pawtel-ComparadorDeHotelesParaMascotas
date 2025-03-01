@@ -1,5 +1,6 @@
-from rest_framework import serializers 
-from appUsers.models import AppUser  
+from rest_framework import serializers
+from pawtel.appUsers.models import AppUser 
+
 
 class AppUserSerializer(serializers.ModelSerializer):  
     class Meta:

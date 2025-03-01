@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from hotels.models import Hotel
-from hotelOwners.models import HotelOwner
+from pawtel.hotels.models import Hotel
+
 
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:

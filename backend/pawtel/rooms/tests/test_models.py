@@ -1,9 +1,11 @@
 from django.test import TestCase
-from rooms.models import Room
-from roomTypes.models import RoomType
-from hotels.models import Hotel
-from hotelOwners.models import HotelOwner
 from django.core.exceptions import ValidationError
+
+from pawtel.hotelOwners.models import HotelOwner
+from pawtel.hotels.models import Hotel
+from pawtel.roomTypes.models import RoomType
+from pawtel.rooms.models import Room
+
 
 class RoomModelTest(TestCase):
 
@@ -46,7 +48,6 @@ class RoomModelTest(TestCase):
 
     
     def test_create_room_invalid_name(self):
-    
         room = Room(
             name="",  
             room_type=self.room_type

@@ -1,5 +1,6 @@
 from django.db import models
-from roomTypes.models import RoomType  
+from pawtel.roomTypes.models import RoomType
+
 
 class Room(models.Model):
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, null=False)

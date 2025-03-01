@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-from hotels.models import Hotel
+from pawtel.hotels.models import Hotel
+
 
 class PetType(models.TextChoices):
     DOG = "DOG", "Dog"

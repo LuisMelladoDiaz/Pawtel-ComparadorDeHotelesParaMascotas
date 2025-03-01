@@ -1,6 +1,6 @@
 from django.db import models
-from django.core.validators import MinLengthValidator
-from hotelOwners.models import HotelOwner
+from pawtel.hotelOwners.models import HotelOwner
+
 
 class Hotel(models.Model):
     hotel_owner = models.ForeignKey(HotelOwner, on_delete=models.CASCADE, null=False)
