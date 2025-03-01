@@ -28,6 +28,33 @@ python manage.py runserver
 
 El backend estará disponible en la dirección `http://localhost:8000`, pero solo se utilizará mediante una API REST.
 
+### Poner en marcha el pre-commit.yaml
+Esta sección es para indicar cómo se instala el hook pre-commit, que sirve como lintern. Sus funciones son las siguientes:
+
+- Quita los espacios en blanco
+- Formatea los HTML y JSON
+- Elimina los imports sin usar
+- Ordena automaticamente los imports de los ficheros
+- Añade homogeniedad a los ficheros del repo
+
+Lo hace automáticamente al hacer commit. No tienes que hacer nada una vez instalado. Los pasos son los siguientes:
+
+1. Instalar las dependencia del proyecto o actualizarlas.
+```bash
+pip install -r requirements.txt
+```
+
+2. Correr el siguiente comando en la raíz. (O dependiendo donde se aloje el fichero, raiz por defecto)
+```bash
+pre-commit install
+```
+Una vez hecho esto, al hacer commit debería lanzarse el hook.
+No obstante como paso opcional, puedes correrlo manualmente sin hacer commit asi (Opcional):
+```bash
+pre-commit run --all-files
+```
+
+
 
 ## Poner en marcha el frontend
 Es necesario tener instalado Node.js (se recomienda la versión 20 o cercana) para poder ejecutar el frontend.
@@ -46,4 +73,3 @@ npm run dev
 ```
 
 4. Abre tu navegador en la dirección `http://localhost:3000` para ver la aplicación.
-
