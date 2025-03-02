@@ -1,4 +1,4 @@
-from pawtel.roomTypes.models import RoomType
+from pawtel.room_types.models import RoomType
 from rest_framework import serializers
 
 

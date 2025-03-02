@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.test import TestCase
-from pawtel.appUsers.models import AppUser
+from pawtel.app_users.models import AppUser
 
 
 class AppUserModelTest(TestCase):
@@ -11,7 +11,7 @@ class AppUserModelTest(TestCase):
             username="testuser",
             email="testuser@example.com",
             phone="+34987654321",
-            password="pepitogrillo"
+            password="pepitogrillo",
         )
         self.assertEqual(user.username, "testuser")
         self.assertEqual(user.email, "testuser@example.com")
@@ -22,17 +22,17 @@ class AppUserModelTest(TestCase):
             username="invaliduser",
             email="invalid-email",
             phone="+34987654321",
-            password="pepitogrillo"
+            password="pepitogrillo",
         )
         with self.assertRaises(ValidationError):
-            user.full_clean()  
+            user.full_clean()
 
     def test_create_appuser_invalid_phone(self):
         user = AppUser.objects.create_user(
             username="pedro",
             email="validemail@example.com",
-            phone="123456789",  
-            password="securepassword"
+            phone="123456789",
+            password="securepassword",
         )
         with self.assertRaises(ValidationError):
             user.full_clean()
@@ -42,23 +42,20 @@ class AppUserModelTest(TestCase):
             username="user1",
             email="duplicate@example.com",
             phone="+34987654321",
-            password="securepass"
+            password="securepass",
         )
 
         with self.assertRaises(IntegrityError):
             user = AppUser.objects.create_user(
-            username="user2",
-            email="duplicate@example.com",
-            phone="+34987654322",
-            password="securepass12"
-        )
+                username="user2",
+                email="duplicate@example.com",
+                phone="+34987654322",
+                password="securepass12",
+            )
 
     def test_create_appuser_blank_email(self):
         user = AppUser.objects.create_user(
-            username="juan",
-            email="", 
-            phone="+34987654321",
-            password="juanytolola"
+            username="juan", email="", phone="+34987654321", password="juanytolola"
         )
         with self.assertRaises(ValidationError):
             user.full_clean()
@@ -67,8 +64,8 @@ class AppUserModelTest(TestCase):
         user = AppUser.objects.create_user(
             username="alberto",
             email="alberto@example.com",
-            phone="",  
-            password="illojuan"
+            phone="",
+            password="illojuan",
         )
         with self.assertRaises(ValidationError):
             user.full_clean()

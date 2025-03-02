@@ -1,5 +1,5 @@
 from django.test import TestCase
-from pawtel.hotelOwners.models import HotelOwner
+from pawtel.hotel_owners.models import HotelOwner
 
 
 class HotelOwnerModelTest(TestCase):
@@ -11,7 +11,7 @@ class HotelOwnerModelTest(TestCase):
             last_name="Does",
             email="owne@example.com",
             phone="+34987654324",
-            password="securepasswo"
+            password="securepasswo",
         )
 
         # Verification data stored correctly
@@ -20,9 +20,9 @@ class HotelOwnerModelTest(TestCase):
         self.assertEqual(owner.last_name, "Does")
         self.assertEqual(owner.email, "owne@example.com")
         self.assertEqual(owner.phone, "+34987654324")
-        self.assertTrue(owner.check_password("securepasswo"))  
+        self.assertTrue(owner.check_password("securepasswo"))
 
         # Verify that it has corrrect permissions
-        self.assertTrue(owner.is_active) 
-        self.assertFalse(owner.is_staff) 
-        self.assertFalse(owner.is_superuser)  
+        self.assertTrue(owner.is_active)
+        self.assertFalse(owner.is_staff)
+        self.assertFalse(owner.is_superuser)

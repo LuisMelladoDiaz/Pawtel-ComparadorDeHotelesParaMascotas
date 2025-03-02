@@ -1,6 +1,6 @@
-from django.test import TestCase
 from django.core.exceptions import ValidationError
-from pawtel.hotelOwners.models import HotelOwner
+from django.test import TestCase
+from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 
 
@@ -13,7 +13,7 @@ class HotelModelTest(TestCase):
             last_name="Doe",
             email="owner@example.com",
             phone="+34987654321",
-            password="securepassword123"
+            password="securepassword123",
         )
 
     def test_create_valid_hotel(self):
@@ -22,13 +22,13 @@ class HotelModelTest(TestCase):
             address="Calle Principal 123",
             city="Madrid",
             description="Un hotel de prueba con buenas vistas.",
-            hotel_owner=self.owner
+            hotel_owner=self.owner,
         )
         self.assertEqual(hotel.name, "Barceló")
         self.assertEqual(hotel.address, "Calle Principal 123")
         self.assertEqual(hotel.city, "Madrid")
         self.assertEqual(hotel.description, "Un hotel de prueba con buenas vistas.")
-        self.assertEqual(hotel.hotel_owner, self.owner)  
+        self.assertEqual(hotel.hotel_owner, self.owner)
 
     def test_create_hotel_without_owner(self):
         hotel = Hotel(
@@ -36,7 +36,7 @@ class HotelModelTest(TestCase):
             address="Calle Falsa 123",
             city="Madrid",
             description="Un hotel sin dueño",
-            hotel_owner=None  
+            hotel_owner=None,
         )
         with self.assertRaises(ValidationError):
             hotel.full_clean()
@@ -47,7 +47,7 @@ class HotelModelTest(TestCase):
             address="Calle Principal 123",
             city="Madrid",
             description="Un hotel de prueba.",
-            hotel_owner=self.owner
+            hotel_owner=self.owner,
         )
         with self.assertRaises(ValidationError):
             hotel.full_clean()
@@ -58,7 +58,7 @@ class HotelModelTest(TestCase):
             address="",
             city="Sevilla",
             description="Hotel muy chill",
-            hotel_owner=self.owner
+            hotel_owner=self.owner,
         )
         with self.assertRaises(ValidationError):
             hotel.full_clean()
@@ -69,7 +69,7 @@ class HotelModelTest(TestCase):
             address="Avenida del Mar 22",
             city="",
             description="Hotel de lujo",
-            hotel_owner=self.owner
+            hotel_owner=self.owner,
         )
         with self.assertRaises(ValidationError):
             hotel.full_clean()
@@ -80,7 +80,7 @@ class HotelModelTest(TestCase):
             address="Calle de la Luna 5",
             city="Valencia",
             description="",
-            hotel_owner=self.owner
+            hotel_owner=self.owner,
         )
         with self.assertRaises(ValidationError):
             hotel.full_clean()

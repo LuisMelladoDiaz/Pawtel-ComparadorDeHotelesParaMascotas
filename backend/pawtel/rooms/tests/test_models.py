@@ -1,9 +1,8 @@
-from django.test import TestCase
 from django.core.exceptions import ValidationError
-
-from pawtel.hotelOwners.models import HotelOwner
+from django.test import TestCase
+from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
-from pawtel.roomTypes.models import RoomType
+from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
 
 
@@ -16,7 +15,7 @@ class RoomModelTest(TestCase):
             last_name="Doe",
             email="owner@example.com",
             phone="+34987654321",
-            password="securepassword123"
+            password="securepassword123",
         )
 
         self.hotel = Hotel.objects.create(
@@ -24,7 +23,7 @@ class RoomModelTest(TestCase):
             address="Calle Principal 123",
             city="Madrid",
             description="Un hotel de prueba.",
-            hotel_owner=self.owner  
+            hotel_owner=self.owner,
         )
 
         self.room_type = RoomType.objects.create(
@@ -33,33 +32,22 @@ class RoomModelTest(TestCase):
             description="Una habitación lujosa con vista al mar.",
             capacity=2,
             price_per_night=150.00,
-            pet_type="DOG"
+            pet_type="DOG",
         )
 
     def test_create_valid_room(self):
-        room = Room.objects.create(
-            name="Habitación 101",
-            room_type=self.room_type
-        )
+        room = Room.objects.create(name="Habitación 101", room_type=self.room_type)
         self.assertEqual(room.name, "Habitación 101")
         self.assertEqual(room.room_type, self.room_type)
-        self.assertEqual(room.room_type.hotel, self.hotel)  
-        self.assertEqual(room.room_type.hotel.hotel_owner, self.owner)  
+        self.assertEqual(room.room_type.hotel, self.hotel)
+        self.assertEqual(room.room_type.hotel.hotel_owner, self.owner)
 
-    
     def test_create_room_invalid_name(self):
-        room = Room(
-            name="",  
-            room_type=self.room_type
-        )
+        room = Room(name="", room_type=self.room_type)
         with self.assertRaises(ValidationError):
             room.full_clean()
 
-    
     def test_create_room_invalid_room_type(self):
-        room = Room(
-            name="Habitación sin Tipo",
-            room_type=None  
-        )
+        room = Room(name="Habitación sin Tipo", room_type=None)
         with self.assertRaises(ValidationError):
             room.full_clean()

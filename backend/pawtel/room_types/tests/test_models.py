@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-from pawtel.hotelOwners.models import HotelOwner
+from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
-from pawtel.roomTypes.models import PetType, RoomType
+from pawtel.room_types.models import PetType, RoomType
 
 
 class RoomTypeModelTest(TestCase):
