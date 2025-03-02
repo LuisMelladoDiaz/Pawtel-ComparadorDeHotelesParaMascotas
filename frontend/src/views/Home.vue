@@ -7,8 +7,8 @@ import PetHotelCard from '../components/HotelCard.vue';
 
 import DatePicker from '../components/DatePicker.vue';
 import DropdownPicker from '../components/DropdownPicker.vue';
-import MapGoogle from '../components/MapGoogle.vue';
 import MapOpen from '../components/MapOpen.vue';
+import Filters from '../components/Filters.vue';
 
 // Estado para la opción seleccionada
 const selectedOption = ref(null);
@@ -33,18 +33,12 @@ const optionsList = [
                 <!-- Barra lateral de filtros -->
                 <div class="flex flex-col gap-6 col-span-1">
                     <div class="card bg-white p-6 rounded-lg shadow-lg">
-                        <MapGoogle />
-                    </div>
-                    <div class="card bg-white p-6 rounded-lg shadow-lg flex-1 h-full">
-                        <h2 class="text-xl font-semibold mb-4">Aqui puede ir un primer filtro</h2>
-                        <DropdownPicker v-model="selectedOption" :options="optionsList" />
-                        <p class="mt-2 text-left">Seleccionaste: {{ selectedOption }}</p>
                         <MapOpen />
                     </div>
-                    <div class="card bg-white p-6 rounded-lg shadow-lg">
-                        <h2 class="text-xl font-semibold mb-4">Aqui puede ir un segundo filtro</h2>
-                        <DatePicker v-model="dateSelected" />
-                        <p class="mt-2 text-left">Fecha seleccionada: {{ dateSelected }}</p>
+                    <div class="card bg-white p-6 rounded-lg shadow-lg flex-1 h-full">
+                        <h2 class="text-xl font-semibold mb-4">Filtrar por: </h2>
+                        <hr class="border-t-2 border-gray-300 mb-4">
+                        <Filters @filter-change="applyFilters" />
                     </div>
                 </div>
 
