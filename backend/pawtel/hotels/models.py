@@ -3,6 +3,8 @@ from pawtel.hotelOwners.models import HotelOwner
 
 
 class Hotel(models.Model):
+
+    is_archived = models.BooleanField(default=False, null=False)
     hotel_owner = models.ForeignKey(HotelOwner, on_delete=models.CASCADE, null=False)
     name = models.CharField(max_length=100, unique=True, blank=False, null=False)
     address = models.CharField(max_length=100, blank=False, null=False)
