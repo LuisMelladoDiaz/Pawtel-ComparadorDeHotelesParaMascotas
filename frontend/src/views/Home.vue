@@ -9,6 +9,7 @@ import DatePicker from '../components/DatePicker.vue';
 import DropdownPicker from '../components/DropdownPicker.vue';
 import MapOpen from '../components/MapOpen.vue';
 import Filters from '../components/Filters.vue';
+import Pagination from '../components/Pagination.vue';
 
 // Estado para la opción seleccionada
 const selectedOption = ref(null);
@@ -57,6 +58,8 @@ const optionsList = [
                         <PetHotelCard image="/src/assets/hotel.jpg" name="Hotel Paws" location="Barcelona" :details="['Pet grooming', 'Transporte gratuito', 'Comida gourmet']" :rating= 6.8 price="25€" />
                         <PetHotelCard image="/src/assets/hotel.jpg" name="Hotel Mascotón" location="Madrid" :details="['Entrenamiento incluido', 'Zona de juegos', 'Cuidado personalizado']" :rating=7.1 price="40€"/>
                     </div>
+                    <!-- Paginación -->
+                    <Pagination :currentPage.sync="currentPage" :totalPages="totalPages" />
                 </div>
             </div>
         </section>
