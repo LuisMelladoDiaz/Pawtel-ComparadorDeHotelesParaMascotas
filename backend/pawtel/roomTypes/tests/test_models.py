@@ -1,6 +1,5 @@
-from django.test import TestCase
 from django.core.exceptions import ValidationError
-
+from django.test import TestCase
 from pawtel.hotelOwners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.roomTypes.models import PetType, RoomType
@@ -15,7 +14,7 @@ class RoomTypeModelTest(TestCase):
             last_name="Doe",
             email="owner@example.com",
             phone="+34987654321",
-            password="securepassword123"
+            password="securepassword123",
         )
 
         self.hotel = Hotel.objects.create(
@@ -23,7 +22,7 @@ class RoomTypeModelTest(TestCase):
             address="Calle Principal 123",
             city="Madrid",
             description="Un hotel de prueba.",
-            hotel_owner=self.owner  
+            hotel_owner=self.owner,
         )
 
     def test_create_valid_roomtype(self):
@@ -33,10 +32,12 @@ class RoomTypeModelTest(TestCase):
             description="Una habitación lujosa con vista al mar.",
             capacity=2,
             price_per_night=150.00,
-            pet_type=PetType.DOG
+            pet_type=PetType.DOG,
         )
         self.assertEqual(room_type.name, "Suite Deluxe")
-        self.assertEqual(room_type.description, "Una habitación lujosa con vista al mar.")
+        self.assertEqual(
+            room_type.description, "Una habitación lujosa con vista al mar."
+        )
         self.assertEqual(room_type.capacity, 2)
         self.assertEqual(room_type.price_per_night, 150.00)
         self.assertEqual(room_type.pet_type, PetType.DOG)
@@ -45,12 +46,12 @@ class RoomTypeModelTest(TestCase):
 
     def test_create_roomtype_without_hotel(self):
         room_type = RoomType(
-            hotel=None, 
+            hotel=None,
             name="Suite Lujo",
             description="Habitación grande",
             capacity=2,
             price_per_night=250.00,
-            pet_type=PetType.DOG
+            pet_type=PetType.DOG,
         )
         with self.assertRaises(ValidationError):
             room_type.full_clean()
@@ -62,7 +63,7 @@ class RoomTypeModelTest(TestCase):
             description="Habitación sin nombre.",
             capacity=2,
             price_per_night=100.00,
-            pet_type=PetType.CAT
+            pet_type=PetType.CAT,
         )
         with self.assertRaises(ValidationError):
             room_type.full_clean()
@@ -74,7 +75,7 @@ class RoomTypeModelTest(TestCase):
             description="",
             capacity=1,
             price_per_night=50.00,
-            pet_type=PetType.ANY
+            pet_type=PetType.DOG,
         )
         with self.assertRaises(ValidationError):
             room_type.full_clean()
@@ -86,7 +87,7 @@ class RoomTypeModelTest(TestCase):
             description="Habitación espaciosa.",
             capacity=0,
             price_per_night=120.00,
-            pet_type=PetType.DOG
+            pet_type=PetType.DOG,
         )
         with self.assertRaises(ValidationError):
             room_type.full_clean()
@@ -97,8 +98,8 @@ class RoomTypeModelTest(TestCase):
             name="Habitación VIP",
             description="Habitación con jacuzzi.",
             capacity=2,
-            price_per_night=-10.00, 
-            pet_type=PetType.CAT
+            price_per_night=-10.00,
+            pet_type=PetType.CAT,
         )
         with self.assertRaises(ValidationError):
             room_type.full_clean()
@@ -110,9 +111,7 @@ class RoomTypeModelTest(TestCase):
             description="No se permiten mascotas.",
             capacity=2,
             price_per_night=90.00,
-            pet_type="FISH"  
+            pet_type="FISH",
         )
         with self.assertRaises(ValidationError):
             room_type.full_clean()
-
-    
