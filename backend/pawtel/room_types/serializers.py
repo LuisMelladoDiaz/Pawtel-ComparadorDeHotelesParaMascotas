@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from pawtel.base_serializer import BaseSerializer
 from pawtel.room_types.models import RoomType
 
@@ -35,7 +37,7 @@ class RoomTypeSerializer(BaseSerializer):
             "capacity": {"min_value": 1, "allow_null": False},
             "price_per_night": {
                 "required": True,
-                "min_value": 1.00,
+                "min_value": Decimal("1.00"),
                 "max_digits": 6,
                 "decimal_places": 2,
                 "allow_null": False,
