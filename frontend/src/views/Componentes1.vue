@@ -57,9 +57,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import Navbar from '../components/Navbar.vue';
-import NavbarTerracota from '../components/NavbarTerracota.vue';
-import FilterNavbar from '../components/FilterNavbar.vue';
+import Navbar from '../components/NavBar.vue';
+import NavbarTerracota from '../components/NavBarTerracota.vue';
+import FilterNavbar from '../components/FilterNavBar.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import Modal from '../components/Modal.vue';
