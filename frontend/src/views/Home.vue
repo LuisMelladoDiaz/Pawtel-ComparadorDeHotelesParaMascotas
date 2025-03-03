@@ -1,89 +1,96 @@
 <script setup>
-import { ref } from 'vue';
 import Navbar from '../components/Navbar.vue';
-import FilterNavbar from '../components/FilterNavbar.vue';
 import Footer from '../components/Footer.vue';
-import PetHotelCard from '../components/HotelCard.vue';
-
-import DatePicker from '../components/DatePicker.vue';
-import DropdownPicker from '../components/DropdownPicker.vue';
-import MapOpen from '../components/MapOpen.vue';
-import Filters from '../components/Filters.vue';
-import Pagination from '../components/Pagination.vue';
-
-// Estado para la opción seleccionada
-const selectedOption = ref(null);
-
-// Lista de opciones para ordenar
-const optionsList = [
-  { label: 'Precio: menor a mayor', value: 'price_asc' },
-  { label: 'Precio: mayor a menor', value: 'price_desc' },
-  { label: 'Calificación: mayor a menor', value: 'rating_desc' },
-  { label: 'Calificación: menor a mayor', value: 'rating_asc' },
-];
+import Carrusel from '../components/Carrusel.vue';
 </script>
 
 <template>
-    <div>
-        <Navbar />
-        <FilterNavbar />
+  <div>
+    <Navbar />
+    <section class="hero-section mx-auto py-12">
+      <section class="container mx-auto flex flex-col lg:flex-row items-center w-full h-full">
+        <div class="lg:w-1/2 text-left p-6">
+          <h1 class="text-5xl font-bold mb-4 text-green-900">Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu <span class="text-yellow-500 italic">mascota.</span></h1>
+          <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor!. Regístrate ahora y obtén 20% de descuento en tu primera reserva</p>
+          <button class="bg-yellow-500 text-white px-6 py-3 rounded-lg font-bold shadow-md">REGÍSTRARME</button>
+        </div>
+        <div class="lg:w-1/2 h-full">
+          <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full h-full object-cover">
+        </div>
+      </section>
+    </section>
+    
+    <section class="bg-green-900 text-white py-12">
+      <div class="container mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-8">¿Qué te ofrece PAWTEL?</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 px-6">
+          <div class="flex flex-col items-center text-center">
+            <img src="../assets/paw.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
+            <p class="mt-4 font-semibold">Ubicación y precios comparados</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="../assets/pawpaw.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
+            <p class="mt-4 font-semibold">Reseñas para saber sobre alojamientos</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="../assets/petprint.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
+            <p class="mt-4 font-semibold">Alertas sobre promociones</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="../assets/paw.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
+            <p class="mt-4 font-semibold">Ubicación y precios comparados</p>
+          </div>
+          <div class="flex flex-col items-center text-center">
+            <img src="../assets/hotel.jpg" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
+            <p class="mt-4 font-semibold">Ubicación y precios comparados</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section class="cards py-16 bg-gray-100">
-            <div class="max-w-7xl mx-auto px-5 grid grid-cols-3 gap-8">
+    <!-- Listado de Productos / Servicios -->
+    <section class="container mx-auto py-12">
+      <h2 class="text-2xl font-bold mb-6 text-center">Guiate de las reservas</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white shadow-lg p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">Alojamiento</h3>
+          <p class="text-gray-600">Encuentra el mejor lugar para tu mascota con cuidadores certificados.</p>
+        </div>
+        <div class="bg-white shadow-lg p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">Paseos</h3>
+          <p class="text-gray-600">Paseadores expertos para que tu mascota esté siempre activa y feliz.</p>
+        </div>
+        <div class="bg-white shadow-lg p-6 rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">Cuidado a Domicilio</h3>
+          <p class="text-gray-600">Atención personalizada en la comodidad de tu hogar.</p>
+        </div>
+      </div>
+    </section>
 
-                <!-- Barra lateral de filtros -->
-                <div class="flex flex-col gap-6 col-span-1">
-                    <div class="card bg-white p-6 rounded-lg shadow-lg">
-                        <MapOpen />
-                    </div>
-                    <div class="card bg-white p-6 rounded-lg shadow-lg flex-1 h-full">
-                        <h2 class="text-xl font-semibold mb-4">Filtrar por: </h2>
-                        <hr class="border-t-2 border-gray-300 mb-4">
-                        <Filters @filter-change="applyFilters" />
-                    </div>
-                </div>
-
-                <!-- Segunda columna -->
-                <div class="card bg-white p-6 rounded-lg shadow-lg flex flex-col gap-2 col-span-2">
-                    <!-- botón de ordenar -->
-                    <div class="flex justify-end">
-                        <div class="relative">
-                            <DropdownPicker v-model="selectedOption" :options="optionsList" />
-                        </div>
-                    </div>
-                    
-                    <!-- Lista de hoteles -->
-                    <div class="p-6 flex flex-col items-center">
-                        <PetHotelCard image="/src/assets/hotel.jpg" name="Residencia Feliz Pet" location="Sevilla" :details="['Servicio 24h', 'Acceso a parque', 'Habitaciones amplias']" :rating=8.1 price="170€"/>
-                        <PetHotelCard image="/src/assets/hotel.jpg" name="Hotel Paws" location="Barcelona" :details="['Pet grooming', 'Transporte gratuito', 'Comida gourmet']" :rating= 6.8 price="25€" />
-                        <PetHotelCard image="/src/assets/hotel.jpg" name="Hotel Mascotón" location="Madrid" :details="['Entrenamiento incluido', 'Zona de juegos', 'Cuidado personalizado']" :rating=7.1 price="40€"/>
-                    </div>
-                    <!-- Paginación -->
-                    <Pagination :currentPage.sync="currentPage" :totalPages="totalPages" />
-                </div>
-            </div>
-        </section>
+   <!-- Sección de Testimonios -->
+   <Carrusel />
+   
+    <!-- Llamado a la Acción -->
+    <section class="py-12 text-center">
+      <h2 class="text-2xl font-bold mb-4">¿Listo para empezar?</h2>
+      <button class="bg-green-500 text-white px-6 py-3 rounded-lg">Regístrate ahora</button>
+    </section>
 
     <Footer />
   </div>
 </template>
 
+
+<script>
+export default {
+  name: "FoodForJoeSection",
+};
+</script>
+
 <style scoped>
-@media (max-width: 900px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .cards {
-    padding-top: 8rem;
-  }
-
-  .card {
-    padding: 1.5rem;
-  }
+.hero-section {
+  background: #f7f7f7;
 }
 </style>
+
+
