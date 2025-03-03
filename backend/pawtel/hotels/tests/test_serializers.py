@@ -7,7 +7,7 @@ from pawtel.hotels.serializers import HotelSerializer
 class HotelSerializerTest(TestCase):
 
     def setUp(self):
-        # Creamos un HotelOwner para usar en los tests (campo obligatorio en Hotel)
+        # We need to create an instance of the hotel owner because it is an attribute of a hotel.
         self.hotel_owner = HotelOwner.objects.create_user(
             username="owner1",
             first_name="Owner",
@@ -16,6 +16,7 @@ class HotelSerializerTest(TestCase):
             phone="+34123456789",
             password="securepassword123",
         )
+        # Create a valid Hotel instance
         self.valid_data = {
             "name": "Hotel Paradise",
             "address": "123 Sunshine Street",
@@ -23,9 +24,9 @@ class HotelSerializerTest(TestCase):
             "description": "Un hotel lujoso en Miami.",
             "hotel_owner": self.hotel_owner.id,
         }
-        # Datos inválidos: por ejemplo, nombre vacío o exceso de longitud
+        # Create an invalid data for testing
         self.invalid_data = self.valid_data.copy()
-        self.invalid_data["name"] = ""  # Nombre vacío
+        self.invalid_data["name"] = ""
 
     # POST tests -------------------------------------------------------------
 
@@ -36,7 +37,7 @@ class HotelSerializerTest(TestCase):
         self.assertEqual(serializer.validated_data["name"], self.valid_data["name"])
 
     def test_serializer_missing_required_field_post(self):
-        # Eliminamos el campo 'description' (obligatorio en POST)
+        # 'description' field deleted
         invalid_data = self.valid_data.copy()
         invalid_data.pop("description")
         context = {"request": type("Request", (), {"method": "POST"})}
@@ -45,7 +46,6 @@ class HotelSerializerTest(TestCase):
         self.assertIn("description", serializer.errors)
 
     def test_invalid_name_length_post(self):
-        # Exceder el máximo de 100 caracteres en 'name'
         invalid_data = self.valid_data.copy()
         invalid_data["name"] = "a" * 101
         context = {"request": type("Request", (), {"method": "POST"})}
@@ -54,7 +54,7 @@ class HotelSerializerTest(TestCase):
         self.assertIn("name", serializer.errors)
 
     def test_missing_hotel_owner_post(self):
-        # No se proporciona hotel_owner (campo requerido)
+        # 'HotelOwner' field deleted
         invalid_data = self.valid_data.copy()
         invalid_data.pop("hotel_owner")
         context = {"request": type("Request", (), {"method": "POST"})}
@@ -63,7 +63,6 @@ class HotelSerializerTest(TestCase):
         self.assertIn("hotel_owner", serializer.errors)
 
     def test_ignore_additional_fields_for_post(self):
-        # Se añaden campos adicionales que deben ser ignorados
         data = self.valid_data.copy()
         data["is_archived"] = True
         data["extra_field"] = "valor extra"
@@ -81,10 +80,9 @@ class HotelSerializerTest(TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
 
     def test_ignore_additional_fields_for_put(self):
-        # En PUT solo deben considerarse los campos editables: name, address, city y description.
         data = self.valid_data.copy()
         data["is_archived"] = True
-        data["hotel_owner"] = None  # hotel_owner no es editable
+        data["hotel_owner"] = None
         data["extra_field"] = "valor extra"
         context = {"request": type("Request", (), {"method": "PUT"})}
         serializer = HotelSerializer(data=data, context=context)
@@ -101,7 +99,6 @@ class HotelSerializerTest(TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
 
     def test_ignore_additional_fields_for_patch(self):
-        # En PATCH se permite modificar los campos editables
         data = {
             "name": "Hotel Paradise Updated",
             "extra_field": "valor extra",
@@ -117,7 +114,6 @@ class HotelSerializerTest(TestCase):
     # GET tests --------------------------------------------------------------
 
     def test_serializer_get_method(self):
-        # Se crea una instancia de Hotel y se serializa en GET
         hotel = Hotel.objects.create(
             name=self.valid_data["name"],
             address=self.valid_data["address"],
@@ -131,11 +127,11 @@ class HotelSerializerTest(TestCase):
         self.assertEqual(serializer.data["address"], hotel.address)
         self.assertEqual(serializer.data["city"], hotel.city)
         self.assertEqual(serializer.data["description"], hotel.description)
-        # Los campos read_only deben estar presentes en la respuesta
+        # read_only fields must be in the response
         self.assertIn("is_archived", serializer.data)
         self.assertIn("id", serializer.data)
 
-    # Creación y guardado de instancias ---------------------------------------
+    # Other tests ---------------------------------------
 
     def test_create_hotel_instance_from_json(self):
         context = {"request": type("Request", (), {"method": "POST"})}

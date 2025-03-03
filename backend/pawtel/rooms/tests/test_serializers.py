@@ -9,7 +9,7 @@ from pawtel.rooms.serializers import RoomSerializer
 class RoomSerializerTest(TestCase):
 
     def setUp(self):
-        # Creamos un HotelOwner para asignarlo al Hotel
+        # We need to create hotel_owner and hotel instances because they are attributes of a room_type.
         self.hotel_owner = HotelOwner.objects.create_user(
             username="hotelowner1",
             first_name="Owner",
@@ -18,7 +18,6 @@ class RoomSerializerTest(TestCase):
             phone="+34111222333",
             password="securepassword123",
         )
-        # Creamos un Hotel para asignarlo al RoomType
         self.hotel = Hotel.objects.create(
             name="Hotel Test",
             address="123 Test Street",
@@ -26,7 +25,7 @@ class RoomSerializerTest(TestCase):
             description="Hotel de prueba",
             hotel_owner=self.hotel_owner,
         )
-        # Creamos un RoomType para asignarlo a Room
+        # We need to create an instance of the room type because it is an attribute of a room.
         self.room_type = RoomType.objects.create(
             name="Suite",
             description="Habitación de lujo",
@@ -35,7 +34,7 @@ class RoomSerializerTest(TestCase):
             pet_type=PetType.DOG,
             hotel=self.hotel,
         )
-        # Datos válidos para Room
+        # Valid data for room
         self.valid_data = {
             "name": "Room A",
             "room_type": self.room_type.id,
@@ -50,7 +49,7 @@ class RoomSerializerTest(TestCase):
         self.assertEqual(serializer.validated_data["name"], self.valid_data["name"])
 
     def test_serializer_missing_required_field_post(self):
-        # Caso: Falta el campo "name"
+        # 'name' field deleted
         invalid_data = self.valid_data.copy()
         invalid_data.pop("name")
         context = {"request": type("Request", (), {"method": "POST"})}
@@ -58,7 +57,7 @@ class RoomSerializerTest(TestCase):
         self.assertFalse(serializer.is_valid())
         self.assertIn("name", serializer.errors)
 
-        # Caso: Falta el campo "room_type"
+        # 'room_type' field deleted
         invalid_data = self.valid_data.copy()
         invalid_data.pop("room_type")
         serializer = RoomSerializer(data=invalid_data, context=context)
@@ -66,7 +65,6 @@ class RoomSerializerTest(TestCase):
         self.assertIn("room_type", serializer.errors)
 
     def test_invalid_name_length_post(self):
-        # Exceder la longitud máxima de 50 caracteres en "name"
         invalid_data = self.valid_data.copy()
         invalid_data["name"] = "a" * 51
         context = {"request": type("Request", (), {"method": "POST"})}
@@ -75,7 +73,6 @@ class RoomSerializerTest(TestCase):
         self.assertIn("name", serializer.errors)
 
     def test_ignore_additional_fields_for_post(self):
-        # Se agregan campos adicionales que deben ser ignorados
         data = self.valid_data.copy()
         data["is_archived"] = True
         data["extra_field"] = "valor extra"
@@ -93,10 +90,9 @@ class RoomSerializerTest(TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
 
     def test_ignore_additional_fields_for_put(self):
-        # En PUT solo se deben considerar los campos editables (en este caso, solo "name")
         data = self.valid_data.copy()
         data["is_archived"] = True
-        data["room_type"] = None  # No es editable en PUT
+        data["room_type"] = None  # Not editable in PUT
         data["extra_field"] = "valor extra"
         context = {"request": type("Request", (), {"method": "PUT"})}
         serializer = RoomSerializer(data=data, context=context)
@@ -113,11 +109,10 @@ class RoomSerializerTest(TestCase):
         self.assertTrue(serializer.is_valid(), serializer.errors)
 
     def test_ignore_additional_fields_for_patch(self):
-        # En PATCH solo se deben procesar los campos editables
         data = {
             "name": "Room A Updated",
             "is_archived": True,
-            "room_type": self.room_type.id,  # No es editable en PATCH
+            "room_type": self.room_type.id,  # Not editable in PATCH
             "extra_field": "valor extra",
         }
         context = {"request": type("Request", (), {"method": "PATCH"})}
@@ -131,7 +126,6 @@ class RoomSerializerTest(TestCase):
     # GET tests --------------------------------------------------------------
 
     def test_serializer_get_method(self):
-        # Se crea una instancia de Room y se serializa en GET
         room = Room.objects.create(
             name=self.valid_data["name"],
             room_type=self.room_type,
@@ -143,13 +137,13 @@ class RoomSerializerTest(TestCase):
         self.assertIn("id", serializer.data)
         self.assertIn("is_archived", serializer.data)
 
-    # Creación y guardado de instancias ---------------------------------------
+    # Other tests ---------------------------------------
 
     def test_create_room_instance_from_json(self):
         context = {"request": type("Request", (), {"method": "POST"})}
         serializer = RoomSerializer(data=self.valid_data, context=context)
         self.assertTrue(serializer.is_valid(), serializer.errors)
-        # Se crea pero no se guarda la instancia en la BD
+        # The instance is created but not saved in the database
         room = serializer.create(serializer.validated_data)
         self.assertEqual(room.name, self.valid_data["name"])
         self.assertEqual(room.room_type.id, self.valid_data["room_type"])
@@ -158,7 +152,7 @@ class RoomSerializerTest(TestCase):
         context = {"request": type("Request", (), {"method": "POST"})}
         serializer = RoomSerializer(data=self.valid_data, context=context)
         self.assertTrue(serializer.is_valid(), serializer.errors)
-        # Se crea y guarda la instancia en la BD
+        # The instance is created and saved in the database
         room = serializer.save()
         self.assertEqual(room.name, self.valid_data["name"])
         self.assertEqual(room.room_type.id, self.valid_data["room_type"])
