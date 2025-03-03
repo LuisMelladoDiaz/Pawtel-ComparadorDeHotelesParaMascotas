@@ -184,13 +184,27 @@ class HotelOwnerSerializerTest(TestCase):
 
     # Other tests ------------------------------------------------------------
 
-    def test_create_hotel_owner_instance_from_json(self):
+    def test_create_hotel_owner_instance_from_json_2(self):
         context = {"request": type("Request", (), {"method": "POST"})}
         serializer = HotelOwnerSerializer(data=self.valid_data, context=context)
 
         self.assertTrue(serializer.is_valid())
 
-        # Create the instance
+        # Create but not save the instance
+        # Must call .is_valid() before in order to have access to .validated_data
+        owner = serializer.create(serializer.validated_data)
+
+        self.assertEqual(owner.username, self.valid_data["username"])
+        self.assertEqual(owner.email, self.valid_data["email"])
+        self.assertEqual(owner.phone, self.valid_data["phone"])
+
+    def test_save_hotel_owner_instance_from_json(self):
+        context = {"request": type("Request", (), {"method": "POST"})}
+        serializer = HotelOwnerSerializer(data=self.valid_data, context=context)
+
+        self.assertTrue(serializer.is_valid())
+
+        # Create and save in DB the instance (this is a test anyways)
         owner = serializer.save()
 
         self.assertEqual(owner.username, self.valid_data["username"])
