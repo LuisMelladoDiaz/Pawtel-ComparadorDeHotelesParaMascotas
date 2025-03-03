@@ -7,9 +7,9 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 type Hotel = {
     id: number;
     name: string;
+    address: string;
+    city: string;
     description: string;
-    location: string;
-    rating: number;
   };
 
   const fetchAllHotels = async () => {
@@ -133,45 +133,6 @@ export const useDeleteHotel = () => {
     onSuccess: () => {
       console.log('Hotel eliminado con éxito');
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
-    },
-  });
-};
-
-
-export const fetchHotelsByOwner = async (ownerId: number) => {
-  const url = `${API_BASE_URL}/hotels/of-hotel-owner/${ownerId}/`;
-  const response = await axios.get(url);
-  return response.data;
-};
-
-
-export const useGetHotelsByOwner = (ownerId: number) => {
-  return useQuery({
-    queryKey: ['hotelsByOwner', ownerId],
-    queryFn: () => fetchHotelsByOwner(ownerId),
-    enabled: !!ownerId,
-    staleTime: 1000 * 60,
-    refetchOnWindowFocus: false,
-  });
-};
-
-
-export const deleteHotelsByOwner = async (ownerId: number) => {
-  const url = `${API_BASE_URL}/hotels/of-hotel-owner/${ownerId}/`;
-  const response = await axios.delete(url);
-  return response.data;
-};
-
-export const useDeleteHotelsByOwner = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: deleteHotelsByOwner,
-
-    onSuccess: () => {
-      console.log('Todos los hoteles del propietario eliminados');
-      queryClient.invalidateQueries({ queryKey: ['hotels'] });
-      queryClient.invalidateQueries({ queryKey: ['hotelsByOwner'] });
     },
   });
 };
