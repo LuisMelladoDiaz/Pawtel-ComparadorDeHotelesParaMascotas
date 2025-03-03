@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import Navbar from '../components/Navbar.vue';
-import FilterNavbar from '../components/FilterNavbar.vue';
+import Navbar from '../components/NavBar.vue';
+import FilterNavbar from '../components/FilterNavBar.vue';
 import Footer from '../components/Footer.vue';
 </script>
 
