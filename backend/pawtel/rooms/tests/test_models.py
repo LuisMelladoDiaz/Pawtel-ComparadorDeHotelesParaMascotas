@@ -43,11 +43,39 @@ class RoomModelTest(TestCase):
         self.assertEqual(room.room_type.hotel.hotel_owner, self.owner)
 
     def test_create_room_invalid_name(self):
-        room = Room(name="", room_type=self.room_type)
+        invalid_names = ["", None, "A" * 51]
+
+        for name in invalid_names:
+            with self.subTest(name=name):
+                room = Room(name=name, room_type=self.room_type)
+                with self.assertRaises(ValidationError):
+                    room.full_clean()
+
+    def test_create_room_without_room_type(self):
+        room = Room(name="Habitación sin Tipo", room_type=None)
         with self.assertRaises(ValidationError):
             room.full_clean()
 
     def test_create_room_invalid_room_type(self):
-        room = Room(name="Habitación sin Tipo", room_type=None)
-        with self.assertRaises(ValidationError):
-            room.full_clean()
+        invalid_room_types = ["", 123, {}, []]
+
+        for room_type in invalid_room_types:
+            with self.subTest(room_type=room_type):
+                with self.assertRaises(ValueError):
+                    Room(name="Habitación 102", room_type=room_type)
+
+    def test_create_multiple_rooms_with_different_room_types(self):
+        another_room_type = RoomType.objects.create(
+            hotel=self.hotel,
+            name="Suite Presidencial",
+            description="La mejor habitación del hotel.",
+            capacity=3,
+            price_per_night=300.00,
+            pet_type="MIXED",
+        )
+
+        room1 = Room.objects.create(name="Habitación 101", room_type=self.room_type)
+        room2 = Room.objects.create(name="Habitación 102", room_type=another_room_type)
+
+        self.assertNotEqual(room1.room_type, room2.room_type)
+        self.assertEqual(room1.room_type.hotel, room2.room_type.hotel)

@@ -45,73 +45,82 @@ class RoomTypeModelTest(TestCase):
         self.assertEqual(room_type.hotel.hotel_owner, self.owner)
 
     def test_create_roomtype_without_hotel(self):
-        room_type = RoomType(
-            hotel=None,
-            name="Suite Lujo",
-            description="Habitación grande",
-            capacity=2,
-            price_per_night=250.00,
-            pet_type=PetType.DOG,
-        )
         with self.assertRaises(ValidationError):
-            room_type.full_clean()
+            RoomType(
+                hotel=None,
+                name="Suite Deluxe",
+                description="Una habitación lujosa con vista al mar.",
+                capacity=2,
+                price_per_night=150.00,
+                pet_type=PetType.DOG,
+            ).full_clean()
 
     def test_create_roomtype_invalid_name(self):
-        room_type = RoomType(
-            hotel=self.hotel,
-            name="",
-            description="Habitación sin nombre.",
-            capacity=2,
-            price_per_night=100.00,
-            pet_type=PetType.CAT,
-        )
-        with self.assertRaises(ValidationError):
-            room_type.full_clean()
+        invalid_names = ["", None, "A" * 51]
+        for name in invalid_names:
+            with self.subTest(name=name):
+                with self.assertRaises(ValidationError):
+                    RoomType(
+                        hotel=self.hotel,
+                        name=name,
+                        description="Una habitación lujosa con vista al mar.",
+                        capacity=2,
+                        price_per_night=150.00,
+                        pet_type=PetType.DOG,
+                    ).full_clean()
 
     def test_create_roomtype_invalid_description(self):
-        room_type = RoomType(
-            hotel=self.hotel,
-            name="Habitación Económica",
-            description="",
-            capacity=1,
-            price_per_night=50.00,
-            pet_type=PetType.DOG,
-        )
-        with self.assertRaises(ValidationError):
-            room_type.full_clean()
+        invalid_descriptions = ["", None, "A" * 301]
+        for description in invalid_descriptions:
+            with self.subTest(description=description):
+                with self.assertRaises(ValidationError):
+                    RoomType(
+                        hotel=self.hotel,
+                        name="Suite Deluxe",
+                        description=description,
+                        capacity=2,
+                        price_per_night=150.00,
+                        pet_type=PetType.DOG,
+                    ).full_clean()
 
     def test_create_roomtype_invalid_capacity(self):
-        room_type = RoomType(
-            hotel=self.hotel,
-            name="Habitación Triple",
-            description="Habitación espaciosa.",
-            capacity=0,
-            price_per_night=120.00,
-            pet_type=PetType.DOG,
-        )
-        with self.assertRaises(ValidationError):
-            room_type.full_clean()
+        invalid_capacities = [0, -1, None]
+        for capacity in invalid_capacities:
+            with self.subTest(capacity=capacity):
+                with self.assertRaises(ValidationError):
+                    RoomType(
+                        hotel=self.hotel,
+                        name="Suite Deluxe",
+                        description="Una habitación lujosa con vista al mar.",
+                        capacity=capacity,
+                        price_per_night=150.00,
+                        pet_type=PetType.DOG,
+                    ).full_clean()
 
     def test_create_roomtype_invalid_price(self):
-        room_type = RoomType(
-            hotel=self.hotel,
-            name="Habitación VIP",
-            description="Habitación con jacuzzi.",
-            capacity=2,
-            price_per_night=-10.00,
-            pet_type=PetType.CAT,
-        )
-        with self.assertRaises(ValidationError):
-            room_type.full_clean()
+        invalid_prices = [0, -10.00, None]
+        for price in invalid_prices:
+            with self.subTest(price=price):
+                with self.assertRaises(ValidationError):
+                    RoomType(
+                        hotel=self.hotel,
+                        name="Suite Deluxe",
+                        description="Una habitación lujosa con vista al mar.",
+                        capacity=2,
+                        price_per_night=price,
+                        pet_type=PetType.DOG,
+                    ).full_clean()
 
     def test_create_roomtype_invalid_pet_type(self):
-        room_type = RoomType(
-            hotel=self.hotel,
-            name="Habitación sin mascotas",
-            description="No se permiten mascotas.",
-            capacity=2,
-            price_per_night=90.00,
-            pet_type="FISH",
-        )
-        with self.assertRaises(ValidationError):
-            room_type.full_clean()
+        invalid_pet_types = ["", None, "FISH"]
+        for pet_type in invalid_pet_types:
+            with self.subTest(pet_type=pet_type):
+                with self.assertRaises(ValidationError):
+                    RoomType(
+                        hotel=self.hotel,
+                        name="Suite Deluxe",
+                        description="Una habitación lujosa con vista al mar.",
+                        capacity=2,
+                        price_per_night=150.00,
+                        pet_type=pet_type,
+                    ).full_clean()
