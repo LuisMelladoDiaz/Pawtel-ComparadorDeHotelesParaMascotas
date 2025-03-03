@@ -1,25 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/vue-query";
 import axios from "axios";
+import { refreshAxiosInterceptor } from "../axios-setup";
 
-const API_BASE_URL = "http://127.0.0.1:8000/auth";
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string) + '/auth';
 
 export const useUserQuery = () => {
   return useQuery({
     queryKey: ["user"],
     queryFn: async () => {
-      const token = localStorage.getItem("access_token");
-      if (!token) throw new Error("No token available"); // Evita peticiones innecesarias
-
-      const response = await axios.get(`${API_BASE_URL}/user-info/`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
+      const response = await axios.get(`${API_BASE_URL}/user-info/`);
       return response.data;
     },
     retry: false,
   });
 };
-
 
 export const useLoginMutation = () => {
   const queryClient = useQueryClient();
@@ -31,7 +25,7 @@ export const useLoginMutation = () => {
       const { access, refresh } = response.data;
       localStorage.setItem("access_token", access);
       localStorage.setItem("refresh_token", refresh);
-
+      refreshAxiosInterceptor();
       return response.data;
     },
     onSuccess: () => {
@@ -40,7 +34,6 @@ export const useLoginMutation = () => {
   });
 };
 
-
 export const useLogoutMutation = () => {
   const queryClient = useQueryClient();
 
@@ -48,9 +41,10 @@ export const useLogoutMutation = () => {
     mutationFn: async () => {
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
+      refreshAxiosInterceptor();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] }); // Para actualizar el estado del usuario
+      queryClient.invalidateQueries({ queryKey: ["user"] }); // Refresh user state
     },
   });
 };
