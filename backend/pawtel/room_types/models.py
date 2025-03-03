@@ -18,7 +18,7 @@ class RoomType(models.Model):
 
     name = models.CharField(max_length=50, blank=False, null=False)
 
-    description = models.TextField(max_length=300, blank=False, null=False)
+    description = models.CharField(max_length=300, blank=False, null=False)
 
     capacity = models.IntegerField(validators=[MinValueValidator(1)], null=False)
 
