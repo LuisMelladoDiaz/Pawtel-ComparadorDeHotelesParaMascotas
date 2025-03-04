@@ -47,7 +47,7 @@
         <p class="mt-2 text-left">Fecha seleccionada:</p>
         <p class="mt-2 text-left">{{ dateSelected }}</p>
       </div>
-      
+
   </div>
 
 </template>
@@ -57,7 +57,7 @@
   import PetHotelCard from '../components/HotelCard.vue';
   import LoadingSpinner from '../components/LoadingSpinner.vue';
   import DatePicker from '../components/DatePicker.vue';
-  
+
   import DropdownPicker from '../components/DropdownPicker.vue';
   const optionsList = ref([
     { label: "Opción 1", value: "opcion1" },
@@ -66,7 +66,7 @@
   ]);
   const selectedOption = ref(null);
   const dateSelected = ref(''); // Estado del padre que se sincroniza con DatePicker
-  
+
 </script>
 
 <style scoped>
