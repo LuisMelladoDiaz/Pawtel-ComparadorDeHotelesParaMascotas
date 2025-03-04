@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @theme {
   --color-terracota: #C36C6C;
   --color-azul-suave: #6C8CC3;
@@ -63,4 +64,14 @@ p, ul, li {
 
 .flatpickr-weekday {
   color: #C36C6C !important;
+}
+
+@keyframes floatAnimation {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: floatAnimation 7s ease-in-out;
 }

@@ -36,9 +36,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="bg-[#F4EDEA] relative mx-auto py-12 max-w-7xl px-5 rounded-lg shadow-md flex flex-col items-center">
-    <h2 class="text-3xl font-bold mb-8 text-[#6C8CC3] font-playfair">Reseñas de quienes confiaron en Pawtel</h2>
-    <div class="flex flex-col lg:flex-row items-center bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition w-full max-w-4xl">
+  <section class="p-6 flex flex-col items-center text-center relative bg-cover bg-no-repeat">
+    <h2 class="text-3xl font-bold mb-8 text-[#6C8CC3] font-playfair relative z-10 py-7">Reseñas de quienes confiaron en Pawtel</h2>
+    <div class="relative z-10 flex flex-col lg:flex-row items-center bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition w-full max-w-4xl">
       <img :src="testimonios[indiceActual].imagen" alt="Testimonio" class="w-40 h-40 rounded-full shadow-md object-cover">
       <div class="text-center lg:text-left lg:ml-6">
         <p class="text-gray-700 italic">"{{ testimonios[indiceActual].texto }}"</p>
