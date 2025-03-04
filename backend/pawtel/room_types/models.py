@@ -26,7 +26,9 @@ class RoomType(models.Model):
         max_digits=6, decimal_places=2, validators=[MinValueValidator(1)], null=False
     )
 
-    pet_type = models.CharField(max_length=10, choices=PetType.choices, null=False)
+    pet_type = models.CharField(
+        max_length=30, choices=PetType.choices, blank=False, null=False
+    )
 
     # Relations --------------------------------------------------------------
 
