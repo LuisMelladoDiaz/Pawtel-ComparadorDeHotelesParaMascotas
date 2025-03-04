@@ -10,7 +10,7 @@ import {
     deleteHotelOwner,
     fetchAllHotelsOfOwner,
     deleteAllHotelsOfOwner,
-} from 'frontend/src/data-layer/api/hotelOwners.ts';
+} from '@/data-layer/api/hotelOwners';
 
 export const useGetAllHotelOwners = () => {
     return useQuery({
@@ -46,7 +46,7 @@ export const useUpdateHotelOwner = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ hotelOwnerId, ownerData }: { hotelOwnerId: number; ownerData: Hotel_Owner }) =>
+        mutationFn: ({ hotelOwnerId, ownerData }: { hotelOwnerId: number; ownerData: HotelOwner }) =>
             updateHotelOwner(hotelOwnerId, ownerData),
         onSuccess: (data) => {
             console.log('Dueño de hotel actualizado:', data);
@@ -59,7 +59,7 @@ export const usePartialUpdateHotelOwner = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: ({ hotelOwnerId, partialData }: { hotelOwnerId: number; partialData: Partial<Hotel_Owner> }) =>
+        mutationFn: ({ hotelOwnerId, partialData }: { hotelOwnerId: number; partialData: Partial<HotelOwner> }) =>
             partialUpdateHotelOwner(hotelOwnerId, partialData),
         onSuccess: (data) => {
             console.log('Dueño de hotel actualizado parcialmente:', data);

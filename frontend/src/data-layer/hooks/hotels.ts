@@ -8,7 +8,7 @@ import {
   partialUpdateHotel,
   deleteHotel,
   type Hotel,
-} from '@/api/hotels';
+} from '@/data-layer/api/hotels';
 
 // Obtener todos los hoteles
 export const useGetAllHotels = () => {

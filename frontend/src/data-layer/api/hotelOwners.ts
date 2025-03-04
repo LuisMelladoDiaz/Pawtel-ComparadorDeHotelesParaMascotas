@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-type Hotel_Owner = {
+type HotelOwner = {
     id: number;
     phone: number;
     email: string;
@@ -19,28 +19,28 @@ type Hotel = {
 export const fetchAllOwners = async () => {
     const url = `${API_BASE_URL}/api/hotel-owners/`;
     const response = await axios.get(url);
-    return response.data as Hotel_Owner[];
+    return response.data as HotelOwner[];
 };
 
 export const fetchHotelOwnerById = async (hotelOwnerId: number) => {
     const url = `${API_BASE_URL}/hotel-owners/${hotelOwnerId}`;
     const response = await axios.get(url);
-    return response.data as Hotel_Owner;
+    return response.data as HotelOwner;
 };
 
-export const createHotelOwner = async (hotelOwnerData: Omit<Hotel_Owner, 'id'>) => {
+export const createHotelOwner = async (hotelOwnerData: Omit<HotelOwner, 'id'>) => {
     const url = `${API_BASE_URL}/hotel-owners/`;
     const response = await axios.post(url, hotelOwnerData);
-    return response.data as Hotel_Owner;
+    return response.data as HotelOwner;
 };
 
-export const updateHotelOwner = async (hotelOwnerId: number, ownerData: Hotel_Owner) => {
+export const updateHotelOwner = async (hotelOwnerId: number, ownerData: HotelOwner) => {
     const url = `${API_BASE_URL}/hotel-owners/${hotelOwnerId}/`;
     const response = await axios.put(url, ownerData);
-    return response.data as Hotel_Owner;
+    return response.data as HotelOwner;
 };
 
-export const partialUpdateHotelOwner = async (hotelOwnerId: number, partialData: Partial<Hotel_Owner>) => {
+export const partialUpdateHotelOwner = async (hotelOwnerId: number, partialData: Partial<HotelOwner>) => {
     const url = `${API_BASE_URL}/hotel-owners/${hotelOwnerId}/`;
     const response = await axios.patch(url, partialData);
     return response.data;
