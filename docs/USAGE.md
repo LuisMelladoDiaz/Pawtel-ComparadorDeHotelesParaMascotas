@@ -87,6 +87,7 @@ npm run build
 
 Y paro ejecutarla debes usar:
 
+
 ```bash
 npm run preview
 ```
