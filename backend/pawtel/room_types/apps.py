@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AppUsersConfig(AppConfig):
+class RoomTypesConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "pawtel.appUsers"
+    name = "pawtel.room_types"
