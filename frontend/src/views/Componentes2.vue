@@ -1,7 +1,7 @@
 
 <template>
       
-    <div class="p-6 flex flex-col items-center">
+    <div class="max-w-7xl mx-auto px-5 p-6 flex flex-col">
       <div class="mt-10 flex flex-col"> 
         <h2 class="text-xl w-auto inline-block self-center">Hotel cards</h2>
         <PetHotelCard
@@ -30,18 +30,18 @@
         />
       </div>
       
-      <div class="mt-10 flex flex-col"> 
+      <div class="mt-10 flex flex-col self-center max-w-100"> 
         <h2 class="text-xl w-auto inline-block self-center">Loading Spinner</h2>
         <LoadingSpinner/>
       </div>
 
-      <div class="mt-10 flex flex-col">
+      <div class="mt-10 flex flex-col self-center max-w-100">
         <h2 class="text-xl w-auto inline-block self-center">Dropdown Picker</h2>
         <DropdownPicker v-model="selectedOption" :options="optionsList" />
         <p class="mt-2 text-left">Seleccionaste: {{ selectedOption }}</p>
       </div>
 
-      <div class="mt-10 mb-30 flex flex-col">
+      <div class="mt-10 mb-30 flex flex-col self-center max-w-100">
         <h2 class="text-xl w-auto inline-block self-center">Date Picker</h2>
         <DatePicker v-model="dateSelected" />
         <p class="mt-2 text-left">Fecha seleccionada:</p>
