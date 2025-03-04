@@ -1,4 +1,3 @@
-// src/hooks/useHotelOwners.ts
 import { useQuery, useMutation, useQueryClient } from '@tanstack/vue-query';
 import { type MaybeRef, toValue } from 'vue';
 import {
@@ -10,7 +9,9 @@ import {
     deleteHotelOwner,
     fetchAllHotelsOfOwner,
     deleteAllHotelsOfOwner,
+    type HotelOwner,
 } from '@/data-layer/api/hotelOwners';
+
 
 export const useGetAllHotelOwners = () => {
     return useQuery({
@@ -33,12 +34,6 @@ export const useGetHotelOwnerById = (hotelOwnerId: MaybeRef<number>) => {
 export const useCreateHotelOwner = () => {
     return useMutation({
         mutationFn: createHotelOwner,
-        onSuccess: (data) => {
-            console.log('Dueño de hotel creado con éxito:', data);
-        },
-        onError: (error) => {
-            console.error('Error al crear el dueño de hotel:', error);
-        },
     });
 };
 
@@ -49,7 +44,6 @@ export const useUpdateHotelOwner = () => {
         mutationFn: ({ hotelOwnerId, ownerData }: { hotelOwnerId: number; ownerData: HotelOwner }) =>
             updateHotelOwner(hotelOwnerId, ownerData),
         onSuccess: (data) => {
-            console.log('Dueño de hotel actualizado:', data);
             queryClient.invalidateQueries({ queryKey: ['hotelOwner', data.id] });
         },
     });
@@ -62,7 +56,6 @@ export const usePartialUpdateHotelOwner = () => {
         mutationFn: ({ hotelOwnerId, partialData }: { hotelOwnerId: number; partialData: Partial<HotelOwner> }) =>
             partialUpdateHotelOwner(hotelOwnerId, partialData),
         onSuccess: (data) => {
-            console.log('Dueño de hotel actualizado parcialmente:', data);
             queryClient.invalidateQueries({ queryKey: ['hotelOwner', data.id] });
         },
     });
@@ -74,7 +67,6 @@ export const useDeleteHotelOwner = () => {
     return useMutation({
         mutationFn: deleteHotelOwner,
         onSuccess: () => {
-            console.log('Dueño de hotel eliminado');
             queryClient.invalidateQueries({ queryKey: ['hotelOwners'] });
         },
     });
@@ -96,7 +88,6 @@ export const useDeleteAllHotelsOfOwner = () => {
     return useMutation({
         mutationFn: deleteAllHotelsOfOwner,
         onSuccess: () => {
-            console.log('Todos los hoteles del dueño eliminados');
             queryClient.invalidateQueries({ queryKey: ['hotels'] });
             queryClient.invalidateQueries({ queryKey: ['hotelOwner'] });
         },

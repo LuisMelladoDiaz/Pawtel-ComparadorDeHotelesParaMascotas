@@ -1,20 +1,14 @@
 import axios from 'axios';
+import { type Hotel } from '@/data-layer/api/hotels';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-type HotelOwner = {
+export type HotelOwner = {
     id: number;
     phone: number;
     email: string;
 };
 
-type Hotel = {
-    id: number;
-    name: string;
-    address: string;
-    city: string;
-    description: string;
-};
 
 export const fetchAllOwners = async () => {
     const url = `${API_BASE_URL}/api/hotel-owners/`;

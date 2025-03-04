@@ -10,17 +10,15 @@ import {
   type Hotel,
 } from '@/data-layer/api/hotels';
 
-// Obtener todos los hoteles
 export const useGetAllHotels = () => {
   return useQuery({
     queryKey: ['hotels'],
     queryFn: fetchAllHotels,
     staleTime: 1000 * 60,
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
   });
 };
 
-// Obtener un hotel por ID
 export const useGetHotelById = (hotelId: MaybeRef<number>) => {
   return useQuery({
     queryKey: ['hotelId', hotelId],
@@ -30,23 +28,17 @@ export const useGetHotelById = (hotelId: MaybeRef<number>) => {
   });
 };
 
-// Crear un hotel
 export const useCreateHotel = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: createHotel,
-    onSuccess: (data) => {
-      console.log('Hotel creado con éxito:', data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
-    },
-    onError: (error) => {
-      console.error('Error al crear el hotel:', error);
     },
   });
 };
 
-// Actualizar un hotel
 export const useUpdateHotel = () => {
   const queryClient = useQueryClient();
 
@@ -55,18 +47,12 @@ export const useUpdateHotel = () => {
       updateHotel(hotelId, hotelData),
 
     onSuccess: (data: Hotel) => {
-      console.log('Hotel actualizado con éxito', data);
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
       queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
-    },
-
-    onError: (error) => {
-      console.error('Error al actualizar el hotel:', error);
     },
   });
 };
 
-// Actualización parcial de un hotel
 export const usePartialUpdateHotel = () => {
   const queryClient = useQueryClient();
 
@@ -75,14 +61,12 @@ export const usePartialUpdateHotel = () => {
       partialUpdateHotel(hotelId, partialData),
 
     onSuccess: (data) => {
-      console.log('Hotel actualizado parcialmente:', data);
       queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
     },
   });
 };
 
-// Eliminar un hotel
 export const useDeleteHotel = () => {
   const queryClient = useQueryClient();
 
@@ -90,7 +74,6 @@ export const useDeleteHotel = () => {
     mutationFn: deleteHotel,
 
     onSuccess: () => {
-      console.log('Hotel eliminado con éxito');
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
     },
   });
