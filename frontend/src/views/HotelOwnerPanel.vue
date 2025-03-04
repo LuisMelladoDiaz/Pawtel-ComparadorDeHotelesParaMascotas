@@ -2,7 +2,7 @@
   <div class="flex flex-col min-h-screen">
     <NavbarTerracota />
 
-    <div class="max-w-5xl mx-auto px-5 w-full flex flex-col items-center flex-grow justify-center mt-8">
+    <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow justify-center mt-8">
 
       <!-- Fila superior -->
       <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
