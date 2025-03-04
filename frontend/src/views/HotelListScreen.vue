@@ -8,11 +8,11 @@
             <div class="container mt-5 hidden md:flex">
                 
                 <!-- Filters -->
-                <div class="list-filters-container flex-col h-fit border rounded-lg border-terracota px-6 py-4 space-y-4 sticky top-5">
-                    <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60">Filtrar por:</h2>
+                <div class="list-filters-container flex-col h-fit border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5">
+                    <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60 py-2">Filtrar por:</h2>
 
                     <!-- Cities -->
-                    <div>
+                    <div class="mt-5">
                         <label class="font-semibold">Ciudad:</label>
                         <select v-model="selectedCity" class="border rounded p-2 mt-1 w-full">
                             <option value="">Todas</option>
@@ -21,7 +21,7 @@
                     </div>
 
                     <!-- Services -->
-                    <div>
+                    <div class="flex flex-col gap-2">
                         <label class="font-semibold">Servicios:</label>
                         <div v-for="service in services" :key="service">
                             <input type="checkbox" :id="service" :value="service" v-model="selectedServices" class="mr-2">
@@ -30,7 +30,7 @@
                     </div>
 
                     <!-- Prices -->
-                    <div>
+                    <div class="flex flex-col gap-2">
                         <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
                         <div class="flex items-center gap-2">
                             <input type="range" :min="20" :max="maxPrice" v-model="minPrice" class="w-full">
