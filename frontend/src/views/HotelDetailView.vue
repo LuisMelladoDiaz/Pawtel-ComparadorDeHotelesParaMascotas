@@ -10,7 +10,7 @@ const route = useRoute();
 const hotel = ref({
   image: '/src/assets/foto1.jpg',
   name: 'Hotel Ejemplo',
-  location: '📍 Madrid, España',
+  location: 'Madrid, España',
   details: ['WiFi gratis', 'Desayuno incluido', 'Piscina', 'Gimnasio'],
   rating: 4.5,
   price: '120€/noche',
@@ -44,9 +44,7 @@ const hotel = ref({
       </div>
 
       <div class="max-w-7xl mx-auto px-5 py-10">
-        <HotelDetailCard 
-          v-bind="hotel"
-        />
+        <HotelDetailCard v-bind="hotel" />
       </div>
     </div>
 
