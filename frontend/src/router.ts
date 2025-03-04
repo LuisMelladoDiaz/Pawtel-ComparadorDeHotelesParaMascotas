@@ -1,15 +1,24 @@
-import { createWebHistory, createRouter } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router"
 
-import HomeView from './views/HomeView.vue'
-import PetsView from './views/PetsView.vue'
+import DevelopmentScreen from './views/DevelopmentScreen.vue'
+import Componentes1 from './views/Componentes1.vue'
+import Componentes2 from './views/Componentes2.vue'
+import TemplateScreen1 from './views/TemplateScreen1.vue'
+import TemplateScreen2 from './views/TemplateScreen2.vue'
+import LoginView from './views/LoginView.vue'
+
 const routes = [
-  { path: '/', component: HomeView },
-  { path: '/pets', component: PetsView}
+  { path: '/', component: DevelopmentScreen},
+  { path: '/componentes1', component: Componentes1},
+  { path: '/componentes2', component: Componentes2},
+  { path: '/login', component: LoginView},
+  { path: '/templateScreen1', component: TemplateScreen1},
+  { path: '/templateScreen2', component: TemplateScreen2}
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
-})
+});
 
 export default router
