@@ -8,7 +8,7 @@ class HotelOwnerSerializerTest(TestCase):
     def setUp(self):
         # Create a valid HotelOwner instance
         self.valid_data = {
-            "id": "1",
+            "id": 1,
             "username": "hotelowner1",
             "email": "hotelowner1@example.com",
             "phone": "+34111222333",
@@ -17,7 +17,7 @@ class HotelOwnerSerializerTest(TestCase):
 
         # Create an invalid data for testing
         self.invalid_data = {
-            "id": "1",
+            "id": 1,
             "username": "hotelowner2",
             "email": "invalid-email",  # Invalid email
             "phone": "123",  # Invalid phone number format
@@ -58,7 +58,7 @@ class HotelOwnerSerializerTest(TestCase):
 
     def test_required_fields_for_post(self):
         incomplete_data = {
-            "id": "1",
+            "id": 1,
             "username": "hotelowner3",
             "email": "hotelowner3@example.com",
             # Missing phone
@@ -72,7 +72,7 @@ class HotelOwnerSerializerTest(TestCase):
 
     def test_ignore_additional_fields_for_post(self):
         data = {
-            "id": "1",
+            "id": 1,
             "username": "hotelowner7",
             "email": "hotelowner7@example.com",
             "phone": "+34987654321",
@@ -110,7 +110,7 @@ class HotelOwnerSerializerTest(TestCase):
 
     def test_ignore_additional_fields_for_put(self):
         data = {
-            "id": "1",
+            "id": 1,
             "username": "hotelowner8",
             "email": "hotelowner8@example.com",
             "phone": "+34987654321",
@@ -147,7 +147,7 @@ class HotelOwnerSerializerTest(TestCase):
 
     def test_ignore_additional_fields_for_patch(self):
         data = {
-            "id": "1",
+            "id": 1,
             "email": "hotelowner1@example.com",
             "password": "newpassword",  # This should be ignored
             "date_joined": "2025-03-02T12:00:00Z",  # This should be ignored
