@@ -1,47 +1,69 @@
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <NavbarTerracota />
-    <div class="max-w-5xl mx-auto px-5 w-5/5">
-      <h1 class="text-2xl font-bold my-4">Panel de Administración de Hoteles</h1>
-      
-      <!-- Botón para añadir un nuevo hotel -->
-      <Button type="accept" @click="openModal" class="mb-4">+ Añadir Hotel</Button>
-      
-      <!-- Tabla de hoteles -->
-      <table class="w-full border-collapse border border-gray-300">
-        <thead>
-          <tr class="bg-gray-100">
-            <th class="border px-4 py-2">Nombre</th>
-            <th class="border px-4 py-2">Dirección</th>
-            <th class="border px-4 py-2">Ciudad</th>
-            <th class="border px-4 py-2">Descripción</th>
-            <th class="border px-4 py-2 text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="hotel in hotels" :key="hotel.id" class="border">
-            <!-- Al hacer la PR se deberá cambiar la línea de hotel.name por estas, para que al pulsar el nombre
-             de un hotel te lleve a la pantalla con sus detalles (para que el dueño pueda comprobar como quedan
-             los cambios que ha hecho, por ejemplo)
-             <td class="border px-4 py-2">
-              <router-link :to="{ name: 'HotelDetail', params: { id: hotel.id } }" class="text-blue-500 hover:underline">
-                {{ hotel.name }}
-              </router-link>
-            </td> -->
-            <td class="border px-4 py-2">{{ hotel.name }}</td>
-            <td class="border px-4 py-2">{{ hotel.address }}</td>
-            <td class="border px-4 py-2">{{ hotel.city }}</td>
-            <td class="border px-4 py-2">{{ hotel.description }}</td>
-            <td class="border px-4 py-2 text-center">
-              <Button type="add" @click="openModal(hotel)">Editar</Button>
-              <Button type="reject" @click="deleteHotel(hotel.id)">Eliminar</Button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <Footer />
 
+    <div class="max-w-5xl mx-auto px-5 w-full flex flex-col items-center flex-grow justify-center mt-8">
+
+      <!-- Fila superior -->
+      <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
+        <span class="font-semibold">Gestión de Hoteles</span>
+        <button @click="openModal" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
+          <i class="fas fa-plus mr-2"></i> Añadir Nuevo
+        </button>
+      </div>
+      
+      <!-- Tabla de hoteles con estilo modernizado -->
+      <div class="overflow-x-auto w-full">
+        <table class="w-full border-collapse shadow-md rounded-b-lg overflow-hidden mb-4">
+          <thead>
+            <tr class="bg-white text-left">
+              <th class="px-4 py-2">Nombre</th>
+              <th class="px-4 py-2">Dirección</th>
+              <th class="px-4 py-2">Ciudad</th>
+              <th class="px-4 py-2">Descripción</th>
+              <th class="px-4 py-2 text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(hotel, index) in paginatedHotels" :key="hotel.id" :class="index % 2 === 0 ? 'bg-gray-100' : 'bg-white'">
+              <td class="px-4 py-2">{{ hotel.name }}</td>
+              <td class="px-4 py-2">{{ hotel.address }}</td>
+              <td class="px-4 py-2">{{ hotel.city }}</td>
+              <td class="px-4 py-2">{{ hotel.description }}</td>
+              <td class="px-4 py-2 text-center flex justify-center gap-2">
+                <button @click="openModal(hotel)" class="text-oliva hover:text-oliva-dark">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button @click="deleteHotel(hotel.id)" class="text-terracota hover:text-terracota-dark">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+      <!-- Información de paginación -->
+      <div class="flex justify-between w-full mt-4 flex-col md:flex-row">
+        <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels.length }}</span>
+        <div class="flex gap-2 mt-2 md:mt-0">
+          <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">← Anterior</button>
+          <button v-for="page in totalPages" :key="page" @click="currentPage = page" 
+                  class="px-3 py-1" :class="{'bg-gray-300': currentPage === page, 'bg-gray-200': currentPage !== page}">
+            {{ page }}
+          </button>
+          <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Siguiente →</button>
+        </div>
+      </div>
+
+      <!-- Línea estilística -->
+      <div class="w-full mt-4 border-t border-gray-300"></div>
+
+    </div>
+
+    <Footer />
+    
     <!-- Modal para añadir/editar hotel -->
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-white p-6 rounded-lg w-1/3">
@@ -59,8 +81,9 @@
   </div>
 </template>
 
+
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import NavbarTerracota from '../components/NavbarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
@@ -68,19 +91,29 @@ import Button from '../components/Button.vue';
 const hotels = ref([
   { id: 1, name: 'Hotel Sol', address: 'Calle 123', city: 'Madrid', description: 'Hotel con vistas al mar.' },
   { id: 2, name: 'Hotel Luna', address: 'Avenida 456', city: 'Barcelona', description: 'Hotel en el centro de la ciudad.' },
+  { id: 3, name: 'Hotel Estrella', address: 'Calle 789', city: 'Sevilla', description: 'Cerca de la catedral.' },
+  { id: 4, name: 'Hotel Noche', address: 'Calle 321', city: 'Granada', description: 'Vista a la Alhambra.' },
+  { id: 5, name: 'Hotel Amanecer', address: 'Av. Sol 12', city: 'Valencia', description: 'Junto a la playa.' },
+  { id: 6, name: 'Hotel Brisa', address: 'Calle Mar 15', city: 'Málaga', description: 'Ambiente costero.' },
+  { id: 7, name: 'Hotel Cielo', address: 'Paseo Azul', city: 'Bilbao', description: 'Vistas impresionantes.' }
 ]);
+
 const modalOpen = ref(false);
 const isEditing = ref(false);
 const hotelData = ref({ name: '', address: '', city: '', description: '' });
+const currentPage = ref(1);
+const itemsPerPage = 5;
+
+const totalPages = computed(() => Math.ceil(hotels.value.length / itemsPerPage));
+
+const paginatedHotels = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return hotels.value.slice(start, start + itemsPerPage);
+});
 
 const openModal = (hotel = null) => {
-  if (hotel) {
-    hotelData.value = { ...hotel };
-    isEditing.value = true;
-  } else {
-    hotelData.value = { name: '', address: '', city: '', description: '' };
-    isEditing.value = false;
-  }
+  hotelData.value = hotel ? { ...hotel } : { name: '', address: '', city: '', description: '' };
+  isEditing.value = !!hotel;
   modalOpen.value = true;
 };
 
@@ -100,35 +133,30 @@ const deleteHotel = (id) => {
     hotels.value = hotels.value.filter(h => h.id !== id);
   }
 };
+
+const prevPage = () => {
+  if (currentPage.value > 1) currentPage.value--;
+};
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) currentPage.value++;
+};
 </script>
 
 <style scoped>
 button {
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
-</style>
 
+button:hover {
+  cursor: pointer;
+}
 
-<style scoped>
-/* 
-Estilos de la versión móvil 
-(Para testearlo le dais a inspeccionar y arriba a la izq de la ventana podeis poner el navegador en versión móvil, eligiendo las dimensiones de un Iphone o Samsung por ejemplo. 
-También podeis verlo desde vuestro móvil iniciando el frontend con "npm run dev -- --host" y copiando la url que te sale en Network [ tu_ip:5173 ])
-La idea es que los estilos de la web de escritorio estén usando Tailwind dentro del <template>, y los estilos de la versión móvil esten aquí en <style scoped>. Por lo que aseguraos por favor
-de que las pantallas sean lo más responsivas posible.
-*/
+.bg-terracota-dark {
+  background-color: #d57c1a; /* Este color debe ser un tono más oscuro de terracota */
+}
 
-
-@media (max-width: 900px) {
-
-    /* Aquí empiezan las clases CSS de la versión móvil */
-    .example {
-        display: flex;
-    }
-    
-    .example2 {
-        display: flex;
-    }
-
+.flex-grow {
+  flex-grow: 1;
 }
 </style>
