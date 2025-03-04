@@ -7,12 +7,14 @@ import TemplateScreen1 from './views/TemplateScreen1.vue'
 import TemplateScreen2 from './views/TemplateScreen2.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
+import RegisterView from './views/RegisterView.vue'
 
 const routes = [
   { path: '/', component: DevelopmentScreen},
   { path: '/componentes1', component: Componentes1},
   { path: '/componentes2', component: Componentes2},
   { path: '/login', component: LoginView},
+  { path: '/register', component: RegisterView},
   { path: '/templateScreen1', component: TemplateScreen1},
   { path: '/templateScreen2', component: TemplateScreen2},
   { path: '/hotels', component: HotelListScreen}
