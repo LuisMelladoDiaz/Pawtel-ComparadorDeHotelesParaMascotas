@@ -76,7 +76,7 @@ npm run dev
 
 ### Poner en marcha el frontend como PWA
 
-Si despliegas el proyecto con "npm run dev", el proyecto no se ejecutará como una PWA instalable sino que se mantendrá como una SPA. Para desplegar la PWA necesitarás ejecutar lo siguientes comandos teniendo npm instalado:
+Tras unos cambios en teoría la aplicación debe funcionar como una PWA mediante "*npm run dev*". En caso de que diese problemas, para desplegar la aplicación específicamente como una PWA necesitarás ejecutar lo siguientes comandos teniendo npm instalado:
 
 Primero será necesario construirla:
 
