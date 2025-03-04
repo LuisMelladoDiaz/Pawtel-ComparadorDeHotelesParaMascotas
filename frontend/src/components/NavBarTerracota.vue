@@ -124,7 +124,7 @@ export default {
       right: 30px;
       top: 21px
     }
-    
+
     .logo {
       height: 50px;
     }

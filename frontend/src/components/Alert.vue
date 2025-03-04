@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="type"
-    :class="[ 
-      'p-4 rounded-lg text-white', 
+    :class="[
+      'p-4 rounded-lg text-white',
       type === 'success' ? 'bg-oliva' :
       type === 'error' ? 'bg-terracota' :
       type === 'info' ? 'bg-azul-suave' : 'bg-gray-500',

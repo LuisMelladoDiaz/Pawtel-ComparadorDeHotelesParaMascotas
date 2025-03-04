@@ -24,7 +24,7 @@
         <button class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</button>
       </div>
 
-      
+
     </div>
 
     <!-- Menú desplegable en móvil -->
