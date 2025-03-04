@@ -1,86 +1,49 @@
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const testimonios = ref([
+  {
+    nombre: "Carla P.",
+    texto: "Pawtel me ayudó a encontrar el mejor alojamiento para mi perro en un solo clic. ¡Repetiré sin duda!",
+    imagen: "/images/owner1.avif"
+  },
+  {
+    nombre: "Ana G.",
+    texto: "Increíble servicio y facilidad para comparar precios. Encontré un hotel perfecto para mi perro.",
+    imagen: "/images/owner2.jpg"
+  },
+  {
+    nombre: "Luis M.",
+    texto: "Nunca había reservado un alojamiento para mi mascota tan fácil y rápido. ¡Muy recomendable!",
+    imagen: "/images/owner3.jpg"
+  }
+]);
+
+const indiceActual = ref(0);
+let intervalo;
+
+const siguienteTestimonio = () => {
+  indiceActual.value = (indiceActual.value + 1) % testimonios.value.length;
+};
+
+onMounted(() => {
+  intervalo = setInterval(siguienteTestimonio, 5000); // Cambia de testimonio cada 5 segundos
+});
+
+onUnmounted(() => {
+  clearInterval(intervalo);
+});
+</script>
+
 <template>
-    <div class="stories-container">
-      <h2>¿Qué opinan nuestros clientes?</h2>
-      <swiper :modules="[Autoplay, Pagination]" :slides-per-view="1" :pagination="{ clickable: true }" :autoplay="{ delay: 4000 }" class="stories-slider">
-        <swiper-slide v-for="(review, index) in reviews" :key="index">
-          <div class="story-card">
-            <img :src="review.image" alt="Mascota" class="story-image" />
-            <div class="story-content">
-              <p class="review-text">"{{ review.text }}"</p>
-              <span class="review-owner">- {{ review.owner }}</span>
-            </div>
-          </div>
-        </swiper-slide>
-      </swiper>
+  <section class="bg-[#F4EDEA] relative mx-auto py-12 max-w-7xl px-5 rounded-lg shadow-md flex flex-col items-center">
+    <h2 class="text-3xl font-bold mb-8 text-[#6C8CC3] font-playfair">Reseñas de quienes confiaron en Pawtel</h2>
+    <div class="flex flex-col lg:flex-row items-center bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition w-full max-w-4xl">
+      <img :src="testimonios[indiceActual].imagen" alt="Testimonio" class="w-40 h-40 rounded-full shadow-md object-cover">
+      <div class="text-center lg:text-left lg:ml-6">
+        <p class="text-gray-700 italic">"{{ testimonios[indiceActual].texto }}"</p>
+        <p class="text-[#C36C6C] font-semibold mt-4">- {{ testimonios[indiceActual].nombre }}</p>
+      </div>
     </div>
-  </template>
-  
-  <script>
-  import { Swiper, SwiperSlide } from 'swiper/vue';
-  import 'swiper/css';
-  import 'swiper/css/pagination';
-  import { Autoplay, Pagination } from 'swiper/modules';
-  
-  export default {
-    components: {
-      Swiper,
-      SwiperSlide,
-    },
-    setup() {
-      return {
-        Autoplay,
-        Pagination,
-      };
-    },
-    data() {
-      return {
-        reviews: [
-          { image: '/images/pet.jpg', text: "¡Mi perro amó su estancia! Todo impecable.", owner: "Juan P." },
-          { image: '/images/petp.jpeg', text: "El lugar es muy seguro y el personal atento.", owner: "Ana G." },
-          { image: '/images/HomePage.jpg', text: "Mi gato se sintió en casa, increíble servicio.", owner: "Carlos R." }
-        ]
-      };
-    }
-  };
-  </script>
-  
-  <style scoped>
-  .stories-container {
-    text-align: center;
-    padding: 20px;
-  }
-  .stories-slider {
-    width: 80%;
-    margin: auto;
-  }
-  .story-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  .story-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  .story-content {
-    margin-top: 10px;
-  }
-  .review-text {
-    font-size: 1.2em;
-    font-style: italic;
-    color: #333;
-  }
-  .review-owner {
-    display: block;
-    margin-top: 5px;
-    font-size: 1em;
-    font-weight: bold;
-    color: #555;
-  }
-  </style>
+  </section>
+</template>

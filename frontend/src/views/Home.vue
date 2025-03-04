@@ -1,96 +1,128 @@
 <script setup>
 import Navbar from '../components/Navbar.vue';
 import Footer from '../components/Footer.vue';
+import FilterNavbar from '../components/FilterNavbar.vue';
 import Carrusel from '../components/Carrusel.vue';
 </script>
 
 <template>
   <div>
     <Navbar />
-    <section class="hero-section mx-auto py-12">
-      <section class="container mx-auto flex flex-col lg:flex-row items-center w-full h-full">
+    <!-- Section Banner -->
+    <section class="banner-section relative mx-auto py-4 max-w-7xl px-5">
+      <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
         <div class="lg:w-1/2 text-left p-6">
-          <h1 class="text-5xl font-bold mb-4 text-green-900">Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu <span class="text-yellow-500 italic">mascota.</span></h1>
-          <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor!. Regístrate ahora y obtén 20% de descuento en tu primera reserva</p>
-          <button class="bg-yellow-500 text-white px-6 py-3 rounded-lg font-bold shadow-md">REGÍSTRARME</button>
+          <h1 class="text-4xl font-bold mb-4 text-blue-500 font-nunito">Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu 
+            <span class="italic text-red-500">mascota.</span>
+          </h1>
+          <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
+          <button class="bg-red-500 text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-red-600 transition">REGÍSTRARME</button>
         </div>
-        <div class="lg:w-1/2 h-full">
-          <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full h-full object-cover">
+        <div class="lg:w-1/2">
+          <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">
         </div>
-      </section>
+      </div>
+      <div class="max-w-7xl mx-auto bg-white p-2 rounded-lg shadow-lg mt-6">
+        <FilterNavbar />
+      </div>
     </section>
-    
-    <section class="bg-green-900 text-white py-12">
+
+    <!-- Section Coomo funcoa -->
+    <section class="bg-[#ffffff] relative mx-auto py-8 max-w-7xl px-5">
       <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-8">¿Qué te ofrece PAWTEL?</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 px-6">
+        <h2 class="text-3xl font-bold mb-16 font-playfair">¿Cómo funciona?</h2>
+        <br>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
           <div class="flex flex-col items-center text-center">
-            <img src="../assets/paw.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
-            <p class="mt-4 font-semibold">Ubicación y precios comparados</p>
+            <img src="../assets/step1.jpg" alt="Ubicación y precios" class="w-60 h-60">
+            <p class="mt-4 font-semibold leading-relaxed">1. Ingresa destino y fechas</p>
           </div>
           <div class="flex flex-col items-center text-center">
-            <img src="../assets/pawpaw.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
-            <p class="mt-4 font-semibold">Reseñas para saber sobre alojamientos</p>
+            <img src="../assets/step2.jpg" alt="Reseñas de alojamientos" class="w-60 h-60">
+            <p class="mt-4 font-semibold leading-relaxed">2. Selecciona el hotel que prefieras</p>
           </div>
           <div class="flex flex-col items-center text-center">
-            <img src="../assets/petprint.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
-            <p class="mt-4 font-semibold">Alertas sobre promociones</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="../assets/paw.png" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
-            <p class="mt-4 font-semibold">Ubicación y precios comparados</p>
-          </div>
-          <div class="flex flex-col items-center text-center">
-            <img src="../assets/hotel.jpg" alt="Comida cocinada" class="w-20 h-20 rounded-full shadow-md">
-            <p class="mt-4 font-semibold">Ubicación y precios comparados</p>
+            <img src="../assets/step3.jpg" alt="Alertas promociones" class="w-60 h-60">
+            <p class="mt-4 font-semibold leading-relaxed">3. Reserva y disfruta</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Listado de Productos / Servicios -->
-    <section class="container mx-auto py-12">
-      <h2 class="text-2xl font-bold mb-6 text-center">Guiate de las reservas</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white shadow-lg p-6 rounded-lg">
-          <h3 class="text-xl font-semibold mb-2">Alojamiento</h3>
-          <p class="text-gray-600">Encuentra el mejor lugar para tu mascota con cuidadores certificados.</p>
+     <!-- Sección Descarga la App -->
+     <section class="bg-[#C36C6C] relative mx-auto py-2 max-w-7xl px-5 rounded-lg overflow-hidden">
+      <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
+        <div class="lg:w-1/2 text-left p-6 text-white">
+          <h2 class="text-3xl font-bold mb-4 font-nunito">Descarga la app de Pawtel</h2>
+          <p class="text-lg mb-6">No dejes escapar ninguna gran oferta con las alertas de precios.</p>
+          <div class="flex space-x-4">
+            <img src="../assets/qr.png" alt="QR Code" class="w-32 h-32">
+            <div class="flex flex-col space-y-2">
+              <img src="../assets/googlePlay.png" alt="Google Play" class="w-12">
+              <img src="../assets/appStore.png" alt="App Store" class="w-12">
+            </div>
+          </div>
         </div>
-        <div class="bg-white shadow-lg p-6 rounded-lg">
-          <h3 class="text-xl font-semibold mb-2">Paseos</h3>
-          <p class="text-gray-600">Paseadores expertos para que tu mascota esté siempre activa y feliz.</p>
-        </div>
-        <div class="bg-white shadow-lg p-6 rounded-lg">
-          <h3 class="text-xl font-semibold mb-2">Cuidado a Domicilio</h3>
-          <p class="text-gray-600">Atención personalizada en la comodidad de tu hogar.</p>
+        <div class="lg:w-1/2 flex justify-center">
+          <img src="../assets/app.png" alt="App Pawtel" class="w-80 h-auto rounded-none shadow-lg object-cover">
         </div>
       </div>
     </section>
 
-   <!-- Sección de Testimonios -->
-   <Carrusel />
-   
-    <!-- Llamado a la Acción -->
-    <section class="py-12 text-center">
-      <h2 class="text-2xl font-bold mb-4">¿Listo para empezar?</h2>
-      <button class="bg-green-500 text-white px-6 py-3 rounded-lg">Regístrate ahora</button>
+    <!-- Sección Beneficios Pawtel -->
+    <section class="relative mx-auto py-12 max-w-7xl px-5">
+      <h2 class="text-3xl font-bold mb-8 text-center text-[#6C8CC3] font-playfair">Beneficios de Pawtel</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition flex flex-col items-center text-center"> 
+          <h3 class="text-xl font-semibold mb-3 text-[#C36C6C]">Ubicación y precios comparados</h3>
+          <img src="../assets/comparator.png" alt="Ubicación" class="w-30 h-30 mb-3"> 
+          <p class="text-gray-700">Encuentra y compara alojamientos para tu mascota según ubicación, servicios y precio.</p>
+        </div>
+        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition flex flex-col items-center text-center"> 
+          <h3 class="text-xl font-semibold mb-3 text-[#C36C6C]">Reservas Seguras y Rápidas</h3>
+          <img src="../assets/reservation.png" alt="Ubicación" class="w-30 h-30 mb-3"> 
+          <p class="text-gray-700">Realiza reservas con facilidad y confianza, asegurando disponibilidad y rapidez en el proceso.</p>
+        </div>
+        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition flex flex-col items-center text-center"> 
+          <h3 class="text-xl font-semibold mb-3 text-[#C36C6C]">Alertas de Promociones y Descuentos</h3>
+          <img src="../assets/alert.png" alt="Ubicación" class="w-30 h-30 mb-3"> 
+          <p class="text-gray-700">Recibe notificaciones en tiempo real sobre las mejores ofertas y descuentos en alojamientos para mascotas.</p>
+        </div>
+      </div>
     </section>
+
+    <!-- Sección Reseñas de Clientes -->
+    <section class="bg-[#ffffff] relative mx-auto py-4 max-w-7xl px-5">
+      <Carrusel />
+    </section>
+
+<!-- Sección Reseñas de Clientes -->
+<section class="relative mx-auto py-8 max-w-7xl px-5 flex flex-col items-center text-center">
+  <!-- Fondo con imagen -->
+  <div
+    class="absolute inset-0 bg-cover bg-no-repeat"
+    style="background-image: url('/images/cat.jpg'); opacity: 0.3; background-position: center 50%;">
+  </div>
+
+  <!-- Contenido con posición relativa para aparecer sobre el fondo -->
+  <div class="relative">
+    <h2 class="text-2xl font-bold mb-4">¿Listo para disfrutar sin preocupaciones?</h2>
+    <p class="text-gray-700 mb-6">
+      ¡Únete a la comunidad de Pawtel y descubre la tranquilidad de dejar a tu mascota, ya sea cuando viajas o cuando necesitas una solución confiable!
+    </p>
+    <button class="bg-green-500 text-white px-6 py-3 rounded-lg">¡Quiero unirme!</button>
+  </div>
+</section>
 
     <Footer />
   </div>
 </template>
 
-
-<script>
-export default {
-  name: "FoodForJoeSection",
-};
-</script>
-
 <style scoped>
-.hero-section {
+.banner-section {
   background: #f7f7f7;
 }
 </style>
+
 
 
