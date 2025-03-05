@@ -21,15 +21,31 @@ const user = ref({
 
 const showPasswordModal = ref(false);
 const showAlert = ref('');
+const isLoggingOut = ref(false);
+const isDeletingAccount = ref(false);
+
+const logout = () => {
+    isLoggingOut.value = true;
+    setTimeout(() => {
+        isLoggingOut.value = false;
+    }, 3000);
+};
+
+const deleteAccount = () => {
+    isDeletingAccount.value = true;
+    setTimeout(() => {
+        isDeletingAccount.value = false;
+    }, 3000);
+};
 </script>
 
 <template>
-    <div class="flex flex-col min-h-screen text-sm">
+    <div class="flex flex-col min-h-screen text-sm bg-gray-100">
         <NavbarTerracota />
 
-        <div class="max-w-8xl mx-auto px-4 py-8 flex-grow">
-            <!-- Contenedor General -->
-            <div class="bg-white shadow-md rounded-md p-5 border">
+        <div class="max-w-8xl mx-auto px-4 py-8 flex-grow flex items-center justify-center">
+
+            <div class="bg-white shadow-md rounded-md p-5 border w-full max-w-5xl">
                 <h2 class="text-2xl font-semibold mb-5 text-center border-b pb-3">Perfil de Usuario</h2>
                 <div class="flex flex-col md:flex-row">
                     <!-- Contenedor Izquierdo -->
@@ -38,12 +54,16 @@ const showAlert = ref('');
                             <img :src="user.profilePicture || defaultProfilePicture" alt="Foto de perfil" class="w-24 h-24 rounded-full mx-auto" />
                         </div>
                         <Button type="add" class="w-full mb-3">Subir Foto</Button>
-                        
+
                         <hr class="w-full my-3 border-gray-300" />
-                        
+
                         <h2 class="text-lg font-semibold mb-3">Avanzado</h2>
-                        <Button type="add" class="w-full mb-3">Cambiar Contraseña</Button>
-                        <Button type="reject" class="w-full mb-3">Borrar Cuenta</Button>
+                        <Button @click="showPasswordModal = true" type="add" class="w-full mb-3">Cambiar Contraseña</Button>
+                        <Button @click="deleteAccount" type="reject" class="w-full mb-3">Borrar Cuenta</Button>
+                        <div v-if="isDeletingAccount" class="flex flex-col items-center mt-3">
+                            <p class="text-gray-600 text-lg mb-2">Borrando su cuenta...</p>
+                            <div class="w-8 h-8 border-4 border-gray-300 border-t-red-500 rounded-full animate-spin"></div>
+                        </div>
                     </div>
 
                     <!-- Contenedor Derecho -->
@@ -75,9 +95,13 @@ const showAlert = ref('');
                                 <input v-model="user.address" type="text" class="w-full p-1.5 border rounded" />
                             </div>
                         </div>
-                        <div class="mt-9 flex flex-col sm:flex-row justify-between gap-4">
+                        <div class="mt-5 sm:mt-8.5 flex flex-col sm:flex-row justify-center gap-4 items-center">
                             <Button type="accept" class="px-4 py-2 w-full sm:w-auto">Guardar Cambios</Button>
-                            <Button type="reject" class="px-4 py-2 w-full sm:w-auto">Cerrar Sesión</Button>
+                            <Button @click="logout" type="reject" class="px-4 py-2 w-full sm:w-auto">Cerrar Sesión</Button>
+                            <div v-if="isLoggingOut" class="flex flex-col items-center mt-3">
+                                <p class="text-gray-600 text-lg mb-2">Cerrando sesión...</p>
+                                <div class="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,20 +110,18 @@ const showAlert = ref('');
 
         <Footer class="mt-auto" />
 
-        <!-- Modal para cambiar contraseña (sin funcionalidad) -->
-        <Modal :isOpen="showPasswordModal" title="Cambiar Contraseña" @close="showPasswordModal = false">
+        <!-- Modal para cambiar contraseña -->
+        <Modal :isOpen="showPasswordModal" title="Cambiar Contraseña" @close="showPasswordModal = false" class="absolute inset-0 flex items-center justify-center z-50 bg-transparent w-full max-w-8xl">
             <div class="flex flex-col gap-4">
                 <input type="password" placeholder="Antigua Contraseña" class="w-full p-2 mb-2 border rounded" />
                 <input type="password" placeholder="Nueva Contraseña" class="w-full p-2 mb-2 border rounded" />
                 <input type="password" placeholder="Repetir Nueva Contraseña" class="w-full p-2 mb-3 border rounded" />
-                <div class="flex justify-end space-x-2">
-                    <Button @click="showPasswordModal = false" type="secondary">Cancelar</Button>
-                    <Button @click="showPasswordModal = false" type="accept">Actualizar</Button>
-                </div>
-            </div>
-        </Modal>
 
-        <!-- Alertas (sin funcionalidad) -->
-        <Alert v-if="showAlert" :type="showAlert">Este es un mensaje de {{ showAlert }}.</Alert>
+            </div>
+        <div class="flex justify-end space-x-2 mt-4">
+    <Button @click="showPasswordModal = false" type="secondary">Cancelar</Button>
+    <Button @click="showPasswordModal = false" type="accept">Aceptar Cambios</Button>
+</div>
+</Modal>
     </div>
 </template>
