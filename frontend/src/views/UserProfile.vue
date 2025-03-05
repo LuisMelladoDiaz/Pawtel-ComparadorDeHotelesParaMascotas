@@ -59,7 +59,7 @@ const deleteAccount = () => {
 
                         <h2 class="text-lg font-semibold mb-3">Avanzado</h2>
                         <Button @click="showPasswordModal = true" type="add" class="w-full mb-3">Cambiar Contraseña</Button>
-                        <Button @click="deleteAccount" type="reject" class="w-full mb-3">Borrar Cuenta</Button>
+                        <Button @click="deleteAccount" type="reject" class="w-full mb-3 mt-1">Borrar Cuenta</Button>
                         <div v-if="isDeletingAccount" class="flex flex-col items-center mt-3">
                             <p class="text-gray-600 text-lg mb-2">Borrando su cuenta...</p>
                             <div class="w-8 h-8 border-4 border-gray-300 border-t-red-500 rounded-full animate-spin"></div>
@@ -95,7 +95,7 @@ const deleteAccount = () => {
                                 <input v-model="user.address" type="text" class="w-full p-1.5 border rounded" />
                             </div>
                         </div>
-                        <div class="mt-5 sm:mt-8.5 flex flex-col sm:flex-row justify-center gap-4 items-center">
+                        <div class="sm:mt-10 flex flex-col sm:flex-row justify-center gap-4 items-center">
                             <Button type="accept" class="px-4 py-2 w-full sm:w-auto">Guardar Cambios</Button>
                             <Button @click="logout" type="reject" class="px-4 py-2 w-full sm:w-auto">Cerrar Sesión</Button>
                             <div v-if="isLoggingOut" class="flex flex-col items-center mt-3">
@@ -111,17 +111,13 @@ const deleteAccount = () => {
         <Footer class="mt-auto" />
 
         <!-- Modal para cambiar contraseña -->
-        <Modal :isOpen="showPasswordModal" title="Cambiar Contraseña" @close="showPasswordModal = false" class="absolute inset-0 flex items-center justify-center z-50 bg-transparent w-full max-w-8xl">
+        <Modal :isOpen="showPasswordModal" title="Cambiar Contraseña" @close="showPasswordModal = false" class="absolute inset-0 flex items-center justify-center z-50 bg-transparent w-full max-w-4xl mt-6">
             <div class="flex flex-col gap-4">
                 <input type="password" placeholder="Antigua Contraseña" class="w-full p-2 mb-2 border rounded" />
                 <input type="password" placeholder="Nueva Contraseña" class="w-full p-2 mb-2 border rounded" />
                 <input type="password" placeholder="Repetir Nueva Contraseña" class="w-full p-2 mb-3 border rounded" />
 
             </div>
-        <div class="flex justify-end space-x-2 mt-4">
-    <Button @click="showPasswordModal = false" type="secondary">Cancelar</Button>
-    <Button @click="showPasswordModal = false" type="accept">Aceptar Cambios</Button>
-</div>
-</Modal>
+        </Modal>
     </div>
 </template>
