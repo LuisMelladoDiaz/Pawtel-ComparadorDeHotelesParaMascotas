@@ -35,7 +35,9 @@
         <span class="price text-[1.75rem] text-[#C36C6C] font-bold">
           {{ price }}
         </span>
-        <Button type="add">Ver disponibilidad</Button>
+        <a href="/hotel/1">
+          <Button type="add">Ver disponibilidad</Button>
+        </a>
       </div>
     </div>
 
