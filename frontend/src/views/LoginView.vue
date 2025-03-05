@@ -129,7 +129,7 @@ const logout = async () => {
 
                         <!-- Botón de inicio de sesión -->
                         <div class="mt-6">
-                            <button type="submit"
+                            <button @click="login"
                                 class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-azul-suave">
                                 Iniciar Sesión
                             </button>
