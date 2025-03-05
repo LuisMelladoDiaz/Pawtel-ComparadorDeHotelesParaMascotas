@@ -9,6 +9,7 @@ import TemplateScreen1 from './views/TemplateScreen1.vue'
 import TemplateScreen2 from './views/TemplateScreen2.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
+import HotelOwnerPanel from './views/hotelOwnerPanel.vue'
 
 const routes = [
   { path: '/', component: DevelopmentScreen},
@@ -19,6 +20,7 @@ const routes = [
   { path: '/login', component: LoginView},
   { path: '/templateScreen1', component: TemplateScreen1},
   { path: '/templateScreen2', component: TemplateScreen2},
+  { path: '/hotelOwnerPanel', component: HotelOwnerPanel },
   { path: '/hotels', component: HotelListScreen}
 ]
 

@@ -9,14 +9,13 @@ import Footer from '../components/Footer.vue';
 
 
 
-
 <template>
- <!-- Aquí se crea la pantalla como tal (No modificar el NavBar, Filter, Footer o la Clase "max-w-7xl mx-auto px-5" (márgenes)) -->
-    <div>
+<!-- Aquí se crea la pantalla como tal (No modificar el NavBar, Filter, Footer o la Clase "max-w-7xl mx-auto px-5" (márgenes)) -->
+    <div class="flex flex-col min-h-screen">
         <Navbar />
         <FilterNavbar />
 
-        <div class="max-w-7xl mx-auto px-5">
+        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
 
              <!-- Versión escritorio -->
             <div class="container mt-5 hidden md:flex">
