@@ -27,7 +27,7 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 | 2.0 | 13/02/2025 | Pawtel hoteles para mascotas | Luis Mellado Díaz |
 | 2.1 | 13/02/2025 | Enlaces importantes y contribuidores | Luis Mellado Díaz |
 | 2.2 | 13/02/2025 | Licencia | Luis Mellado Díaz |
-
+| 2.3 | 05/03/2025 | Información PWA descargable | Francisco Miguel Jiménez Morales |
 
 
 
@@ -58,6 +58,8 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 ## 🚀 Instalación
 
 Para instalar y ejecutar el proyecto de **PawTel**, siga los pasos detallados en el archivo [docs/USAGE.md](docs/USAGE.md).
+
+Si accede desde el despliegue en la nube, podría descargar el proyecto como aplicación desde su navegador, ya que Pawtel es una PWA.
 
 ----
 
