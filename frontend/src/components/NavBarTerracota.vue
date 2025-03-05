@@ -5,6 +5,7 @@
       <div class="menu-icon md:hidden flex flex-col items-end" @click="toggleMenu">
         <i class="fas fa-bars text-white text-3xl"></i>
       </div>
+
       <router-link to="/">
         <img src="../assets/pawtel-logo-white.png" alt="Logo" class="logo h-[50px]" />
       </router-link>
@@ -17,12 +18,17 @@
         <router-link to="/contacto" class="hover:underline">Contacto</router-link>
       </div>
 
-      <!-- Botones de autenticación en pantallas grandes -->
-      <div class="auth-buttons flex gap-5 text-white hidden md:flex">
+      <!-- Botones de autenticación y perfil en pantallas grandes -->
+      <div class="auth-buttons flex items-center gap-5 text-white hidden md:flex">
         <button class="auth-button login text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</button>
         <button class="auth-button sign-in text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</button>
+        <!-- Icono de perfil alineado -->
+        <router-link to="/userProfile" class="text-white hover:text-gray-900 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
+          </svg>
+        </router-link>
       </div>
-
     </div>
 
     <!-- Menú desplegable en móvil -->
@@ -36,6 +42,12 @@
       <div class="auth-buttons flex flex-col gap-3 text-terracota mt-4">
         <button class="auth-button login bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</button>
         <button class="auth-button sign-in bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</button>
+        <!-- Icono de perfil -->
+        <router-link to="/UserProfile" class="text-white hover:text-gray-900 flex items-center justify-center mt-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
+          </svg>
+        </router-link>
       </div>
     </div>
   </nav>
@@ -61,6 +73,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
   @media (max-width: 900px) {

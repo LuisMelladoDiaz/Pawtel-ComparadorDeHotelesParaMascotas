@@ -32,6 +32,7 @@ import Footer from '../components/Footer.vue';
             <h2 class="text-xl font-semibold mb-4">Pantallas</h2>
             <router-link to="/templateScreen1" class="text-xl text-terracota hover:underline">Template Screen 1</router-link>
             <router-link to="/templateScreen2" class="text-xl text-terracota hover:underline">Template Screen 2</router-link>
+            <router-link to="/userProfile" class="text-xl text-terracota hover:underline">Perfil de usuario</router-link>
             <router-link to="/hotelOwnerPanel" class="text-xl text-terracota hover:underline">Hotel Owner Panel</router-link>
             <router-link to="/hotels" class="text-xl text-terracota hover:underline">Hotel List</router-link>
           </div>
@@ -43,6 +44,7 @@ import Footer from '../components/Footer.vue';
         </div>
       </section>
     </div>
+    
     <Footer />
   </div>
 </template>
@@ -51,18 +53,6 @@ import Footer from '../components/Footer.vue';
 @media (max-width: 900px) {
   .hero h1 {
     font-size: 2.5rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  .cards {
-    padding-top: 8rem;
-  }
-
-  .card {
-    padding: 1.5rem;
   }
 }
 </style>
