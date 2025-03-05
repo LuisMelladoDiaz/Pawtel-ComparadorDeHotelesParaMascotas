@@ -19,8 +19,8 @@
     ></i>
 
     <!-- Mostrar fechas -->
-    <p 
-      :class="formattedDate ? 'text-pawtel-black' : 'text-pawtel-gray'" 
+    <p
+      :class="formattedDate ? 'text-pawtel-black' : 'text-pawtel-gray'"
       class="text-[18px] absolute left-[35px] bottom-[7px] w-auto pointer-events-none inline-block whitespace-nowrap overflow-hidden text-ellipsis">
       {{ formattedDate || 'Selecciona un rango de fechas' }}
     </p>
