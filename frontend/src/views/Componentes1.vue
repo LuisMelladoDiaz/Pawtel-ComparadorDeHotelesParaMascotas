@@ -5,7 +5,7 @@
     <FilterNavbar />
 
     <div class="w-4/5 mx-auto">
-      
+
       <div class="p-6 flex flex-col gap-6 items-center">
         <!-- Botones de acción -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -35,14 +35,14 @@
             <label for="numberInput" class="text-lg">Ejemplo de Input Numérico</label>
             <InputNumber id="numberInput" placeholder="Número" />
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </div>
 
-    
+
 
     <!-- Modal -->
     <Modal :isOpen="showModal" title="Ejemplo Modal" @close="showModal = false">
@@ -57,9 +57,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import Navbar from '../components/Navbar.vue';
-import NavbarTerracota from '../components/NavbarTerracota.vue';
-import FilterNavbar from '../components/FilterNavbar.vue';
+import Navbar from '../components/NavBar.vue';
+import NavbarTerracota from '../components/NavBarTerracota.vue';
+import FilterNavbar from '../components/FilterNavBar.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import Modal from '../components/Modal.vue';
