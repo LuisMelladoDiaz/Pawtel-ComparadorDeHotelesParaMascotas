@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="flex flex-col min-h-screen">
         <Navbar />
         <FilterNavbar />
 
-        <div class="max-w-7xl mx-auto px-5">
+        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
             <!-- Desktop version -->
             <div class="container mt-5 hidden md:flex">
                 
@@ -229,7 +229,7 @@
                 <!-- Filtered hotels container -->
                     
                     <!-- Applied Filters -->
-                    <div v-if="appliedFilters.length > 0" class="applied-filters-container flex flex-wrap flex-row gap-2 pl-3 pb-5 self-start text-white overflow-x-auto whitespace-nowrap">
+                    <div v-if="appliedFilters.length > 0" class="applied-filters-container flex flex-row gap-2 pl-3 pb-5 self-start text-white overflow-x-auto w-full whitespace-nowrap">
                         <AppliedFilter v-for="(filter, index) in appliedFilters" :key="index" :filterName="filter" @remove="removeFilter(filter)" />
                     </div>
 

@@ -6,7 +6,7 @@
         <i class="fas fa-bars text-terracota text-3xl"></i>
       </div>
 
-      <router-link to="/home">
+      <router-link to="/">
         <img src="../assets/pawtel-logo.png" alt="Logo" class="logo h-[50px]" />
       </router-link>
 
@@ -19,11 +19,17 @@
       </div>
 
       <!-- Botones de autenticación en pantallas grandes -->
-      <div class="auth-buttons flex gap-5 text-white hidden md:flex">
-        <button class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</button>
-        <button class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</button>
-      </div>
+      <div class="auth-buttons flex items-center gap-5 hidden md:flex">
+        <button class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Iniciar Sesión</button>
+        <button class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Crear Cuenta</button>
 
+        <!-- Icono de perfil -->
+        <router-link to="/UserProfile" class="text-terracota hover:text-terracota-dark flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
+          </svg>
+        </router-link>
+      </div>
 
     </div>
 
@@ -38,6 +44,12 @@
       <div class="auth-buttons flex flex-col gap-3 text-white mt-4">
         <button class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</button>
         <button class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</button>
+      <!-- Icono de perfil -->
+        <router-link to="/userProfile" class="bg-terracota hover:bg-terracota-dark rounded p-2 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
+          </svg>
+        </router-link>
       </div>
     </div>
   </nav>
@@ -84,11 +96,11 @@ export default {
       margin-top: 5px;
       border-color: #c36c6c;
       background-color: white;
-      border: 2px solid #c36c6c ; /* Borde superior en terracota */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+      border: 2px solid #c36c6c;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       z-index: 10;
       padding: 20px;
-      border-radius: 8px; /* Bordes redondeados */
+      border-radius: 8px;
       max-height: auto;
     }
 
@@ -97,7 +109,7 @@ export default {
       display: block;
       padding: 12px;
       font-size: 16px;
-      color: #c36c6c ;
+      color: #c36c6c;
       font-weight: bold;
       text-decoration: none;
     }
@@ -106,6 +118,8 @@ export default {
       background-color: #f3f1f1;
       border-radius: 4px;
     }
+
+  
 
     /* Estilos para el ícono de hamburguesa */
     .menu-icon span {
@@ -122,11 +136,10 @@ export default {
       width: 107px;
       position: absolute;
       right: 30px;
-      top: 21px
+      top: 21px;
     }
     .logo {
       height: 50px;
     }
-
   }
 </style>
