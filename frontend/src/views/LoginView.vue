@@ -110,8 +110,8 @@ const logout = async () => {
                     <form @submit.prevent="login">
                         <!-- Campo de correo -->
                         <div class="mt-4">
-                            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input type="email" id="email" v-model="email"
+                            <label for="username" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                            <input type="username" id="username" v-model="username"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
                         </div>
