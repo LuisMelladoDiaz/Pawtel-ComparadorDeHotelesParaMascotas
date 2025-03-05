@@ -71,7 +71,7 @@ const deleteAccount = () => {
                         <h2 class="text-xl font-semibold mb-5">Información Personal</h2>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-gray-700">Username</label>
+                                <label class="block text-gray-700">Nombre de Usuario</label>
                                 <input v-model="user.username" type="text" class="w-full p-1.5 border rounded" />
                             </div>
                             <div>
@@ -79,11 +79,11 @@ const deleteAccount = () => {
                                 <input v-model="user.email" type="email" class="w-full p-1.5 border rounded" />
                             </div>
                             <div>
-                                <label class="block text-gray-700">First Name</label>
+                                <label class="block text-gray-700">Nombre</label>
                                 <input v-model="user.firstName" type="text" class="w-full p-1.5 border rounded" />
                             </div>
                             <div>
-                                <label class="block text-gray-700">Last Name</label>
+                                <label class="block text-gray-700">Apellidos</label>
                                 <input v-model="user.lastName" type="text" class="w-full p-1.5 border rounded" />
                             </div>
                             <div>
