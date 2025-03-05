@@ -10,6 +10,7 @@ import TemplateScreen2 from './views/TemplateScreen2.vue'
 import UserProfile from './views/UserProfile.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
+import RegisterView from './views/RegisterView.vue'
 import HotelOwnerPanel from './views/hotelOwnerPanel.vue'
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
   { path: '/componentes1', component: Componentes1},
   { path: '/componentes2', component: Componentes2},
   { path: '/login', component: LoginView},
+  { path: '/register', component: RegisterView},
   { path: '/templateScreen1', component: TemplateScreen1},
   { path: '/templateScreen2', component: TemplateScreen2},
   { path : '/userProfile', component: UserProfile},
