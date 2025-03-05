@@ -12,16 +12,14 @@ const email = ref('');
 const phone = ref('');
 const password = ref('');
 const confirmPassword = ref('');
-const dateJoined = ref('');
 const errorMessage = ref('');
 const router = useRouter();
 
-// Usamos el hook que devuelve la mutación
 const { mutateAsync: createHotelOwner } = useCreateHotelOwner();
 
-// Register function
+
 const register = async () => {
-    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value || !dateJoined.value) {
+    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value) {
         alert('Por favor, completa todos los campos');
         return;
     }
@@ -31,6 +29,9 @@ const register = async () => {
         return;
     }
 
+    // Obtener la fecha actual de registro
+    const currentDate = new Date().toISOString().split('T')[0]; // Formato YYYY-MM-DD
+
     try {
         // Llamamos a la mutación pasando los datos
         await createHotelOwner({
@@ -38,7 +39,8 @@ const register = async () => {
             email: email.value,
             phone: phone.value,
             password: password.value,
-            date_joined: dateJoined.value
+            date_joined: currentDate, // Fecha de registro generada automáticamente
+            // El ID puede ser generado automáticamente por el backend, si es necesario
         });
 
         alert('Registro exitoso, ahora puedes iniciar sesión');
@@ -63,13 +65,13 @@ const register = async () => {
                         <InputText v-model="phone" label="Teléfono" type="tel" />
                         <InputText v-model="password" label="Contraseña" type="password" />
                         <InputText v-model="confirmPassword" label="Confirmar Contraseña" type="password" />
-                        <InputText v-model="dateJoined" label="Fecha de Registro" type="date" />
-
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
 
-                        <button type="submit" class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark">
-                            Registrarse
-                        </button>
+                        <div class="mt-6">
+                            <button type="submit" class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark">
+                                 Registrarse
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
