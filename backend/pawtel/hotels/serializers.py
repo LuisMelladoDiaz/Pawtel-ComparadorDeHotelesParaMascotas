@@ -1,18 +1,30 @@
-from rest_framework import serializers
+from pawtel.base_serializer import BaseSerializer
 from pawtel.hotels.models import Hotel
 
 
-class HotelSerializer(serializers.ModelSerializer):
+class HotelSerializer(BaseSerializer):
+
+    fields_required_for_post = ["name", "address", "city", "description", "hotel_owner"]
+    fields_editable = ["name", "address", "city", "description"]
+    fields_not_readable = []
+
     class Meta:
         model = Hotel
         fields = [
-            "id", "name", "address", "city", "description", "hotel_owner"
+            "id",
+            "is_archived",
+            "name",
+            "address",
+            "city",
+            "description",
+            "hotel_owner",
         ]
         extra_kwargs = {
             "id": {"read_only": True},
-            "name": {"required": True, "max_length": 100, "allow_null": False},
-            "address": {"required": True, "max_length": 100, "allow_null": False},
-            "city": {"required": True, "max_length": 50, "allow_null": False},
-            "description": {"required": True, "max_length": 300, "allow_null": False},
-            "hotel_owner": {"required": True, "allow_null": False},
+            "is_archived": {"read_only": True},
+            "name": {"max_length": 100, "allow_null": False},
+            "address": {"max_length": 100, "allow_null": False},
+            "city": {"max_length": 50, "allow_null": False},
+            "description": {"max_length": 300, "allow_null": False},
+            "hotel_owner": {"allow_null": False},
         }

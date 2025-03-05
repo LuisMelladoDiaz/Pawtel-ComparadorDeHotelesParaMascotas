@@ -3,17 +3,17 @@
     <label :for="id">{{ label }}</label>
     <div class="input-wrapper shadow-sm ">
       <span v-if="icon" :class="['input-icon text-pawtel-black', icon]"></span>
-      <input 
-        :id="id" 
-        :value="modelValue" 
-        @input="$emit('update:modelValue', $event.target.value)" 
-        type="text" 
-        :placeholder="placeholder" 
-        class="input-text" 
+      <input
+        :id="id"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        type="text"
+        :placeholder="placeholder"
+        class="input-text"
       />
-      <span 
-        v-if="modelValue" 
-        class="absolute cursor-pointer text-pawtel-black hover:text-terracota mr-2 right-2 font-bold" 
+      <span
+        v-if="modelValue"
+        class="absolute cursor-pointer text-pawtel-black hover:text-terracota mr-2 right-2 font-bold"
         @click="$emit('update:modelValue', '')"
       >
         <i class="fas fa-times"></i>

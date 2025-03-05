@@ -48,8 +48,14 @@ pip install -r requirements.txt
 ```bash
 pre-commit install
 ```
+
+Se puede comprobar que está instalado.
+```bash
+pre-commit --version
+```
+
 Una vez hecho esto, al hacer commit debería lanzarse el hook.
-No obstante como paso opcional, puedes correrlo manualmente sin hacer commit asi (Opcional):
+No obstante como paso opcional, puedes correrlo manualmente sin hacer commit así (Opcional):
 ```bash
 pre-commit run --all-files
 ```
