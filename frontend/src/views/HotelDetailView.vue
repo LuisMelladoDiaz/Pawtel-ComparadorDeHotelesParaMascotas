@@ -9,7 +9,7 @@ import HotelDetailCard from '../components/HotelDetailCard.vue';
 const route = useRoute();
 const hotel = ref({
   image: '/src/assets/foto1.jpg',
-  name: 'Hotel Ejemplo',
+  name: 'Caniland Resort',
   location: 'Madrid, España',
   details: ['WiFi gratis', 'Desayuno incluido', 'Piscina', 'Gimnasio'],
   rating: 4.5,
@@ -28,14 +28,14 @@ const hotel = ref({
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <Navbar />
     <FilterNavbar />
 
     <!-- Versión de escritorio -->
-    <div class="hidden md:flex flex-col">
-      <div class="bg-white shadow-md py-2 flex justify-center gap-6 text-black text-lg border-b">
-        <a href="#" class="hover:underline">Vista General</a>
+    <div class="hidden md:flex items-center max-w-7xl mx-auto px-5 w-full flex-col flex-grow">
+      <div class="bg-white shadow-md py-3 flex justify-between max-w-7xl mx-auto w-full px-10 text-black text-lg border-b">
+        <a href="#" class="hover:underline font-bold">Vista General</a>
         <a href="#" class="hover:underline">Información y Precios</a>
         <a href="#" class="hover:underline">Servicios</a>
         <a href="#" class="hover:underline">Requisitos</a>
@@ -43,7 +43,7 @@ const hotel = ref({
         <a href="#" class="hover:underline">Opiniones de Clientes</a>
       </div>
 
-      <div class="max-w-7xl mx-auto px-5 py-10">
+      <div class="max-w-7xl mx-auto py-10">
         <HotelDetailCard v-bind="hotel" />
       </div>
     </div>

@@ -17,10 +17,10 @@ defineProps({
 
 <template>
   <!-- Versión Escritorio -->
-  <div class="hotel-detail-container max-w-7xl mx-auto p-6 shadow-lg flex flex-col hidden md:flex">
+  <div class="hotel-detail-container max-w-7xl mx-auto flex-col hidden md:flex">
     <div class="bg-terracota text-white text-center py-4 rounded-t-lg">
       <h2 class="text-3xl font-bold">{{ name }}</h2>
-      <p class="text-lg flex items-center justify-center">
+      <p class="text-lg flex items-center justify-center underline">
         <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
         {{ location }}
       </p>
