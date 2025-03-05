@@ -1,63 +1,87 @@
 <script setup>
-/* Aquí se deben importar los diferentes componentes y recursos */
 import { ref } from 'vue';
-import Navbar from '../components/NavBar.vue';
+import { useRouter } from 'vue-router';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
-import FilterNavbar from '../components/FilterNavBar.vue';
 import Footer from '../components/Footer.vue';
+import { useCreateHotelOwner } from '@/data-layer/hooks/hotelOwners'; // Importa el hook correctamente
+import InputText from '@/components/InputText.vue';
+
+// Form fields
+const username = ref('');
+const email = ref('');
+const phone = ref('');
+const password = ref('');
+const confirmPassword = ref('');
+const dateJoined = ref('');
+const errorMessage = ref('');
+const router = useRouter();
+
+// Usamos el hook que devuelve la mutación
+const { mutateAsync: createHotelOwner } = useCreateHotelOwner();
+
+// Register function
+const register = async () => {
+    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value || !dateJoined.value) {
+        alert('Por favor, completa todos los campos');
+        return;
+    }
+
+    if (password.value !== confirmPassword.value) {
+        alert('Las contraseñas no coinciden');
+        return;
+    }
+
+    try {
+        // Llamamos a la mutación pasando los datos
+        await createHotelOwner({
+            username: username.value,
+            email: email.value,
+            phone: phone.value,
+            password: password.value,
+            date_joined: dateJoined.value
+        });
+
+        alert('Registro exitoso, ahora puedes iniciar sesión');
+        router.push('/login'); // Redirige a la página de inicio de sesión
+    } catch (error) {
+        console.error('Error al registrarse:', error);
+        alert('Hubo un error al registrarse. Inténtalo de nuevo.');
+    }
+};
 </script>
 
-
-
 <template>
-    <!-- Aquí se crea la pantalla como tal (No modificar el NavBar, Filter, Footer o la Clase "max-w-7xl mx-auto px-5" (márgenes)) -->
     <div>
         <NavbarTerracota />
-
         <div class="max-w-7xl mx-auto px-5">
+            <div class="container flex justify-center items-center mt-10">
+                <div class="w-1/3 bg-white shadow-lg rounded-lg p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
+                    <form @submit.prevent="register">
+                        <InputText v-model="username" label="Nombre de Usuario" />
+                        <InputText v-model="email" label="Correo Electrónico" type="email" />
+                        <InputText v-model="phone" label="Teléfono" type="tel" />
+                        <InputText v-model="password" label="Contraseña" type="password" />
+                        <InputText v-model="confirmPassword" label="Confirmar Contraseña" type="password" />
+                        <InputText v-model="dateJoined" label="Fecha de Registro" type="date" />
 
-            <!-- Versión escritorio -->
-            <div class="container flex mt-5 hidden md:flex">
+                        <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
 
-
+                        <button type="submit" class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark">
+                            Registrarse
+                        </button>
+                    </form>
+                </div>
             </div>
-
-
-
-
-            <!-- Versión móvil -->
-            <div class="container flex flex-col items-start mt-5 md:hidden">
-
-
-            </div>
-
         </div>
-
         <Footer />
     </div>
 </template>
 
-
-
-
 <style scoped>
-/*
-Estilos de la versión móvil
-(Para testearlo le dais a inspeccionar y arriba a la izq de la ventana podeis poner el navegador en versión móvil, eligiendo las dimensiones de un Iphone o Samsung por ejemplo.
-También podeis verlo desde vuestro móvil iniciando el frontend con "npm run dev -- --host" y copiando la url que te sale en Network [ tu_ip:5173 ])
-La idea es que los estilos de la web de escritorio estén en el primer <div>, y los de móvil en el segundo <div>, aplicando Tailwind para los estilos de forma independiente.
-*/
-
 @media (max-width: 900px) {
-
-    /* Aquí empiezan las clases CSS de la versión móvil */
-    .example {
-        display: flex;
+    .container {
+        padding: 1rem;
     }
-
-    .example2 {
-        display: flex;
-    }
-
 }
 </style>
