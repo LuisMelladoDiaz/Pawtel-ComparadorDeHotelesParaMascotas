@@ -31,10 +31,10 @@
               <td class="px-4 py-2">{{ hotel.city }}</td>
               <td class="px-4 py-2">{{ hotel.description }}</td>
               <td class="px-4 py-2 text-center flex justify-center gap-2">
-                <button @click="openModal(hotel)" class="text-oliva hover:text-oliva-dark">
+                <button @click="openModal(hotel)" class="text-oliva hover:text-oliva-dark text-[20px]">
                   <i class="fas fa-edit"></i>
                 </button>
-                <button @click="deleteHotel(hotel.id)" class="text-terracota hover:text-terracota-dark">
+                <button @click="deleteHotel(hotel.id)" class="text-terracota hover:text-terracota-dark text-[20px]">
                   <i class="fas fa-trash"></i>
                 </button>
               </td>
