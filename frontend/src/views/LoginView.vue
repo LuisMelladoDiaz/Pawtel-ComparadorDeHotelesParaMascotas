@@ -3,19 +3,50 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
+import { useLoginMutation, useLogoutMutation } from '@/data-layer/auth';
 
-const email = ref('');
+// Refs para los campos de usuario y contraseña
+const username = ref('');
 const password = ref('');
 const errorMessage = ref('');
 const router = useRouter();
 
+// Inicializar la mutación de login
+const loginMutation = useLoginMutation();
+const logoutMutation = useLogoutMutation();
+
 /* Función para manejar el inicio de sesión */
 const login = async () => {
-  await loginMutation.mutateAsync({ username: username.value, password: password.value });
+    if (!username.value || !password.value) {
+        alert('Por favor, completa todos los campos');
+        return;
+    }
+
+    try {
+        // Ejecutar la mutación de login
+        await loginMutation.mutateAsync({
+            username: username.value,
+            password: password.value
+        });
+
+        alert('Inicio de sesión exitoso');
+        router.push('/dashboard'); // Redirige a la página principal
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        alert('Usuario o contraseña incorrectos');
+    }
 };
 
+/* Función para cerrar sesión */
 const logout = async () => {
-  await logoutMutation.mutateAsync();
+    try {
+        await logoutMutation.mutateAsync();
+        alert('Sesión cerrada correctamente');
+        router.push('/login'); // Redirige a la página de login
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        alert('Error al cerrar sesión');
+    }
 };
 </script>
 
@@ -35,8 +66,8 @@ const logout = async () => {
                     <form @submit.prevent="login">
                         <!-- Campo de correo -->
                         <div class="mt-4">
-                            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input type="email" id="email" v-model="email"
+                            <label for="username" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                            <input type="username" id="username" v-model="username"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
                         </div>
@@ -54,7 +85,7 @@ const logout = async () => {
 
                         <!-- Botón de inicio de sesión -->
                         <div class="mt-6">
-                            <button type="submit"
+                            <button @click="login"
                                 class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
                                 Iniciar Sesión
                             </button>
