@@ -11,7 +11,11 @@ const petCount = ref('');
 
 const onSearch = () => {
   console.log('Filtrando por:', { city: city.value, dateRange: dateRange.value, petCount: petCount.value });
+  
+  // Redirigir a /hotels
+  window.location.href = "/hotels";
 };
+
 </script>
 
 <template>
