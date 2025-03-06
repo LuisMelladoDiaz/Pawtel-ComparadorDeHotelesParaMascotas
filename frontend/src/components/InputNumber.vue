@@ -3,13 +3,13 @@
     <label :for="id">{{ label }}</label>
     <div class="input-wrapper shadow-sm">
       <span v-if="icon" :class="['input-icon text-pawtel-black', icon]"></span>
-      <input 
-        :id="id" 
-        :value="modelValue" 
-        @input="$emit('update:modelValue', $event.target.value)" 
-        type="number" 
-        :placeholder="placeholder" 
-        class="input-number" 
+      <input
+        :id="id"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        type="number"
+        :placeholder="placeholder"
+        class="input-number"
         min="1"
       />
     </div>

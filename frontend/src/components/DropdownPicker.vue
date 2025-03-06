@@ -6,8 +6,8 @@
 
     <div class="flex items-center bg-white rounded-lg shadow-sm min-w-64 text-[18px] font-complementario">
 
-      <button 
-        @click="toggleDropdown" 
+      <button
+        @click="toggleDropdown"
         :class="{'text-pawtel-gray': !modelValue}"
         class="flex-1 py-2 px-4 text-gray-700 text-left focus:outline-none cursor-pointer"
       >
@@ -15,16 +15,16 @@
       </button>
 
       <!-- ▼ -->
-      <font-awesome-icon 
-        @click="toggleDropdown" 
-        :icon="['fas', 'chevron-down']" 
+      <font-awesome-icon
+        @click="toggleDropdown"
+        :icon="['fas', 'chevron-down']"
         class="mr-2 relative bottom-[2px] text-pawtel-black cursor-pointer"
       />
 
       <!-- X -->
-      <button 
-        v-if="modelValue !== null" 
-        @click="clearSelection" 
+      <button
+        v-if="modelValue !== null"
+        @click="clearSelection"
         class="px-3 text-pawtel-black hover:text-terracota-dark focus:outline-none cursor-pointer"
       >
         <font-awesome-icon :icon="['fas', 'times']" />
@@ -32,14 +32,14 @@
 
     </div>
 
-      <div 
-        v-if="isOpen" 
+      <div
+        v-if="isOpen"
         class="absolute mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg z-10"
       >
         <ul class="py-1 text-gray-700">
-          <li 
-            v-for="(option, index) in options" 
-            :key="index" 
+          <li
+            v-for="(option, index) in options"
+            :key="index"
             @click="selectOption(option)"
             class="px-4 py-2 cursor-pointer hover:bg-gray-100"
           >

@@ -33,7 +33,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
+    "rest_framework_simplejwt",
     "sample",
+    "authapp",
+    "pawtel.app_users.apps.AppUsersConfig",
+    "pawtel.hotel_owners.apps.HotelOwnersConfig",
+    "pawtel.hotels.apps.HotelsConfig",
+    "pawtel.rooms.apps.RoomsConfig",
+    "pawtel.room_types.apps.RoomTypesConfig",
 ]
 
 MIDDLEWARE = [
@@ -47,12 +54,36 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# Configurar REST Framework para usar JWT
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",  # Clase de autenticación JWT
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",  # Requiere autenticación para acceder
+    ],
+}
+
+# Configurar SimpleJWT
+
+SIMPLE_JWT = {
+    "AUTH_COOKIE": "access_token",  # Nombre de la cookie con el JWT
+    "AUTH_COOKIE_HTTP_ONLY": True,  # Seguridad para que no sea accesible por JavaScript
+    "AUTH_COOKIE_SAMESITE": "None",  # Configuración de SameSite para las cookies
+    "AUTH_COOKIE_SECURE": True,  # Puede ser True si usas HTTPS
+}
+
+# Configurar CORS para permitir peticiones del frontend
+
 ROOT_URLCONF = "pawtel.urls"
 
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS").split(",")
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
-CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_HEADERS = ["Content-Type", "Authorization"]
 
 TEMPLATES = [
     {
