@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar.vue';
 import Footer from '../components/Footer.vue';
 import FilterNavbar from '../components/FilterNavbar.vue';
 import Carrusel from '../components/Carrusel.vue';
+import Button from '../components/Button.vue';
 </script>
 
 <template>
@@ -16,8 +17,7 @@ import Carrusel from '../components/Carrusel.vue';
             <span class="italic" style="color: var(--color-terracota);">mascota.</span>
           </h1>
           <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
-          <button class="bg-red-500 text-white px-6 py-3 rounded-lg font-bold shadow-md hover:bg-red-600 transition">REGÍSTRARME</button>
-
+          <Button type="reject" @click="handleLogin">Iniciar Sesión</Button>
         </div>
         <div class="lg:w-1/2">
           <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">
@@ -51,24 +51,34 @@ import Carrusel from '../components/Carrusel.vue';
     </section>
     
     <!-- Sección Descarga la App -->
-    <section class="bg-[#C36C6C] relative mx-auto py-2 max-w-7xl px-5 rounded-lg overflow-hidden">
-      <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
-        <div class="lg:w-1/2 text-left p-6 text-white">
-          <h2 class="text-3xl font-bold mb-4 font-nunito">Lleva Pawtel contigo, donde vayas!</h2>
-          <p class="text-lg mb-6">No dejes escapar ninguna gran oferta con las alertas de precios.</p>
-          <div class="flex space-x-4">
-            <img src="../assets/qr.png" alt="QR Code" class="w-32 h-32">
-            <div class="flex flex-col space-y-2">
-              <img src="../assets/googlePlay.png" alt="Google Play" class="w-12">
-              <img src="../assets/appStore.png" alt="App Store" class="w-12">
-            </div>
-          </div>
-        </div>
-        <div class="lg:w-1/2 flex justify-center">
-          <img src="../assets/app.png" alt="App Pawtel" class="w-80 h-auto rounded-none shadow-lg object-cover">
+    <!-- Sección Descarga la App -->
+<section class="bg-[#C36C6C] relative mx-auto py-2 max-w-7xl px-5 rounded-lg overflow-hidden">
+  <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
+    <div class="lg:w-1/2 text-left p-6 text-white">
+      <h2 class="text-3xl font-bold mb-4 font-nunito">
+        ¡Lleva Pawtel contigo, donde vayas!
+      </h2>
+      <p class="text-lg mb-6">
+        Próximamente disponible en tu móvil para que no te pierdas ninguna oferta.
+      </p>
+      <!-- Eliminamos la sección de QR y logos de tiendas -->
+      <!--
+      <div class="flex space-x-4">
+        <img src="../assets/qr.png" alt="QR Code" class="w-32 h-32">
+        <div class="flex flex-col space-y-2">
+          <img src="../assets/googlePlay.png" alt="Google Play" class="w-12">
+          <img src="../assets/appStore.png" alt="App Store" class="w-12">
         </div>
       </div>
-    </section>
+      -->
+    </div>
+    <div class="lg:w-1/2 flex justify-center">
+      <!-- Puedes mantener la imagen de la app o reemplazarla por otra -->
+      <img src="../assets/app.png" alt="App Pawtel" class="w-80 h-auto rounded-none shadow-lg object-cover">
+    </div>
+  </div>
+</section>
+
 
     <!-- Sección Beneficios Pawtel -->
     <section class="relative mx-auto py-12 max-w-7xl px-5">
@@ -105,7 +115,7 @@ import Carrusel from '../components/Carrusel.vue';
         <p class="text-gray-700 mb-6">
           ¡Únete a la comunidad de Pawtel y descubre la tranquilidad de dejar a tu mascota, ya sea cuando viajas o cuando necesitas una solución confiable!
         </p>
-        <button class="bg-green-500 text-white px-6 py-3 rounded-lg">¡Quiero unirme!</button>
+        <Button type="add" @click="handleLogin">¡Quiero unirme!</Button>
       </div>
     </section>
     <Footer />
