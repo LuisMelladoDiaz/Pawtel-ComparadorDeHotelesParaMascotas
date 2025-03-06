@@ -3,12 +3,15 @@ import axios from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type Hotel = {
-  id: number;
+  id?: number;
+  is_archived: boolean;
   name: string;
   address: string;
   city: string;
   description: string;
+  hotel_owner?: string;
 };
+
 
 export const fetchAllHotels = async () => {
   const url = `${API_BASE_URL}/hotels`;
