@@ -8,119 +8,96 @@ from rest_framework.exceptions import NotFound, PermissionDenied
 
 class HotelService:
 
+    # Common -----------------------------------------------------------------
+
     @staticmethod
     def authorize_action_hotel(request, pk):
-
-        hotel = Hotel.objects.get(id=pk)
+        hotel = HotelService.retrieve_hotel(pk)
 
         if not hotel:
-            raise NotFound("Hotel owner does not exist.")
+            raise NotFound("Hotel does not exist.")
 
         if hotel.is_archived:
             raise PermissionDenied("")
 
     @staticmethod
+    def serialize_output_hotel(hotel, many=False):
+        return HotelSerializer(hotel, many=many).data
+
+    # GET --------------------------------------------------------------------
+
+    @staticmethod
     def retrieve_hotel(pk):
-        return Hotel.objects.get(pk=pk)
+        return Hotel.objects.get(id=pk)
+
+    # POST -------------------------------------------------------------------
 
     @staticmethod
     def serialize_input_hotel_create(request):
-        serializer = HotelSerializer(data=request.data)
-
-        if not serializer.is_valid():
-            raise ValidationError(serializer.errors)
-
+        context = {"request": request}
+        serializer = HotelSerializer(data=request.data, context=context)
         return serializer
 
     @staticmethod
     def validate_create_hotel(input_serializer):
         if not input_serializer.is_valid():
-            raise PermissionDenied("Not valid data")
-        return True
+            raise ValidationError(input_serializer.errors)
+
+        name = input_serializer.validated_data.get("name")
+
+        if name and Hotel.objects.filter(name=name).exists():
+            raise ValidationError({"username": "Name in use."})
 
     @staticmethod
     def create_hotel(input_serializer):
         hotel_created = input_serializer.save()
         return hotel_created
 
-    @staticmethod
-    def serialize_output_hotel(hotel):
-        return HotelSerializer(hotel).data
+    # PUT/PATCH --------------------------------------------------------------
 
     @staticmethod
     def serialize_input_hotel_update(request, pk):
-        data = {
-            key: value
-            for key, value in request.data.items()
-            if key
-            in HotelSerializer.fields_required_for_post
-            + HotelSerializer.fields_editable
-        }
-        serializer = HotelSerializer(data=data)
-
-        if not serializer.is_valid():
-            raise ValidationError(serializer.errors)
-
+        hotel = HotelService.retrieve_hotel(pk)
+        context = {"request": request}
+        serializer = HotelSerializer(instance=hotel, data=request.data, context=context)
         return serializer
 
     @staticmethod
     def validate_update_hotel(pk, input_serializer):
         if not input_serializer.is_valid():
-            raise PermissionDenied("Not valid data.")
-        return True
+            raise ValidationError(input_serializer.errors)
+
+        name = input_serializer.validated_data.get("name")
+
+        if name and Hotel.objects.filter(name=name).exclude(id=pk).exists():
+            raise ValidationError({"username": "Name in use."})
 
     @staticmethod
     def update_hotel(pk, input_serializer):
-        hotel = Hotel.objects.get(pk=pk)
+        hotel = HotelService.retrieve_hotel(pk)
         return input_serializer.update(hotel, input_serializer.validated_data)
 
-    @staticmethod
-    def serialize_input_hotel_partial_update(request, pk):
-        data = {
-            key: value
-            for key, value in request.data.items()
-            if key
-            in HotelSerializer.fields_required_for_post
-            + HotelSerializer.fields_editable
-        }
-        serializer = HotelSerializer(data=data, partial=True)
-
-        if not serializer.is_valid():
-            raise ValidationError(serializer.errors)
-
-        return serializer
-
-    @staticmethod
-    def validate_partial_update_hotel(pk, input_serializer):
-        if not input_serializer.is_valid():
-            raise PermissionDenied("dos para la actualización parcial del hotel.")
-        return True
-
-    @staticmethod
-    def partial_update_hotel(pk, input_serializer):
-        hotel = Hotel.objects.get(pk=pk)
-        return input_serializer.update(hotel, input_serializer.validated_data)
+    # DELETE -----------------------------------------------------------------
 
     @staticmethod
     def delete_hotel(pk):
-        hotel = Hotel.objects.get(pk=pk)
+        hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
 
-    @staticmethod
-    def get_all_room_types_of_hotel(request, pk):
-        hotel = Hotel.objects.get(pk=pk)
-        return RoomType.objects.filter(hotel=hotel)
+    # OTHERS -----------------------------------------------------------------
 
     @staticmethod
-    def get_total_vacancy_for_each_room_type_of_hotel(request, pk):
-        hotel = Hotel.objects.get(pk=pk)
-        room_types = RoomType.objects.filter(hotel=hotel)
+    def get_all_room_types_of_hotel(hotel_id):
+        return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
 
+    @staticmethod
+    def get_total_vacancy_for_each_room_type_of_hotel(pk):
+        room_types = HotelService.get_all_room_types_of_hotel(pk)
         vacancy_data = []
 
         for room_type in room_types:
-            rooms = Room.objects.filter(room_type=room_type).count()
-            total_vacancy = room_type.capacity * rooms
+            num_rooms = Room.objects.filter(room_type=room_type).count()
+            total_vacancy = room_type.capacity * num_rooms
             vacancy_data.append(
                 {"room_type_id": room_type.id, "total_vacancy": total_vacancy}
             )

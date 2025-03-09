@@ -13,14 +13,14 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         hotels = Hotel.objects.filter(is_archived=False)
-        serializer = HotelSerializer(hotels, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        output_serializer_data = HotelService.serialize_output_hotel(hotels, many=True)
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
         hotel = HotelService.retrieve_hotel(pk)
-        serializer = HotelSerializer(hotel)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        output_serializer_data = HotelService.serialize_output_hotel(hotel)
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         input_serializer = HotelService.serialize_input_hotel_create(request)
@@ -38,14 +38,9 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
-        HotelService.authorize_action_hotel(request, pk)
-        input_serializer = HotelService.serialize_input_hotel_partial_update(
+        return self.update(
             request, pk
-        )
-        HotelService.validate_partial_update_hotel(pk, input_serializer)
-        hotel_updated = HotelService.partial_update_hotel(pk, input_serializer)
-        output_serializer_data = HotelService.serialize_output_hotel(hotel_updated)
-        return Response(output_serializer_data, status=status.HTTP_200_OK)
+        )  # The context of the request specifies that it is PATCH
 
     def destroy(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
@@ -59,7 +54,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="get_all_room_types_of_hotel",
     )
     def get_all_room_types_of_hotel(self, request, pk=None):
-        room_types = HotelService.get_all_room_types_of_hotel(request, pk)
+        room_types = HotelService.get_all_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -70,7 +65,5 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="get_total_vacancy_for_each_room_type_of_hotel",
     )
     def get_total_vacancy_for_each_room_type_of_hotel(self, request, pk=None):
-        vacancy_data = HotelService.get_total_vacancy_for_each_room_type_of_hotel(
-            request, pk
-        )
+        vacancy_data = HotelService.get_total_vacancy_for_each_room_type_of_hotel(pk)
         return Response(vacancy_data, status=status.HTTP_200_OK)

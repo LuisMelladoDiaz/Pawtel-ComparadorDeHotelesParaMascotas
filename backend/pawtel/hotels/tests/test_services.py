@@ -46,14 +46,14 @@ class HotelServiceTest(TestCase):
         Room.objects.create(room_type=self.room_type2)
 
     def test_get_all_room_types_of_hotel(self):
-        room_types = HotelService.get_all_room_types_of_hotel(self, self.hotel.id)
+        room_types = HotelService.get_all_room_types_of_hotel(self.hotel.id)
         self.assertEqual(len(room_types), 2)
         self.assertEqual(room_types[0].name, "Single")
         self.assertEqual(room_types[1].name, "Double")
 
     def test_get_total_vacancy_for_each_room_type_of_hotel(self):
         vacancies = HotelService.get_total_vacancy_for_each_room_type_of_hotel(
-            self, self.hotel.id
+            self.hotel.id
         )
         self.assertEqual(len(vacancies), 2)
 
@@ -72,6 +72,6 @@ class HotelServiceTest(TestCase):
             name="Hotel with No Rooms", is_archived=False, hotel_owner=self.hotel_owner
         )
         vacancies = HotelService.get_total_vacancy_for_each_room_type_of_hotel(
-            self, hotel_no_rooms.id
+            hotel_no_rooms.id
         )
         self.assertEqual(len(vacancies), 0)

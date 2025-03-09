@@ -52,7 +52,12 @@ class HotelViewSetTestCase(TestCase):
 
     def test_update_hotel(self):
         url = reverse("hotel-detail", kwargs={"pk": self.hotel.id})
-        data = {"name": "Updated Hotel"}
+        data = {
+            "name": "Updated Hotel",
+            "address": "123 Street",
+            "city": "Test City",
+            "description": "A nice hotel",
+        }
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.hotel.refresh_from_db()
