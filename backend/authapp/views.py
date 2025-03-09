@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from pawtel.hotel_owners.models import HotelOwner
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -77,21 +77,14 @@ class RegisterView(APIView):
         username = request.data.get("username")
         password = request.data.get("password")
         email = request.data.get("email")
-        first_name = request.data.get("first_name") or "Noname"
-        last_name = request.data.get("last_name") or "Noname"
+        phone = request.data.get("phone")
+        role = request.data.get("role")
 
-        if username is None or password is None:
+        if role == "hotel_owner":
+            HotelOwner.create_hotel_owner(email, username, password, phone)
+        else:
             return Response(
-                {"error": "Please provide both username and password"}, status=400
+                {"error": "Invalid role. Only hotel owners are allowed."}, status=400
             )
-
-        user = User.objects.create_user(
-            username=username,
-            password=password,
-            email=email,
-            first_name=first_name,
-            last_name=last_name,
-        )
-        user.save()
 
         return Response({"message": "User created successfully"}, status=201)

@@ -30,9 +30,9 @@ export const fetchHotelOwnerById = async (hotelOwnerId: number) => {
 };
 
 export const createHotelOwner = async (hotelOwnerData: Omit<HotelOwner, 'id'>) => {
-    const url = `${API_BASE_URL}/hotel-owners/`;
+    const url = `${API_BASE_URL}/auth/register/`;
     try {
-        const response = await axios.post(url, hotelOwnerData);
+        const response = await axios.post(url, {...hotelOwnerData, role: "hotel_owner"});
         return response.data as HotelOwner;
     } catch (error) {
         if (axios.isAxiosError(error)) {
