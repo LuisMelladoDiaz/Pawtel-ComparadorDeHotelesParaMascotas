@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import authenticate
 from pawtel.hotel_owners.models import HotelOwner
+from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -16,7 +17,9 @@ class LoginView(APIView):
 
         user = authenticate(request, username=username, password=password)
         if user is None:
-            return Response({"error": "Invalid credentials"}, status=401)
+            return Response(
+                {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
+            )
 
         refresh = RefreshToken.for_user(user)
         response_data = {
@@ -84,7 +87,10 @@ class RegisterView(APIView):
             HotelOwner.create_hotel_owner(email, username, password, phone)
         else:
             return Response(
-                {"error": "Invalid role. Only hotel owners are allowed."}, status=400
+                {"error": "Invalid role. Only hotel owners are allowed."},
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
-        return Response({"message": "User created successfully"}, status=201)
+        return Response(
+            {"message": "User created successfully"}, status=status.HTTP_201_CREATED
+        )
