@@ -5,7 +5,7 @@
     class="card-container flex-wrap box-border gap-4 w-full border mb-4 p-[15px] rounded-lg border-[#cc6a4e] hidden md:flex">
 
     <div class="image-container flex-[1_1_15%] max-w-[200px] h-[200px] overflow-hidden">
-      <img :src="image" alt="Hotel" class="w-full h-full object-cover object-center" />
+      <img :src="image" alt="Hotel" class="w-full h-full object-cover object-center border rounded-lg border-gray-400" />
     </div>
 
     <div class="info-container flex-[1_1_35%] flex flex-col justify-between box-border w-full min-w-[300px] p-[5px]">
@@ -35,7 +35,9 @@
         <span class="price text-[1.75rem] text-[#C36C6C] font-bold">
           {{ price }}
         </span>
-        <Button type="add">Ver disponibilidad</Button>
+        <a href="/hotel/1">
+          <Button type="add">Ver disponibilidad</Button>
+        </a>
       </div>
     </div>
 
@@ -45,8 +47,8 @@
   <div
     class="card-container flex flex-row justify-between w-full flex-wrap box-border border mb-4 p-[15px] rounded-lg border-[#cc6a4e] md:hidden ">
 
-    <div class="image-container self-center max-w-[100px] h-[250px] overflow-hidden">
-      <img :src="image" alt="Hotel" class="w-full h-full object-cover object-center" />
+    <div class="image-container self-center max-w-[80px] h-[250px] overflow-hidden">
+      <img :src="image" alt="Hotel" class="w-full h-full object-cover object-center shadow-lg rounded-lg" />
     </div>
 
     <div class="flex flex-col w-[70%]">
@@ -78,7 +80,7 @@
             {{ price }}
           </div>
         </div>
-        <div>
+        <div class="flex items-center">
           <Button type="add" class="w-full">Ver disponibilidad</Button>
         </div>
       </div>
