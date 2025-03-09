@@ -116,6 +116,19 @@ class HotelOwnerViewSetTest(TestCase):
         self.active_hotel_owner.refresh_from_db()
         self.assertEqual(self.active_hotel_owner.email, "updated@example.com")
 
+    def test_update_hotel_owner_same_data(self):
+        """Test updating a hotel owner"""
+        url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
+        data = {
+            "username": "active_owner_2",
+            "email": "active_owner@example.com",
+            "phone": "+34123456789",
+        }
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.active_hotel_owner.refresh_from_db()
+        self.assertEqual(self.active_hotel_owner.email, "active_owner@example.com")
+
     def test_update_hotel_owner_inactive(self):
         """Test updating a hotel owner, but the hotel owner is inactive"""
         url = reverse("hotel-owner-detail", kwargs={"pk": self.inactive_hotel_owner.id})

@@ -13,18 +13,22 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         hotel_owners = HotelOwner.objects.filter(is_active=True)
-        serializer = HotelOwnerSerializer(hotel_owners, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
+            hotel_owners, many=True
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(request, pk)
-        serializer = HotelOwnerSerializer(hotel_owner)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
+            hotel_owner
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         input_serializer = HotelOwnerService.serialize_input_hotel_owner_create(request)
-        HotelOwnerService.validate_create_hotel_owner(input_serializer, request.user)
+        HotelOwnerService.validate_create_hotel_owner(input_serializer)
         hotel_owner_created = HotelOwnerService.create_hotel_owner(input_serializer)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner_created
@@ -36,7 +40,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         input_serializer = HotelOwnerService.serialize_input_hotel_owner_update(
             request, pk
         )
-        HotelOwnerService.validate_semantically_update_hotel_owner(pk, input_serializer)
+        HotelOwnerService.validate_update_hotel_owner(pk, input_serializer)
         hotel_owner_updated = HotelOwnerService.update_hotel_owner(pk, input_serializer)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner_updated
@@ -44,20 +48,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
-        input_serializer = HotelOwnerService.serialize_input_hotel_owner_partial_update(
+        return self.update(
             request, pk
-        )
-        HotelOwnerService.validate_semantically_partial_update_hotel_owner(
-            pk, input_serializer
-        )
-        hotel_owner_updated = HotelOwnerService.partial_update_hotel_owner(
-            pk, input_serializer
-        )
-        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
-            hotel_owner_updated
-        )
-        return Response(output_serializer_data, status=status.HTTP_200_OK)
+        )  # The context of the request specifies that it is PATCH
 
     def destroy(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
@@ -67,7 +60,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="hotels/get",
+        url_path="hotels",
         url_name="get_all_hotels_of_hotel_owner",
     )
     def get_all_hotels_of_hotel_owner(self, request, pk=None):
