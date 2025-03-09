@@ -11,14 +11,14 @@ class RoomViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         rooms = Room.objects.filter(is_archived=False)
-        serializer = RoomSerializer(rooms, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        output_serializer_data = RoomService.serialize_output_room(rooms, many=True)
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         RoomService.authorize_action_room(request, pk)
         room = RoomService.retrieve_room(pk)
-        serializer = RoomSerializer(room)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        output_serializer_data = RoomService.serialize_output_room(room)
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         input_serializer = RoomService.serialize_input_room_create(request)
@@ -36,12 +36,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
-        RoomService.authorize_action_room(request, pk)
-        input_serializer = RoomService.serialize_input_room_partial_update(request, pk)
-        RoomService.validate_partial_update_room(pk, input_serializer)
-        room_updated = RoomService.partial_update_room(pk, input_serializer)
-        output_serializer_data = RoomService.serialize_output_room(room_updated)
-        return Response(output_serializer_data, status=status.HTTP_200_OK)
+        return self.update(request, pk)
 
     def destroy(self, request, pk=None):
         RoomService.authorize_action_room(request, pk)
