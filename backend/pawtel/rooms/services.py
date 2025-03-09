@@ -7,6 +7,11 @@ from rest_framework.exceptions import NotFound, PermissionDenied
 class RoomService:
 
     @staticmethod
+    def list_rooms():
+        rooms = Room.objects.filter(is_archived=False)
+        return rooms
+
+    @staticmethod
     def authorize_action_room(request, pk):
 
         room = RoomService.retrieve_room(pk)

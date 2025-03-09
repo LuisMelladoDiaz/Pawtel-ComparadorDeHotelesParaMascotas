@@ -10,7 +10,7 @@ class RoomViewSet(viewsets.ModelViewSet):
     serializer_class = RoomSerializer
 
     def list(self, request):
-        rooms = Room.objects.filter(is_archived=False)
+        rooms = RoomService.list_rooms()
         output_serializer_data = RoomService.serialize_output_room(rooms, many=True)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
