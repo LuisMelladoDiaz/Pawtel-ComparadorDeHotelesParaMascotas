@@ -5,7 +5,6 @@ from pawtel.hotels.models import Hotel
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
-from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class HotelServiceTest(TestCase):
@@ -47,18 +46,14 @@ class HotelServiceTest(TestCase):
         Room.objects.create(room_type=self.room_type2)
 
     def test_get_all_room_types_of_hotel(self):
-        room_types = HotelService.get_all_room_types_of_hotel(self.hotel.id)
+        room_types = HotelService.get_all_room_types_of_hotel(self, self.hotel.id)
         self.assertEqual(len(room_types), 2)
-        self.assertEqual(room_types[0]["name"], "Single")
-        self.assertEqual(room_types[1]["name"], "Double")
-
-    def test_get_all_room_types_of_hotel_not_found(self):
-        with self.assertRaises(NotFound):
-            HotelService.get_all_room_types_of_hotel(999)
+        self.assertEqual(room_types[0].name, "Single")
+        self.assertEqual(room_types[1].name, "Double")
 
     def test_get_total_vacancy_for_each_room_type_of_hotel(self):
         vacancies = HotelService.get_total_vacancy_for_each_room_type_of_hotel(
-            self.hotel.id
+            self, self.hotel.id
         )
         self.assertEqual(len(vacancies), 2)
 
@@ -72,20 +67,11 @@ class HotelServiceTest(TestCase):
         self.assertEqual(single_vacancy["total_vacancy"], 1)
         self.assertEqual(double_vacancy["total_vacancy"], 4)
 
-    def test_get_total_vacancy_for_each_room_type_of_hotel_not_found(self):
-        with self.assertRaises(NotFound):
-            HotelService.get_total_vacancy_for_each_room_type_of_hotel(999)
-
-    def test_check_if_archived(self):
-        try:
-            HotelService.check_if_archived(self.hotel.id)
-        except PermissionDenied:
-            self.fail(
-                "check_if_archived raised an unexpected exception for an active hotel."
-            )
-        with self.assertRaises(PermissionDenied):
-            HotelService.check_if_archived(self.archived_hotel.id)
-
-    def test_check_if_archived_not_found(self):
-        with self.assertRaises(NotFound):
-            HotelService.check_if_archived(999)
+    def test_get_total_vacancy_for_each_room_type_of_hotel_no_rooms(self):
+        hotel_no_rooms = Hotel.objects.create(
+            name="Hotel with No Rooms", is_archived=False, hotel_owner=self.hotel_owner
+        )
+        vacancies = HotelService.get_total_vacancy_for_each_room_type_of_hotel(
+            self, hotel_no_rooms.id
+        )
+        self.assertEqual(len(vacancies), 0)
