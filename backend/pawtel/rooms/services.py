@@ -1,57 +1,99 @@
-from django.shortcuts import get_object_or_404
-from pawtel.room_types.models import RoomType
-from rest_framework.exceptions import ValidationError
-
-from .models import Room
+from django.forms import ValidationError
+from pawtel.rooms.models import Room
+from pawtel.rooms.serializers import RoomSerializer
+from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class RoomService:
-    @staticmethod
-    def get_all_rooms():
-        return Room.objects.filter(is_archived=False)
 
     @staticmethod
-    def get_room_by_id(room_id):
-        return Room.objects.filter(id=room_id, is_archived=False).first()
+    def authorize_action_room(request, pk):
+
+        room = Room.objects.get(id=pk)
+
+        if not room:
+            raise NotFound("Room does not exist.")
+
+        if room.is_archived:
+            raise PermissionDenied("")
 
     @staticmethod
-    def create_room(data):
-        room_type = RoomType.objects.get(id=data["room_type_id"])
-        return Room.objects.create(
-            room_type=room_type,
-            name=data["name"],
-            is_archived=data.get("is_archived", False),
-        )
+    def retrieve_room(pk):
+        return Room.objects.get(pk=pk)
 
     @staticmethod
-    def update_room(room_id, data):
-        room = get_object_or_404(Room, id=room_id)
-        required_fields = ["room_type_id", "name", "is_archived"]
-        missing_fields = [field for field in required_fields if field not in data]
-        if missing_fields:
-            raise ValidationError(
-                f"The following required fields are missing: {', '.join(missing_fields)}"
-            )
-        room.room_type = RoomType.objects.get(id=data["room_type_id"])
-        room.name = data["name"]
-        room.is_archived = data["is_archived"]
-        room.save()
-        return room
+    def serialize_input_room_create(request):
+        context = {"request": request}
+        serializer = RoomSerializer(data=request.data, context=context)
+
+        if not serializer.is_valid():
+            raise ValidationError(serializer.errors)
+
+        return serializer
 
     @staticmethod
-    def partial_update_room(room_id, data):
-        room = get_object_or_404(Room, id=room_id)
-        if "room_type_id" in data:
-            room.room_type = RoomType.objects.get(id=data["room_type_id"])
-        if "name" in data:
-            room.name = data["name"]
-        if "is_archived" in data:
-            room.is_archived = data["is_archived"]
-        room.save()
-        return room
+    def validate_create_room(input_serializer):
+        if not input_serializer.is_valid():
+            raise PermissionDenied("Not valid data")
+        return True
 
     @staticmethod
-    def destroy_room(room_id):
-        room = get_object_or_404(Room, id=room_id)
+    def create_room(input_serializer):
+        room_created = input_serializer.save()
+        return room_created
+
+    @staticmethod
+    def serialize_output_room(room):
+        return RoomSerializer(room).data
+
+    @staticmethod
+    def serialize_input_room_update(request, pk):
+        context = {"request": request}
+        serializer = RoomSerializer(data=request.data, context=context)
+
+        if not serializer.is_valid():
+            raise ValidationError(serializer.errors)
+
+        return serializer
+
+    @staticmethod
+    def validate_update_room(pk, input_serializer):
+        if not input_serializer.is_valid():
+            raise PermissionDenied("Not valid data.")
+        return True
+
+    @staticmethod
+    def update_room(pk, input_serializer):
+        room = Room.objects.get(pk=pk)
+        return input_serializer.update(room, input_serializer.validated_data)
+
+    @staticmethod
+    def serialize_input_room_partial_update(request, pk):
+        data = {
+            key: value
+            for key, value in request.data.items()
+            if key
+            in RoomSerializer.fields_required_for_post + RoomSerializer.fields_editable
+        }
+        serializer = RoomSerializer(data=data, partial=True)
+
+        if not serializer.is_valid():
+            raise ValidationError(serializer.errors)
+
+        return serializer
+
+    @staticmethod
+    def validate_partial_update_room(pk, input_serializer):
+        if not input_serializer.is_valid():
+            raise PermissionDenied("Not valid data.")
+        return True
+
+    @staticmethod
+    def partial_update_room(pk, input_serializer):
+        room = Room.objects.get(pk=pk)
+        return input_serializer.update(room, input_serializer.validated_data)
+
+    @staticmethod
+    def delete_room(pk):
+        room = Room.objects.get(pk=pk)
         room.delete()
-        return None

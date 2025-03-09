@@ -46,7 +46,7 @@ class RoomViewSetTests(APITestCase):
 
     def test_create_room(self):
         url = reverse("room-list")
-        data = {"room_type_id": self.room_type.id, "name": "New Room"}
+        data = {"room_type": self.room_type.id, "name": "New Room"}
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data["name"], "New Room")
@@ -54,26 +54,11 @@ class RoomViewSetTests(APITestCase):
     def test_update_room(self):
         url = reverse("room-detail", args=[self.room1.id])
         data = {
-            "room_type_id": self.room_type.id,
             "name": "Updated Room",
-            "is_archived": True,
         }
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["name"], "Updated Room")
-        self.assertEqual(response.data["is_archived"], True)
-
-    def test_update_room_with_incomplete_data(self):
-        url = reverse("room-detail", args=[self.room1.id])
-        data = {
-            "room_type_id": self.room_type.id,
-            "name": "Updated Room",
-        }
-        response = self.client.put(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn(
-            "The following required fields are missing: is_archived", str(response.data)
-        )
 
     def test_partial_update_room(self):
         url = reverse("room-detail", args=[self.room1.id])
