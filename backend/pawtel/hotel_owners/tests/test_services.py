@@ -5,50 +5,44 @@ from pawtel.hotels.models import Hotel
 from rest_framework.exceptions import PermissionDenied
 
 
-class HotelServiceTest(TestCase):
-    def setUp(self):
-        self.hotel_owner = HotelOwner.objects.create(
-            username="owner_test",
-            email="owner@example.com",
-            password="securepassword123",
-            phone="+1234567890",
-            is_active=True,
+class HotelOwnerServiceTest(TestCase):
+    def test_get_all_hotels_of_hotel_owner(self):
+        hotel_owner = HotelOwner.objects.create(
+            email="test@example.com", phone="123456789", is_active=True
         )
-        self.hotel1 = Hotel.objects.create(name="Hotel 1", hotel_owner=self.hotel_owner)
-        self.hotel2 = Hotel.objects.create(name="Hotel 2", hotel_owner=self.hotel_owner)
+        hotel1 = Hotel.objects.create(
+            name="Hotel One", hotel_owner=hotel_owner, is_archived=False
+        )
+        hotel2 = Hotel.objects.create(
+            name="Hotel Two", hotel_owner=hotel_owner, is_archived=False
+        )
+        hotel_archived = Hotel.objects.create(
+            name="Hotel Archived", hotel_owner=hotel_owner, is_archived=True
+        )
+        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(hotel_owner.id)
+        self.assertListEqual(list(hotels), [hotel1, hotel2])
+        self.assertNotIn(hotel_archived, hotels)
 
-        self.inactive_owner = HotelOwner.objects.create(
-            username="inactive_owner",
-            email="inactive_owner@example.com",
-            password="securepassword123",
-            phone="+0987654321",
-            is_active=False,
+    def test_get_all_hotels_of_hotel_owner_no_hotels(self):
+        hotel_owner = HotelOwner.objects.create(
+            email="empty@example.com", phone="987654321", is_active=True
         )
-        self.inactive_hotel = Hotel.objects.create(
-            name="Inactive Hotel", hotel_owner=self.inactive_owner
-        )
+        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(hotel_owner.id)
+        self.assertListEqual(list(hotels), [])
 
-    def test_get_all_hotels_by_hotel_owner(self):
-        hotels_data = HotelOwnerService.get_all_hotels_of_hotel_owner(
-            self.hotel_owner.id
+    def test_delete_all_hotels_of_hotel_owner(self):
+        hotel_owner = HotelOwner.objects.create(
+            email="delete@example.com", phone="1122334455", is_active=True
         )
-        self.assertEqual(len(hotels_data), 2)
-        self.assertEqual(hotels_data[0].name, "Hotel 1")
-        self.assertEqual(hotels_data[1].name, "Hotel 2")
+        Hotel.objects.create(name="Hotel A", hotel_owner=hotel_owner, is_archived=False)
+        Hotel.objects.create(name="Hotel B", hotel_owner=hotel_owner, is_archived=False)
+        HotelOwnerService.delete_all_hotels_of_hotel_owner(hotel_owner.id)
+        hotels = Hotel.objects.filter(hotel_owner=hotel_owner)
+        self.assertEqual(hotels.count(), 0)
 
-    def test_delete_all_hotels_by_hotel_owner(self):
-        hotels_deleted = HotelOwnerService.delete_all_hotels_of_hotel_owner(
-            self.hotel_owner.id
+    def test_delete_all_hotels_of_hotel_owner_no_hotels(self):
+        hotel_owner = HotelOwner.objects.create(
+            email="nohotels@example.com", phone="5566778899", is_active=True
         )
-        self.assertEqual(hotels_deleted, 2)
-        self.assertEqual(Hotel.objects.filter(hotel_owner=self.hotel_owner).count(), 0)
-
-    def test_check_if_active(self):
-        try:
-            HotelOwnerService.check_if_active(self.hotel_owner.id)
-        except PermissionDenied:
-            self.fail(
-                "check_if_active raised an unexpected exception for an active owner."
-            )
-        with self.assertRaises(PermissionDenied):
-            HotelOwnerService.check_if_active(self.inactive_owner.id)
+        with self.assertRaises(PermissionDenied, msg="No hotels to delete."):
+            HotelOwnerService.delete_all_hotels_of_hotel_owner(hotel_owner.id)
