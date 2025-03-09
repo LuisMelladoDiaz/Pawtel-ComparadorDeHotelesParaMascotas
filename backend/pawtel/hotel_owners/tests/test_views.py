@@ -66,17 +66,26 @@ class HotelOwnerViewSetTest(TestCase):
     def test_get_all_hotels_of_hotel_owner(self):
         """Test retrieving all hotels of a hotel owner"""
         url = reverse(
-            "hotel-owner-get-all-hotels-of-hotel-owner",
+            "hotel-owner-get_all_hotels_of_hotel_owner",
             kwargs={"pk": self.active_hotel_owner.id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
+    def test_get_all_hotels_of_inactive_hotel_owner(self):
+        """Test retrieving all hotels of an inactive hotel owner"""
+        url = reverse(
+            "hotel-owner-get_all_hotels_of_hotel_owner",
+            kwargs={"pk": self.inactive_hotel_owner.id},
+        )
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_delete_all_hotels_of_hotel_owner(self):
         """Test deleting all hotels of a hotel owner"""
         url = reverse(
-            "hotel-owner-delete-all-hotels-of-hotel-owner",
+            "hotel-owner-delete_all_hotels_of_hotel_owner",
             kwargs={"pk": self.active_hotel_owner.id},
         )
         response = self.client.delete(url)
@@ -85,11 +94,20 @@ class HotelOwnerViewSetTest(TestCase):
             Hotel.objects.filter(hotel_owner=self.active_hotel_owner).exists()
         )
 
+    def test_delete_all_hotels_of_inactive_hotel_owner(self):
+        """Test deleting all hotels of an inactive hotel owner"""
+        url = reverse(
+            "hotel-owner-delete_all_hotels_of_hotel_owner",
+            kwargs={"pk": self.inactive_hotel_owner.id},
+        )
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
     def test_update_hotel_owner(self):
         """Test updating a hotel owner"""
         url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
         data = {
-            "username": self.active_hotel_owner.username,
+            "username": "usernameUpdated",
             "email": "updated@example.com",
             "phone": "+34123456780",
         }
