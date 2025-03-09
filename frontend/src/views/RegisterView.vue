@@ -54,7 +54,7 @@ const register = async () => {
             <!-- Desktop version -->
             <div class="container flex justify-center items-center mt-10 hidden md:flex">
                 <div class="w-1/3 bg-white shadow-lg rounded-lg p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse como dueño de hotel</h2>
 
                     <form @submit.prevent="register">
                         <InputText v-model="username" label="Nombre de Usuario" />

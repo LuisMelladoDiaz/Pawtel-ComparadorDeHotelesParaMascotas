@@ -5,7 +5,7 @@
       <div class="menu-icon md:hidden flex flex-col items-end" @click="toggleMenu">
         <i class="fas fa-bars text-terracota text-3xl"></i>
       </div>
-      
+
 
       <router-link to="/">
         <img src="../assets/pawtel-logo.png" alt="Logo" class="logo h-[50px]" />
@@ -21,8 +21,8 @@
 
       <!-- Botones de autenticación en pantallas grandes -->
       <div class="auth-buttons flex items-center gap-5 hidden md:flex">
-        <button class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Iniciar Sesión</button>
-        <button class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Crear Cuenta</button>
+        <router-link to="/login" class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Iniciar Sesión</router-link>
+        <router-link to="/register" class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Crear Cuenta</router-link>
 
         <!-- Icono de perfil -->
         <router-link to="/UserProfile" class="text-terracota hover:text-terracota-dark flex items-center">
@@ -120,7 +120,7 @@ export default {
       border-radius: 4px;
     }
 
-  
+
 
     /* Estilos para el ícono de hamburguesa */
     .menu-icon span {
