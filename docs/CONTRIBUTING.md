@@ -167,11 +167,14 @@ Para detalles sobre la estructura del proyecto, configuración y cómo levantar 
 
 Ahí encontrarás información sobre:
 
-- 📂 Estructura de carpetas
-- 🔧 Control de versiones y flujo de trabajo
-- 🛠️ Integración continua con GitHub Actions
-- 📦 Gestión de dependencias (frontend y backend)
-- 🐳 Uso de Docker (si aplica)
+-🚀 Poner en marcha el backend
+
+-🛡️ Poner en marcha el pre-commit.yaml
+
+-🛜 Poner en marcha el frontend (modo desarrollo)
+
+-📲 Poner en marcha el frontend como PWA (modo producción)
+
 
 Asegúrate de seguir las instrucciones de ese archivo para tener tu entorno listo antes de empezar a contribuir. 🚀
 
