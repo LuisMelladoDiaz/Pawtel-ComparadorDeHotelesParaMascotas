@@ -1,0 +1,143 @@
+# PAWTEL  
+## Acta de Reunión - Control Sprint 1  
+
+![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
+
+**Equipo:**  
+- Andrés Martínez Reviriego  
+- Claudio Cortés Carrasco  
+- Daniel Flores De Francisco  
+- David González Martínez  
+- Fernando Castelló Sánchez  
+- Francisco Miguel Jiménez Morales  
+- Javier García Sebastián  
+- Javier Ruiz Garrido  
+- Jorge Gómez de Tovar  
+- Luis Mellado Díaz  
+- Manuel Castillejo Vela  
+- Rafael Castillo Cebolla  
+- Sergio Trenado González  
+- Yesica Garate Fuentes  
+
+**Fecha:** 10/03/2025  
+**Hora:** 10:00  
+**Equipo:** G11  
+**Lugar:** Google Meets  
+**Duración:** 40 min  
+**Moderadores:** Luis Mellado Díaz  
+**Entregable:** Sprint 1
+
+---
+
+### Índice
+1. [Historial de Versiones](#historial-de-versiones)
+2. [Lista de Asistentes](#lista-de-asistentes)
+3. [Agenda](#agenda)
+4. [Frontend](#frontend)
+5. [Delivery](#delivery)
+6. [DevOps](#devops)
+7. [Presentación](#presentación)
+8. [Usuarios Piloto](#usuarios-piloto)
+
+---
+
+### Historial de Versiones
+| Fecha       | N° de Versión | Descripción               | Elaborado por           |
+|-------------|---------------|---------------------------|-------------------------|
+| 10/03/2025  | v 1.0         | Versión inicial del documento | Luis Mellado Díaz       |
+
+---
+
+### Lista de Asistentes
+| Integrante                                | Asistencia |
+|-------------------------------------------|------------|
+| Daniel Flores De Francisco (Director de Proyecto) | ❌         |
+| Luis Mellado Díaz (Director de Proyecto)  | ✅         |
+| David González Martínez (Jefe Full-Stack) | ✅         |
+| Rafael Castillo Cebolla (Jefe Backend)    | ✅         |
+| Sergio Trenado González (Jefe Frontend)   | ✅         |
+| Andrés Martínez Reviriego                 | ❌         |
+| Claudio Cortés Carrasco                   | ❌         |
+| Fernando Castelló Sánchez                 | ❌         |
+| Francisco Miguel Jiménez Morales          | ❌         |
+| Javier García Sebastián                   | ❌         |
+| Javier Ruiz Garrido                       | ❌         |
+| Jorge Gómez de Tovar                      | ❌         |
+| Manuel Castillejo Vela                    | ❌         |
+| Yesica Garate Fuentes                     | ❌         |
+
+---
+
+### Agenda
+1. **Frontend**:
+   - Mejorar pantalla dueño de hotel.
+   - Mockup para pantallas CRUD.
+   - Pantallas de "Sobre Nosotros" y "Contacto".
+   - Javi -> Redes.
+2. **Delivery**:
+   - Repartir los documentos de la delivery.
+3. **DevOps**:
+   - Despliegue automático.
+4. **Presentación**:
+   - Contenido reusable.
+   - Quién va a presentar.
+   - Video de respaldo.
+5. **Usuarios Piloto**:
+   - Establecer fechas de entrega del feedback.
+   - Enseñar mockups.
+
+---
+
+### Frontend
+1. **Mejorar pantalla dueño de hotel**:
+   - Se discutieron mejoras en la interfaz de usuario para la pantalla del dueño de hotel.
+2. **Mockup para pantallas CRUD**:
+   - Se propuso mejorar el mockup existente y reutilizar el estilo en otras pantallas.
+3. **Pantallas de "Sobre Nosotros" y "Contacto"**:
+   - Se sugirió que estas pantallas redirijan a la landing page de David.
+4. **Javi -> Redes**:
+   - Javi se encargará de las redes sociales.
+
+---
+
+### Delivery
+1. **Repartir los documentos de la delivery**:
+   - Cada persona recibirá un documento para revisar, y los PMs se encargarán de la revisión final y entrega.
+   - Documentos asignados:
+     - **presentación**: equipo de presentaciones
+     - **KBreport.md**: Manuel
+     - **pilotUsers.md**: Dani
+     - **performanceEvaluation**: Dani y Luis
+     - **timeEffortReport.md**: David
+     - **AIReport.md**: Sergio
+     - **commitmentAgreement**: Ya está hecho.
+     - **commitmentAgreementPilotos**: Javi R
+     - **pilotUsersPerformanceEvaluation**: Rafa
+     - **revisión.md**: Luis
+
+---
+
+### DevOps
+1. **Despliegue automático**:
+   - Se propuso configurar un workflow que despliegue automáticamente desde `push` a `main`.
+
+---
+
+### Presentación
+1. **Contenido reusable**:
+   - Se acordó que el contenido reusable debe incorporar el feedback recibido desde ya.
+2. **Quién va a presentar**:
+   - Pendiente de decisión.
+3. **Video de respaldo**:
+   - Andrés se encargará de grabar un video por si la app falla durante la presentación en directo.
+
+---
+
+### Usuarios Piloto
+1. **Establecer fechas de entrega del feedback**:
+   - Se discutió la necesidad de establecer fechas claras para recibir feedback de los usuarios piloto.
+2. **Enseñar mockups**:
+   - Se propuso mostrar los mockups a los usuarios piloto para obtener su opinión.
+3. Creación de un equipo de personas encargadas de gestionar los usuarios piloto.
+
+---
