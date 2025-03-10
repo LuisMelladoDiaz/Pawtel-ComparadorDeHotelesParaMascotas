@@ -44,6 +44,7 @@
 |-------------|---------------|---------------------------|-------------------------|
 | 22/02/2025  | v 1.0         | Versión inicial del documento | Manuel Castillejo Vela |
 | 20/02/2025  | v 1.1         | Versión tras corrección de especificaciones | Manuel Castillejo Vela |
+| 10/03/2025  | v 2.0         | Versión tras adición de nuevo feedback del Sprint 1 y adaptación a formato .md | Manuel Castillejo Vela |
 
 ### Resumen Ejecutivo
 El objetivo principal de este documento es definir y detallar de qué manera el equipo de trabajo ha aportado a la base de conocimiento grupal que se establece en conjunto con el resto de los equipos de trabajo de la asignatura. Para ello se proporcionan las URLs correspondientes a las bases de conocimiento, se explica la contribución del grupo a la misma y las acciones de consolidación que se llevaron a cabo en relación con el feedback obtenido.
