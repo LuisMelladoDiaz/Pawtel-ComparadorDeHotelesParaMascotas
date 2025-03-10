@@ -1,5 +1,5 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
+from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.services import HotelService
@@ -9,13 +9,15 @@ from pawtel.rooms.models import Room
 
 class HotelServiceTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username="testowner", password="1234")
-        self.hotel_owner = HotelOwner.objects.create(
-            username=self.user.username,
+        self.app_user = AppUser.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
             email="owner@example.com",
-            phone="+34123456789",
-            is_active=True,
+            phone="+34987654321",
+            password="securepassword123",
         )
+        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
         self.hotel = Hotel.objects.create(
             name="Test Hotel", is_archived=False, hotel_owner=self.hotel_owner
         )
