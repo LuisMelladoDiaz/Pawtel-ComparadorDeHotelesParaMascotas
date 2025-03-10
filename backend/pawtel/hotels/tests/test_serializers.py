@@ -1,4 +1,5 @@
 from django.test import TestCase
+from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
@@ -7,16 +8,15 @@ from pawtel.hotels.serializers import HotelSerializer
 class HotelSerializerTest(TestCase):
 
     def setUp(self):
-        # We need to create an instance of the hotel owner because it is an attribute of a hotel.
-        self.hotel_owner = HotelOwner.objects.create_user(
-            username="owner1",
-            first_name="Owner",
-            last_name="Test",
-            email="owner1@example.com",
-            phone="+34123456789",
+        self.app_user = AppUser.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
+            email="owner@example.com",
+            phone="+34987654321",
             password="securepassword123",
         )
-        # Create a valid Hotel instance
+        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
         self.valid_data = {
             "name": "Hotel Paradise",
             "address": "123 Sunshine Street",
@@ -24,7 +24,6 @@ class HotelSerializerTest(TestCase):
             "description": "Un hotel lujoso en Miami.",
             "hotel_owner": self.hotel_owner.id,
         }
-        # Create an invalid data for testing
         self.invalid_data = self.valid_data.copy()
         self.invalid_data["name"] = ""
 

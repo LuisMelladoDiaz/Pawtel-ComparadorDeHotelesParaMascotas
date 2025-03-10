@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import authenticate
-from pawtel.hotel_owners.models import HotelOwner
+from pawtel.hotel_owners.services import HotelOwnerService
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -77,20 +77,15 @@ class RegisterView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        username = request.data.get("username")
-        password = request.data.get("password")
-        email = request.data.get("email")
-        phone = request.data.get("phone")
         role = request.data.get("role")
+        object = None
 
         if role == "hotel_owner":
-            HotelOwner.create_hotel_owner(email, username, password, phone)
+            object = HotelOwnerService.general_create_hotel_owner(request)
         else:
             return Response(
                 {"error": "Invalid role. Only hotel owners are allowed."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        return Response(
-            {"message": "User created successfully"}, status=status.HTTP_201_CREATED
-        )
+        return Response(object, status=status.HTTP_201_CREATED)
