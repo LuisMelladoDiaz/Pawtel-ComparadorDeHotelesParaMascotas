@@ -109,7 +109,8 @@ class HotelOwnerViewSetTest(TestCase):
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.active_hotel_owner.refresh_from_db()
-        self.assertEqual(self.active_hotel_owner.user.email, "updated@example.com")
+        self.assertEqual(self.active_hotel_owner.user.email, data["email"])
+        self.assertEqual(self.active_hotel_owner.user.password, data["password"])
 
     def test_update_hotel_owner_same_data(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})

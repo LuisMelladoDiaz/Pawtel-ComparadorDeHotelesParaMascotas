@@ -6,7 +6,7 @@ class AppUserSerializer(BaseSerializer):
 
     fields_required_for_post = ["username", "email", "phone", "password"]
     fields_editable = ["username", "email", "phone", "password"]
-    fields_not_readable = []
+    fields_not_readable = ["password"]
 
     class Meta:
         model = AppUser
@@ -22,7 +22,7 @@ class AppUserSerializer(BaseSerializer):
         ]
         extra_kwargs = {
             "id": {"read_only": True},
-            "password": {},
+            "password": {"write_only": True},
             "username": {"allow_null": False},
             "email": {"max_length": 100, "allow_null": False},
             "phone": {

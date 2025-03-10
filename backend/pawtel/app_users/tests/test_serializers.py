@@ -32,6 +32,9 @@ class AppUserSerializerTest(TestCase):
         self.assertEqual(
             serializer.validated_data["username"], self.valid_data["username"]
         )
+        self.assertEqual(
+            serializer.validated_data["password"], self.valid_data["password"]
+        )
 
     def test_serializer_invalid_email_post(self):
         invalid_data = self.valid_data.copy()
@@ -177,6 +180,7 @@ class AppUserSerializerTest(TestCase):
         serializer = AppUserSerializer(owner, context=context)
 
         self.assertNotIn("first_name", serializer.data)
+        self.assertNotIn("password", serializer.data)
         self.assertIn("username", serializer.data)
 
     # Other tests ------------------------------------------------------------
@@ -223,3 +227,4 @@ class AppUserSerializerTest(TestCase):
         self.assertEqual(serializer.data["username"], owner.username)
         self.assertEqual(serializer.data["email"], owner.email)
         self.assertEqual(serializer.data["phone"], owner.phone)
+        self.assertNotIn("password", serializer.data)

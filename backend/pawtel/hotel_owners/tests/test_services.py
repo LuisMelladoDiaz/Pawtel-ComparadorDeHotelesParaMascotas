@@ -64,4 +64,6 @@ class HotelOwnerServiceTest(TestCase):
         user = AppUser.objects.filter(username="newowner").first()
         self.assertEqual(user.username, "newowner")
         self.assertEqual(response["user"]["id"], user.id)
+        self.assertNotIn("password", response["user"])
+        self.assertEqual(user.password, data["password"])
         self.assertTrue(HotelOwner.objects.filter(user_id=user.id).exists())
