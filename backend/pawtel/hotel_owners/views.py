@@ -1,3 +1,4 @@
+from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotel_owners.services import HotelOwnerService
@@ -12,7 +13,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     serializer_class = HotelOwnerSerializer
 
     def list(self, request):
-        hotel_owners = HotelOwner.objects.filter(is_active=True)
+        hotel_owners = HotelOwnerService.list_hotel_owners()
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owners, many=True
         )
@@ -27,34 +28,31 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        input_serializer = HotelOwnerService.serialize_input_hotel_owner_create(request)
-        HotelOwnerService.validate_create_hotel_owner(input_serializer)
-        hotel_owner_created = HotelOwnerService.create_hotel_owner(input_serializer)
-        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
-            hotel_owner_created
-        )
+        # It will be managed through the views of AuthApp
+        # return Response({"message": "This operation is forbidden."}, status=status.HTTP_403_FORBIDDEN)
+
+        # Just for testing for the moment
+        output_serializer_data = HotelOwnerService.general_create_hotel_owner(request)
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
-        input_serializer = HotelOwnerService.serialize_input_hotel_owner_update(
-            request, pk
-        )
-        HotelOwnerService.validate_update_hotel_owner(pk, input_serializer)
-        hotel_owner_updated = HotelOwnerService.update_hotel_owner(pk, input_serializer)
+        app_user_id = HotelOwnerService.get_app_user_id_of_hotel_owner(pk)
+        AppUserService.general_update_app_user(request, app_user_id)
+        hotel_owner_updated = HotelOwnerService.retrieve_hotel_owner(pk)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner_updated
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
-        return self.update(
-            request, pk
-        )  # The context of the request specifies that it is PATCH
+        # The context of the request specifies that it is PATCH
+        return self.update(request, pk)
 
     def destroy(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
-        HotelOwnerService.delete_hotel_owner(pk)
+        app_user_id = HotelOwnerService.get_app_user_id_of_hotel_owner(pk)
+        AppUserService.general_delete_app_user(request, app_user_id)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(

@@ -1,4 +1,4 @@
-from django.forms import ValidationError
+from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
@@ -6,6 +6,18 @@ from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class HotelOwnerService:
+
+    # General processes ------------------------------------------------------
+
+    @staticmethod
+    def general_create_hotel_owner(request):
+        """This will be called from the views of AuthApp."""
+        app_user = AppUserService.general_create_app_user(request)
+        hotel_owner_created = HotelOwnerService.__create_hotel_owner(app_user.id)
+        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
+            hotel_owner_created
+        )
+        return output_serializer_data
 
     # Common -----------------------------------------------------------------
 
@@ -16,12 +28,16 @@ class HotelOwnerService:
         if not hotel_owner:
             raise NotFound("Hotel owner does not exist.")
 
-        if not hotel_owner.is_active:
+        if not hotel_owner.user.is_active:
             raise PermissionDenied("")
 
     @staticmethod
     def serialize_output_hotel_owner(hotel_owner, many=False):
         return HotelOwnerSerializer(hotel_owner, many=many).data
+
+    @staticmethod
+    def get_app_user_id_of_hotel_owner(hotel_owner_id):
+        return HotelOwnerService.retrieve_hotel_owner(hotel_owner_id).user.id
 
     # GET --------------------------------------------------------------------
 
@@ -29,76 +45,15 @@ class HotelOwnerService:
     def retrieve_hotel_owner(pk):
         return HotelOwner.objects.get(id=pk)
 
+    @staticmethod
+    def list_hotel_owners():
+        return HotelOwner.objects
+
     # POST -------------------------------------------------------------------
 
     @staticmethod
-    def serialize_input_hotel_owner_create(request):
-        context = {"request": request}
-        serializer = HotelOwnerSerializer(data=request.data, context=context)
-        return serializer
-
-    @staticmethod
-    def validate_create_hotel_owner(input_serializer):
-        if not input_serializer.is_valid():
-            raise ValidationError(input_serializer.errors)
-
-        email = input_serializer.validated_data.get("email")
-        phone = input_serializer.validated_data.get("phone")
-
-        if HotelOwner.objects.filter(email=email).exists():
-            raise ValidationError({"email": "Email already in use."})
-
-        if HotelOwner.objects.filter(phone=phone).exists():
-            raise ValidationError({"phone": "Phone number already in use."})
-
-    @staticmethod
-    def create_hotel_owner(input_serializer):
-        hotel_owner = input_serializer.save()
-        return hotel_owner
-
-    # PUT/PATCH --------------------------------------------------------------
-
-    @staticmethod
-    def serialize_input_hotel_owner_update(request, pk):
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-        context = {"request": request}
-        serializer = HotelOwnerSerializer(
-            instance=hotel_owner, data=request.data, context=context
-        )
-        return serializer
-
-    @staticmethod
-    def validate_update_hotel_owner(pk, input_serializer):
-        if not input_serializer.is_valid():
-            raise ValidationError(input_serializer.errors)
-
-        username = input_serializer.validated_data.get("username")
-        email = input_serializer.validated_data.get("email")
-        phone = input_serializer.validated_data.get("phone")
-
-        if (
-            username
-            and HotelOwner.objects.filter(username=username).exclude(id=pk).exists()
-        ):
-            raise ValidationError({"username": "Username in use."})
-
-        if email and HotelOwner.objects.filter(email=email).exclude(id=pk).exists():
-            raise ValidationError({"email": "Email in use."})
-
-        if phone and HotelOwner.objects.filter(phone=phone).exclude(id=pk).exists():
-            raise ValidationError({"phone": "Phone in use."})
-
-    @staticmethod
-    def update_hotel_owner(pk, input_serializer):
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-        return input_serializer.update(hotel_owner, input_serializer.validated_data)
-
-    # DELETE -----------------------------------------------------------------
-
-    @staticmethod
-    def delete_hotel_owner(pk):
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-        hotel_owner.delete()
+    def __create_hotel_owner(app_user_id):
+        return HotelOwner.objects.create(user_id=app_user_id)
 
     # OTHERS -----------------------------------------------------------------
 
