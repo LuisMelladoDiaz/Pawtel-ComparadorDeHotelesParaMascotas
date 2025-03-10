@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
@@ -9,7 +10,7 @@ from pawtel.rooms.models import Room
 class RoomModelTest(TestCase):
 
     def setUp(self):
-        self.owner = HotelOwner.objects.create_user(
+        self.app_user = AppUser.objects.create_user(
             username="hotelowner1",
             first_name="John",
             last_name="Doe",
@@ -17,7 +18,7 @@ class RoomModelTest(TestCase):
             phone="+34987654321",
             password="securepassword123",
         )
-
+        self.owner = HotelOwner.objects.create(user_id=self.app_user.id)
         self.hotel = Hotel.objects.create(
             name="Hotel Test",
             address="Calle Principal 123",
@@ -25,7 +26,6 @@ class RoomModelTest(TestCase):
             description="Un hotel de prueba.",
             hotel_owner=self.owner,
         )
-
         self.room_type = RoomType.objects.create(
             hotel=self.hotel,
             name="Suite Deluxe",
