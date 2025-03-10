@@ -1,9 +1,10 @@
 from django.forms import ValidationError
+from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import NotFound
 
 
 class HotelService:
@@ -14,17 +15,18 @@ class HotelService:
     def authorize_action_hotel(request, pk):
         hotel = HotelService.retrieve_hotel(pk)
 
-        if not hotel:
+        if (not hotel) or (hotel.is_archived):
             raise NotFound("Hotel does not exist.")
-
-        if hotel.is_archived:
-            raise PermissionDenied("")
 
     @staticmethod
     def serialize_output_hotel(hotel, many=False):
         return HotelSerializer(hotel, many=many).data
 
     # GET --------------------------------------------------------------------
+
+    @staticmethod
+    def list_hotels():
+        return Hotel.objects.filter(is_archived=False)
 
     @staticmethod
     def retrieve_hotel(pk):
@@ -44,9 +46,13 @@ class HotelService:
             raise ValidationError(input_serializer.errors)
 
         name = input_serializer.validated_data.get("name")
+        hotel_owner_id = input_serializer.validated_data.get("hotel_owner").id
+
+        if not HotelOwnerService.retrieve_hotel_owner(hotel_owner_id).user.is_active:
+            raise ValidationError({"hotel_owner": "Invalid hotel owner."})
 
         if name and Hotel.objects.filter(name=name).exists():
-            raise ValidationError({"username": "Name in use."})
+            raise ValidationError({"name": "Name in use."})
 
     @staticmethod
     def create_hotel(input_serializer):
@@ -70,7 +76,7 @@ class HotelService:
         name = input_serializer.validated_data.get("name")
 
         if name and Hotel.objects.filter(name=name).exclude(id=pk).exists():
-            raise ValidationError({"username": "Name in use."})
+            raise ValidationError({"name": "Name in use."})
 
     @staticmethod
     def update_hotel(pk, input_serializer):
@@ -84,7 +90,7 @@ class HotelService:
         hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
 
-    # OTHERS -----------------------------------------------------------------
+    # Others -----------------------------------------------------------------
 
     @staticmethod
     def get_all_room_types_of_hotel(hotel_id):

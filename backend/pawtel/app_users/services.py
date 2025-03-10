@@ -1,7 +1,7 @@
 from django.forms import ValidationError
 from pawtel.app_users.models import AppUser
 from pawtel.app_users.serializers import AppUserSerializer
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import NotFound
 
 
 class AppUserService:
@@ -36,11 +36,8 @@ class AppUserService:
     def __authorize_action_app_user(request, pk):
         app_user = AppUserService.retrieve_app_user(pk)
 
-        if not app_user:
+        if (not app_user) or (not app_user.is_active):
             raise NotFound("App user does not exist.")
-
-        if not app_user.is_active:
-            raise PermissionDenied("")
 
     # GET --------------------------------------------------------------------
 

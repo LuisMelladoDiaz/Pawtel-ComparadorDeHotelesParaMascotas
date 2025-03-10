@@ -12,7 +12,7 @@ class HotelViewSet(viewsets.ModelViewSet):
     serializer_class = HotelSerializer
 
     def list(self, request):
-        hotels = Hotel.objects.filter(is_archived=False)
+        hotels = HotelService.list_hotels()
         output_serializer_data = HotelService.serialize_output_hotel(hotels, many=True)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
@@ -54,6 +54,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="get_all_room_types_of_hotel",
     )
     def get_all_room_types_of_hotel(self, request, pk=None):
+        HotelService.authorize_action_hotel(request, pk)
         room_types = HotelService.get_all_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -65,5 +66,6 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="get_total_vacancy_for_each_room_type_of_hotel",
     )
     def get_total_vacancy_for_each_room_type_of_hotel(self, request, pk=None):
+        HotelService.authorize_action_hotel(request, pk)
         vacancy_data = HotelService.get_total_vacancy_for_each_room_type_of_hotel(pk)
         return Response(vacancy_data, status=status.HTTP_200_OK)
