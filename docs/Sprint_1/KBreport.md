@@ -22,7 +22,9 @@
 - **Yesica Garate Fuentes**
 
 **Fecha:** 10/03/2025
+
 **Equipo:** G11
+
 **Entregable:** Sprint 1
 
 ---
@@ -48,13 +50,18 @@ El objetivo principal de este documento es definir y detallar de qué manera el 
 
 ### Desarrollo
 **Base de conocimiento**
+
 Link a la base de conocimiento grupal: [https://bcc2425.vercel.app/](https://bcc2425.vercel.app/)
-Link al repositorio con la información correspondiente a la base de conocimiento específica del grupo 11: [https://github.com/LuisMelladoDiaz/PawTelComparadorDeHotelesParaMascotas/tree/main/docs/feedback](https://github.com/LuisMelladoDiaz/PawTelComparadorDeHotelesParaMascotas/tree/main/docs/feedback)
+
+Link al repositorio con el feedback recogido por el grupo 11 para el Sprint 1: [https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/tree/main/docs/Sprint_1/feedback_semanal](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/tree/main/docs/Sprint_1/feedback_semanal)
+
 
 **Contenido específico del grupo**
+
 El grupo 11 ha contribuido proporcionando el feedback específico recogido de las correspondientes clases. Respecto a la puesta en común de feedback entre los distintos grupos, el grupo 11 queda a la espera de la consiguiente subdivisión de apartados y posibles reuniones poniendo a su disposición la información recogida en las sesiones de clase semanales. El feedback proporcionado y recogido por el grupo está adjunto a este documento.
 
 **Acciones de consolidación**
+
 Ninguna acción de consolidación fue llevada a cabo.
 
 
