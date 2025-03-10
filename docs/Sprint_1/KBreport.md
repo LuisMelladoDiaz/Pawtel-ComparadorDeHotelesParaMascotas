@@ -42,8 +42,8 @@
 ### Historial de Versiones
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
-| 22/02/2025  | v 1.0         | Versión inicial del documento | Manuel Castillejo Vela |
-| 20/02/2025  | v 1.1         | Versión tras corrección de especificaciones | Manuel Castillejo Vela |
+| 20/02/2025  | v 1.0         | Versión inicial del documento | Manuel Castillejo Vela |
+| 22/02/2025  | v 1.1         | Versión tras corrección de especificaciones | Manuel Castillejo Vela |
 | 10/03/2025  | v 2.0         | Versión tras adición de nuevo feedback del Sprint 1 y adaptación a formato .md | Manuel Castillejo Vela |
 
 ### Resumen Ejecutivo
