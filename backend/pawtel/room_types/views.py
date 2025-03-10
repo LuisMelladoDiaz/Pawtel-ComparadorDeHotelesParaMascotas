@@ -58,8 +58,9 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         url_name="get_total_vacancy_of_room_type",
     )
     def get_total_vacancy_of_room_type(self, request, pk=None):
-        total_vacancy = RoomTypeService.get_total_vacancy_of_room_type(pk)
-        return Response(total_vacancy, status=status.HTTP_200_OK)
+        RoomTypeService.authorize_action_room_type(request, pk)
+        total_vacancy_data = RoomTypeService.get_total_vacancy_of_room_type(pk)
+        return Response(total_vacancy_data, status=status.HTTP_200_OK)
 
     @action(
         detail=True,
@@ -68,6 +69,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         url_name="get_all_rooms_of_room_type",
     )
     def get_all_rooms_of_room_type(self, request, pk=None):
+        RoomTypeService.authorize_action_room_type(request, pk)
         rooms = RoomTypeService.get_all_rooms_of_room_type(pk)
         serializer = RoomSerializer(rooms, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -75,9 +77,10 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="rooms/vacancies",
+        url_path="rooms/vacancy",
         url_name="get_vacancy_for_each_room_of_room_type",
     )
     def get_vacancy_for_each_room_of_room_type(self, request, pk=None):
+        RoomTypeService.authorize_action_room_type(request, pk)
         vacancy_list = RoomTypeService.get_vacancy_for_each_room_of_room_type(pk)
         return Response(vacancy_list, status=status.HTTP_200_OK)

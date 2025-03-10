@@ -1,4 +1,5 @@
 from django.test import TestCase
+from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
@@ -8,7 +9,15 @@ from pawtel.rooms.models import Room
 
 class RoomTypeServiceTests(TestCase):
     def setUp(self):
-        self.owner = HotelOwner.objects.create(username="testuser")
+        self.app_user = AppUser.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
+            email="owner@example.com",
+            phone="+34987654321",
+            password="securepassword123",
+        )
+        self.owner = HotelOwner.objects.create(user_id=self.app_user.id)
         self.hotel = Hotel.objects.create(name="Hotel Pawtel", hotel_owner=self.owner)
 
         self.room_type_1 = RoomType.objects.create(
@@ -20,7 +29,6 @@ class RoomTypeServiceTests(TestCase):
             hotel=self.hotel,
             is_archived=False,
         )
-
         self.room_type_2 = RoomType.objects.create(
             name="Standard",
             description="Standard room for pets",
@@ -48,7 +56,7 @@ class RoomTypeServiceTests(TestCase):
         total_vacancy = RoomTypeService.get_total_vacancy_of_room_type(
             room_type_id=self.room_type_1.id
         )
-        self.assertEqual(total_vacancy, 2)
+        self.assertEqual(total_vacancy["total_vacancy"], 2)
 
     def test_get_all_rooms_of_room_type_valid(self):
         rooms = RoomTypeService.get_all_rooms_of_room_type(

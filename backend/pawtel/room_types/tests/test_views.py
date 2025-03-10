@@ -1,4 +1,5 @@
 from django.urls import reverse
+from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
@@ -11,9 +12,15 @@ class RoomTypeViewSetTests(APITestCase):
     def setUp(self):
         self.client = APIClient()
 
-        self.owner = HotelOwner.objects.create(username="testuser")
-        self.owner.set_password("testpass")
-        self.owner.save()
+        self.app_user = AppUser.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
+            email="owner@example.com",
+            phone="+34987654321",
+            password="securepassword123",
+        )
+        self.owner = HotelOwner.objects.create(user_id=self.app_user.id)
 
         self.hotel = Hotel.objects.create(name="Hotel Pawtel", hotel_owner=self.owner)
 
@@ -26,7 +33,6 @@ class RoomTypeViewSetTests(APITestCase):
             hotel=self.hotel,
             is_archived=False,
         )
-
         self.room_type_2 = RoomType.objects.create(
             name="Standard",
             description="Standard room for pets",
@@ -50,7 +56,7 @@ class RoomTypeViewSetTests(APITestCase):
             room_type=self.room_type_2, name="Room 4", is_archived=True
         )
 
-        self.client.force_authenticate(user=self.owner)
+        self.client.force_authenticate(user=self.app_user)
 
     def test_list_room_types(self):
         url = reverse("room-type-list")
@@ -112,7 +118,7 @@ class RoomTypeViewSetTests(APITestCase):
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, 2)
+        self.assertEqual(response.data["total_vacancy"], 2)
 
     def test_get_all_rooms_of_room_type_valid(self):
         url = reverse(

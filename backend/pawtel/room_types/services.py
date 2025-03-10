@@ -2,10 +2,25 @@ from django.forms import ValidationError
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.rooms.models import Room
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import NotFound
 
 
 class RoomTypeService:
+
+    # Common -----------------------------------------------------------------
+
+    @staticmethod
+    def authorize_action_room_type(request, pk):
+
+        room_type = RoomTypeService.retrieve_room_type(pk)
+        if (not room_type) or (room_type.is_archived):
+            raise NotFound("Room type does not exist.")
+
+    @staticmethod
+    def serialize_output_room_type(room_type, many=False):
+        return RoomTypeSerializer(room_type, many=many).data
+
+    # GET --------------------------------------------------------------------
 
     @staticmethod
     def list_room_types():
@@ -13,21 +28,10 @@ class RoomTypeService:
         return room_types
 
     @staticmethod
-    def authorize_action_room_type(request, pk):
-
-        room_type = RoomTypeService.retrieve_room_type(pk)
-        if not room_type:
-            raise NotFound("This type of room does not exist.")
-        if room_type.is_archived:
-            raise PermissionDenied("")
-
-    @staticmethod
-    def serialize_output_room_type(room_type, many=False):
-        return RoomTypeSerializer(room_type, many=many).data
-
-    @staticmethod
     def retrieve_room_type(pk):
         return RoomType.objects.get(id=pk)
+
+    # POST -------------------------------------------------------------------
 
     @staticmethod
     def serialize_input_room_type_create(request):
@@ -39,12 +43,22 @@ class RoomTypeService:
     def validate_create_room_type(input_serializer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
-        return True
+
+        name = input_serializer.validated_data.get("name")
+        hotel = input_serializer.validated_data.get("hotel")
+
+        if hotel.is_archived:
+            raise ValidationError({"hotel": "Invalid hotel."})
+
+        if name and RoomType.objects.filter(hotel_id=hotel.id, name=name).exists():
+            raise ValidationError({"name": "Name in use by same hotel."})
 
     @staticmethod
     def create_room_type(input_serializer):
         room_type_created = input_serializer.save()
         return room_type_created
+
+    # PUT/PATCH --------------------------------------------------------------
 
     @staticmethod
     def serialize_input_room_type_update(request, pk):
@@ -59,24 +73,42 @@ class RoomTypeService:
     def validate_update_room_type(pk, input_serializer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
-        return True
+
+        name = input_serializer.validated_data.get("name")
+        hotel_id = RoomTypeService.retrieve_room_type(pk).hotel.id
+
+        if (
+            name
+            and RoomType.objects.filter(hotel_id=hotel_id, name=name)
+            .exclude(id=pk)
+            .exists()
+        ):
+            raise ValidationError({"name": "Name in use by same hotel."})
 
     @staticmethod
     def update_room_type(pk, input_serializer):
         room_type = RoomTypeService.retrieve_room_type(pk)
         return input_serializer.update(room_type, input_serializer.validated_data)
 
+    # DELETE -----------------------------------------------------------------
+
     @staticmethod
     def delete_room_type(pk):
         room_type = RoomType.objects.get(pk=pk)
         room_type.delete()
+
+    # Others -----------------------------------------------------------------
 
     @staticmethod
     def get_total_vacancy_of_room_type(room_type_id=None):
         total_vacancy = Room.objects.filter(
             room_type_id=room_type_id, is_archived=False
         ).count()
-        return total_vacancy
+        response_data = {
+            "room_type_id": int(room_type_id),
+            "total_vacancy": total_vacancy,
+        }
+        return response_data
 
     @staticmethod
     def get_all_rooms_of_room_type(room_type_id=None):

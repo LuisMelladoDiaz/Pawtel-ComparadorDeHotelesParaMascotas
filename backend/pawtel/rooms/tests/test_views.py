@@ -1,4 +1,5 @@
 from django.urls import reverse
+from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
@@ -11,9 +12,15 @@ class RoomViewSetTests(APITestCase):
     def setUp(self):
         self.client = APIClient()
 
-        self.owner = HotelOwner.objects.create(username="testuser")
-        self.owner.set_password("testpass")
-        self.owner.save()
+        self.app_user = AppUser.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
+            email="owner@example.com",
+            phone="+34987654321",
+            password="securepassword123",
+        )
+        self.owner = HotelOwner.objects.create(user_id=self.app_user.id)
 
         self.hotel = Hotel.objects.create(name="Hotel Pawtel", hotel_owner=self.owner)
 
@@ -30,7 +37,7 @@ class RoomViewSetTests(APITestCase):
             room_type=self.room_type, name="Room 1", is_archived=False
         )
 
-        self.client.force_authenticate(user=self.owner)
+        self.client.force_authenticate(user=self.app_user)
 
     def test_list_rooms(self):
         url = reverse("room-list")
