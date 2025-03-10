@@ -1,0 +1,67 @@
+# Feedback Semanal - ISPP
+
+## Portada
+
+**Universidad de Sevilla**  
+**Escuela Técnia Superior de Ingeniería Informática**  
+**Ingeniería de Software y Práctica Profesional (ISPP)**  
+**Curso 2024-25**  
+
+---
+
+
+**Fecha:** 21/02/2025
+
+## Introducción
+
+Este documento tiene como objetivo recopilar el feedback proporcionado por los profesores durante las presentaciones semanales de los grupos en la asignatura de Ingeniería del Software y Práctica Profesional (ISPP).  
+Es importante registrar los comentarios clave, observaciones adicionales y las tareas pendientes para mejorar nuestro proyecto.
+
+
+<br>
+
+## Feedback de las presentaciones
+
+| Grupo                         | Feedback recibido     | Observaciones adicionales |
+|-------------------------------|-----------------------|---------------------------|
+| **Grupo 7 - MapYouWorld**     | - Se ha mezclado el commitment agreement del stack. Fallo menor <br> - En general la presentación ha sido buena.  <br>- Solo van a usar WebSocket, es poco común. gRPC como alternativa a WebSocket.  <br>- Pequeño ajuste en el modelo de negocio pero generalmente bien.  <br> - PMBOK no es una metodología, es un marco de referencia. <br>- Despliegues fijos. Tienen que ser accesibles de primer momento. <br> - Han hablado sobre la gestión de conocimiento con sólo una diapositiva, pero renta más utilizar varias para no dar sensación de estancamiento.| - Leer y hacer Business Model Canvas. <br>- Han mostrado todas las funcionalidades junto a su mockup. Pensar si nos puede ser útil. <br>- Triángulo de innovación de servicio, tecnología y negocio. |
+| **Grupo 8 - Nutribaby**       | - No se salta al MVP, hay que explicar el producto en su totalidad y luego podar funcionalidades. <br> - MVP demasiado amplio. <br> -  No han explicado cual es cada competidor, ni qué hacen, ni cómo los han encontrado. <br> - Justo después de competidores saltan a los riesgos (producto -> competidores -> MVP -> recursos -> riesgos es buena idea). <br> - Los números no sirven para nada. Más útil las palabras  <br> - Beneficio es igual a ingesos menos costes. Han asumido el IVA? Y los planes de coste? Poca legibilidad <br> - Han elegido una mala estructura. <br> - No tienen la planificación de los sprint. <br> -  Faltan cosas en la presentación. Intentar que el trabajo que se ha hecho durante la semana esté bien reflejado en la presentación. <br> - Mala tipografía para el cuerpo. <br> - No han hablado de en que consiste el premium antes de hablar de los costes y beneficios.|
+| **Grupo 9 - Caronte**         | - Ha hecho referenciado los mismos competidores. <br>- Se han quedado sin tiempo. <br> - Nube de competidores que no aporta nada a la presentación. Tienes que indicar porqué has descartado los competidores y explicar los competidores.  <br> - Las protopersonas no dan feedback. No digas que dan feedback <br>- Business Model Canvas no se lee, letra muy chica. <br> - Usar tecnologías que nos habiliten desarrollo multiplataforma. <br> - El cambio entre vídeo y diapositivas queda mal. <br> - Business model canvas tiene flechas que lo cruzan, debería ser más transitorio. <br> - Fotos deberían ser homogéneas. | - Ninguna observación adicional. |
+| **Grupo 10 - Go4Surprise**    | - No minimizan el riesgo sobre la cancelación, el plan de contingencia es malo. <br>- Es verdaderamente rentable? De donde salen los datos de ingreso y rentabilidad.  <br> - Números de diapositivas más grandes.  <br> - Qué es optimizar el algoritmo? Eso no tiene sentido  <br> - El MVP va bastante tarde, al final de la presentación. Hay que ponerle cara al proyecto lo antes posible.  <br> - Hilar la presentación, no usar indices excesivos. <br> - La barra de progreso no se nota. <br> - Indicar unidad temporal de costes, y tener en cuenta costes sociales. <br> - Tener en cuenta la escala geográfica en la que se trabaja. | - Fotos no uniformes. <br> - No dicen de donde sacan salarios. |
+| **Grupo 11 - Pawtel**         | - Abrir a todo tipo de mascotas y no animales. Si hacer algo no supone un incremento de trabajo a nivel técnico, es buena idea hacerlo. <br> - Poner caso realista frente al optimistas y pesimista.   <br> - Distinguir navegador, donde se ejecuta. <br> - Tabla de competidores se ve mal. <br> - Menos texto en las diapositivas. <br> - En diagrama, poner flechas dobles, y usar imagotipo en vez de logotipo. <br> - Tema de imágenes unificarlo. <br> - La falta de planificación no es un riesgo.  |
+| **General**                   | - Orden de presentación: el producto que desarrollamos. La venta se hace "sola" si el problema que resolvemos está claro y es atractivo. <br>- Menciones honoríficas de la semana y Hall of shame de la semana. <br>- Alinear los riesgos con lo que hayamos hablado antes, principalmente la DAFO. Comentarlo o indicarlo visualmente. <br>- Los riesgos no se definen por nada, sino para evitarlos. <br>- Tener unidades homógeneas para los datos.  <br>- Las presentaciones deben ser autocontenidas, evitando referencias a presentaciones anteriores, nuestras o de otros equipos. |  |
+
+
+
+<br>
+                                                
+## Para hacer pero no necesariamente para la presentación
+- Métricas cuantitativas para seguir el rendimiento. Sacar números para saber cómo van las cosas. De GitHub por ejemplo. Cuidado con las normas basadas en estas métricas, por si la gente infla el número de commits con tonterías.
+
+## Para la presentación
+- Killer opener, business model, transmitir la idea y crear hype.
+' Analisis de costes.
+- Competidores.
+- Equipo (con menos importancia).
+- Cumplimiento del commitment agreement. 
+- Roles de cada uno en este primer sprint y cómo han afectado al proyecto, en qué han trabajado.
+- seguimiento del commitment agreement, cómo se han portado.
+- Cuando mostremos la aplicación ya va a ser software. No hace falta que lo mostremos en directo, sino que pueden ser capturas de pantalla.
+- Retrospectiva de mitad de sprint. Análisis del rendimiento (con las métricas establecidas), cuánto hemos trabajdo, finalización de tareas, problemas, lecciones aprendidas, propuestas de resolución. Horas estimadas vs las reales. En qué parte del proyecto estamos. Hablar sobre discrepancias con planificación temporal (Reloj de avance del proyecto)
+- Cómo solucionamos los problemas al final. Se espera que sigamos las contingencias del plan de riesgos. Si no, está bien cambiar y adaptar, pero comentarlo y actualizar los riesgos.
+- Está perfectamente bien cambiar el plan. Pero comentarlo.
+- Seguimiento y Control de como vamos en el proyecto.
+- Gestión de usuarios pilotos (MUY IMPORTANTE). Más detalle ya. Cómo vamos a comunicarnos, cómo se lo vamos a dar. Hablar de la agenda. Cómo vamos a tomar el feedback.
+- Report de como hemos usado la IA.
+
+## Estimación de tiempos de presentación
+- 15 min de presentación a partir de ahora.
+- Unos 6 o 7 minutos para estas cosas nuevas de evaluación de rendimiento, retrospectiva y tal.
+- Reducir previas partes:
+    - Killer opener y elevator al grano
+    - Equipo, reducir mucho
+    - Reducir competidores (no significa ponerlo y pasar para adelante)
+
+## Adicional
+- Arreglar lo del patrocinador en los documentos.
+- Estudiar competidores cada semana (si no cambia, perfecto; si sí, pues cambiar). Si tenemos definido un proceso concreto para sacarlos, repetirlo.
