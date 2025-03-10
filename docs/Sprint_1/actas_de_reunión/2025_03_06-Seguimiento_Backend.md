@@ -1,7 +1,7 @@
 # PAWTEL  
 **Buscador y Comparador de Hoteles para Mascotas**
 
-![Forma El contenido generado por IA puede ser incorrecto.](/media/image2.png){width="4.333333333333333in" height="2.9583672353455817in"}
+![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
 
 **Equipo:**  
 Andrés Martínez Reviriego  
