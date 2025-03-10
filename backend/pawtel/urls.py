@@ -24,4 +24,6 @@ urlpatterns = [
     path("auth/", include("authapp.urls")),  # Include auth_app urls
     path("", include("pawtel.hotel_owners.urls")),
     path("", include("pawtel.hotels.urls")),
+    path("", include("pawtel.rooms.urls")),
+    path("", include("pawtel.room_types.urls")),
 ]

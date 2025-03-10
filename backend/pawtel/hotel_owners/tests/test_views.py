@@ -77,7 +77,7 @@ class HotelOwnerViewSetTest(TestCase):
             kwargs={"pk": self.inactive_hotel_owner.id},
         )
         response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_all_hotels_of_hotel_owner(self):
         url = reverse(
@@ -96,7 +96,7 @@ class HotelOwnerViewSetTest(TestCase):
             kwargs={"pk": self.inactive_hotel_owner.id},
         )
         response = self.client.delete(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_update_hotel_owner(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
@@ -134,7 +134,7 @@ class HotelOwnerViewSetTest(TestCase):
             "password": "abcdef",
         }
         response = self.client.put(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_partial_update_hotel_owner(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
@@ -148,7 +148,7 @@ class HotelOwnerViewSetTest(TestCase):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.inactive_hotel_owner.id})
         data = {"phone": "+34223344555"}
         response = self.client.patch(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_hotel_owner(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
@@ -161,4 +161,4 @@ class HotelOwnerViewSetTest(TestCase):
     def test_delete_hotel_owner_inactive(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.inactive_hotel_owner.id})
         response = self.client.delete(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

@@ -24,12 +24,10 @@ class HotelOwnerService:
     @staticmethod
     def authorize_action_hotel_owner(request, pk):
         hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+        app_user = AppUserService.retrieve_app_user(hotel_owner.user_id)
 
-        if not hotel_owner:
+        if (not hotel_owner) or (not app_user) or (not hotel_owner.user.is_active):
             raise NotFound("Hotel owner does not exist.")
-
-        if not hotel_owner.user.is_active:
-            raise PermissionDenied("")
 
     @staticmethod
     def serialize_output_hotel_owner(hotel_owner, many=False):
