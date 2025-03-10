@@ -22,6 +22,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("sample.urls")),  # Include sample module API
     path("auth/", include("authapp.urls")),  # Include auth_app urls
+    path("", include("pawtel.hotel_owners.urls")),
+    path("", include("pawtel.hotels.urls")),
     path("rooms/", include("pawtel.rooms.urls")),
     path("room-types/", include("pawtel.room_types.urls")),
 ]

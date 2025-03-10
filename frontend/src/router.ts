@@ -10,20 +10,25 @@ import TemplateScreen2 from './views/TemplateScreen2.vue'
 import UserProfile from './views/UserProfile.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
-import HotelOwnerPanel from './views/hotelOwnerPanel.vue'
+import RegisterView from './views/RegisterView.vue'
+import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
+import Home from './views/Home.vue'
+
 
 const routes = [
-  { path: '/', component: DevelopmentScreen},
+  { path: '/', component: Home},
+  { path: '/dev', component: DevelopmentScreen},
+  { path: '/hotels', component: HotelListScreen},
   { path: '/hoteles', component: HotelListView },
   { path: '/hotel/:id', name: 'HotelDetail', component: HotelDetailsView },
   { path: '/componentes1', component: Componentes1},
   { path: '/componentes2', component: Componentes2},
   { path: '/login', component: LoginView},
+  { path: '/register', component: RegisterView},
   { path: '/templateScreen1', component: TemplateScreen1},
   { path: '/templateScreen2', component: TemplateScreen2},
   { path : '/userProfile', component: UserProfile},
   { path: '/hotelOwnerPanel', component: HotelOwnerPanel },
-  { path: '/hotels', component: HotelListScreen}
 ]
 
 const router = createRouter({

@@ -1,6 +1,7 @@
 from decimal import Decimal
 
 from django.test import TestCase
+from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import PetType, RoomType
@@ -10,15 +11,15 @@ from pawtel.room_types.serializers import RoomTypeSerializer
 class RoomTypeSerializerTest(TestCase):
 
     def setUp(self):
-        # We need to create hotel_owner and hotel instances because they are attributes of a room_type.
-        self.hotel_owner = HotelOwner.objects.create_user(
-            username="owner1",
-            first_name="Owner",
-            last_name="Test",
-            email="owner1@example.com",
-            phone="+34123456789",
+        self.app_user = AppUser.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
+            email="owner@example.com",
+            phone="+34987654321",
             password="securepassword123",
         )
+        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
         self.hotel = Hotel.objects.create(
             name="Hotel Test",
             address="123 Test St",
@@ -26,7 +27,6 @@ class RoomTypeSerializerTest(TestCase):
             description="Descripción del hotel de prueba",
             hotel_owner=self.hotel_owner,
         )
-
         self.valid_data = {
             "name": "Suite Deluxe",
             "description": "Una habitación de lujo.",

@@ -1,5 +1,8 @@
 <template>
   <div class="relative inline-block text-left w-full" ref="dropdownRef">
+    
+    <!-- Agregar el label -->
+    <h4 v-if="label" class="text-lg font-semibold mb-2">{{ label }}</h4>
 
     <div class="flex items-center bg-white rounded-lg shadow-sm min-w-64 text-[18px] font-complementario">
 
@@ -44,7 +47,6 @@
           </li>
         </ul>
       </div>
-
   </div>
 </template>
 
@@ -57,6 +59,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 library.add(faChevronDown, faTimes);
 
 const props = defineProps({
+  label: { type: String, default: '' },
   options: { type: Array, required: true, default: () => [] },
   modelValue: { type: [String, Number, Object, null], required: true }
 });
@@ -78,10 +81,9 @@ const clearSelection = () => {
   emit('update:modelValue', null);
 };
 
-// Mostrar el label correcto
 const selectedLabel = computed(() => {
   const found = props.options.find(opt => opt.value === props.modelValue);
-  return found ? found.label : "Selecciona una opción";
+  return found ? found.label : "Seleccionar ";
 });
 
 </script>

@@ -4,10 +4,17 @@ import { type Hotel } from '@/data-layer/api/hotels';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type HotelOwner = {
-    id: number;
-    phone: number;
+    id?: number;
+    username: string;
     email: string;
+    phone: string;
+    password: string;
+    date_joined?: string;
+    last_login?: string;
+    is_active?: boolean;
 };
+
+
 
 
 export const fetchAllOwners = async () => {
@@ -23,9 +30,19 @@ export const fetchHotelOwnerById = async (hotelOwnerId: number) => {
 };
 
 export const createHotelOwner = async (hotelOwnerData: Omit<HotelOwner, 'id'>) => {
-    const url = `${API_BASE_URL}/hotel-owners/`;
-    const response = await axios.post(url, hotelOwnerData);
-    return response.data as HotelOwner;
+    const url = `${API_BASE_URL}/auth/register/`;
+    try {
+        const response = await axios.post(url, {...hotelOwnerData, role: "hotel_owner"});
+        return response.data as HotelOwner;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.error("Error en la solicitud:", error.response?.data);
+            throw new Error(error.response?.data?.detail || 'Error desconocido');
+        } else {
+            console.error("Error desconocido:", error);
+            throw new Error('Error desconocido');
+        }
+    }
 };
 
 export const updateHotelOwner = async (hotelOwnerId: number, ownerData: HotelOwner) => {

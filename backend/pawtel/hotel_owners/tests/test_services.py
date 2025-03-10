@@ -1,0 +1,69 @@
+from django.test import TestCase
+from pawtel.app_users.models import AppUser
+from pawtel.hotel_owners.models import HotelOwner
+from pawtel.hotel_owners.services import HotelOwnerService
+from pawtel.hotels.models import Hotel
+from rest_framework.exceptions import PermissionDenied
+
+
+class HotelOwnerServiceTest(TestCase):
+
+    def setUp(self):
+        self.app_user = AppUser.objects.create(
+            username="active_owner",
+            email="active_owner@example.com",
+            phone="+34123456789",
+            password="123456",
+            is_active=True,
+        )
+        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
+
+    def test_get_all_hotels_of_hotel_owner(self):
+        hotel1 = Hotel.objects.create(
+            name="Hotel One", hotel_owner=self.hotel_owner, is_archived=False
+        )
+        hotel2 = Hotel.objects.create(
+            name="Hotel Two", hotel_owner=self.hotel_owner, is_archived=False
+        )
+        hotel_archived = Hotel.objects.create(
+            name="Hotel Archived", hotel_owner=self.hotel_owner, is_archived=True
+        )
+        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(self.hotel_owner.id)
+        self.assertListEqual(list(hotels), [hotel1, hotel2])
+        self.assertNotIn(hotel_archived, hotels)
+
+    def test_get_all_hotels_of_hotel_owner_no_hotels(self):
+        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(self.hotel_owner.id)
+        self.assertListEqual(list(hotels), [])
+
+    def test_delete_all_hotels_of_hotel_owner(self):
+        Hotel.objects.create(
+            name="Hotel A", hotel_owner=self.hotel_owner, is_archived=False
+        )
+        Hotel.objects.create(
+            name="Hotel B", hotel_owner=self.hotel_owner, is_archived=False
+        )
+        HotelOwnerService.delete_all_hotels_of_hotel_owner(self.hotel_owner.id)
+        hotels = Hotel.objects.filter(hotel_owner=self.hotel_owner)
+        self.assertEqual(hotels.count(), 0)
+
+    def test_delete_all_hotels_of_hotel_owner_no_hotels(self):
+        with self.assertRaises(PermissionDenied, msg="No hotels to delete."):
+            HotelOwnerService.delete_all_hotels_of_hotel_owner(self.hotel_owner.id)
+
+    def test_general_create_hotel_owner(self):
+        data = {
+            "username": "newowner",
+            "email": "newowner@example.com",
+            "phone": "+34123456781",
+            "password": "123456",
+            "is_active": True,
+        }
+        request = type("Request", (), {"data": data, "method": "POST"})
+        response = HotelOwnerService.general_create_hotel_owner(request)
+        user = AppUser.objects.filter(username="newowner").first()
+        self.assertEqual(user.username, "newowner")
+        self.assertEqual(response["user"]["id"], user.id)
+        self.assertNotIn("password", response["user"])
+        self.assertEqual(user.password, data["password"])
+        self.assertTrue(HotelOwner.objects.filter(user_id=user.id).exists())
