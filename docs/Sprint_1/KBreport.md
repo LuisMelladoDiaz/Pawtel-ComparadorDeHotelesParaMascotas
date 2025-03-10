@@ -221,7 +221,7 @@ Es importante registrar los comentarios clave, observaciones adicionales y las t
 
 ## Para la presentación
 - Killer opener, business model, transmitir la idea y crear hype.
-' Analisis de costes.
+- Análisis de costes.
 - Competidores.
 - Equipo (con menos importancia).
 - Cumplimiento del commitment agreement.
