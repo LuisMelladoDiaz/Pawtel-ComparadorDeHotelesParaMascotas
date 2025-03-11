@@ -1,7 +1,7 @@
 <script setup>
 import Navbar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
-import FilterNavbar from '../components/FilterNavbar.vue';
+import FilterNavbar from '../components/FilterNavBar.vue';
 import Carrusel from '../components/Carrusel.vue';
 import Button from '../components/Button.vue';
 </script>
