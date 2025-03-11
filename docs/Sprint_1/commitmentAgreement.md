@@ -28,7 +28,6 @@
 **Entregable:** Sprint 1
 
 ---
- ---
  
  ## **Índice**
  1. [Introducción](#introducción)
