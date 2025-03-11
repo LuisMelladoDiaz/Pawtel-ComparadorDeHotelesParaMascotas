@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import NavbarTerracota from '../components/NavbarTerracota.vue';
+import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import Modal from '../components/Modal.vue';
