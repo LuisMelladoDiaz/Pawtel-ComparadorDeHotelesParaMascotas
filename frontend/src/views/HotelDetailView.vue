@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Navbar from '../components/NavBar.vue';
-import FilterNavbar from '../components/FilterNavbar.vue';
+import FilterNavbar from '../components/FilterNavBar.vue';
 import Footer from '../components/Footer.vue';
 import HotelDetailCard from '../components/HotelDetailCard.vue';
 
