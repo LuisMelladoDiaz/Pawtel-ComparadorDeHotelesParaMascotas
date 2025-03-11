@@ -8,3 +8,5 @@ black>=23.12.1
 isort>=5.13.2
 autoflake>=2.2.1
 mysqlclient>=2.0
+gunicorn
+uvicorn
