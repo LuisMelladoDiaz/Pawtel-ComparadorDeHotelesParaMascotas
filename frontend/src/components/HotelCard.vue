@@ -9,7 +9,6 @@
     price: { type: String, required: true },
   });
   import Button from '../components/Button.vue';
-  import {useGetAllHotels} from '@/data-layer/hooks/hotels';
 </script>
 
 <template>
@@ -87,7 +86,7 @@
       </div>
 
       <div class="right-column flex flex-col gap-2 p-[5px] w-full font-titulos">
-        
+
         <div class="flex flex-row items-center justify-between">
           <div class="rating bg-[#C36C6C] text-[white] font-bold text-[1rem] w-10 h-3 flex justify-center items-center text-center p-[15px] rounded-lg">
             {{ rating }}
@@ -104,5 +103,3 @@
 
   </div>
 </template>
-
-

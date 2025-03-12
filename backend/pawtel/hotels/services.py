@@ -25,10 +25,6 @@ class HotelService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def list_hotels():
-        return Hotel.objects.filter(is_archived=False)
-
-    @staticmethod
     def retrieve_hotel(pk):
         return Hotel.objects.get(id=pk)
 
@@ -96,22 +92,39 @@ class HotelService:
     def list_hotels(filters=None):
         hotels = Hotel.objects.filter(is_archived=False)
 
+        valid_filters = [
+            "city",
+            "name",
+            "hotel_owner",
+            "room_type",
+            "max_price_per_night",
+            "sort_by",
+            "limit",
+        ]
+
+        assert filters is None or all(f in valid_filters for f in filters), filters
+
         if filters:
             if "city" in filters:
+                assert isinstance(filters["city"], str)
                 hotels = hotels.filter(city__icontains=filters["city"])
 
             if "name" in filters:
+                assert isinstance(filters["name"], str)
                 hotels = hotels.filter(name__icontains=filters["name"])
 
             if "hotel_owner" in filters:
                 hotels = hotels.filter(hotel_owner__id=filters["hotel_owner"])
 
             if "room_type" in filters:
+                assert isinstance(filters["room_type"], str)
                 hotels = hotels.filter(
                     roomtype__name__icontains=filters["room_type"]
                 ).distinct()
 
             if "max_price_per_night" in filters:
+                fl = float(filters["max_price_per_night"])
+                assert isinstance(fl, float)
                 try:
                     max_price = float(filters["max_price_per_night"])
                     hotels = hotels.filter(
@@ -120,14 +133,20 @@ class HotelService:
                 except ValueError:
                     pass
 
-            if "sort" in filters:
-                sort_field = filters["sort"]
+            if "sort_by" in filters:
+                assert isinstance(filters["sort_by"], str)
+                # assert valid
+                valid = ["price_per_night", "city"]
+                assert filters["sort_by"] in valid
+                sort_field = filters["sort_by"]
                 if sort_field.startswith("-"):  # Permitir orden descendente
                     hotels = hotels.order_by(sort_field)
                 else:
                     hotels = hotels.order_by(sort_field)
 
             if "limit" in filters:
+                i = int(filters["limit"])
+                assert isinstance(i, int)
                 try:
                     limit = int(filters["limit"])
                     hotels = hotels[:limit]

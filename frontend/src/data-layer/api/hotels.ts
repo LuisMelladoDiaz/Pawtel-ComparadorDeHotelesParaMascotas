@@ -12,9 +12,9 @@ export type Hotel = {
   hotel_owner?: string;
 };
 
-
-export const fetchAllHotels = async () => {
-  const url = `${API_BASE_URL}/hotels`;
+export const fetchAllHotels = async (filters?: Record<string, any>) => {
+  const queryParams = new URLSearchParams(filters).toString();
+  const url = `${API_BASE_URL}/hotels?${queryParams}`;
   const response = await axios.get(url);
   return response.data as Hotel[];
 };
