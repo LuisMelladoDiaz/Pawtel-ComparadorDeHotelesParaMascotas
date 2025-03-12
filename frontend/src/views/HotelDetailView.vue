@@ -1,30 +1,38 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import Navbar from '../components/NavBar.vue';
 import FilterNavbar from '../components/FilterNavBar.vue';
 import Footer from '../components/Footer.vue';
 import HotelDetailCard from '../components/HotelDetailCard.vue';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
+import { useGetHotelById } from '@/data-layer/hooks/hotels';
 
 const route = useRoute();
-const hotel = ref({
-  image: '/src/assets/foto1.jpg',
-  name: 'Caniland Resort',
-  location: 'Madrid, España',
-  details: ['WiFi gratis', 'Desayuno incluido', 'Piscina', 'Gimnasio'],
-  rating: 4.5,
-  price: '120€/noche',
-  imageGallery: [
+const hotelId = computed(() => Number(route.params.id));
+
+const { data: apiHotel, isLoading, error } = useGetHotelById(hotelId);
+
+const hotel = computed(() => ({
+  id: apiHotel.value?.id || null,
+  image: apiHotel.value?.image || '/src/assets/hotel.jpg',
+  name: apiHotel.value?.name || 'Nombre',
+  address: apiHotel.value?.address || 'Dirección',
+  city: apiHotel.value?.city || 'Ciudad',
+  details: ['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros'], // Mantiene detalles manuales
+  rating: apiHotel.value?.rating || '8.5',
+  price: apiHotel.value?.price || '50€',
+  imageGallery: apiHotel.value?.imageGallery || [
     '/src/assets/foto1.jpg',
     '/src/assets/foto2.jpg',
     '/src/assets/foto1.jpg',
     '/src/assets/foto2.jpg'
   ],
-  description: 'Un hotel increíble con todas las comodidades que necesitas para unas vacaciones perfectas.',
-  reviews: [
+  description: apiHotel.value?.description || 'Descripción predeterminada del hotel.',
+  reviews: apiHotel.value?.reviews || [
     { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
   ]
-});
+}));
 </script>
 
 <template>
@@ -32,26 +40,57 @@ const hotel = ref({
     <Navbar />
     <FilterNavbar />
 
-    <!-- Versión de escritorio -->
-    <div class="hidden md:flex items-center max-w-7xl mx-auto px-5 w-full flex-col flex-grow">
-      <div class="bg-white shadow-md py-3 flex justify-between max-w-7xl mx-auto w-full px-10 text-black text-lg border-b">
-        <a href="#" class="hover:underline font-bold">Vista General</a>
-        <a href="#" class="hover:underline">Información y Precios</a>
-        <a href="#" class="hover:underline">Servicios</a>
-        <a href="#" class="hover:underline">Requisitos</a>
-        <a href="#" class="hover:underline">A Tener en Cuenta</a>
-        <a href="#" class="hover:underline">Opiniones de Clientes</a>
-      </div>
+    <LoadingSpinner v-if="isLoading" class="text-center py-10 text-xl font-bold text-gray-700 flex-col flex-grow">
+      Cargando detalles del hotel...
+    </LoadingSpinner>
 
-      <div class="max-w-7xl mx-auto py-10">
-        <HotelDetailCard v-bind="hotel" />
-      </div>
+    <div v-else-if="error" class="text-center py-10 text-xl font-bold text-red-600">
+      Error al cargar el hotel. Inténtalo de nuevo más tarde.
     </div>
 
-    <!-- Versión móvil -->
-    <div class="md:hidden flex flex-col items-center px-4 py-6">
-      <HotelDetailCard v-bind="hotel" />
-    </div>
+    <!-- Desktop Version -->
+    <template v-else>
+      <div class="hidden md:flex items-center max-w-7xl mx-auto px-5 w-full flex-col flex-grow">
+        <div class="bg-white shadow-md py-3 flex justify-between max-w-7xl mx-auto w-full px-10 text-black text-lg border-b">
+          <a href="#" class="hover:underline font-bold">Vista General</a>
+          <a href="#" class="hover:underline">Información y Precios</a>
+          <a href="#" class="hover:underline">Servicios</a>
+          <a href="#" class="hover:underline">Requisitos</a>
+          <a href="#" class="hover:underline">A Tener en Cuenta</a>
+          <a href="#" class="hover:underline">Opiniones de Clientes</a>
+        </div>
+
+        <div class="max-w-7xl mx-auto py-10">
+          <HotelDetailCard
+            :id="hotel.id"
+            :image="hotel.image"
+            :name="hotel.name"
+            :city="hotel.city"
+            :address="hotel.address"
+            :details="hotel.details"
+            :rating="hotel.rating"
+            :price="hotel.price"
+            :imageGallery="hotel.imageGallery"
+            :description="hotel.description"
+          />
+        </div>
+      </div>
+
+      <!-- Mobile Version -->
+      <div class="md:hidden flex flex-col items-center px-4 py-6">
+        <HotelDetailCard
+          :id="hotel.id"
+          :image="hotel.image"
+          :name="hotel.name"
+          :location="hotel.location"
+          :details="hotel.details"
+          :rating="hotel.rating"
+          :price="hotel.price"
+          :imageGallery="hotel.imageGallery"
+          :description="hotel.description"
+        />
+      </div>
+    </template>
 
     <Footer />
   </div>

@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 defineProps({
   image: { type: String, required: true },
   name: { type: String, required: true },
-  location: { type: String, required: true },
+  address: { type: String, required: true },
+  city: { type: String, required: true },
   details: { type: Array, required: true },
   rating: { type: Number, required: true },
   price: { type: String, required: true },
@@ -22,7 +23,7 @@ defineProps({
       <h2 class="text-3xl font-bold">{{ name }}</h2>
       <p class="text-lg flex items-center justify-center underline">
         <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
-        {{ location }}
+        {{ address }}, {{ city }}
       </p>
     </div>
 
@@ -66,7 +67,7 @@ defineProps({
       <h2 class="text-2xl font-bold">{{ name }}</h2>
       <p class="text-md flex items-center justify-center">
         <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
-        {{ location }}
+        {{ address }}, {{ city }}
       </p>
     </div>
 
