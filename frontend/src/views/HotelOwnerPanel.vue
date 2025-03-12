@@ -49,7 +49,9 @@ const openModal = (hotel) => {
 const saveHotel = async () => {
   try {
     if (isEditing.value) {
-      await updateHotelMutation.mutateAsync({ hotelOwnerId: hotelOwnerId.value, ownerData: hotelData.value });
+      console.log(hotelData.value.id)
+      console.log(hotelData.value)
+      await updateHotelMutation.mutateAsync(hotelDataValue.id, hotelData.value);
     } else {
       await createHotelMutation.mutateAsync(hotelData.value);
     }
