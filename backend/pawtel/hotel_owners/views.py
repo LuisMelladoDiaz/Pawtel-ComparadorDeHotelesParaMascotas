@@ -5,6 +5,7 @@ from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.serializers import HotelSerializer
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
 
@@ -29,11 +30,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        # return Response({"detail": "This operation is forbidden."}, status=status.HTTP_403_FORBIDDEN)
-
-        # Just for testing for the moment TODO
-        output_serializer_data = HotelOwnerService.general_create_hotel_owner(request)
-        return Response(output_serializer_data, status=status.HTTP_201_CREATED)
+        return PermissionDenied("This operation is forbidden.")
 
     def update(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
