@@ -43,8 +43,8 @@
 
       <!-- Botones de autenticación en el menú móvil -->
       <div class="auth-buttons flex flex-col gap-3 text-white mt-4">
-        <button class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</button>
-        <button class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</button>
+        <router-link to="/login" class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
+        <router-link to="/register" class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
       <!-- Icono de perfil -->
         <router-link to="/userProfile" class="bg-terracota hover:bg-terracota-dark rounded p-2 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">

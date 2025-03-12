@@ -17,7 +17,9 @@ import Button from '../components/Button.vue';
             <span class="italic" style="color: var(--color-terracota);">mascota.</span>
           </h1>
           <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
-          <Button type="reject" @click="handleLogin">Iniciar Sesión</Button>
+          <router-link to="/login">
+            <Button type="reject">Iniciar Sesión</Button>
+          </router-link>
         </div>
         <div class="lg:w-1/2">
           <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">
