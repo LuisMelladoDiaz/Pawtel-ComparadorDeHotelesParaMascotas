@@ -1,31 +1,43 @@
-# PAWTEL  
-**Buscador y Comparador de Hoteles para Mascotas**
-
 ![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
 
-**Equipo:**  
-Andrés Martínez Reviriego  
-Claudio Cortés Carrasco  
-Daniel Flores De Francisco  
-David González Martínez  
-Fernando Castelló Sánchez  
-Francisco Miguel Jiménez Morales  
-Javier García Sebastián  
-Javier Ruiz Garrido  
-Jorge Gómez de Tovar  
-Luis Mellado Díaz  
-Manuel Castillejo Vela  
-Rafael Castillo Cebolla  
-Sergio Trenado González  
-Yesica Garate Fuentes 
+
+**Equipo:**
+- **Andrés Martínez Reviriego**
+- **Claudio Cortés Carrasco**
+- **Daniel Flores De Francisco**
+- **David González Martínez**
+- **Fernando Castelló Sánchez**
+- **Francisco Miguel Jiménez Morales**
+- **Javier García Sebastián**
+- **Javier Ruiz Garrido**
+- **Jorge Gómez de Tovar**
+- **Luis Mellado Díaz**
+- **Manuel Castillejo Vela**
+- **Rafael Castillo Cebolla**
+- **Sergio Trenado González**
+- **Yesica Garate Fuentes**
+
+**Fecha:** 10/03/2025
+
+**Equipo:** G11
+
+**Entregable:** Sprint 1
+
+---
+ 
+ ## **Índice**
+ 1. [Tabla de Versiones](#historial-de-versiones)  
+ 2. [Lista de Usuarios Piloto](#lista-de-usuarios-piloto)  
+ 3. [Gestión de la comunicación y feedback](#gestión-de-la-comunicación-y-feedback-de-los-usuarios-piloto)  
 
  
-**Entregable:** Sprint 1
+ ---
 
 ## Historial de Versiones
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
 | 10/03/2025  | v 1.0         | Versión inicial del documento |Daniel Flores de Francisco |
+|12/03/2025  | v 1.1         | Tabla actualizada. Portada |Daniel Flores de Francisco |
 
 ---
 
@@ -35,7 +47,7 @@ Yesica Garate Fuentes
 |----------------------------------------|--------------------|--------------------|
 | Javier Flores de Francisco             | 644979530         | Acepto las condiciones |
 | Leonardo Arturo Pérez López            | 648913287         | Acepto las condiciones |
-| Hermitania Fuentes Pfocco              | 611 64 59 54      | Acepto las condiciones |
+| Hermitania Fuentes Pfocco              | 611645954      | Acepto las condiciones |
 | Pablo Salido Muñoz                      | 717713090         | Acepto las condiciones |
 | David Cano Ramírez                      | 685343986         | Acepto las condiciones |
 | David Toronjo Mendoza                   | 674562408         | Acepto las condiciones |
@@ -53,6 +65,27 @@ Yesica Garate Fuentes
 | Raúl Toscano Anguni                     | 640629595         | Acepto las condiciones |
 | María Eugenia Carrasco Vázquez          | 627380391         | Acepto las condiciones |
 | Sebastian Torres Garate                 | 603035634         | Acepto las condiciones |
+| Juan Carlos Gómez Dominguez             | 690871256         | Acepto las condiciones |
+| Manuel Moreno Cebolla                   | 661096399         | Acepto las condiciones |
+| Javier Carrasco Vázquez                 | 637836856         | Acepto las condiciones |
+| Manuel Cabrera Moreno                   | 711746253         | Acepto las condiciones |
+| Emilio Ruiz Jimenez                     | 661394821         | Acepto las condiciones |
+| Úrsula Garrido González                 | 691926333         | Acepto las condiciones |
+| Mercedes de Tovar Romero                | 650392904         | Acepto las condiciones |
+| Inmaculada Sánchez Pastor               | 655412723         | Acepto las condiciones |
+| Alex Garate Fuentes                     | +51 961888833     | Acepto las condiciones |
+| Samantha Garate Peñaloza                | +51 951250680     | Acepto las condiciones |
+| Kelly Torres Serrano                    | +51 939206008     | Acepto las condiciones |
+| Miguel Parejo Benitez                   | 622489668         | Acepto las condiciones |
+| Nacho Jiménez Santa Cruz                | 674470182         | Acepto las condiciones |
+| **Daniel Ruiz Lopez**               | **644435370**          | **Acepto las condiciones**  |
+| **David Godoy Fernandez**                 | **633628724**          | **Acepto las condiciones**  |
+| **Francisco Pérez Manzano**                 | **640255703**          | **Acepto las condiciones**  |
+| **Javier Nieto Vicioso**                 | **622293841**          | **Acepto las condiciones**  |
+| **María del Mar Ávila Maqueda**                 | **644359235**         | **Acepto las condiciones**  |
+
+Nota: Los usuarios que están **resaltados** son los proporcionados por la asignatura ISPP.
+
 
 # Gestión de la comunicación y feedback de los usuarios piloto.
 
