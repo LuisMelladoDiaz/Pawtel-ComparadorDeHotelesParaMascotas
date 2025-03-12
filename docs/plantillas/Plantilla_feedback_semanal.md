@@ -9,29 +9,28 @@
 
 ---
 
-<p align="center">
-  <img src="landing/assets/logo.png" alt="Logo del proyecto" width="200">
-</p>
+![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
 
 **Proyecto:** Pawtel 
 **Entregable:** 
 **Versión:** 1.0  
 **Fecha:** 
-**Autores:** Grupo 11:
-Andrés Martínez Reviriego
-Claudio Cortés Carrasco
-Daniel Flores De Francisco
-David González Martínez
-Fernando Castelló Sánchez
-Francisco Miguel Jiménez Morales
-Javier García Sebastián
-Javier Ruiz Garrido
-Jorge Gómez de Tovar
-Luis Mellado Díaz
-Manuel Castillejo Vela
-Rafael Castillo Cebolla
-Sergio Trenado González
-Yesica Garate Fuentes
+**Grupo:** G11
+**Equipo:**
+- Andrés Martínez Reviriego
+- Claudio Cortés Carrasco
+- Daniel Flores De Francisco
+- David González Martínez
+- Fernando Castelló Sánchez
+- Francisco Miguel Jiménez Morales
+- Javier García Sebastián
+- Javier Ruiz Garrido
+- Jorge Gómez de Tovar
+- Luis Mellado Díaz
+- Manuel Castillejo Vela
+- Rafael Castillo Cebolla
+- Sergio Trenado González
+- Yesica Garate Fuentes
 
 ---
 
