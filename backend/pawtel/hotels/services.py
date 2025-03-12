@@ -90,6 +90,26 @@ class HotelService:
         hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
 
+    # Filter
+
+    @staticmethod
+    def list_hotels(filters=None):
+        hotels = Hotel.objects.filter(is_archived=False)
+
+        if filters:
+            if "city" in filters:
+                hotels = hotels.filter(city__icontains=filters["city"])
+            if "name" in filters:
+                hotels = hotels.filter(name__icontains=filters["name"])
+            if "hotel_owner" in filters:
+                hotels = hotels.filter(hotel_owner__id=filters["hotel_owner"])
+            if "sort" in filters:
+                hotels = hotels.order_by(filters["sort"])
+            if "limit" in filters and filters["limit"].isdigit():
+                hotels = hotels[: int(filters["limit"])]
+
+        return hotels
+
     # Others -----------------------------------------------------------------
 
     @staticmethod
