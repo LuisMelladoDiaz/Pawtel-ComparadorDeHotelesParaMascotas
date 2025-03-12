@@ -5,12 +5,10 @@ import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
 import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
+
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
+const hotelOwnerId = computed(() => hotelOwner?.value?.id);
 
-const hotelOwnerId = computed(() =>{
-
-  return hotelOwner?.value?.id;
-});
 // Obtener los hoteles del dueño desde el backend
 const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId, true);
 const createHotelMutation = useCreateHotel();
@@ -25,7 +23,6 @@ const currentPage = ref(1);
 const itemsPerPage = 6;
 
 const totalPages = computed(() => Math.ceil((hotels.value?.length || 0) / itemsPerPage));
-
 const paginatedHotels = computed(() => {
   if (!hotels.value) return [];
   const start = (currentPage.value - 1) * itemsPerPage;
@@ -33,25 +30,34 @@ const paginatedHotels = computed(() => {
 });
 
 // Abrir modal para añadir/editar
-const openModal = (hotel) => {
-  if (hotelData.value.id !== null) {
+const openModal = (hotel = null) => {
+  if (hotel) {
+    // Modo de edición: cargar los datos del hotel seleccionado
     hotelData.value = { ...hotel };
     isEditing.value = true;
   } else {
-    hotelData.value = { name: '', address: '', city: '', description: '' };
+    // Modo de creación: reiniciar los datos del hotel
+    hotelData.value = { id: null, name: '', address: '', city: '', description: '' };
     isEditing.value = false;
   }
   modalOpen.value = true;
 };
 
-
 // Guardar hotel (Crear o Editar)
 const saveHotel = async () => {
   try {
     if (isEditing.value) {
-      console.log(hotelData.value.id)
-      console.log(hotelData.value)
-      await updateHotelMutation.mutateAsync(hotelDataValue.id, hotelData.value);
+      await updateHotelMutation.mutateAsync({
+          hotelId: hotelData.value.id,
+          hotelData: {
+            name: hotelData.value.name,
+            address: hotelData.value.address,
+            city: hotelData.value.city,
+            description: hotelData.value.description,
+          },
+        });
+        window.location.reload();
+
     } else {
       await createHotelMutation.mutateAsync(hotelData.value);
     }
@@ -59,7 +65,6 @@ const saveHotel = async () => {
   } catch (error) {
     console.error('Error al guardar el hotel', error);
   }
-
 };
 
 // Eliminar hotel
@@ -67,6 +72,7 @@ const deleteHotel = async (id) => {
   if (confirm('¿Estás seguro de eliminar este hotel?')) {
     try {
       await deleteHotelMutation.mutateAsync(id);
+      window.location.reload();
     } catch (error) {
       console.error('Error al eliminar hotel', error);
     }
@@ -87,7 +93,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
       <!-- Cabecera -->
       <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
         <span class="font-semibold">Gestión de Hoteles</span>
-        <button @click="openModal" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
+        <button @click="openModal()" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
           <i class="fas fa-plus mr-2"></i> Añadir Nuevo
         </button>
       </div>
