@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import NavbarTerracota from '../components/NavbarTerracota.vue';
+import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 
 // Variables reactivas para los datos del formulario
@@ -52,9 +52,9 @@ const sendMessage = async () => {
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <NavbarTerracota />
-    <section class="relative mx-auto py-12 max-w-7xl px-5">
+    <section class="relative mx-auto py-12 max-w-7xl px-5 w-full flex flex-col flex-grow">
       <h1 class="text-5xl font-extrabold text-[#6C8CC3] text-center font-titleHome drop-shadow-lg">Contáctanos</h1>
       <p class="text-lg text-gray-600 text-center mt-4">¿Tienes alguna pregunta? ¡Estamos aquí para ayudarte! Ponte en contacto con nuestro equipo.</p>
       <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">

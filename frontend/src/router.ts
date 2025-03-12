@@ -19,7 +19,7 @@ import Contact from './views/Contact.vue';
 
 const routes = [
   { path: '/', component: Home},
-  { path: '/sobre_nosotros', component: AboutUs},
+  { path: '/sobre-nosotros', component: AboutUs},
   { path: '/contacto', component: Contact},
   { path: '/dev', component: DevelopmentScreen},
   { path: '/hotels', component: HotelListScreen},
@@ -31,7 +31,7 @@ const routes = [
   { path: '/register', component: RegisterView},
   { path: '/templateScreen1', component: TemplateScreen1},
   { path: '/templateScreen2', component: TemplateScreen2},
-  { path : '/userProfile', component: UserProfile},
+  { path: '/userProfile', component: UserProfile},
   { path: '/hotelOwnerPanel', component: HotelOwnerPanel },
 ]
 

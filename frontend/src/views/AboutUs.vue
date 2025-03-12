@@ -1,12 +1,12 @@
 <script setup>
-import NavbarTerracota from '../components/NavbarTerracota.vue';
+import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <NavbarTerracota />
-    <section class="relative mx-auto py-16 max-w-7xl px-6 text-center">
+    <section class="relative mx-auto py-16 max-w-7xl px-6 text-center w-full flex flex-col flex-grow">
       <h1 class="text-5xl font-extrabold text-[#6C8CC3] font-titleHome drop-shadow-lg">Sobre Nosotros</h1>
 
       <div class="mt-12 bg-white shadow-lg p-8 rounded-xl border-t-4 border-[#C36C6C] shadow-md transition-all">
