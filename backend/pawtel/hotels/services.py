@@ -111,6 +111,15 @@ class HotelService:
                     roomtype__name__icontains=filters["room_type"]
                 ).distinct()
 
+            if "max_price_per_night" in filters:
+                try:
+                    max_price = float(filters["max_price_per_night"])
+                    hotels = hotels.filter(
+                        roomtype__price_per_night__lte=max_price
+                    ).distinct()
+                except ValueError:
+                    pass
+
             if "sort" in filters:
                 sort_field = filters["sort"]
                 if sort_field.startswith("-"):  # Permitir orden descendente
