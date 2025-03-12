@@ -1,16 +1,20 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
-import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner } from '@/data-layer/hooks/hotelOwners';
+import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
+import { useCreateHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
+const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
 
-const hotelOwnerId = 1; // Cambia esto dinámicamente según el usuario autenticado
+const hotelOwnerId = computed(() =>{
 
+  return hotelOwner?.value?.id;
+});
 // Obtener los hoteles del dueño desde el backend
-const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId);
-const createHotelMutation = useCreateHotelOwner();
-const updateHotelMutation = useUpdateHotelOwner();
+const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId, true);
+const createHotelMutation = useCreateHotel();
+const updateHotelMutation = useUpdateHotel();
 const deleteHotelMutation = useDeleteHotelOwner();
 
 const modalOpen = ref(false);
@@ -31,7 +35,7 @@ const paginatedHotels = computed(() => {
 // Abrir modal para añadir/editar
 const openModal = (hotel = null) => {
   hotelData.value = hotel ? { ...hotel } : { name: '', address: '', city: '', description: '' };
-  isEditing.value = !!hotel;
+  isEditing.value = false;
   modalOpen.value = true;
 };
 
@@ -39,7 +43,7 @@ const openModal = (hotel = null) => {
 const saveHotel = async () => {
   try {
     if (isEditing.value) {
-      await updateHotelMutation.mutateAsync({ hotelOwnerId, ownerData: hotelData.value });
+      await updateHotelMutation.mutateAsync({ hotelOwnerId: hotelOwnerId.value, ownerData: hotelData.value });
     } else {
       await createHotelMutation.mutateAsync(hotelData.value);
     }
@@ -70,7 +74,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
     <NavbarTerracota />
 
     <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
-      
+
       <!-- Cabecera -->
       <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
         <span class="font-semibold">Gestión de Hoteles</span>
@@ -78,7 +82,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           <i class="fas fa-plus mr-2"></i> Añadir Nuevo
         </button>
       </div>
-      
+
       <!-- Tabla de hoteles -->
       <div class="overflow-x-auto w-full">
         <table class="w-full border-collapse shadow-md rounded-b-lg overflow-hidden mb-4">
@@ -125,7 +129,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels?.length || 0 }}</span>
         <div class="flex gap-2 mt-2 md:mt-0">
           <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">← Anterior</button>
-          <button v-for="page in totalPages" :key="page" @click="currentPage = page" 
+          <button v-for="page in totalPages" :key="page" @click="currentPage = page"
                   class="px-3 py-1" :class="{'bg-gray-300': currentPage === page, 'bg-gray-200': currentPage !== page}">
             {{ page }}
           </button>

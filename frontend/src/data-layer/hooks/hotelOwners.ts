@@ -9,6 +9,7 @@ import {
     deleteHotelOwner,
     fetchAllHotelsOfOwner,
     deleteAllHotelsOfOwner,
+    getCurrentHotelOwner,
     type HotelOwner,
 } from '@/data-layer/api/hotelOwners';
 
@@ -72,11 +73,11 @@ export const useDeleteHotelOwner = () => {
     });
 };
 
-export const useGetAllHotelsOfOwner = (hotelOwnerId: number) => {
+export const useGetAllHotelsOfOwner = (hotelOwnerId: number, enabled: boolean) => {
     return useQuery({
-        queryKey: ['hotelsOfOwner', hotelOwnerId],
-        queryFn: () => fetchAllHotelsOfOwner(hotelOwnerId),
-        enabled: !!hotelOwnerId,
+        queryKey: ['hotelsOfOwner', hotelOwnerId, enabled],
+        queryFn: () => fetchAllHotelsOfOwner(toValue(hotelOwnerId)),
+        enabled: enabled,
         staleTime: 1000 * 60,
         refetchOnWindowFocus: false,
     });
@@ -93,3 +94,14 @@ export const useDeleteAllHotelsOfOwner = () => {
         },
     });
 };
+
+
+
+export const useGetCurrentHotelOwner = () => {
+    return useQuery({
+        queryKey: ['currentHotelOwner'],
+        queryFn: () => getCurrentHotelOwner(),
+        staleTime: 1000 * 60,
+        refetchOnWindowFocus: false,
+    });
+}

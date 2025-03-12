@@ -74,3 +74,9 @@ export const deleteAllHotelsOfOwner = async (hotelOwnerId: number) => {
     const response = await axios.delete(url);
     return response.data;
 };
+
+export const getCurrentHotelOwner = async () => {
+    const url = `${API_BASE_URL}/hotel-owners/hotel_owners_me`;
+    const response = await axios.get(url);
+    return response.data as HotelOwner;
+}

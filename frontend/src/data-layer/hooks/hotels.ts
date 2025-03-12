@@ -10,10 +10,12 @@ import {
   type Hotel,
 } from '@/data-layer/api/hotels';
 
-export const useGetAllHotels = () => {
+export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
   return useQuery({
-    queryKey: ['hotels'],
-    queryFn: fetchAllHotels,
+    queryKey: ['hotels', filters],
+    queryFn: () => fetchAllHotels({
+      ...Object.fromEntries(Object.entries(filters || {}).map(([key, value]) => [key, toValue(value)])),
+    }),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
@@ -34,8 +36,11 @@ export const useCreateHotel = () => {
   return useMutation({
     mutationFn: createHotel,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['hotels'] });
+      queryClient.invalidateQueries({
+        predicate: (query) => true,
+      });
     },
+
   });
 };
 

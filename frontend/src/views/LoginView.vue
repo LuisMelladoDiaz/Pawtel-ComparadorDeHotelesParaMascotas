@@ -25,7 +25,7 @@ const login = async () => {
         });
 
         alert('Inicio de sesión exitoso');
-        router.push('/dashboard');
+        router.push('/');
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
         alert('Usuario o contraseña incorrectos');
