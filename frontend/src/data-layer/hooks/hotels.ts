@@ -36,8 +36,11 @@ export const useCreateHotel = () => {
   return useMutation({
     mutationFn: createHotel,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['hotels'] });
+      queryClient.invalidateQueries({
+        predicate: (query) => true,
+      });
     },
+
   });
 };
 

@@ -33,7 +33,10 @@ class HotelService:
     @staticmethod
     def serialize_input_hotel_create(request):
         context = {"request": request}
-        serializer = HotelSerializer(data=request.data, context=context)
+        current_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
+        data = request.data.copy()
+        data["hotel_owner"] = current_owner_id
+        serializer = HotelSerializer(data=data, context=context)
         return serializer
 
     @staticmethod

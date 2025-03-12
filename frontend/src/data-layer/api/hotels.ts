@@ -26,7 +26,7 @@ export const fetchHotelById = async (hotelId: number) => {
 };
 
 export const createHotel = async (hotelData: Omit<Hotel, 'id'>) => {
-  const url = `${API_BASE_URL}/hotels`;
+  const url = `${API_BASE_URL}/hotels/`;
   const response = await axios.post(url, hotelData);
   return response.data as Hotel;
 };

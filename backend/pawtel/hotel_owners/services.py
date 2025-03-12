@@ -70,3 +70,9 @@ class HotelOwnerService:
             raise PermissionDenied("No hotels to delete.")
 
         hotels_to_delete.delete()
+
+    @staticmethod
+    def get_current_hotel_owner(request):
+        if not request.user or not request.user.is_authenticated:
+            raise PermissionDenied("User is not authenticated.")
+        return HotelOwner.objects.get(user_id=request.user.id)

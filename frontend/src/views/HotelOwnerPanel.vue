@@ -4,7 +4,7 @@ import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
-
+import { useCreateHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
 
 const hotelOwnerId = computed(() =>{
@@ -13,8 +13,8 @@ const hotelOwnerId = computed(() =>{
 });
 // Obtener los hoteles del dueño desde el backend
 const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId, true);
-const createHotelMutation = useCreateHotelOwner();
-const updateHotelMutation = useUpdateHotelOwner();
+const createHotelMutation = useCreateHotel();
+const updateHotelMutation = useUpdateHotel();
 const deleteHotelMutation = useDeleteHotelOwner();
 
 const modalOpen = ref(false);
@@ -35,7 +35,7 @@ const paginatedHotels = computed(() => {
 // Abrir modal para añadir/editar
 const openModal = (hotel = null) => {
   hotelData.value = hotel ? { ...hotel } : { name: '', address: '', city: '', description: '' };
-  isEditing.value = !!hotel;
+  isEditing.value = false;
   modalOpen.value = true;
 };
 
@@ -43,7 +43,7 @@ const openModal = (hotel = null) => {
 const saveHotel = async () => {
   try {
     if (isEditing.value) {
-      await updateHotelMutation.mutateAsync({ hotelOwnerId, ownerData: hotelData.value });
+      await updateHotelMutation.mutateAsync({ hotelOwnerId: hotelOwnerId.value, ownerData: hotelData.value });
     } else {
       await createHotelMutation.mutateAsync(hotelData.value);
     }
