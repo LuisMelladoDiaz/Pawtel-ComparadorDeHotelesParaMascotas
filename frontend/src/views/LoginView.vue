@@ -45,9 +45,9 @@ const logout = async () => {
 </script>
 
 <template>
-    <div>
+    <div class="flex flex-col min-h-screen">
         <NavbarTerracota />
-        <div class="max-w-7xl mx-auto px-5">
+        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
             <div class="container flex justify-center items-center mt-10 hidden md:flex">
                 <div class="w-1/3 bg-white shadow-lg rounded-lg p-6">
                     <h2 class="text-2xl font-semibold text-gray-800 text-center">Iniciar Sesión</h2>
