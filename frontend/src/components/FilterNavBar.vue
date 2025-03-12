@@ -4,16 +4,17 @@ import InputText from './InputText.vue';
 import InputNumber from './InputNumber.vue';
 import DatePicker from '../components/DatePicker.vue';
 import Button from '../components/Button.vue';
+import { useRouter } from 'vue-router';
 
 const city = ref('');
 const dateRange = ref('');
 const petCount = ref('');
 
+const router = useRouter();
 const onSearch = () => {
-  console.log('Filtrando por:', { city: city.value, dateRange: dateRange.value, petCount: petCount.value });
-  
-  // Redirigir a /hotels
-  window.location.href = "/hotels";
+  router.push({
+    path: '/hotels',
+  });
 };
 
 </script>
