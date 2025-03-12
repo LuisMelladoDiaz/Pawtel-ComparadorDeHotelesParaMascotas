@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -26,4 +27,5 @@ urlpatterns = [
     path("", include("pawtel.hotels.urls")),
     path("", include("pawtel.rooms.urls")),
     path("", include("pawtel.room_types.urls")),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -34,6 +35,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
+    "rest_framework_simplejwt.token_blacklist",
     "sample",
     "authapp",
     "pawtel.app_users.apps.AppUsersConfig",
@@ -62,16 +64,14 @@ REST_FRAMEWORK = {
     ]
 }
 
-# Configurar SimpleJWT
 
 SIMPLE_JWT = {
-    "AUTH_COOKIE": "access_token",  # Nombre de la cookie con el JWT
-    "AUTH_COOKIE_HTTP_ONLY": True,  # Seguridad para que no sea accesible por JavaScript
-    "AUTH_COOKIE_SAMESITE": "None",  # Configuración de SameSite para las cookies
-    "AUTH_COOKIE_SECURE": True,  # Puede ser True si usas HTTPS
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=2),  # short-lived access token
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),  # longer-lived refresh token
+    "ROTATE_REFRESH_TOKENS": True,  # issue a new refresh token when the old one is used
+    "BLACKLIST_AFTER_ROTATION": True,  # blacklist used refresh tokens
 }
 
-# Configurar CORS para permitir peticiones del frontend
 
 ROOT_URLCONF = "pawtel.urls"
 
