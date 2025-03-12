@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from pawtel.hotels.models import Hotel, HotelOwner
 from faker import Faker
+import random
 
 fake = Faker()
 
@@ -16,7 +17,7 @@ class Command(BaseCommand):
             return
         
         for _ in range(5):  # Crear 5 hoteles
-            owner = fake.random_choice(owners)
+            owner = random.choice(owners)
             hotel = Hotel.objects.create(
                 name=fake.company(),
                 address=fake.address(),

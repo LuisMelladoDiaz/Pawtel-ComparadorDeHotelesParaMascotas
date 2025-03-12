@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
-from pawtel.hotels.models import Hotel, RoomType, Room
+from pawtel.room_types.models import RoomType
+from pawtel.rooms.models import Room
+from pawtel.hotels.models import Hotel
 from pawtel.app_users.models import AppUser
 from pawtel.hotels.models import HotelOwner
 
