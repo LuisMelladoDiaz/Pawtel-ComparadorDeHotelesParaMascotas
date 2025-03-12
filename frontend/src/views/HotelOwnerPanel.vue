@@ -1,10 +1,77 @@
+<script setup>
+import { ref, computed } from 'vue';
+import NavbarTerracota from '../components/NavBarTerracota.vue';
+import Footer from '../components/Footer.vue';
+import Button from '../components/Button.vue';
+import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner } from '@/data-layer/hooks/hotelOwners';
+
+const hotelOwnerId = 1; // Cambia esto dinámicamente según el usuario autenticado
+
+// Obtener los hoteles del dueño desde el backend
+const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId);
+const createHotelMutation = useCreateHotelOwner();
+const updateHotelMutation = useUpdateHotelOwner();
+const deleteHotelMutation = useDeleteHotelOwner();
+
+const modalOpen = ref(false);
+const isEditing = ref(false);
+const hotelData = ref({ id: null, name: '', address: '', city: '', description: '' });
+
+const currentPage = ref(1);
+const itemsPerPage = 6;
+
+const totalPages = computed(() => Math.ceil((hotels.value?.length || 0) / itemsPerPage));
+
+const paginatedHotels = computed(() => {
+  if (!hotels.value) return [];
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return hotels.value.slice(start, start + itemsPerPage);
+});
+
+// Abrir modal para añadir/editar
+const openModal = (hotel = null) => {
+  hotelData.value = hotel ? { ...hotel } : { name: '', address: '', city: '', description: '' };
+  isEditing.value = !!hotel;
+  modalOpen.value = true;
+};
+
+// Guardar hotel (Crear o Editar)
+const saveHotel = async () => {
+  try {
+    if (isEditing.value) {
+      await updateHotelMutation.mutateAsync({ hotelOwnerId, ownerData: hotelData.value });
+    } else {
+      await createHotelMutation.mutateAsync(hotelData.value);
+    }
+    modalOpen.value = false;
+  } catch (error) {
+    console.error('Error al guardar el hotel', error);
+  }
+};
+
+// Eliminar hotel
+const deleteHotel = async (id) => {
+  if (confirm('¿Estás seguro de eliminar este hotel?')) {
+    try {
+      await deleteHotelMutation.mutateAsync(id);
+    } catch (error) {
+      console.error('Error al eliminar hotel', error);
+    }
+  }
+};
+
+// Paginación
+const prevPage = () => currentPage.value > 1 && currentPage.value--;
+const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
+</script>
+
 <template>
   <div class="flex flex-col min-h-screen">
     <NavbarTerracota />
 
-    <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow justify-center mt-8">
-
-      <!-- Fila superior -->
+    <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
+      
+      <!-- Cabecera -->
       <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
         <span class="font-semibold">Gestión de Hoteles</span>
         <button @click="openModal" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
@@ -12,7 +79,7 @@
         </button>
       </div>
       
-      <!-- Tabla de hoteles con estilo modernizado -->
+      <!-- Tabla de hoteles -->
       <div class="overflow-x-auto w-full">
         <table class="w-full border-collapse shadow-md rounded-b-lg overflow-hidden mb-4">
           <thead>
@@ -24,7 +91,17 @@
               <th class="px-4 py-2 text-center">Acciones</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-if="isLoading">
+            <tr>
+              <td colspan="5" class="text-center p-4">Cargando hoteles...</td>
+            </tr>
+          </tbody>
+          <tbody v-else-if="isError">
+            <tr>
+              <td colspan="5" class="text-center p-4 text-red-600">Error al cargar los hoteles.</td>
+            </tr>
+          </tbody>
+          <tbody v-else>
             <tr v-for="(hotel, index) in paginatedHotels" :key="hotel.id" :class="index % 2 === 0 ? 'bg-gray-100' : 'bg-white'">
               <td class="px-4 py-2">{{ hotel.name }}</td>
               <td class="px-4 py-2">{{ hotel.address }}</td>
@@ -43,10 +120,9 @@
         </table>
       </div>
 
-      
-      <!-- Información de paginación -->
+      <!-- Paginación -->
       <div class="flex justify-between w-full mt-4 flex-col md:flex-row">
-        <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels.length }}</span>
+        <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels?.length || 0 }}</span>
         <div class="flex gap-2 mt-2 md:mt-0">
           <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">← Anterior</button>
           <button v-for="page in totalPages" :key="page" @click="currentPage = page" 
@@ -57,14 +133,11 @@
         </div>
       </div>
 
-      <!-- Línea estilística -->
-      <div class="w-full mt-4 border-t border-gray-300"></div>
-
     </div>
 
     <Footer />
-    
-    <!-- Modal para añadir/editar hotel -->
+
+    <!-- Modal para Añadir/Editar Hotel -->
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-white p-6 rounded-lg w-1/3">
         <h2 class="text-xl font-bold mb-4">{{ isEditing ? 'Editar Hotel' : 'Añadir Hotel' }}</h2>
@@ -80,83 +153,3 @@
     </div>
   </div>
 </template>
-
-
-<script setup>
-import { ref, computed } from 'vue';
-import NavbarTerracota from '../components/NavBarTerracota.vue';
-import Footer from '../components/Footer.vue';
-import Button from '../components/Button.vue';
-
-const hotels = ref([
-  { id: 1, name: 'Hotel Sol', address: 'Calle 123', city: 'Madrid', description: 'Hotel con vistas al mar.' },
-  { id: 2, name: 'Hotel Luna', address: 'Avenida 456', city: 'Barcelona', description: 'Hotel en el centro de la ciudad.' },
-  { id: 3, name: 'Hotel Estrella', address: 'Calle 789', city: 'Sevilla', description: 'Cerca de la catedral.' },
-  { id: 4, name: 'Hotel Noche', address: 'Calle 321', city: 'Granada', description: 'Vista a la Alhambra.' },
-  { id: 5, name: 'Hotel Amanecer', address: 'Av. Sol 12', city: 'Valencia', description: 'Junto a la playa.' },
-  { id: 6, name: 'Hotel Brisa', address: 'Calle Mar 15', city: 'Málaga', description: 'Ambiente costero.' },
-  { id: 7, name: 'Hotel Cielo', address: 'Paseo Azul', city: 'Bilbao', description: 'Vistas impresionantes.' }
-]);
-
-const modalOpen = ref(false);
-const isEditing = ref(false);
-const hotelData = ref({ name: '', address: '', city: '', description: '' });
-const currentPage = ref(1);
-const itemsPerPage = 5;
-
-const totalPages = computed(() => Math.ceil(hotels.value.length / itemsPerPage));
-
-const paginatedHotels = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  return hotels.value.slice(start, start + itemsPerPage);
-});
-
-const openModal = (hotel = null) => {
-  hotelData.value = hotel ? { ...hotel } : { name: '', address: '', city: '', description: '' };
-  isEditing.value = !!hotel;
-  modalOpen.value = true;
-};
-
-const saveHotel = () => {
-  if (isEditing.value) {
-    const index = hotels.value.findIndex(h => h.id === hotelData.value.id);
-    if (index !== -1) hotels.value[index] = { ...hotelData.value };
-  } else {
-    hotelData.value.id = hotels.value.length + 1;
-    hotels.value.push({ ...hotelData.value });
-  }
-  modalOpen.value = false;
-};
-
-const deleteHotel = (id) => {
-  if (confirm('¿Estás seguro de eliminar este hotel?')) {
-    hotels.value = hotels.value.filter(h => h.id !== id);
-  }
-};
-
-const prevPage = () => {
-  if (currentPage.value > 1) currentPage.value--;
-};
-
-const nextPage = () => {
-  if (currentPage.value < totalPages.value) currentPage.value++;
-};
-</script>
-
-<style scoped>
-button {
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-.bg-terracota-dark {
-  background-color: #d57c1a; /* Este color debe ser un tono más oscuro de terracota */
-}
-
-.flex-grow {
-  flex-grow: 1;
-}
-</style>

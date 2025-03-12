@@ -1,3 +1,17 @@
+<script setup>
+  defineProps({
+    id: { type: String, required: true },
+    image: { type: String, required: true },
+    name: { type: String, required: true },
+    city: { type: String, required: true },
+    details: { type: Array, required: true },
+    rating: { type: Number, required: true },
+    price: { type: String, required: true },
+  });
+  import Button from '../components/Button.vue';
+  import {useGetAllHotels} from '@/data-layer/hooks/hotels';
+</script>
+
 <template>
 
 <!-- Desktop Version -->
@@ -15,11 +29,12 @@
       <div class="hotel-location text-[1.1rem] mb-4 font-subtitulos text-pawtel-black flex items-center">
         <i class="fas fa-map-marker-alt text-[1.25rem] mr-2" style="text-decoration: none;"></i>
         <p class="underline">
-          {{ location }}
+          {{ city }}
         </p>
       </div>
 
-      <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black">
+      <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black flex flex-col">
+        <a class="text-[15px] font-bold mb-1">Detalles</a>
         <li v-for="(detail, index) in details" :key="index">
           <i class="fa-solid fa-check text-[1rem] text-terracota" style="text-decoration: none;"></i> {{ detail }}
         </li>
@@ -35,9 +50,9 @@
         <span class="price text-[1.75rem] text-[#C36C6C] font-bold">
           {{ price }}
         </span>
-        <a href="/hotel/1">
+        <RouterLink :to="`/hotel/${id}`">
           <Button type="add">Ver disponibilidad</Button>
-        </a>
+        </RouterLink>
       </div>
     </div>
 
@@ -59,11 +74,12 @@
         <div class="hotel-location text-[1.1rem] mb-4 font-subtitulos text-pawtel-black flex items-center">
           <i class="fas fa-map-marker-alt text-[1.25rem] mr-2" style="text-decoration: none;"></i>
           <p class="underline">
-            {{ location }}
+            {{ city }}
           </p>
         </div>
 
         <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black">
+          <h2 class="text-[15px] font-bold">Detalles</h2>
           <li v-for="(detail, index) in details" :key="index">
             <i class="fa-solid fa-check text-[1rem] text-terracota" style="text-decoration: none;"></i> {{ detail }}
           </li>
@@ -89,14 +105,4 @@
   </div>
 </template>
 
-<script setup>
-  defineProps({
-    image: { type: String, required: true },
-    name: { type: String, required: true },
-    location: { type: String, required: true },
-    details: { type: Array, required: true },
-    rating: { type: Number, required: true },
-    price: { type: String, required: true },
-  });
-  import Button from '../components/Button.vue';
-</script>
+

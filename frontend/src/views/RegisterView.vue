@@ -47,9 +47,9 @@ const register = async () => {
 </script>
 
 <template>
-    <div>
+    <div class="flex flex-col min-h-screen">
         <NavbarTerracota />
-        <div class="max-w-7xl mx-auto px-5">
+        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
 
             <!-- Desktop version -->
             <div class="container flex justify-center items-center mt-10 hidden md:flex">
