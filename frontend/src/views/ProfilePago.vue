@@ -10,7 +10,7 @@
           <ul class="menu-list">
             <h2> Mi Perfil </h2>
             <li><router-link to="/UserProfile" class="active">Datos Personales</router-link></li>
-            <li><router-link to="/ProfilePago" class="active">Métodos de Pago</router-link></li>
+            <li><router-link to="/Profile-Pago">Métodos de Pago</router-link></li>
             <li><router-link to="/perfil/mis-mascotas">Mis Mascotas</router-link></li>
             <li><router-link to="/perfil/mis-resenas">Mis Reseñas</router-link></li>
             <li><router-link to="/perfil/ayuda">Ayuda y Contacto</router-link></li>
@@ -21,7 +21,7 @@
 
       <!-- Contenedor de los datos (A la derecha) -->
       <main class="profile-content">
-        <h2>Bienvenid@ de nuevo, {{ user.username }} !</h2>
+        <h2 class="welcome-text"> Administre sus pagos y reserve sin preocupaciones </h2>
 
         <form @submit.prevent="saveChanges">
           <!-- Primera fila: Correo y Contraseña -->
@@ -266,4 +266,10 @@ const deleteAccount = () => {
   margin-top: 20px;
 }
 
+.welcome-text{
+  font-size: 24px;
+}
+.username{
+  font-weight: bold;
+}
 </style>
