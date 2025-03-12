@@ -39,7 +39,7 @@ class Command(BaseCommand):
             "Gijón",
         ]
 
-        # Lista de nombres de hoteles para mascotas
+        # Lista ampliada de nombres de hoteles para mascotas
         nombres_hoteles_mascotas = [
             "El Rincón del Can",
             "Hotel Patas y Colas",
@@ -56,6 +56,27 @@ class Command(BaseCommand):
             "Hotel Patitas",
             "Hotel Colas Alegres",
             "Hotel Mascota Real",
+            "Hotel Paws & Relax",
+            "Hotel Happy Tails",
+            "Hotel Furry Friends",
+            "Hotel Wagging Tails",
+            "Hotel Purrfect Stay",
+            "Hotel Bark Avenue",
+            "Hotel Whisker Haven",
+            "Hotel Pawsome Place",
+            "Hotel Tail Wagger Inn",
+            "Hotel Feline Paradise",
+            "Hotel Doggy Retreat",
+            "Hotel Kitty Corner",
+            "Hotel Canine Castle",
+            "Hotel Meow Manor",
+            "Hotel Puppy Palace",
+            "Hotel Whisker Lodge",
+            "Hotel Barkingham Palace",
+            "Hotel Paws Inn",
+            "Hotel Furry Retreat",
+            "Hotel Tail Haven",
+            "Hotel Purr Palace",
         ]
 
         # Lista de descripciones coherentes para hoteles de mascotas
@@ -75,8 +96,18 @@ class Command(BaseCommand):
         for _ in range(5):
             owner = random.choice(owners)
             ciudad = random.choice(ciudades_espanolas)
-            nombre = random.choice(nombres_hoteles_mascotas)
             descripcion = random.choice(descripciones_hoteles_mascotas)
+
+            # Generar un nombre único
+            nombre = random.choice(nombres_hoteles_mascotas)
+            if Hotel.objects.filter(name=nombre).exists():
+                # Si el nombre ya existe, generar uno nuevo con Faker
+                nombre = fake.company()
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"Nombre repetido. Generando nuevo nombre: {nombre}"
+                    )
+                )
 
             # Generar una dirección ficticia en la ciudad seleccionada
             direccion = f"{fake.street_address()}"
