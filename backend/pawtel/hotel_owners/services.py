@@ -2,7 +2,7 @@ from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import AuthenticationFailed, NotFound, PermissionDenied
 
 # to get the current hotel owner
 
@@ -25,11 +25,19 @@ class HotelOwnerService:
 
     @staticmethod
     def authorize_action_hotel_owner(request, pk):
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-        app_user = AppUserService.retrieve_app_user(hotel_owner.user_id)
+        target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+        target_app_user = AppUserService.retrieve_app_user(target_hotel_owner.user_id)
+        logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if (not hotel_owner) or (not app_user) or (not hotel_owner.user.is_active):
+        if (
+            (not target_hotel_owner)
+            or (not target_app_user)
+            or (not target_app_user.is_active)
+        ):
             raise NotFound("Hotel owner does not exist.")
+
+        if target_hotel_owner.id != logged_in_hotel_owner.id:
+            raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def serialize_output_hotel_owner(hotel_owner, many=False):
@@ -73,6 +81,7 @@ class HotelOwnerService:
 
     @staticmethod
     def get_current_hotel_owner(request):
-        if not request.user or not request.user.is_authenticated:
-            raise PermissionDenied("User is not authenticated.")
-        return HotelOwner.objects.get(user_id=request.user.id)
+        if (not request.user) or (not request.user.is_authenticated):
+            raise AuthenticationFailed("User is not authenticated.")
+        hotel_owner = HotelOwner.objects.get(user_id=request.user.id)
+        return hotel_owner
