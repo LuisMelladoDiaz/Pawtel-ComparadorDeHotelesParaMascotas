@@ -12,10 +12,14 @@ import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
 import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
 import Home from './views/Home.vue'
+import AboutUs from './views/AboutUs.vue';
+import Contact from './views/Contact.vue';
 
 
 const routes = [
   { path: '/', component: Home},
+  { path: '/sobre-nosotros', component: AboutUs},
+  { path: '/contacto', component: Contact},
   { path: '/dev', component: DevelopmentScreen},
   { path: '/hotels', component: HotelListScreen},
   { path: '/hotel/:id', name: 'HotelDetail', component: HotelDetailsView },

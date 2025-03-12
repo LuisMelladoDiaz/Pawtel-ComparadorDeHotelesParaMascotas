@@ -15,7 +15,7 @@
 
       <!-- Menú en pantallas grandes -->
       <div class="nav-links flex gap-6 no-underline text-terracota font-bold text-base hidden md:flex">
-        <router-link to="/sobre_nosotros" class="hover:underline">Sobre Nosotros</router-link>
+        <router-link to="/sobre-nosotros" class="hover:underline">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline">Contacto</router-link>
       </div>
 
@@ -37,7 +37,7 @@
     <!-- Menú desplegable en móvil -->
     <div v-if="isMenuOpen" class="mobile-menu md:hidden bg-white py-4 border-t-2 border-terracota shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-terracota font-bold text-base">
-        <router-link to="/sobre_nosotros" class="hover:underline p-2">Sobre Nosotros</router-link>
+        <router-link to="/sobre-nosotros" class="hover:underline p-2">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline p-2">Contacto</router-link>
       </div>
 
