@@ -1,6 +1,8 @@
+# PAWTEL
+
 ![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
 
-## Usuarios Piloto. Gestión del Feedback y Comunicación
+## Performance Evaluation
 
 **Equipo:**
 - **Andrés Martínez Reviriego**
@@ -37,30 +39,31 @@
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
 | 12/03/2025  | v 1.0         | Versión inicial del documento |Daniel Flores de Francisco |
+| 12/03/2025  | v 1.1         | Notas individuales | Luis Mellado Díaz |
 
 
 ---
 
 ### Evaluación Individual Acordada
 
-| Student | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
-|---------|------|------|------|------|------|------|------|
-| Flores de Francisco, Daniel | 10 | | | | | | |
-| Mellado Díaz, Luis | 10 | | | | | | |
-| González Martínez, David | 10 | | | | | | |
-| Martínez Reviriego, Andrés | 10 | | | | | | |
-| Cortés Carrasco, Claudio | 10 | | | | | | |
-| Trenado González, Sergio | 10 | | | | | | |
-| Jiménez Morales, Francisco Miguel | 10 | | | | | | |
-| Gómez de Tovar, Jorge | 10 | | | | | | |
-| Ruiz Garrido, Javier | 10 | | | | | | |
-| Castillo Cebolla, Rafael | 10 | | | | | | |
-| Castelló Sánchez, Fernando | 10 | | | | | | |
-| García Sebastián, Javier | 10 | | | | | | |
-| Garate Fuentes, Yesica | 10 | | | | | | |
-| Castillejo Vela, Manuel | 10 | | | | | | |
+| Student                     | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
+|-----------------------------|------|------|------|------|------|------|-------|
+| Flores de Francisco, Daniel | 10   | 10   |      |      |      |      | 20    |
+| Mellado Díaz, Luis          | 10   | 10   |      |      |      |      | 20    |
+| González Martínez, David    | 10   | 10   |      |      |      |      | 20    |
+| Martínez Reviriego, Andrés  | 10   | 10   |      |      |      |      | 20    |
+| Cortés Carrasco, Claudio    | 10   | 10   |      |      |      |      | 20    |
+| Trenado González, Sergio    | 10   | 10   |      |      |      |      | 20    |
+| Jiménez Morales, Francisco Miguel | 10 | 9   |      |      |      |      | 19    |
+| Gómez de Tovar, Jorge       | 10   | 8    |      |      |      |      | 18    |
+| Ruiz Garrido, Javier        | 10   | 8    |      |      |      |      | 18    |
+| Castillo Cebolla, Rafael    | 10   | 10   |      |      |      |      | 20    |
+| Castelló Sánchez, Fernando  | 10   | 10   |      |      |      |      | 20    |
+| García Sebastián, Javier    | 10   | 6    |      |      |      |      | 16    |
+| Garate Fuentes, Yesica      | 10   | 9    |      |      |      |      | 19    |
+| Castillejo Vela, Manuel     | 10   | 10   |      |      |      |      | 20    |
 
-**Total:** 140  
+**Total:** 262
 
 ---
 
@@ -85,8 +88,9 @@
 - Acta de constitución, registro de interesados y plan de gestión de requisitos.
 - Coordinador del grupo junto a Daniel.
 - Tareas de QA y reparto de actividades.
-- Creó la plantilla usada en los documentos.
+- Creación de las plantillas para documentos.
 - Presentador la tercera semana.
+- Pantalla 
 
 #### González Martínez, David
 - Responsable del stack tecnológico junto con Manuel.
@@ -166,14 +170,21 @@
 - Disposición alta
 
 #### Mellado Díaz, Luis
-- Creación del repositorio.
-- Actas de reuniones, informes de horas, documento de compromiso.
-- MVP de Pawtel.
-- Acta de constitución, registro de interesados y plan de gestión de requisitos.
-- Coordinador del grupo junto a Daniel.
-- Tareas de QA y reparto de actividades.
-- Creó la plantilla usada en los documentos.
-- Presentador la tercera semana.
+- Organización de presentaciones y reuniones.
+- Informes de progreso.
+- Informe de métricas y rendimiento.
+- Reuniones de seguimiento y actas.
+- Implementación de medidas tras reuniones.
+- Plantillas de documentación.
+- QA de presentaciones.
+- QA del KReport.
+- QA de la encuesta de usuarios piloto.
+- QA de la pantalla de perfil de usuario
+- Creación de un diagrama UML.
+- Seeders
+- Registro de incidencias.
+- Creación de componentes globales.
+- Desarrollo del panel CRUD de hoteles.
 
 #### González Martínez, David
 - Jefe de equipo: informes de desempeño, reparto de tareas, QAs y reuniones
@@ -226,10 +237,21 @@
 - Disposición media/baja
 
 #### Castillo Cebolla, Rafael
-- Desarrollo del MVP de la fallida aplicación MeetUs.
-- Lluvia de ideas para la propuesta del grupo.
-- Revisión y QA.
-- Plan de gestión de la configuración.
+- Arreglos y mejoras en el backend.
+- Diseño de backend y documentación.
+- Creación y mejora de rutas API.
+- QA general del backend.
+- Mejora de archivos de documentación (CONTRIBUTE.md).
+- Preparación de retrospectivas y métricas de rendimiento.
+- Preparación de informes de desempeño.
+- Participación en reuniones de sprint.
+- Preparación y organización del sprint 1 (backend).
+- Reunión de mitad de sprint (backend).
+- Creación y revisión de diagramas UML.
+- Diseño de backend y análisis de rutas.
+- Creación y supervisión de issues para el proyecto.
+- Preparación de presentaciones.
+- Preparación de entregas relacionadas con el proyecto.
 
 #### Castelló Sánchez, Fernando
 - Pantalla de detalles de hotel

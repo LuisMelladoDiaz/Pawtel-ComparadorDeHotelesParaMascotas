@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
@@ -65,5 +66,5 @@ class HotelOwnerServiceTest(TestCase):
         self.assertEqual(user.username, "newowner")
         self.assertEqual(response["user"]["id"], user.id)
         self.assertNotIn("password", response["user"])
-        self.assertEqual(user.password, data["password"])
+        self.assertTrue(check_password(data["password"], user.password))
         self.assertTrue(HotelOwner.objects.filter(user_id=user.id).exists())
