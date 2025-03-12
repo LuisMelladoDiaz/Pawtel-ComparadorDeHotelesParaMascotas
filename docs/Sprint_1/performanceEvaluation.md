@@ -54,7 +54,7 @@
 | Martínez Reviriego, Andrés  | 10   | 10   |      |      |      |      | 20    |
 | Cortés Carrasco, Claudio    | 10   | 10   |      |      |      |      | 20    |
 | Trenado González, Sergio    | 10   | 10   |      |      |      |      | 20    |
-| Jiménez Morales, Francisco Miguel | 10 | 10   |      |      |      |      | 20    |
+| Jiménez Morales, Francisco Miguel | 10 | 9   |      |      |      |      | 19    |
 | Gómez de Tovar, Jorge       | 10   | 8    |      |      |      |      | 18    |
 | Ruiz Garrido, Javier        | 10   | 8    |      |      |      |      | 18    |
 | Castillo Cebolla, Rafael    | 10   | 10   |      |      |      |      | 20    |
@@ -63,7 +63,7 @@
 | Garate Fuentes, Yesica      | 10   | 9    |      |      |      |      | 19    |
 | Castillejo Vela, Manuel     | 10   | 10   |      |      |      |      | 20    |
 
-**Total:** 263
+**Total:** 262
 
 ---
 
