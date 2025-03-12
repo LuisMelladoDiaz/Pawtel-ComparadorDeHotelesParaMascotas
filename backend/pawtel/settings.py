@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "pawtel.hotels.apps.HotelsConfig",
     "pawtel.rooms.apps.RoomsConfig",
     "pawtel.room_types.apps.RoomTypesConfig",
+    "pawtel",
 ]
 
 MIDDLEWARE = [
