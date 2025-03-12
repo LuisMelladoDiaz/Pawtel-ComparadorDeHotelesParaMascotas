@@ -7,5 +7,5 @@ pip install -r requirements.txt
 python manage.py migrate
 
 if [ $# -eq 1 ] && [ "$1" == "--seed" ]; then
-    python manage.py seed --clear
+    python manage.py seed --clean --noinput
 fi

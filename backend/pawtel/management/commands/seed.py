@@ -1,25 +1,36 @@
-from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
+from django.core.management.base import BaseCommand, CommandError
+from pawtel.app_users.models import AppUser
+from pawtel.hotels.models import Hotel, HotelOwner
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
-from pawtel.hotels.models import Hotel
-from pawtel.app_users.models import AppUser
-from pawtel.hotels.models import HotelOwner
+
 
 class Command(BaseCommand):
     help = "Seed the entire database with test data"
 
     def add_arguments(self, parser):
         parser.add_argument(
-            '--clean',
-            action='store_true',
-            help='Delete existing data before seeding',
+            "--clean",
+            action="store_true",
+            help="Delete existing data before seeding",
+        )
+        parser.add_argument(
+            "--noinput",
+            action="store_true",
+            help="Do not prompt the user for input of any kind",
         )
 
     def handle(self, *args, **options):
-        if options['clean']:
-            confirm = input("Are you sure you want to delete all existing data before seeding? (yes/no): ")
-            if confirm.lower() == 'yes':
+        if options["clean"]:
+            confirm = (
+                "yes"
+                if options["noinput"]
+                else input(
+                    "Are you sure you want to delete all existing data? (yes/no): "
+                )
+            )
+            if confirm.lower() == "yes":
                 self.stdout.write(self.style.WARNING("Deleting existing data..."))
                 Room.objects.all().delete()
                 RoomType.objects.all().delete()
