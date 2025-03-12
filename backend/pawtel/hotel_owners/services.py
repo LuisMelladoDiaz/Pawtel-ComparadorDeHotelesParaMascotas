@@ -4,6 +4,8 @@ from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
 from rest_framework.exceptions import NotFound, PermissionDenied
 
+# to get the current hotel owner
+
 
 class HotelOwnerService:
 
@@ -68,3 +70,9 @@ class HotelOwnerService:
             raise PermissionDenied("No hotels to delete.")
 
         hotels_to_delete.delete()
+
+    @staticmethod
+    def get_current_hotel_owner(request):
+        if not request.user or not request.user.is_authenticated:
+            raise PermissionDenied("User is not authenticated.")
+        return HotelOwner.objects.get(user_id=request.user.id)

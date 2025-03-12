@@ -9,30 +9,6 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import AppliedFilter from '../components/AppliedFilter.vue';
 
 import {useGetAllHotels} from '@/data-layer/hooks/hotels';
-const { data: apiHotels, isLoading, isError } = useGetAllHotels();
-
-const hotels = computed(() =>
-  apiHotels.value?.map((hotel) => ({
-    id: hotel.id,
-    image: hotel.image || '/src/assets/hotel.jpg',
-    name: hotel.name || 'Nombre',
-    address: hotel.address || 'Dirección',
-    city: hotel.city || 'Ciudad',
-    details: ['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros'],
-    rating: hotel.rating || '8.5',
-    price: hotel.price || '50€',
-    imageGallery: hotel.imageGallery || [
-      '/src/assets/foto1.jpg',
-      '/src/assets/foto2.jpg',
-      '/src/assets/foto1.jpg',
-      '/src/assets/foto2.jpg'
-    ],
-    description: hotel.description || 'Descripción predeterminada del alojamiento.',
-    reviews: hotel.reviews || [
-      { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
-    ]
-  })) || []
-);
 
 // Filters
 const cities = ref(["Madrid", "Barcelona", "Sevilla", "Valencia", "Málaga", "Bilbao"]);
@@ -75,6 +51,41 @@ const toggleFilters = () => {
     if (isFiltersOpen.value) isSortByOpen.value = false;
 };
 
+const sortByWithDir = computed(() => sortBy.value ? `${sortBy.value}` : "city");
+
+// filters dict (computed)
+const { data: apiHotels, isLoading, isError } = useGetAllHotels({
+    sort_by: sortByWithDir,
+    city: selectedCity,
+    max_price_per_night: maxPrice,
+});
+
+
+const hotels = computed(() =>
+  apiHotels.value?.map((hotel) => ({
+    id: hotel.id,
+    image: hotel.image || '/src/assets/hotel.jpg',
+    name: hotel.name || 'Nombre',
+    address: hotel.address || 'Dirección',
+    city: hotel.city || 'Ciudad',
+    details: ['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros'],
+    rating: hotel.rating || '8.5',
+    price: hotel.price || '50€',
+    imageGallery: hotel.imageGallery || [
+      '/src/assets/foto1.jpg',
+      '/src/assets/foto2.jpg',
+      '/src/assets/foto1.jpg',
+      '/src/assets/foto2.jpg'
+    ],
+    description: hotel.description || 'Descripción predeterminada del alojamiento.',
+    reviews: hotel.reviews || [
+      { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
+    ]
+  })) || []
+);
+
+
+
 </script>
 
 
@@ -88,7 +99,7 @@ const toggleFilters = () => {
         <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
             <!-- Desktop version -->
             <div class="container mt-5 hidden md:flex">
-                
+
                 <!-- Filters -->
                 <div class="list-filters-container flex-col h-fit border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5">
                     <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60 py-2">Filtrar por:</h2>
@@ -132,7 +143,7 @@ const toggleFilters = () => {
 
                 <!-- Filtered hotels container -->
                 <div class="hotels-filtered-container flex flex-col flex-auto min-w-0 pl-4">
-                    
+
                     <!-- Sort By + Applied filters -->
                     <div class="applied-filters-container flex flex-row flex-wrap items-center text-white gap-2">
                         <!-- Sort By Card -->
@@ -178,13 +189,13 @@ const toggleFilters = () => {
 
 
 
-            
+
             <!-- Mobile Version -->
             <div class="container flex flex-col items-start mt-5 md:hidden">
 
                 <!-- Icons -->
                 <div class="icons flex flex-row items-center self-center gap-10 pb-5">
-                    <div @click="toggleSortBy"> 
+                    <div @click="toggleSortBy">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-[35px] h-[35px]" fill="#C36C6C">
                             <path d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z"/>
                         </svg>
@@ -202,8 +213,8 @@ const toggleFilters = () => {
 
                     <div class="p-5 flex flex-col gap-4">
                         <div class="flex flex-col gap-2">
-                            <button 
-                                v-for="option in ['precio', 'valoracion', 'nombre']" 
+                            <button
+                                v-for="option in ['precio', 'valoracion', 'nombre']"
                                 :key="option"
                                 @click="sortBy = option; toggleSortBy();"
                                 class="p-2 rounded-md text-center cursor-pointer font-bold"
@@ -213,7 +224,7 @@ const toggleFilters = () => {
                             </button>
                         </div>
 
-                        <button 
+                        <button
                             @click="direction = direction === 'asc' ? 'desc' : 'asc'"
                             class="p-2 w-full text-white bg-azul-suave font-bold rounded-md shadow-md flex items-center justify-center gap-2"
                         >
@@ -270,7 +281,7 @@ const toggleFilters = () => {
                 </div>
 
                 <!-- Filtered hotels container -->
-                    
+
                     <!-- Applied Filters -->
                     <div v-if="appliedFilters.length > 0" class="applied-filters-container flex flex-row gap-2 pl-3 pb-5 self-start text-white overflow-x-auto w-full whitespace-nowrap">
                         <AppliedFilter v-for="(filter, index) in appliedFilters" :key="index" :filterName="filter" @remove="removeFilter(filter)" />
@@ -301,5 +312,3 @@ const toggleFilters = () => {
         <Footer />
     </div>
 </template>
-
-

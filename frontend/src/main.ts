@@ -12,6 +12,6 @@ createApp(App).use(router).use(VueQueryPlugin).mount('#app')
 
 library.add(faLocationDot);
 
-App.component('font-awesome-icon', FontAwesomeIcon);
+//App.component('font-awesome-icon', FontAwesomeIcon); // esto falla, hay que verlo
 
 refreshAxiosInterceptor()
