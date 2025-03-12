@@ -13,10 +13,14 @@ import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
 import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
 import Home from './views/Home.vue'
+import AboutUs from './views/AboutUs.vue';
+import Contact from './views/Contact.vue';
 
 
 const routes = [
   { path: '/', component: Home},
+  { path: '/sobre-nosotros', component: AboutUs},
+  { path: '/contacto', component: Contact},
   { path: '/dev', component: DevelopmentScreen},
   { path: '/hotels', component: HotelListScreen},
   { path: '/hoteles', component: HotelListView },
@@ -27,7 +31,7 @@ const routes = [
   { path: '/register', component: RegisterView},
   { path: '/templateScreen1', component: TemplateScreen1},
   { path: '/templateScreen2', component: TemplateScreen2},
-  { path : '/userProfile', component: UserProfile},
+  { path: '/userProfile', component: UserProfile},
   { path: '/hotelOwnerPanel', component: HotelOwnerPanel },
 ]
 
