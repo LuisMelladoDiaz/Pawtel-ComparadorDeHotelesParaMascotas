@@ -12,7 +12,8 @@ class HotelViewSet(viewsets.ModelViewSet):
     serializer_class = HotelSerializer
 
     def list(self, request):
-        hotels = HotelService.list_hotels()
+        filters = request.query_params.dict()  # URL filters checked
+        hotels = HotelService.list_hotels(filters)
         output_serializer_data = HotelService.serialize_output_hotel(hotels, many=True)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 

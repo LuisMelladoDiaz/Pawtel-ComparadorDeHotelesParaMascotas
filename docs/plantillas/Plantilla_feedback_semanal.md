@@ -9,12 +9,15 @@
 
 ---
 
+
 ![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
+
 
 **Proyecto:** Pawtel 
 **Entregable:** 
 **Versión:** 1.0  
 **Fecha:** 
+
 **Grupo:** G11
 **Equipo:**
 - Andrés Martínez Reviriego
@@ -31,6 +34,7 @@
 - Rafael Castillo Cebolla
 - Sergio Trenado González
 - Yesica Garate Fuentes
+
 
 ---
 
