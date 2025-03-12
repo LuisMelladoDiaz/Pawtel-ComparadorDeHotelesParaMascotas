@@ -10,3 +10,4 @@ autoflake>=2.2.1
 mysqlclient>=2.0
 gunicorn
 uvicorn
+faker
