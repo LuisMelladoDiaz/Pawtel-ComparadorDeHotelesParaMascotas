@@ -8,6 +8,9 @@ export function refreshAxiosInterceptor() {
     if (token && config.url && !config.url.includes("/auth")) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+    else {
+      delete config.headers.Authorization;
+    }
 
     return config;
   });
