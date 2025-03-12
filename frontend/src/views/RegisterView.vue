@@ -5,43 +5,65 @@ import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import { useCreateHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import InputText from '@/components/InputText.vue';
+import { Notyf } from 'notyf';
+
+const notyf = new Notyf();
 
 const username = ref('');
 const email = ref('');
 const phone = ref('');
 const password = ref('');
 const confirmPassword = ref('');
-const errorMessage = ref('');
 const router = useRouter();
-const { mutateAsync: createHotelOwner } = useCreateHotelOwner();
+const { createHotelOwner } = useCreateHotelOwner();
 
 const register = async () => {
     if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value) {
-        alert('Por favor, completa todos los campos');
+        notyf.error('Por favor, completa todos los campos');
         return;
     }
 
     if (password.value !== confirmPassword.value) {
-        alert('Las contraseñas no coinciden');
+        notyf.error('Las contraseñas no coinciden');
+        return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value)) {
+        notyf.error('El correo electrónico no es válido');
+        return;
+    }
+
+    const phonePattern = /^\+34\d{9}$/;
+    if (!phonePattern.test(phone.value)) {
+        notyf.error('El teléfono no es válido');
         return;
     }
 
     const currentDate = new Date().toISOString().split('T')[0];
 
     try {
-        await createHotelOwner({
-            username: username.value,
-            email: email.value,
-            phone: phone.value,
-            password: password.value,
-            date_joined: currentDate,
-        });
-
-        alert('Registro exitoso, ahora puedes iniciar sesión');
-        router.push('/login');
+        await createHotelOwner(
+            {
+                username: username.value,
+                email: email.value,
+                phone: phone.value,
+                password: password.value,
+                date_joined: currentDate,
+            },
+            {
+                onSuccess: () => {
+                    toastSuccess("Registro exitoso")
+                    router.push('/login');
+                },
+                onError: (error) => {
+                    console.error('Error al registrarse:', error);
+                    toastError("Error registro")
+                },
+            }
+        );
     } catch (error) {
-        console.error('Error al registrarse:', error);
-        alert('Hubo un error al registrarse. Inténtalo de nuevo.');
+        notyf.error('Hubo un error al registrarse. Inténtalo de nuevo.');
     }
 };
 </script>
@@ -62,8 +84,6 @@ const register = async () => {
                         <InputText v-model="phone" label="Teléfono" type="tel" />
                         <InputText v-model="password" label="Contraseña" type="password" />
                         <InputText v-model="confirmPassword" label="Confirmar Contraseña" type="password" />
-
-                        <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
 
                         <div class="mt-6">
                             <button type="submit"
@@ -93,8 +113,6 @@ const register = async () => {
                         <InputText v-model="phone" label="Teléfono" type="tel" />
                         <InputText v-model="password" label="Contraseña" type="password" />
                         <InputText v-model="confirmPassword" label="Confirmar Contraseña" type="password" />
-
-                        <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
 
                         <div class="mt-6">
                             <button type="submit"

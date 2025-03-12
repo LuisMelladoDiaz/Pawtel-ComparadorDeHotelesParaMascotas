@@ -6,7 +6,17 @@ import {VueQueryPlugin } from '@tanstack/vue-query'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { Notyf } from 'notyf';
+import 'notyf/notyf.min.css';
 import { refreshAxiosInterceptor } from './axios-setup'
+
+const notyf = new Notyf({
+    duration: 3000,
+    position: { x: 'center', y: 'top' },
+  });
+
+const app = createApp(App);
+app.config.globalProperties.$notyf = notyf;
 
 createApp(App).use(router).use(VueQueryPlugin).mount('#app')
 
