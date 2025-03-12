@@ -4,6 +4,8 @@ from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
 from rest_framework.exceptions import NotFound, PermissionDenied
 
+# to get the current hotel owner
+
 
 class HotelOwnerService:
 

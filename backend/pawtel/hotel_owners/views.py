@@ -77,3 +77,23 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
         HotelOwnerService.delete_all_hotels_of_hotel_owner(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    # hotel_owners
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="hotel_owners_me",
+        url_name="retrieve_current_hotel_owner",
+    )
+    def retrieve_current_hotel_owner(self, request):
+        user = request.user
+        if not user or not user.is_authenticated:
+            return Response(
+                {"message": "User is not authenticated: " + str(user)},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
+        appuser = HotelOwner.objects.get(user=user.id)
+
+        # serialize
+        serializer = HotelOwnerService.serialize_output_hotel_owner(appuser)
+        return Response(serializer, status=status.HTTP_200_OK)
