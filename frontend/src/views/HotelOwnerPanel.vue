@@ -34,10 +34,16 @@ const paginatedHotels = computed(() => {
 
 // Abrir modal para añadir/editar
 const openModal = (hotel = null) => {
-  hotelData.value = hotel ? { ...hotel } : { name: '', address: '', city: '', description: '' };
-  isEditing.value = false;
+  if (hotelData.value.id !== null) {
+    hotelData.value = { ...hotel };
+    isEditing.value = true;
+  } else {
+    hotelData.value = { name: '', address: '', city: '', description: '' };
+    isEditing.value = false;
+  }
   modalOpen.value = true;
 };
+
 
 // Guardar hotel (Crear o Editar)
 const saveHotel = async () => {
@@ -150,7 +156,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         <input v-model="hotelData.city" placeholder="Ciudad" class="w-full p-2 mb-2 border rounded" />
         <textarea v-model="hotelData.description" placeholder="Descripción" class="w-full p-2 mb-2 border rounded"></textarea>
         <div class="flex justify-end gap-2">
-          <Button type="accept" @click="saveHotel">Guardar</Button>
+          <Button type="accept" @click="saveHotel">{{ isEditing ? 'Actualizar' : 'Crear' }}</Button>
           <Button type="reject" @click="modalOpen = false">Cancelar</Button>
         </div>
       </div>
