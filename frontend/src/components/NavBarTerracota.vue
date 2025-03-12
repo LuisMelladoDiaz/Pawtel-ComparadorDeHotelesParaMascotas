@@ -23,7 +23,7 @@
         <router-link to="/login" class="auth-button login text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
         <router-link to="/register" class="auth-button sign-in text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
         <!-- Icono de perfil alineado -->
-        <router-link to="/userProfile" class="text-white hover:text-gray-900 flex items-center">
+        <router-link to="/user-profile" class="text-white hover:text-gray-900 flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
           </svg>
@@ -43,7 +43,7 @@
         <router-link to="/login" class="auth-button login bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
         <router-link to="/register" class="auth-button sign-in bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
         <!-- Icono de perfil -->
-        <router-link to="/UserProfile" class="text-white hover:text-gray-900 flex items-center justify-center mt-2">
+        <router-link to="/user-profile" class="text-white hover:text-gray-900 flex items-center justify-center mt-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
           </svg>

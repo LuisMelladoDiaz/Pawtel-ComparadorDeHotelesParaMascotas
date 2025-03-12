@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import HotelListView from './views/HotelListView.vue';
 import HotelDetailsView from './views/HotelDetailView.vue';
 import DevelopmentScreen from './views/DevelopmentScreen.vue'
 import Componentes1 from './views/Componentes1.vue'
@@ -19,16 +18,15 @@ const routes = [
   { path: '/', component: Home},
   { path: '/dev', component: DevelopmentScreen},
   { path: '/hotels', component: HotelListScreen},
-  { path: '/hoteles', component: HotelListView },
   { path: '/hotel/:id', name: 'HotelDetail', component: HotelDetailsView },
-  { path: '/componentes1', component: Componentes1},
-  { path: '/componentes2', component: Componentes2},
+  { path: '/componentes-1', component: Componentes1},
+  { path: '/componentes-2', component: Componentes2},
   { path: '/login', component: LoginView},
   { path: '/register', component: RegisterView},
-  { path: '/templateScreen1', component: TemplateScreen1},
-  { path: '/templateScreen2', component: TemplateScreen2},
-  { path : '/userProfile', component: UserProfile},
-  { path: '/hotelOwnerPanel', component: HotelOwnerPanel },
+  { path: '/template-screen-1', component: TemplateScreen1},
+  { path: '/template-screen-2', component: TemplateScreen2},
+  { path: '/user-profile', component: UserProfile},
+  { path: '/hotel-owner-panel', component: HotelOwnerPanel },
 ]
 
 const router = createRouter({
