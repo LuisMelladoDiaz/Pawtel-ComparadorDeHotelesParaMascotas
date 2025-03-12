@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth import authenticate
 from pawtel.hotel_owners.services import HotelOwnerService
 from rest_framework import status
@@ -28,34 +27,7 @@ class LoginView(APIView):
             "refresh": str(refresh),
         }
 
-        response = Response(response_data)
-
-        response.set_cookie(
-            key=settings.SIMPLE_JWT["AUTH_COOKIE"],
-            value=str(refresh.access_token),
-            httponly=True,
-            samesite="None",
-            secure=True,
-        )
-        response.set_cookie(
-            key="refresh_token",
-            value=str(refresh),
-            httponly=True,
-            samesite="None",
-            secure=True,
-        )
-
-        return response
-
-
-class LogoutView(APIView):
-    permission_classes = [AllowAny]
-
-    def post(self, request):
-        response = Response({"message": "Logged out successfully"})
-        response.delete_cookie(settings.SIMPLE_JWT["AUTH_COOKIE"])
-        response.delete_cookie("refresh_token")
-        return response
+        return Response(response_data, status=status.HTTP_200_OK)
 
 
 class UserInfoView(APIView):
