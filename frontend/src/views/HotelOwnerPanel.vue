@@ -4,7 +4,7 @@ import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
-import { useCreateHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
+import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
 
 const hotelOwnerId = computed(() =>{
@@ -15,7 +15,7 @@ const hotelOwnerId = computed(() =>{
 const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId, true);
 const createHotelMutation = useCreateHotel();
 const updateHotelMutation = useUpdateHotel();
-const deleteHotelMutation = useDeleteHotelOwner();
+const deleteHotelMutation = useDeleteHotel();
 
 const modalOpen = ref(false);
 const isEditing = ref(false);
@@ -33,7 +33,7 @@ const paginatedHotels = computed(() => {
 });
 
 // Abrir modal para añadir/editar
-const openModal = (hotel = null) => {
+const openModal = (hotel) => {
   if (hotelData.value.id !== null) {
     hotelData.value = { ...hotel };
     isEditing.value = true;
@@ -57,6 +57,7 @@ const saveHotel = async () => {
   } catch (error) {
     console.error('Error al guardar el hotel', error);
   }
+
 };
 
 // Eliminar hotel
