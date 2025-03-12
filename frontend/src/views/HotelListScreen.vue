@@ -1,3 +1,85 @@
+<script setup>
+import { ref, computed } from 'vue';
+import Navbar from '../components/NavBar.vue';
+import NavbarTerracota from '../components/NavBarTerracota.vue';
+import FilterNavbar from '../components/FilterNavBar.vue';
+import Footer from '../components/Footer.vue';
+import PetHotelCard from '../components/HotelCard.vue';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
+import AppliedFilter from '../components/AppliedFilter.vue';
+
+import {useGetAllHotels} from '@/data-layer/hooks/hotels';
+const { data: apiHotels, isLoading, isError } = useGetAllHotels();
+
+const hotels = computed(() =>
+  apiHotels.value?.map((hotel) => ({
+    id: hotel.id,
+    image: hotel.image || '/src/assets/hotel.jpg',
+    name: hotel.name || 'Nombre',
+    address: hotel.address || 'Dirección',
+    city: hotel.city || 'Ciudad',
+    details: ['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros'],
+    rating: hotel.rating || '8.5',
+    price: hotel.price || '50€',
+    imageGallery: hotel.imageGallery || [
+      '/src/assets/foto1.jpg',
+      '/src/assets/foto2.jpg',
+      '/src/assets/foto1.jpg',
+      '/src/assets/foto2.jpg'
+    ],
+    description: hotel.description || 'Descripción predeterminada del alojamiento.',
+    reviews: hotel.reviews || [
+      { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
+    ]
+  })) || []
+);
+
+// Filters
+const cities = ref(["Madrid", "Barcelona", "Sevilla", "Valencia", "Málaga", "Bilbao"]);
+const services = ref(["Habitaciones individuales","Habitaciones compartidas", "Zonas climatizadas", "Camas y mantas confortables", "Alimentación adaptada", "Acceso a agua fresca 24/7", "Atención veterinaria 24h", "Zona de juegos al aire libre", "Piscina para perros"]);
+
+const selectedCity = ref("");
+const selectedServices = ref([]);
+const minPrice = ref(20);
+const maxPrice = ref(200);
+const sortBy = ref("");
+const direction = ref("");
+
+const appliedFilters = ref([]);
+
+const applyFilters = () => {
+    appliedFilters.value = [];
+
+    if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
+    selectedServices.value.forEach(service => appliedFilters.value.push(service));
+    appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
+    appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
+    isFiltersOpen.value = false;
+};
+
+const removeFilter = (filter) => {
+    appliedFilters.value = appliedFilters.value.filter(f => f !== filter);
+};
+
+// Menus
+const isSortByOpen = ref(false);
+const isFiltersOpen = ref(false);
+
+const toggleSortBy = () => {
+    isSortByOpen.value = !isSortByOpen.value;
+    if (isSortByOpen.value) isFiltersOpen.value = false;
+};
+
+const toggleFilters = () => {
+    isFiltersOpen.value = !isFiltersOpen.value;
+    if (isFiltersOpen.value) isSortByOpen.value = false;
+};
+
+</script>
+
+
+
+
 <template>
     <div class="flex flex-col min-h-screen">
         <Navbar />
@@ -74,59 +156,20 @@
 
                     <!-- Hotels list -->
                     <div class="hotel-list-container flex flex-col pt-4">
+                        <LoadingSpinner v-if="isLoading" class="text-center py-10 text-xl font-bold text-gray-700 flex-col flex-grow">
+                            Cargando detalles del hotel...
+                          </LoadingSpinner>
                         <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Caniland Resort"
-                        location="Madrid"
-                        :details="['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros']"
-                        rating=9.2
-                        price="45€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Patas Felices"
-                        location="Barcelona"
-                        :details="['Guardería de día', 'Entrenamiento canino', 'Comida personalizada']"
-                        rating=8.7
-                        price="35€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Dog Paradise"
-                        location="Valencia"
-                        :details="['Paseos diarios', 'Supervisión 24h', 'Transporte a domicilio']"
-                        rating=9.0
-                        price="40€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Huellas Resort"
-                        location="Sevilla"
-                        :details="['Espacios climatizados', 'Supervisión en vivo vía app', 'Spa y peluquería canina']"
-                        rating=9.5
-                        price="50€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Peludos & Friends"
-                        location="Málaga"
-                        :details="['Playas para perros', 'Comida gourmet', 'Sesiones de masajes']"
-                        rating=8.3
-                        price="38€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Best Friends Hotel"
-                        location="Bilbao"
-                        :details="['Habitaciones individuales', 'Cámaras de seguridad', 'Parque de agility']"
-                        rating=8.9
-                        price="42€"
-                        />
+                            v-for="hotel in hotels"
+                            :key="hotel.id"
+                            :id="hotel.id"
+                            :image="hotel.image"
+                            :name="hotel.name"
+                            :city="hotel.city"
+                            :details="hotel.details"
+                            :rating="hotel.rating"
+                            :price="hotel.price"
+                            />
                     </div>
 
                 </div>
@@ -235,59 +278,20 @@
 
                     <!-- Hotels list -->
                     <div class="hotel-list-container flex flex-col self-center w-full">
+                        <LoadingSpinner v-if="isLoading" class="text-center py-10 text-xl font-bold text-gray-700 flex-col flex-grow">
+                            Cargando detalles del hotel...
+                          </LoadingSpinner>
                         <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Caniland Resort"
-                        location="Madrid"
-                        :details="['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros']"
-                        rating=9.2
-                        price="45€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Patas Felices"
-                        location="Barcelona"
-                        :details="['Guardería de día', 'Entrenamiento canino', 'Comida personalizada']"
-                        rating=8.7
-                        price="35€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Dog Paradise"
-                        location="Valencia"
-                        :details="['Paseos diarios', 'Supervisión 24h', 'Transporte a domicilio']"
-                        rating=9.0
-                        price="40€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Huellas Resort"
-                        location="Sevilla"
-                        :details="['Espacios climatizados', 'Supervisión en vivo vía app', 'Spa y peluquería canina']"
-                        rating=9.5
-                        price="50€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Peludos & Friends"
-                        location="Málaga"
-                        :details="['Playas para perros', 'Comida gourmet', 'Sesiones de masajes']"
-                        rating=8.3
-                        price="38€"
-                        />
-
-                        <PetHotelCard
-                        image="/src/assets/hotel.jpg"
-                        name="Best Friends Hotel"
-                        location="Bilbao"
-                        :details="['Habitaciones individuales', 'Cámaras de seguridad', 'Parque de agility']"
-                        rating=8.9
-                        price="42€"
-                        />
+                            v-for="hotel in hotels"
+                            :key="hotel.id"
+                            :id="hotel.id"
+                            :image="hotel.image"
+                            :name="hotel.name"
+                            :city="hotel.city"
+                            :details="hotel.details"
+                            :rating="hotel.rating"
+                            :price="hotel.price"
+                            />
                     </div>
 
                 </div>
@@ -299,55 +303,3 @@
 </template>
 
 
-<script setup>
-import { ref } from 'vue';
-import Navbar from '../components/NavBar.vue';
-import NavbarTerracota from '../components/NavBarTerracota.vue';
-import FilterNavbar from '../components/FilterNavBar.vue';
-import Footer from '../components/Footer.vue';
-import PetHotelCard from '../components/HotelCard.vue';
-import AppliedFilter from '../components/AppliedFilter.vue';
-
-
-const cities = ref(["Madrid", "Barcelona", "Sevilla", "Valencia", "Málaga", "Bilbao"]);
-const services = ref(["Guardería de día", "Entrenamiento", "Piscina", "Spa", "Veterinario 24h"]);
-
-const selectedCity = ref("");
-const selectedServices = ref([]);
-const minPrice = ref(20);
-const maxPrice = ref(200);
-const sortBy = ref("");
-const direction = ref("");
-
-const appliedFilters = ref([]);
-
-const applyFilters = () => {
-    appliedFilters.value = [];
-
-    if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
-    selectedServices.value.forEach(service => appliedFilters.value.push(service));
-    appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
-    appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
-    isFiltersOpen.value = false;
-};
-
-const removeFilter = (filter) => {
-    appliedFilters.value = appliedFilters.value.filter(f => f !== filter);
-};
-
-
-const isSortByOpen = ref(false);
-const isFiltersOpen = ref(false);
-
-const toggleSortBy = () => {
-    isSortByOpen.value = !isSortByOpen.value;
-    if (isSortByOpen.value) isFiltersOpen.value = false;
-};
-
-const toggleFilters = () => {
-    isFiltersOpen.value = !isFiltersOpen.value;
-    if (isFiltersOpen.value) isSortByOpen.value = false;
-};
-
-
-</script>
