@@ -90,6 +90,52 @@ class HotelService:
         hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
 
+    # Filter -----------------------------------------------------------------
+
+    @staticmethod
+    def list_hotels(filters=None):
+        hotels = Hotel.objects.filter(is_archived=False)
+
+        if filters:
+            if "city" in filters:
+                hotels = hotels.filter(city__icontains=filters["city"])
+
+            if "name" in filters:
+                hotels = hotels.filter(name__icontains=filters["name"])
+
+            if "hotel_owner" in filters:
+                hotels = hotels.filter(hotel_owner__id=filters["hotel_owner"])
+
+            if "room_type" in filters:
+                hotels = hotels.filter(
+                    roomtype__name__icontains=filters["room_type"]
+                ).distinct()
+
+            if "max_price_per_night" in filters:
+                try:
+                    max_price = float(filters["max_price_per_night"])
+                    hotels = hotels.filter(
+                        roomtype__price_per_night__lte=max_price
+                    ).distinct()
+                except ValueError:
+                    pass
+
+            if "sort" in filters:
+                sort_field = filters["sort"]
+                if sort_field.startswith("-"):  # Permitir orden descendente
+                    hotels = hotels.order_by(sort_field)
+                else:
+                    hotels = hotels.order_by(sort_field)
+
+            if "limit" in filters:
+                try:
+                    limit = int(filters["limit"])
+                    hotels = hotels[:limit]
+                except ValueError:
+                    pass  # Ignorar si el límite no es un número válido
+
+        return hotels
+
     # Others -----------------------------------------------------------------
 
     @staticmethod
