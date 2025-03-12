@@ -90,7 +90,7 @@ class HotelService:
         hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
 
-    # Filter
+    # Filter -----------------------------------------------------------------
 
     @staticmethod
     def list_hotels(filters=None):
@@ -99,14 +99,31 @@ class HotelService:
         if filters:
             if "city" in filters:
                 hotels = hotels.filter(city__icontains=filters["city"])
+
             if "name" in filters:
                 hotels = hotels.filter(name__icontains=filters["name"])
+
             if "hotel_owner" in filters:
                 hotels = hotels.filter(hotel_owner__id=filters["hotel_owner"])
+
+            if "room_type" in filters:
+                hotels = hotels.filter(
+                    roomtype__name__icontains=filters["room_type"]
+                ).distinct()
+
             if "sort" in filters:
-                hotels = hotels.order_by(filters["sort"])
-            if "limit" in filters and filters["limit"].isdigit():
-                hotels = hotels[: int(filters["limit"])]
+                sort_field = filters["sort"]
+                if sort_field.startswith("-"):  # Permitir orden descendente
+                    hotels = hotels.order_by(sort_field)
+                else:
+                    hotels = hotels.order_by(sort_field)
+
+            if "limit" in filters:
+                try:
+                    limit = int(filters["limit"])
+                    hotels = hotels[:limit]
+                except ValueError:
+                    pass  # Ignorar si el límite no es un número válido
 
         return hotels
 
