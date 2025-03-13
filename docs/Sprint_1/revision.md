@@ -94,6 +94,8 @@ De cara a la primera entrega hemos decidido reducir el alcance a los siguientes 
 - Si se desea borrar un hotel, en el apartado de acciones se pulsará el botón rojo.
 - Si se desea editar un hotel, en el apartado de acciones se pulsará el botón de edición verde.
 
+**Nota: estos hoteles creados no saldrán en el listado general, pues tienen que pasar un proceso de verificación por parte del admin que se implementará en el sprint 2**
+
 4. Como usuario no autenticado, puedo listar los hoteles y filtrarlos por distintas características:
 
 - Desde la pantalla de Home, podemos darle al botón "Buscar" para hacer una búsqueda general de los hoteles.
@@ -149,8 +151,8 @@ En el alcance de este sprint solo teníamos pensado este tipo de usuario, pero i
 Usuario: pawtel_admin 
 Contraseña: 4dm1n
 
-La aplicación cuenta con apartados, pantallas misceláneas o extras y secciones preparadas para el siguiente sprint, por lo que se ruega no tener en cuenta: Contáctanos, Perfil de usuario, Reservas y Habitaciones, Iconos de la NavBar...
-Todo esta preparado y programado para futuros sprints.
+La aplicación cuenta con apartados, pantallas misceláneas o extras y secciones preparadas para el siguiente sprint, por lo que se ruega no tener en cuenta: Contáctanos, Sobre Nosotros, Perfil de usuario, Reservas y Habitaciones, Iconos de la NavBar...
+Todo esta preparado y programado para futuros sprints. Se evaluarán los casos de uso core mencionados anteriormente.
 
 - La URL de nuestra landing page es: [landing.pawtel.es](https://landing.pawtel.es/)
 - La URL de nuestro despliegue es: pawtel-frontend-sprint1.onrender.com, con credenciales de Render:
