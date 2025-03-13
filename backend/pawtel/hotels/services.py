@@ -108,6 +108,7 @@ class HotelService:
             "hotel_owner",
             "room_type",
             "max_price_per_night",
+            "min_price_per_night",
             "sort_by",
             "limit",
         ]
@@ -143,16 +144,31 @@ class HotelService:
                 except ValueError:
                     pass
 
+            if "min_price_per_night" in filters:
+                fl = float(filters["min_price_per_night"])
+                assert isinstance(fl, float)
+                try:
+                    min_price = float(filters["min_price_per_night"])
+                    hotels = hotels.filter(
+                        roomtype__price_per_night__gte=min_price
+                    ).distinct()
+                except ValueError:
+                    pass
+
             if "sort_by" in filters:
                 assert isinstance(filters["sort_by"], str)
-                # assert valid
-                valid = ["price_per_night", "city"]
-                assert filters["sort_by"] in valid
+
+                valid = ["price_per_night", "city", "name"]
+                # Verificamos si sort_by está en los campos válidos o si empieza con "-"
+                assert filters["sort_by"] in valid or filters["sort_by"].startswith("-")
+
                 sort_field = filters["sort_by"]
-                if sort_field.startswith("-"):  # Permitir orden descendente
-                    hotels = hotels.order_by(sort_field)
+
+                # Si el campo comienza con "-", orden descendente
+                if sort_field.startswith("-"):
+                    hotels = hotels.order_by(sort_field)  # Orden descendente
                 else:
-                    hotels = hotels.order_by(sort_field)
+                    hotels = hotels.order_by(sort_field)  # Orden ascendente
 
             if "limit" in filters:
                 i = int(filters["limit"])
