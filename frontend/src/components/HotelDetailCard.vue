@@ -8,9 +8,10 @@ defineProps({
   name: { type: String, required: true },
   address: { type: String, required: true },
   city: { type: String, required: true },
-  price: { type: String, required: true },
   imageGallery: { type: Array, required: true },
-  description: { type: String, required: true }
+  description: { type: String, required: true },
+  price_min: { type: String, required: true },
+  price_max: { type: String, required: true },
 });
 </script>
 
@@ -38,11 +39,13 @@ defineProps({
       <div class="flex-1 flex flex-col items-center text-center">
         <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
         <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col">
-          <div class="price px-1 text-[1.75rem] self-end text-[#C36C6C] font-bold">
-            <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}
+          <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col">
+            <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a> 
+            <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
           </div>
-          <p class="text-sm text-justify text-gray-700 mt-2 max-h-[110px] p-1 overflow-y-auto">
-            {{ description }}
+          <p class="text-sm text-justify text-[1rem] text-gray-700 font-bold p-1">Descripción</p> 
+          <p class="text-sm text-justify text-gray-700 max-h-[79px] p-1 overflow-y-auto">
+            {{ description }}{{ description }}
           </p>
         </div>
       </div>
@@ -64,10 +67,12 @@ defineProps({
     </div>
 
     <div class="border border-terracota p-4 rounded-lg w-full mt-4 flex flex-col">
-      <div class="price text-[1.75rem] self-end text-[#C36C6C] font-bold">
-            <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}
+      <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col">
+          <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a> 
+          <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
       </div>
-      <p class="text-sm text-justify text-gray-700 mt-2">{{ description }}</p> 
+      <p class="text-sm text-justify text-[1rem] text-gray-700 font-bold p-1">Descripción</p> 
+      <p class="text-sm text-justify p-1 text-gray-700 mt-2">{{ description }}</p> 
     </div>
 
     <Button type="add" class="w-full mt-4">Reservar</Button>

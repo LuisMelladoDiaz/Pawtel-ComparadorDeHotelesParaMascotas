@@ -21,7 +21,8 @@ const hotel = computed(() => ({
   name: apiHotel.value?.name || 'Nombre',
   address: apiHotel.value?.address || 'Dirección',
   city: apiHotel.value?.city || 'Ciudad',
-  price: apiHotel.value?.price || '50€',
+  price_max: apiHotel.value?.most_expensive_price || '0',
+  price_min: apiHotel.value?.cheapest_price || '0',
   imageGallery: apiHotel.value?.imageGallery || [
     foto1,
     foto2,
@@ -82,7 +83,8 @@ const hotel = computed(() => ({
             :city="hotel.city"
             :description="hotel.description"
             :address="hotel.address"
-            :price="hotel.price"
+            :price_max="hotel.price_max"
+            :price_min="hotel.price_min"
             :imageGallery="hotel.imageGallery"
           />
         </div>
@@ -119,7 +121,8 @@ const hotel = computed(() => ({
           :city="hotel.city"
           :address="hotel.address"
           :description="hotel.description"
-          :price="hotel.price"
+          :price_max="hotel.price_max"
+          :price_min="hotel.price_min"
           :imageGallery="hotel.imageGallery"
         />
       </div>
