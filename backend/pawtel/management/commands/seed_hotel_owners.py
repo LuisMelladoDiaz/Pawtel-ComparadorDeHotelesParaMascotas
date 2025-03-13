@@ -29,7 +29,7 @@ class Command(BaseCommand):
                 username=username1,
                 email=email1,
                 phone=phone1,
-                password="pass123",
+                password="password123",
             )
             HotelOwner.objects.create(user=user1)
             self.stdout.write(self.style.SUCCESS(f"Created HotelOwner: {username1}"))
@@ -43,7 +43,7 @@ class Command(BaseCommand):
                 username=username2,
                 email=email2,
                 phone=phone2,
-                password="pass123",
+                password="password123",
             )
             HotelOwner.objects.create(user=user2)
             self.stdout.write(self.style.SUCCESS(f"Created HotelOwner: {username2}"))
