@@ -23,7 +23,6 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        HotelService.authorize_create_hotel(request)
         input_serializer = HotelService.serialize_input_hotel_create(request)
         HotelService.validate_create_hotel(input_serializer)
         hotel_created = HotelService.create_hotel(input_serializer)

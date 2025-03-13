@@ -103,7 +103,7 @@ class HotelModelTest(TestCase):
                     hotel.full_clean()
 
     def test_create_hotel_invalid_description(self):
-        invalid_descriptions = ["", None, "A" * 301]
+        invalid_descriptions = ["", None, "A" * 401]
 
         for description in invalid_descriptions:
             with self.subTest(description=description):

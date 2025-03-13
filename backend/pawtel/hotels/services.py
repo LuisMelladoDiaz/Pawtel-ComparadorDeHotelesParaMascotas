@@ -1,3 +1,4 @@
+from django.db.models import Max, Min
 from django.forms import ValidationError
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
@@ -5,7 +6,6 @@ from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
 from rest_framework.exceptions import NotFound, PermissionDenied
-from django.db.models import Max, Min
 
 
 class HotelService:
@@ -37,15 +37,6 @@ class HotelService:
             raise NotFound(detail=f"Hotel with id {pk} not found")
 
     # POST -------------------------------------------------------------------
-
-    @staticmethod
-    def authorize_create_hotel(request):
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
-
-        hotel_owner_id = request.data.get("hotel_owner")
-
-        if not hotel_owner_id or hotel_owner_id != hotel_owner.id:
-            raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def serialize_input_hotel_create(request):
@@ -164,11 +155,11 @@ class HotelService:
                     ).distinct()
                 except ValueError:
                     pass
-            
+
             hotels = hotels.annotate(
                 price_max=Max("roomtype__price_per_night"),
-                price_min=Min("roomtype__price_per_night")
-                )
+                price_min=Min("roomtype__price_per_night"),
+            )
             if "sort_by" in filters:
                 assert isinstance(filters["sort_by"], str)
 
