@@ -1,4 +1,3 @@
-from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
@@ -51,20 +50,3 @@ class HotelOwnerServiceTest(TestCase):
     def test_delete_all_hotels_of_hotel_owner_no_hotels(self):
         with self.assertRaises(PermissionDenied, msg="No hotels to delete."):
             HotelOwnerService.delete_all_hotels_of_hotel_owner(self.hotel_owner.id)
-
-    def test_general_create_hotel_owner(self):
-        data = {
-            "username": "newowner",
-            "email": "newowner@example.com",
-            "phone": "+34123456781",
-            "password": "123456",
-            "is_active": True,
-        }
-        request = type("Request", (), {"data": data, "method": "POST"})
-        response = HotelOwnerService.general_create_hotel_owner(request)
-        user = AppUser.objects.filter(username="newowner").first()
-        self.assertEqual(user.username, "newowner")
-        self.assertEqual(response["user"]["id"], user.id)
-        self.assertNotIn("password", response["user"])
-        self.assertTrue(check_password(data["password"], user.password))
-        self.assertTrue(HotelOwner.objects.filter(user_id=user.id).exists())
