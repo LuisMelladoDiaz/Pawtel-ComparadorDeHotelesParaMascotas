@@ -17,7 +17,6 @@ const login = async () => {
         alert('Por favor, completa todos los campos');
         return;
     }
-
     try {
         await loginMutation.mutateAsync({
             username: username.value,
@@ -70,7 +69,7 @@ const logout = async () => {
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
 
                         <div class="mt-6">
-                            <button @click="login"
+                            <button type="submit"
                                 class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
                                 Iniciar Sesión
                             </button>

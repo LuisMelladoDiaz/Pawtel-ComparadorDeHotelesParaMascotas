@@ -1,6 +1,8 @@
-# 🐾 PawTel - Comparador de Hoteles para Mascotas
+# 🐾 Pawtel - Comparador de Hoteles para Mascotas
 
-Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
+![Logo de PAWTEL](https://raw.githubusercontent.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/refs/heads/main/frontend/src/assets/pawtel-logo-white.png)
+
+Bienvenido a **Pawtel**, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 ---
 
@@ -35,7 +37,7 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 
 ## 📌 Acerca del Proyecto
 
-**PawTel** es una plataforma digital diseñada para comparar hoteles para mascotas. Con PawTel, los dueños pueden encontrar hoteles confiables para sus mascotas, mientras que los hoteles pueden gestionar sus reservas de manera eficiente.
+**Pawtel** es una plataforma digital diseñada para comparar hoteles para mascotas. Con Pawtel, los dueños pueden encontrar hoteles confiables para sus mascotas, mientras que los hoteles pueden gestionar sus reservas de manera eficiente.
 
 **Características clave:**
 - 🏨 Búsqueda y comparación de hoteles para mascotas con filtros personalizados.
@@ -57,7 +59,7 @@ Bienvenido a **PawTel**, una plataforma innovadora para la busqueda y reserva de
 ---
 ## 🚀 Instalación
 
-Para instalar y ejecutar el proyecto de **PawTel**, siga los pasos detallados en el archivo [docs/USAGE.md](docs/USAGE.md).
+Para instalar y ejecutar el proyecto de **Pawtel**, siga los pasos detallados en el archivo [docs/USAGE.md](docs/USAGE.md).
 
 Si accede desde el despliegue en la nube, podría descargar el proyecto como aplicación desde su navegador, ya que Pawtel es una PWA.
 
@@ -84,13 +86,13 @@ Si accede desde el despliegue en la nube, podría descargar el proyecto como apl
 ## 🔗 Enlaces Importantes
 
 ### Repositorios y Documentación
-- 🔹 **[Repositorio GitHub](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas)**
-- 🔹 **[Documentación del Proyecto](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/docs)**
+- 🔹 **[Repositorio GitHub](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas)**
+- 🔹 **[Documentación del Proyecto](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/docs)**
 - 🔹 **[Plan Inicial de Proyecto](https://github.com/LuisMelladoDiaz/ISPP/blob/main/docs/Plan_Inicial_de_Proyecto.md)**
-- 🔹 **[Manual de Identidad Corporativa](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/borradores/Manual%20de%20identidad%20corporativa%20(paleta%20de%20colores%2C%20tipografia%20y%20logo).pdf)**
+- 🔹 **[Manual de Identidad Corporativa](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/main/docs/borradores/Manual%20de%20identidad%20corporativa%20(paleta%20de%20colores%2C%20tipografia%20y%20logo).pdf)**
 
 ### Contribución y Despliegue
-- 🔹 **Cómo Contribuir y Gestión de la Configuración:**  [Pautas de contribución](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
+- 🔹 **Cómo Contribuir y Gestión de la Configuración:**  [Pautas de contribución](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
 - 🔹 **Despliegue en Producción:** *(Enlace por agregar)*
 
 ### Presentaciones
@@ -103,7 +105,7 @@ Si accede desde el despliegue en la nube, podría descargar el proyecto como apl
 
 Este proyecto está protegido por derechos de autor. Todos los derechos están reservados. No se permite la copia, distribución, modificación ni sublicencia sin el permiso expreso del titular de los derechos de autor.
 
-Copyright (c) 2025 PawTel.
+Copyright (c) 2025 Pawtel.
 
 ---
 
@@ -126,9 +128,9 @@ Copyright (c) 2025 PawTel.
 
 🚀 ¡Y más personas increíbles que han contribuido!
 
-Si deseas contribuir, revisa nuestras [pautas de contribución](https://github.com/LuisMelladoDiaz/PawTel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
+Si deseas contribuir, revisa nuestras [pautas de contribución](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
 
 ---
 
 
-🎉 _¡Gracias por visitar PawTel! Si te gusta el proyecto, no dudes en dejar una estrella ⭐ en GitHub._
+🎉 _¡Gracias por visitar Pawtel! Si te gusta el proyecto, no dudes en dejar una estrella ⭐ en GitHub._
