@@ -1,10 +1,11 @@
-from django.core.management.base import BaseCommand
-from django.core.management import call_command
-from faker import Faker
 import random
+
+from django.core.management.base import BaseCommand
+from faker import Faker
 from pawtel.hotels.models import Hotel, HotelOwner
 
-fake = Faker('es_ES')
+fake = Faker("es_ES")
+
 
 class Command(BaseCommand):
     help = "Seed database with hotels"
@@ -65,14 +66,28 @@ class Command(BaseCommand):
     def create_random_hotels(self, num_random):
         owners = list(HotelOwner.objects.all())
         if not owners:
-            self.stdout.write(self.style.ERROR("No HotelOwners found. Run seed_hotel_owners first."))
+            self.stdout.write(
+                self.style.ERROR("No HotelOwners found. Run seed_hotel_owners first.")
+            )
             return
 
         # Lista de ciudades españolas
         ciudades_espanolas = [
-            "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza",
-            "Málaga", "Murcia", "Palma de Mallorca", "Las Palmas de Gran Canaria",
-            "Bilbao", "Alicante", "Córdoba", "Valladolid", "Vigo", "Gijón"
+            "Madrid",
+            "Barcelona",
+            "Valencia",
+            "Sevilla",
+            "Zaragoza",
+            "Málaga",
+            "Murcia",
+            "Palma de Mallorca",
+            "Las Palmas de Gran Canaria",
+            "Bilbao",
+            "Alicante",
+            "Córdoba",
+            "Valladolid",
+            "Vigo",
+            "Gijón",
         ]
 
         # Lista ampliada de nombres de hoteles para mascotas
@@ -115,7 +130,7 @@ class Command(BaseCommand):
         ]
 
 
-        for _ in range(num_random):
+        for _ in range(5):
             owner = random.choice(owners)
             ciudad = random.choice(ciudades_espanolas)
             descripcion = random.choice(descripciones_hoteles_mascotas)
@@ -125,7 +140,11 @@ class Command(BaseCommand):
             if Hotel.objects.filter(name=nombre).exists():
                 # Si el nombre ya existe, generar uno nuevo con Faker
                 nombre = fake.company()
-                self.stdout.write(self.style.WARNING(f"Nombre repetido. Generando nuevo nombre: {nombre}"))
+                self.stdout.write(
+                    self.style.WARNING(
+                        f"Nombre repetido. Generando nuevo nombre: {nombre}"
+                    )
+                )
 
             # Generar una dirección ficticia en la ciudad seleccionada
             direccion = f"{fake.street_address()}"
@@ -135,6 +154,10 @@ class Command(BaseCommand):
                 address=direccion,
                 city=ciudad,
                 description=descripcion,
-                hotel_owner=owner
+                hotel_owner=owner,
             )
-            self.stdout.write(self.style.SUCCESS(f"Created Hotel: {hotel.name} ({hotel.city})"))
+            self.stdout.write(
+                self.style.SUCCESS(f"Created Hotel: {hotel.name} ({hotel.city})")
+            )
+
+        self.stdout.write(self.style.SUCCESS("Hotels seeding complete!"))

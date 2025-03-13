@@ -3,7 +3,7 @@ from faker import Faker
 from pawtel.app_users.models import AppUser
 from pawtel.hotels.models import HotelOwner
 
-fake = Faker('es_ES')
+fake = Faker("es_ES")
 
 
 class Command(BaseCommand):
