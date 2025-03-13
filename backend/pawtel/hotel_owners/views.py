@@ -30,7 +30,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        return PermissionDenied("This operation is forbidden.")
+        raise PermissionDenied("This operation is forbidden.")
 
     def update(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
