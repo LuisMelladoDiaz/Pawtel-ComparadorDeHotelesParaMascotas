@@ -68,7 +68,7 @@ const hotels = computed(() =>
     name: hotel.name || 'Nombre',
     address: hotel.address || 'Dirección',
     city: hotel.city || 'Ciudad',
-    details: ['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros'],
+    description: hotel.description || 'Descripción',
     rating: hotel.rating || '8.5',
     price: hotel.price || '50€',
     imageGallery: hotel.imageGallery || [
@@ -96,7 +96,7 @@ const hotels = computed(() =>
         <Navbar />
         <FilterNavbar />
 
-        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
+        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow items-center">
             <!-- Desktop version -->
             <div class="container mt-5 hidden md:flex">
 
@@ -177,7 +177,7 @@ const hotels = computed(() =>
                             :image="hotel.image"
                             :name="hotel.name"
                             :city="hotel.city"
-                            :details="hotel.details"
+                            :description="hotel.description"
                             :rating="hotel.rating"
                             :price="hotel.price"
                             />
@@ -299,7 +299,7 @@ const hotels = computed(() =>
                             :image="hotel.image"
                             :name="hotel.name"
                             :city="hotel.city"
-                            :details="hotel.details"
+                            :description="hotel.description"
                             :rating="hotel.rating"
                             :price="hotel.price"
                             />
