@@ -4,6 +4,9 @@ import Footer from '../components/Footer.vue';
 import FilterNavbar from '../components/FilterNavBar.vue';
 import Carrusel from '../components/Carrusel.vue';
 import Button from '../components/Button.vue';
+import { useIsLoggedIn } from '@/data-layer/auth';
+
+const { data: isLoggedIn } = useIsLoggedIn();
 </script>
 
 <template>
@@ -17,7 +20,7 @@ import Button from '../components/Button.vue';
             <span class="italic" style="color: var(--color-terracota);">mascota.</span>
           </h1>
           <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
-          <router-link to="/login">
+          <router-link to="/login" v-if="!isLoggedIn">
             <Button type="reject">Iniciar Sesión</Button>
           </router-link>
         </div>
