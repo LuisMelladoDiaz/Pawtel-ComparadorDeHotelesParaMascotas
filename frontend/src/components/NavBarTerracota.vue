@@ -14,6 +14,13 @@
 
       <!-- Menú en pantallas grandes -->
       <div class="nav-links flex gap-6 no-underline text-white font-bold text-base hidden lg:flex">
+        <router-link 
+            to="/hotel-owner-panel" 
+            class="hover:underline"
+            v-if="isLoggedIn"
+          >
+            Mis Hoteles
+        </router-link>
         <router-link to="/sobre-nosotros" class="hover:underline">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline">Contacto</router-link>
       </div>
@@ -40,6 +47,13 @@
     <!-- Menú desplegable en móvil -->
     <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-terracota py-4 border-t-2 border-white shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-white font-bold text-base">
+        <router-link 
+            to="/hotel-owner-panel" 
+            class="hover:underline p-2"
+            v-if="isLoggedIn"
+          >
+            Mis Hoteles
+        </router-link>
         <router-link to="/sobre-nosotros" class="hover:underline p-2">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline p-2">Contacto</router-link>
       </div>

@@ -32,7 +32,7 @@ export const createHotel = async (hotelData: Omit<Hotel, 'id'>) => {
 };
 
 export const updateHotel = async (hotelId: number, hotelData: Omit<Hotel, 'id'>) => {
-  const url = `${API_BASE_URL}/hotels/${hotelId}`;
+  const url = `${API_BASE_URL}/hotels/${hotelId}/`;
   const response = await axios.put(url, hotelData);
   return response.data as Hotel;
 };
