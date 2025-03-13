@@ -1,4 +1,4 @@
-# PAWTEL  
+<h1 align="center" style="font-size: 60px; font-weight: bold; color: #ff6600;">PAWTEL</h1>
 **Buscador y Comparador de Hoteles para Mascotas**
 
 ![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
