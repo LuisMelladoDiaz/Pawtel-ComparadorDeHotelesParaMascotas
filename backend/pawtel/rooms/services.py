@@ -39,6 +39,19 @@ class RoomService:
     # POST -------------------------------------------------------------------
 
     @staticmethod
+    def authorize_create_room(request):
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+
+        room_type_id = request.data.get("room_type")
+        if not room_type_id:
+            raise PermissionDenied("Permission denied.")
+
+        room_type = RoomTypeService.retrieve_room_type(room_type_id)
+
+        if not room_type or room_type.hotel.hotel_owner.id != hotel_owner.id:
+            raise PermissionDenied("Permission denied.")
+
+    @staticmethod
     def serialize_input_room_create(request):
         context = {"request": request}
         serializer = RoomSerializer(data=request.data, context=context)

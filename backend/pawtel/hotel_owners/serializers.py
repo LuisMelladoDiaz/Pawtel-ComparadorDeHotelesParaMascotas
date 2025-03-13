@@ -14,4 +14,7 @@ class HotelOwnerSerializer(BaseSerializer):
     class Meta:
         model = HotelOwner
         fields = ["id", "user"]
-        extra_kwargs = {"id": {"read_only": True}, "user": {"read_only": True}}
+        extra_kwargs = {
+            "id": {"read_only": True},
+            "user": {"read_only": True, "allow_null": False},
+        }

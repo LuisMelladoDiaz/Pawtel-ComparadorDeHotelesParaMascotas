@@ -2,7 +2,8 @@ from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
-from rest_framework.exceptions import AuthenticationFailed, NotFound, PermissionDenied
+from rest_framework.exceptions import (AuthenticationFailed, NotFound,
+                                       PermissionDenied)
 
 # to get the current hotel owner
 
@@ -26,14 +27,12 @@ class HotelOwnerService:
     @staticmethod
     def authorize_action_hotel_owner(request, pk):
         target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+        if not target_hotel_owner:
+            raise NotFound("Hotel owner does not exist.")
         target_app_user = AppUserService.retrieve_app_user(target_hotel_owner.user_id)
         logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if (
-            (not target_hotel_owner)
-            or (not target_app_user)
-            or (not target_app_user.is_active)
-        ):
+        if (not target_app_user) or (not target_app_user.is_active):
             raise NotFound("Hotel owner does not exist.")
 
         if target_hotel_owner.id != logged_in_hotel_owner.id:
