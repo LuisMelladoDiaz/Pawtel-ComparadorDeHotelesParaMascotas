@@ -19,9 +19,20 @@ import hotel6 from '../assets/hoteles/hotel6.jpg';
 const defaultImages = [hotel1, hotel2, hotel3, hotel4, hotel5, hotel6];
 
 // Filters
-const cities = ref(["Barcelona", "Murcia", "Palma de Mallorca", "Sevilla"]);
-const rooms = ref(["Suite", "Suite de lujo", "Habitación Estándar", "Habitación Económica",
-  "Habitación Premium", "Habitación Familiar", "Doble", "Habitación Deluxe"]);
+const cities = ref([
+    "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
+    "Palma de Mallorca", "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+    "Valladolid", "Vigo", "Gijón"
+].sort());
+const rooms = ref(["Single",
+    "Doble",
+    "Suite",
+    "Habitación Familiar",
+    "Habitación Deluxe",
+    "Habitación Estándar",
+    "Suite de Lujo",
+    "Habitación Económica",
+    "Habitación Premium"].sort());
 
 const selectedCity = ref('');
 const selectedRoom = ref('');
