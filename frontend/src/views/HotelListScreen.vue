@@ -126,11 +126,11 @@ const hotels = computed(() =>
                     <div class="flex flex-col gap-2">
                         <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
                         <div class="flex items-center gap-2">
-                            <input type="range" :min="20" :max="maxPrice" v-model="minPrice" class="w-full">
+                            <input type="range" :min="20" :max="maxPrice" v-model="minPrice" class="w-full custom-range">
                             <span class="text-sm">{{ minPrice }}€</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <input type="range" :min="minPrice" :max="200" v-model="maxPrice" class="w-full">
+                            <input type="range"  :min="minPrice" :max="200" v-model="maxPrice" class="w-full custom-range">
                             <span class="text-sm">{{ maxPrice }}€</span>
                         </div>
                     </div>
@@ -312,3 +312,9 @@ const hotels = computed(() =>
         <Footer />
     </div>
 </template>
+
+<style scoped>
+.custom-range {
+  accent-color: #6C8CC3;
+}
+</style>

@@ -34,7 +34,7 @@ const onSearch = () => {
 
 
 <style scoped>
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
 
     /* Aquí empiezan las clases CSS de la versión móvil */
     .filter-navbar {

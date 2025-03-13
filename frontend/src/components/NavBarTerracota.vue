@@ -2,7 +2,7 @@
   <nav class="navbar bg-terracota py-4 h-[70px] px-5">
     <div class="navbar-content max-w-7xl px-5 mx-auto flex justify-between items-center h-full">
       <!-- Ícono de menú para móviles -->
-      <div class="menu-icon md:hidden flex flex-col items-end" @click="toggleMenu">
+      <div class="menu-icon lg:hidden flex flex-col items-end" @click="toggleMenu">
         <i class="fas fa-bars text-white text-3xl"></i>
       </div>
 
@@ -13,13 +13,13 @@
       <SearchBar class="search border-white" />
 
       <!-- Menú en pantallas grandes -->
-      <div class="nav-links flex gap-6 no-underline text-white font-bold text-base hidden md:flex">
+      <div class="nav-links flex gap-6 no-underline text-white font-bold text-base hidden lg:flex">
         <router-link to="/sobre-nosotros" class="hover:underline">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline">Contacto</router-link>
       </div>
 
       <!-- Botones de autenticación y perfil en pantallas grandes -->
-      <div class="auth-buttons flex items-center gap-5 text-white hidden md:flex">
+      <div class="auth-buttons flex items-center gap-5 text-white hidden lg:flex">
         <template v-if="!isLoggedIn">
           <router-link to="/login" class="auth-button login text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
           <router-link to="/register" class="auth-button sign-in text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
@@ -38,7 +38,7 @@
     </div>
 
     <!-- Menú desplegable en móvil -->
-    <div v-if="isMenuOpen" class="mobile-menu md:hidden bg-terracota py-4 border-t-2 border-white shadow-lg rounded-b-lg">
+    <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-terracota py-4 border-t-2 border-white shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-white font-bold text-base">
         <router-link to="/sobre-nosotros" class="hover:underline p-2">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline p-2">Contacto</router-link>
@@ -87,7 +87,7 @@ const logout = () => {
 </script>
 
 <style scoped>
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     .navbar-content {
       display: flex;
       justify-content: flex-start;
