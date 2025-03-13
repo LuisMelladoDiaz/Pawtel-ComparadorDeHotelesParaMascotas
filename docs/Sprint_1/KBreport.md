@@ -1,31 +1,39 @@
-# PAWTEL
-## KBReport - Sprint 1
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32" alt="Logo de PAWTEL" width="300">
+</p>
+
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
+<br>
+| **EQUIPO DE DESARROLLO (G11)** |   |   |   |
+|--------------------------|---|---|---|
+| `Luis Mellado Díaz` | `PM del Proyecto` | `Daniel Flores De Francisco` | `PM del Proyecto` |
+| Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales | Javier García Sebastián | Javier Ruiz Garrido |
+| Jorge Gómez de Tovar | Andrés Martínez Reviriego | Manuel Castillejo Vela | Rafael Castillo Cebolla |
+| Claudio Cortés Carrasco | Sergio Trenado González | Yesica Garate Fuentes | David González Martínez |
+
+<br>
+🌍 Visítanos en nuestra Página web y Redes sociales proximamente.
+
+📌 **Página Web:** [www.pawtel.com](https://www.pawtel.com)   
+📩 **Contáctanos:** [📧 contacto@pawtel.com](mailto:contacto@pawtel.com)  
+
+---
+
+<br>
+🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾🐾
+<br>
+<br><br>
 
 
-![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
 
+# Tipo de Documento: KBReport - Sprint 
 
-**Equipo:**
-- **Andrés Martínez Reviriego**
-- **Claudio Cortés Carrasco**
-- **Daniel Flores De Francisco**
-- **David González Martínez**
-- **Fernando Castelló Sánchez**
-- **Francisco Miguel Jiménez Morales**
-- **Javier García Sebastián**
-- **Javier Ruiz Garrido**
-- **Jorge Gómez de Tovar**
-- **Luis Mellado Díaz**
-- **Manuel Castillejo Vela**
-- **Rafael Castillo Cebolla**
-- **Sergio Trenado González**
-- **Yesica Garate Fuentes**
+**Entregable:** Sprint 1
 
 **Fecha:** 10/03/2025
 
 **Equipo:** G11
-
-**Entregable:** Sprint 1
 
 ---
 
@@ -39,6 +47,8 @@
    3. [Semana 3](#semana-3)
    4. [Semana 5](#semana-5)
 
+---
+
 ### Historial de Versiones
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
@@ -46,8 +56,12 @@
 | 22/02/2025  | v 1.1         | Versión tras corrección de especificaciones | Manuel Castillejo Vela |
 | 10/03/2025  | v 2.0         | Versión tras adición de nuevo feedback del Sprint 1 y adaptación a formato .md | Manuel Castillejo Vela |
 
+---
+
 ### Resumen Ejecutivo
 El objetivo principal de este documento es definir y detallar de qué manera el equipo de trabajo ha aportado a la base de conocimiento grupal que se establece en conjunto con el resto de los equipos de trabajo de la asignatura. Para ello se proporcionan las URLs correspondientes a las bases de conocimiento, se explica la contribución del grupo a la misma y las acciones de consolidación que se llevaron a cabo en relación con el feedback obtenido.
+
+---
 
 ### Desarrollo
 **Base de conocimiento**
