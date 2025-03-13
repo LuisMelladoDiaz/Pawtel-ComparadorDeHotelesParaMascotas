@@ -64,6 +64,7 @@ const sortByWithDir = computed(() => {
 const { data: apiHotels, isLoading, isError } = useGetAllHotels({
     sort_by: sortByWithDir,
     max_price_per_night: maxPrice,
+    min_price_per_night: minPrice,
 });
 
 
@@ -136,7 +137,7 @@ const hotels = computed(() =>
                             <span class="text-sm">{{ minPrice }}€</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <input type="range" :min="minPrice" :max="200" v-model="maxPrice" class="w-full">
+                            <input type="range" :min="minPrice" :max="500" v-model="maxPrice" class="w-full">
                             <span class="text-sm">{{ maxPrice }}€</span>
                         </div>
                     </div>
@@ -272,7 +273,7 @@ const hotels = computed(() =>
                                 <span class="text-sm">{{ minPrice }}€</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <input type="range" :min="minPrice" :max="200" v-model="maxPrice" class="w-full">
+                                <input type="range" :min="minPrice" :max="500" v-model="maxPrice" class="w-full">
                                 <span class="text-sm">{{ maxPrice }}€</span>
                             </div>
                         </div>

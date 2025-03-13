@@ -146,7 +146,7 @@ class HotelService:
                 try:
                     min_price = float(filters["min_price_per_night"])
                     hotels = hotels.filter(
-                        roomtype__price_per_night__lte=min_price
+                        roomtype__price_per_night__gte=min_price
                     ).distinct()
                 except ValueError:
                     pass
