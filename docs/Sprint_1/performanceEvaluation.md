@@ -61,11 +61,11 @@
 | Ruiz Garrido, Javier        | 10   | 8    |      |      |      |      | 18    |
 | Castillo Cebolla, Rafael    | 10   | 10   |      |      |      |      | 20    |
 | Castelló Sánchez, Fernando  | 10   | 10   |      |      |      |      | 20    |
-| García Sebastián, Javier    | 10   | 7    |      |      |      |      | 17    |
+| García Sebastián, Javier    | 10   | 8    |      |      |      |      | 18    |
 | Garate Fuentes, Yesica      | 10   | 9    |      |      |      |      | 19    |
 | Castillejo Vela, Manuel     | 10   | 10   |      |      |      |      | 20    |
 
-**Total:** 262
+**Total:** 264
 
 ---
 
