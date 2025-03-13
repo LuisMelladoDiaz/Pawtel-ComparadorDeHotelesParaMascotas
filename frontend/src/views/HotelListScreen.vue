@@ -158,8 +158,6 @@ const hotels = computed(() =>
                                 alt="Ordenar" class="w-5 h-5" style="filter: invert(1);">
                             <select v-model="sortBy" class="p-2 w-fit text-white bg-terracota font-bold">
                                 <option value="" disabled selected>Ordenar por...</option>
-                                <option value="precio">Precio</option>
-                                <option value="valoracion">Valoración</option>
                                 <option value="name">Nombre</option>
                             </select>
                             <select v-model="direction" class=" w-fit text-white bg-terracota font-bold">
