@@ -26,7 +26,10 @@ class HotelService:
 
     @staticmethod
     def retrieve_hotel(pk):
-        return Hotel.objects.get(id=pk)
+        try:
+            return Hotel.objects.get(pk=pk)
+        except Hotel.DoesNotExist:
+            raise NotFound(detail=f"Hotel with id {pk} not found")
 
     # POST -------------------------------------------------------------------
 
