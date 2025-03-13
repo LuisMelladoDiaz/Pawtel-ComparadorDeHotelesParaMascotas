@@ -24,6 +24,8 @@
 
 **Equipo:** G11
 
+**Entregable:** Sprint 1
+
 
 ---
  
@@ -52,14 +54,14 @@
 | Mellado Díaz, Luis          | 10   | 10   |      |      |      |      | 20    |
 | González Martínez, David    | 10   | 10   |      |      |      |      | 20    |
 | Martínez Reviriego, Andrés  | 10   | 10   |      |      |      |      | 20    |
-| Cortés Carrasco, Claudio    | 10   | 10   |      |      |      |      | 20    |
+| Cortés Carrasco, Claudio    | 10   | 9   |      |      |      |      | 19    |
 | Trenado González, Sergio    | 10   | 10   |      |      |      |      | 20    |
 | Jiménez Morales, Francisco Miguel | 10 | 9   |      |      |      |      | 19    |
 | Gómez de Tovar, Jorge       | 10   | 8    |      |      |      |      | 18    |
 | Ruiz Garrido, Javier        | 10   | 8    |      |      |      |      | 18    |
 | Castillo Cebolla, Rafael    | 10   | 10   |      |      |      |      | 20    |
 | Castelló Sánchez, Fernando  | 10   | 10   |      |      |      |      | 20    |
-| García Sebastián, Javier    | 10   | 6    |      |      |      |      | 16    |
+| García Sebastián, Javier    | 10   | 7    |      |      |      |      | 17    |
 | Garate Fuentes, Yesica      | 10   | 9    |      |      |      |      | 19    |
 | Castillejo Vela, Manuel     | 10   | 10   |      |      |      |      | 20    |
 
