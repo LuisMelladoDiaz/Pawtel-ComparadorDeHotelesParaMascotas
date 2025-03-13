@@ -9,7 +9,7 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { useGetHotelById } from '@/data-layer/hooks/hotels';
 import foto1 from '../assets/foto1.jpg';
 import foto2 from '../assets/foto2.jpg';
-import hotel from '../assets/hotel.jpg';
+import hotelpic from '../assets/hotel.jpg';
 const route = useRoute();
 const hotelId = computed(() => Number(route.params.id));
 
@@ -17,7 +17,7 @@ const { data: apiHotel, isLoading, error } = useGetHotelById(hotelId);
 
 const hotel = computed(() => ({
   id: apiHotel.value?.id || null,
-  image: apiHotel.value?.image || hotel,
+  image: apiHotel.value?.image || hotelpic,
   name: apiHotel.value?.name || 'Nombre',
   address: apiHotel.value?.address || 'Dirección',
   city: apiHotel.value?.city || 'Ciudad',

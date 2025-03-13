@@ -11,7 +11,7 @@ import AppliedFilter from '../components/AppliedFilter.vue';
 import {useGetAllHotels} from '@/data-layer/hooks/hotels';
 import foto1 from '../assets/foto1.jpg';
 import foto2 from '../assets/foto2.jpg';
-import hotel from '../assets/hotel.jpg';
+import hotelpic from '../assets/hotel.jpg';
 
 // Filters
 const cities = ref(["Madrid", "Barcelona", "Sevilla", "Valencia", "Málaga", "Bilbao"]);
@@ -67,7 +67,7 @@ const { data: apiHotels, isLoading, isError } = useGetAllHotels({
 const hotels = computed(() =>
   apiHotels.value?.map((hotel) => ({
     id: hotel.id,
-    image: hotel.image || hotel,
+    image: hotel.image || hotelpic,
     name: hotel.name || 'Nombre',
     address: hotel.address || 'Dirección',
     city: hotel.city || 'Ciudad',
