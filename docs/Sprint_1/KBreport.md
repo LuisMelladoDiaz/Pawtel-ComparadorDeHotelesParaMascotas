@@ -1,53 +1,68 @@
-# PAWTEL
-## KBReport - Sprint 1
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+**🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
+<p align="center">
+  <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
+</p>
 
-![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
+🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-
-**Equipo:**
-- **Andrés Martínez Reviriego**
-- **Claudio Cortés Carrasco**
-- **Daniel Flores De Francisco**
-- **David González Martínez**
-- **Fernando Castelló Sánchez**
-- **Francisco Miguel Jiménez Morales**
-- **Javier García Sebastián**
-- **Javier Ruiz Garrido**
-- **Jorge Gómez de Tovar**
-- **Luis Mellado Díaz**
-- **Manuel Castillejo Vela**
-- **Rafael Castillo Cebolla**
-- **Sergio Trenado González**
-- **Yesica Garate Fuentes**
-
-**Fecha:** 10/03/2025
-
-**Equipo:** G11
-
-**Entregable:** Sprint 1
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
 
 ---
 
-### Índice
-1. [Historial de Versiones](#historial-de-versiones)
-2. [Resumen Ejecutivo](#resumen-ejecutivo)
-3. [Desarrollo](#desarrollo)
-4. [Feedback Aportado](#feedback-aportado)
-   1. [Semana 1](#semana-1)
-   2. [Semana 2](#semana-2)
-   3. [Semana 3](#semana-3)
-   4. [Semana 5](#semana-5)
+<br><br>
 
-### Historial de Versiones
-| Fecha       | N° de Versión | Descripción               | Elaborado por           |
-|-------------|---------------|---------------------------|-------------------------|
-| 20/02/2025  | v 1.0         | Versión inicial del documento | Manuel Castillejo Vela |
-| 22/02/2025  | v 1.1         | Versión tras corrección de especificaciones | Manuel Castillejo Vela |
-| 10/03/2025  | v 2.0         | Versión tras adición de nuevo feedback del Sprint 1 y adaptación a formato .md | Manuel Castillejo Vela |
+# 📑 **KBReport - Sprint** 🚀
 
-### Resumen Ejecutivo
-El objetivo principal de este documento es definir y detallar de qué manera el equipo de trabajo ha aportado a la base de conocimiento grupal que se establece en conjunto con el resto de los equipos de trabajo de la asignatura. Para ello se proporcionan las URLs correspondientes a las bases de conocimiento, se explica la contribución del grupo a la misma y las acciones de consolidación que se llevaron a cabo en relación con el feedback obtenido.
+**📅 Entregable:** Sprint 1  
+**📆 Fecha:** 10/03/2025  
+**👥 Equipo:** G11 
+
+|  |   | 
+|--------------------------|---|
+| `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
+| Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
+| Javier García Sebastián | Javier Ruiz Garrido |
+| Jorge Gómez de Tovar | Andrés Martínez Reviriego |
+| Manuel Castillejo Vela | Rafael Castillo Cebolla |
+| Claudio Cortés Carrasco | Sergio Trenado González |
+| Yesica Garate Fuentes | David González Martínez |
+
+
+---
+
+## 📌 **Índice** 📖  
+1. [📝 Historial de Versiones](#historial-de-versiones)  
+2. [📌 Resumen Ejecutivo](#resumen-ejecutivo)  
+3. [⚙️ Desarrollo](#desarrollo)  
+4. [🗂️ Feedback Aportado](#feedback-aportado)  
+   - [Semana 1 🏁](#semana-1)  
+   - [Semana 2 ✏️](#semana-2)  
+   - [Semana 3 🔍](#semana-3)  
+   - [Semana 5 🏅](#semana-5)  
+
+---
+
+## 📝 **Historial de Versiones**  
+
+| 📆 Fecha | 🔢 N° de Versión | 📄 Descripción | ✍️ Elaborado por |  
+|-------------|---------------|---------------------------|-------------------------|  
+| 20/02/2025  | v 1.0         | Versión inicial del documento | Manuel Castillejo Vela |  
+| 22/02/2025  | v 1.1         | Corrección de especificaciones | Manuel Castillejo Vela |  
+| 10/03/2025  | v 2.0         | Feedback Sprint 1 y formato .md | Manuel Castillejo Vela |  
+
+---
+
+## 📌 **Resumen Ejecutivo**  
+📍 **Objetivo:** Explicar cómo el equipo ha contribuido a la base de conocimiento grupal.  
+📍 **Contenido:**  
+- Se detallan nuestras **contribuciones** 📖.  
+- Se incluyen enlaces a la **base de conocimiento** 🔗.  
+- Se presentan **acciones tomadas** según el feedback obtenido ✍️.  
+
+---
 
 ### Desarrollo
 **Base de conocimiento**

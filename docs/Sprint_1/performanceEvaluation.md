@@ -1,48 +1,50 @@
-# PAWTEL
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+**🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
-![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
+<p align="center">
+  <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
+</p>
 
-## Performance Evaluation
+🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-**Equipo:**
-- **Andrés Martínez Reviriego**
-- **Claudio Cortés Carrasco**
-- **Daniel Flores De Francisco**
-- **David González Martínez**
-- **Fernando Castelló Sánchez**
-- **Francisco Miguel Jiménez Morales**
-- **Javier García Sebastián**
-- **Javier Ruiz Garrido**
-- **Jorge Gómez de Tovar**
-- **Luis Mellado Díaz**
-- **Manuel Castillejo Vela**
-- **Rafael Castillo Cebolla**
-- **Sergio Trenado González**
-- **Yesica Garate Fuentes**
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
-**Fecha:** 12/03/2025
+---
 
-**Equipo:** G11
+<br><br>
 
-**Entregable:** Sprint 1
+# **Performance Evaluation**
+
+**📅 Entregable:** Sprint 1  
+**📆 Fecha:** 12/03/2025  
+**👥 Equipo:** G11 
+
+
+|  |   | 
+|--------------------------|---|
+| `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
+| Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
+| Javier García Sebastián | Javier Ruiz Garrido |
+| Jorge Gómez de Tovar | Andrés Martínez Reviriego |
+| Manuel Castillejo Vela | Rafael Castillo Cebolla |
+| Claudio Cortés Carrasco | Sergio Trenado González |
+| Yesica Garate Fuentes | David González Martínez |
 
 
 ---
  
- ## **Índice**
- 1. [Tabla de Versiones](#historial-de-versiones)  
- 2. [Evaluación Individual Acordada](#evaluación-individual-acordada)  
-  
-
+## 📌 **Índice**
+ 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)  
+ 2. 📝 [**Evaluación Individual Acordada**](#evaluación-individual-acordada)  
  
  ---
 
-## Historial de Versiones
-| Fecha       | N° de Versión | Descripción               | Elaborado por           |
-|-------------|---------------|---------------------------|-------------------------|
-| 12/03/2025  | v 1.0         | Versión inicial del documento |Daniel Flores de Francisco |
-| 12/03/2025  | v 1.1         | Notas individuales | Luis Mellado Díaz |
-
+## 📜 **Historial de Versiones**  
+| 📅 **Fecha**       | 🔢 **N° de Versión** | 📝 **Descripción**               | ✍️ **Elaborado por**           |
+|------------------|----------------|---------------------------|-------------------------|
+| 📆 12/03/2025  | 🔹 v 1.0         | 🏁 Versión inicial del documento | ✍️ Daniel Flores de Francisco |
+| 📆 12/03/2025  | 🔹 v 1.1         | 🗒️ Notas individuales | ✍️ Luis Mellado Díaz |
 
 ---
 

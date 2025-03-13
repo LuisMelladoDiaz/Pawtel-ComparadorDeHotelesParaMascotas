@@ -1,35 +1,42 @@
-# PAWTEL
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+**🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
-## Informe de uso de IA - Sprint 1
+<p align="center">
+  <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
+</p>
 
-![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
+🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-**Equipo:**
-- Andrés Martínez Reviriego
-- Claudio Cortés Carrasco
-- Daniel Flores De Francisco
-- David González Martínez
-- Fernando Castelló Sánchez
-- Francisco Miguel Jiménez Morales
-- Javier García Sebastián
-- Javier Ruiz Garrido
-- Jorge Gómez de Tovar
-- Luis Mellado Díaz
-- Manuel Castillejo Vela
-- Rafael Castillo Cebolla
-- Sergio Trenado González
-- Yesica Garate Fuentes
-
-**Fecha:** 12/03/2025 <br>
-**Grupo:** G11 <br>
-**Entregable:** Sprint 1
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
 
 ---
 
-### Índice
-1. [Historial de versiones](#1-historial-de-versiones)
-2. [Resumen ejecutivo](#2-resumen-ejecutivo)
-3. [Informes](#3-informes)
+<br><br>
+
+# 📑 **Informe de uso de IA** - Sprint 1 🚀
+
+**📅 Entregable:** Sprint 1  
+**📆 Fecha:** 12/03/2025  
+**👥 Equipo:** G11 
+
+
+|  |   | 
+|--------------------------|---|
+| `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
+| Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
+| Javier García Sebastián | Javier Ruiz Garrido |
+| Jorge Gómez de Tovar | Andrés Martínez Reviriego |
+| Manuel Castillejo Vela | Rafael Castillo Cebolla |
+| Claudio Cortés Carrasco | Sergio Trenado González |
+| Yesica Garate Fuentes | David González Martínez |
+
+---
+
+### 📌 Índice
+1. 📜 [**Historial de versiones**](#1-historial-de-versiones)  
+2. 🏆 [**Resumen ejecutivo**](#2-resumen-ejecutivo)  
+3. 📂 [**Informes**](#3-informes)  
     - [Andrés Martínez Reviriego](#andrés-martínez-reviriego)
     - [Claudio Cortés Carrasco](#claudio-cortés-carrasco)
     - [Daniel Flores de Francisco](#daniel-flores-de-francisco)
@@ -46,16 +53,17 @@
 
 ---
 
-### 1. Historial de versiones
-| Fecha       | N° de Versión | Descripción                   | Elaborado por           |
+### 📜 1. Historial de versiones  
+| 📅 Fecha       | 🔢 N° de Versión | 📄 Descripción                   | ✍️ Elaborado por           |
 |-------------|---------------|-------------------------------|-------------------------|
 | 12/03/2025  | v 1.0         | Versión inicial del documento | Sergio Trenado González |
 
 ---
 
-### 2. Resumen ejecutivo
+### 🏆 2. Resumen ejecutivo  
 
-Recopilación de los diferentes informes de uso de IA a lo largo del Sprint 1 hasta la fecha 12/03/2025.
+📌 **Descripción:**  
+📖 Recopilación de los diferentes **informes de uso de IA** 🤖 durante el **Sprint 1** hasta la fecha **12/03/2025**.  
 
 ---
 
@@ -63,7 +71,7 @@ Recopilación de los diferentes informes de uso de IA a lo largo del Sprint 1 ha
 
 
 
-### Andrés Martínez Reviriego
+### 👨‍💻 Andrés Martínez Reviriego
 
 #### 1. Información General
 
@@ -115,7 +123,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Claudio Cortés Carrasco
+### 👨‍💻 Claudio Cortés Carrasco
 
 #### 1. Información General
 
@@ -164,7 +172,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Daniel Flores de Francisco
+### 👨‍💻 Daniel Flores de Francisco
 
 #### 1. Información General
 
@@ -215,7 +223,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Fernando Castelló Sánchez
+### 👨‍💻 Fernando Castelló Sánchez
 
 #### 1. Información General
 
@@ -268,7 +276,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Francisco Miguel Jiménez Morales
+### 👨‍💻 Francisco Miguel Jiménez Morales
 
 #### 1. Información General
 
@@ -315,7 +323,7 @@ Ninguno
 
 ---
 
-### David González Martínez
+### 👨‍💻 David González Martínez
 
 #### 1. Información General
 
@@ -364,7 +372,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Jorge Gómez de Tovar
+### 👨‍💻 Jorge Gómez de Tovar
 
 #### 1. Información General  
 
@@ -413,7 +421,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Sergio Trenado González
+### 👨‍💻 Sergio Trenado González
 
 #### 1. Información General
 
@@ -461,7 +469,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Manuel Castillejo Vela
+### 👨‍💻 Manuel Castillejo Vela
 
 #### 1. Información General
 
@@ -525,7 +533,7 @@ Poner en marcha el frontend como PWA.
 
 ---
 
-### Javier Ruiz Garrido
+### 👨‍💻 Javier Ruiz Garrido
 
 #### 1. Información General
 
@@ -581,7 +589,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Luis Mellado Díaz
+### 👨‍💻 Luis Mellado Díaz
 
 #### 1. Información General
 
@@ -633,7 +641,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Rafael Castillo Cebolla
+### 👨‍💻 Rafael Castillo Cebolla
 
 #### 1. Información General
 
@@ -681,7 +689,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ---
 
-### Yesica Garate Fuentes
+### 👨‍💻 Yesica Garate Fuentes
 
 #### 1. Información General 
 

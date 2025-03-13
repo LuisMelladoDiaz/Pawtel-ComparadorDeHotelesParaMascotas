@@ -1,43 +1,48 @@
-# PAWTEL
-## **Compromiso de Participación en la Asignatura ISPP**
- 
- 
-![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+**🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
+
+<p align="center">
+  <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
+</p>
+
+🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
+
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
+
+---
+
+<br><br>
+
+# 📑 **Compromiso de Participación en la Asignatura ISPP** 🚀
+
+**📅 Entregable:** Sprint 1  
+**📆 Fecha:** 10/03/2025  
+**👥 Equipo:** G11 
 
 
-**Equipo:**
-- **Andrés Martínez Reviriego**
-- **Claudio Cortés Carrasco**
-- **Daniel Flores De Francisco**
-- **David González Martínez**
-- **Fernando Castelló Sánchez**
-- **Francisco Miguel Jiménez Morales**
-- **Javier García Sebastián**
-- **Javier Ruiz Garrido**
-- **Jorge Gómez de Tovar**
-- **Luis Mellado Díaz**
-- **Manuel Castillejo Vela**
-- **Rafael Castillo Cebolla**
-- **Sergio Trenado González**
-- **Yesica Garate Fuentes**
+|  |   | 
+|--------------------------|---|
+| `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
+| Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
+| Javier García Sebastián | Javier Ruiz Garrido |
+| Jorge Gómez de Tovar | Andrés Martínez Reviriego |
+| Manuel Castillejo Vela | Rafael Castillo Cebolla |
+| Claudio Cortés Carrasco | Sergio Trenado González |
+| Yesica Garate Fuentes | David González Martínez |
 
-**Fecha:** 10/03/2025
-
-**Equipo:** G11
-
-**Entregable:** Sprint 1
 
 ---
  
- ## **Índice**
- 1. [Introducción](#introducción)
- 2. [Tabla de Versiones](#tabla-de-versiones)  
- 3. [Compromisos](#compromisos)  
- 4. [Penalizaciones y Strikes](#penalizaciones-y-strikes)  
- 5. [Motivos para Recibir Strikes](#motivos-para-recibir-strikes)  
- 6. [Recompensas](#recompensas)  
- 7. [Firmas de los Alumnos](#firmas-de-los-alumnos)  
- 
+## 📌 **Índice**
+ 1. 📖 [**Introducción**](#introducción)  
+ 2. 📅 [**Tabla de Versiones**](#tabla-de-versiones)  
+ 3. 🤝 [**Compromisos**](#compromisos)  
+ 4. ⚠️ [**Penalizaciones y Strikes**](#penalizaciones-y-strikes)  
+ 5. 🚫 [**Motivos para Recibir Strikes**](#motivos-para-recibir-strikes)  
+ 6. 🏆 [**Recompensas**](#recompensas)  
+ 7. ✍️ [**Firmas de los Alumnos**](#firmas-de-los-alumnos)  
+
  ---
  
  ## **Tabla de Versiones**
@@ -46,7 +51,6 @@
  | 1.0     | 02/02/2025  | Versión inicial del acuerdo        | Luis Mellado Díaz |
  | 2.0     | 11/03/2025  | Versión Sprint1. Se añadió portada y el concepto de hall of shame/fame       | Luis Mellado Díaz |
 
- 
  ---
  
  ## **Introducción**

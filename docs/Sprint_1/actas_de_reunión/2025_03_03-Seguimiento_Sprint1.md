@@ -1,27 +1,20 @@
-# PAWTEL  
-**Buscador y Comparador de Hoteles para Mascotas**
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+**🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
-![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
+<p align="center">
+  <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
+</p>
+
+🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
+
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
 
 ---
 
-## Acta de Reunión - Seguimiento Sprint 1  
+<br><br>
 
-**Equipo:**  
-- **Andrés Martínez Reviriego**  
-- **Claudio Cortés Carrasco**  
-- **Daniel Flores De Francisco**  
-- **David González Martínez**  
-- **Fernando Castelló Sánchez**  
-- **Francisco Miguel Jiménez Morales**  
-- **Javier García Sebastián**  
-- **Javier Ruiz Garrido**  
-- **Jorge Gómez de Tovar**  
-- **Luis Mellado Díaz**  
-- **Manuel Castillejo Vela**  
-- **Rafael Castillo Cebolla**  
-- **Sergio Trenado González**  
-- **Yesica Garate Fuentes**  
+# 📑 **Acta de Reunión - Seguimiento Sprint 1** 🚀
 
 **Fecha:** 03/03/2025  
 **Hora:** 17:00  
