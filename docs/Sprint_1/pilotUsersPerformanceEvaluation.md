@@ -117,7 +117,7 @@ Ha sido el único en dar un feedback profundo y estar atento a los distintos avi
 - **Compromiso general del usuario piloto:** (Bajo / Medio / Alto) -> Medio
 - **Impacto del feedback en la mejora de la aplicación:** (Mínimo / Moderado / Significativo) -> Moderado
 - **¿Se recomendaría a este usuario para futuras pruebas?** (Sí/No, justificar) -> Si
-- **Nota del Evaluador** 7.5
+- **Nota del Evaluador** 8
 
 ## 4. Observaciones Adicionales
 

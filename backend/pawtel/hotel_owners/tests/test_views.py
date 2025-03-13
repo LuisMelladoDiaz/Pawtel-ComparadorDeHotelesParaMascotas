@@ -18,18 +18,10 @@ class HotelOwnerViewSetTest(TestCase):
             password="123456",
             is_active=True,
         )
+        self.authenticated_hotel_owner = HotelOwner.objects.create(
+            user_id=self.authenticated_user.id
+        )
         self.client.force_authenticate(user=self.authenticated_user)
-
-        self.active_app_user = AppUser.objects.create(
-            username="active_owner",
-            email="active_owner@example.com",
-            phone="+34123456789",
-            password="123456",
-            is_active=True,
-        )
-        self.active_hotel_owner = HotelOwner.objects.create(
-            user_id=self.active_app_user.id
-        )
 
         self.inactive_app_user = AppUser.objects.create(
             username="inactive_owner",
@@ -43,18 +35,21 @@ class HotelOwnerViewSetTest(TestCase):
         )
 
         self.hotel1 = Hotel.objects.create(
-            name="Hotel 1", hotel_owner=self.active_hotel_owner
+            name="Hotel 1", hotel_owner=self.authenticated_hotel_owner
         )
         self.hotel2 = Hotel.objects.create(
-            name="Hotel 2", hotel_owner=self.active_hotel_owner
+            name="Hotel 2", hotel_owner=self.authenticated_hotel_owner
         )
 
     def test_get_hotel_owner(self):
-        url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
-            response.data["user"]["username"], self.active_hotel_owner.user.username
+            response.data["user"]["username"],
+            self.authenticated_hotel_owner.user.username,
         )
 
     def test_list_all_hotel_owners(self):
@@ -66,7 +61,7 @@ class HotelOwnerViewSetTest(TestCase):
     def test_get_all_hotels_of_hotel_owner(self):
         url = reverse(
             "hotel-owner-get_all_hotels_of_hotel_owner",
-            kwargs={"pk": self.active_hotel_owner.id},
+            kwargs={"pk": self.authenticated_hotel_owner.id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -83,12 +78,12 @@ class HotelOwnerViewSetTest(TestCase):
     def test_delete_all_hotels_of_hotel_owner(self):
         url = reverse(
             "hotel-owner-delete_all_hotels_of_hotel_owner",
-            kwargs={"pk": self.active_hotel_owner.id},
+            kwargs={"pk": self.authenticated_hotel_owner.id},
         )
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(
-            Hotel.objects.filter(hotel_owner=self.active_hotel_owner).exists()
+            Hotel.objects.filter(hotel_owner=self.authenticated_hotel_owner).exists()
         )
 
     def test_delete_all_hotels_of_inactive_hotel_owner(self):
@@ -100,7 +95,9 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_update_hotel_owner(self):
-        url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
         data = {
             "username": "usernameUpdated",
             "email": "updated@example.com",
@@ -109,14 +106,18 @@ class HotelOwnerViewSetTest(TestCase):
         }
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.active_hotel_owner.refresh_from_db()
-        self.assertEqual(self.active_hotel_owner.user.email, data["email"])
+        self.authenticated_hotel_owner.refresh_from_db()
+        self.assertEqual(self.authenticated_hotel_owner.user.email, data["email"])
         self.assertTrue(
-            check_password(data["password"], self.active_hotel_owner.user.password)
+            check_password(
+                data["password"], self.authenticated_hotel_owner.user.password
+            )
         )
 
     def test_update_hotel_owner_same_data(self):
-        url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
         data = {
             "username": "active_owner_2",
             "email": "active_owner@example.com",
@@ -125,8 +126,10 @@ class HotelOwnerViewSetTest(TestCase):
         }
         response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.active_hotel_owner.refresh_from_db()
-        self.assertEqual(self.active_hotel_owner.user.email, "active_owner@example.com")
+        self.authenticated_hotel_owner.refresh_from_db()
+        self.assertEqual(
+            self.authenticated_hotel_owner.user.email, "active_owner@example.com"
+        )
 
     def test_update_hotel_owner_inactive(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.inactive_hotel_owner.id})
@@ -140,12 +143,14 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_partial_update_hotel_owner(self):
-        url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
         data = {"phone": "+34223344554"}
         response = self.client.patch(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.active_hotel_owner.refresh_from_db()
-        self.assertEqual(self.active_hotel_owner.user.phone, "+34223344554")
+        self.authenticated_hotel_owner.refresh_from_db()
+        self.assertEqual(self.authenticated_hotel_owner.user.phone, "+34223344554")
 
     def test_partial_update_hotel_owner_inactive(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.inactive_hotel_owner.id})
@@ -154,11 +159,13 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_delete_hotel_owner(self):
-        url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(
-            HotelOwner.objects.filter(id=self.active_hotel_owner.id).exists()
+            HotelOwner.objects.filter(id=self.authenticated_hotel_owner.id).exists()
         )
 
     def test_delete_hotel_owner_inactive(self):

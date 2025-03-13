@@ -19,6 +19,9 @@ Rafael Castillo Cebolla
 Sergio Trenado González  
 Yesica Garate Fuentes 
 
+**Fecha:** 10/03/2025
+
+**Equipo:** G11
  
 **Entregable:** Sprint 1
 

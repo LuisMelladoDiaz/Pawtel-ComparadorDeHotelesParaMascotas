@@ -5,6 +5,7 @@ from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.serializers import HotelSerializer
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
 
@@ -29,11 +30,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        # return Response({"message": "This operation is forbidden."}, status=status.HTTP_403_FORBIDDEN)
-
-        # Just for testing for the moment
-        output_serializer_data = HotelOwnerService.general_create_hotel_owner(request)
-        return Response(output_serializer_data, status=status.HTTP_201_CREATED)
+        raise PermissionDenied("This operation is forbidden.")
 
     def update(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
@@ -78,22 +75,15 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         HotelOwnerService.delete_all_hotels_of_hotel_owner(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    # hotel_owners
     @action(
         detail=False,
         methods=["get"],
-        url_path="hotel_owners_me",
+        url_path="hotel-owners-me",
         url_name="retrieve_current_hotel_owner",
     )
     def retrieve_current_hotel_owner(self, request):
-        user = request.user
-        if not user or not user.is_authenticated:
-            return Response(
-                {"message": "User is not authenticated: " + str(user)},
-                status=status.HTTP_401_UNAUTHORIZED,
-            )
-        appuser = HotelOwner.objects.get(user=user.id)
-
-        # serialize
-        serializer = HotelOwnerService.serialize_output_hotel_owner(appuser)
-        return Response(serializer, status=status.HTTP_200_OK)
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
+            hotel_owner
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)

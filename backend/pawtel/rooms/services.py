@@ -1,8 +1,9 @@
 from django.forms import ValidationError
+from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.room_types.services import RoomTypeService
 from pawtel.rooms.models import Room
 from pawtel.rooms.serializers import RoomSerializer
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class RoomService:
@@ -12,9 +13,13 @@ class RoomService:
     @staticmethod
     def authorize_action_room(request, pk):
         room = RoomService.retrieve_room(pk)
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
         if (not room) or (room.is_archived):
             raise NotFound("Room does not exist.")
+
+        if room.room_type.hotel.hotel_owner.id != hotel_owner.id:
+            raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def serialize_output_room(room, many=False):

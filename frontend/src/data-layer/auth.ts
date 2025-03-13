@@ -71,7 +71,7 @@ export const useLogoutMutation = () => {
       router.push("/")
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user", "isLoggedIn"] }); // Refresh user state
+      queryClient.invalidateQueries({ queryKey: ["isLoggedIn", "user"] }); // Refresh user state
     },
   });
 };

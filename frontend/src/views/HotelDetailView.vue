@@ -7,7 +7,9 @@ import Footer from '../components/Footer.vue';
 import HotelDetailCard from '../components/HotelDetailCard.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { useGetHotelById } from '@/data-layer/hooks/hotels';
-
+import foto1 from '../assets/foto1.jpg';
+import foto2 from '../assets/foto2.jpg';
+import hotelpic from '../assets/hotel.jpg';
 const route = useRoute();
 const hotelId = computed(() => Number(route.params.id));
 
@@ -15,7 +17,7 @@ const { data: apiHotel, isLoading, error } = useGetHotelById(hotelId);
 
 const hotel = computed(() => ({
   id: apiHotel.value?.id || null,
-  image: apiHotel.value?.image || '/src/assets/hotel.jpg',
+  image: apiHotel.value?.image || hotelpic,
   name: apiHotel.value?.name || 'Nombre',
   address: apiHotel.value?.address || 'Dirección',
   city: apiHotel.value?.city || 'Ciudad',
@@ -23,10 +25,10 @@ const hotel = computed(() => ({
   rating: apiHotel.value?.rating || '8.5',
   price: apiHotel.value?.price || '50€',
   imageGallery: apiHotel.value?.imageGallery || [
-    '/src/assets/foto1.jpg',
-    '/src/assets/foto2.jpg',
-    '/src/assets/foto1.jpg',
-    '/src/assets/foto2.jpg'
+    foto1,
+    foto2,
+    foto1,
+    foto2,
   ],
   description: apiHotel.value?.description || 'Descripción predeterminada del hotel.',
   reviews: apiHotel.value?.reviews || [

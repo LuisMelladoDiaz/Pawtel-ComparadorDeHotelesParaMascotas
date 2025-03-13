@@ -4,7 +4,7 @@ from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class HotelService:
@@ -14,9 +14,13 @@ class HotelService:
     @staticmethod
     def authorize_action_hotel(request, pk):
         hotel = HotelService.retrieve_hotel(pk)
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
         if (not hotel) or (hotel.is_archived):
             raise NotFound("Hotel does not exist.")
+
+        if hotel.hotel_owner.id != hotel_owner.id:
+            raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def serialize_output_hotel(hotel, many=False):
