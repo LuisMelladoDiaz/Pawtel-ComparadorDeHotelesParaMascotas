@@ -7,7 +7,7 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.com](https://www.pawtel.com)   
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
 📩 **Contáctanos:** [📧 contacto@pawtel.com](mailto:contacto@pawtel.com)  
 
 ---
@@ -22,8 +22,7 @@
 
 |  |   | 
 |--------------------------|---|
-| `Luis Mellado Díaz` | `PM del Proyecto`🏆 |
-| `Daniel Flores De Francisco` | `PM del Proyecto`🏆 |
+| `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
 | Javier García Sebastián | Javier Ruiz Garrido |
 | Jorge Gómez de Tovar | Andrés Martínez Reviriego |
