@@ -8,12 +8,16 @@ import { Notyf } from 'notyf';
 
 const notyf = new Notyf();
 
-
 const username = ref('');
 const password = ref('');
+const showPassword = ref(false);
 const errorMessage = ref('');
 const router = useRouter();
 const loginMutation = useLoginMutation();
+
+const togglePasswordVisibility = () => {
+    showPassword.value = !showPassword.value;
+};
 
 const login = async () => {
     if (!username.value || !password.value) {
@@ -62,11 +66,14 @@ const logout = async () => {
                                 required />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-4 relative">
                             <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input type="password" id="password" v-model="password"
+                            <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                            <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
+                                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                            </button>
                         </div>
 
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
@@ -100,11 +107,14 @@ const logout = async () => {
                                 required />
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-4 relative">
                             <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input type="password" id="password" v-model="password"
+                            <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                            <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
+                                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                            </button>
                         </div>
 
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
