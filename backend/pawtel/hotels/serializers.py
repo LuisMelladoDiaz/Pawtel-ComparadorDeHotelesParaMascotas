@@ -1,12 +1,15 @@
 from pawtel.base_serializer import BaseSerializer
 from pawtel.hotels.models import Hotel
-
+from pawtel.room_types.models import RoomType
+from django.db.models import Min
+from rest_framework import serializers
 
 class HotelSerializer(BaseSerializer):
-
     fields_required_for_post = ["name", "address", "city", "description", "hotel_owner"]
     fields_editable = ["name", "address", "city", "description"]
     fields_not_readable = []
+
+    cheapest_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Hotel
@@ -18,6 +21,7 @@ class HotelSerializer(BaseSerializer):
             "city",
             "description",
             "hotel_owner",
+            "cheapest_price",
         ]
         extra_kwargs = {
             "id": {"read_only": True},
@@ -28,3 +32,7 @@ class HotelSerializer(BaseSerializer):
             "description": {"max_length": 400, "allow_null": False},
             "hotel_owner": {"allow_null": False},
         }
+
+    def get_cheapest_price(self, obj):
+        cheapest = RoomType.objects.filter(hotel=obj).aggregate(min_price=Min("price_per_night"))["min_price"]
+        return cheapest if cheapest is not None else None

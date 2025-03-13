@@ -48,7 +48,7 @@
         <div class="right-column flex flex-col items-end justify-end gap-2 p-[5px] min-w-50 font-titulos">
             <div class="price-disponibilidad flex flex-col items-end justify-between gap-3">
               <span class="price text-[1.95rem] text-[#C36C6C] font-bold">
-                <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}
+                <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}€
               </span>
               <RouterLink :to="`/hotel/${id}`">
                 <Button class="!m-0" type="add">Ver disponibilidad</Button>
@@ -82,7 +82,7 @@
         </div>
 
         <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black">
-          <p>
+          <p class="flex flex-col text-justify max-h-[75px] overflow-y-auto">
             {{ description }}
           </p>
         </ul>
@@ -92,7 +92,7 @@
 
         <div class="flex flex-col items-center justify-between">
           <div class="price text-[1.75rem] self-end text-[#C36C6C] font-bold">
-            <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}
+            <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}€
           </div>
           <div class="flex items-center !w-full">
             <RouterLink :to="`/hotel/${id}`" class="!w-full !m-0 text-[15px]">
