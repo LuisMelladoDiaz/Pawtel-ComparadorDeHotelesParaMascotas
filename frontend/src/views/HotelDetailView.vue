@@ -77,12 +77,10 @@ const hotel = computed(() => ({
             :image="hotel.image"
             :name="hotel.name"
             :city="hotel.city"
+            :description="hotel.description"
             :address="hotel.address"
-            :details="hotel.details"
-            :rating="hotel.rating"
             :price="hotel.price"
             :imageGallery="hotel.imageGallery"
-            :description="hotel.description"
           />
         </div>
       </div>
@@ -117,11 +115,9 @@ const hotel = computed(() => ({
           :name="hotel.name"
           :city="hotel.city"
           :address="hotel.address"
-          :details="hotel.details"
-          :rating="hotel.rating"
+          :description="hotel.description"
           :price="hotel.price"
           :imageGallery="hotel.imageGallery"
-          :description="hotel.description"
         />
       </div>
     </template>

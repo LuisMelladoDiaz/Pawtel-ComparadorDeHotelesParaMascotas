@@ -82,7 +82,6 @@
         </div>
 
         <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black">
-  
           <p>
             {{ description }}
           </p>

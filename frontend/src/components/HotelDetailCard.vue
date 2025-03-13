@@ -8,7 +8,6 @@ defineProps({
   name: { type: String, required: true },
   address: { type: String, required: true },
   city: { type: String, required: true },
-  rating: { type: Number, required: true },
   price: { type: String, required: true },
   imageGallery: { type: Array, required: true },
   description: { type: String, required: true }
@@ -45,9 +44,6 @@ defineProps({
           <p class="text-sm text-justify text-gray-700 mt-2 max-h-[110px] p-1 overflow-y-auto">
             {{ description }}
           </p>
-          <ul class="text-sm text-gray-700 mt-2 text-left">
-            <li v-for="(detail, index) in details" :key="index">✔ {{ detail }}</li>
-          </ul>
         </div>
       </div>
     </div>

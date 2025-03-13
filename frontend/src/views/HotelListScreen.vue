@@ -177,7 +177,6 @@ const hotels = computed(() =>
                             :name="hotel.name"
                             :city="hotel.city"
                             :description="hotel.description"
-                            :rating="hotel.rating"
                             :price="hotel.price"
                             />
                     </div>
@@ -299,7 +298,6 @@ const hotels = computed(() =>
                             :name="hotel.name"
                             :city="hotel.city"
                             :description="hotel.description"
-                            :rating="hotel.rating"
                             :price="hotel.price"
                             />
                     </div>
