@@ -14,14 +14,27 @@
 
       <!-- Menú en pantallas grandes -->
       <div class="nav-links flex gap-6 no-underline text-white font-bold text-base hidden md:flex">
+        <router-link 
+            to="/hotel-owner-panel" 
+            class="hover:underline"
+            v-if="isLoggedIn"
+          >
+            Mis Hoteles
+        </router-link>
         <router-link to="/sobre-nosotros" class="hover:underline">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline">Contacto</router-link>
       </div>
 
       <!-- Botones de autenticación y perfil en pantallas grandes -->
       <div class="auth-buttons flex items-center gap-5 text-white hidden md:flex">
-        <router-link to="/login" class="auth-button login text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
-        <router-link to="/register" class="auth-button sign-in text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
+        <template v-if="!isLoggedIn">
+          <router-link to="/login" class="auth-button login text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
+          <router-link to="/register" class="auth-button sign-in text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
+        </template>
+
+        <template v-else>
+          <button @click="logout" class="auth-button text-terracota bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Cerrar Sesión</button>
+        </template>
         <!-- Icono de perfil alineado -->
         <router-link to="/user-profile" class="text-white hover:text-gray-900 flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
@@ -34,14 +47,28 @@
     <!-- Menú desplegable en móvil -->
     <div v-if="isMenuOpen" class="mobile-menu md:hidden bg-terracota py-4 border-t-2 border-white shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-white font-bold text-base">
+        <router-link 
+            to="/hotel-owner-panel" 
+            class="hover:underline p-2"
+            v-if="isLoggedIn"
+          >
+            Mis Hoteles
+        </router-link>
         <router-link to="/sobre-nosotros" class="hover:underline p-2">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline p-2">Contacto</router-link>
       </div>
 
       <!-- Botones de autenticación en el menú móvil -->
       <div class="auth-buttons flex flex-col gap-3 text-terracota mt-4">
-        <router-link to="/login" class="auth-button login bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
-        <router-link to="/register" class="auth-button sign-in bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
+        <template v-if="!isLoggedIn">
+          <router-link to="/login" class="auth-button login bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
+          <router-link to="/register" class="auth-button sign-in bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
+        </template>
+        <template v-else>
+          <button @click="logout" class="auth-button bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Cerrar Sesión</button>
+        </template>
+
+
         <!-- Icono de perfil -->
         <router-link to="/user-profile" class="text-white hover:text-gray-900 flex items-center justify-center mt-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
@@ -53,27 +80,25 @@
   </nav>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from 'vue';
 import SearchBar from './SearchBar.vue';
+import { useIsLoggedIn, useLogoutMutation } from '@/data-layer/auth';
 
-export default {
-  components: {
-    SearchBar,
-  },
-  setup() {
-    const isMenuOpen = ref(false);
+const isMenuOpen = ref(false);
 
-    // Función para alternar el estado del menú
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-    };
-
-    return { isMenuOpen, toggleMenu };
-  },
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
 };
-</script>
 
+const {data: isLoggedIn} = useIsLoggedIn();
+const {mutate: mutateLogout} = useLogoutMutation();
+
+const logout = () => {
+  mutateLogout();
+};
+
+</script>
 
 <style scoped>
   @media (max-width: 900px) {

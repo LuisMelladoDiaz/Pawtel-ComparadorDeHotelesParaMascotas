@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 from django.urls import reverse
 from pawtel.app_users.models import AppUser
@@ -110,7 +111,9 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.active_hotel_owner.refresh_from_db()
         self.assertEqual(self.active_hotel_owner.user.email, data["email"])
-        self.assertEqual(self.active_hotel_owner.user.password, data["password"])
+        self.assertTrue(
+            check_password(data["password"], self.active_hotel_owner.user.password)
+        )
 
     def test_update_hotel_owner_same_data(self):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.active_hotel_owner.id})

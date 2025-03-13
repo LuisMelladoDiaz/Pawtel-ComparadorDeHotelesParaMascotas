@@ -8,7 +8,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-import { refreshAxiosInterceptor } from './axios-setup'
+import * as a from './axios-setup';
 
 const notyf = new Notyf({
     duration: 3000,
@@ -23,5 +23,3 @@ createApp(App).use(router).use(VueQueryPlugin).mount('#app')
 library.add(faLocationDot);
 
 //App.component('font-awesome-icon', FontAwesomeIcon); // esto falla, hay que verlo
-
-refreshAxiosInterceptor()

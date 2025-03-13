@@ -4,18 +4,16 @@ import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
-import { useCreateHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
+import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
+
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
+const hotelOwnerId = computed(() => hotelOwner?.value?.id);
 
-const hotelOwnerId = computed(() =>{
-
-  return hotelOwner?.value?.id;
-});
 // Obtener los hoteles del dueño desde el backend
 const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId, true);
 const createHotelMutation = useCreateHotel();
 const updateHotelMutation = useUpdateHotel();
-const deleteHotelMutation = useDeleteHotelOwner();
+const deleteHotelMutation = useDeleteHotel();
 
 const modalOpen = ref(false);
 const isEditing = ref(false);
@@ -25,7 +23,6 @@ const currentPage = ref(1);
 const itemsPerPage = 6;
 
 const totalPages = computed(() => Math.ceil((hotels.value?.length || 0) / itemsPerPage));
-
 const paginatedHotels = computed(() => {
   if (!hotels.value) return [];
   const start = (currentPage.value - 1) * itemsPerPage;
@@ -34,8 +31,15 @@ const paginatedHotels = computed(() => {
 
 // Abrir modal para añadir/editar
 const openModal = (hotel = null) => {
-  hotelData.value = hotel ? { ...hotel } : { name: '', address: '', city: '', description: '' };
-  isEditing.value = false;
+  if (hotel) {
+    // Modo de edición: cargar los datos del hotel seleccionado
+    hotelData.value = { ...hotel };
+    isEditing.value = true;
+  } else {
+    // Modo de creación: reiniciar los datos del hotel
+    hotelData.value = { id: null, name: '', address: '', city: '', description: '' };
+    isEditing.value = false;
+  }
   modalOpen.value = true;
 };
 
@@ -43,7 +47,17 @@ const openModal = (hotel = null) => {
 const saveHotel = async () => {
   try {
     if (isEditing.value) {
-      await updateHotelMutation.mutateAsync({ hotelOwnerId: hotelOwnerId.value, ownerData: hotelData.value });
+      await updateHotelMutation.mutateAsync({
+          hotelId: hotelData.value.id,
+          hotelData: {
+            name: hotelData.value.name,
+            address: hotelData.value.address,
+            city: hotelData.value.city,
+            description: hotelData.value.description,
+          },
+        });
+        window.location.reload();
+
     } else {
       await createHotelMutation.mutateAsync(hotelData.value);
     }
@@ -58,6 +72,7 @@ const deleteHotel = async (id) => {
   if (confirm('¿Estás seguro de eliminar este hotel?')) {
     try {
       await deleteHotelMutation.mutateAsync(id);
+      window.location.reload();
     } catch (error) {
       console.error('Error al eliminar hotel', error);
     }
@@ -78,7 +93,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
       <!-- Cabecera -->
       <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
         <span class="font-semibold">Gestión de Hoteles</span>
-        <button @click="openModal" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
+        <button @click="openModal()" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
           <i class="fas fa-plus mr-2"></i> Añadir Nuevo
         </button>
       </div>
@@ -150,7 +165,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         <input v-model="hotelData.city" placeholder="Ciudad" class="w-full p-2 mb-2 border rounded" />
         <textarea v-model="hotelData.description" placeholder="Descripción" class="w-full p-2 mb-2 border rounded"></textarea>
         <div class="flex justify-end gap-2">
-          <Button type="accept" @click="saveHotel">Guardar</Button>
+          <Button type="accept" @click="saveHotel">{{ isEditing ? 'Actualizar' : 'Crear' }}</Button>
           <Button type="reject" @click="modalOpen = false">Cancelar</Button>
         </div>
       </div>
