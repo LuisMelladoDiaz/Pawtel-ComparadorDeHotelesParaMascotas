@@ -2,7 +2,7 @@
   <nav class="navbar bg-white py-4 h-[70px] px-5">
     <div class="navbar-content max-w-7xl px-5 mx-auto flex justify-between items-center h-full">
       <!-- Ícono de menú para móviles -->
-      <div class="menu-icon md:hidden flex flex-col items-end" @click="toggleMenu">
+      <div class="menu-icon lg:hidden flex flex-col items-end" @click="toggleMenu">
         <i class="fas fa-bars text-terracota text-3xl"></i>
       </div>
 
@@ -14,7 +14,7 @@
       <SearchBar class="search border-terracota" />
 
       <!-- Menú en pantallas grandes -->
-      <div class="nav-links flex gap-6 no-underline text-terracota font-bold text-base hidden md:flex">
+      <div class="nav-links flex gap-6 no-underline text-terracota font-bold text-base hidden lg:flex">
         <router-link 
           to="/hotel-owner-panel" 
           class="hover:underline"
@@ -27,7 +27,7 @@
       </div>
 
       <!-- Botones de autenticación en pantallas grandes -->
-      <div class="auth-buttons flex items-center gap-5 hidden md:flex">
+      <div class="auth-buttons flex items-center gap-5 hidden lg:flex">
         <template v-if="!isLoggedIn">
           <router-link to="/login" class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Iniciar Sesión</router-link>
           <router-link to="/register" class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Crear Cuenta</router-link>
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Menú desplegable en móvil -->
-    <div v-if="isMenuOpen" class="mobile-menu md:hidden bg-white py-4 border-t-2 border-terracota shadow-lg rounded-b-lg">
+    <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-white py-4 border-t-2 border-terracota shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-terracota font-bold text-base">
         <router-link 
           to="/hotel-owner-panel" 
@@ -102,7 +102,7 @@ const logout = () => {
 </script>
 
 <style scoped>
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     .navbar-content {
       display: flex;
       justify-content: flex-start;

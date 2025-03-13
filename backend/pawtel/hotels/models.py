@@ -14,7 +14,7 @@ class Hotel(models.Model):
 
     city = models.CharField(max_length=50, blank=False, null=False)
 
-    description = models.CharField(max_length=300, blank=False, null=False)
+    description = models.CharField(max_length=400, blank=False, null=False)
 
     # Relations --------------------------------------------------------------
 
