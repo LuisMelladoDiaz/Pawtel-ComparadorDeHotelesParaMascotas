@@ -5,7 +5,8 @@
     name: { type: String, required: true },
     city: { type: String, required: true },
     description: { type: Array, required: true },
-    price: { type: String, required: true },
+    price_min: { type: String, required: true },
+    price_max: { type: String, required: true },
   });
   import Button from '../components/Button.vue';
 </script>
@@ -47,8 +48,10 @@
 
         <div class="right-column flex flex-col items-end justify-end gap-2 p-[5px] min-w-50 font-titulos">
             <div class="price-disponibilidad flex flex-col items-end justify-between gap-3">
-              <span class="price text-[1.95rem] text-[#C36C6C] font-bold">
-                <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}€
+              
+              <span class="price text-[1.55rem] text-[#C36C6C] font-bold flex flex-col">
+                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a> 
+                <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
               </span>
               <RouterLink :to="`/hotel/${id}`">
                 <Button class="!m-0" type="add">Ver disponibilidad</Button>
@@ -90,10 +93,11 @@
       <div class="right-column flex flex-col gap-2 p-[5px] w-full font-titulos">
 
         <div class="flex flex-col items-center justify-between">
-          <div class="price text-[1.75rem] self-end text-[#C36C6C] font-bold">
-            <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}€
-          </div>
-          <div class="flex items-center !w-full">
+          <span class="price text-[1.35rem] text-[#C36C6C] font-bold flex flex-col self-end">
+                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a> 
+                <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
+              </span>
+          <div class="flex items-center !w-full mt-2">
             <RouterLink :to="`/hotel/${id}`" class="!w-full !m-0 text-[15px]">
               <Button type="add" class="!w-full !m-0 text-[15px]">Ver disponibilidad</Button>
             </RouterLink>
