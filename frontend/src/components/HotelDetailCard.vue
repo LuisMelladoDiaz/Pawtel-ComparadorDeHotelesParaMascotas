@@ -39,10 +39,12 @@ defineProps({
       <div class="flex-1 flex flex-col items-center text-center">
         <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
         <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col">
-          <div class="price text-[1.75rem] self-end text-[#C36C6C] font-bold">
+          <div class="price px-1 text-[1.75rem] self-end text-[#C36C6C] font-bold">
             <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}
           </div>
-          <p class="text-sm text-justify text-gray-700 mt-2">{{ description }}</p>
+          <p class="text-sm text-justify text-gray-700 mt-2 max-h-[110px] p-1 overflow-y-auto">
+            {{ description }}
+          </p>
           <ul class="text-sm text-gray-700 mt-2 text-left">
             <li v-for="(detail, index) in details" :key="index">✔ {{ detail }}</li>
           </ul>
