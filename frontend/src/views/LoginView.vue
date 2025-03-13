@@ -3,7 +3,11 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
-import { useLoginMutation } from '@/data-layer/auth';
+import { useLoginMutation, useLogoutMutation } from '@/data-layer/auth';
+import { Notyf } from 'notyf';
+
+const notyf = new Notyf();
+
 
 const username = ref('');
 const password = ref('');
@@ -13,7 +17,7 @@ const loginMutation = useLoginMutation();
 
 const login = async () => {
     if (!username.value || !password.value) {
-        alert('Por favor, completa todos los campos');
+        notyf.error('Por favor, completa todos los campos');
         return;
     }
     try {
@@ -22,17 +26,26 @@ const login = async () => {
             password: password.value
         });
 
-        alert('Inicio de sesión exitoso');
+        notyf.success('Inicio de sesión exitoso');
         router.push('/');
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
-        alert('Usuario o contraseña incorrectos');
+        notyf.error('Usuario o contraseña incorrectos');
     }
 };
 
+const logout = async () => {
+    try {
+        await logoutMutation.mutateAsync();
+        notyf.success('Sesión cerrada correctamente');
+        router.push('/login');
+    } catch (error) {
+        console.error('Error al cerrar sesión:', error);
+        notyf.error('Error al cerrar sesión');
+    }
+};
 
 </script>
-
 <template>
     <div class="flex flex-col min-h-screen">
         <NavbarTerracota />
