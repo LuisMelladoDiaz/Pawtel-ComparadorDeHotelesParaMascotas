@@ -160,6 +160,6 @@ Todo esta preparado y programado para futuros sprints. Se evaluarán los casos d
     - Contraseña: pawtel123
 - La URL de nuestro repositorio de GitHub es: [github.com/Pawtel](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas)
 - La URL a nuestro sistema de seguimiento de tiempo es: [Clockify.me/Pawtel](https://app.clockify.me/projects/67bb0478254a3a5bd06e2d53/), usando la cuenta pawteles@gmail.com con la contraseña Grupo11@
-- La URL al vídeo de demostración es: 
+- La URL al vídeo de demostración es: https://drive.google.com/file/d/1pb2-VGNGUgia30zzA9S3uhaGpwnS7e3s/view?usp=sharing
 
 
