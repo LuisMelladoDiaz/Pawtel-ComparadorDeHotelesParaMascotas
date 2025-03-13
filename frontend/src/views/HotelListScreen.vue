@@ -53,10 +53,8 @@ const toggleFilters = () => {
 
 const sortByWithDir = computed(() => sortBy.value ? `${sortBy.value}` : "city");
 
-// filters dict (computed)
 const { data: apiHotels, isLoading, isError } = useGetAllHotels({
     sort_by: sortByWithDir,
-    city: selectedCity,
     max_price_per_night: maxPrice,
 });
 
@@ -154,7 +152,7 @@ const hotels = computed(() =>
                                 <option value="" disabled selected>Ordenar por...</option>
                                 <option value="precio">Precio</option>
                                 <option value="valoracion">Valoración</option>
-                                <option value="nombre">Nombre</option>
+                                <option value="name">Nombre</option>
                             </select>
                             <select v-model="direction" class=" w-fit text-white bg-terracota font-bold">
                                 <option value="asc">ASC</option>

@@ -13,7 +13,7 @@ import Button from '../components/Button.vue';
     <section class="banner-section relative mx-auto py-4 max-w-7xl px-5">
       <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
         <div class="lg:w-1/2 text-left p-6">
-          <h1 class="text-4xl font-bold mb-4 font-titleHome" style="color: var(--color-azul-suave); font-family: var(--font-titleHome);">Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu 
+          <h1 class="text-4xl font-bold mb-4 font-titleHome" style="color: var(--color-azul-suave); font-family: var(--font-titleHome);">Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu
             <span class="italic" style="color: var(--color-terracota);">mascota.</span>
           </h1>
           <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
@@ -51,8 +51,7 @@ import Button from '../components/Button.vue';
         </div>
       </div>
     </section>
-    
-    <!-- Sección Descarga la App -->
+
     <!-- Sección Descarga la App -->
 <section class="bg-[#C36C6C] relative mx-auto py-2 max-w-7xl px-5 rounded-lg overflow-hidden">
   <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
@@ -86,19 +85,19 @@ import Button from '../components/Button.vue';
     <section class="relative mx-auto py-12 max-w-7xl px-5">
       <h2 class="text-3xl font-bold py-7 mb-8 text-center text-[#6C8CC3] font-playfair">Beneficios de Pawtel</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center"> 
+        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center">
           <h3 class="text-xl font-semibold mb-3 text-[#C36C6C]">Ubicación y precios comparados</h3>
-          <img src="../assets/comparator.png" alt="Ubicación" class="w-30 h-30 mb-3"> 
+          <img src="../assets/comparator.png" alt="Ubicación" class="w-30 h-30 mb-3">
           <p class="text-gray-700">Encuentra y compara alojamientos para tu mascota según ubicación, servicios y precio.</p>
         </div>
-        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center"> 
+        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center">
           <h3 class="text-xl font-semibold mb-3 text-[#C36C6C]">Reservas Seguras y Rápidas</h3>
-          <img src="../assets/reservation.png" alt="Ubicación" class="w-30 h-30 mb-3"> 
+          <img src="../assets/reservation.png" alt="Ubicación" class="w-30 h-30 mb-3">
           <p class="text-gray-700">Realiza reservas con facilidad y confianza, asegurando disponibilidad y rapidez en el proceso.</p>
         </div>
-        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center"> 
+        <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center">
           <h3 class="text-xl font-semibold mb-3 text-[#C36C6C]">Alertas de Promociones y Descuentos</h3>
-          <img src="../assets/alert.png" alt="Ubicación" class="w-30 h-30 mb-3"> 
+          <img src="../assets/alert.png" alt="Ubicación" class="w-30 h-30 mb-3">
           <p class="text-gray-700">Recibe notificaciones en tiempo real sobre las mejores ofertas y descuentos en alojamientos para mascotas.</p>
         </div>
       </div>
@@ -108,7 +107,7 @@ import Button from '../components/Button.vue';
     <section class="bg-[#F4EDEA] rounded-xl relative mx-auto py-4 max-w-7xl px-5">
       <Carrusel />
     </section>
-    
+
     <!-- Sección Mensaje final -->
     <section class="relative mx-auto py-25 max-w-7xl px-5 rounded-lg overflow-hidden items-center text-center">
       <div class="absolute inset-0 bg-cover bg-no-repeat" style="background-image: url('/images/cat.jpg'); opacity: 0.3; background-position: center 50%;"></div>
@@ -129,6 +128,3 @@ import Button from '../components/Button.vue';
     background: #f7f7f7;
   }
 </style>
-
-
-

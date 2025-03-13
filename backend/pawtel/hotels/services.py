@@ -142,7 +142,7 @@ class HotelService:
             if "sort_by" in filters:
                 assert isinstance(filters["sort_by"], str)
                 # assert valid
-                valid = ["price_per_night", "city"]
+                valid = ["price_per_night", "city", "name"]
                 assert filters["sort_by"] in valid
                 sort_field = filters["sort_by"]
                 if sort_field.startswith("-"):  # Permitir orden descendente
