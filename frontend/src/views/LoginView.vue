@@ -8,12 +8,12 @@ import { Notyf } from 'notyf';
 
 const notyf = new Notyf();
 
+
 const username = ref('');
 const password = ref('');
 const errorMessage = ref('');
 const router = useRouter();
 const loginMutation = useLoginMutation();
-const logoutMutation = useLogoutMutation();
 
 const login = async () => {
     if (!username.value || !password.value) {
@@ -44,6 +44,7 @@ const logout = async () => {
         notyf.error('Error al cerrar sesión');
     }
 };
+
 </script>
 <template>
     <div class="flex flex-col min-h-screen">
