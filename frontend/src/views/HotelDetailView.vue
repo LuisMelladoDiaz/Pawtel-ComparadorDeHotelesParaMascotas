@@ -7,9 +7,11 @@ import Footer from '../components/Footer.vue';
 import HotelDetailCard from '../components/HotelDetailCard.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import { useGetHotelById } from '@/data-layer/hooks/hotels';
-import foto1 from '../assets/foto1.jpg';
-import foto2 from '../assets/foto2.jpg';
-import hotelpic from '../assets/hotel.jpg';
+import detalles1 from '../assets/hoteles/detalles1.jpg';
+import detalles2 from '../assets/hoteles/detalles2.jpg';
+import detalles3 from '../assets/hoteles/detalles3.jpg';
+import detalles4 from '../assets/hoteles/detalles4.jpg';
+import hotelpic from '../assets/hoteles/hotel1.jpg';
 const route = useRoute();
 const hotelId = computed(() => Number(route.params.id));
 
@@ -24,10 +26,10 @@ const hotel = computed(() => ({
   price_max: apiHotel.value?.most_expensive_price || '0',
   price_min: apiHotel.value?.cheapest_price || '0',
   imageGallery: apiHotel.value?.imageGallery || [
-    foto1,
-    foto2,
-    foto1,
-    foto2,
+    detalles3,
+    detalles4,
+    detalles1,
+    detalles2,
   ],
   description: apiHotel.value?.description || 'Descripción predeterminada del hotel.',
   reviews: apiHotel.value?.reviews || [

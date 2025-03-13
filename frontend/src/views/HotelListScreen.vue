@@ -9,9 +9,14 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import AppliedFilter from '../components/AppliedFilter.vue';
 
 import {useGetAllHotels} from '@/data-layer/hooks/hotels';
-import foto1 from '../assets/foto1.jpg';
-import foto2 from '../assets/foto2.jpg';
-import hotelpic from '../assets/hotel.jpg';
+import hotel1 from '../assets/hoteles/hotel1.jpg';
+import hotel2 from '../assets/hoteles/hotel2.jpg';
+import hotel3 from '../assets/hoteles/hotel3.jpg';
+import hotel4 from '../assets/hoteles/hotel4.jpg';
+import hotel5 from '../assets/hoteles/hotel5.jpg';
+import hotel6 from '../assets/hoteles/hotel6.jpg';
+
+const defaultImages = [hotel1, hotel2, hotel3, hotel4, hotel5, hotel6];
 
 // Filters
 const cities = ref(["Barcelona", "Murcia", "Palma de Mallorca", "Sevilla"]);
@@ -94,19 +99,13 @@ const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAl
 const hotels = computed(() =>
   apiHotels.value?.map((hotel) => ({
     id: hotel.id,
-    image: hotel.image || hotelpic,
+    image: hotel.image || defaultImages[hotel.id % defaultImages.length],
     name: hotel.name || 'Nombre',
     address: hotel.address || 'Dirección',
     city: hotel.city || 'Ciudad',
     description: hotel.description || 'Descripción',
     price_max: hotel.most_expensive_price || '0',
     price_min: hotel.cheapest_price || '0',
-    imageGallery: hotel.imageGallery || [
-        foto1,
-        foto2,
-        foto1,
-        foto2,
-    ],
     reviews: hotel.reviews || [
       { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
     ]
