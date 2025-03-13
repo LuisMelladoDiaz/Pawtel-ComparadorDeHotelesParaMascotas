@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=100, unique=True)),
                 ("address", models.CharField(max_length=100)),
                 ("city", models.CharField(max_length=50)),
-                ("description", models.CharField(max_length=300)),
+                ("description", models.CharField(max_length=400)),
                 (
                     "hotel_owner",
                     models.ForeignKey(

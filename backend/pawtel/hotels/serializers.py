@@ -25,6 +25,6 @@ class HotelSerializer(BaseSerializer):
             "name": {"max_length": 100, "allow_null": False},
             "address": {"max_length": 100, "allow_null": False},
             "city": {"max_length": 50, "allow_null": False},
-            "description": {"max_length": 300, "allow_null": False},
+            "description": {"max_length": 400, "allow_null": False},
             "hotel_owner": {"allow_null": False},
         }
