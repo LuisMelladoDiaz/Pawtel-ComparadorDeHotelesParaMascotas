@@ -13,6 +13,10 @@ import foto1 from '../assets/foto1.jpg';
 import foto2 from '../assets/foto2.jpg';
 import hotelpic from '../assets/hotel.jpg';
 
+import { Notyf } from 'notyf';
+
+const notyf = new Notyf();
+
 // Filters
 const cities = ref(["Barcelona", "Murcia", "Palma de Mallorca", "Sevilla"]);
 const rooms = ref(["Suite", "Suite de lujo", "Habitación Estándar", "Habitación Económica",
@@ -47,10 +51,14 @@ const applyFilters = () => {
 
   // Cerrar filtros
   isFiltersOpen.value = false;
+
+  // Notificación
+  notyf.success('Filtros aplicados correctamente');
 };
 
 const removeFilter = (filter) => {
   appliedFilters.value = appliedFilters.value.filter(f => f !== filter);
+  notyf.success('Filtro eliminado');
 };
 
 // Menus
@@ -74,7 +82,12 @@ const sortByWithDir = computed(() => {
 });
 
 // Watch for changes in filters and re-fetch data
-watch([selectedCity, selectedRoom, minPrice, maxPrice, sortBy, direction], () => {
+watch([selectedCity, selectedRoom, sortBy, direction], () => {
+  refetchHotels();
+  notyf.success('Hoteles actualizados con los nuevos filtros');
+});
+
+watch([minPrice, maxPrice], () => {
   refetchHotels();
 });
 
