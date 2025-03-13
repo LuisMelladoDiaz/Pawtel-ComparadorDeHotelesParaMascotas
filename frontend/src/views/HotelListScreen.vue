@@ -9,6 +9,9 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import AppliedFilter from '../components/AppliedFilter.vue';
 
 import {useGetAllHotels} from '@/data-layer/hooks/hotels';
+import foto1 from '../assets/foto1.jpg';
+import foto2 from '../assets/foto2.jpg';
+import hotelpic from '../assets/hotel.jpg';
 
 // Filters
 const cities = ref(["Madrid", "Barcelona", "Sevilla", "Valencia", "Málaga", "Bilbao"]);
@@ -64,7 +67,7 @@ const { data: apiHotels, isLoading, isError } = useGetAllHotels({
 const hotels = computed(() =>
   apiHotels.value?.map((hotel) => ({
     id: hotel.id,
-    image: hotel.image || '/src/assets/hotel.jpg',
+    image: hotel.image || hotelpic,
     name: hotel.name || 'Nombre',
     address: hotel.address || 'Dirección',
     city: hotel.city || 'Ciudad',
@@ -72,10 +75,10 @@ const hotels = computed(() =>
     rating: hotel.rating || '8.5',
     price: hotel.price || '50€',
     imageGallery: hotel.imageGallery || [
-      '/src/assets/foto1.jpg',
-      '/src/assets/foto2.jpg',
-      '/src/assets/foto1.jpg',
-      '/src/assets/foto2.jpg'
+        foto1,
+        foto2,
+        foto1,
+        foto2,
     ],
     description: hotel.description || 'Descripción predeterminada del alojamiento.',
     reviews: hotel.reviews || [
