@@ -19,8 +19,8 @@ const services = ref(["Habitaciones individuales","Habitaciones compartidas", "Z
 
 const selectedCity = ref("");
 const selectedServices = ref([]);
-const minPrice = ref(20);
-const maxPrice = ref(200);
+const minPrice = ref(0);
+const maxPrice = ref(500);
 const sortBy = ref("");
 const direction = ref("");
 
@@ -62,7 +62,6 @@ const { data: apiHotels, isLoading, isError } = useGetAllHotels({
     city: selectedCity,
     max_price_per_night: maxPrice,
 });
-
 
 const hotels = computed(() =>
   apiHotels.value?.map((hotel) => ({
@@ -128,11 +127,11 @@ const hotels = computed(() =>
                     <div class="flex flex-col gap-2">
                         <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
                         <div class="flex items-center gap-2">
-                            <input type="range" :min="20" :max="maxPrice" v-model="minPrice" class="w-full custom-range">
+                            <input type="range" :min="0" :max="maxPrice" v-model="minPrice" class="w-full custom-range">
                             <span class="text-sm">{{ minPrice }}€</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <input type="range"  :min="minPrice" :max="200" v-model="maxPrice" class="w-full custom-range">
+                            <input type="range"  :min="minPrice" :max="500" v-model="maxPrice" class="w-full custom-range">
                             <span class="text-sm">{{ maxPrice }}€</span>
                         </div>
                     </div>
@@ -265,11 +264,11 @@ const hotels = computed(() =>
                         <div>
                             <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
                             <div class="flex items-center gap-2">
-                                <input type="range" :min="20" :max="maxPrice" v-model="minPrice" class="w-full">
+                                <input type="range" :min="0" :max="maxPrice" v-model="minPrice" class="w-full">
                                 <span class="text-sm">{{ minPrice }}€</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <input type="range" :min="minPrice" :max="200" v-model="maxPrice" class="w-full">
+                                <input type="range" :min="minPrice" :max="500" v-model="maxPrice" class="w-full">
                                 <span class="text-sm">{{ maxPrice }}€</span>
                             </div>
                         </div>
