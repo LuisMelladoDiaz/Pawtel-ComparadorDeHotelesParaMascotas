@@ -5,6 +5,7 @@ from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
 from rest_framework.exceptions import NotFound, PermissionDenied
+from django.db.models import Max, Min
 
 
 class HotelService:
@@ -163,11 +164,15 @@ class HotelService:
                     ).distinct()
                 except ValueError:
                     pass
-
+            
+            hotels = hotels.annotate(
+                price_max=Max("roomtype__price_per_night"),
+                price_min=Min("roomtype__price_per_night")
+                )
             if "sort_by" in filters:
                 assert isinstance(filters["sort_by"], str)
 
-                valid = ["price_per_night", "city", "name"]
+                valid = ["price_per_night", "city", "name", "price_max", "price_min"]
                 # Verificamos si sort_by está en los campos válidos o si empieza con "-"
                 assert filters["sort_by"] in valid or filters["sort_by"].startswith("-")
 

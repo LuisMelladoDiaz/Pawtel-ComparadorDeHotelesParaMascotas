@@ -124,7 +124,7 @@ const hotels = computed(() =>
         <div class="container mt-5 hidden md:flex">
 
             <!-- Filters -->
-            <div class="list-filters-container flex-col h-fit border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5">
+            <div class="list-filters-container flex-col max-w-70 h-fit border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5">
             <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60 py-2">Filtrar por:</h2>
 
             <!-- Cities -->
@@ -171,6 +171,8 @@ const hotels = computed(() =>
                 <select v-model="sortBy" class="p-2 w-fit text-white bg-terracota font-bold">
                     <option value="" disabled selected>Ordenar por...</option>
                     <option value="name">Nombre</option>
+                    <option value="price_max">Precio Máximo</option>
+                    <option value="price_min">Precio Mínimo</option>
                 </select>
                 
                 </div>
@@ -238,7 +240,25 @@ const hotels = computed(() =>
                 class="p-2 rounded-md text-center cursor-pointer font-bold"
                 :class="{'bg-terracota text-white': sortBy === option, 'bg-gray-100': sortBy !== option}"
               >
-                {{ option.charAt(0).toUpperCase() + option.slice(1) }}
+                {{ option === 'name' ? 'Nombre' : option.charAt(0).toUpperCase() + option.slice(1) }}
+              </button>
+              <button
+                v-for="option in ['price_max']"
+                :key="option"
+                @click="sortBy = option; toggleSortBy();"
+                class="p-2 rounded-md text-center cursor-pointer font-bold"
+                :class="{'bg-terracota text-white': sortBy === option, 'bg-gray-100': sortBy !== option}"
+              >
+                {{ option === 'price_max' ? 'Precio Máximo' : option.charAt(0).toUpperCase() + option.slice(1) }}
+              </button>
+              <button
+                v-for="option in ['price_min']"
+                :key="option"
+                @click="sortBy = option; toggleSortBy();"
+                class="p-2 rounded-md text-center cursor-pointer font-bold"
+                :class="{'bg-terracota text-white': sortBy === option, 'bg-gray-100': sortBy !== option}"
+              >
+                {{ option === 'price_min' ? 'Precio Mínimo' : option.charAt(0).toUpperCase() + option.slice(1) }}
               </button>
             </div>
 
