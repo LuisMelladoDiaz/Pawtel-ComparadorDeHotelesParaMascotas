@@ -5,6 +5,10 @@ import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
 import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
+import { Notyf } from 'notyf'; // Import Notyf library
+import 'notyf/notyf.min.css'; // Import Notyf CSS
+
+const notyf = new Notyf(); // Initialize Notyf
 
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
 const hotelOwnerId = computed(() => hotelOwner?.value?.id);
@@ -57,12 +61,12 @@ const saveHotel = async () => {
           },
         });
         window.location.reload();
-
     } else {
       await createHotelMutation.mutateAsync(hotelData.value);
     }
     modalOpen.value = false;
   } catch (error) {
+    notyf.error('Error al guardar el hotel.');
     console.error('Error al guardar el hotel', error);
   }
 };
@@ -74,6 +78,7 @@ const deleteHotel = async (id) => {
       await deleteHotelMutation.mutateAsync(id);
       window.location.reload();
     } catch (error) {
+      notyf.error('Error al eliminar hotel.');
       console.error('Error al eliminar hotel', error);
     }
   }
