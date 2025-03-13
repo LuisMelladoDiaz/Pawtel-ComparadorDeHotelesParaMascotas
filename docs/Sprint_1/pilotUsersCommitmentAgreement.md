@@ -14,7 +14,7 @@
 
 <br><br>
 
-# 📑 **Acuerdo con Usuarios Piloto - Sprint** 🚀
+# 📑 **Acuerdo con Usuarios Piloto - Sprint 1** 🚀
 
 **📅 Entregable:** Sprint 1  
 **📆 Fecha:** 10/03/2025  
