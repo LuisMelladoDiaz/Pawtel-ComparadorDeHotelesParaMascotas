@@ -15,7 +15,7 @@ const phone = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const router = useRouter();
-const { createHotelOwner } = useCreateHotelOwner();
+const { mutateAsync: createHotelOwner } = useCreateHotelOwner();
 
 const register = async () => {
     if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value) {
@@ -53,12 +53,12 @@ const register = async () => {
             },
             {
                 onSuccess: () => {
-                    toastSuccess("Registro exitoso")
+                    notyf.success("Registro exitoso");
                     router.push('/login');
                 },
                 onError: (error) => {
                     console.error('Error al registrarse:', error);
-                    toastError("Error registro")
+                    notyf.error("Error en el registro");
                 },
             }
         );
