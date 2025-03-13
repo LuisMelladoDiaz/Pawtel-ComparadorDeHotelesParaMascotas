@@ -1,37 +1,27 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
-**🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
-
+<h1 align="center">🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 </h1>
+<h3 align="center">Busca, compara y reserva alojamientos exclusivos para tus mascotas.</h3>
 <p align="center">
   <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
 </p>
+<h1 align="center"> Evaluación de los Usuarios Piloto 🚀</h1>
+<h3 align="center"> Entregable: Sprint 1  <br> Fecha: 12/03/2025
+<h3 align="center"> GRUPO 11:</h3>
 
-🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
+|                          |                          |                          |                          |                          |                          |
+|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|--------------------------|
+| Luis Mellado Díaz | Daniel Flores De Francisco | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales | Javier García Sebastián | Javier Ruiz Garrido |
+| Jorge Gómez de Tovar      | Andrés Martínez Reviriego | Manuel Castillejo Vela    | Rafael Castillo Cebolla | Claudio Cortés Carrasco | Sergio Trenado González |
+| Yesica Garate Fuentes     | David González Martínez |                          |                          |                          |                          |
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+<h6 align="right"> Visítanos en nuestra Página web
 
----
-
-# **Evaluación de los Usuarios Piloto**
-
-**Entregable:** Sprint 1
-**Fecha:** 12/03/2025
-**Equipo:** G11
-
-|  |   | 
-|--------------------------|---|
-| `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
-| Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
-| Javier García Sebastián | Javier Ruiz Garrido |
-| Jorge Gómez de Tovar | Andrés Martínez Reviriego |
-| Manuel Castillejo Vela | Rafael Castillo Cebolla |
-| Claudio Cortés Carrasco | Sergio Trenado González |
-| Yesica Garate Fuentes | David González Martínez |
+[www.pawtel.es](https://www.pawtel.es)   
+</h6>
 
 
 ---
  
- ## **Índice**
+### 📌 Índice  
  1. [Tabla de Versiones](#tabla-de-versiones)  
  2. [Evaluación de Usuario Piloto](#evaluación-de-usuarios-piloto) 
 
