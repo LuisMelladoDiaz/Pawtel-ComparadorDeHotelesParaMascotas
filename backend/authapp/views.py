@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from pawtel.app_users.serializers import AppUserSerializer
 from pawtel.hotel_owners.services import HotelOwnerService
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -35,14 +36,8 @@ class UserInfoView(APIView):
 
     def get(self, request):
         user = request.user
-        return Response(
-            {
-                "username": user.username,
-                "email": user.email,
-                "first_name": user.first_name,
-                "last_name": user.last_name,
-            }
-        )
+        user_serializer_data = AppUserSerializer(user).data
+        return Response(user_serializer_data)
 
 
 class RegisterView(APIView):
