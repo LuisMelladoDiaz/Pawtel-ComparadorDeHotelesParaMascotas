@@ -23,7 +23,7 @@ const selectedRoom = ref('');
 const minPrice = ref(0);
 const maxPrice = ref(500);
 const sortBy = ref("");
-const direction = ref("");
+const direction = ref("asc");
 
 const appliedFilters = ref([]);
 
@@ -64,6 +64,11 @@ const toggleSortDirection = () => {
 const toggleFilters = () => {
   isFiltersOpen.value = !isFiltersOpen.value;
   if (isFiltersOpen.value) isSortByOpen.value = false;
+};
+
+const toggleSortBy = () => {
+    isSortByOpen.value = !isSortByOpen.value;
+    if (isSortByOpen.value) isFiltersOpen.value = false;
 };
 
 const sortDirection = ref("asc");
@@ -159,18 +164,22 @@ const hotels = computed(() =>
             <!-- Sort By + Applied filters -->
             <div class="applied-filters-container flex flex-row flex-wrap items-center text-white gap-2">
                 <!-- Sort By Card -->
-                <div class="order-card flex items-center gap-1 border rounded-lg px-3 bg-terracota shadow-lg whitespace-nowrap">
+                <div class="order-card min-h-[42px] flex items-center gap-1 border rounded-lg px-3 bg-terracota shadow-lg whitespace-nowrap">
                 <img src="https://site-assets.fontawesome.com/releases/v6.7.2/svgs/solid/arrow-down-arrow-up.svg"
                     alt="Ordenar" class="w-5 h-5" style="filter: invert(1);">
                 <select v-model="sortBy" class="p-2 w-fit text-white bg-terracota font-bold">
                     <option value="" disabled selected>Ordenar por...</option>
                     <option value="name">Nombre</option>
                 </select>
-                <select v-model="direction" class=" w-fit text-white bg-terracota font-bold">
-                    <option value="asc">ASC</option>
-                    <option value="desc">DESC</option>
-                </select>
+                
                 </div>
+                <button
+                    @click="direction = direction === 'asc' ? 'desc' : 'asc'"
+                    class="p-2 w-fit min-h-[42px] min-w-25 text-white bg-terracota font-bold border rounded-md shadow-md flex items-center justify-center gap-2"
+                    >
+                    <span> {{ direction === 'asc' ? 'ASC' : 'DESC' }} </span>
+                    <i :class="direction === 'asc' ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>
+                </button>
                 <!-- Applied filters -->
                 <AppliedFilter v-for="(filter, index) in appliedFilters" :key="index" :filterName="filter" @remove="removeFilter(filter)" />
             </div>
@@ -221,7 +230,7 @@ const hotels = computed(() =>
           <div class="p-5 flex flex-col gap-4">
             <div class="flex flex-col gap-2">
               <button
-                v-for="option in ['precio', 'valoracion', 'nombre']"
+                v-for="option in ['name']"
                 :key="option"
                 @click="sortBy = option; toggleSortBy();"
                 class="p-2 rounded-md text-center cursor-pointer font-bold"
@@ -250,16 +259,16 @@ const hotels = computed(() =>
 
           <div class="p-5 flex flex-col gap-6">
             <!-- Cities -->
-            <div>
+            <div class="flex flex-col">
               <label class="font-semibold">Ciudad:</label>
-              <select v-model="selectedCity" class="border rounded p-2 mt-1 w-fit ml-3">
+              <select v-model="selectedCity" class="border rounded p-2 w-full mt-1">
                 <option value="">Todas</option>
                 <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
               </select>
             </div>
 
             <!-- Rooms -->
-            <div class="mt-5">
+            <div class="flex flex-col">
               <label class="font-semibold">Habitaciones:</label>
               <select v-model="selectedRoom" class="border rounded p-2 mt-1 w-full">
                 <option value="">Todas</option>
@@ -280,10 +289,6 @@ const hotels = computed(() =>
               </div>
             </div>
 
-            <!-- Apply Button -->
-            <button @click="applyFilters" class="bg-terracota text-white px-4 py-2 rounded-lg shadow hover:bg-red-600">
-              Aplicar Filtros
-            </button>
           </div>
         </div>
 
