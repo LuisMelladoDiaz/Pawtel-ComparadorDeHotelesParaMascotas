@@ -38,6 +38,15 @@ class HotelService:
     # POST -------------------------------------------------------------------
 
     @staticmethod
+    def authorize_create_hotel(request):
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+
+        hotel_owner_id = request.data.get("hotel_owner")
+
+        if not hotel_owner_id or hotel_owner_id != hotel_owner.id:
+            raise PermissionDenied("Permission denied.")
+
+    @staticmethod
     def serialize_input_hotel_create(request):
         context = {"request": request}
         current_owner_id = HotelOwnerService.get_current_hotel_owner(request).id

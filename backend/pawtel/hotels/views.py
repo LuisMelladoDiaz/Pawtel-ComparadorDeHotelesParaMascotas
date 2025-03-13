@@ -18,12 +18,12 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        HotelService.authorize_action_hotel(request, pk)
         hotel = HotelService.retrieve_hotel(pk)
         output_serializer_data = HotelService.serialize_output_hotel(hotel)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
+        HotelService.authorize_create_hotel(request)
         input_serializer = HotelService.serialize_input_hotel_create(request)
         HotelService.validate_create_hotel(input_serializer)
         hotel_created = HotelService.create_hotel(input_serializer)
@@ -39,9 +39,8 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
-        return self.update(
-            request, pk
-        )  # The context of the request specifies that it is PATCH
+        # The context of the request specifies that it is PATCH
+        return self.update(request, pk)
 
     def destroy(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
