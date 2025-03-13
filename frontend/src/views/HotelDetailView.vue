@@ -19,8 +19,6 @@ const hotel = computed(() => ({
   name: apiHotel.value?.name || 'Nombre',
   address: apiHotel.value?.address || 'Dirección',
   city: apiHotel.value?.city || 'Ciudad',
-  details: ['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros'], // Mantiene detalles manuales
-  rating: apiHotel.value?.rating || '8.5',
   price: apiHotel.value?.price || '50€',
   imageGallery: apiHotel.value?.imageGallery || [
     '/src/assets/foto1.jpg',
@@ -52,15 +50,28 @@ const hotel = computed(() => ({
     <template v-else>
       <div class="hidden md:flex items-center max-w-7xl mx-auto px-5 w-full flex-col flex-grow">
         <div class="bg-white shadow-md py-3 flex justify-between max-w-7xl mx-auto w-full px-10 text-black text-lg border-b">
-          <a href="#" class="hover:underline font-bold">Vista General</a>
-          <a href="#" class="hover:underline">Información y Precios</a>
-          <a href="#" class="hover:underline">Servicios</a>
-          <a href="#" class="hover:underline">Requisitos</a>
-          <a href="#" class="hover:underline">A Tener en Cuenta</a>
-          <a href="#" class="hover:underline">Opiniones de Clientes</a>
+          <div class="flex flex-row w-full justify-center space-x-2">
+            <router-link 
+              :to="$route.path" 
+              class="disabled w-1/2 text-center py-2 px-4 bg-gray-200 rounded-tl-md rounded-bl-md cursor-default"
+            >
+              Vista General
+            </router-link>
+
+            <router-link 
+              :to="`${$route.path}/rooms`" 
+              class="w-1/2 text-center py-2 px-4 bg-gray-100 rounded-tr-md rounded-br-md hover:bg-azul-suave hover:text-white transition duration-200 ease-in-out"
+              :class="{'bg-blue-500 text-white': $route.path === `/hotel/${$route.params.id}/rooms`}"
+            >
+              Habitaciones y Precios
+            </router-link>
+          </div>
         </div>
 
-        <div class="max-w-7xl mx-auto py-10">
+
+
+
+        <div class="max-w-7xl mx-auto py-10 w-full">
           <HotelDetailCard
             :id="hotel.id"
             :image="hotel.image"
@@ -78,11 +89,34 @@ const hotel = computed(() => ({
 
       <!-- Mobile Version -->
       <div class="md:hidden flex flex-col items-center px-4 py-6">
+
+        <div class="bg-white shadow-md py-3 flex items-center justify-between max-w-7xl mx-auto w-full px-10 text-black text-lg border-b">
+
+          <div class="flex flex-col items-center w-full justify-center space-y-2">
+            <router-link 
+              :to="$route.path" 
+              class=" w-full text-center py-2 px-4 bg-gray-200 rounded-md cursor-default"
+            >
+              Vista General
+            </router-link>
+
+            <router-link 
+              :to="`${$route.path}/rooms`" 
+              class="w-full text-center py-2 px-4 bg-gray-100 rounded-md hover:bg-azul-suave hover:text-white transition duration-200 ease-in-out"
+              :class="{'bg-blue-500 text-white': $route.path === `/hotel/${$route.params.id}/rooms`}"
+            >
+              Habitaciones y Precios
+            </router-link>
+          </div>
+        </div>
+
+
         <HotelDetailCard
           :id="hotel.id"
           :image="hotel.image"
           :name="hotel.name"
-          :location="hotel.location"
+          :city="hotel.city"
+          :address="hotel.address"
           :details="hotel.details"
           :rating="hotel.rating"
           :price="hotel.price"

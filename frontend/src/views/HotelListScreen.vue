@@ -69,7 +69,6 @@ const hotels = computed(() =>
     address: hotel.address || 'Dirección',
     city: hotel.city || 'Ciudad',
     description: hotel.description || 'Descripción',
-    rating: hotel.rating || '8.5',
     price: hotel.price || '50€',
     imageGallery: hotel.imageGallery || [
       '/src/assets/foto1.jpg',

@@ -5,7 +5,6 @@
     name: { type: String, required: true },
     city: { type: String, required: true },
     description: { type: Array, required: true },
-    rating: { type: Number, required: true },
     price: { type: String, required: true },
   });
   import Button from '../components/Button.vue';
@@ -97,7 +96,9 @@
             <a class="text-[15px] relative bottom-[2px]">desde </a> {{ price }}
           </div>
           <div class="flex items-center !w-full">
-          <Button type="add" class="!w-full !m-0 text-[15px]">Ver disponibilidad</Button>
+            <RouterLink :to="`/hotel/${id}`" class="!w-full !m-0 text-[15px]">
+              <Button type="add" class="!w-full !m-0 text-[15px]">Ver disponibilidad</Button>
+            </RouterLink>
         </div>
         </div>
         
