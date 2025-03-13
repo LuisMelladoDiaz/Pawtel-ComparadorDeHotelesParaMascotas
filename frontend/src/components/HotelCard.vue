@@ -4,7 +4,7 @@
     image: { type: String, required: true },
     name: { type: String, required: true },
     city: { type: String, required: true },
-    details: { type: Array, required: true },
+    description: { type: String, required: true },
     rating: { type: Number, required: true },
     price: { type: String, required: true },
   });
@@ -32,12 +32,14 @@
         </p>
       </div>
 
-      <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black flex flex-col">
-        <a class="text-[15px] font-bold mb-1">Detalles</a>
-        <li v-for="(detail, index) in details" :key="index">
-          <i class="fa-solid fa-check text-[1rem] text-terracota" style="text-decoration: none;"></i> {{ detail }}
-        </li>
-      </ul>
+      <div class="hotel-description text-[0.9rem] mt-auto font-complementario text-pawtel-black">
+          <p class="text-[15px] font-bold mb-1">Descripción</p>
+          <div class="text">
+            <i class="text-terracota mr-2"></i>
+            <span>{{ description }}</span>
+          </div>
+        </div>
+
     </div>
 
     <div class="right-column flex-[1_1_10%] flex flex-col items-end justify-between gap-2 p-[5px] w-full font-titulos">
@@ -54,7 +56,6 @@
         </RouterLink>
       </div>
     </div>
-
   </div>
 
 <!-- Mobile Version -->
@@ -77,12 +78,13 @@
           </p>
         </div>
 
-        <ul class="hotel-details text-[0.9rem] mt-auto font-complementario text-pawtel-black">
-          <h2 class="text-[15px] font-bold">Detalles</h2>
-          <li v-for="(detail, index) in details" :key="index">
-            <i class="fa-solid fa-check text-[1rem] text-terracota" style="text-decoration: none;"></i> {{ detail }}
-          </li>
-        </ul>
+        <div class="hotel-description text-[0.9rem] mt-auto font-complementario text-pawtel-black">
+          <p class="text-[15px] font-bold mb-1">Descripción</p>
+          <div class="text">
+            <i class="fa-solid fa-check text-[1rem] text-terracota mr-2"></i>
+            <span>{{ description }}</span>
+          </div>
+        </div>
       </div>
 
       <div class="right-column flex flex-col gap-2 p-[5px] w-full font-titulos">

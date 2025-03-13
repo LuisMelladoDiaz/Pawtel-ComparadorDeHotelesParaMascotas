@@ -104,6 +104,7 @@ class HotelService:
             "hotel_owner",
             "room_type",
             "max_price_per_night",
+            "min_price_per_night",
             "sort_by",
             "limit",
         ]
@@ -135,6 +136,17 @@ class HotelService:
                     max_price = float(filters["max_price_per_night"])
                     hotels = hotels.filter(
                         roomtype__price_per_night__lte=max_price
+                    ).distinct()
+                except ValueError:
+                    pass
+
+            if "min_price_per_night" in filters:
+                fl = float(filters["min_price_per_night"])
+                assert isinstance(fl, float)
+                try:
+                    min_price = float(filters["min_price_per_night"])
+                    hotels = hotels.filter(
+                        roomtype__price_per_night__lte=min_price
                     ).distinct()
                 except ValueError:
                     pass

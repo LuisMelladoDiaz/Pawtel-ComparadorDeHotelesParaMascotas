@@ -12,10 +12,10 @@ import {useGetAllHotels} from '@/data-layer/hooks/hotels';
 
 // Filters
 const cities = ref(["Madrid", "Barcelona", "Sevilla", "Valencia", "Málaga", "Bilbao"]);
-const services = ref(["Habitaciones individuales","Habitaciones compartidas", "Zonas climatizadas", "Camas y mantas confortables", "Alimentación adaptada", "Acceso a agua fresca 24/7", "Atención veterinaria 24h", "Zona de juegos al aire libre", "Piscina para perros"]);
+const rooms = ref(["Habitaciones individuales","Habitaciones compartidas", "Zonas climatizadas", "Camas y mantas confortables", "Alimentación adaptada", "Acceso a agua fresca 24/7", "Atención veterinaria 24h", "Zona de juegos al aire libre", "Piscina para perros"]);
 
 const selectedCity = ref("");
-const selectedServices = ref([]);
+const selectedRooms = ref([]);
 const minPrice = ref(20);
 const maxPrice = ref(200);
 const sortBy = ref("");
@@ -27,7 +27,7 @@ const applyFilters = () => {
     appliedFilters.value = [];
 
     if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
-    selectedServices.value.forEach(service => appliedFilters.value.push(service));
+    selectedRooms.value.forEach(room => appliedFilters.value.push(rooms));
     appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
     appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
     isFiltersOpen.value = false;
@@ -41,22 +41,31 @@ const removeFilter = (filter) => {
 const isSortByOpen = ref(false);
 const isFiltersOpen = ref(false);
 
-const toggleSortBy = () => {
-    isSortByOpen.value = !isSortByOpen.value;
-    if (isSortByOpen.value) isFiltersOpen.value = false;
+const toggleSortDirection = () => {
+    sortDirection.value = sortDirection.value === "asc" ? "desc" : "asc";
 };
+
 
 const toggleFilters = () => {
     isFiltersOpen.value = !isFiltersOpen.value;
     if (isFiltersOpen.value) isSortByOpen.value = false;
 };
 
-const sortByWithDir = computed(() => sortBy.value ? `${sortBy.value}` : "city");
+const sortDirection = ref("asc");
+
+const sortByWithDir = computed(() => {
+    if (!sortBy.value) return "city";
+    return direction.value === "desc" ? `-${sortBy.value}` : sortBy.value;
+});
+
+
+
 
 const { data: apiHotels, isLoading, isError } = useGetAllHotels({
     sort_by: sortByWithDir,
     max_price_per_night: maxPrice,
 });
+
 
 
 const hotels = computed(() =>
@@ -66,7 +75,7 @@ const hotels = computed(() =>
     name: hotel.name || 'Nombre',
     address: hotel.address || 'Dirección',
     city: hotel.city || 'Ciudad',
-    details: ['Atención veterinaria 24h', 'Zona de juegos al aire libre', 'Piscina para perros'],
+    description: hotel.description || 'Descripción',
     rating: hotel.rating || '8.5',
     price: hotel.price || '50€',
     imageGallery: hotel.imageGallery || [
@@ -75,7 +84,6 @@ const hotels = computed(() =>
       '/src/assets/foto1.jpg',
       '/src/assets/foto2.jpg'
     ],
-    description: hotel.description || 'Descripción predeterminada del alojamiento.',
     reviews: hotel.reviews || [
       { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
     ]
@@ -111,12 +119,12 @@ const hotels = computed(() =>
                         </select>
                     </div>
 
-                    <!-- Services -->
+                    <!-- Room Types -->
                     <div class="flex flex-col gap-2">
-                        <label class="font-semibold">Servicios:</label>
-                        <div v-for="service in services" :key="service">
-                            <input type="checkbox" :id="service" :value="service" v-model="selectedServices" class="mr-2">
-                            <label :for="service">{{ service }}</label>
+                        <label class="font-semibold">Habitaciones:</label>
+                        <div v-for="room in rooms" :key="room">
+                            <input type="checkbox" :id="room" :value="room" v-model="selectedRooms" class="mr-2">
+                            <label :for="room">{{ room }}</label>
                         </div>
                     </div>
 
@@ -175,7 +183,7 @@ const hotels = computed(() =>
                             :image="hotel.image"
                             :name="hotel.name"
                             :city="hotel.city"
-                            :details="hotel.details"
+                            :description="hotel.description"
                             :rating="hotel.rating"
                             :price="hotel.price"
                             />
@@ -249,12 +257,12 @@ const hotels = computed(() =>
                             </select>
                         </div>
 
-                        <!-- Services -->
+                        <!-- Rooms -->
                         <div class="flex flex-col gap-1">
-                            <label class="font-semibold">Servicios:</label>
-                            <div v-for="service in services" :key="service">
-                                <input type="checkbox" :id="service" :value="service" v-model="selectedServices" class="mr-2">
-                                <label :for="service">{{ service }}</label>
+                            <label class="font-semibold">Habitaciones:</label>
+                            <div v-for="room in rooms" :key="room">
+                                <input type="checkbox" :id="room" :value="room" v-model="selectedRooms" class="mr-2">
+                                <label :for="room">{{ room }}</label>
                             </div>
                         </div>
 
@@ -297,7 +305,7 @@ const hotels = computed(() =>
                             :image="hotel.image"
                             :name="hotel.name"
                             :city="hotel.city"
-                            :details="hotel.details"
+                            :description="hotel.description"
                             :rating="hotel.rating"
                             :price="hotel.price"
                             />
