@@ -43,9 +43,10 @@ const hotel = computed(() => ({
     <LoadingSpinner v-if="isLoading" class="text-center py-10 text-xl font-bold text-gray-700 flex-col flex-grow">
       Cargando detalles del hotel...
     </LoadingSpinner>
-
-    <div v-else-if="error" class="text-center py-10 text-xl font-bold text-red-600">
-      Error al cargar el hotel. Inténtalo de nuevo más tarde.
+    <div v-else-if="error" class="hidden md:flex items-center max-w-7xl mx-auto px-5 w-full flex-col flex-grow">
+      <div  class="text-center py-10 text-xl font-bold text-terracota">
+        Error al cargar el hotel. Inténtalo de nuevo más tarde.
+      </div>
     </div>
 
     <!-- Desktop Version -->
