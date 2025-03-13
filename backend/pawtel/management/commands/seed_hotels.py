@@ -97,7 +97,6 @@ class Command(BaseCommand):
             owner = random.choice(owners)
             ciudad = random.choice(ciudades_espanolas)
             descripcion = random.choice(descripciones_hoteles_mascotas)
-
             # Generar un nombre único
             nombre = random.choice(nombres_hoteles_mascotas)
             if Hotel.objects.filter(name=nombre).exists():
