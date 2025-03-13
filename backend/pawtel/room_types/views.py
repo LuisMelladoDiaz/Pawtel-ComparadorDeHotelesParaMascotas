@@ -25,6 +25,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
+        RoomTypeService.authorize_create_room_type(request)
         input_serializer = RoomTypeService.serialize_input_room_type_create(request)
         RoomTypeService.validate_create_room_type(input_serializer)
         room_type_created = RoomTypeService.create_room_type(input_serializer)
@@ -44,6 +45,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
+        # The context of the request specifies that it is PATCH
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):

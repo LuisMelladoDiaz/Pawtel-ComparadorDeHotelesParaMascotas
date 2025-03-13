@@ -1,5 +1,6 @@
 from django.forms import ValidationError
 from pawtel.hotel_owners.services import HotelOwnerService
+from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.rooms.models import Room
@@ -37,6 +38,19 @@ class RoomTypeService:
         return RoomType.objects.get(id=pk)
 
     # POST -------------------------------------------------------------------
+
+    @staticmethod
+    def authorize_create_room_type(request):
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+
+        hotel_id = request.data.get("hotel")
+        if not hotel_id:
+            raise PermissionDenied("Permission denied.")
+
+        hotel = HotelService.retrieve_hotel(hotel_id)
+
+        if not hotel or hotel.hotel_owner.id != hotel_owner.id:
+            raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def serialize_input_room_type_create(request):

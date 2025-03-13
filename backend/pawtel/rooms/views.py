@@ -21,6 +21,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
+        RoomService.authorize_create_room(request)
         input_serializer = RoomService.serialize_input_room_create(request)
         RoomService.validate_create_room(input_serializer)
         room_created = RoomService.create_room(input_serializer)
@@ -36,6 +37,7 @@ class RoomViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
+        # The context of the request specifies that it is PATCH
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
