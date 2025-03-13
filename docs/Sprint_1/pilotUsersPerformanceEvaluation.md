@@ -8,7 +8,7 @@
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
 📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 contacto@pawtel.com](mailto:contacto@pawtel.com)  
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
 
 ---
 

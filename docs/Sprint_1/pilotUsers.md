@@ -8,7 +8,7 @@
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
 📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 contacto@pawtel.com](mailto:contacto@pawtel.com)  
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
 
 ---
 
@@ -16,9 +16,10 @@
 
 # **Usuarios Piloto. Gestión del Feedback y Comunicación**
 
-**Entregable:** Sprint 1
-**Fecha:** 10/03/2025
-**Equipo:** G11
+**📅 Entregable:** Sprint 1  
+**📆 Fecha:** 10/03/2025  
+**👥 Equipo:** G11 
+
 
 |  |   | 
 |--------------------------|---|
@@ -33,19 +34,19 @@
 
 ---
  
- ## **Índice**
- 1. [Tabla de Versiones](#historial-de-versiones)  
- 2. [Lista de Usuarios Piloto](#lista-de-usuarios-piloto)  
- 3. [Gestión de la comunicación y feedback](#gestión-de-la-comunicación-y-feedback-de-los-usuarios-piloto)  
+## 📌 **Índice**
+ 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)  
+ 2. 🧑‍💻 [**Lista de Usuarios Piloto**](#lista-de-usuarios-piloto)  
+ 3. 💬 [**Gestión de la Comunicación y Feedback**](#gestión-de-la-comunicación-y-feedback-de-los-usuarios-piloto)  
 
- 
- ---
+---
 
-## Historial de Versiones
-| Fecha       | N° de Versión | Descripción               | Elaborado por           |
-|-------------|---------------|---------------------------|-------------------------|
-| 10/03/2025  | v 1.0         | Versión inicial del documento |Daniel Flores de Francisco |
-|12/03/2025  | v 1.1         | Tabla actualizada. Portada |Daniel Flores de Francisco |
+## 📜 **Historial de Versiones**
+| 📅 **Fecha**    | 🔢 **N° de Versión** | 📝 **Descripción**                  | ✍️ **Elaborado por**           |
+|---------------|----------------|--------------------------------|-------------------------|
+| 📆 10/03/2025 | 🔹 v 1.0       | 🏁 Versión inicial del documento | ✍️ Daniel Flores de Francisco |
+| 📆 12/03/2025 | 🔹 v 1.1       | 📋 Tabla actualizada. 🖼️ Portada | ✍️ Daniel Flores de Francisco |
+
 
 ---
 

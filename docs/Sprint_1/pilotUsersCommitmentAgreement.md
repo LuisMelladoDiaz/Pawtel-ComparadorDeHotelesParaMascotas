@@ -8,7 +8,7 @@
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
 📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 contacto@pawtel.com](mailto:contacto@pawtel.com)  
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,10 +16,10 @@
 
 # 📑 **Acuerdo con Usuarios Piloto - Sprint** 🚀
 
-**Entregable:** Sprint 1
-**Fecha:** 10/03/2025
-**Equipo:** G11
- 
+**📅 Entregable:** Sprint 1  
+**📆 Fecha:** 10/03/2025  
+**👥 Equipo:** G11 
+
 |  |   | 
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |

@@ -8,17 +8,18 @@
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
 📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 contacto@pawtel.com](mailto:contacto@pawtel.com)  
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
 <br><br>
 
-# **Compromiso de Participación en la Asignatura ISPP**
- 
-**Entregable:** Sprint 1
-**Fecha:** 10/03/2025
-**Equipo:** G11
+# 📑 **Compromiso de Participación en la Asignatura ISPP** 🚀
+
+**📅 Entregable:** Sprint 1  
+**📆 Fecha:** 10/03/2025  
+**👥 Equipo:** G11 
+
 
 |  |   | 
 |--------------------------|---|
@@ -33,15 +34,15 @@
 
 ---
  
- ## **Índice**
- 1. [Introducción](#introducción)
- 2. [Tabla de Versiones](#tabla-de-versiones)  
- 3. [Compromisos](#compromisos)  
- 4. [Penalizaciones y Strikes](#penalizaciones-y-strikes)  
- 5. [Motivos para Recibir Strikes](#motivos-para-recibir-strikes)  
- 6. [Recompensas](#recompensas)  
- 7. [Firmas de los Alumnos](#firmas-de-los-alumnos)  
- 
+## 📌 **Índice**
+ 1. 📖 [**Introducción**](#introducción)  
+ 2. 📅 [**Tabla de Versiones**](#tabla-de-versiones)  
+ 3. 🤝 [**Compromisos**](#compromisos)  
+ 4. ⚠️ [**Penalizaciones y Strikes**](#penalizaciones-y-strikes)  
+ 5. 🚫 [**Motivos para Recibir Strikes**](#motivos-para-recibir-strikes)  
+ 6. 🏆 [**Recompensas**](#recompensas)  
+ 7. ✍️ [**Firmas de los Alumnos**](#firmas-de-los-alumnos)  
+
  ---
  
  ## **Tabla de Versiones**
@@ -50,7 +51,6 @@
  | 1.0     | 02/02/2025  | Versión inicial del acuerdo        | Luis Mellado Díaz |
  | 2.0     | 11/03/2025  | Versión Sprint1. Se añadió portada y el concepto de hall of shame/fame       | Luis Mellado Díaz |
 
- 
  ---
  
  ## **Introducción**
