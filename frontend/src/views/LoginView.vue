@@ -3,14 +3,13 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
-import { useLoginMutation, useLogoutMutation } from '@/data-layer/auth';
+import { useLoginMutation } from '@/data-layer/auth';
 
 const username = ref('');
 const password = ref('');
 const errorMessage = ref('');
 const router = useRouter();
 const loginMutation = useLoginMutation();
-const logoutMutation = useLogoutMutation();
 
 const login = async () => {
     if (!username.value || !password.value) {
@@ -31,16 +30,7 @@ const login = async () => {
     }
 };
 
-const logout = async () => {
-    try {
-        await logoutMutation.mutateAsync();
-        alert('Sesión cerrada correctamente');
-        router.push('/login');
-    } catch (error) {
-        console.error('Error al cerrar sesión:', error);
-        alert('Error al cerrar sesión');
-    }
-};
+
 </script>
 
 <template>
