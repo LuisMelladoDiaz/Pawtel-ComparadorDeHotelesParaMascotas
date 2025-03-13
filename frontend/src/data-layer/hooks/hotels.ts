@@ -16,10 +16,11 @@ export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
     queryFn: () => fetchAllHotels({
       ...Object.fromEntries(Object.entries(filters || {}).map(([key, value]) => [key, toValue(value)])),
     }),
-    staleTime: 1000 * 60,
-    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60, // Los datos se mantienen frescos por 1 minuto
+    refetchOnWindowFocus: false, // No refrescar los datos cuando la ventana vuelve al foco
   });
 };
+
 
 export const useGetHotelById = (hotelId: MaybeRef<number>) => {
   return useQuery({
