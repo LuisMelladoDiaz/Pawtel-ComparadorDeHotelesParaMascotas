@@ -122,7 +122,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     @action(
         detail=False,
         methods=["get"],
-        url_path="hotel-owners-me",
+        url_path="me",
         url_name="retrieve_current_hotel_owner",
     )
     def retrieve_current_hotel_owner(self, request):
