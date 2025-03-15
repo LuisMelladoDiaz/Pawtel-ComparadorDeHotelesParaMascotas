@@ -62,6 +62,10 @@ jobs:
         run: |
           cd backend
           python manage.py migrate
+          
+      - name: Grant privileges to test_user
+        run: |
+          mysql -h 127.0.0.1 -u root -proot_password -e "GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%'; FLUSH PRIVILEGES;"
 
       - name: Run tests
         env:

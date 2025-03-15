@@ -118,10 +118,6 @@ DATABASES = {
     }
 }
 
-if "test" in sys.argv:
-    DATABASES["default"]["USER"] = os.getenv("DB_USER")
-    DATABASES["default"]["PASSWORD"] = os.getenv("DB_PASSWORD")
-
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
