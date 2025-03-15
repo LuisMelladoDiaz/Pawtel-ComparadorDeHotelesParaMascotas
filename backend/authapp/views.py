@@ -49,9 +49,11 @@ class RegisterView(APIView):
 
         if role == "hotel_owner":
             object = HotelOwnerService.general_create_hotel_owner(request)
+        elif role == "customer":
+            object = HotelOwnerService.general_create_hotel_owner(request)
         else:
             return Response(
-                {"error": "Invalid role. Only hotel owners are allowed."},
+                {"error": "Invalid role. Only hotel owners and customers are allowed."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
