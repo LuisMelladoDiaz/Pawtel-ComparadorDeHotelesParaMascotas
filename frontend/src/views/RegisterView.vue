@@ -14,6 +14,7 @@ const email = ref('');
 const phone = ref('');
 const password = ref('');
 const confirmPassword = ref('');
+const role = ref('Cliente');
 const router = useRouter();
 const { mutateAsync: createHotelOwner } = useCreateHotelOwner();
 
@@ -29,7 +30,7 @@ const toggleConfirmPasswordVisibility = () => {
 };
 
 const register = async () => {
-    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value) {
+    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value || !role.value) {
         notyf.error('Por favor, completa todos los campos');
         return;
     }
@@ -60,6 +61,7 @@ const register = async () => {
                 email: email.value,
                 phone: phone.value,
                 password: password.value,
+                role: role.value,
                 date_joined: currentDate,
             },
             {
@@ -107,6 +109,17 @@ const register = async () => {
                             <input type="tel" id="phone" v-model="phone"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                        </div>
+
+                        <div class="mt-4 relative">
+                            <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
+                            <select id="role" v-model="role"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
+                                required>
+                                <option value="Cliente">Cliente</option>
+                                <option value="Dueño de hotel">Dueño de hotel</option>
+                                <option value="Administrador">Administrador</option>
+                            </select>
                         </div>
 
                         <div class="mt-4 relative">
@@ -170,6 +183,17 @@ const register = async () => {
                             <input type="tel" id="phone" v-model="phone"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                        </div>
+
+                        <div class="mt-4 relative">
+                            <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
+                            <select id="role" v-model="role"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
+                                required>
+                                <option value="Cliente">Cliente</option>
+                                <option value="Dueño de hotel">Dueño de hotel</option>
+                                <option value="Administrador">Administrador</option>
+                            </select>
                         </div>
 
                         <div class="mt-4 relative">
