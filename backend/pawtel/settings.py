@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -116,6 +117,11 @@ DATABASES = {
         },
     }
 }
+
+if "test" in sys.argv:
+    DATABASES["default"]["USER"] = "root"
+    DATABASES["default"]["PASSWORD"] = "root_password"
+
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
