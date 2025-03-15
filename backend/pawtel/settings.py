@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    "sample",
+    "drf_spectacular",  # API documentation
+    "drf_spectacular_sidecar",  # APU documentation UI
     "authapp",
     "pawtel.app_users.apps.AppUsersConfig",
     "pawtel.hotel_owners.apps.HotelOwnersConfig",
@@ -61,7 +62,8 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework_simplejwt.authentication.JWTAuthentication",  # Clase de autenticación JWT
-    ]
+    ],
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",  # API documentation
 }
 
 
