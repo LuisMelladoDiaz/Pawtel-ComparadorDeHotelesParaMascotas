@@ -17,22 +17,24 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
+                                   SpectacularSwaggerView)
 from rest_framework_simplejwt.views import TokenRefreshView
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
-
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("sample.urls")),  # Include sample module API
     path("auth/", include("authapp.urls")),  # Include auth_app urls
     path("", include("pawtel.hotel_owners.urls")),
     path("", include("pawtel.hotels.urls")),
     path("", include("pawtel.rooms.urls")),
     path("", include("pawtel.room_types.urls")),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    
     # DRF Spectacular
-    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/docs/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path("api/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]
