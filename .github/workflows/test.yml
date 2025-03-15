@@ -5,10 +5,12 @@ on:
     branches:
       - main
       - develop
+      - test/workflow_target
   push:
     branches:
       - main
       - develop
+      - test/workflow_target
 
 jobs:
   test:
