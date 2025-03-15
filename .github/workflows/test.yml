@@ -57,6 +57,7 @@ jobs:
           DB_PASSWORD: test_password
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
+          CORS_ALLOWED_ORIGINS: "http://localhost,http://127.0.0.1"
         run: |
           cd backend
           python manage.py migrate
