@@ -79,7 +79,7 @@ export const useLogoutMutation = () => {
 export const usePasswordResetMutation = () => {
   return useMutation({
     mutationFn: async (data) => {
-      const response = await axios.post(`${API_BASE_URL}/auth/password-reset/`, data);
+      const response = await axios.post(`${API_BASE_URL}/email-password-reset/`, data);
       return response.data;
     },
     onError: (error) => {
