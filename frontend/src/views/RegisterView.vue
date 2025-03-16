@@ -3,8 +3,8 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
+import { useCreateCustomer } from '@/data-layer/hooks/customers';
 import { useCreateHotelOwner } from '@/data-layer/hooks/hotelOwners';
-import InputText from '@/components/InputText.vue';
 import { Notyf } from 'notyf';
 
 const notyf = new Notyf();
@@ -14,7 +14,9 @@ const email = ref('');
 const phone = ref('');
 const password = ref('');
 const confirmPassword = ref('');
+const role = ref('customer'); // Default role set to 'customer'
 const router = useRouter();
+const { mutateAsync: createCustomer } = useCreateCustomer();
 const { mutateAsync: createHotelOwner } = useCreateHotelOwner();
 
 const showPassword = ref(false);
@@ -29,7 +31,7 @@ const toggleConfirmPasswordVisibility = () => {
 };
 
 const register = async () => {
-    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value) {
+    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value || !role.value) {
         notyf.error('Por favor, completa todos los campos');
         return;
     }
@@ -54,25 +56,49 @@ const register = async () => {
     const currentDate = new Date().toISOString().split('T')[0];
 
     try {
-        await createHotelOwner(
-            {
-                username: username.value,
-                email: email.value,
-                phone: phone.value,
-                password: password.value,
-                date_joined: currentDate,
-            },
-            {
-                onSuccess: () => {
-                    notyf.success("Registro exitoso");
-                    router.push('/login');
+        if (role.value === 'hotel_owner') {
+            await createHotelOwner(
+                {
+                    username: username.value,
+                    email: email.value,
+                    phone: phone.value,
+                    password: password.value,
+                    role: role.value,
+                    date_joined: currentDate,
                 },
-                onError: (error) => {
-                    console.error('Error al registrarse:', error);
-                    notyf.error("Error en el registro");
+                {
+                    onSuccess: () => {
+                        notyf.success("Registro exitoso");
+                        router.push('/login');
+                    },
+                    onError: (error) => {
+                        console.error('Error al registrarse:', error);
+                        notyf.error("Error en el registro");
+                    },
+                }
+            );
+        } else {
+            await createCustomer(
+                {
+                    username: username.value,
+                    email: email.value,
+                    phone: phone.value,
+                    password: password.value,
+                    role: role.value,
+                    date_joined: currentDate,
                 },
-            }
-        );
+                {
+                    onSuccess: () => {
+                        notyf.success("Registro exitoso");
+                        router.push('/login');
+                    },
+                    onError: (error) => {
+                        console.error('Error al registrarse:', error);
+                        notyf.error("Error en el registro");
+                    },
+                }
+            );
+        }
     } catch (error) {
         notyf.error('Hubo un error al registrarse. Inténtalo de nuevo.');
     }
@@ -85,7 +111,7 @@ const register = async () => {
         <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
             <div class="container flex justify-center items-center mt-10 hidden md:flex">
                 <div class="w-1/3 bg-white shadow-lg rounded-lg p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse como dueño de hotel</h2>
+                    <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
 
                     <form @submit.prevent="register">
                         <div class="mt-4 relative">
@@ -107,6 +133,16 @@ const register = async () => {
                             <input type="tel" id="phone" v-model="phone"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                        </div>
+
+                        <div class="mt-4 relative">
+                            <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
+                            <select id="role" v-model="role"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
+                                required>
+                                <option value="customer">Cliente</option>
+                                <option value="hotel_owner">Dueño de hotel</option>
+                            </select>
                         </div>
 
                         <div class="mt-4 relative">
@@ -170,6 +206,16 @@ const register = async () => {
                             <input type="tel" id="phone" v-model="phone"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                        </div>
+
+                        <div class="mt-4 relative">
+                            <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
+                            <select id="role" v-model="role"
+                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
+                                required>
+                                <option value="customer">Cliente</option>
+                                <option value="hotel_owner">Dueño de hotel</option>
+                            </select>
                         </div>
 
                         <div class="mt-4 relative">
