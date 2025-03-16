@@ -54,7 +54,7 @@ const resetPassword = async () => {
                         <div class="mt-6">
                             <button type="submit"
                                 class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
-                                Enviar Correo de Restablecimiento
+                                Enviar correo para restablecer su contraseña
                             </button>
                         </div>
 
@@ -83,7 +83,7 @@ const resetPassword = async () => {
                         <div class="mt-6">
                             <button type="submit"
                                 class="w-full py-2 px-4 bg-azul-suave text-white font-semibold rounded-lg shadow-md hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
-                                Enviar Correo de Restablecimiento
+                                Enviar correo para restablecer su contraseña
                             </button>
                         </div>
 

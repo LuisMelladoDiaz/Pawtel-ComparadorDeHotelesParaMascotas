@@ -83,12 +83,12 @@ class PasswordResetView(APIView):
                 f"http://localhost:5173/auth/password-reset-confirm/{uidb64}/{token}/"
             )
             message = (
-                f"Ha solicitado reestablecer la contraseña. Para continuar el proceso haga click en el siguiente enlace:\n\n"
+                f"Ha solicitado restablecer la contraseña. Para continuar el proceso haga click en el siguiente enlace:\n\n"
                 f"{frontend_url}\n\n"
                 "Si no has solicitado cambiar la contraseña, por favor contáctanos de inmediato a nuestro email: pawteles@gmail.com"
             )
             send_mail(
-                "Reestablezca su contraseña",
+                "Restablezca su contraseña",
                 message,
                 "pawteles@gmail.com",
                 [email],
