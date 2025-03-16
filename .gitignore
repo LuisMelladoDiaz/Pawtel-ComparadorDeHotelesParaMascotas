@@ -173,3 +173,7 @@ cython_debug/
 
 # VS Code settings
 .vscode/settings.json
+
+# Environment variables
+.env.local
+.env.*.local

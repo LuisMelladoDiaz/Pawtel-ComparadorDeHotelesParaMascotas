@@ -5,8 +5,13 @@ import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import { useLoginMutation, useLogoutMutation } from '@/data-layer/auth';
 import { Notyf } from 'notyf';
+import { useField, Form, Field, ErrorMessage } from 'vee-validate';
+import { required } from '@vee-validate/rules';
+import { defineRule } from 'vee-validate';
 
 const notyf = new Notyf();
+
+defineRule('required', required);
 
 const username = ref('');
 const password = ref('');
@@ -19,15 +24,11 @@ const togglePasswordVisibility = () => {
     showPassword.value = !showPassword.value;
 };
 
-const login = async () => {
-    if (!username.value || !password.value) {
-        notyf.error('Por favor, completa todos los campos');
-        return;
-    }
+const login = async (values) => {
     try {
         await loginMutation.mutateAsync({
-            username: username.value,
-            password: password.value
+            username: values.username,
+            password: values.password
         });
 
         notyf.success('Inicio de sesión exitoso');
@@ -58,22 +59,24 @@ const logout = async () => {
                 <div class="w-1/3 bg-white shadow-lg rounded-lg p-6">
                     <h2 class="text-2xl font-semibold text-gray-800 text-center">Iniciar Sesión</h2>
 
-                    <form @submit.prevent="login">
+                    <Form @submit="login">
                         <div class="mt-4">
                             <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-                            <input type="username" id="username" v-model="username"
+                            <Field name="username" as="input" id="username" v-model="username" rules="required"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                            <ErrorMessage name="username" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-4 relative">
                             <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
+                            <Field :type="showPassword ? 'text' : 'password'" name="password" as="input" id="password" v-model="password" rules="required"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
                             <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
                                 <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                             </button>
+                            <ErrorMessage name="password" class="text-red-500 text-sm" />
                         </div>
 
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
@@ -91,7 +94,7 @@ const logout = async () => {
                                 <router-link to="/register" class="text-azul-suave hover:underline">Regístrate aquí</router-link>
                             </p>
                         </div>
-                    </form>
+                    </Form>
                 </div>
             </div>
 
@@ -99,28 +102,30 @@ const logout = async () => {
                 <div class="w-full max-w-xs bg-white shadow-lg rounded-lg p-6">
                     <h2 class="text-xl font-semibold text-gray-800 text-center">Iniciar Sesión</h2>
 
-                    <form @submit.prevent="login">
+                    <Form @submit="login">
                         <div class="mt-4">
                             <label for="username" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input type="username" id="username" v-model="username"
+                            <Field name="username" as="input" id="username" v-model="username" rules="required"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                            <ErrorMessage name="username" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-4 relative">
                             <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
+                            <Field :type="showPassword ? 'text' : 'password'" name="password" as="input" id="password" v-model="password" rules="required"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
                             <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
                                 <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                             </button>
+                            <ErrorMessage name="password" class="text-red-500 text-sm" />
                         </div>
 
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
 
                         <div class="mt-6">
-                            <button @click="login"
+                            <button type="submit"
                                 class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-azul-suave">
                                 Iniciar Sesión
                             </button>
@@ -132,7 +137,7 @@ const logout = async () => {
                                 <router-link to="/register" class="text-blue-600 hover:underline">Regístrate aquí</router-link>
                             </p>
                         </div>
-                    </form>
+                    </Form>
                 </div>
             </div>
 

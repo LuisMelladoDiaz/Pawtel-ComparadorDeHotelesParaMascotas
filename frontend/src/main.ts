@@ -9,6 +9,11 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import * as a from './axios-setup';
+import { defineRule } from 'vee-validate';
+import { required } from '@vee-validate/rules';
+
+// Define VeeValidate rules
+defineRule('required', required);
 
 const notyf = new Notyf({
     duration: 3000,
@@ -18,7 +23,7 @@ const notyf = new Notyf({
 const app = createApp(App);
 app.config.globalProperties.$notyf = notyf;
 
-createApp(App).use(router).use(VueQueryPlugin).mount('#app')
+app.use(router).use(VueQueryPlugin).mount('#app')
 
 library.add(faLocationDot);
 
