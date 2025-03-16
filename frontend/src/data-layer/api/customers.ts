@@ -63,7 +63,7 @@ export const deleteCustomer = async (CustomerId: number) => {
 };
 
 export const getCurrentCustomer = async () => {
-    const url = `${API_BASE_URL}/customers/customers-me`;
+    const url = `${API_BASE_URL}/customers/me`;
     const response = await axios.get(url);
     return response.data as Customer;
 }
