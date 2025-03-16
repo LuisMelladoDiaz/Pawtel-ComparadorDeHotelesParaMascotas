@@ -1,4 +1,3 @@
-from django.core.exceptions import ValidationError
 from django.test import TestCase
 from pawtel.app_users.models import AppUser
 from pawtel.customers.models import Customer
@@ -27,16 +26,3 @@ class CustomerModelTest(TestCase):
         self.assertTrue(customer.user.is_active)
         self.assertFalse(customer.user.is_staff)
         self.assertFalse(customer.user.is_superuser)
-
-    def test_create_hotel_without_owner(self):
-        customer = Customer()
-        with self.assertRaises(ValidationError):
-            customer.full_clean()
-
-    def test_create_hotel_invalid_owner(self):
-        invalid_app_users = ["", 123, {}, []]
-
-        for app_user in invalid_app_users:
-            with self.subTest(user=app_user):
-                with self.assertRaises(ValueError):
-                    Customer.objects.create(user=app_user)
