@@ -6,11 +6,10 @@ import Footer from '../components/Footer.vue';
 import { useCreateCustomer } from '@/data-layer/hooks/customers';
 import { useCreateHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { Notyf } from 'notyf';
+import { Form, Field, ErrorMessage } from 'vee-validate';
 
 const notyf = new Notyf();
-
 const username = ref('');
-const email = ref('');
 const phone = ref('');
 const password = ref('');
 const confirmPassword = ref('');
@@ -30,40 +29,18 @@ const toggleConfirmPasswordVisibility = () => {
     showConfirmPassword.value = !showConfirmPassword.value;
 };
 
-const register = async () => {
-    if (!username.value || !email.value || !phone.value || !password.value || !confirmPassword.value || !role.value) {
-        notyf.error('Por favor, completa todos los campos');
-        return;
-    }
-
-    if (password.value !== confirmPassword.value) {
-        notyf.error('Las contraseñas no coinciden');
-        return;
-    }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email.value)) {
-        notyf.error('El correo electrónico no es válido');
-        return;
-    }
-
-    const phonePattern = /^\+34\d{9}$/;
-    if (!phonePattern.test(phone.value)) {
-        notyf.error('El teléfono no es válido');
-        return;
-    }
-
+const register = async (values) => {
     const currentDate = new Date().toISOString().split('T')[0];
 
     try {
-        if (role.value === 'hotel_owner') {
+        if (values.role === 'hotel_owner') {
             await createHotelOwner(
                 {
-                    username: username.value,
-                    email: email.value,
-                    phone: phone.value,
-                    password: password.value,
-                    role: role.value,
+                    username: values.username,
+                    email: values.email,
+                    phone: values.phone,
+                    password: values.password,
+                    role: values.role,
                     date_joined: currentDate,
                 },
                 {
@@ -80,11 +57,11 @@ const register = async () => {
         } else {
             await createCustomer(
                 {
-                    username: username.value,
-                    email: email.value,
-                    phone: phone.value,
-                    password: password.value,
-                    role: role.value,
+                    username: values.username,
+                    email: values.email,
+                    phone: values.phone,
+                    password: values.password,
+                    role: values.role,
                     date_joined: currentDate,
                 },
                 {
@@ -113,56 +90,65 @@ const register = async () => {
                 <div class="w-1/3 bg-white shadow-lg rounded-lg p-6">
                     <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
 
-                    <form @submit.prevent="register">
+                    <Form @submit="register">
                         <div class="mt-4 relative">
                             <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-                            <input type="text" id="username" v-model="username"
+                            <Field name="username" as="input" id="username" v-model="username" rules="required"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                            <ErrorMessage name="username" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-4 relative">
                             <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input type="email" id="email" v-model="email"
+                            <Field name="email" as="input" id="email" v-model="email" rules="required|email"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
+                            <ErrorMessage name="email" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-4 relative">
                             <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                            <input type="tel" id="phone" v-model="phone"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required />
+                            <input v-validate="{ required: true, regex: /^\+34\d{9}$/ }"
+                                   name="phone"
+                                   v-model="phone"
+                                   type="text"
+                                   class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
+                                   required />
+                            <ErrorMessage name="phone" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-4 relative">
                             <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
-                            <select id="role" v-model="role"
+                            <Field name="role" as="select" id="role" v-model="role" rules="required"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required>
                                 <option value="customer">Cliente</option>
                                 <option value="hotel_owner">Dueño de hotel</option>
-                            </select>
+                            </Field>
+                            <ErrorMessage name="role" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-4 relative">
                             <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
+                            <Field :type="showPassword ? 'text' : 'password'" name="password" as="input" id="password" v-model="password" rules="required|min:6"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
                             <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
                                 <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                             </button>
+                            <ErrorMessage name="password" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-4 relative">
                             <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
-                            <input :type="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword"
+                            <Field :type="showConfirmPassword ? 'text' : 'password'" name="confirmPassword" as="input" id="confirmPassword" v-model="confirmPassword" rules="required|confirmed:password"
                                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                                 required />
                             <button type="button" @click="toggleConfirmPasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
                                 <i :class="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                             </button>
+                            <ErrorMessage name="confirmPassword" class="text-red-500 text-sm" />
                         </div>
 
                         <div class="mt-6">
@@ -178,83 +164,9 @@ const register = async () => {
                                 <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
                             </p>
                         </div>
-                    </form>
+                    </Form>
                 </div>
             </div>
-
-            <div class="container flex flex-col items-center mt-10 md:hidden">
-                <div class="w-full max-w-xs bg-white shadow-lg rounded-lg p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 text-center">Registrarse</h2>
-
-                    <form @submit.prevent="register">
-                        <div class="mt-4 relative">
-                            <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-                            <input type="text" id="username" v-model="username"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required />
-                        </div>
-
-                        <div class="mt-4 relative">
-                            <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                            <input type="email" id="email" v-model="email"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required />
-                        </div>
-
-                        <div class="mt-4 relative">
-                            <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                            <input type="tel" id="phone" v-model="phone"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required />
-                        </div>
-
-                        <div class="mt-4 relative">
-                            <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
-                            <select id="role" v-model="role"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required>
-                                <option value="customer">Cliente</option>
-                                <option value="hotel_owner">Dueño de hotel</option>
-                            </select>
-                        </div>
-
-                        <div class="mt-4 relative">
-                            <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required />
-                            <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
-                                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-                            </button>
-                        </div>
-
-                        <div class="mt-4 relative">
-                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
-                            <input :type="showConfirmPassword ? 'text' : 'password'" id="confirmPassword" v-model="confirmPassword"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required />
-                            <button type="button" @click="toggleConfirmPasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
-                                <i :class="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-                            </button>
-                        </div>
-
-                        <div class="mt-6">
-                            <button type="submit"
-                                class="w-full py-2 px-4 bg-azul-suave text-white font-semibold rounded-lg shadow-md hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
-                                Registrarse
-                            </button>
-                        </div>
-
-                        <div class="mt-4 text-center">
-                            <p class="text-sm text-gray-600">
-                                ¿Ya tienes cuenta?
-                                <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
         </div>
         <Footer />
     </div>
