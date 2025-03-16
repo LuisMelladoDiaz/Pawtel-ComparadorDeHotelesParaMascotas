@@ -44,7 +44,7 @@ class BookingHoldService:
         if not customer.user.is_active:
             raise PermissionDenied("Permission denied.")
 
-        if BookingHoldService.has_customer_booking_hold(customer.id):
+        if BookingHoldService.has_customer_booking_active_hold(customer.id):
             raise PermissionDenied("Customer already has booking hold.")
 
     @staticmethod
@@ -52,7 +52,7 @@ class BookingHoldService:
         context = {"request": request}
 
         current_customer_id = CustomerService.get_current_customer(request).id
-        hold_expires_at = now() + timedelta(minutes=10)
+        hold_expires_at = now() + timedelta(minutes=1)
 
         data = request.data.copy()
         data["customer"] = current_customer_id
@@ -85,8 +85,10 @@ class BookingHoldService:
     # Others -----------------------------------------------------------------
 
     @staticmethod
-    def has_customer_booking_hold(customer_id):
-        return BookingHold.objects.filter(customer_id=customer_id).exists()
+    def has_customer_booking_active_hold(customer_id):
+        return BookingHold.objects.filter(
+            customer_id=customer_id, hold_expires_at__gt=now()
+        ).exists()
 
     @staticmethod
     def count_active_booking_holds_of_room_type(room_type_id):

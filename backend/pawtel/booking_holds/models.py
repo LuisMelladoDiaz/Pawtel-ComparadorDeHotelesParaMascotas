@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ValidationError
 from django.utils.timezone import now, timedelta
 from pawtel.customers.models import Customer
 from pawtel.room_types.models import RoomType
@@ -29,3 +30,9 @@ class BookingHold(models.Model):
 
     def __str__(self):
         return f"Booking hold of room_type.name by {self.customer.username}"
+
+    def clean(self):
+        if self.hold_expires_at and self.hold_expires_at < now():
+            raise ValidationError(
+                {"hold_expires_at": "Hold expiration date cannot be in the past."}
+            )

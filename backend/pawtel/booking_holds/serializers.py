@@ -10,7 +10,7 @@ class BookingHoldSerializer(BaseSerializer):
 
     class Meta:
         model = BookingHold
-        fields = ["id", "hold_expires_at", "customer", "room_type"]
+        fields = ["id", "hold_expires_at", "customer", "room_type", "is_expired"]
         extra_kwargs = {
             "id": {"read_only": True},
             "hold_expires_at": {"allow_null": False},
