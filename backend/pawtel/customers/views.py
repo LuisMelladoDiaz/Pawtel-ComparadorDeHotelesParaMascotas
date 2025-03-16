@@ -3,6 +3,7 @@ from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
 from pawtel.customers.services import CustomerService
 from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 
@@ -47,3 +48,16 @@ class CustomerViewSet(viewsets.ModelViewSet):
         app_user_id = CustomerService.get_app_user_id_of_customer(pk)
         AppUserService.general_delete_app_user(request, app_user_id)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="me",
+        url_name="retrieve_current_customer",
+    )
+    def retrieve_current_customer(self, request):
+        hotel_owner = CustomerService.get_current_hotel_owner(request)
+        output_serializer_data = CustomerService.serialize_output_hotel_owner(
+            hotel_owner
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
