@@ -76,6 +76,13 @@ const logout = async () => {
                             </button>
                         </div>
 
+                        <div class="mt-4 text-center">
+                            <p class="text-sm text-gray-600">
+                                ¿Has olvidado tu contraseña? <br>
+                                <router-link to="/email-password-reset" class="text-blue-600 hover:underline">Reestablecer contraseña</router-link>
+                            </p>
+                        </div>
+
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
 
                         <div class="mt-6">
@@ -115,6 +122,13 @@ const logout = async () => {
                             <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
                                 <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                             </button>
+                        </div>
+
+                        <div class="mt-4 text-center">
+                            <p class="text-sm text-gray-600">
+                                ¿Has olvidado tu contraseña?
+                                <router-link to="/register" class="text-blue-600 hover:underline">Reestablecer contraseña</router-link>
+                            </p>
                         </div>
 
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>

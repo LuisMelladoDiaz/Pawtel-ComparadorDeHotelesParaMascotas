@@ -75,3 +75,15 @@ export const useLogoutMutation = () => {
     },
   });
 };
+
+export const usePasswordResetMutation = () => {
+  return useMutation({
+    mutationFn: async (data) => {
+      const response = await axios.post(`${API_BASE_URL}/auth/password-reset/`, data);
+      return response.data;
+    },
+    onError: (error) => {
+      console.error('El email introducido no tiene una cuenta con nosotros', error);
+    },
+  });
+};
