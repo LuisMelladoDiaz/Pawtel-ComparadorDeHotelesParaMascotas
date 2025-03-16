@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import Navbar from '../components/NavBar.vue';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import FilterNavbar from '../components/FilterNavBar.vue';
@@ -7,7 +7,8 @@ import Footer from '../components/Footer.vue';
 import PetHotelCard from '../components/HotelCard.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
 import AppliedFilter from '../components/AppliedFilter.vue';
-
+import { useRoute, useRouter } from 'vue-router';
+import { debounce } from 'lodash';
 import {useGetAllHotels} from '@/data-layer/hooks/hotels';
 import hotel1 from '../assets/hoteles/hotel1.jpg';
 import hotel2 from '../assets/hoteles/hotel2.jpg';
@@ -21,6 +22,8 @@ const defaultImages = [hotel1, hotel2, hotel3, hotel4, hotel5, hotel6];
 import { Notyf } from 'notyf';
 
 const notyf = new Notyf();
+const route = useRoute();
+const router = useRouter();
 
 // Filters
 const cities = ref([
@@ -38,43 +41,88 @@ const rooms = ref(["Single",
     "Habitación Económica",
     "Habitación Premium"].sort());
 
-const selectedCity = ref('');
-const selectedRoom = ref('');
-const minPrice = ref(0);
-const maxPrice = ref(500);
-const sortBy = ref("");
-const direction = ref("asc");
+    const selectedCity = ref("");
+    const selectedRoom = ref("");
+    const minPrice = ref(0);
+    const maxPrice = ref(500);
+    const sortBy = ref("");
+    const direction = ref("asc");
+
+onMounted(() => {
+  updateFiltersFromRoute();
+});
+
+watch(() => route.query, () => {
+  updateFiltersFromRoute();
+}, { deep: true });
+
+const updateFiltersFromRoute = () => {
+  selectedCity.value = route.query.city || "";
+  selectedRoom.value = route.query.room_type || "";
+  minPrice.value = route.query.min_price ? Number(route.query.min_price) : 0;
+  maxPrice.value = route.query.max_price ? Number(route.query.max_price) : 500;
+  sortBy.value = route.query.sort_by || "";
+  direction.value = route.query.direction || "asc";
+};
 
 const appliedFilters = ref([]);
 
 const applyFilters = () => {
-  // Clear applied filters
+  const queryParams = {
+    city: selectedCity.value || undefined,
+    room_type: selectedRoom.value || undefined,
+    min_price: minPrice.value !== 0 ? minPrice.value : undefined,
+    max_price: maxPrice.value !== 500 ? maxPrice.value : undefined,
+    sort_by: sortBy.value || undefined,
+    direction: direction.value || "asc"
+  };
+
+  Object.keys(queryParams).forEach(key => {
+    if (queryParams[key] === undefined) delete queryParams[key];
+  });
+
+  router.push({ path: route.path, query: queryParams });
+
   appliedFilters.value = [];
-
-  // Ciudad
-  if (selectedCity.value) {
-    appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
-  }
-
-  // Tipo de habitación
-  if (selectedRoom.value) {
-    appliedFilters.value.push(`Tipo de habitación: ${selectedRoom.value}`);
-  }
-
-  // Precios
+  if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
+  if (selectedRoom.value) appliedFilters.value.push(`Tipo de habitación: ${selectedRoom.value}`);
   appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
   appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
 
-  // Cerrar filtros
   isFiltersOpen.value = false;
-
-  // Notificación
   notyf.success('Filtros aplicados correctamente');
 };
 
+// Aplicar debounce a applyFilters
+const debouncedApplyFilters = debounce(() => {
+  applyFilters();
+}, 300);
+
+// Watch for changes in filters and apply them to the URL
+watch([selectedCity, selectedRoom, sortBy, direction], () => {
+  applyFilters();
+});
+
+watch([minPrice, maxPrice], () => {
+  debouncedApplyFilters(); // Usar debouncedApplyFilters aquí
+});
+
 const removeFilter = (filter) => {
+  if (filter.startsWith("Ciudad:")) {
+    selectedCity.value = ""; // Restablecer la ciudad
+  } else if (filter.startsWith("Tipo de habitación:")) {
+    selectedRoom.value = ""; // Restablecer el tipo de habitación
+  } else if (filter.startsWith("Max Precio:")) {
+    maxPrice.value = 500; // Restablecer el precio máximo
+  } else if (filter.startsWith("Min Precio:")) {
+    minPrice.value = 0; // Restablecer el precio mínimo
+  }
+
   appliedFilters.value = appliedFilters.value.filter(f => f !== filter);
   notyf.success('Filtro eliminado');
+
+  // Actualizar la URL
+  applyFilters();
 };
 
 // Menus
@@ -197,7 +245,7 @@ const hotels = computed(() =>
                     <option value="price_max">Precio Máximo</option>
                     <option value="price_min">Precio Mínimo</option>
                 </select>
-                
+
                 </div>
                 <button
                     @click="direction = direction === 'asc' ? 'desc' : 'asc'"
