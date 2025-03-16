@@ -3,7 +3,6 @@ from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
-from pawtel.rooms.models import Room
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
@@ -41,19 +40,6 @@ class RoomTypeViewSetTests(APITestCase):
             pet_type="CAT",
             hotel=self.hotel,
             is_archived=True,
-        )
-
-        self.room1 = Room.objects.create(
-            room_type=self.room_type_1, name="Room 1", is_archived=False
-        )
-        self.room2 = Room.objects.create(
-            room_type=self.room_type_1, name="Room 2", is_archived=True
-        )
-        self.room3 = Room.objects.create(
-            room_type=self.room_type_1, name="Room 3", is_archived=False
-        )
-        self.room4 = Room.objects.create(
-            room_type=self.room_type_2, name="Room 4", is_archived=True
         )
 
         self.client.force_authenticate(user=self.app_user)
@@ -111,35 +97,3 @@ class RoomTypeViewSetTests(APITestCase):
         url = reverse("room-type-detail", args=[self.room_type_1.id])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-
-    def test_get_total_vacancy_of_room_type_valid(self):
-        url = reverse(
-            "room-type-get_total_vacancy_of_room_type", args=[self.room_type_1.id]
-        )
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["total_vacancy"], 2)
-
-    def test_get_all_rooms_of_room_type_valid(self):
-        url = reverse(
-            "room-type-get_all_rooms_of_room_type", args=[self.room_type_1.id]
-        )
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
-        room_names = [room["name"] for room in response.data]
-        self.assertIn(self.room1.name, room_names)
-        self.assertIn(self.room3.name, room_names)
-
-    def test_get_vacancy_for_each_room_of_room_type_valid(self):
-        url = reverse(
-            "room-type-get_vacancy_for_each_room_of_room_type",
-            args=[self.room_type_1.id],
-        )
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
-        for room_vacancy in response.data:
-            self.assertIn("room_id", room_vacancy)
-            self.assertIn("vacancy", room_vacancy)
-            self.assertEqual(room_vacancy["vacancy"], self.room_type_1.capacity)

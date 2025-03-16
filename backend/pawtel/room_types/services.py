@@ -3,7 +3,6 @@ from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
-from pawtel.rooms.models import Room
 from rest_framework.exceptions import NotFound, PermissionDenied
 
 
@@ -115,31 +114,3 @@ class RoomTypeService:
     def delete_room_type(pk):
         room_type = RoomType.objects.get(pk=pk)
         room_type.delete()
-
-    # Others -----------------------------------------------------------------
-
-    @staticmethod
-    def get_total_vacancy_of_room_type(room_type_id=None):
-        total_vacancy = Room.objects.filter(
-            room_type_id=room_type_id, is_archived=False
-        ).count()
-        response_data = {
-            "room_type_id": int(room_type_id),
-            "total_vacancy": total_vacancy,
-        }
-        return response_data
-
-    @staticmethod
-    def get_all_rooms_of_room_type(room_type_id=None):
-        rooms = Room.objects.filter(room_type_id=room_type_id, is_archived=False)
-        return rooms
-
-    @staticmethod
-    def get_vacancy_for_each_room_of_room_type(room_type_id=None):
-        rooms = RoomTypeService.get_all_rooms_of_room_type(room_type_id)
-        vacancy_list = []
-        for room in rooms:
-            vacancy_list.append(
-                {"room_id": room.id, "vacancy": room.room_type.capacity}
-            )
-        return vacancy_list

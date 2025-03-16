@@ -4,7 +4,6 @@ from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
-from pawtel.rooms.models import Room
 from rest_framework.exceptions import NotFound, PermissionDenied
 
 
@@ -191,17 +190,3 @@ class HotelService:
     @staticmethod
     def get_all_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
-
-    @staticmethod
-    def get_total_vacancy_for_each_room_type_of_hotel(pk):
-        room_types = HotelService.get_all_room_types_of_hotel(pk)
-        vacancy_data = []
-
-        for room_type in room_types:
-            num_rooms = Room.objects.filter(room_type=room_type).count()
-            total_vacancy = room_type.capacity * num_rooms
-            vacancy_data.append(
-                {"room_type_id": room_type.id, "total_vacancy": total_vacancy}
-            )
-
-        return vacancy_data

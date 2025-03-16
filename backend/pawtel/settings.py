@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -44,7 +43,6 @@ INSTALLED_APPS = [
     "pawtel.hotel_owners.apps.HotelOwnersConfig",
     "pawtel.customers.apps.CustomersConfig",
     "pawtel.hotels.apps.HotelsConfig",
-    "pawtel.rooms.apps.RoomsConfig",
     "pawtel.room_types.apps.RoomTypesConfig",
     "pawtel",
 ]

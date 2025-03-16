@@ -27,7 +27,6 @@ urlpatterns = [
     path("", include("pawtel.customers.urls")),
     path("", include("pawtel.hotel_owners.urls")),
     path("", include("pawtel.hotels.urls")),
-    path("", include("pawtel.rooms.urls")),
     path("", include("pawtel.room_types.urls")),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # DRF Spectacular
