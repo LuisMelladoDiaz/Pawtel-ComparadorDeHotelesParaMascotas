@@ -13,6 +13,8 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     queryset = HotelOwner.objects.all()
     serializer_class = HotelOwnerSerializer
 
+    # Default CRUD -----------------------------------------------------------
+
     def list(self, request):
         hotel_owners = HotelOwnerService.list_hotel_owners()
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
@@ -52,33 +54,75 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         AppUserService.general_delete_app_user(request, app_user_id)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    # Get all hotels of hotel owner ------------------------------------------
+
     @action(
         detail=True,
         methods=["get"],
         url_path="hotels",
-        url_name="get_all_hotels_of_hotel_owner",
+        url_name="get_all_hotels_of_hotel_owner_explicit",
     )
-    def get_all_hotels_of_hotel_owner(self, request, pk=None):
+    def get_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
+        # Same as get_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(pk)
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="my-hotels",
+        url_name="get_all_hotels_of_hotel_owner_implicit",
+    )
+    def get_all_hotels_of_hotel_owner_implicit(self, request):
+        # Same as get_all_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
+        HotelOwnerService.authorize_action_hotel_owner(request, pk=None)
+        hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
+        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(hotel_owner_id)
+
+    @staticmethod
+    def __get_all_hotels_of_hotel_owner_base(pk):
+        # Common logic between both methods
         hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(pk)
         serializer = HotelSerializer(hotels, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    # Delete all hotels of hotel owner ---------------------------------------
 
     @action(
         detail=True,
         methods=["delete"],
         url_path="hotels/delete",
-        url_name="delete_all_hotels_of_hotel_owner",
+        url_name="delete_all_hotels_of_hotel_owner_explicit",
     )
-    def delete_all_hotels_of_hotel_owner(self, request, pk=None):
+    # Same as get_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
+    def delete_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(pk)
+
+    @action(
+        detail=False,
+        methods=["delete"],
+        url_path="my-hotels/delete",  # must add final /
+        url_name="delete_all_hotels_of_hotel_owner_implicit",
+    )
+    def delete_all_hotels_of_hotel_owner_implicit(self, request, pk=None):
+        # Same as delete_all_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
+        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
+        return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(hotel_owner_id)
+
+    @staticmethod
+    def __delete_all_hotels_of_hotel_owner_base(pk=None):
+        # Common logic between both methods
         HotelOwnerService.delete_all_hotels_of_hotel_owner(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    # Others -----------------------------------------------------------------
 
     @action(
         detail=False,
         methods=["get"],
-        url_path="hotel-owners-me",
+        url_path="me",
         url_name="retrieve_current_hotel_owner",
     )
     def retrieve_current_hotel_owner(self, request):

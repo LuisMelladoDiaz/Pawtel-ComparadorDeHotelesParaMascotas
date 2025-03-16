@@ -23,7 +23,8 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("auth/", include("authapp.urls")),  # Include auth_app urls
+    path("auth/", include("authapp.urls")),
+    path("", include("pawtel.customers.urls")),
     path("", include("pawtel.hotel_owners.urls")),
     path("", include("pawtel.hotels.urls")),
     path("", include("pawtel.rooms.urls")),

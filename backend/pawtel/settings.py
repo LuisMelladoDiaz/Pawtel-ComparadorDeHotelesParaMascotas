@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "authapp",
     "pawtel.app_users.apps.AppUsersConfig",
     "pawtel.hotel_owners.apps.HotelOwnersConfig",
+    "pawtel.customers.apps.CustomersConfig",
     "pawtel.hotels.apps.HotelsConfig",
     "pawtel.rooms.apps.RoomsConfig",
     "pawtel.room_types.apps.RoomTypesConfig",

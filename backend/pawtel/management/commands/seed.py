@@ -1,6 +1,7 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from pawtel.app_users.models import AppUser
+from pawtel.customers.models import Customer
 from pawtel.hotels.models import Hotel, HotelOwner
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
@@ -36,6 +37,7 @@ class Command(BaseCommand):
                 RoomType.objects.all().delete()
                 Hotel.objects.all().delete()
                 HotelOwner.objects.all().delete()
+                Customer.objects.all().delete()
                 AppUser.objects.all().delete()
                 self.stdout.write(self.style.SUCCESS("All relevant data deleted."))
             else:
@@ -45,6 +47,7 @@ class Command(BaseCommand):
 
         try:
             call_command("seed_hotel_owners")
+            call_command("seed_customers")
             call_command("seed_hotels")
             call_command("seed_room_types")
             call_command("seed_rooms")
