@@ -1,5 +1,5 @@
-from authapp.views import (LoginView, PasswordResetView, RegisterView,
-                           UserInfoView)
+from authapp.views import (LoginView, PasswordResetConfirmView,
+                           PasswordResetView, RegisterView, UserInfoView)
 from django.urls import path
 
 urlpatterns = [
@@ -8,5 +8,10 @@ urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
     path(
         "email-password-reset/", PasswordResetView.as_view(), name="email new password"
+    ),
+    path(
+        "password-reset-confirm/<uidb64>/<token>/",
+        PasswordResetConfirmView.as_view(),
+        name="password reset",
     ),
 ]

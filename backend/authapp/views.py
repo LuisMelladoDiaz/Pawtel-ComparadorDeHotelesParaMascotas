@@ -1,5 +1,8 @@
 from django.contrib.auth import authenticate
+from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from pawtel.app_users.models import AppUser
 from pawtel.app_users.serializers import AppUserSerializer
 from pawtel.customers.services import CustomerService
@@ -74,9 +77,14 @@ class PasswordResetView(APIView):
             )
         try:
             user = AppUser.objects.get(email=email)
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+            frontend_url = (
+                f"http://localhost:5173/auth/password-reset-confirm/{uidb64}/{token}/"
+            )
             message = (
                 f"Ha solicitado reestablecer la contraseña. Para continuar el proceso haga click en el siguiente enlace:\n\n"
-                f"{'reset_link'}\n\n"
+                f"{frontend_url}\n\n"
                 "Si no has solicitado cambiar la contraseña, por favor contáctanos de inmediato a nuestro email: pawteles@gmail.com"
             )
             send_mail(
@@ -93,4 +101,34 @@ class PasswordResetView(APIView):
             return Response(
                 {"error": "User with this email does not exist"},
                 status=status.HTTP_404_NOT_FOUND,
+            )
+
+
+class PasswordResetConfirmView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, uidb64, token):
+        try:
+            uid = force_str(urlsafe_base64_decode(uidb64))
+            user = AppUser.objects.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, AppUser.DoesNotExist):
+            user = None
+
+        if user is not None and default_token_generator.check_token(user, token):
+            password = request.data.get("password")
+            if password:
+                user.set_password(password)
+                user.save()
+                return Response(
+                    {"message": "La contraseña se ha cambiado correctamente."},
+                    status=status.HTTP_200_OK,
+                )
+            else:
+                return Response(
+                    {"error": "Se necesita una contraseña."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+        else:
+            return Response(
+                {"error": "Id inválido."}, status=status.HTTP_400_BAD_REQUEST
             )

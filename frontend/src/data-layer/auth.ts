@@ -87,3 +87,15 @@ export const usePasswordResetMutation = () => {
     },
   });
 };
+
+export const usePasswordResetConfirmMutation = () => {
+  return useMutation({
+    mutationFn: async ({ uidb64, token, password }: { uidb64: string; token: string; password: string }) => {
+      const response = await axios.post(`${API_BASE_URL}/password-reset-confirm/${uidb64}/${token}/`, { password });
+      return response.data;
+    },
+    onError: (error) => {
+      console.error('Error al restablecer la contraseña', error);
+    },
+  });
+};
