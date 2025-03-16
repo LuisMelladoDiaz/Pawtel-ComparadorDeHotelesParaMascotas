@@ -30,7 +30,7 @@ export const useGetCustomerById = (customerId: MaybeRef<number>) => {
     });
 };
 
-export const useCreatecustomer = () => {
+export const useCreateCustomer = () => {
     return useMutation({
         mutationFn: createCustomer,
     });

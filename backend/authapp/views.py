@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from pawtel.app_users.serializers import AppUserSerializer
+from pawtel.customers.services import CustomerService
 from pawtel.hotel_owners.services import HotelOwnerService
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -50,7 +51,7 @@ class RegisterView(APIView):
         if role == "hotel_owner":
             object = HotelOwnerService.general_create_hotel_owner(request)
         elif role == "customer":
-            object = HotelOwnerService.general_create_hotel_owner(request)
+            object = CustomerService.general_create_customer(request)
         else:
             return Response(
                 {"error": "Invalid role. Only hotel owners and customers are allowed."},
