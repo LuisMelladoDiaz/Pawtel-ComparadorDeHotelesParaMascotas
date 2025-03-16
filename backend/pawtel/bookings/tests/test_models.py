@@ -75,6 +75,7 @@ class BookingModelTest(TestCase):
             booking.full_clean()
 
     def test_create_booking_invalid_price(self):
+        invalid_prices = [-1, 0, None, "A"]
         for price in invalid_prices:
             with self.subTest(price=price):
                 with self.assertRaises(ValidationError):
