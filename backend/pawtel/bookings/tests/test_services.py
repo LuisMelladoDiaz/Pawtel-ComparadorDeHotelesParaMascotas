@@ -1,15 +1,14 @@
-from django.test import TestCase
 from datetime import date, timedelta
+
 from django.core.exceptions import ValidationError
-from rest_framework.exceptions import PermissionDenied, NotFound
+from django.test import TestCase
 from pawtel.app_users.models import AppUser
-from pawtel.customers.models import Customer
-from pawtel.hotels.models import Hotel
-from pawtel.hotel_owners.models import HotelOwner
-from pawtel.room_types.models import RoomType
-from pawtel.bookings.models import Booking
 from pawtel.bookings.services import BookingService
-from pawtel.customers.services import CustomerService
+from pawtel.customers.models import Customer
+from pawtel.hotel_owners.models import HotelOwner
+from pawtel.hotels.models import Hotel
+from pawtel.room_types.models import RoomType
+from rest_framework.exceptions import NotFound
 
 
 class BookingServiceTest(TestCase):
@@ -58,7 +57,7 @@ class BookingServiceTest(TestCase):
             "end_date": date.today() + timedelta(days=5),
         }
 
-    #CREATE Method Tests ----------------------------------------------
+    # CREATE Method Tests ----------------------------------------------
 
     def test_create_valid_booking(self):
         """✅ Servicio crea una reserva correctamente."""
@@ -76,12 +75,12 @@ class BookingServiceTest(TestCase):
         # Create first booking
         BookingService.create_booking(request_mock, self.booking_data)
 
-        #Try create another booking superpuesta
+        # Try create another booking superpuesta
         with self.assertRaises(ValidationError):
             BookingService.create_booking(request_mock, self.booking_data)
 
     def test_create_booking_invalid_end_date(self):
-        #end_date must be after start_date
+        # end_date must be after start_date
         request_mock = type("Request", (), {"user": self.app_user_customer})
         invalid_data = self.booking_data.copy()
         invalid_data["end_date"] = invalid_data["start_date"]  #  It can´t be the same
@@ -92,12 +91,12 @@ class BookingServiceTest(TestCase):
     def test_create_booking_invalid_room_type(self):
         request_mock = type("Request", (), {"user": self.app_user_customer})
         invalid_data = self.booking_data.copy()
-        invalid_data["room_type"] = 999  #RoomType doesn´t exist
+        invalid_data["room_type"] = 999  # RoomType doesn´t exist
 
         with self.assertRaises(NotFound):
             BookingService.create_booking(request_mock, invalid_data)
 
-    # GET Method Tests 
+    # GET Method Tests
 
     def test_list_bookings(self):
         request_mock = type("Request", (), {"user": self.app_user_customer})
@@ -116,5 +115,3 @@ class BookingServiceTest(TestCase):
     def test_retrieve_booking_not_found(self):
         with self.assertRaises(NotFound):
             BookingService.retrieve_booking(999)  # Doesn´t exist
-
-

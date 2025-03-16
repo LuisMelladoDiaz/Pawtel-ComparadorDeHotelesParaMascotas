@@ -1,12 +1,13 @@
-from django.test import TestCase
 from datetime import date, timedelta
+
+from django.test import TestCase
 from pawtel.app_users.models import AppUser
-from pawtel.customers.models import Customer
-from pawtel.hotels.models import Hotel
-from pawtel.hotel_owners.models import HotelOwner
-from pawtel.room_types.models import RoomType
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
+from pawtel.customers.models import Customer
+from pawtel.hotel_owners.models import HotelOwner
+from pawtel.hotels.models import Hotel
+from pawtel.room_types.models import RoomType
 
 
 class BookingSerializerTest(TestCase):
@@ -54,7 +55,7 @@ class BookingSerializerTest(TestCase):
             "room_type": self.room_type.id,
             "start_date": str(date.today() + timedelta(days=2)),
             "end_date": str(date.today() + timedelta(days=5)),
-            "total_price": 600.00
+            "total_price": 600.00,
         }
 
     # POST tests --------------------------------------------------------------
@@ -108,7 +109,7 @@ class BookingSerializerTest(TestCase):
             room_type=self.room_type,
             start_date=date.today() + timedelta(days=2),
             end_date=date.today() + timedelta(days=5),
-            total_price=600.00
+            total_price=600.00,
         )
         context = {"request": type("Request", (), {"method": "GET"})}
         serializer = BookingSerializer(booking, context=context)
@@ -117,5 +118,3 @@ class BookingSerializerTest(TestCase):
         self.assertIn("room_type", serializer.data)
         self.assertEqual(serializer.data["customer"], self.customer.id)
         self.assertEqual(serializer.data["room_type"], self.room_type.id)
-
-  

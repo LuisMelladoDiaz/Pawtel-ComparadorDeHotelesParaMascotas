@@ -1,12 +1,14 @@
+from datetime import date, timedelta
+
 from django.core.exceptions import ValidationError
 from django.test import TestCase
-from datetime import date, timedelta
 from pawtel.app_users.models import AppUser
+from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
-from pawtel.bookings.models import Booking
+
 
 class BookingModelTest(TestCase):
 
@@ -43,7 +45,7 @@ class BookingModelTest(TestCase):
             room_type=self.room_type,
             start_date=date.today() + timedelta(days=3),
             end_date=date.today() + timedelta(days=6),
-            total_price=600.00
+            total_price=600.00,
         )
         self.assertEqual(booking.customer, self.customer)
         self.assertEqual(booking.room_type, self.room_type)
@@ -57,7 +59,7 @@ class BookingModelTest(TestCase):
                 room_type=self.room_type,
                 start_date=date.today(),
                 end_date=date.today() + timedelta(days=3),
-                total_price=600.00
+                total_price=600.00,
             )
             booking.full_clean()
 
@@ -68,7 +70,7 @@ class BookingModelTest(TestCase):
                 room_type=self.room_type,
                 start_date=date.today() + timedelta(days=5),
                 end_date=date.today() + timedelta(days=3),
-                total_price=600.00
+                total_price=600.00,
             )
             booking.full_clean()
 
@@ -81,6 +83,6 @@ class BookingModelTest(TestCase):
                         room_type=self.room_type,
                         start_date=date.today() + timedelta(days=3),
                         end_date=date.today() + timedelta(days=6),
-                        total_price=0.00
+                        total_price=0.00,
                     )
                     booking.full_clean()

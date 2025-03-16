@@ -1,14 +1,15 @@
+from datetime import date, timedelta
+
 from django.test import TestCase
 from django.urls import reverse
-from datetime import date, timedelta
+from pawtel.app_users.models import AppUser
+from pawtel.bookings.models import Booking
+from pawtel.customers.models import Customer
+from pawtel.hotel_owners.models import HotelOwner
+from pawtel.hotels.models import Hotel
+from pawtel.room_types.models import RoomType
 from rest_framework import status
 from rest_framework.test import APIClient
-from pawtel.app_users.models import AppUser
-from pawtel.customers.models import Customer
-from pawtel.hotels.models import Hotel
-from pawtel.hotel_owners.models import HotelOwner
-from pawtel.room_types.models import RoomType
-from pawtel.bookings.models import Booking
 
 
 class BookingViewSetTestCase(TestCase):
@@ -58,7 +59,7 @@ class BookingViewSetTestCase(TestCase):
             room_type=self.room_type,
             start_date=date.today() + timedelta(days=2),
             end_date=date.today() + timedelta(days=5),
-            total_price=600.00
+            total_price=600.00,
         )
 
         # Autenticar al cliente
@@ -78,12 +79,12 @@ class BookingViewSetTestCase(TestCase):
         self.assertEqual(response.data["id"], self.booking.id)
 
     def test_retrieve_booking_unauthorized(self):
-        #Un Customer no puede ver reservas de otros Customers
+        # Un Customer no puede ver reservas de otros Customers
         # Crear otro usuario cliente
         app_user_customer2 = AppUser.objects.create_user(
             username="customer2",
             email="customer2@example.com",
-            password="securepassword123"
+            password="securepassword123",
         )
         self.client.force_authenticate(user=app_user_customer2)
 
@@ -99,10 +100,8 @@ class BookingViewSetTestCase(TestCase):
             "room_type": self.room_type.id,
             "start_date": str(date.today() + timedelta(days=3)),
             "end_date": str(date.today() + timedelta(days=6)),
-            "total_price": 600.00
+            "total_price": 600.00,
         }
         response = self.client.post(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(Booking.objects.filter(customer=self.customer).exists())
-
-  
