@@ -92,16 +92,4 @@ class BookingViewSetTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    # POST Method Test --------------------------------------------------
 
-    def test_create_booking(self):
-        url = reverse("booking-list")
-        data = {
-            "room_type": self.room_type.id,
-            "start_date": str(date.today() + timedelta(days=3)),
-            "end_date": str(date.today() + timedelta(days=6)),
-            "total_price": 600.00,
-        }
-        response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertTrue(Booking.objects.filter(customer=self.customer).exists())

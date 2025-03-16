@@ -31,7 +31,10 @@ class BookingViewSet(viewsets.ModelViewSet):
         output_serializer_data = BookingService.serialize_output_booking(booking)
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
-    # 🔹 Forbidden Methods ----------------------------------------------------
+    #Forbidden Methods ----------------------------------------------------
+
+    def create(self, request):
+        raise PermissionDenied("This operation is forbidden.")
 
     def update(self, request, pk=None):
         raise PermissionDenied("This operation is forbidden.")

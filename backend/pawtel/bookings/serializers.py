@@ -12,7 +12,7 @@ class BookingSerializer(BaseSerializer):
         "customer",
         "room_type",
     ]
-    fields_editable = ["start_date", "end_date", "total_price"]
+    fields_editable = []
     fields_not_readable = []
 
     class Meta:

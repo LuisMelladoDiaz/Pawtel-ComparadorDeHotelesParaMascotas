@@ -57,44 +57,6 @@ class BookingServiceTest(TestCase):
             "end_date": date.today() + timedelta(days=5),
         }
 
-    # CREATE Method Tests ----------------------------------------------
-
-    def test_create_valid_booking(self):
-        """✅ Servicio crea una reserva correctamente."""
-        request_mock = type("Request", (), {"user": self.app_user_customer})
-        booking = BookingService.create_booking(request_mock, self.booking_data)
-
-        self.assertIsNotNone(booking.id)
-        self.assertEqual(booking.customer, self.customer)
-        self.assertEqual(booking.room_type, self.room_type)
-        self.assertEqual(booking.total_price, 600.00)  # 3 nights * 200€
-
-    def test_create_booking_overlapping(self):
-        request_mock = type("Request", (), {"user": self.app_user_customer})
-
-        # Create first booking
-        BookingService.create_booking(request_mock, self.booking_data)
-
-        # Try create another booking superpuesta
-        with self.assertRaises(ValidationError):
-            BookingService.create_booking(request_mock, self.booking_data)
-
-    def test_create_booking_invalid_end_date(self):
-        # end_date must be after start_date
-        request_mock = type("Request", (), {"user": self.app_user_customer})
-        invalid_data = self.booking_data.copy()
-        invalid_data["end_date"] = invalid_data["start_date"]  #  It can´t be the same
-
-        with self.assertRaises(ValidationError):
-            BookingService.create_booking(request_mock, invalid_data)
-
-    def test_create_booking_invalid_room_type(self):
-        request_mock = type("Request", (), {"user": self.app_user_customer})
-        invalid_data = self.booking_data.copy()
-        invalid_data["room_type"] = 999  # RoomType doesn´t exist
-
-        with self.assertRaises(NotFound):
-            BookingService.create_booking(request_mock, invalid_data)
 
     # GET Method Tests
 

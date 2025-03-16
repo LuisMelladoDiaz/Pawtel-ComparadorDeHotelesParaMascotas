@@ -25,7 +25,6 @@ class Booking(models.Model):
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, null=False)
 
     def clean(self):
-        """✅ Validaciones personalizadas para comprobar restricciones sintácticas de las fechas"""
         super().clean()
 
         if self.creation_date > date.today():
