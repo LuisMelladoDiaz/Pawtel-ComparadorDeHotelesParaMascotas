@@ -2,7 +2,7 @@ from pawtel.base_serializer import BaseSerializer
 from pawtel.bookings.models import Booking
 
 class BookingSerializer(BaseSerializer):
-    fields_required_for_post = ["start_date", "end_date", "total_price", "customer", "room"]
+    fields_required_for_post = ["start_date", "end_date", "total_price", "customer", "room_type"]
     fields_editable = ["start_date", "end_date", "total_price"]
     fields_not_readable = []
 
@@ -15,7 +15,7 @@ class BookingSerializer(BaseSerializer):
             "end_date",
             "total_price",
             "customer",
-            "room"
+            "room_type"
         ]
         extra_kwargs = {
             "id": {"read_only": True},  
@@ -28,7 +28,7 @@ class BookingSerializer(BaseSerializer):
                 "allow_null": False,
             },
             "customer": {"allow_null": False},  
-            "room": {"allow_null": False},  
+            "room_type": {"allow_null": False},  
         }
 
     def validate_start_date(self, value):

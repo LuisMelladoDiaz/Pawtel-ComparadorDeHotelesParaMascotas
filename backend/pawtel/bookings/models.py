@@ -12,7 +12,7 @@ class Booking(models.Model):
     # Relations --------------------------------------------------------------
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, null=False)
+    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, null=False)
 
 
 

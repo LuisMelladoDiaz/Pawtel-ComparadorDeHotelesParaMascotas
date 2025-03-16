@@ -4,7 +4,7 @@ from rest_framework.exceptions import PermissionDenied, NotFound
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService  
-from pawtel.rooms.models import Room
+from pawtel.room_types.models import RoomType
 
 class BookingService:
 
@@ -50,11 +50,11 @@ class BookingService:
     @transaction.atomic
     def create_booking(request, booking_data):
         customer = CustomerService.get_current_customer(request)  
-        room_id = booking_data.get("room")
+        room_id = booking_data.get("room_type")
         try:
-            room = Room.objects.get(id=room_id)
-        except Room.DoesNotExist:
-            raise NotFound("Room does not exist.")
+            room_type = RoomType.objects.get(id=room_id)
+        except RoomType.DoesNotExist:
+            raise NotFound("RoomType does not exist.")
 
         start_date = booking_data.get("start_date")
         end_date = booking_data.get("end_date")
@@ -64,7 +64,7 @@ class BookingService:
         #Validate that the client does not have previous reservations for the same room in the same period
         overlapping_bookings = Booking.objects.filter(
             customer=customer,
-            room=room,
+            room_type=room_type,
             start_date__lt=end_date,
             end_date__gt=start_date
         ).exists()
@@ -72,14 +72,14 @@ class BookingService:
         if overlapping_bookings:
             raise ValidationError("A customer can have different bookings for the same room, but not overlapping.")
 
-        price_per_night = room.room_type.price_per_night
+        price_per_night = room_type.price_per_night
         total_nights = (end_date - start_date).days
         total_price = round(price_per_night * total_nights, 2)  # 2 decimals
 
         #Create the booking
         booking = Booking.objects.create(
             customer=customer,
-            room=room,
+            room_type=room_type,
             start_date=start_date,
             end_date=end_date,
             total_price=total_price,

@@ -23,7 +23,7 @@ class BookingViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        """✅ Crea una reserva validando restricciones semánticas."""
+        #Crea una reserva validando restricciones semánticas.
         booking = BookingService.create_booking(request, request.data) 
         output_serializer_data = BookingService.serialize_output_booking(booking)
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
