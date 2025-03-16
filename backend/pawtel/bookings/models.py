@@ -2,6 +2,9 @@ from datetime import date
 
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.forms import ValidationError
+from pawtel.customers.models import Customer
+from pawtel.room_types.models import RoomType
 
 
 class Booking(models.Model):
@@ -9,7 +12,11 @@ class Booking(models.Model):
     start_date = models.DateField(null=False, blank=False)
     end_date = models.DateField(null=False, blank=False)
     total_price = models.DecimalField(
-        decimal_places=2, validators=[MinValueValidator(1.00)], null=False, blank=False
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(1)],
+        null=False,
+        blank=False,
     )
 
     # Relations --------------------------------------------------------------

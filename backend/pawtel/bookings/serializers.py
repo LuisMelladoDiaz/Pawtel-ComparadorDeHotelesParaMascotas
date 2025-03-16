@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from pawtel.base_serializer import BaseSerializer
 from pawtel.bookings.models import Booking
 
@@ -31,8 +33,8 @@ class BookingSerializer(BaseSerializer):
             "end_date": {"allow_null": False},
             "total_price": {
                 "min_value": Decimal("1.00"),
+                "max_digits": 10,
                 "decimal_places": 2,
-                "allow_null": False,
             },
             "customer": {"allow_null": False},
             "room_type": {"allow_null": False},
