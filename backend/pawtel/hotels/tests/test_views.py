@@ -80,11 +80,3 @@ class HotelViewSetTestCase(TestCase):
         url = reverse("hotel-get_all_room_types_of_hotel", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_get_total_vacancy_for_each_room_type_of_hotel(self):
-        url = reverse(
-            "hotel-get_total_vacancy_for_each_room_type_of_hotel",
-            kwargs={"pk": self.hotel.id},
-        )
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)

@@ -10,11 +10,18 @@ class RoomTypeSerializer(BaseSerializer):
         "name",
         "description",
         "capacity",
+        "num_rooms",
         "price_per_night",
         "pet_type",
         "hotel",
     ]
-    fields_editable = ["name", "description", "capacity", "price_per_night"]
+    fields_editable = [
+        "name",
+        "description",
+        "capacity",
+        "num_rooms",
+        "price_per_night",
+    ]
     fields_not_readable = []
 
     class Meta:
@@ -25,6 +32,7 @@ class RoomTypeSerializer(BaseSerializer):
             "name",
             "description",
             "capacity",
+            "num_rooms",
             "price_per_night",
             "pet_type",
             "hotel",
@@ -34,7 +42,8 @@ class RoomTypeSerializer(BaseSerializer):
             "is_archived": {"read_only": True},
             "name": {"max_length": 50, "allow_null": False},
             "description": {"max_length": 300, "allow_null": False},
-            "capacity": {"min_value": 1, "allow_null": False},
+            "capacity": {"min_value": 1, "max_value": 200, "allow_null": False},
+            "num_rooms": {"min_value": 0, "max_value": 200, "allow_null": False},
             "price_per_night": {
                 "required": True,
                 "min_value": Decimal("1.00"),
