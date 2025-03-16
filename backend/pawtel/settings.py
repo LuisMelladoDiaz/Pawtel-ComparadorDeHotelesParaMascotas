@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "pawtel.customers.apps.CustomersConfig",
     "pawtel.hotels.apps.HotelsConfig",
     "pawtel.room_types.apps.RoomTypesConfig",
+    "pawtel.booking_holds.apps.BookingHoldsConfig",
     "pawtel",
 ]
 

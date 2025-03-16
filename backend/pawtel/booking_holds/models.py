@@ -4,13 +4,15 @@ from pawtel.customers.models import Customer
 from pawtel.room_types.models import RoomType
 
 
+def default_hold_expiry():
+    return now() + timedelta(minutes=10)
+
+
 class BookingHold(models.Model):
 
     # Attributes -------------------------------------------------------------
 
-    hold_expires_at = models.DateTimeField(
-        default=lambda: now() + timedelta(minutes=10), null=False
-    )
+    hold_expires_at = models.DateTimeField(default=default_hold_expiry, null=False)
 
     # Transient attributes ---------------------------------------------------
 
