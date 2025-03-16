@@ -1,6 +1,5 @@
 from django.forms import ValidationError
 from pawtel.hotel_owners.services import HotelOwnerService
-from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from rest_framework.exceptions import NotFound, PermissionDenied
@@ -40,16 +39,7 @@ class RoomTypeService:
 
     @staticmethod
     def authorize_create_room_type(request):
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
-
-        hotel_id = request.data.get("hotel")
-        if not hotel_id:
-            raise PermissionDenied("Permission denied.")
-
-        hotel = HotelService.retrieve_hotel(hotel_id)
-
-        if not hotel or hotel.hotel_owner.id != hotel_owner.id:
-            raise PermissionDenied("Permission denied.")
+        HotelOwnerService.get_current_hotel_owner(request)
 
     @staticmethod
     def serialize_input_room_type_create(request):
@@ -58,14 +48,15 @@ class RoomTypeService:
         return serializer
 
     @staticmethod
-    def validate_create_room_type(input_serializer):
+    def validate_create_room_type(request, input_serializer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
         name = input_serializer.validated_data.get("name")
         hotel = input_serializer.validated_data.get("hotel")
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if hotel.is_archived:
+        if (hotel.is_archived) or (hotel.hotel_owner.id != hotel_owner.id):
             raise ValidationError({"hotel": "Invalid hotel."})
 
         if name and RoomType.objects.filter(hotel_id=hotel.id, name=name).exists():

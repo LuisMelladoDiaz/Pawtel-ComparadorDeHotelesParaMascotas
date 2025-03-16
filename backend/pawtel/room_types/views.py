@@ -25,7 +25,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     def create(self, request):
         RoomTypeService.authorize_create_room_type(request)
         input_serializer = RoomTypeService.serialize_input_room_type_create(request)
-        RoomTypeService.validate_create_room_type(input_serializer)
+        RoomTypeService.validate_create_room_type(request, input_serializer)
         room_type_created = RoomTypeService.create_room_type(input_serializer)
         output_serializer_data = RoomTypeService.serialize_output_room_type(
             room_type_created
