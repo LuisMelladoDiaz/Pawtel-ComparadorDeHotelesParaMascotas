@@ -45,7 +45,7 @@ class CustomerService:
         if hasattr(user, "customer"):
             permissions = customer_permissions
             user_type = "Customer"
-        elif hasattr(user, "hotelowner"):
+        elif hasattr(user, "hotel_owner"):
             permissions = hotel_owner_permissions
             user_type = "HotelOwner"
             """
