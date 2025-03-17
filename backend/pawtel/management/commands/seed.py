@@ -4,7 +4,6 @@ from pawtel.app_users.models import AppUser
 from pawtel.customers.models import Customer
 from pawtel.hotels.models import Hotel, HotelOwner
 from pawtel.room_types.models import RoomType
-from pawtel.rooms.models import Room
 
 
 class Command(BaseCommand):
@@ -33,7 +32,6 @@ class Command(BaseCommand):
             )
             if confirm.lower() == "yes":
                 self.stdout.write(self.style.WARNING("Deleting existing data..."))
-                Room.objects.all().delete()
                 RoomType.objects.all().delete()
                 Hotel.objects.all().delete()
                 HotelOwner.objects.all().delete()
@@ -50,7 +48,6 @@ class Command(BaseCommand):
             call_command("seed_customers")
             call_command("seed_hotels")
             call_command("seed_room_types")
-            call_command("seed_rooms")
         except CommandError as e:
             self.stdout.write(self.style.ERROR(f"Error while seeding: {e}"))
             return
