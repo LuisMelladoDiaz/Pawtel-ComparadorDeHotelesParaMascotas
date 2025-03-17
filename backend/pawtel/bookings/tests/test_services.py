@@ -60,7 +60,6 @@ class BookingServiceTest(TestCase):
     # GET Method Tests
 
     def test_list_bookings(self):
-        """✅ Obtener todas las reservas existentes."""
         Booking.objects.create(
             customer=self.customer,
             room_type=self.room_type,
@@ -73,7 +72,6 @@ class BookingServiceTest(TestCase):
         self.assertEqual(len(bookings), 1)
 
     def test_retrieve_booking_valid(self):
-        """✅ Obtener una reserva existente."""
         booking = Booking.objects.create(
             customer=self.customer,
             room_type=self.room_type,
@@ -86,6 +84,5 @@ class BookingServiceTest(TestCase):
         self.assertEqual(retrieved_booking.id, booking.id)
 
     def test_retrieve_booking_not_found(self):
-        """❌ Intentar obtener una reserva inexistente."""
         with self.assertRaises(NotFound):
-            BookingService.retrieve_booking(999)  # ❌ No existe
+            BookingService.retrieve_booking(999)  # No existe
