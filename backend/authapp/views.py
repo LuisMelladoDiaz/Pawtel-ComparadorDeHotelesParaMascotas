@@ -117,6 +117,13 @@ class PasswordResetConfirmView(APIView):
         if user is not None and default_token_generator.check_token(user, token):
             password = request.data.get("password")
             if password:
+                if user.check_password(password):
+                    return Response(
+                        {
+                            "error": "La nueva contraseña no puede ser la misma que la anterior."
+                        },
+                        status=status.HTTP_400_BAD_REQUEST,
+                    )
                 user.set_password(password)
                 user.save()
                 return Response(
