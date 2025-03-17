@@ -1,8 +1,8 @@
 from datetime import date, timedelta
 
-from django.core.exceptions import ValidationError
 from django.test import TestCase
 from pawtel.app_users.models import AppUser
+from pawtel.bookings.models import Booking
 from pawtel.bookings.services import BookingService
 from pawtel.customers.models import Customer
 from pawtel.hotel_owners.models import HotelOwner
@@ -57,23 +57,35 @@ class BookingServiceTest(TestCase):
             "end_date": date.today() + timedelta(days=5),
         }
 
-
     # GET Method Tests
 
     def test_list_bookings(self):
-        request_mock = type("Request", (), {"user": self.app_user_customer})
-        BookingService.create_booking(request_mock, self.booking_data)
+        """✅ Obtener todas las reservas existentes."""
+        Booking.objects.create(
+            customer=self.customer,
+            room_type=self.room_type,
+            start_date=date.today() + timedelta(days=2),
+            end_date=date.today() + timedelta(days=5),
+            total_price=600.00,
+        )
 
         bookings = BookingService.list_bookings()
         self.assertEqual(len(bookings), 1)
 
     def test_retrieve_booking_valid(self):
-        request_mock = type("Request", (), {"user": self.app_user_customer})
-        booking = BookingService.create_booking(request_mock, self.booking_data)
+        """✅ Obtener una reserva existente."""
+        booking = Booking.objects.create(
+            customer=self.customer,
+            room_type=self.room_type,
+            start_date=date.today() + timedelta(days=2),
+            end_date=date.today() + timedelta(days=5),
+            total_price=600.00,
+        )
 
         retrieved_booking = BookingService.retrieve_booking(booking.id)
         self.assertEqual(retrieved_booking.id, booking.id)
 
     def test_retrieve_booking_not_found(self):
+        """❌ Intentar obtener una reserva inexistente."""
         with self.assertRaises(NotFound):
-            BookingService.retrieve_booking(999)  # Doesn´t exist
+            BookingService.retrieve_booking(999)  # ❌ No existe
