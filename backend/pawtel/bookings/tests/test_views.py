@@ -63,7 +63,6 @@ class BookingViewSetTestCase(TestCase):
             total_price=600.00,
         )
 
-        # Autenticar al cliente
         self.client.force_authenticate(user=self.app_user_customer)
 
     # GET Method Tests --------------------------------------------------

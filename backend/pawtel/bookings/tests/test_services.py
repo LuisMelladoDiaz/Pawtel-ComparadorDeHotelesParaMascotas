@@ -85,4 +85,4 @@ class BookingServiceTest(TestCase):
 
     def test_retrieve_booking_not_found(self):
         with self.assertRaises(NotFound):
-            BookingService.retrieve_booking(999)  # No existe
+            BookingService.retrieve_booking(999)  # It does not exist

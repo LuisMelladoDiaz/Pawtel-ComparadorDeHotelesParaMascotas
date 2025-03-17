@@ -1,9 +1,6 @@
-from django.db import transaction
-from django.forms import ValidationError
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService
-from pawtel.room_types.models import RoomType
 from rest_framework.exceptions import NotFound, PermissionDenied
 
 
@@ -20,7 +17,7 @@ class BookingService:
     @staticmethod
     def authorize_action_booking(request, pk):
         booking = BookingService.retrieve_booking(pk)
-        customer = CustomerService.get_current_customer(request)  # Obtener el cliente
+        customer = CustomerService.get_current_customer(request)
         if not booking:
             raise NotFound("Booking does not exist.")
 
@@ -40,7 +37,3 @@ class BookingService:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
             raise NotFound(detail=f"Booking with id {pk} not found")
-
-
-
-   

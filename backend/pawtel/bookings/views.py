@@ -12,7 +12,7 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
 
     def list(self, request):
-
+        # In the future it will be restricted to admin onlyl
         bookings = BookingService.list_bookings()
         output_serializer_data = BookingService.serialize_output_booking(
             bookings, many=True
@@ -25,9 +25,7 @@ class BookingViewSet(viewsets.ModelViewSet):
         output_serializer_data = BookingService.serialize_output_booking(booking)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
-
-
-    #Forbidden Methods ----------------------------------------------------
+    # Forbidden Methods ----------------------------------------------------
 
     def create(self, request):
         raise PermissionDenied("This operation is forbidden.")

@@ -67,7 +67,7 @@ class BookingSerializerTest(TestCase):
 
     def test_missing_required_fields_post(self):
         invalid_data = self.valid_data.copy()
-        invalid_data.pop("start_date")  # Se elimina `start_date`
+        invalid_data.pop("start_date")
         context = {"request": type("Request", (), {"method": "POST"})}
         serializer = BookingSerializer(data=invalid_data, context=context)
         self.assertFalse(serializer.is_valid())
