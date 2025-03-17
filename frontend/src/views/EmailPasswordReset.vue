@@ -60,7 +60,7 @@ const resetPassword = async () => {
 
                         <div class="mt-4 text-center">
                             <p class="text-sm text-gray-600">
-                                ¿Ya tienes cuenta?
+                                ¿Recuerdas tu contraseña?
                                 <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
                             </p>
                         </div>

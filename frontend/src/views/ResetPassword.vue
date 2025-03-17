@@ -53,14 +53,14 @@ const resetPassword = async () => {
 
                 <form @submit.prevent="resetPassword">
                     <div class="mt-4 relative">
-                        <label for="password" class="block text-sm font-medium text-gray-700">Nueva Contraseña</label>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Nueva contraseña</label>
                         <input type="password" id="password" v-model="password"
                             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                             required />
                     </div>
 
                     <div class="mt-4 relative">
-                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar Nueva Contraseña</label>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar nueva contraseña</label>
                         <input type="password" id="confirmPassword" v-model="confirmPassword"
                             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
                             required />

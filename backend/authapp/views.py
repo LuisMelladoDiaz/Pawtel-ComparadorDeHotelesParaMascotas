@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
@@ -79,18 +81,16 @@ class PasswordResetView(APIView):
             user = AppUser.objects.get(email=email)
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
             token = default_token_generator.make_token(user)
-            frontend_url = (
-                f"http://localhost:5173/auth/password-reset-confirm/{uidb64}/{token}/"
-            )
+            frontend_url = f"{os.getenv('FRONTEND_URL')}/auth/password-reset-confirm/{uidb64}/{token}/"
             message = (
                 f"Ha solicitado restablecer la contraseña. Para continuar el proceso haga click en el siguiente enlace:\n\n"
                 f"{frontend_url}\n\n"
-                "Si no has solicitado cambiar la contraseña, por favor contáctanos de inmediato a nuestro email: pawteles@gmail.com"
+                f"Si no has solicitado cambiar la contraseña, por favor contáctanos de inmediato a nuestro email: {os.getenv('DEFAULT_FROM_EMAIL')}"
             )
             send_mail(
                 "Restablezca su contraseña",
                 message,
-                "pawteles@gmail.com",
+                os.getenv("DEFAULT_FROM_EMAIL"),
                 [email],
                 fail_silently=False,
             )
