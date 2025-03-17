@@ -25,6 +25,17 @@ class BookingViewSet(viewsets.ModelViewSet):
         output_serializer_data = BookingService.serialize_output_booking(booking)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
+
+    def list_by_hotel(self, request, hotel_id=None):
+        bookings = BookingService.list_bookings_by_hotel(hotel_id)
+        output_serializer_data = BookingService.serialize_output_booking(bookings, many=True)
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    def list_by_customer(self, request, customer_id=None):
+        bookings = BookingService.list_bookings_by_customer(customer_id)
+        output_serializer_data = BookingService.serialize_output_booking(bookings, many=True)
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
     # Forbidden Methods ----------------------------------------------------
 
     def create(self, request):

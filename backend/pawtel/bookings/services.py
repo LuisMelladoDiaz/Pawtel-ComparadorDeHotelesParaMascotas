@@ -37,3 +37,14 @@ class BookingService:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
             raise NotFound(detail=f"Booking with id {pk} not found")
+    
+
+    @staticmethod
+    def list_bookings_by_hotel(hotel_id):
+        bookings = Booking.objects.filter(room_type__hotel__id=hotel_id)
+        return bookings
+
+    @staticmethod
+    def list_bookings_by_customer(customer_id):
+        bookings = Booking.objects.filter(customer_id=customer_id)
+        return bookings
