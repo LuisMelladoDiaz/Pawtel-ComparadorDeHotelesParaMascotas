@@ -8,7 +8,7 @@ from pawtel.customers.models import Customer
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class BookingServiceTest(TestCase):
@@ -67,8 +67,10 @@ class BookingServiceTest(TestCase):
             end_date=date.today() + timedelta(days=5),
             total_price=600.00,
         )
-
-        bookings = BookingService.list_bookings()
+        permission_granted, user_type = BookingService.check_permission(
+            self.app_user_customer, "list"
+        )
+        bookings = BookingService.list_bookings(permission_granted, user_type)
         self.assertEqual(len(bookings), 1)
 
     def test_retrieve_booking_valid(self):
@@ -86,3 +88,50 @@ class BookingServiceTest(TestCase):
     def test_retrieve_booking_not_found(self):
         with self.assertRaises(NotFound):
             BookingService.retrieve_booking(999)  # It does not exist
+
+    def test_check_permission_customer_allowed_actions(self):
+        user = self.app_user_customer
+        allowed_actions = ["list", "retrieve"]
+
+        for action in allowed_actions:
+            has_permission, user_type = BookingService.check_permission(user, action)
+            self.assertTrue(has_permission)
+            self.assertEqual(user_type, "Customer")
+
+    def test_check_permission_customer_denied_actions(self):
+        user = self.app_user_customer
+        denied_actions = ["create", "update", "partial_update", "destroy"]
+
+        for action in denied_actions:
+            with self.assertRaises(PermissionDenied):
+                BookingService.check_permission(user, action)
+
+    def test_check_permission_hotel_owner_allowed_actions(self):
+        user = self.app_user_hotel_owner
+        allowed_actions = ["retrieve"]
+
+        for action in allowed_actions:
+            has_permission, user_type = BookingService.check_permission(user, action)
+            self.assertTrue(has_permission)
+            self.assertEqual(user_type, "HotelOwner")
+
+    def test_check_permission_hotel_owner_denied_actions(self):
+        user = self.app_user_hotel_owner
+        denied_actions = ["list", "create", "update", "partial_update", "destroy"]
+
+        for action in denied_actions:
+            with self.assertRaises(PermissionDenied):
+                BookingService.check_permission(user, action)
+
+    def test_check_permission_unknown_user(self):
+        unknown_user = AppUser.objects.create_user(
+            username="unknown_user",
+            first_name="Unknown",
+            last_name="User",
+            email="unknown@example.com",
+            phone="+34987655555",
+            password="unknownpassword",
+        )
+
+        with self.assertRaises(PermissionDenied):
+            BookingService.check_permission(unknown_user, "list")
