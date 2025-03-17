@@ -1,10 +1,9 @@
-from django.forms import ValidationError
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.rooms.models import Room
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import *
 
 
 class RoomTypeService:
