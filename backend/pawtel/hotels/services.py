@@ -23,8 +23,8 @@ class HotelService:
             raise PermissionDenied("Permission denied.")
 
     @staticmethod
-    def serialize_output_hotel(hotel, many=False):
-        return HotelSerializer(hotel, many=many).data
+    def serialize_output_hotel(hotel, many=False, context=None):
+        return HotelSerializer(hotel, many=many, context=context).data
 
     # GET --------------------------------------------------------------------
 

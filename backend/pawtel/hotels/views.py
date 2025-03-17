@@ -1,5 +1,5 @@
 from pawtel.hotels.models import Hotel
-from pawtel.hotels.serializers import HotelSerializer
+from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.serializers import RoomTypeSerializer
 from rest_framework import status, viewsets
@@ -14,7 +14,9 @@ class HotelViewSet(viewsets.ModelViewSet):
     def list(self, request):
         filters = request.query_params.dict()  # URL filters checked
         hotels = HotelService.list_hotels(filters)
-        output_serializer_data = HotelService.serialize_output_hotel(hotels, many=True)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotels, many=True, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
@@ -28,6 +30,17 @@ class HotelViewSet(viewsets.ModelViewSet):
         hotel_created = HotelService.create_hotel(input_serializer)
         output_serializer_data = HotelService.serialize_output_hotel(hotel_created)
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=["post"])
+    def upload_image(self, request, pk=None):
+        hotel = self.get_object()
+        image_serializer = HotelImageSerializer(data=request.data)
+
+        if image_serializer.is_valid():
+            image_serializer.save(hotel=hotel)
+            return Response(image_serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(image_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def update(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)

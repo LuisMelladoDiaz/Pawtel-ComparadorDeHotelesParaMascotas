@@ -4,7 +4,7 @@ import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
-import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
+import { useCreateHotel, useUpdateHotel, useDeleteHotel, useUploadImageToHotel } from '@/data-layer/hooks/hotels';
 import { Notyf } from 'notyf'; // Import Notyf library
 import 'notyf/notyf.min.css'; // Import Notyf CSS
 
@@ -83,6 +83,41 @@ const deleteHotel = async (id) => {
     }
   }
 };
+
+
+const file = ref(null);
+const isCover = ref(false);
+
+const handleFileChange = (e) => {
+  file.value = e.target.files[0];
+};
+
+
+const upload = useUploadImageToHotel();
+
+const handleUpload = async () => {
+  if (!file) {
+    notyf.error('No se ha seleccionado ningún archivo.');
+    return;
+  }
+  upload.mutateAsync({ hotelId: hotelData.value.id,
+    image: file,
+    isCover: isCover },
+  {
+    onSuccess: () => {
+      notyf.success('Imagen subida correctamente.');
+      setFile(null);
+    },
+    onError: (error) => {
+      notyf.error('Error al subir la imagen.');
+      console.error('Error al subir la imagen', error);
+    },
+  });
+
+};
+
+
+
 
 // Paginación
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
@@ -173,7 +208,18 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           <Button type="accept" @click="saveHotel">{{ isEditing ? 'Actualizar' : 'Crear' }}</Button>
           <Button type="reject" @click="modalOpen = false">Cancelar</Button>
         </div>
+        <div v-if="isEditing" class="text-red-600 text-sm mt-2">
+          <div class="flex flex-col">
+            <label for="image" class="mb-2">Imagen:</label>
+            <input id="image" type="file" @change="handleFileChange" class="mb-2" />
+            <label for="cover">
+              Establecer como portada:
+              <input id="cover" type="checkbox" v-model="isCover" class="ml-2" />
+            </label>
+            <button @click="handleUpload" class="mt-2">Subir</button>
+          </div>
+        </div>
+        </div>
       </div>
-    </div>
   </div>
 </template>
