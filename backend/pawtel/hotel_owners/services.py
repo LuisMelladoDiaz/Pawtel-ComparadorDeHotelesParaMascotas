@@ -10,6 +10,78 @@ from rest_framework.exceptions import (AuthenticationFailed, NotFound,
 
 class HotelOwnerService:
 
+    def check_permission(user, action):
+        """Checks if the user has permission to perform an action based on their type."""
+
+        customer_permissions = {
+            "allowed_actions": [],
+            "denied_actions": [
+                "list",
+                "retrieve",
+                "create",
+                "update",
+                "destroy",
+                "get_all_hotels_of_hotel_owner_explicit",
+                "get_all_hotels_of_hotel_owner_implicit",
+                "delete_all_hotels_of_hotel_owner_explicit",
+                "delete_all_hotels_of_hotel_owner_implicit",
+                "retrieve_current_hotel_owner",
+            ],
+        }
+
+        hotel_owner_permissions = {
+            "allowed_actions": [
+                "retrieve",
+                "update",
+                "destroy",
+                "get_all_hotels_of_hotel_owner_implicit",
+                "delete_all_hotels_of_hotel_owner_implicit",
+                "retrieve_current_hotel_owner",
+                "list",
+                "create",
+                "get_all_hotels_of_hotel_owner_implicit",
+                "delete_all_hotels_of_hotel_owner_explicit",
+                "get_all_hotels_of_hotel_owner_explicit",
+            ],
+            "denied_actions": [],
+        }
+
+        # Temporal hasta que esté admin
+        """
+        app_admin_permissions = {
+            'allowed_actions': [
+                'list', 'retrieve', 'create', 'update', 'destroy',
+                'get_all_hotels_of_hotel_owner_explicit', 'get_all_hotels_of_hotel_owner_implicit',
+                'delete_all_hotels_of_hotel_owner_explicit','delete_all_hotels_of_hotel_owner_implicit', 'retrieve_current_hotel_owner'
+            ],
+            'denied_actions': []
+        }
+        """
+
+        if hasattr(user, "customer"):
+            permissions = customer_permissions
+            user_type = "Customer"
+        elif hasattr(user, "hotelowner"):
+            permissions = hotel_owner_permissions
+            user_type = "HotelOwner"
+
+            """ elif hasattr(user, "app_admin"):
+            permissions = app_admin_permissions
+            user_type = "AppAdmin" """
+
+        else:
+            raise PermissionDenied("Role not recognized.")
+
+        # Verificar si la acción está permitida
+        if action in permissions["allowed_actions"]:
+            return True, user_type
+        elif action in permissions["denied_actions"]:
+            raise PermissionDenied(
+                f"You don't have permission to perform the action: {action}"
+            )
+        else:
+            raise PermissionDenied(f"Action {action} is not recognized for your role.")
+
     # General processes ------------------------------------------------------
 
     @staticmethod
@@ -25,22 +97,31 @@ class HotelOwnerService:
     # Common -----------------------------------------------------------------
 
     @staticmethod
-    def authorize_action_hotel_owner(request, pk=None):
-        logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+    def authorize_action_hotel_owner(
+        request, pk=None, permission_granted=None, user_type=None
+    ):
+        if permission_granted:
+            # if not user_type == "AppAdmin":
+            logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+            if pk:
+                target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+                if not target_hotel_owner:
+                    raise NotFound("Hotel owner does not exist.")
+                target_app_user = AppUserService.retrieve_app_user(
+                    target_hotel_owner.user_id
+                )
 
-        if pk:
-            target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-            if not target_hotel_owner:
-                raise NotFound("Hotel owner does not exist.")
-            target_app_user = AppUserService.retrieve_app_user(
-                target_hotel_owner.user_id
-            )
+                if (not target_app_user) or (not target_app_user.is_active):
+                    raise NotFound("Hotel owner does not exist.")
 
-            if (not target_app_user) or (not target_app_user.is_active):
-                raise NotFound("Hotel owner does not exist.")
-
-            if target_hotel_owner.id != logged_in_hotel_owner.id:
-                raise PermissionDenied("Permission denied.")
+                if target_hotel_owner.id != logged_in_hotel_owner.id:
+                    raise PermissionDenied("Permission denied.")
+            # else :
+            """
+                if pk:
+                    target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+                    if not target_hotel_owner:
+                        raise NotFound("Hotel owner does not exist.")"""
 
     @staticmethod
     def serialize_output_hotel_owner(hotel_owner, many=False):
@@ -57,7 +138,9 @@ class HotelOwnerService:
         return HotelOwner.objects.get(id=pk)
 
     @staticmethod
-    def list_hotel_owners():
+    def list_hotel_owners(permission_granted, user_type):
+        if not permission_granted:
+            raise PermissionDenied(f"You don't have permission to perform the action")
         return HotelOwner.objects
 
     # POST -------------------------------------------------------------------

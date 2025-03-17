@@ -1,3 +1,5 @@
+import inspect
+
 from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
@@ -16,14 +18,26 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     # Default CRUD -----------------------------------------------------------
 
     def list(self, request):
-        hotel_owners = HotelOwnerService.list_hotel_owners()
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        hotel_owners = HotelOwnerService.list_hotel_owners(
+            permission_granted, user_type
+        )
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owners, many=True
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        HotelOwnerService.authorize_action_hotel_owner(
+            request, pk, permission_granted, user_type
+        )
         hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner
@@ -35,7 +49,13 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         raise PermissionDenied("This operation is forbidden.")
 
     def update(self, request, pk=None):
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        HotelOwnerService.authorize_action_hotel_owner(
+            request, pk, permission_granted, user_type
+        )
         app_user_id = HotelOwnerService.get_app_user_id_of_hotel_owner(pk)
         AppUserService.general_update_app_user(request, app_user_id)
         hotel_owner_updated = HotelOwnerService.retrieve_hotel_owner(pk)
@@ -49,7 +69,13 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        HotelOwnerService.authorize_action_hotel_owner(
+            request, pk, permission_granted, user_type
+        )
         app_user_id = HotelOwnerService.get_app_user_id_of_hotel_owner(pk)
         AppUserService.general_delete_app_user(request, app_user_id)
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -64,7 +90,13 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     def get_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
         # Same as get_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        HotelOwnerService.authorize_action_hotel_owner(
+            request, pk, permission_granted, user_type
+        )
         return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(pk)
 
     @action(
@@ -75,7 +107,13 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     def get_all_hotels_of_hotel_owner_implicit(self, request):
         # Same as get_all_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
-        HotelOwnerService.authorize_action_hotel_owner(request, pk=None)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        HotelOwnerService.authorize_action_hotel_owner(
+            request, pk=None, permission_granted=permission_granted, user_type=user_type
+        )
         hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
         return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(hotel_owner_id)
 
@@ -96,7 +134,13 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     # Same as get_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
     def delete_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        HotelOwnerService.authorize_action_hotel_owner(
+            request, pk, permission_granted, user_type
+        )
         return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(pk)
 
     @action(
@@ -107,7 +151,13 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     def delete_all_hotels_of_hotel_owner_implicit(self, request, pk=None):
         # Same as delete_all_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        HotelOwnerService.authorize_action_hotel_owner(
+            request, pk, permission_granted, user_type
+        )
         hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
         return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(hotel_owner_id)
 
