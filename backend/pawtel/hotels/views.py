@@ -57,14 +57,3 @@ class HotelViewSet(viewsets.ModelViewSet):
         room_types = HotelService.get_all_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @action(
-        detail=True,
-        methods=["get"],
-        url_path="room-types/total-vacancy",
-        url_name="get_total_vacancy_for_each_room_type_of_hotel",
-    )
-    def get_total_vacancy_for_each_room_type_of_hotel(self, request, pk=None):
-        HotelService.authorize_action_hotel(request, pk)
-        vacancy_data = HotelService.get_total_vacancy_for_each_room_type_of_hotel(pk)
-        return Response(vacancy_data, status=status.HTTP_200_OK)
