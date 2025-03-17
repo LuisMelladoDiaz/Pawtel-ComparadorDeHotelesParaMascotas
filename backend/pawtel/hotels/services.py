@@ -1,10 +1,10 @@
 from django.db.models import Max, Min
-from django.forms import ValidationError
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class HotelService:
