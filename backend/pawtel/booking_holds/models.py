@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 from django.forms import ValidationError
 from django.utils.timezone import now, timedelta
@@ -13,7 +15,13 @@ class BookingHold(models.Model):
 
     # Attributes -------------------------------------------------------------
 
-    hold_expires_at = models.DateTimeField(default=default_hold_expiry, null=False)
+    hold_expires_at = models.DateTimeField(
+        default=default_hold_expiry, null=False, blank=False
+    )
+
+    booking_start_date = models.DateField(null=False, blank=False)
+
+    booking_end_date = models.DateField(null=False, blank=False)
 
     # Transient attributes ---------------------------------------------------
 
@@ -32,7 +40,30 @@ class BookingHold(models.Model):
         return f"Booking hold of room_type.name by {self.customer.username}"
 
     def clean(self):
-        if self.hold_expires_at and self.hold_expires_at < now():
+        super().clean()
+
+        if (self.hold_expires_at) and (self.hold_expires_at) < now():
             raise ValidationError(
                 {"hold_expires_at": "Hold expiration date cannot be in the past."}
+            )
+
+        if (self.booking_start_date) and (self.booking_start_date) <= date.today():
+            raise ValidationError(
+                {"start_date": "Booking start date must be in the future."}
+            )
+
+        if (self.booking_end_date) and (self.booking_end_date) <= date.today():
+            raise ValidationError(
+                {"end_date": "Booking end date must be in the future."}
+            )
+
+        if (
+            (self.booking_start_date)
+            and (self.booking_end_date)
+            and (self.booking_end_date < self.booking_start_date)
+        ):
+            raise ValidationError(
+                {
+                    "end_date": "Booking end date cannot be earlier than booking start date."
+                }
             )

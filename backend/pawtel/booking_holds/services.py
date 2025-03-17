@@ -67,11 +67,15 @@ class BookingHoldService:
             raise ValidationError(input_serializer.errors)
 
         room_type = input_serializer.validated_data.get("room_type")
+        ## booking_start_date = input_serializer.validated_data.get("booking_start_date")
+        ## booking_end_date = input_serializer.validated_data.get("booking_end_date")
 
         if (not room_type) or (room_type.is_archived):
             raise NotFound("RoomType does not exist.")
 
-        # check there is vacancy
+        ## is_room_type_available = RoomTypeService.check_availability_in_period(room_type.id, booking_start_date, booking_end_date)
+        ## if not is_room_type_available:
+        ##    raise ValidationError({"room_type": "RoomType is not available during indicated period."})
 
     @staticmethod
     def create_booking_hold(input_serializer):

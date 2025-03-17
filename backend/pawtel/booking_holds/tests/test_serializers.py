@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.test import TestCase
 from django.utils.timezone import now, timedelta
 from pawtel.app_users.models import AppUser
@@ -49,16 +51,23 @@ class BookingHoldSerializerTest(TestCase):
         )
         self.customer = Customer.objects.create(user_id=self.app_user_customer.id)
 
-        in_a_minute = now() + timedelta(minutes=1)
+        self.in_ten_minutes = now() + timedelta(minutes=10)
+        self.in_two_days = date.today() + timedelta(days=2)
+        self.in_four_days = date.today() + timedelta(days=4)
+
         self.valid_booking_hold = BookingHold.objects.create(
             customer=self.customer,
             room_type=self.room_type,
-            hold_expires_at=in_a_minute,
+            hold_expires_at=self.in_ten_minutes,
+            booking_start_date=self.in_two_days,
+            booking_end_date=self.in_four_days,
         )
         self.valid_data = {
-            "hold_expires_at": now() + timedelta(minutes=1),
             "customer": self.customer.id,
             "room_type": self.room_type.id,
+            "hold_expires_at": self.in_ten_minutes,
+            "booking_start_date": self.in_two_days,
+            "booking_end_date": self.in_four_days,
         }
 
     def test_valid_booking_hold_serialization(self):

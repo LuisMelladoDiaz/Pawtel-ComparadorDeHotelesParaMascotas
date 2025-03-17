@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.utils.timezone import now, timedelta
@@ -47,29 +49,58 @@ class BookingHoldModelTest(TestCase):
         )
         self.customer = Customer.objects.create(user_id=self.app_user_customer.id)
 
+        self.in_ten_minutes = now() + timedelta(minutes=10)
+        self.in_two_days = date.today() + timedelta(days=2)
+        self.in_four_days = date.today() + timedelta(days=4)
+
     def test_create_valid_booking_hold(self):
         booking_hold = BookingHold.objects.create(
-            customer=self.customer, room_type=self.room_type
+            customer=self.customer,
+            room_type=self.room_type,
+            hold_expires_at=self.in_ten_minutes,
+            booking_start_date=self.in_two_days,
+            booking_end_date=self.in_four_days,
         )
         self.assertEqual(booking_hold.customer, self.customer)
         self.assertEqual(booking_hold.room_type, self.room_type)
         self.assertTrue(booking_hold.hold_expires_at > now())
+        self.assertTrue(booking_hold.booking_start_date >= date.today())
+        self.assertTrue(booking_hold.booking_end_date >= date.today())
+        self.assertTrue(
+            booking_hold.booking_end_date >= booking_hold.booking_start_date
+        )
 
     def test_hold_expiry_function(self):
         booking_hold = BookingHold.objects.create(
-            customer=self.customer, room_type=self.room_type
+            customer=self.customer,
+            room_type=self.room_type,
+            hold_expires_at=self.in_ten_minutes,
+            booking_start_date=self.in_two_days,
+            booking_end_date=self.in_four_days,
         )
         self.assertFalse(booking_hold.is_expired())
         booking_hold.hold_expires_at = now() - timedelta(minutes=1)
         self.assertTrue(booking_hold.is_expired())
 
     def test_create_booking_hold_without_customer(self):
-        booking_hold = BookingHold(customer=None, room_type=self.room_type)
+        booking_hold = BookingHold(
+            customer=None,
+            room_type=self.room_type,
+            hold_expires_at=self.in_ten_minutes,
+            booking_start_date=self.in_two_days,
+            booking_end_date=self.in_four_days,
+        )
         with self.assertRaises(ValidationError):
             booking_hold.full_clean()
 
     def test_create_booking_hold_without_room_type(self):
-        booking_hold = BookingHold(customer=self.customer, room_type=None)
+        booking_hold = BookingHold(
+            customer=self.customer,
+            room_type=None,
+            hold_expires_at=self.in_ten_minutes,
+            booking_start_date=self.in_two_days,
+            booking_end_date=self.in_four_days,
+        )
         with self.assertRaises(ValidationError):
             booking_hold.full_clean()
 
@@ -81,6 +112,36 @@ class BookingHoldModelTest(TestCase):
                     customer=self.customer,
                     room_type=self.room_type,
                     hold_expires_at=date,
+                    booking_start_date=self.in_two_days,
+                    booking_end_date=self.in_four_days,
+                )
+                with self.assertRaises(ValidationError):
+                    booking_hold.full_clean()
+
+    def test_invalid_start_date(self):
+        invalid_dates = [None, now() - timedelta(days=1)]
+        for date in invalid_dates:
+            with self.subTest(hold_expires_at=date):
+                booking_hold = BookingHold(
+                    customer=self.customer,
+                    room_type=self.room_type,
+                    hold_expires_at=self.in_ten_minutes,
+                    booking_start_date=date,
+                    booking_end_date=self.in_four_days,
+                )
+                with self.assertRaises(ValidationError):
+                    booking_hold.full_clean()
+
+    def test_start_date_later_than_end_date(self):
+        invalid_dates = [None, now() - timedelta(days=1)]
+        for date in invalid_dates:
+            with self.subTest(hold_expires_at=date):
+                booking_hold = BookingHold(
+                    customer=self.customer,
+                    room_type=self.room_type,
+                    hold_expires_at=self.in_ten_minutes,
+                    booking_start_date=self.in_four_days,
+                    booking_end_date=self.in_two_days,
                 )
                 with self.assertRaises(ValidationError):
                     booking_hold.full_clean()
