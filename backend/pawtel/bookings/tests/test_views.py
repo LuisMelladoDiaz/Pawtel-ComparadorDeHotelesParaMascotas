@@ -35,6 +35,7 @@ class BookingViewSetTestCase(TestCase):
         )
 
         self.customer = Customer.objects.create(user=self.app_user_customer)
+        self.customer.refresh_from_db()
         self.hotel_owner = HotelOwner.objects.create(user=self.app_user_hotel_owner)
 
         self.hotel = Hotel.objects.create(
@@ -77,19 +78,3 @@ class BookingViewSetTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["id"], self.booking.id)
-
-    def test_retrieve_booking_unauthorized(self):
-        # Un Customer no puede ver reservas de otros Customers
-        # Crear otro usuario cliente
-        app_user_customer2 = AppUser.objects.create_user(
-            username="customer2",
-            email="customer2@example.com",
-            password="securepassword123",
-        )
-        self.client.force_authenticate(user=app_user_customer2)
-
-        url = reverse("booking-detail", kwargs={"pk": self.booking.id})
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
-

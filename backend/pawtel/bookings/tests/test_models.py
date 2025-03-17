@@ -13,7 +13,7 @@ from pawtel.room_types.models import RoomType
 class BookingModelTest(TestCase):
 
     def setUp(self):
-        self.app_user = AppUser.objects.create_user(
+        self.app_user_customer = AppUser.objects.create_user(
             username="customer10",
             first_name="Pepa",
             last_name="Johnson",
@@ -21,8 +21,19 @@ class BookingModelTest(TestCase):
             phone="+34987654333",
             password="chocolate",
         )
-        self.customer = Customer.objects.create(user=self.app_user)
-        self.hotel_owner = HotelOwner.objects.create(user=self.app_user)
+
+        self.app_user_hotel_owner = AppUser.objects.create_user(
+            username="hotelowner10",
+            first_name="Carlos",
+            last_name="Gomez",
+            email="carlos@example.com",
+            phone="+34987654334",
+            password="hotelpassword",
+        )
+
+        self.customer = Customer.objects.create(user=self.app_user_customer)
+        self.hotel_owner = HotelOwner.objects.create(user=self.app_user_hotel_owner)
+
         self.hotel = Hotel.objects.create(
             name="Barcelo Sevilla",
             address="Calle Betis",
@@ -30,6 +41,7 @@ class BookingModelTest(TestCase):
             description="Un hotel exclusivo",
             hotel_owner=self.hotel_owner,
         )
+
         self.room_type = RoomType.objects.create(
             hotel=self.hotel,
             name="Suite Ejecutiva",

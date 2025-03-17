@@ -25,12 +25,11 @@ class Booking(models.Model):
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, null=False)
 
     def clean(self):
-        super().clean()
+        if not self.creation_date:
+            self.creation_date = date.today()
 
         if self.creation_date > date.today():
-            raise ValidationError(
-                {"creation_date": "La fecha de creación no puede estar en el futuro"}
-            )
+            raise ValidationError("La fecha de creación no puede estar en el futuro.")
 
         if self.start_date <= date.today():
             raise ValidationError(
@@ -39,6 +38,11 @@ class Booking(models.Model):
 
         if self.end_date <= date.today():
             raise ValidationError({"end_date": "La fecha de fin debe ser en el futuro"})
+
+        if self.end_date <= self.start_date:
+            raise ValidationError(
+                {"end_date": "La fecha de fin debe ser después de la fecha de inicio"}
+            )
 
     def __str__(self):
         return f"Booking {self.id}: {self.start_date} - {self.end_date})"
