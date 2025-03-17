@@ -7,18 +7,64 @@ from rest_framework.exceptions import NotFound, PermissionDenied
 
 class RoomTypeService:
 
+    @staticmethod
+    def check_permission(user, action):
+        customer_permissions = {
+            "allowed_actions": ["retrieve"],
+            "denied_actions": ["list", "create", "update", "destroy"],
+        }
+
+        hotel_owner_permissions = {
+            "allowed_actions": ["list", "retrieve", "create", "update", "destroy"],
+            "denied_actions": [],
+        }
+        """
+        app_admin_permissions = {
+            'allowed_actions': ['list', 'retrieve'],
+            'denied_actions': ['create', 'update', 'destroy']
+        }
+        """
+        if hasattr(user, "customer"):
+            permissions = customer_permissions
+            user_type = "Customer"
+        elif hasattr(user, "hotelowner"):
+            permissions = hotel_owner_permissions
+            user_type = "HotelOwner"
+            """
+        elif hasattr(user, "app_admin"):
+            permissions = app_admin_permissions
+            user_type = "AppAdmin"'
+        """
+        else:
+            raise PermissionDenied("Role not recognized.")
+
+        if action in permissions["allowed_actions"]:
+            return True, user_type
+        elif action in permissions["denied_actions"]:
+            raise PermissionDenied(
+                f"You don't have permission to perform the action: {action}"
+            )
+        else:
+            raise PermissionDenied(f"Action {action} is not recognized for your role.")
+
     # Common -----------------------------------------------------------------
 
     @staticmethod
-    def authorize_action_room_type(request, pk):
-        room_type = RoomTypeService.retrieve_room_type(pk)
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+    def authorize_action_room_type(request, pk, permission_granted, user_type):
+        if permission_granted:
 
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("Room type does not exist.")
+            # if not user_type== "AppAdmin":
+            room_type = RoomTypeService.retrieve_room_type(pk)
+            hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if room_type.hotel.hotel_owner.id != hotel_owner.id:
-            raise PermissionDenied("Permission denied.")
+            if (not room_type) or (room_type.is_archived):
+                raise NotFound("Room type does not exist.")
+
+            if room_type.hotel.hotel_owner.id != hotel_owner.id:
+                raise PermissionDenied("Permission denied.")
+        # else:
+        #   if (not room_type) or (room_type.is_archived):
+        #      raise NotFound("Room type does not exist.")
 
     @staticmethod
     def serialize_output_room_type(room_type, many=False):
@@ -27,9 +73,13 @@ class RoomTypeService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def list_room_types():
-        room_types = RoomType.objects.filter(is_archived=False)
-        return room_types
+    def list_room_types(permission_granted, user_type):
+        if permission_granted:
+            # if not user_type == "AppAdmin":
+            room_types = RoomType.objects.filter(is_archived=False)
+            # else:
+            # room_types = RoomType.objects.all()
+            return room_types
 
     @staticmethod
     def retrieve_room_type(pk):
@@ -38,8 +88,9 @@ class RoomTypeService:
     # POST -------------------------------------------------------------------
 
     @staticmethod
-    def authorize_create_room_type(request):
-        HotelOwnerService.get_current_hotel_owner(request)
+    def authorize_create_room_type(request, permission_granted):
+        if permission_granted:
+            HotelOwnerService.get_current_hotel_owner(request)
 
     @staticmethod
     def serialize_input_room_type_create(request):

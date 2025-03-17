@@ -1,3 +1,5 @@
+import inspect
+
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.room_types.services import RoomTypeService
@@ -10,20 +12,34 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     serializer_class = RoomTypeSerializer
 
     def list(self, request):
-        room_types = RoomTypeService.list_room_types()
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = RoomTypeService.check_permission(
+            request.user, action_name
+        )
+        room_types = RoomTypeService.list_room_types(permission_granted, user_type)
         output_serializer_data = RoomTypeService.serialize_output_room_type(
             room_types, many=True
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        RoomTypeService.authorize_action_room_type(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = RoomTypeService.check_permission(
+            request.user, action_name
+        )
+        RoomTypeService.authorize_action_room_type(
+            request, pk, permission_granted, user_type
+        )
         room_type = RoomTypeService.retrieve_room_type(pk)
         output_serializer_data = RoomTypeService.serialize_output_room_type(room_type)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        RoomTypeService.authorize_create_room_type(request)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = RoomTypeService.check_permission(
+            request.user, action_name
+        )
+        RoomTypeService.authorize_create_room_type(request, permission_granted)
         input_serializer = RoomTypeService.serialize_input_room_type_create(request)
         RoomTypeService.validate_create_room_type(request, input_serializer)
         room_type_created = RoomTypeService.create_room_type(input_serializer)
@@ -33,7 +49,13 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
-        RoomTypeService.authorize_action_room_type(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = RoomTypeService.check_permission(
+            request.user, action_name
+        )
+        RoomTypeService.authorize_action_room_type(
+            request, pk, permission_granted, user_type
+        )
         input_serializer = RoomTypeService.serialize_input_room_type_update(request, pk)
         RoomTypeService.validate_update_room_type(pk, input_serializer)
         room_type_updated = RoomTypeService.update_room_type(pk, input_serializer)
@@ -47,6 +69,12 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
-        RoomTypeService.authorize_action_room_type(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = RoomTypeService.check_permission(
+            request.user, action_name
+        )
+        RoomTypeService.authorize_action_room_type(
+            request, pk, permission_granted, user_type
+        )
         RoomTypeService.delete_room_type(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
