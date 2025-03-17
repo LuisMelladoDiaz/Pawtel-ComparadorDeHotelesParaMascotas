@@ -1,7 +1,7 @@
 from datetime import date
 
+from django.core.exceptions import ValidationError
 from django.db import models
-from django.forms import ValidationError
 from django.utils.timezone import now, timedelta
 from pawtel.customers.models import Customer
 from pawtel.room_types.models import RoomType

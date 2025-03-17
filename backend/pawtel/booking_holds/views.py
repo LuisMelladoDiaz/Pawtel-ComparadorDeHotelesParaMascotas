@@ -13,10 +13,20 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
     # Default CRUD -----------------------------------------------------------
 
     def list(self, request):
-        raise PermissionDenied("This operation is forbidden.")
+        ##! TODO: In the future, authorize only admin
+        booking_holds = BookingHoldService.list_all_booking_holds()
+        output_serializer_data = BookingHoldService.serialize_output_booking_hold(
+            booking_holds, many=True
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        raise PermissionDenied("This operation is forbidden.")
+        BookingHoldService.authorize_generic_action_booking_hold(request, pk)
+        booking_hold = BookingHoldService.retrieve_booking_hold(pk)
+        output_serializer_data = BookingHoldService.serialize_output_booking_hold(
+            booking_hold
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         BookingHoldService.authorize_booking_hold_create(request)
@@ -37,6 +47,6 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
         raise PermissionDenied("This operation is forbidden.")
 
     def destroy(self, request, pk=None):
-        BookingHoldService.authorize_delete_booking_hold(request, pk)
+        BookingHoldService.authorize_generic_action_booking_hold(request, pk)
         BookingHoldService.delete_booking_hold(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)

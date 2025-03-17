@@ -8,6 +8,23 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 class BookingHoldService:
 
+    # Others -----------------------------------------------------------------
+
+    @staticmethod
+    def authorize_generic_action_booking_hold(request, pk):
+        customer = CustomerService.get_current_customer(request)
+        booking_hold = BookingHoldService.retrieve_booking_hold(pk)
+
+        if not booking_hold:
+            raise NotFound("BookingHold does not exist.")
+
+        if (
+            (not customer)
+            or (not customer.user.is_active)
+            or (booking_hold.customer.id != customer.id)
+        ):
+            raise PermissionDenied("Permission denied.")
+
     # GET --------------------------------------------------------------------
 
     @staticmethod
@@ -17,10 +34,14 @@ class BookingHoldService:
         except BookingHold.DoesNotExist:
             raise NotFound(detail=f"BookingHold not found.")
 
+    @staticmethod
+    def list_all_booking_holds():
+        return BookingHold.objects
+
     # DELETE -----------------------------------------------------------------
 
     @staticmethod
-    def authorize_delete_booking_hold(request, pk):
+    def authorize_generic_action_booking_hold(request, pk):
         customer = CustomerService.get_current_customer(request)
         booking_hold = BookingHoldService.retrieve_booking_hold(pk)
 
@@ -67,15 +88,15 @@ class BookingHoldService:
             raise ValidationError(input_serializer.errors)
 
         room_type = input_serializer.validated_data.get("room_type")
-        ## booking_start_date = input_serializer.validated_data.get("booking_start_date")
-        ## booking_end_date = input_serializer.validated_data.get("booking_end_date")
+        ##! booking_start_date = input_serializer.validated_data.get("booking_start_date")
+        ##! booking_end_date = input_serializer.validated_data.get("booking_end_date")
 
         if (not room_type) or (room_type.is_archived):
             raise NotFound("RoomType does not exist.")
 
-        ## is_room_type_available = RoomTypeService.check_availability_in_period(room_type.id, booking_start_date, booking_end_date)
-        ## if not is_room_type_available:
-        ##    raise ValidationError({"room_type": "RoomType is not available during indicated period."})
+        ##! is_room_type_available = RoomTypeService.check_availability_in_period(room_type.id, booking_start_date, booking_end_date)
+        ##! if not is_room_type_available:
+        ##!    raise ValidationError({"room_type": "RoomType is not available during indicated period."})
 
     @staticmethod
     def create_booking_hold(input_serializer):
@@ -83,8 +104,8 @@ class BookingHoldService:
         return booking_hold
 
     @staticmethod
-    def serialize_output_booking_hold(booking_hold):
-        return BookingHoldSerializer(booking_hold).data
+    def serialize_output_booking_hold(booking_hold, many=False):
+        return BookingHoldSerializer(booking_hold, many=many).data
 
     # Others -----------------------------------------------------------------
 
