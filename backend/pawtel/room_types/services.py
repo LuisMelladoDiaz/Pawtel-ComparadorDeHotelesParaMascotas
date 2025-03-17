@@ -3,7 +3,8 @@ from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.rooms.models import Room
-from rest_framework.exceptions import *
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class RoomTypeService:

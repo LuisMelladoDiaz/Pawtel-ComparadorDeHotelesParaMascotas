@@ -4,7 +4,8 @@ from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
 from pawtel.rooms.models import Room
-from rest_framework.exceptions import *
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class HotelService:
@@ -33,7 +34,7 @@ class HotelService:
         try:
             return Hotel.objects.get(pk=pk)
         except Hotel.DoesNotExist:
-            raise NotFound(detail=f"Hotel with id {pk} not found")
+            raise NotFound(detail=f"Hotel not found")
 
     # POST -------------------------------------------------------------------
 
