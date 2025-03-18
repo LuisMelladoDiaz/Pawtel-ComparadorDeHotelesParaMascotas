@@ -100,7 +100,7 @@ const handleUpload = async () => {
     notyf.error('No se ha seleccionado ningún archivo.');
     return;
   }
-  upload.mutateAsync({ hotelId: hotelData.value.id,
+  upload.mutate({ hotelId: hotelData.value.id,
     image: file,
     isCover: isCover },
   {
