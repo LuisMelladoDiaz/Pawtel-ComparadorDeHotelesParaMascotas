@@ -1,5 +1,5 @@
 from pawtel.hotels.models import Hotel
-from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
+from pawtel.hotels.serializers import HotelSerializer
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.serializers import RoomTypeSerializer
 from rest_framework import status, viewsets
@@ -21,33 +21,36 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         hotel = HotelService.retrieve_hotel(pk)
-        output_serializer_data = HotelService.serialize_output_hotel(hotel)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotel, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         input_serializer = HotelService.serialize_input_hotel_create(request)
         HotelService.validate_create_hotel(input_serializer)
         hotel_created = HotelService.create_hotel(input_serializer)
-        output_serializer_data = HotelService.serialize_output_hotel(hotel_created)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotel_created, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     @action(detail=True, methods=["post"])
     def upload_image(self, request, pk=None):
         hotel = self.get_object()
-        image_serializer = HotelImageSerializer(data=request.data)
-
-        if image_serializer.is_valid():
-            image_serializer.save(hotel=hotel)
-            return Response(image_serializer.data, status=status.HTTP_201_CREATED)
-
-        return Response(image_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        img = HotelService.upload_image_to_hotel(
+            hotel, request.data.get("image"), request.data.get("is_cover")
+        )
+        return Response(img, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
         input_serializer = HotelService.serialize_input_hotel_update(request, pk)
         HotelService.validate_update_hotel(pk, input_serializer)
         hotel_updated = HotelService.update_hotel(pk, input_serializer)
-        output_serializer_data = HotelService.serialize_output_hotel(hotel_updated)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotel_updated, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):

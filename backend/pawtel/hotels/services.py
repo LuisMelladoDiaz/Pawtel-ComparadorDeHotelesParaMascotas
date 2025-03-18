@@ -2,7 +2,7 @@ from django.db.models import Max, Min
 from django.forms import ValidationError
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
-from pawtel.hotels.serializers import HotelSerializer
+from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.room_types.models import RoomType
 from rest_framework.exceptions import NotFound, PermissionDenied
 
@@ -190,3 +190,15 @@ class HotelService:
     @staticmethod
     def get_all_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+
+    @staticmethod
+    def upload_image_to_hotel(hotel, image, is_cover=False):
+        if not hotel or hotel.is_archived:
+            raise NotFound("Hotel does not exist or is archived.")
+        serializer = HotelImageSerializer(
+            data={"image": image, "is_cover": is_cover, "hotel": hotel.id}
+        )
+        if not serializer.is_valid():
+            raise ValidationError(serializer.errors)
+        serializer.save()
+        return serializer.data

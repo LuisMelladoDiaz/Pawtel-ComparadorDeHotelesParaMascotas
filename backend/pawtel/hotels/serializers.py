@@ -6,19 +6,9 @@ from rest_framework import serializers
 
 
 class HotelImageSerializer(serializers.ModelSerializer):
-    image = serializers.SerializerMethodField()
-
     class Meta:
         model = HotelImage
-        fields = ["id", "image", "is_cover"]
-
-    def get_image(self, obj):
-        request = self.context.get("request")
-        if request:
-            return request.build_absolute_uri(obj.image.url)
-        else:
-            raise ValueError("Request context is required to get image URL")
-        return obj.image.url
+        fields = ["id", "image", "is_cover", "hotel"]
 
 
 class HotelSerializer(BaseSerializer):
