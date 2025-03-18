@@ -7,6 +7,7 @@ import {
   updateHotel,
   partialUpdateHotel,
   deleteHotel,
+  uploadImageToHotel,
   type Hotel,
 } from '@/data-layer/api/hotels';
 
@@ -81,6 +82,21 @@ export const useDeleteHotel = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
+    },
+  });
+};
+
+export const useUploadImageToHotel = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ hotelId, image, isCover }: { hotelId: MaybeRef<number>; image: MaybeRef<File>; isCover: MaybeRef<boolean> }) => {
+
+      return uploadImageToHotel(toValue(hotelId), toValue(image), toValue(isCover));
+    },
+
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
     },
   });
 };

@@ -26,6 +26,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "storages",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -167,3 +168,50 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+def bool_env(env_var: str) -> bool:
+    return os.getenv(env_var, "False").lower() == "true"
+
+
+if not DEBUG:
+    assert bool_env("USE_S3"), "In production, USE_S3 must be set to True"
+
+if not DEBUG or bool_env("USE_S3"):
+    STORAGE = "s3"
+    assert os.getenv("AWS_S3_ENDPOINT_URL"), "AWS_S3_ENDPOINT_URL must be set"
+    assert os.getenv("AWS_ACCESS_KEY_ID"), "AWS_ACCESS_KEY_ID must be set"
+    assert os.getenv("AWS_SECRET_ACCESS_KEY"), "AWS_SECRET_ACCESS_KEY must be set"
+    assert os.getenv("AWS_STORAGE_BUCKET_NAME"), "AWS_STORAGE_BUCKET_NAME must be set"
+    assert os.getenv("AWS_S3_REGION_NAME"), "AWS_S3_REGION_NAME must be set"
+    assert os.getenv("AWS_S3_CUSTOM_DOMAIN"), "AWS_S3_CUSTOM_DOMAIN must be set"
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3.S3Storage",
+            "OPTIONS": {
+                "endpoint_url": os.getenv("AWS_S3_ENDPOINT_URL"),
+                "access_key": os.getenv("AWS_ACCESS_KEY_ID"),
+                "secret_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+                "bucket_name": os.getenv("AWS_STORAGE_BUCKET_NAME"),
+                "region_name": os.getenv("AWS_S3_REGION_NAME"),
+                "custom_domain": os.getenv("AWS_S3_CUSTOM_DOMAIN"),
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+else:
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    STORAGE = "local"
+
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+            "OPTIONS": {},
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
