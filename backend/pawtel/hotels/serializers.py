@@ -37,6 +37,16 @@ class HotelSerializer(BaseSerializer):
             "cover_image",
         ]
 
+        extra_kwargs = {
+            "id": {"read_only": True},
+            "is_archived": {"read_only": True},
+            "name": {"max_length": 100, "allow_null": False},
+            "address": {"max_length": 100, "allow_null": False},
+            "city": {"max_length": 50, "allow_null": False},
+            "description": {"max_length": 400, "allow_null": False},
+            "hotel_owner": {"allow_null": False},
+        }
+
     def get_cheapest_price(self, obj):
         cheapest = RoomType.objects.filter(hotel=obj).aggregate(
             min_price=Min("price_per_night")
