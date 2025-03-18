@@ -9,6 +9,7 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 class HotelService:
 
+    @staticmethod
     def check_permission(user, action):
         """Checks if the user has permission to perform an action based on their type."""
 
