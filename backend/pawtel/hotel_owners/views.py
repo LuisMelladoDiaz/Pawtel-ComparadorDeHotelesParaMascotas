@@ -114,7 +114,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         HotelOwnerService.authorize_action_hotel_owner(
             request, pk=None, permission_granted=permission_granted, user_type=user_type
         )
-        hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
+        hotel_owner_id = HotelOwnerService.get_current_hotel_owner(
+            request, permission_granted
+        ).id
         return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(hotel_owner_id)
 
     @staticmethod
@@ -158,7 +160,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         HotelOwnerService.authorize_action_hotel_owner(
             request, pk, permission_granted, user_type
         )
-        hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
+        hotel_owner_id = HotelOwnerService.get_current_hotel_owner(
+            request, permission_granted
+        ).id
         return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(hotel_owner_id)
 
     @staticmethod
@@ -176,7 +180,13 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_name="retrieve_current_hotel_owner",
     )
     def retrieve_current_hotel_owner(self, request):
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = HotelOwnerService.check_permission(
+            request.user, action_name
+        )
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(
+            request, permission_granted
+        )
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner
         )

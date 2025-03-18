@@ -69,7 +69,9 @@ class HotelService:
     def authorize_action_hotel(request, pk, permission_granted):
         if permission_granted:
             hotel = HotelService.retrieve_hotel(pk, permission_granted, None)
-            hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+            hotel_owner = HotelOwnerService.get_current_hotel_owner(
+                request, permission_granted
+            )
 
             if (not hotel) or (hotel.is_archived):
                 raise NotFound("Hotel does not exist.")
@@ -107,7 +109,7 @@ class HotelService:
     @staticmethod
     def serialize_input_hotel_create(request):
         context = {"request": request}
-        current_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
+        current_owner_id = HotelOwnerService.get_current_hotel_owner(request, True).id
         data = request.data.copy()
         data["hotel_owner"] = current_owner_id
         serializer = HotelSerializer(data=data, context=context)

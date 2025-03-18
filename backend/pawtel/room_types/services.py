@@ -55,7 +55,9 @@ class RoomTypeService:
 
             # if not user_type== "AppAdmin":
             room_type = RoomTypeService.retrieve_room_type(pk)
-            hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+            hotel_owner = HotelOwnerService.get_current_hotel_owner(
+                request, permission_granted
+            )
 
             if (not room_type) or (room_type.is_archived):
                 raise NotFound("Room type does not exist.")
@@ -90,7 +92,7 @@ class RoomTypeService:
     @staticmethod
     def authorize_create_room_type(request, permission_granted):
         if permission_granted:
-            HotelOwnerService.get_current_hotel_owner(request)
+            HotelOwnerService.get_current_hotel_owner(request, permission_granted)
 
     @staticmethod
     def serialize_input_room_type_create(request):
@@ -105,7 +107,7 @@ class RoomTypeService:
 
         name = input_serializer.validated_data.get("name")
         hotel = input_serializer.validated_data.get("hotel")
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request, True)
 
         if (hotel.is_archived) or (hotel.hotel_owner.id != hotel_owner.id):
             raise ValidationError({"hotel": "Invalid hotel."})

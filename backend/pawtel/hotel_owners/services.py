@@ -102,7 +102,9 @@ class HotelOwnerService:
     ):
         if permission_granted:
             # if not user_type == "AppAdmin":
-            logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+            logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(
+                request, permission_granted
+            )
             if pk:
                 target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
                 if not target_hotel_owner:
@@ -166,8 +168,9 @@ class HotelOwnerService:
         hotels_to_delete.delete()
 
     @staticmethod
-    def get_current_hotel_owner(request):
+    def get_current_hotel_owner(request, permission_granted):
         if (not request.user) or (not request.user.is_authenticated):
             raise AuthenticationFailed("User is not authenticated.")
-        hotel_owner = HotelOwner.objects.get(user_id=request.user.id)
-        return hotel_owner
+        if permission_granted:
+            hotel_owner = HotelOwner.objects.get(user_id=request.user.id)
+            return hotel_owner
