@@ -1,5 +1,8 @@
+from datetime import timedelta
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.room_types.models import RoomType
+from pawtel.bookings.models import Booking
+from django.db.models import Sum
 from pawtel.room_types.serializers import RoomTypeSerializer
 from rest_framework.exceptions import (NotFound, PermissionDenied,
                                        ValidationError)
@@ -105,3 +108,32 @@ class RoomTypeService:
     def delete_room_type(pk):
         room_type = RoomType.objects.get(pk=pk)
         room_type.delete()
+        
+        
+
+    @staticmethod
+    def is_room_type_available(room_type_id, start_date, end_date):
+        room_type = RoomType.objects.filter(id=room_type_id).first()
+
+        if not room_type:
+            raise NotFound("RoomType does not exist.")
+
+        num_rooms = room_type.num_rooms
+        max_capacity = num_rooms * room_type.capacity  # Capacidad máxima en cada día
+
+        # Generamos el rango de fechas
+        date_range = [start_date + timedelta(days=i) for i in range((end_date - start_date).days + 1)]
+        
+        for day in date_range:
+            # Contamos el número de reservas activas en ese día
+            booked_rooms = Booking.objects.filter(
+                room_type=room_type,
+                start_date__lte=day,
+                end_date__gte=day
+            ).count()
+
+            available_capacity = max_capacity - booked_rooms
+            if available_capacity <= 0:
+                return False  # Si en algún día no hay disponibilidad, retornamos False
+
+        return True
