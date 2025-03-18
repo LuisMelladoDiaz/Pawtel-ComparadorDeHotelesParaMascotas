@@ -8,9 +8,9 @@ import DevelopmentScreen from './views/DevelopmentScreen.vue';
 import Home from './views/Home.vue';
 import HotelDetailsView from './views/HotelDetailView.vue';
 import HotelListScreen from './views/HotelListScreen.vue';
-import HotelOwnerPanel from './views/HotelOwnerPanel.vue';
 import LoginView from './views/LoginView.vue';
 import MisHoteles from './views/MisHoteles.vue';
+import EditHotel from './views/EditHotel.vue';
 import RegisterView from './views/RegisterView.vue';
 import TemplateScreen1 from './views/TemplateScreen1.vue';
 import TemplateScreen2 from './views/TemplateScreen2.vue';
@@ -31,8 +31,9 @@ const routes = [
   { path: '/template-screen-1', component: TemplateScreen1},
   { path: '/template-screen-2', component: TemplateScreen2},
   { path: '/user-profile', component: UserProfile},
-  { path: '/hotel-owner-panel', component: HotelOwnerPanel },
   { path: '/mis-hoteles', component: MisHoteles },
+  { path: '/mis-hoteles/edit/:id', component: EditHotel },
+
 ]
 
 const router = createRouter({

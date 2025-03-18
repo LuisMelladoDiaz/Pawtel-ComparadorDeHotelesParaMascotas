@@ -3,6 +3,7 @@ import { type MaybeRef, toValue } from 'vue';
 import {
   fetchAllHotels,
   fetchHotelById,
+  fetchRoomTypesByHotel,
   createHotel,
   updateHotel,
   partialUpdateHotel,
@@ -82,5 +83,14 @@ export const useDeleteHotel = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
     },
+  });
+};
+
+export const useGetRoomTypesByHotel = (hotelId: MaybeRef<number>) => {
+  return useQuery({
+    queryKey: ['roomTypes', hotelId],
+    queryFn: () => fetchRoomTypesByHotel(toValue(hotelId)),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
   });
 };
