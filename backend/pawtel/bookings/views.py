@@ -1,3 +1,5 @@
+import inspect
+
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.bookings.services import BookingService
@@ -13,14 +15,24 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         # In the future it will be restricted to admin onlyl
-        bookings = BookingService.list_bookings()
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = BookingService.check_permission(
+            request.user, action_name
+        )
+        bookings = BookingService.list_bookings(permission_granted, user_type)
         output_serializer_data = BookingService.serialize_output_booking(
             bookings, many=True
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        BookingService.authorize_action_booking(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = BookingService.check_permission(
+            request.user, action_name
+        )
+        BookingService.authorize_action_booking(
+            request, pk, permission_granted, user_type
+        )
         booking = BookingService.retrieve_booking(pk)
         output_serializer_data = BookingService.serialize_output_booking(booking)
         return Response(output_serializer_data, status=status.HTTP_200_OK)

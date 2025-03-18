@@ -1,3 +1,5 @@
+import inspect
+
 from pawtel.app_users.services import AppUserService
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
@@ -13,14 +15,24 @@ class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
 
     def list(self, request):
-        customers = CustomerService.list_customers()
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = CustomerService.check_permission(
+            request.user, action_name
+        )
+        customers = CustomerService.list_customers(permission_granted, user_type)
         output_serializer_data = CustomerService.serialize_output_customer(
             customers, many=True
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        CustomerService.authorize_action_customer(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = CustomerService.check_permission(
+            request.user, action_name
+        )
+        CustomerService.authorize_action_customer(
+            request, pk, permission_granted, user_type
+        )
         customer = CustomerService.retrieve_customer(pk)
         output_serializer_data = CustomerService.serialize_output_customer(customer)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
@@ -30,7 +42,13 @@ class CustomerViewSet(viewsets.ModelViewSet):
         raise PermissionDenied("This operation is forbidden.")
 
     def update(self, request, pk=None):
-        CustomerService.authorize_action_customer(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = CustomerService.check_permission(
+            request.user, action_name
+        )
+        CustomerService.authorize_action_customer(
+            request, pk, permission_granted, user_type
+        )
         app_user_id = CustomerService.get_app_user_id_of_customer(pk)
         AppUserService.general_update_app_user(request, app_user_id)
         customer_updated = CustomerService.retrieve_customer(pk)
@@ -44,7 +62,13 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
-        CustomerService.authorize_action_customer(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = CustomerService.check_permission(
+            request.user, action_name
+        )
+        CustomerService.authorize_action_customer(
+            request, pk, permission_granted, user_type
+        )
         app_user_id = CustomerService.get_app_user_id_of_customer(pk)
         AppUserService.general_delete_app_user(request, app_user_id)
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -55,9 +79,16 @@ class CustomerViewSet(viewsets.ModelViewSet):
         url_path="me",
         url_name="retrieve_current_customer",
     )
-    def retrieve_current_customer(self, request):
-        hotel_owner = CustomerService.get_current_hotel_owner(request)
-        output_serializer_data = CustomerService.serialize_output_hotel_owner(
-            hotel_owner
+    def retrieve_current_customer(
+        self,
+        request,
+    ):
+        action_name = inspect.currentframe().f_code.co_name
+        permission_granted, user_type = CustomerService.check_permission(
+            request.user, action_name
         )
+        customer = CustomerService.get_current_customer(
+            request, permission_granted, user_type
+        )
+        output_serializer_data = CustomerService.serialize_output_customer(customer)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
