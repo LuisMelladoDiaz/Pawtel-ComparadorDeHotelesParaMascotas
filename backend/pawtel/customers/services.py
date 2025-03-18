@@ -1,4 +1,5 @@
 from pawtel.app_users.services import AppUserService
+from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
 from rest_framework.exceptions import (AuthenticationFailed, NotFound,
@@ -52,6 +53,18 @@ class CustomerService:
     @staticmethod
     def list_customers():
         return Customer.objects
+
+    @staticmethod
+    def get_all_bookings_by_customer(customer_id, user):
+        customer = Customer.objects.filter(id=customer_id).first()
+
+        if not customer:
+            raise NotFound("Customer does not exist.")
+
+        if customer.user.id != user.id:
+            raise PermissionDenied("You do not have permission to view these bookings.")
+
+        return Booking.objects.filter(customer=customer)
 
     # POST -------------------------------------------------------------------
 

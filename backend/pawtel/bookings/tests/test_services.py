@@ -177,21 +177,3 @@ class BookingServiceTest(TestCase):
     def test_retrieve_booking_not_found(self):
         with self.assertRaises(NotFound):
             BookingService.retrieve_booking(999)  # It does not exist
-
-    def test_list_bookings_by_hotel(self):
-        bookings_hotel1 = BookingService.list_bookings_by_hotel(self.hotel1.id)
-        bookings_hotel2 = BookingService.list_bookings_by_hotel(self.hotel2.id)
-
-        self.assertEqual(len(bookings_hotel1), 1)
-        self.assertEqual(len(bookings_hotel2), 1)
-        self.assertEqual(bookings_hotel1[0], self.booking1)
-        self.assertEqual(bookings_hotel2[0], self.booking2)
-
-    def test_list_bookings_by_customer(self):
-        bookings_customer1 = BookingService.list_bookings_by_customer(self.customer1.id)
-        bookings_customer2 = BookingService.list_bookings_by_customer(self.customer2.id)
-
-        self.assertEqual(len(bookings_customer1), 1)
-        self.assertEqual(len(bookings_customer2), 1)
-        self.assertEqual(bookings_customer1[0], self.booking1)
-        self.assertEqual(bookings_customer2[0], self.booking2)

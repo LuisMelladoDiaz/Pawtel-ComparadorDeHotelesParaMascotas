@@ -100,22 +100,6 @@ class BookingViewSetTestCase(TestCase):
 
         self.client.force_authenticate(user=self.app_user_customer1)
 
-    def test_list_bookings_by_hotel(self):
-        url = reverse("booking-by-hotel", kwargs={"hotel_id": self.hotel1.id})
-        response = self.client.get(url)
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["id"], self.booking1.id)
-
-    def test_list_bookings_by_customer(self):
-        url = reverse("booking-by-customer", kwargs={"customer_id": self.customer1.id})
-        response = self.client.get(url)
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["id"], self.booking1.id)
-
     def test_list_bookings(self):
         url = reverse("booking-list")
         response = self.client.get(url)

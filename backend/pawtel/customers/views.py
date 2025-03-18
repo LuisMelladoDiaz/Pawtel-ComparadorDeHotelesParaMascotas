@@ -1,4 +1,5 @@
 from pawtel.app_users.services import AppUserService
+from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
 from pawtel.customers.services import CustomerService
@@ -61,3 +62,29 @@ class CustomerViewSet(viewsets.ModelViewSet):
             hotel_owner
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="bookings",
+        url_name="get_all_bookings_by_customer_explicit",
+    )
+    def get_all_bookings_by_customer_explicit(self, request, pk=None):
+        CustomerService.authorize_action_customer(request, pk)
+        bookings = CustomerService.get_all_bookings_by_customer(pk, request.user)
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="my-bookings",
+        url_name="get_all_bookings_by_customer_implicit",
+    )
+    def get_all_bookings_by_customer_implicit(self, request):
+        customer = CustomerService.get_current_customer(request)
+        bookings = CustomerService.get_all_bookings_by_customer(
+            customer.id, request.user
+        )
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

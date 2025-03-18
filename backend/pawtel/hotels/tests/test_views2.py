@@ -70,13 +70,13 @@ class HotelViewSetTestCase2(TestCase):
             pet_type="CAT",
         )
 
-        # Create Customers (NEW)
+        # Create Customers
         self.customer1 = Customer.objects.create(user=self.app_user_owner1)
         self.customer2 = Customer.objects.create(user=self.app_user_owner2)
 
-        # Create Bookings (FIXED)
+        # Create Bookings
         self.booking1 = Booking.objects.create(
-            customer=self.customer1,  # FIX: Use Customer instance
+            customer=self.customer1,
             room_type=self.room_type1,
             start_date=date.today() + timedelta(days=3),
             end_date=date.today() + timedelta(days=7),
@@ -84,7 +84,7 @@ class HotelViewSetTestCase2(TestCase):
         )
 
         self.booking2 = Booking.objects.create(
-            customer=self.customer2,  # FIX: Use Customer instance
+            customer=self.customer2,
             room_type=self.room_type2,
             start_date=date.today() + timedelta(days=5),
             end_date=date.today() + timedelta(days=10),
