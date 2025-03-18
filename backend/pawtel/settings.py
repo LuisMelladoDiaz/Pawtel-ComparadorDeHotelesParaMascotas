@@ -179,3 +179,13 @@ DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 # Frontend URL
 FRONTEND_URL = os.getenv("FRONTEND_URL")
+
+# Assert that required environment variables are set
+assert EMAIL_BACKEND, "EMAIL_BACKEND is not set in the environment variables"
+assert EMAIL_HOST, "EMAIL_HOST is not set in the environment variables"
+assert EMAIL_HOST_USER, "EMAIL_HOST_USER is not set in the environment variables"
+assert (
+    EMAIL_HOST_PASSWORD
+), "EMAIL_HOST_PASSWORD is not set in the environment variables"
+assert DEFAULT_FROM_EMAIL, "DEFAULT_FROM_EMAIL is not set in the environment variables"
+assert FRONTEND_URL, "FRONTEND_URL is not set in the environment variables"
