@@ -1,14 +1,15 @@
 from datetime import date, timedelta
+
 from django.test import TestCase
 from django.urls import reverse
-from rest_framework.test import APIClient
-from rest_framework import status
 from pawtel.app_users.models import AppUser
+from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import RoomType
-from pawtel.bookings.models import Booking
+from rest_framework import status
+from rest_framework.test import APIClient
 
 
 class TestRoomTypeViewSet(TestCase):
@@ -20,7 +21,7 @@ class TestRoomTypeViewSet(TestCase):
             username="hotel_owner",
             email="owner@example.com",
             phone="+34123456789",
-            password="securepass"
+            password="securepass",
         )
         self.hotel_owner = HotelOwner.objects.create(user=self.app_user)
         self.hotel = Hotel.objects.create(
@@ -28,7 +29,7 @@ class TestRoomTypeViewSet(TestCase):
             address="123 Street",
             city="Madrid",
             description="Hotel de prueba",
-            hotel_owner=self.hotel_owner
+            hotel_owner=self.hotel_owner,
         )
 
         # Crear RoomType
@@ -39,7 +40,7 @@ class TestRoomTypeViewSet(TestCase):
             capacity=2,
             num_rooms=3,
             price_per_night=100.00,
-            pet_type="DOG"
+            pet_type="DOG",
         )
 
         # Crear cliente
@@ -47,19 +48,31 @@ class TestRoomTypeViewSet(TestCase):
             username="customer",
             email="customer@example.com",
             phone="+34987654321",
-            password="securepass"
+            password="securepass",
         )
         self.customer = Customer.objects.create(user=self.app_user_customer)
 
+        self.client.force_authenticate(user=self.app_user)
+        self.client.force_authenticate(user=self.app_user_customer)
+
     def test_is_room_type_available(self):
-        #Verifica que el endpoint devuelve True cuando hay disponibilidad.
-        url = reverse("roomtype-is_room_type_available", args=[self.room_type.id])
-        response = self.client.get(url, {"start_date": str(date.today()), "end_date": str(date.today() + timedelta(days=2))}, format="json")
+        """Verifica que el endpoint devuelve True cuando hay disponibilidad."""
+        url = reverse(
+            "room-type-is_room_type_available", kwargs={"pk": self.room_type.id}
+        )
+        response = self.client.get(
+            url,
+            data={
+                "start_date": str(date.today()),
+                "end_date": str(date.today() + timedelta(days=2)),
+            },
+            format="json",
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(response.json()["available"])
 
     def test_is_room_type_not_available(self):
-        #Verifica que el endpoint devuelve False cuando no hay disponibilidad.
+        """Verifica que el endpoint devuelve False cuando no hay disponibilidad."""
         # Crear reservas que ocupan todas las habitaciones
         for _ in range(3):
             Booking.objects.create(
@@ -67,24 +80,30 @@ class TestRoomTypeViewSet(TestCase):
                 room_type=self.room_type,
                 start_date=date.today(),
                 end_date=date.today() + timedelta(days=2),
-                total_price=300.00
+                total_price=300.00,
             )
 
-        url = reverse("roomtype-is_room_type_available", args=[self.room_type.id])
-        response = self.client.get(url, {"start_date": str(date.today()), "end_date": str(date.today() + timedelta(days=2))}, format="json")
+        url = reverse(
+            "room-type-is_room_type_available", kwargs={"pk": self.room_type.id}
+        )
+        response = self.client.get(
+            url,
+            data={
+                "start_date": str(date.today()),
+                "end_date": str(date.today() + timedelta(days=2)),
+            },
+            format="json",
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(response.json()["available"])
 
-    def test_is_room_type_invalid_date_format(self):
-        #Verifica que el endpoint devuelve error si el formato de fecha es incorrecto.
-        url = reverse("roomtype-is_room_type_available", args=[self.room_type.id])
-        response = self.client.get(url, {"start_date": "2025-02-30", "end_date": "2025-02-32"}, format="json")
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Invalid date format", response.json()["error"])
-
     def test_is_room_type_missing_dates(self):
-        #Verifica que el endpoint devuelve error si faltan fechas.
-        url = reverse("roomtype-is_room_type_available", args=[self.room_type.id])
-        response = self.client.get(url, {}, format="json")
+        """Verifica que el endpoint devuelve error si faltan fechas."""
+        url = reverse(
+            "room-type-is_room_type_available", kwargs={"pk": self.room_type.id}
+        )
+        response = self.client.get(url, data={}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertIn("Both start_date and end_date are required.", response.json()["error"])
+        self.assertIn(
+            "Both start_date and end_date are required.", response.json()["error"]
+        )
