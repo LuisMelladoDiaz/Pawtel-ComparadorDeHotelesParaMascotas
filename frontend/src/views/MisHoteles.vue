@@ -9,6 +9,8 @@ import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { useRouter } from 'vue-router';
 
+
+
 const router = useRouter();
 
 const notyf = new Notyf();
@@ -19,12 +21,10 @@ const hotelOwnerId = computed(() => hotelOwner?.value?.id);
 // Obtener los hoteles del dueño desde el backend
 const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId, true);
 const createHotelMutation = useCreateHotel();
-const updateHotelMutation = useUpdateHotel();
 const deleteHotelMutation = useDeleteHotel();
 
 const modalOpen = ref(false);
-const isEditing = ref(false);
-const hotelData = ref({ id: null, name: '', address: '', city: '', description: '' });
+const hotelData = ref({ name: '', address: '', city: '', description: '' });
 
 const currentPage = ref(1);
 const itemsPerPage = 6;
@@ -36,45 +36,20 @@ const paginatedHotels = computed(() => {
   return hotels.value.slice(start, start + itemsPerPage);
 });
 
-// Abrir modal para añadir/editar
-const openModal = (hotel = null) => {
-  if (hotel) {
-    // Modo de edición: cargar los datos del hotel seleccionado
-    hotelData.value = { ...hotel };
-    isEditing.value = true;
-  } else {
-    // Modo de creación: reiniciar los datos del hotel
-    hotelData.value = { id: null, name: '', address: '', city: '', description: '' };
-    isEditing.value = false;
-  }
+// Abrir modal para añadir hotel
+const openModal = () => {
+  hotelData.value = { name: '', address: '', city: '', description: '' };
   modalOpen.value = true;
 };
 
-// Redirigir a la pantalla de edición
-const editHotel = (id) => {
-  router.push(`/mis-hoteles/edit/${id}`);
-};
-
-// Guardar hotel (Crear o Editar)
+// Guardar hotel (Crear)
 const saveHotel = async () => {
   try {
-    if (isEditing.value) {
-      await updateHotelMutation.mutateAsync({
-          hotelId: hotelData.value.id,
-          hotelData: {
-            name: hotelData.value.name,
-            address: hotelData.value.address,
-            city: hotelData.value.city,
-            description: hotelData.value.description,
-          },
-        });
-        window.location.reload();
-    } else {
-      await createHotelMutation.mutateAsync(hotelData.value);
-    }
-    modalOpen.value = false;
+    const newHotel = await createHotelMutation.mutateAsync(hotelData.value);
+    
+    router.push(`/mis-hoteles/edit/${newHotel.id}`);
+    modalOpen.value = false; 
   } catch (error) {
-    notyf.error('Error al guardar el hotel.');
     console.error('Error al guardar el hotel', error);
   }
 };
@@ -92,6 +67,11 @@ const deleteHotel = async (id) => {
   }
 };
 
+// Redirigir a la pantalla de edición
+const editHotel = (id) => {
+  router.push(`/mis-hoteles/edit/${id}`);
+};
+
 // Paginación
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
@@ -102,11 +82,10 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
     <NavbarTerracota />
 
     <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
-
       <!-- Cabecera -->
       <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
         <span class="font-semibold">Gestión de Hoteles</span>
-        <button @click="openModal()" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
+        <button @click="openModal" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
           <i class="fas fa-plus mr-2"></i> Añadir Nuevo
         </button>
       </div>
@@ -140,10 +119,12 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
               <td class="px-4 py-2">{{ hotel.city }}</td>
               <td class="px-4 py-2">{{ hotel.description }}</td>
               <td class="px-4 py-2 text-center flex justify-center gap-2">
+                <!-- Botón de editar, que redirige a la página de edición -->
                 <button @click="editHotel(hotel.id)" class="text-oliva hover:text-oliva-dark text-[20px]">
                   <i class="fas fa-edit"></i>
                 </button>
 
+                <!-- Botón de eliminar -->
                 <button @click="deleteHotel(hotel.id)" class="text-terracota hover:text-terracota-dark text-[20px]">
                   <i class="fas fa-trash"></i>
                 </button>
@@ -170,16 +151,16 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
 
     <Footer />
 
-    <!-- Modal para Añadir/Editar Hotel -->
+    <!-- Modal para Añadir Hotel -->
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-white p-6 rounded-lg w-1/3">
-        <h2 class="text-xl font-bold mb-4">{{ isEditing ? 'Editar Hotel' : 'Añadir Hotel' }}</h2>
+        <h2 class="text-xl font-bold mb-4">Añadir Hotel</h2>
         <input v-model="hotelData.name" placeholder="Nombre" class="w-full p-2 mb-2 border rounded" />
         <input v-model="hotelData.address" placeholder="Dirección" class="w-full p-2 mb-2 border rounded" />
         <input v-model="hotelData.city" placeholder="Ciudad" class="w-full p-2 mb-2 border rounded" />
         <textarea v-model="hotelData.description" placeholder="Descripción" class="w-full p-2 mb-2 border rounded"></textarea>
         <div class="flex justify-end gap-2">
-          <Button type="accept" @click="saveHotel">{{ isEditing ? 'Actualizar' : 'Crear' }}</Button>
+          <Button type="accept" @click="saveHotel">Crear</Button>
           <Button type="reject" @click="modalOpen = false">Cancelar</Button>
         </div>
       </div>

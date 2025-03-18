@@ -14,50 +14,50 @@ export type RoomType = {
 };
 
 export const fetchAllRoomTypes = async (hotelId?: number) => {
-  const url = hotelId ? `${API_BASE_URL}/hotels/${hotelId}/room-types/` : `${API_BASE_URL}/room-type/`;
+  const url = hotelId ? `${API_BASE_URL}/hotels/${hotelId}/room-types/` : `${API_BASE_URL}/room-types/`;
   const response = await axios.get(url);
   return response.data as RoomType[];
 };
 
 export const fetchRoomTypeById = async (roomTypeId: number) => {
-  const url = `${API_BASE_URL}/room-type/${roomTypeId}/`;
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/`;
   const response = await axios.get(url);
   return response.data as RoomType;
 };
 
 export const createRoomType = async (roomTypeData: Omit<RoomType, 'id'>) => {
-  const url = `${API_BASE_URL}/room-type/`;
+  const url = `${API_BASE_URL}/room-types/`;
   const response = await axios.post(url, roomTypeData);
   return response.data as RoomType;
 };
 
 export const updateRoomType = async (roomTypeId: number, roomTypeData: Omit<RoomType, 'id'>) => {
-  const url = `${API_BASE_URL}/room-type/${roomTypeId}/`;
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/`;
   const response = await axios.put(url, roomTypeData);
   return response.data as RoomType;
 };
 
 export const partialUpdateRoomType = async (roomTypeId: number, partialData: Partial<RoomType>) => {
-  const url = `${API_BASE_URL}/room-type/${roomTypeId}/`;
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/`;
   const response = await axios.patch(url, partialData);
   return response.data;
 };
 
 export const deleteRoomType = async (roomTypeId: number) => {
-  const url = `${API_BASE_URL}/room-type/${roomTypeId}/`;
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/`;
   const response = await axios.delete(url);
   return response.data;
 };
 
 export const fetchTotalVacancyForRoomType = async (roomTypeId: number) => {
-  const url = `${API_BASE_URL}/room-type/${roomTypeId}/total-vacancy/`;
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/total-vacancy/`;
   const response = await axios.get(url);
   return response.data as { id: number, total_vacancy: number };
 };
 
 
 export const fetchVacancyForEachRoomInRoomType = async (roomTypeId: number) => {
-  const url = `${API_BASE_URL}/room-type/${roomTypeId}/rooms/vacancy/`;
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/rooms/vacancy/`;
   const response = await axios.get(url);
   return response.data as { room_id: number, vacancy: number }[];
 };
