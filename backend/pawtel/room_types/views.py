@@ -1,10 +1,12 @@
 from datetime import datetime
+
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.room_types.services import RoomTypeService
 from rest_framework import status, viewsets
-from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.response import Response
+
 
 class RoomTypeViewSet(viewsets.ModelViewSet):
     queryset = RoomType.objects.all()
@@ -52,22 +54,32 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         RoomTypeService.delete_room_type(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-    @action(detail=True, methods=["get"], url_path="is-available", url_name="is_room_type_available")
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="is-available",
+        url_name="is_room_type_available",
+    )
     def is_room_type_available(self, request, pk=None):
-        #Verifica si un `RoomType` específico está disponible en un rango de fechas
-        data = request.data
+        # Verifica si un `RoomType` específico está disponible en un rango de fechas
+        data = request.GET
         start_date_str = data.get("start_date")
         end_date_str = data.get("end_date")
 
         if not start_date_str or not end_date_str:
-            return Response({"error": "Both start_date and end_date are required."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Both start_date and end_date are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         try:
             start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
             end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
         except ValueError:
-            return Response({"error": "Invalid date format. Use YYYY-MM-DD."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"error": "Invalid date format. Use YYYY-MM-DD."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         is_available = RoomTypeService.is_room_type_available(pk, start_date, end_date)
         return Response({"available": is_available}, status=status.HTTP_200_OK)

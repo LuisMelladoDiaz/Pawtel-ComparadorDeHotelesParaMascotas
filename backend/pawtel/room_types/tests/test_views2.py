@@ -62,19 +62,19 @@ class TestRoomTypeViewSet(TestCase):
         )
         response = self.client.get(
             url,
-            data={
+            {
                 "start_date": str(date.today()),
                 "end_date": str(date.today() + timedelta(days=2)),
             },
-            format="json",
         )
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertTrue(response.json()["available"])
 
     def test_is_room_type_not_available(self):
         """Verifica que el endpoint devuelve False cuando no hay disponibilidad."""
         # Crear reservas que ocupan todas las habitaciones
-        for _ in range(3):
+        for _ in range(self.room_type.num_rooms * self.room_type.capacity):
             Booking.objects.create(
                 customer=self.customer,
                 room_type=self.room_type,
@@ -88,12 +88,12 @@ class TestRoomTypeViewSet(TestCase):
         )
         response = self.client.get(
             url,
-            data={
+            {
                 "start_date": str(date.today()),
                 "end_date": str(date.today() + timedelta(days=2)),
             },
-            format="json",
         )
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertFalse(response.json()["available"])
 
