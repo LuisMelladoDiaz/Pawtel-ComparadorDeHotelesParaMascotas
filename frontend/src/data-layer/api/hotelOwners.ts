@@ -70,7 +70,7 @@ export const fetchAllHotelsOfOwner = async (hotelOwnerId: number) => {
 };
 
 export const deleteAllHotelsOfOwner = async (hotelOwnerId: number) => {
-    const url = `${API_BASE_URL}/hotel-owners/${hotelOwnerId}/hotels/`;
+    const url = `${API_BASE_URL}/hotel-owners/${hotelOwnerId}/hotels/delete/`;
     const response = await axios.delete(url);
     return response.data;
 };

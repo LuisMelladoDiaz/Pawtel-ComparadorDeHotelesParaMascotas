@@ -5,7 +5,8 @@ from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class HotelService:
@@ -34,7 +35,7 @@ class HotelService:
         try:
             return Hotel.objects.get(pk=pk)
         except Hotel.DoesNotExist:
-            raise NotFound(detail=f"Hotel with id {pk} not found")
+            raise NotFound(detail=f"Hotel not found")
 
     @staticmethod
     def get_all_bookings_by_hotel(hotel_id, user):
