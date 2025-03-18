@@ -1,4 +1,4 @@
-from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from pawtel.hotels.models import Hotel
 
@@ -20,7 +20,13 @@ class RoomType(models.Model):
 
     description = models.CharField(max_length=300, blank=False, null=False)
 
-    capacity = models.IntegerField(validators=[MinValueValidator(1)], null=False)
+    capacity = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(200)], null=False
+    )
+
+    num_rooms = models.IntegerField(
+        default=0, validators=[MinValueValidator(0), MaxValueValidator(200)], null=False
+    )
 
     price_per_night = models.DecimalField(
         max_digits=6, decimal_places=2, validators=[MinValueValidator(1)], null=False
