@@ -1,7 +1,6 @@
-from django.forms import ValidationError
 from pawtel.app_users.models import AppUser
 from pawtel.app_users.serializers import AppUserSerializer
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, ValidationError
 
 
 class AppUserService:
