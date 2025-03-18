@@ -1,10 +1,10 @@
 from django.db.models import Max, Min
 from django.forms import ValidationError
+from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.room_types.models import RoomType
-from pawtel.bookings.models import Booking
 from rest_framework.exceptions import NotFound, PermissionDenied
 
 
@@ -35,7 +35,7 @@ class HotelService:
             return Hotel.objects.get(pk=pk)
         except Hotel.DoesNotExist:
             raise NotFound(detail=f"Hotel with id {pk} not found")
-        
+
     @staticmethod
     def get_all_bookings_by_hotel(hotel_id, user):
         hotel = Hotel.objects.filter(id=hotel_id, is_archived=False).first()
@@ -46,7 +46,7 @@ class HotelService:
         if hotel.hotel_owner.user.id != user.id:
             raise PermissionDenied("You do not have permission to view these bookings.")
 
-        return Booking.objects.filter(room__room_type__hotel=hotel)
+        return Booking.objects.filter(room_type__hotel=hotel)
 
     # POST -------------------------------------------------------------------
 
