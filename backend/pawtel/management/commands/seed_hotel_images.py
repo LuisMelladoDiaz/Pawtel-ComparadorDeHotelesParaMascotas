@@ -30,14 +30,22 @@ class Command(BaseCommand):
 
     def create_hotel_images(self, hotels, num_images_per_hotel):
         for hotel in hotels:
-            for _ in range(num_images_per_hotel):
-                image = self.generate_image()
-                hotel_image = HotelImage.objects.create(hotel=hotel, image=image)
+            # Primero crea la imagen de portada (cover image)
+            cover_image = self.generate_image(is_cover=True)
+            HotelImage.objects.create(hotel=hotel, image=cover_image, is_cover=True)
+            self.stdout.write(
+                self.style.SUCCESS(f"Created cover image for Hotel: {hotel.name}")
+            )
+
+            # Luego crea las imágenes adicionales (no cover)
+            for _ in range(num_images_per_hotel - 1):
+                image = self.generate_image(is_cover=False)
+                HotelImage.objects.create(hotel=hotel, image=image, is_cover=False)
                 self.stdout.write(
                     self.style.SUCCESS(f"Created image for Hotel: {hotel.name}")
                 )
 
-    def generate_image(self):
+    def generate_image(self, is_cover=False):
         img = Image.new(
             "RGB",
             (200, 200),
