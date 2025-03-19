@@ -14,7 +14,6 @@ const loginMutation = useLoginMutation();
 const showPassword = ref(false);
 const errorMessage = ref('');
 
-// Esquema de validación con Yup
 const validationSchema = yup.object({
     username: yup.string().required('El nombre de usuario es obligatorio'),
     password: yup.string().required('La contraseña es obligatoria')

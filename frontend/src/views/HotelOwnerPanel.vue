@@ -11,16 +11,13 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 
 const notyf = new Notyf();
-// Obtener el dueño del hotel actual
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
 
-// Extraer el ID de hotelOwner solo si está disponible
 const hotelOwnerId = computed(() => hotelOwner.value?.id ?? null);
 
-// Llamar a useGetAllHotelsOfOwner solo cuando hotelOwnerId sea válido
 const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(
   computed(() => hotelOwnerId.value),
-  computed(() => !!hotelOwnerId.value) // Activar solo cuando haya ID válido
+  computed(() => !!hotelOwnerId.value)
 );
 
 const createHotelMutation = useCreateHotel();
@@ -40,7 +37,6 @@ const paginatedHotels = computed(() => {
   return hotels.value.slice(start, start + itemsPerPage);
 });
 
-// Esquema de validación Yup
 const hotelSchema = yup.object({
   name: yup.string().required('El nombre es obligatorio'),
   address: yup.string().required('La dirección es obligatoria'),
@@ -48,7 +44,6 @@ const hotelSchema = yup.object({
   description: yup.string().required('La descripción es obligatoria'),
 });
 
-// Abrir modal para añadir/editar
 const openModal = (hotel = null) => {
   if (hotel) {
     hotelData.value = { ...hotel };
@@ -60,7 +55,6 @@ const openModal = (hotel = null) => {
   modalOpen.value = true;
 };
 
-// Guardar hotel (Crear o Editar)
 const saveHotel = async (values) => {
   try {
     if (isEditing.value && hotelData.value.id) {
@@ -87,7 +81,6 @@ const saveHotel = async (values) => {
 };
 
 
-// Eliminar hotel
 const deleteHotel = async (id) => {
   if (confirm('¿Estás seguro de eliminar este hotel?')) {
     try {
@@ -99,7 +92,6 @@ const deleteHotel = async (id) => {
   }
 };
 
-// Paginación
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
@@ -115,7 +107,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         </button>
       </div>
 
-      <!-- Tabla de hoteles -->
       <div class="overflow-x-auto w-full">
         <table class="w-full border-collapse shadow-md rounded-b-lg overflow-hidden mb-4">
           <thead>
@@ -156,7 +147,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         </table>
       </div>
 
-      <!-- Paginación -->
       <div class="flex justify-between w-full mt-4 flex-col md:flex-row">
         <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels?.length || 0 }}</span>
         <div class="flex gap-2 mt-2 md:mt-0">
@@ -172,7 +162,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
 
     <Footer />
 
-    <!-- Modal con validaciones -->
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-white p-6 rounded-lg w-1/3">
         <Form @submit="saveHotel" :validation-schema="hotelSchema" :initial-values="hotelData">
