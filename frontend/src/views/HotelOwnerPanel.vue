@@ -133,7 +133,6 @@ const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
 <template>
-  <div class="flex flex-col min-h-screen">
     <NavbarTerracota />
 
     <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
