@@ -1,0 +1,31 @@
+name: Codacy Analysis with Report
+
+on:
+  push:
+    branches:
+      - main
+      - test/workflow_target
+  pull_request:
+
+jobs:
+  codacy-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Instalar CLI de Codacy
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/codacy/codacy-analysis-cli/master/install.sh | sh
+
+      - name: Ejecutar análisis de Codacy y generar reporte
+        env:
+          CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        run: |
+          ./codacy-analysis-cli analyze --output json > codacy-report.json
+
+      - name: Subir reporte como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: codacy-report
+          path: codacy-report.json
