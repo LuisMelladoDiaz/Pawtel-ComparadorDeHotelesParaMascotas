@@ -48,6 +48,7 @@ class Command(BaseCommand):
             call_command("seed_customers")
             call_command("seed_hotels")
             call_command("seed_room_types")
+            call_command("seed_hotel_images")
         except CommandError as e:
             self.stdout.write(self.style.ERROR(f"Error while seeding: {e}"))
             return
