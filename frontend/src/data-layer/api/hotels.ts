@@ -48,3 +48,16 @@ export const deleteHotel = async (hotelId: number) => {
   const response = await axios.delete(url);
   return response.data;
 };
+
+
+export const uploadImageToHotel = async (hotelId: number, image: File, isCover: boolean) => {
+  const formData = new FormData();
+  formData.append('image', image, image.name);
+  formData.append('is_cover', isCover ? 'true' : 'false');
+  const response = await axios.post(
+    `${API_BASE_URL}/hotels/${hotelId}/upload_image/`,
+    formData,
+    { headers: { 'Content-Type': 'multipart/form-data' } }
+  );
+  return response.data;
+}
