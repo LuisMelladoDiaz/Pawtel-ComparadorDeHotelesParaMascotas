@@ -14,6 +14,7 @@ import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
 import EmailPasswordReset from './views/EmailPasswordReset.vue'
 import PasswordResetConfirm from './views/ResetPassword.vue'
 import Home from './views/Home.vue'
+import MyBookings from './views/MyBookings.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
 
@@ -35,6 +36,8 @@ const routes = [
   { path: '/template-screen-2', component: TemplateScreen2},
   { path: '/user-profile', component: UserProfile},
   { path: '/hotel-owner-panel', component: HotelOwnerPanel },
+  { path: '/mis-reservas', component: MyBookings },
+
 ]
 
 const router = createRouter({

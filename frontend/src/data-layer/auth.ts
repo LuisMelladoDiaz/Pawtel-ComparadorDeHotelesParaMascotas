@@ -99,3 +99,29 @@ export const usePasswordResetConfirmMutation = () => {
     },
   });
 };
+// ROLES
+
+export const useRoleQuery = () => {
+  return useQuery({
+    queryKey: ["role"],
+    queryFn: async () => {
+      const response = await axios.get(`${API_BASE_URL}/user-info/`);
+      return response.data.role;
+    },
+    retry: false,
+  });
+};
+
+export const useIsRole = (role: string) => {
+  const roleQuery = useRoleQuery();
+  
+  const isRole = computed(() => {
+    return roleQuery.isLoading.value ? false : roleQuery.data.value == role;
+  });
+
+  return {
+    isRole,
+    isLoading: roleQuery.isLoading,
+    isError: roleQuery.isError,
+  };
+};
