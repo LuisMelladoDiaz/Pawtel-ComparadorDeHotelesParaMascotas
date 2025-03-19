@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.room_types.services import RoomTypeService
@@ -61,25 +59,8 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         url_name="is_room_type_available",
     )
     def is_room_type_available(self, request, pk=None):
-        # Verifica si un `RoomType` específico está disponible en un rango de fechas
-        data = request.GET
-        start_date_str = data.get("start_date")
-        end_date_str = data.get("end_date")
-
-        if not start_date_str or not end_date_str:
-            return Response(
-                {"error": "Both start_date and end_date are required."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        try:
-            start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
-            end_date = datetime.strptime(end_date_str, "%Y-%m-%d").date()
-        except ValueError:
-            return Response(
-                {"error": "Invalid date format. Use YYYY-MM-DD."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
+        RoomTypeService.authorize_room_type_available(request, pk)
+        start_date, end_date = RoomTypeService.parse_availability_dates(request)
+        RoomTypeService.validate_room_type_available(start_date, end_date)
         is_available = RoomTypeService.is_room_type_available(pk, start_date, end_date)
-        return Response({"available": is_available}, status=status.HTTP_200_OK)
+        return Response({"is_available": is_available}, status=status.HTTP_200_OK)
