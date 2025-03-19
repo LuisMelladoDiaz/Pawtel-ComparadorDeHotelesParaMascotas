@@ -32,8 +32,8 @@ class BookingService:
         return bookings
 
     @staticmethod
-    def retrieve_booking(pk):
+    def retrieve_booking(pk, only_archived=True):
         try:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
-            raise NotFound(detail=f"Booking with id {pk} not found")
+            raise NotFound(detail="Booking not found.")
