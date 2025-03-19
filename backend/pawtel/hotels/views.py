@@ -63,9 +63,9 @@ class HotelViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=["get"],
         url_path="bookings",
-        url_name="get_all_bookings_by_hotel_explicit",
+        url_name="get_all_bookings_by_hotel",
     )
-    def get_all_bookings_by_hotel_explicit(self, request, pk=None):
+    def get_all_bookings_by_hotel(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
         bookings = HotelService.get_all_bookings_by_hotel(pk)
         serializer = BookingSerializer(bookings, many=True)

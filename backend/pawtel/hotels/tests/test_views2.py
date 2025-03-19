@@ -16,7 +16,6 @@ class HotelViewSetTestCase2(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-        # Crear usuario y hotel owner
         self.app_user3 = AppUser.objects.create_user(
             username="hotel_owner2",
             first_name="Johnttt",
@@ -27,9 +26,7 @@ class HotelViewSetTestCase2(TestCase):
         )
         self.client.force_authenticate(user=self.app_user3)
         self.hotel_owner4 = HotelOwner.objects.create(user_id=self.app_user3.id)
-        print("HotelOwners en BD:", HotelOwner.objects.all())
 
-        # Crear hotel
         self.hotel = Hotel.objects.create(
             name="Hotel Test",
             address="123 Street",
@@ -38,7 +35,6 @@ class HotelViewSetTestCase2(TestCase):
             hotel_owner=self.hotel_owner4,
         )
 
-        # Crear RoomType
         self.room_type = RoomType.objects.create(
             hotel=self.hotel,
             name="Suite",
@@ -49,7 +45,6 @@ class HotelViewSetTestCase2(TestCase):
             pet_type="DOG",
         )
 
-        # Crear usuario cliente
         self.app_user2 = AppUser.objects.create_user(
             username="customer_user",
             first_name="Pepita",
@@ -61,7 +56,6 @@ class HotelViewSetTestCase2(TestCase):
 
         self.customer = Customer.objects.create(user_id=self.app_user2.id)
 
-        # Crear reservas para el hotel
         self.booking1 = Booking.objects.create(
             customer=self.customer,
             room_type=self.room_type,
@@ -78,10 +72,7 @@ class HotelViewSetTestCase2(TestCase):
         )
 
     def test_get_all_bookings_by_hotel_explicit(self):
-        """Verifica que el endpoint devuelve todas las reservas de un hotel."""
-        url = reverse(
-            "hotel-get_all_bookings_by_hotel_explicit", kwargs={"pk": self.hotel.id}
-        )
+        url = reverse("hotel-get_all_bookings_by_hotel", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)  # Debe devolver dos reservas
+        self.assertEqual(len(response.data), 2)

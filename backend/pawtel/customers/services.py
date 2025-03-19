@@ -24,17 +24,21 @@ class CustomerService:
 
     @staticmethod
     def authorize_action_customer(request, pk):
-        target_customer = CustomerService.retrieve_customer(pk)
-        if not target_customer:
-            raise NotFound("Customer does not exist.")
-        target_app_user = AppUserService.retrieve_app_user(target_customer.user_id)
         logged_in_customer = CustomerService.get_current_customer(request)
 
-        if (not target_app_user) or (not target_app_user.is_active):
-            raise NotFound("Customer does not exist.")
+        if pk:
+            target_customer = CustomerService.retrieve_customer(pk)
+            if not target_customer:
+                raise NotFound("Customer does not exist.")
+            target_app_user = AppUserService.retrieve_app_user(target_customer.user_id)
 
-        if target_customer.id != logged_in_customer.id:
-            raise PermissionDenied("Permission denied.")
+            if (not target_app_user) or (not target_app_user.is_active):
+                raise NotFound("Customer does not exist.")
+
+            if (not logged_in_customer) or (
+                target_customer.id != logged_in_customer.id
+            ):
+                raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def serialize_output_customer(customer, many=False):
