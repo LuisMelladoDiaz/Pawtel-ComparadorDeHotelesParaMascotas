@@ -97,7 +97,7 @@ class HotelViewSetTestCase(TestCase):
 
     def test_upload_image(self):
         image = self.create_image()
-        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
         data = {"image": image}
         response = self.client.post(url, data, format="multipart")
 
@@ -107,7 +107,7 @@ class HotelViewSetTestCase(TestCase):
 
     def test_update_image(self):
         initial_image = self.create_image("initial_image.jpg")
-        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
         data = {"image": initial_image}
         response = self.client.post(url, data, format="multipart")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -118,7 +118,7 @@ class HotelViewSetTestCase(TestCase):
         updated_image = self.create_image("updated_image.jpg")
         data = {"image": updated_image}
         url = reverse(
-            "hotel-update-image",
+            "hotel-image-update-image",
             kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id},
         )
         response = self.client.put(url, data, format="multipart")
@@ -133,7 +133,7 @@ class HotelViewSetTestCase(TestCase):
 
     def test_partial_update_image(self):
         initial_image = self.create_image("initial_image.jpg")
-        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
         data = {"image": initial_image}
         response = self.client.post(url, data, format="multipart")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -144,7 +144,7 @@ class HotelViewSetTestCase(TestCase):
         updated_image = self.create_image("updated_image.jpg")
         data = {"image": updated_image}
         url = reverse(
-            "hotel-partial-update-image",
+            "hotel-image-partial-update-image",
             kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id},
         )
         response = self.client.patch(url, data, format="multipart")
@@ -159,7 +159,7 @@ class HotelViewSetTestCase(TestCase):
 
     def test_delete_image(self):
         image = self.create_image("test_image.jpg")
-        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
         data = {"image": image}
         response = self.client.post(url, data, format="multipart")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -168,7 +168,7 @@ class HotelViewSetTestCase(TestCase):
         image_url = self.hotel.images.first().image
 
         delete_url = reverse(
-            "hotel-delete-image",
+            "hotel-image-delete-image",
             kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id},
         )
         response = self.client.delete(delete_url)
@@ -183,35 +183,97 @@ class HotelViewSetTestCase(TestCase):
                 "test_text.txt", b"Some text data", content_type="text/plain"
             )
         }
-        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
         response = self.client.post(url, data, format="multipart")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_get_all_images(self):
         image = self.create_image("single_image.jpg")
-        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
         data = {"image": image}
         response = self.client.post(url, data, format="multipart")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.hotel.refresh_from_db()
 
-        url = reverse("hotel-get-all-images", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-get-all-images", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreater(len(response.data), 0)
 
     def test_get_image(self):
         image = self.create_image("single_image.jpg")
-        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
         data = {"image": image}
         response = self.client.post(url, data, format="multipart")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.hotel.refresh_from_db()
 
         url = reverse(
-            "hotel-get-image",
+            "hotel-image-get-image",
             kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["id"], self.hotel.images.first().id)
+
+    def test_get_cover_image(self):
+        cover_image = self.create_image("cover_image.jpg")
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
+        data = {"image": cover_image, "is_cover": True}
+        response = self.client.post(url, data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+
+        url = reverse("hotel-image-get-cover-image", kwargs={"pk": self.hotel.id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue("image" in response.data)
+
+    def test_get_non_cover_images(self):
+        image1 = self.create_image("image1.jpg")
+        image2 = self.create_image("image2.jpg")
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
+        self.client.post(url, {"image": image1}, format="multipart")
+        self.client.post(url, {"image": image2}, format="multipart")
+        self.hotel.refresh_from_db()
+
+        url = reverse("hotel-image-get-non-cover-images", kwargs={"pk": self.hotel.id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_set_image_as_cover(self):
+        image1 = self.create_image("image1.jpg")
+        image2 = self.create_image("image2.jpg")
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
+        response1 = self.client.post(url, {"image": image1}, format="multipart")
+        response2 = self.client.post(url, {"image": image2}, format="multipart")
+        self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response2.status_code, status.HTTP_201_CREATED)
+
+        self.hotel.refresh_from_db()
+
+        image2_id = self.hotel.images.last().id
+        url = reverse(
+            "hotel-image-set-image-as-cover",
+            kwargs={"pk": self.hotel.id, "image_id": image2_id},
+        )
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.hotel.refresh_from_db()
+
+        cover_image = self.hotel.images.filter(is_cover=True).first()
+        self.assertEqual(cover_image.id, image2_id)
+
+    def test_invalid_set_cover_image(self):
+        url = reverse(
+            "hotel-image-set-image-as-cover",
+            kwargs={"pk": self.hotel.id, "image_id": 999},
+        )
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_get_cover_image_no_cover(self):
+        url = reverse("hotel-image-get-cover-image", kwargs={"pk": self.hotel.id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
