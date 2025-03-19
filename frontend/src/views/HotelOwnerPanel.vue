@@ -14,6 +14,7 @@ const notyf = new Notyf();
 // Obtener el dueño del hotel actual
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
 
+
 // Extraer el ID de hotelOwner solo si está disponible
 const hotelOwnerId = computed(() => hotelOwner.value?.id ?? null);
 
@@ -98,6 +99,41 @@ const deleteHotel = async (id) => {
     }
   }
 };
+
+
+const file = ref(null);
+const isCover = ref(false);
+
+const handleFileChange = (e) => {
+  file.value = e.target.files[0];
+};
+
+
+const upload = useUploadImageToHotel();
+
+const handleUpload = async () => {
+  if (!file) {
+    notyf.error('No se ha seleccionado ningún archivo.');
+    return;
+  }
+  upload.mutate({ hotelId: hotelData.value.id,
+    image: file,
+    isCover: isCover },
+  {
+    onSuccess: () => {
+      notyf.success('Imagen subida correctamente.');
+      setFile(null);
+    },
+    onError: (error) => {
+      notyf.error('Error al subir la imagen.');
+      console.error('Error al subir la imagen', error);
+    },
+  });
+
+};
+
+
+
 
 // Paginación
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
@@ -190,7 +226,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
 
           <Button type="submit">{{ isEditing ? 'Actualizar' : 'Crear' }}</Button>
         </Form>
+
       </div>
-    </div>
   </div>
 </template>

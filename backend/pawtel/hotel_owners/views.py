@@ -65,7 +65,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     def get_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
         # Same as get_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
-        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(pk)
+        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(pk, request)
 
     @action(
         detail=False,
@@ -77,13 +77,15 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         # Same as get_all_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
         HotelOwnerService.authorize_action_hotel_owner(request, pk=None)
         hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
-        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(hotel_owner_id)
+        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(
+            hotel_owner_id, request
+        )
 
     @staticmethod
-    def __get_all_hotels_of_hotel_owner_base(pk):
+    def __get_all_hotels_of_hotel_owner_base(pk, request):
         # Common logic between both methods
         hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(pk)
-        serializer = HotelSerializer(hotels, many=True)
+        serializer = HotelSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     # Delete all hotels of hotel owner ---------------------------------------
