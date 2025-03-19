@@ -53,8 +53,11 @@ class HotelOwnerService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_hotel_owner(pk):
-        return HotelOwner.objects.get(id=pk)
+    def retrieve_hotel_owner(pk, allow_inactive=False):
+        try:
+            return HotelOwner.objects.get(id=pk)
+        except HotelOwner.DoesNotExist:
+            raise NotFound(detail="Hotel owner not found.")
 
     @staticmethod
     def list_hotel_owners():
@@ -86,5 +89,9 @@ class HotelOwnerService:
     def get_current_hotel_owner(request):
         if (not request.user) or (not request.user.is_authenticated):
             raise AuthenticationFailed("User is not authenticated.")
+
         hotel_owner = HotelOwner.objects.get(user_id=request.user.id)
+        if (not hotel_owner) or (not hotel_owner.user.is_active):
+            raise NotFound("Hotel owner does not exist.")
+
         return hotel_owner

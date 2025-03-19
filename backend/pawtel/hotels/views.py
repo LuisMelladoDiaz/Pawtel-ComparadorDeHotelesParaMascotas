@@ -1,6 +1,9 @@
 from drf_spectacular.utils import extend_schema
 from pawtel.hotels.models import Hotel, HotelImage
 from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
+from pawtel.bookings.serializers import BookingSerializer
+from pawtel.hotels.models import Hotel
+from pawtel.hotels.serializers import HotelSerializer
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.serializers import RoomTypeSerializer
 from rest_framework import status, viewsets
@@ -67,6 +70,18 @@ class HotelViewSet(viewsets.ModelViewSet):
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def get_all_bookings_by_hotel(self, request, pk=None):
+        HotelService.authorize_action_hotel(request, pk)
+        bookings = HotelService.get_all_bookings_by_hotel(pk)
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def __serialize_bookings(bookings):
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+      
 
 @extend_schema(tags=["hotel-images"])
 class HotelImageViewSet(viewsets.ViewSet):
@@ -154,3 +169,11 @@ class HotelImageViewSet(viewsets.ViewSet):
         return Response(
             {"detail": "Image deleted successfully"}, status=status.HTTP_204_NO_CONTENT
         )
+      
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="bookings",
+        url_name="get_all_bookings_by_hotel",
+    )
+
