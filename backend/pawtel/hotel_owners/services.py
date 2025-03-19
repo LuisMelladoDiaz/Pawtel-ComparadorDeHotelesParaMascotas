@@ -25,18 +25,22 @@ class HotelOwnerService:
     # Common -----------------------------------------------------------------
 
     @staticmethod
-    def authorize_action_hotel_owner(request, pk):
-        target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-        if not target_hotel_owner:
-            raise NotFound("Hotel owner does not exist.")
-        target_app_user = AppUserService.retrieve_app_user(target_hotel_owner.user_id)
+    def authorize_action_hotel_owner(request, pk=None):
         logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if (not target_app_user) or (not target_app_user.is_active):
-            raise NotFound("Hotel owner does not exist.")
+        if pk:
+            target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+            if not target_hotel_owner:
+                raise NotFound("Hotel owner does not exist.")
+            target_app_user = AppUserService.retrieve_app_user(
+                target_hotel_owner.user_id
+            )
 
-        if target_hotel_owner.id != logged_in_hotel_owner.id:
-            raise PermissionDenied("Permission denied.")
+            if (not target_app_user) or (not target_app_user.is_active):
+                raise NotFound("Hotel owner does not exist.")
+
+            if target_hotel_owner.id != logged_in_hotel_owner.id:
+                raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def serialize_output_hotel_owner(hotel_owner, many=False):
@@ -49,8 +53,11 @@ class HotelOwnerService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_hotel_owner(pk):
-        return HotelOwner.objects.get(id=pk)
+    def retrieve_hotel_owner(pk, allow_inactive=False):
+        try:
+            return HotelOwner.objects.get(id=pk)
+        except HotelOwner.DoesNotExist:
+            raise NotFound(detail="Hotel owner not found.")
 
     @staticmethod
     def list_hotel_owners():
@@ -82,5 +89,9 @@ class HotelOwnerService:
     def get_current_hotel_owner(request):
         if (not request.user) or (not request.user.is_authenticated):
             raise AuthenticationFailed("User is not authenticated.")
+
         hotel_owner = HotelOwner.objects.get(user_id=request.user.id)
+        if (not hotel_owner) or (not hotel_owner.user.is_active):
+            raise NotFound("Hotel owner does not exist.")
+
         return hotel_owner

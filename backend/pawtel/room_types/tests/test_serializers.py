@@ -31,6 +31,7 @@ class RoomTypeSerializerTest(TestCase):
             "name": "Suite Deluxe",
             "description": "Una habitación de lujo.",
             "capacity": 2,
+            "num_rooms": 10,
             "price_per_night": Decimal("150.00"),
             "pet_type": PetType.DOG,  # Could be "DOG", "CAT", "BIRD" o "MIXED"
             "hotel": self.hotel.id,

@@ -1,0 +1,128 @@
+from datetime import date
+
+from django.test import TestCase
+from django.urls import reverse
+from django.utils.timezone import now, timedelta
+from pawtel.app_users.models import AppUser
+from pawtel.booking_holds.models import BookingHold
+from pawtel.customers.models import Customer
+from pawtel.hotel_owners.models import HotelOwner
+from pawtel.hotels.models import Hotel
+from pawtel.room_types.models import RoomType
+from rest_framework import status
+from rest_framework.test import APIClient
+
+
+class BookingHoldViewSet(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+        self.app_user_owner = AppUser.objects.create_user(
+            username="hotelowner1",
+            first_name="John",
+            last_name="Doe",
+            email="owner@example.com",
+            phone="+34987654321",
+            password="securepassword123",
+        )
+        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user_owner.id)
+        self.hotel = Hotel.objects.create(
+            name="Test Hotel", is_archived=False, hotel_owner=self.hotel_owner
+        )
+        self.archived_hotel = Hotel.objects.create(
+            name="Archived Hotel", is_archived=True, hotel_owner=self.hotel_owner
+        )
+
+        self.room_type1 = RoomType.objects.create(
+            name="Single",
+            hotel=self.hotel,
+            description="A cozy single room.",
+            capacity=1,
+            price_per_night=50.0,
+            pet_type="DOG",
+        )
+        self.room_type2 = RoomType.objects.create(
+            name="Double",
+            hotel=self.hotel,
+            description="A spacious double room.",
+            capacity=2,
+            price_per_night=75.0,
+            pet_type="CAT",
+        )
+
+        self.app_user_customer = AppUser.objects.create_user(
+            username="customer1",
+            first_name="John",
+            last_name="Doe",
+            email="customer@example.com",
+            phone="+34123456789",
+            password="securepassword123",
+        )
+        self.customer = Customer.objects.create(user_id=self.app_user_customer.id)
+
+        self.booking_hold = BookingHold.objects.create(
+            customer=self.customer,
+            room_type=self.room_type1,
+            booking_start_date=date.today() + timedelta(days=2),
+            booking_end_date=date.today() + timedelta(days=4),
+        )
+
+        self.client.force_authenticate(user=self.app_user_customer)
+
+    def test_list_booking_holds(self):
+        url = reverse("booking-hold-list")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_retrieve_booking_hold(self):
+        url = reverse("booking-hold-detail", kwargs={"pk": self.booking_hold.id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["room_type"], self.room_type1.id)
+
+    def test_create_booking_hold(self):
+        url = reverse("booking-hold-list")
+        data = {
+            "room_type": self.room_type2.id,
+            "booking_start_date": str(date.today() + timedelta(days=3)),
+            "booking_end_date": str(date.today() + timedelta(days=7)),
+        }
+
+        self.booking_hold.hold_expires_at = now() - timedelta(
+            minutes=5
+        )  # Set expiration in the past
+        self.booking_hold.save()
+
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(BookingHold.objects.filter(room_type=self.room_type2).exists())
+
+    def test_create_booking_hold_invalid_with_active_hold(self):
+        url = reverse("booking-hold-list")
+        data = {
+            "room_type": self.room_type2.id,
+            "booking_start_date": str(date.today() + timedelta(days=3)),
+            "booking_end_date": str(date.today() + timedelta(days=3)),
+        }
+        response = self.client.post(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertTrue(
+            not BookingHold.objects.filter(room_type=self.room_type2).exists()
+        )
+
+    def test_update_booking_hold_forbidden(self):
+        url = reverse("booking-hold-detail", kwargs={"pk": self.booking_hold.id})
+        data = {"booking_end_date": str(now().date() + timedelta(days=7))}
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_partial_update_booking_hold_forbidden(self):
+        url = reverse("booking-hold-detail", kwargs={"pk": self.booking_hold.id})
+        data = {"booking_end_date": str(now().date() + timedelta(days=8))}
+        response = self.client.patch(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_delete_booking_hold(self):
+        url = reverse("booking-hold-detail", kwargs={"pk": self.booking_hold.id})
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(BookingHold.objects.filter(id=self.booking_hold.id).exists())

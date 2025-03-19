@@ -15,17 +15,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import (SpectacularAPIView, SpectacularRedocView,
+                                   SpectacularSwaggerView)
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("sample.urls")),  # Include sample module API
-    path("auth/", include("authapp.urls")),  # Include auth_app urls
+    path("auth/", include("authapp.urls")),
+    path("", include("pawtel.customers.urls")),
     path("", include("pawtel.hotel_owners.urls")),
     path("", include("pawtel.hotels.urls")),
-    path("", include("pawtel.rooms.urls")),
     path("", include("pawtel.room_types.urls")),
+    path("", include("pawtel.bookings.urls")),
+    path("", include("pawtel.booking_holds.urls")),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # DRF Spectacular
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/docs/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path("api/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]
+
+if settings.STORAGE == "local":  # Serve media files only in development
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

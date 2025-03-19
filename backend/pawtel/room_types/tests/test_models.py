@@ -32,6 +32,7 @@ class RoomTypeModelTest(TestCase):
             name="Suite Deluxe",
             description="Una habitación lujosa con vista al mar.",
             capacity=2,
+            num_rooms=10,
             price_per_night=150.00,
             pet_type=PetType.DOG,
         )
@@ -42,6 +43,7 @@ class RoomTypeModelTest(TestCase):
         self.assertEqual(room_type.capacity, 2)
         self.assertEqual(room_type.price_per_night, 150.00)
         self.assertEqual(room_type.pet_type, PetType.DOG)
+        self.assertEqual(room_type.num_rooms, 10)
         self.assertEqual(room_type.hotel, self.hotel)
         self.assertEqual(room_type.hotel.hotel_owner, self.owner)
 
@@ -52,6 +54,7 @@ class RoomTypeModelTest(TestCase):
                 name="Suite Deluxe",
                 description="Una habitación lujosa con vista al mar.",
                 capacity=2,
+                num_rooms=10,
                 price_per_night=150.00,
                 pet_type=PetType.DOG,
             ).full_clean()
@@ -66,6 +69,7 @@ class RoomTypeModelTest(TestCase):
                         name=name,
                         description="Una habitación lujosa con vista al mar.",
                         capacity=2,
+                        num_rooms=10,
                         price_per_night=150.00,
                         pet_type=PetType.DOG,
                     ).full_clean()
@@ -80,12 +84,13 @@ class RoomTypeModelTest(TestCase):
                         name="Suite Deluxe",
                         description=description,
                         capacity=2,
+                        num_rooms=10,
                         price_per_night=150.00,
                         pet_type=PetType.DOG,
                     ).full_clean()
 
     def test_create_roomtype_invalid_capacity(self):
-        invalid_capacities = [0, -1, None]
+        invalid_capacities = [0, -1, 201, None]
         for capacity in invalid_capacities:
             with self.subTest(capacity=capacity):
                 with self.assertRaises(ValidationError):
@@ -94,6 +99,22 @@ class RoomTypeModelTest(TestCase):
                         name="Suite Deluxe",
                         description="Una habitación lujosa con vista al mar.",
                         capacity=capacity,
+                        num_rooms=10,
+                        price_per_night=150.00,
+                        pet_type=PetType.DOG,
+                    ).full_clean()
+
+    def test_create_roomtype_invalid_num_rooms(self):
+        invalid_num_rooms = [-1, 201, None]
+        for num_room in invalid_num_rooms:
+            with self.subTest(num_rooms=num_room):
+                with self.assertRaises(ValidationError):
+                    RoomType(
+                        hotel=self.hotel,
+                        name="Suite Deluxe",
+                        description="Una habitación lujosa con vista al mar.",
+                        capacity=100,
+                        num_rooms=num_room,
                         price_per_night=150.00,
                         pet_type=PetType.DOG,
                     ).full_clean()
@@ -108,6 +129,7 @@ class RoomTypeModelTest(TestCase):
                         name="Suite Deluxe",
                         description="Una habitación lujosa con vista al mar.",
                         capacity=2,
+                        num_rooms=10,
                         price_per_night=price,
                         pet_type=PetType.DOG,
                     ).full_clean()
@@ -122,6 +144,7 @@ class RoomTypeModelTest(TestCase):
                         name="Suite Deluxe",
                         description="Una habitación lujosa con vista al mar.",
                         capacity=2,
+                        num_rooms=10,
                         price_per_night=150.00,
                         pet_type=pet_type,
                     ).full_clean()

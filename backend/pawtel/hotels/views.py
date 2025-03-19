@@ -1,3 +1,4 @@
+from pawtel.bookings.serializers import BookingSerializer
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.hotels.services import HotelService
@@ -14,27 +15,43 @@ class HotelViewSet(viewsets.ModelViewSet):
     def list(self, request):
         filters = request.query_params.dict()  # URL filters checked
         hotels = HotelService.list_hotels(filters)
-        output_serializer_data = HotelService.serialize_output_hotel(hotels, many=True)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotels, many=True, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         hotel = HotelService.retrieve_hotel(pk)
-        output_serializer_data = HotelService.serialize_output_hotel(hotel)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotel, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         input_serializer = HotelService.serialize_input_hotel_create(request)
         HotelService.validate_create_hotel(input_serializer)
         hotel_created = HotelService.create_hotel(input_serializer)
-        output_serializer_data = HotelService.serialize_output_hotel(hotel_created)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotel_created, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
+
+    @action(detail=True, methods=["post"])
+    def upload_image(self, request, pk=None):
+        hotel = self.get_object()
+        img = HotelService.upload_image_to_hotel(
+            hotel, request.data.get("image"), request.data.get("is_cover")
+        )
+        return Response(img, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
         input_serializer = HotelService.serialize_input_hotel_update(request, pk)
         HotelService.validate_update_hotel(pk, input_serializer)
         hotel_updated = HotelService.update_hotel(pk, input_serializer)
-        output_serializer_data = HotelService.serialize_output_hotel(hotel_updated)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotel_updated, context={"request": request}
+        )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
@@ -61,10 +78,16 @@ class HotelViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="room-types/total-vacancy",
-        url_name="get_total_vacancy_for_each_room_type_of_hotel",
+        url_path="bookings",
+        url_name="get_all_bookings_by_hotel",
     )
-    def get_total_vacancy_for_each_room_type_of_hotel(self, request, pk=None):
+    def get_all_bookings_by_hotel(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
-        vacancy_data = HotelService.get_total_vacancy_for_each_room_type_of_hotel(pk)
-        return Response(vacancy_data, status=status.HTTP_200_OK)
+        bookings = HotelService.get_all_bookings_by_hotel(pk)
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def __serialize_bookings(bookings):
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
