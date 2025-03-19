@@ -304,8 +304,6 @@ class HotelService:
     @staticmethod
     def retrieve_all_non_cover_images(pk):
         hotel_images = HotelImage.objects.filter(hotel__id=pk, is_cover=False)
-        if not hotel_images.exists():
-            raise NotFound(detail="No non-cover images found for the hotel.")
         return hotel_images
 
     @staticmethod
