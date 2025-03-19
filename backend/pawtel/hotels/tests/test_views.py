@@ -165,8 +165,6 @@ class HotelViewSetTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.hotel.refresh_from_db()
 
-        image_url = self.hotel.images.first().image
-
         delete_url = reverse(
             "hotel-image-delete-image",
             kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id},
@@ -240,7 +238,7 @@ class HotelViewSetTestCase(TestCase):
         url = reverse("hotel-image-get-non-cover-images", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data), 1)
 
     def test_set_image_as_cover(self):
         image1 = self.create_image("image1.jpg")

@@ -211,11 +211,11 @@ class HotelService:
     def validate_upload_image(input_serializer, pk):
         hotel = HotelService.retrieve_hotel(pk)
         if not hotel or hotel.is_archived:
-            raise NotFound({"Hotel": "Hotel does not exist or is archived."})
+            raise NotFound(detail="Hotel does not exist or is archived.")
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
         if hotel.images.count() >= 5:
-            raise ValidationError({"Hotel": "A hotel cannot have more than 5 images."})
+            raise ValidationError({"hotel": "A hotel cannot have more than 5 images."})
 
     @staticmethod
     def upload_image_to_hotel(input_serializer):
@@ -246,26 +246,24 @@ class HotelService:
         try:
             return HotelImage.objects.get(id=image_id, hotel_id=pk)
         except HotelImage.DoesNotExist:
-            raise NotFound({"Hotel Image": "Hotel Image not found."})
+            raise NotFound(detail="Hotel Image not found.")
 
     @staticmethod
     def retrieve_all_images_from_hotel(pk):
         hotel_images = HotelImage.objects.filter(hotel_id=pk)
         if not hotel_images:
-            raise NotFound({"Hotel": "No images found for hotel."})
+            raise NotFound(detail="No images found for hotel.")
         return hotel_images
 
     @staticmethod
     def validate_update_image(input_serializer, pk, image_id):
         hotel = HotelService.retrieve_hotel(pk)
         if not hotel or hotel.is_archived:
-            raise NotFound({"Hotel": "Hotel does not exist or is archived."})
+            raise NotFound(detail="Hotel does not exist or is archived.")
 
         hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
         if not hotel_image:
-            raise NotFound(
-                {"Hotel Image": "Image not found or does not belong to the hotel."}
-            )
+            raise NotFound(detail="Image not found or does not belong to the hotel.")
 
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
@@ -276,10 +274,7 @@ class HotelService:
         current_image_count = hotel.images.count()
 
         hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
-        if (
-            current_image_count == 1
-            and hotel_image == input_serializer.validated_data.get("image")
-        ):
+        if current_image_count == 1:
             input_serializer.validated_data["is_cover"] = True
 
         if input_serializer.validated_data.get("is_cover", False):
@@ -303,27 +298,25 @@ class HotelService:
         try:
             hotel_image = HotelImage.objects.get(hotel__id=pk, is_cover=True)
         except HotelImage.DoesNotExist:
-            raise NotFound({"Hotel": "No cover image found for the hotel."})
+            raise NotFound(detail="No cover image found for the hotel.")
         return hotel_image
 
     @staticmethod
     def retrieve_all_non_cover_images(pk):
         hotel_images = HotelImage.objects.filter(hotel__id=pk, is_cover=False)
         if not hotel_images.exists():
-            raise NotFound({"Hotel": "No non-cover images found for the hotel."})
+            raise NotFound(detail="No non-cover images found for the hotel.")
         return hotel_images
 
     @staticmethod
     def validate_set_image_as_cover(pk, image_id):
         hotel = HotelService.retrieve_hotel(pk)
         if not hotel or hotel.is_archived:
-            raise NotFound({"Hotel": "Hotel does not exist or is archived."})
+            raise NotFound(detail="Hotel does not exist or is archived.")
 
         hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
         if not hotel_image:
-            raise NotFound(
-                {"Hotel Image": "Image not found or does not belong to the hotel."}
-            )
+            raise NotFound(detail="Image not found or does not belong to the hotel.")
 
     @staticmethod
     def set_image_as_cover(pk, image_id):
