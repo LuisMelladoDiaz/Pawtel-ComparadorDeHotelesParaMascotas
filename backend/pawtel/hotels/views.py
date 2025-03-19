@@ -1,3 +1,4 @@
+from pawtel.bookings.serializers import BookingSerializer
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.hotels.services import HotelService
@@ -72,4 +73,21 @@ class HotelViewSet(viewsets.ModelViewSet):
         HotelService.authorize_action_hotel(request, pk)
         room_types = HotelService.get_all_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="bookings",
+        url_name="get_all_bookings_by_hotel",
+    )
+    def get_all_bookings_by_hotel(self, request, pk=None):
+        HotelService.authorize_action_hotel(request, pk)
+        bookings = HotelService.get_all_bookings_by_hotel(pk)
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def __serialize_bookings(bookings):
+        serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

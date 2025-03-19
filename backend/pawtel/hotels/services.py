@@ -1,4 +1,6 @@
 from django.db.models import Max, Min
+from django.forms import ValidationError
+from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
@@ -34,6 +36,10 @@ class HotelService:
             return Hotel.objects.get(pk=pk)
         except Hotel.DoesNotExist:
             raise NotFound(detail="Hotel not found")
+
+    @staticmethod
+    def get_all_bookings_by_hotel(hotel_id):
+        return Booking.objects.filter(room_type__hotel=hotel_id)
 
     # POST -------------------------------------------------------------------
 
