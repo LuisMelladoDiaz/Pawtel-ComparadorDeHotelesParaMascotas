@@ -71,9 +71,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     )
     def get_all_bookings_by_customer_explicit(self, request, pk=None):
         CustomerService.authorize_action_customer(request, pk)
-        bookings = CustomerService.get_all_bookings_by_customer(pk, request.user)
-        serializer = BookingSerializer(bookings, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return CustomerViewSet.__get_all_bookings_of_customer_base(pk)
 
     @action(
         detail=False,
@@ -82,9 +80,13 @@ class CustomerViewSet(viewsets.ModelViewSet):
         url_name="get_all_bookings_by_customer_implicit",
     )
     def get_all_bookings_by_customer_implicit(self, request):
-        customer = CustomerService.get_current_customer(request)
-        bookings = CustomerService.get_all_bookings_by_customer(
-            customer.id, request.user
-        )
+        CustomerService.authorize_action_customer(request, pk=None)
+        customer_id = CustomerService.get_current_customer(request).id
+        return CustomerViewSet.__get_all_bookings_of_customer_base(customer_id)
+
+    @staticmethod
+    def __get_all_bookings_of_customer_base(pk):
+        # Common logic between both methods
+        bookings = CustomerService.get_all_bookings_by_customer(pk)
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

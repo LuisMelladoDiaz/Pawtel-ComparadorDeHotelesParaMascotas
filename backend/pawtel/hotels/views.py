@@ -1,5 +1,4 @@
 from pawtel.bookings.serializers import BookingSerializer
-from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
 from pawtel.hotels.serializers import HotelSerializer
 from pawtel.hotels.services import HotelService
@@ -67,33 +66,10 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="get_all_bookings_by_hotel_explicit",
     )
     def get_all_bookings_by_hotel_explicit(self, request, pk=None):
-        HotelOwnerService.authorize_action_hotel_owner(request, pk)
+        HotelService.authorize_action_hotel(request, pk)
         bookings = HotelService.get_all_bookings_by_hotel(pk)
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @action(
-        detail=False,
-        methods=["get"],
-        url_path="my-bookings",
-        url_name="get_all_bookings_by_hotel_implicit",
-    )
-    def get_all_bookings_by_hotel_implicit(self, request):
-        HotelOwnerService.authorize_action_hotel_owner(request)
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
-        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(hotel_owner.id)
-
-        bookings = []
-        for hotel in hotels:
-            bookings.extend(HotelService.get_all_bookings_by_hotel(hotel.id))
-
-        serializer = BookingSerializer(bookings, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @staticmethod
-    def __get_all_bookings_by_hotel_base(hotel_id):
-        bookings = HotelService.get_all_bookings_by_hotel(hotel_id)
-        return HotelViewSet.__serialize_bookings(bookings)
 
     @staticmethod
     def __serialize_bookings(bookings):

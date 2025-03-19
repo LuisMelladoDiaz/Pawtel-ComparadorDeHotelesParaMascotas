@@ -12,85 +12,97 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 
-class CustomerViewSetTestCase2(TestCase):
+class CustomerViewSetTest2(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-        self.app_user_customer1 = AppUser.objects.create_user(
-            username="customer1",
-            first_name="Alice",
-            last_name="Smith",
-            email="customer1@example.com",
-            phone="+34678901234",
-            password="securepassword123",
-        )
-        self.app_user_customer2 = AppUser.objects.create_user(
-            username="customer2",
-            first_name="Bob",
-            last_name="Johnson",
-            email="customer2@example.com",
-            phone="+34678901235",
-            password="securepassword123",
-        )
-
-        self.customer1 = Customer.objects.create(user=self.app_user_customer1)
-        self.customer2 = Customer.objects.create(user=self.app_user_customer2)
-
-        self.hotel_owner_user = AppUser.objects.create_user(
-            username="hotelowner1",
-            first_name="John",
-            last_name="Doe",
-            email="owner@example.com",
+        # Crear usuario y cliente
+        self.user_customer = AppUser.objects.create_user(
+            username="customer_user",
+            email="customer@example.com",
             phone="+34987654321",
-            password="securepassword123",
+            password="password123",
         )
-        self.hotel_owner = HotelOwner.objects.create(user=self.hotel_owner_user)
-        self.hotel = Hotel.objects.create(
-            name="Test Hotel", is_archived=False, hotel_owner=self.hotel_owner
-        )
+        self.customer = Customer.objects.create(user_id=self.user_customer.id)
+        self.client.force_authenticate(user=self.user_customer)
 
+        # Crear usuario y hotel owner
+        self.user_owner = AppUser.objects.create_user(
+            username="hotel_owner",
+            email="owner@example.com",
+            phone="+34987654322",
+            password="password123",
+        )
+        self.hotel_owner = HotelOwner.objects.create(user=self.user_owner)
+
+        # Crear hotel y room type
+        self.hotel = Hotel.objects.create(
+            name="Hotel Test",
+            address="123 Street",
+            city="Madrid",
+            description="Hotel de prueba",
+            hotel_owner=self.hotel_owner,
+        )
         self.room_type = RoomType.objects.create(
-            name="Deluxe Room",
             hotel=self.hotel,
-            description="A luxurious room.",
+            name="Suite",
+            description="Luxury suite",
             capacity=2,
-            price_per_night=120.0,
+            num_rooms=3,
+            price_per_night=150.00,
             pet_type="DOG",
         )
 
+        # Crear reservas para el cliente
         self.booking1 = Booking.objects.create(
-            customer=self.customer1,
+            customer=self.customer,
             room_type=self.room_type,
-            start_date=date.today() + timedelta(days=3),
-            end_date=date.today() + timedelta(days=7),
-            total_price=1200.0,
+            start_date=date.today() + timedelta(days=2),
+            end_date=date.today() + timedelta(days=5),
+            total_price=450.00,
         )
+        self.booking2 = Booking.objects.create(
+            customer=self.customer,
+            room_type=self.room_type,
+            start_date=date.today() + timedelta(days=10),
+            end_date=date.today() + timedelta(days=12),
+            total_price=300.00,
+        )
+
+    print(Customer.objects.all())
 
     def test_get_all_bookings_by_customer_explicit(self):
+        self.client.force_authenticate(user=self.user_customer)
         url = reverse(
             "customer-get_all_bookings_by_customer_explicit",
-            kwargs={"pk": self.customer1.id},
+            kwargs={"pk": self.customer.id},
         )
-        self.client.force_authenticate(user=self.app_user_customer1)
         response = self.client.get(url)
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 2)  # Debe devolver dos reservas
 
     def test_get_all_bookings_by_customer_implicit(self):
+        """Verifica que un cliente puede recuperar todas sus reservas implícitamente."""
         url = reverse("customer-get_all_bookings_by_customer_implicit")
-        self.client.force_authenticate(user=self.app_user_customer1)
         response = self.client.get(url)
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 1)
+        self.assertEqual(len(response.data), 2)  # Debe devolver dos reservas
 
-    def test_get_all_bookings_by_customer_permission_denied(self):
+    def test_get_all_bookings_by_customer_explicit_unauthorized(self):
+        """Verifica que un cliente no puede acceder a las reservas de otro cliente."""
+        other_user = AppUser.objects.create_user(
+            username="other_customer",
+            email="other@example.com",
+            phone="+34987654323",
+            password="password123",
+        )
+        other_customer = Customer.objects.create(user=other_user)
+        self.client.force_authenticate(user=other_user)
         url = reverse(
             "customer-get_all_bookings_by_customer_explicit",
-            kwargs={"pk": self.customer1.id},
+            kwargs={"pk": self.customer.id},
         )
-        self.client.force_authenticate(user=self.app_user_customer2)
         response = self.client.get(url)
-
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(
+            response.status_code, status.HTTP_403_FORBIDDEN
+        )  # Debe devolver error de permiso

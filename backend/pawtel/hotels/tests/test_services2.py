@@ -10,85 +10,68 @@ from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 
 
-class HotelServiceTest2(TestCase):
+class TestGetAllBookingsByHotel(TestCase):
     def setUp(self):
-        self.app_user_owner1 = AppUser.objects.create_user(
-            username="hotelowner12",
-            first_name="John",
-            last_name="Doe",
-            email="owner1@example.com",
-            phone="+34987655321",
-            password="securepassword123",
+        # Crear usuario y hotel owner
+        self.user_owner = AppUser.objects.create_user(
+            username="hotel_owner",
+            email="owner@example.com",
+            phone="+34987654321",
+            password="password123",
         )
-        self.app_user_owner2 = AppUser.objects.create_user(
-            username="hotelowner2",
-            first_name="Alice",
-            last_name="Smith",
-            email="owner2@example.com",
-            phone="+34987654322",
-            password="securepassword123",
-        )
+        self.hotel_owner = HotelOwner.objects.create(user=self.user_owner)
 
-        # Create Hotel Owners
-        self.hotel_owner1 = HotelOwner.objects.create(user_id=self.app_user_owner1.id)
-        self.hotel_owner2 = HotelOwner.objects.create(user_id=self.app_user_owner2.id)
-
-        # Create Hotels
-        self.hotel1 = Hotel.objects.create(
-            name="Test Hotel",
-            is_archived=False,
-            hotel_owner=self.hotel_owner1,
+        # Crear hotel
+        self.hotel = Hotel.objects.create(
+            name="Hotel Test",
+            address="123 Street",
+            city="Madrid",
+            description="Hotel de prueba",
+            hotel_owner=self.hotel_owner,
         )
 
-        self.hotel2 = Hotel.objects.create(
-            name="Hotel Luna Azul",
-            is_archived=False,
-            hotel_owner=self.hotel_owner2,
-        )
-
-        # Create Room Types
-        self.room_type1 = RoomType.objects.create(
-            name="Single",
-            hotel=self.hotel1,
-            description="A cozy single room.",
-            capacity=1,
-            price_per_night=50.0,
+        # Crear RoomType
+        self.room_type = RoomType.objects.create(
+            hotel=self.hotel,
+            name="Suite",
+            description="Luxury suite",
+            capacity=2,
+            num_rooms=3,
+            price_per_night=150.00,
             pet_type="DOG",
         )
 
-        self.room_type2 = RoomType.objects.create(
-            name="Double",
-            hotel=self.hotel1,
-            description="A spacious double room.",
-            capacity=2,
-            price_per_night=75.0,
-            pet_type="CAT",
+        # Crear usuario cliente
+        self.user_customer = AppUser.objects.create_user(
+            username="customer_user",
+            email="customer@example.com",
+            phone="+34987654322",
+            password="password123",
         )
+        self.customer = Customer.objects.create(user=self.user_customer)
 
-        # Create Customers
-        self.customer1 = Customer.objects.create(user=self.app_user_owner1)
-        self.customer2 = Customer.objects.create(user=self.app_user_owner2)
-
-        # Create Bookings
+        # Crear reservas para el hotel
         self.booking1 = Booking.objects.create(
-            customer=self.customer1,
-            room_type=self.room_type1,
-            start_date=date.today() + timedelta(days=3),
-            end_date=date.today() + timedelta(days=7),
-            total_price=400.00,
+            customer=self.customer,
+            room_type=self.room_type,
+            start_date=date.today() + timedelta(days=2),
+            end_date=date.today() + timedelta(days=5),
+            total_price=450.00,
         )
-
         self.booking2 = Booking.objects.create(
-            customer=self.customer2,  # Use Customer instance
-            room_type=self.room_type2,
-            start_date=date.today() + timedelta(days=5),
-            end_date=date.today() + timedelta(days=10),
-            total_price=1000.00,
+            customer=self.customer,
+            room_type=self.room_type,
+            start_date=date.today() + timedelta(days=10),
+            end_date=date.today() + timedelta(days=12),
+            total_price=300.00,
         )
 
     def test_get_all_bookings_by_hotel(self):
-        bookings = HotelService.get_all_bookings_by_hotel(
-            self.hotel1.id, self.hotel_owner1.user
-        )
-        self.assertEqual(len(bookings), 2)
-        self.assertEqual(bookings[0].id, self.booking1.id)
+        """Verifica que el método devuelve todas las reservas de un hotel."""
+        bookings = HotelService.get_all_bookings_by_hotel(self.hotel.id)
+        self.assertEqual(len(bookings), 2)  # Debe devolver dos reservas
+
+    def test_get_all_bookings_by_non_existent_hotel(self):
+        """Verifica que si el hotel no existe, devuelve una lista vacía."""
+        bookings = HotelService.get_all_bookings_by_hotel(999)
+        self.assertEqual(len(bookings), 0)  # No debe haber reservas

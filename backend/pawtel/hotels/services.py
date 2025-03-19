@@ -38,16 +38,8 @@ class HotelService:
             raise NotFound(detail=f"Hotel not found")
 
     @staticmethod
-    def get_all_bookings_by_hotel(hotel_id, user):
-        hotel = Hotel.objects.filter(id=hotel_id, is_archived=False).first()
-
-        if not hotel:
-            raise NotFound("Hotel does not exist or has been archived.")
-
-        if hotel.hotel_owner.user.id != user.id:
-            raise PermissionDenied("You do not have permission to view these bookings.")
-
-        return Booking.objects.filter(room_type__hotel=hotel)
+    def get_all_bookings_by_hotel(hotel_id):
+        return Booking.objects.filter(room_type__hotel=hotel_id)
 
     # POST -------------------------------------------------------------------
 
