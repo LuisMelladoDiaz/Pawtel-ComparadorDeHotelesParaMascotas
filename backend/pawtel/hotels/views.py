@@ -1,5 +1,6 @@
-from pawtel.hotels.models import Hotel
-from pawtel.hotels.serializers import HotelSerializer
+from drf_spectacular.utils import extend_schema
+from pawtel.hotels.models import Hotel, HotelImage
+from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.serializers import RoomTypeSerializer
 from rest_framework import status, viewsets
@@ -65,6 +66,12 @@ class HotelViewSet(viewsets.ModelViewSet):
         room_types = HotelService.get_all_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@extend_schema(tags=["hotel-images"])
+class HotelImageViewSet(viewsets.ViewSet):
+    queryset = HotelImage.objects.all()
+    serializer_class = HotelImageSerializer
 
     @action(
         detail=True,
