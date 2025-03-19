@@ -17,16 +17,17 @@ class HotelViewSetTestCase2(TestCase):
         self.client = APIClient()
 
         # Crear usuario y hotel owner
-        self.app_user = AppUser.objects.create_user(
-            username="hotel_owner",
-            first_name="John",
-            last_name="Doe",
-            email="owner@example.com",
-            phone="+34987654321",
-            password="password123",
+        self.app_user3 = AppUser.objects.create_user(
+            username="hotel_owner2",
+            first_name="Johnttt",
+            last_name="Dotte",
+            email="owner32@example.com",
+            phone="+34987654444",
+            password="password456",
         )
-        self.client.force_authenticate(user=self.app_user)
-        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
+        self.client.force_authenticate(user=self.app_user3)
+        self.hotel_owner4 = HotelOwner.objects.create(user_id=self.app_user3.id)
+        print("HotelOwners en BD:", HotelOwner.objects.all())
 
         # Crear hotel
         self.hotel = Hotel.objects.create(
@@ -34,7 +35,7 @@ class HotelViewSetTestCase2(TestCase):
             address="123 Street",
             city="Madrid",
             description="Hotel de prueba",
-            hotel_owner=self.hotel_owner,
+            hotel_owner=self.hotel_owner4,
         )
 
         # Crear RoomType
@@ -51,10 +52,13 @@ class HotelViewSetTestCase2(TestCase):
         # Crear usuario cliente
         self.app_user2 = AppUser.objects.create_user(
             username="customer_user",
-            email="customer@example.com",
+            first_name="Pepita",
+            last_name="Flores",
+            email="customer43@example.com",
             phone="+34987654322",
-            password="password123",
+            password="password923",
         )
+
         self.customer = Customer.objects.create(user_id=self.app_user2.id)
 
         # Crear reservas para el hotel
@@ -75,8 +79,6 @@ class HotelViewSetTestCase2(TestCase):
 
     def test_get_all_bookings_by_hotel_explicit(self):
         """Verifica que el endpoint devuelve todas las reservas de un hotel."""
-        self.client.force_authenticate(user=self.app_user)
-        self.client.force_authenticate(user=self.app_user2)
         url = reverse(
             "hotel-get_all_bookings_by_hotel_explicit", kwargs={"pk": self.hotel.id}
         )

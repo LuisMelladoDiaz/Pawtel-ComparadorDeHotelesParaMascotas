@@ -17,23 +17,29 @@ class CustomerViewSetTest2(TestCase):
         self.client = APIClient()
 
         # Crear usuario y cliente
-        self.user_customer = AppUser.objects.create_user(
+        self.app_user5 = AppUser.objects.create_user(
             username="customer_user",
+            first_name="Jott",
+            last_name="otte",
             email="customer@example.com",
-            phone="+34987654321",
+            phone="+34987754321",
             password="password123",
         )
-        self.customer = Customer.objects.create(user_id=self.user_customer.id)
-        self.client.force_authenticate(user=self.user_customer)
+
+        self.customer = Customer.objects.create(user_id=self.app_user5.id)
+        self.client.force_authenticate(user=self.app_user5)
+        print(Customer.objects.all())
 
         # Crear usuario y hotel owner
-        self.user_owner = AppUser.objects.create_user(
+        self.app_user6 = AppUser.objects.create_user(
             username="hotel_owner",
+            first_name="Pepaa",
+            last_name="Jimenez",
             email="owner@example.com",
-            phone="+34987654322",
-            password="password123",
+            phone="+34999654322",
+            password="passwd123",
         )
-        self.hotel_owner = HotelOwner.objects.create(user=self.user_owner)
+        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user6.id)
 
         # Crear hotel y room type
         self.hotel = Hotel.objects.create(
@@ -69,21 +75,11 @@ class CustomerViewSetTest2(TestCase):
             total_price=300.00,
         )
 
-    print(Customer.objects.all())
-
     def test_get_all_bookings_by_customer_explicit(self):
-        self.client.force_authenticate(user=self.user_customer)
         url = reverse(
             "customer-get_all_bookings_by_customer_explicit",
             kwargs={"pk": self.customer.id},
         )
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)  # Debe devolver dos reservas
-
-    def test_get_all_bookings_by_customer_implicit(self):
-        """Verifica que un cliente puede recuperar todas sus reservas implícitamente."""
-        url = reverse("customer-get_all_bookings_by_customer_implicit")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)  # Debe devolver dos reservas
@@ -106,3 +102,10 @@ class CustomerViewSetTest2(TestCase):
         self.assertEqual(
             response.status_code, status.HTTP_403_FORBIDDEN
         )  # Debe devolver error de permiso
+
+    def test_get_all_bookings_by_customer_implicit(self):
+        """Verifica que un cliente puede recuperar todas sus reservas implícitamente."""
+        url = reverse("customer-get_all_bookings_by_customer_implicit")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)  # Debe devolver dos reservas
