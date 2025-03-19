@@ -1,11 +1,13 @@
 from django.test import TestCase
 from django.urls import reverse
+from io import BytesIO
+from PIL import Image
 from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
 from rest_framework import status
 from rest_framework.test import APIClient
-
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 class HotelViewSetTestCase(TestCase):
     def setUp(self):
@@ -24,6 +26,13 @@ class HotelViewSetTestCase(TestCase):
         self.hotel = Hotel.objects.create(
             name="Test Hotel", hotel_owner=self.hotel_owner
         )
+    def create_image(self, filename="test_image.jpg"):
+        img = Image.new('RGB', (100, 100), color=(255, 0, 0))  
+        img_byte_arr = BytesIO()
+        img.save(img_byte_arr, format='JPEG')
+        img_byte_arr.seek(0)
+
+        return SimpleUploadedFile(filename, img_byte_arr.read(), content_type='image/jpeg')
 
     def test_list_hotels(self):
         url = reverse("hotel-list")
@@ -35,7 +44,7 @@ class HotelViewSetTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["name"], self.hotel.name)
-
+    
     def test_create_hotel(self):
         url = reverse("hotel-list")
         data = {
@@ -80,3 +89,109 @@ class HotelViewSetTestCase(TestCase):
         url = reverse("hotel-get_all_room_types_of_hotel", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        
+    def test_upload_image(self):
+        image = self.create_image()
+        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        data = {'image': image}
+        response = self.client.post(url, data, format="multipart")
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+        self.assertTrue(self.hotel.images.count() == 1)
+
+    def test_update_image(self):
+        initial_image = self.create_image("initial_image.jpg")
+        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id}) 
+        data = {'image': initial_image}
+        response = self.client.post(url, data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+        
+        initial_image_url = self.hotel.images.first().image
+
+        updated_image = self.create_image("updated_image.jpg")
+        data = {'image': updated_image}
+        url = reverse("hotel-update-image", kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id})
+        response = self.client.put(url, data, format="multipart") 
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.hotel.refresh_from_db()
+        
+        updated_image_url = self.hotel.images.first().image
+        self.assertNotEqual(updated_image_url, initial_image_url)
+        self.assertTrue(updated_image_url.name.split('/')[-1].startswith("updated_image"))
+
+    def test_partial_update_image(self):
+        initial_image = self.create_image("initial_image.jpg")
+        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id}) 
+        data = {'image': initial_image}
+        response = self.client.post(url, data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+        
+        initial_image_url = self.hotel.images.first().image
+
+        updated_image = self.create_image("updated_image.jpg")
+        data = {'image': updated_image}
+        url = reverse("hotel-partial-update-image", kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id})
+        response = self.client.patch(url, data, format="multipart")  
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.hotel.refresh_from_db()
+        
+        updated_image_url = self.hotel.images.first().image
+        self.assertNotEqual(updated_image_url, initial_image_url)
+        self.assertTrue(updated_image_url.name.split('/')[-1].startswith("updated_image"))
+
+    def test_delete_image(self):
+        image = self.create_image("test_image.jpg")
+        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        data = {'image': image}
+        response = self.client.post(url, data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+        
+        image_url = self.hotel.images.first().image
+
+        delete_url = reverse("hotel-delete-image", kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id})  
+        response = self.client.delete(delete_url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.hotel.refresh_from_db()
+        
+        self.assertIsNone(self.hotel.images.first())
+
+    def test_invalid_image_upload(self):
+        data = {
+            "image": SimpleUploadedFile(
+                "test_text.txt", b"Some text data", content_type="text/plain"
+            )
+        }
+        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})  
+        response = self.client.post(url, data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_get_all_images(self):
+        image = self.create_image("single_image.jpg")
+        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        data = {'image': image}
+        response = self.client.post(url, data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+
+        url = reverse("hotel-get-all-images", kwargs={"pk": self.hotel.id}) 
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertGreater(len(response.data), 0) 
+
+    def test_get_image(self):
+        image = self.create_image("single_image.jpg")
+        url = reverse("hotel-upload-image", kwargs={"pk": self.hotel.id})
+        data = {'image': image}
+        response = self.client.post(url, data, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+        
+        url = reverse("hotel-get-image", kwargs={"pk": self.hotel.id, "image_id": self.hotel.images.first().id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["id"], self.hotel.images.first().id)
+
