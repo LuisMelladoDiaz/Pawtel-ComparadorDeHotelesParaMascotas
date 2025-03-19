@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate
 from pawtel.app_users.serializers import AppUserSerializer
+from pawtel.customers.services import CustomerService
 from pawtel.hotel_owners.services import HotelOwnerService
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -37,6 +38,17 @@ class UserInfoView(APIView):
     def get(self, request):
         user = request.user
         user_serializer_data = AppUserSerializer(user).data
+
+        if hasattr(user, "hotel_owner"):
+            hotel_owner_id = user.hotel_owner.id
+            user_serializer_data["hotel_owner_id"] = hotel_owner_id
+            user_serializer_data["role"] = "hotel_owner"
+
+        elif hasattr(user, "customer"):
+            customer_id = user.customer.id
+            user_serializer_data["customer_id"] = customer_id
+            user_serializer_data["role"] = "customer"
+
         return Response(user_serializer_data)
 
 
@@ -49,9 +61,11 @@ class RegisterView(APIView):
 
         if role == "hotel_owner":
             object = HotelOwnerService.general_create_hotel_owner(request)
+        elif role == "customer":
+            object = CustomerService.general_create_customer(request)
         else:
             return Response(
-                {"error": "Invalid role. Only hotel owners are allowed."},
+                {"error": "Invalid role. Only hotel owners and customers are allowed."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 

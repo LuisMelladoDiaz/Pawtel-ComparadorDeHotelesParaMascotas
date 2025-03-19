@@ -58,26 +58,32 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
 
-    def test_get_all_hotels_of_hotel_owner(self):
+    def test_get_all_hotels_of_hotel_owner_explicit(self):
         url = reverse(
-            "hotel-owner-get_all_hotels_of_hotel_owner",
+            "hotel-owner-get_all_hotels_of_hotel_owner_explicit",
             kwargs={"pk": self.authenticated_hotel_owner.id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
-    def test_get_all_hotels_of_inactive_hotel_owner(self):
+    def test_get_all_hotels_of_inactive_hotel_owner_explicit(self):
         url = reverse(
-            "hotel-owner-get_all_hotels_of_hotel_owner",
+            "hotel-owner-get_all_hotels_of_hotel_owner_explicit",
             kwargs={"pk": self.inactive_hotel_owner.id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    def test_delete_all_hotels_of_hotel_owner(self):
+    def test_get_all_hotels_of_hotel_owner_implicit(self):
+        url = reverse("hotel-owner-get_all_hotels_of_hotel_owner_implicit")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 2)
+
+    def test_delete_all_hotels_of_hotel_owner_explicit(self):
         url = reverse(
-            "hotel-owner-delete_all_hotels_of_hotel_owner",
+            "hotel-owner-delete_all_hotels_of_hotel_owner_explicit",
             kwargs={"pk": self.authenticated_hotel_owner.id},
         )
         response = self.client.delete(url)
@@ -86,13 +92,21 @@ class HotelOwnerViewSetTest(TestCase):
             Hotel.objects.filter(hotel_owner=self.authenticated_hotel_owner).exists()
         )
 
-    def test_delete_all_hotels_of_inactive_hotel_owner(self):
+    def test_delete_all_hotels_of_inactive_hotel_owner_explicit(self):
         url = reverse(
-            "hotel-owner-delete_all_hotels_of_hotel_owner",
+            "hotel-owner-delete_all_hotels_of_hotel_owner_explicit",
             kwargs={"pk": self.inactive_hotel_owner.id},
         )
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_all_hotels_of_hotel_owner_implicit(self):
+        url = reverse("hotel-owner-delete_all_hotels_of_hotel_owner_implicit")
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            Hotel.objects.filter(hotel_owner=self.authenticated_hotel_owner).exists()
+        )
 
     def test_update_hotel_owner(self):
         url = reverse(

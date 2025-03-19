@@ -1,10 +1,13 @@
-from django.forms import ValidationError
+from datetime import timedelta
+
+from pawtel.customers.services import CustomerService
+from django.utils.dateparse import parse_date
+from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.services import HotelOwnerService
-from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
-from pawtel.rooms.models import Room
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError, )
 
 
 class RoomTypeService:
@@ -34,23 +37,17 @@ class RoomTypeService:
         return room_types
 
     @staticmethod
-    def retrieve_room_type(pk):
-        return RoomType.objects.get(id=pk)
+    def retrieve_room_type(pk, only_archived=True):
+        try:
+            return RoomType.objects.get(id=pk)
+        except RoomType.DoesNotExist:
+            raise NotFound(detail="Room type not found.")
 
     # POST -------------------------------------------------------------------
 
     @staticmethod
     def authorize_create_room_type(request):
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
-
-        hotel_id = request.data.get("hotel")
-        if not hotel_id:
-            raise PermissionDenied("Permission denied.")
-
-        hotel = HotelService.retrieve_hotel(hotel_id)
-
-        if not hotel or hotel.hotel_owner.id != hotel_owner.id:
-            raise PermissionDenied("Permission denied.")
+        HotelOwnerService.get_current_hotel_owner(request)
 
     @staticmethod
     def serialize_input_room_type_create(request):
@@ -59,14 +56,15 @@ class RoomTypeService:
         return serializer
 
     @staticmethod
-    def validate_create_room_type(input_serializer):
+    def validate_create_room_type(request, input_serializer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
         name = input_serializer.validated_data.get("name")
         hotel = input_serializer.validated_data.get("hotel")
+        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if hotel.is_archived:
+        if (hotel.is_archived) or (hotel.hotel_owner.id != hotel_owner.id):
             raise ValidationError({"hotel": "Invalid hotel."})
 
         if name and RoomType.objects.filter(hotel_id=hotel.id, name=name).exists():
@@ -116,30 +114,62 @@ class RoomTypeService:
         room_type = RoomType.objects.get(pk=pk)
         room_type.delete()
 
-    # Others -----------------------------------------------------------------
 
+    # Availability -----------------------------------------------------------
+    
     @staticmethod
-    def get_total_vacancy_of_room_type(room_type_id=None):
-        total_vacancy = Room.objects.filter(
-            room_type_id=room_type_id, is_archived=False
-        ).count()
-        response_data = {
-            "room_type_id": int(room_type_id),
-            "total_vacancy": total_vacancy,
-        }
-        return response_data
+    def authorize_room_type_available(request, pk):
+        CustomerService.get_current_customer(request)
+        room_type = RoomTypeService.retrieve_room_type(pk)
 
+        if (not room_type) or (room_type.is_archived):
+            raise NotFound("Room type does not exist.")
+    
     @staticmethod
-    def get_all_rooms_of_room_type(room_type_id=None):
-        rooms = Room.objects.filter(room_type_id=room_type_id, is_archived=False)
-        return rooms
+    def parse_availability_dates(request):
+        start_date_str = request.GET.get("start_date")
+        end_date_str = request.GET.get("end_date")
 
+        if not start_date_str or not end_date_str:
+            raise ValidationError({"detail": "Both start_date and end_date are required."})
+
+        start_date = parse_date(start_date_str)
+        end_date = parse_date(end_date_str)
+        
+        return start_date, end_date
+    
     @staticmethod
-    def get_vacancy_for_each_room_of_room_type(room_type_id=None):
-        rooms = RoomTypeService.get_all_rooms_of_room_type(room_type_id)
-        vacancy_list = []
-        for room in rooms:
-            vacancy_list.append(
-                {"room_id": room.id, "vacancy": room.room_type.capacity}
-            )
-        return vacancy_list
+    def validate_room_type_available(start_date, end_date):
+        if not start_date or not end_date:
+            raise ValidationError({"detail": "Invalid date format. Use yyyy-mm-dd."})
+        
+        if end_date < start_date:
+            raise ValidationError({"detail": "End date cannot be earlier than start date."})
+    
+    @staticmethod
+    def is_room_type_available(room_type_id, start_date, end_date):
+        """
+        Checks if a room type is available for each individual day within the requested date range.
+        A room type is available only if, for every day in the range, the number of bookings plus 
+        active booking holds does not exceed the total available slots (num_rooms * capacity).
+        """
+        
+        room_type = RoomTypeService.retrieve_room_type(room_type_id)
+        total_slots = room_type.num_rooms * room_type.capacity
+
+        days_to_check = [
+            start_date + timedelta(days=i)
+            for i in range((end_date - start_date).days + 1)  # + 1 because end date is included
+        ]
+
+        for day in days_to_check:
+            bookings_count = Booking.objects.filter(
+                room_type_id=room_type_id,
+                start_date__lte=day,  # Booking started before or on this day
+                end_date__gte=day      # Booking ends after this day
+            ).count()
+
+            if bookings_count >= total_slots:
+                return False
+
+        return True
