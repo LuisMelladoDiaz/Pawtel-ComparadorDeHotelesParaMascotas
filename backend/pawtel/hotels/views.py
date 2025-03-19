@@ -94,7 +94,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["post"],
-        url_path="hotel-image/upload",
+        url_path="hotel-images/upload",
         url_name="upload-image",
     )
     def upload_image(self, request, pk=None):
@@ -110,7 +110,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="hotel-image/(?P<image_id>\\d+)",
+        url_path="hotel-images/(?P<image_id>\\d+)",
         url_name="get-image",
     )
     def get_image(self, request, pk=None, image_id=None):
@@ -124,7 +124,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="hotel-image/all",
+        url_path="hotel-images/all",
         url_name="get-all-images",
     )
     def get_all_images(self, request, pk=None):
@@ -138,7 +138,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["put"],
-        url_path="hotel-image/(?P<image_id>\\d+)/update",
+        url_path="hotel-images/(?P<image_id>\\d+)/update",
         url_name="update-image",
     )
     def update_image(self, request, pk=None, image_id=None):
@@ -154,7 +154,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["patch"],
-        url_path="hotel-image/(?P<image_id>\\d+)/patch",
+        url_path="hotel-images/(?P<image_id>\\d+)/patch",
         url_name="partial-update-image",
     )
     def partial_update_image(self, request, pk=None, image_id=None):
@@ -163,7 +163,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["delete"],
-        url_path="hotel-image/(?P<image_id>\\d+)/delete",
+        url_path="hotel-images/(?P<image_id>\\d+)/delete",
         url_name="delete-image",
     )
     def delete_image(self, request, pk=None, image_id=None):
@@ -174,11 +174,11 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="hotel-image/cover",
+        url_path="hotel-images/cover",
         url_name="get-cover-image",
     )
     def get_cover_image(self, request, pk=None):
-        cover_image = HotelService.rerieve_cover_image(request, pk)
+        cover_image = HotelService.retrieve_cover_image(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             cover_image, context={"request": request}
         )
@@ -187,11 +187,11 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="hotel-image/non-cover",
+        url_path="hotel-images/non-cover",
         url_name="get-non-cover-images",
     )
     def get_non_cover_images(self, request, pk=None):
-        non_cover_images = HotelService.retrieve_all_non_cover_images(request, pk)
+        non_cover_images = HotelService.retrieve_all_non_cover_images(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             non_cover_images, many=True, context={"request": request}
         )
@@ -200,13 +200,13 @@ class HotelImageViewSet(viewsets.ViewSet):
     @action(
         detail=True,
         methods=["put"],
-        url_path="hotel-image/(?P<image_id>\\d+)/set-cover",
+        url_path="hotel-images/(?P<image_id>\\d+)/set-cover",
         url_name="set-image-as-cover",
     )
     def set_image_as_cover(self, request, pk=None, image_id=None):
         HotelService.authorize_action_hotel(request, pk)
-        HotelService.validate_set_image_as_cover(request, pk, image_id)
-        cover_image = HotelService.set_image_as_cover(request, pk, image_id)
+        HotelService.validate_set_image_as_cover(pk, image_id)
+        cover_image = HotelService.set_image_as_cover(pk, image_id)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             cover_image, context={"request": request}
         )
