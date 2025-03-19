@@ -1,5 +1,9 @@
 name: Codacy Analysis with Report
 
+permissions:
+  actions: read
+  contents: write
+
 on:
   push:
     branches:
@@ -25,7 +29,7 @@ jobs:
           ./codacy-analysis-cli analyze --output json > codacy-report.json
 
       - name: Subir reporte como artefacto
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: codacy-report
           path: codacy-report.json
