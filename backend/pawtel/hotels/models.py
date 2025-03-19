@@ -24,3 +24,9 @@ class Hotel(models.Model):
 
     def __str__(self):
         return f"Hotel {self.name}, {self.city}"
+
+
+class HotelImage(models.Model):
+    image = models.ImageField(upload_to="hotels/", blank=False, null=False)
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="images")
+    is_cover = models.BooleanField(default=False, null=False)

@@ -1,7 +1,9 @@
 from django.db.models import Max, Min
+from django.forms import ValidationError
+from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel
-from pawtel.hotels.serializers import HotelSerializer
+from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.room_types.models import RoomType
 from rest_framework.exceptions import (NotFound, PermissionDenied,
                                        ValidationError)
@@ -23,17 +25,21 @@ class HotelService:
             raise PermissionDenied("Permission denied.")
 
     @staticmethod
-    def serialize_output_hotel(hotel, many=False):
-        return HotelSerializer(hotel, many=many).data
+    def serialize_output_hotel(hotel, many=False, context=None):
+        return HotelSerializer(hotel, many=many, context=context).data
 
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_hotel(pk):
+    def retrieve_hotel(pk, only_archived=True):
         try:
             return Hotel.objects.get(pk=pk)
         except Hotel.DoesNotExist:
-            raise NotFound(detail=f"Hotel not found")
+            raise NotFound(detail="Hotel not found")
+
+    @staticmethod
+    def get_all_bookings_by_hotel(hotel_id):
+        return Booking.objects.filter(room_type__hotel=hotel_id)
 
     # POST -------------------------------------------------------------------
 
@@ -190,3 +196,15 @@ class HotelService:
     @staticmethod
     def get_all_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+
+    @staticmethod
+    def upload_image_to_hotel(hotel, image, is_cover=False):
+        if not hotel or hotel.is_archived:
+            raise NotFound("Hotel does not exist or is archived.")
+        serializer = HotelImageSerializer(
+            data={"image": image, "is_cover": is_cover, "hotel": hotel.id}
+        )
+        if not serializer.is_valid():
+            raise ValidationError(serializer.errors)
+        serializer.save()
+        return serializer.data
