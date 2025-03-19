@@ -102,7 +102,6 @@ const handleFileChange = (e) => {
 };
 
 
-const upload = useUploadImageToHotel();
 
 const handleUpload = async () => {
   if (!file) {
