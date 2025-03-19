@@ -1,6 +1,6 @@
 from django.db.models import Max, Min
 from pawtel.hotel_owners.services import HotelOwnerService
-from pawtel.hotels.models import Hotel
+from pawtel.hotels.models import Hotel , HotelImage
 from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.room_types.models import RoomType
 from rest_framework.exceptions import (NotFound, PermissionDenied,
@@ -191,14 +191,78 @@ class HotelService:
     def get_all_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
 
+   # Hotel_Image -------------------------------------------------------------
+
+
     @staticmethod
-    def upload_image_to_hotel(hotel, image, is_cover=False):
+    def serialize_input_hotel_image(request, pk):
+        context = {"request": request}
+        hotel = HotelService.retrieve_hotel(pk)
+        data = request.data.copy()
+        data["hotel"]= hotel.id
+        serializer = HotelImageSerializer(data=data,context=context)
+        return serializer
+
+    def validate_upload_image(input_serializer,pk):
+        hotel = HotelService.retrieve_hotel(pk)
         if not hotel or hotel.is_archived:
             raise NotFound("Hotel does not exist or is archived.")
-        serializer = HotelImageSerializer(
-            data={"image": image, "is_cover": is_cover, "hotel": hotel.id}
-        )
-        if not serializer.is_valid():
-            raise ValidationError(serializer.errors)
-        serializer.save()
-        return serializer.data
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
+        if hotel.images.count() >= 5:
+            raise ValidationError("A hotel cannot have more than 5 images.")
+        
+        if input_serializer.validated_data.get("is_cover") and hotel.images.filter(is_cover=True).exists():
+            raise ValidationError("Only one image can be set as the cover.")
+        
+    @staticmethod
+    def upload_image_to_hotel(input_serializer):
+        hotel_image_created = input_serializer.save()
+        return hotel_image_created
+
+    @staticmethod
+    def serialize_output_hotel_image(hotel_image, many=False,context=None):
+        return HotelImageSerializer(hotel_image,many=many,context=context).data
+    
+    @staticmethod
+    def retrieve_image_from_hotel(pk, image_id):
+        try:
+            return HotelImage.objects.get(id=image_id, hotel_id=pk)
+        except HotelImage.DoesNotExist:
+            raise NotFound(detail=f"Hotel Image not found")
+
+    @staticmethod
+    def retrieve_all_images_from_hotel(pk):
+        hotel_images = HotelImage.objects.filter(hotel_id=pk)
+        if not hotel_images:
+            raise NotFound(detail=f"No images found for hotel")
+        return hotel_images
+    
+    @staticmethod
+    def validate_update_image(input_serializer, pk, image_id):
+        hotel = HotelService.retrieve_hotel(pk)
+        if not hotel or hotel.is_archived:
+            raise NotFound("Hotel does not exist or is archived.")
+        
+        hotel_image = HotelService.retrieve_image_from_hotel(pk,image_id)
+        if not hotel_image:
+            raise NotFound("Image not found or does not belong to the hotel.")
+        
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
+
+        if hotel.images.count() >= 5:
+            raise ValidationError("A hotel cannot have more than 5 images.")
+            
+        if input_serializer.validated_data.get("is_cover") and hotel.images.filter(is_cover=True).exists():
+            raise ValidationError("Only one image can be set as the cover.")
+
+    @staticmethod
+    def update_image_to_hotel(input_serializer,pk,image_id):
+        hotel_image = HotelService.retrieve_image_from_hotel(pk,image_id)
+        return input_serializer.update(hotel_image, input_serializer.validated_data)
+    
+    @staticmethod
+    def delete_image_from_hotel(pk, image_id):
+        hotel_image = HotelService.retrieve_image_from_hotel(pk,image_id)
+        hotel_image.delete()

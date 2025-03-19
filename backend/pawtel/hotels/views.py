@@ -35,14 +35,6 @@ class HotelViewSet(viewsets.ModelViewSet):
         )
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
-    @action(detail=True, methods=["post"])
-    def upload_image(self, request, pk=None):
-        hotel = self.get_object()
-        img = HotelService.upload_image_to_hotel(
-            hotel, request.data.get("image"), request.data.get("is_cover")
-        )
-        return Response(img, status=status.HTTP_201_CREATED)
-
     def update(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
         input_serializer = HotelService.serialize_input_hotel_update(request, pk)
@@ -73,3 +65,75 @@ class HotelViewSet(viewsets.ModelViewSet):
         room_types = HotelService.get_all_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    @action(
+        detail=True,
+        methods=["post"],
+        url_path="hotel_images/upload",
+        url_name="upload-image"
+    )
+    def upload_image(self, request, pk=None):
+        HotelService.authorize_action_hotel(request, pk)
+        input_serializer = HotelService.serialize_input_hotel_image(request, pk)
+        HotelService.validate_upload_image(input_serializer, pk)
+        hotel_image = HotelService.upload_image_to_hotel(input_serializer)
+        output_serializer_data = HotelService.serialize_output_hotel_image(hotel_image, context={"request": request})
+        return Response(output_serializer_data, status=status.HTTP_201_CREATED)
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="hotel_images/get/(?P<image_id>\\d+)",
+        url_name="get-image"
+    )
+    def get_image(self, request, pk=None, image_id=None):
+        HotelService.authorize_action_hotel(request, pk)
+        hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
+        output_serializer_data = HotelService.serialize_output_hotel_image(hotel_image, context={"request": request})
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="hotel_images/all",
+        url_name="get-all-images"
+    )
+    def get_all_images(self, request, pk=None):
+        HotelService.authorize_action_hotel(request, pk)
+        hotel_images = HotelService.retrieve_all_images_from_hotel(pk)
+        output_serializer_data = HotelService.serialize_output_hotel_image(hotel_images, many=True, context={"request": request})
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["put"],
+        url_path="hotel_images/update/(?P<image_id>\\d+)",
+        url_name="update-image"
+    )
+    def update_image(self, request, pk=None, image_id=None):
+        HotelService.authorize_action_hotel(request, pk)
+        input_serializer = HotelService.serialize_input_hotel_image(request, pk)
+        HotelService.validate_update_image(input_serializer, pk, image_id)
+        hotel_image = HotelService.update_image_to_hotel(input_serializer, pk, image_id)
+        output_serializer_data = HotelService.serialize_output_hotel_image(hotel_image, context={"request": request})
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["patch"],
+        url_path="hotel_images/patch/(?P<image_id>\\d+)",
+        url_name="partial-update-image"
+    )
+    def partial_update_image(self, request, pk=None, image_id=None):
+        return self.update_image(request, pk, image_id)
+
+    @action(
+        detail=True,
+        methods=["delete"],
+        url_path="hotel_images/(?P<image_id>\\d+)",
+        url_name="delete-image"
+    )
+    def delete_image(self, request, pk=None, image_id=None):
+        HotelService.authorize_action_hotel(request, pk)
+        HotelService.delete_image_from_hotel(pk, image_id)
+        return Response({"detail": "Image deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
