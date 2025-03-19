@@ -46,8 +46,11 @@ class CustomerService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_customer(pk):
-        return Customer.objects.get(id=pk)
+    def retrieve_customer(pk, allow_inactive=False):
+        try:
+            return Customer.objects.get(id=pk)
+        except Customer.DoesNotExist:
+            raise NotFound(detail="Customer not found.")
 
     @staticmethod
     def list_customers():
@@ -65,5 +68,9 @@ class CustomerService:
     def get_current_customer(request):
         if (not request.user) or (not request.user.is_authenticated):
             raise AuthenticationFailed("User is not authenticated.")
+
         customer = Customer.objects.get(user_id=request.user.id)
+        if (not customer) or (not customer.user.is_active):
+            raise NotFound("Customer does not exist.")
+
         return customer

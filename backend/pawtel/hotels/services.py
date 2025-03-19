@@ -29,11 +29,11 @@ class HotelService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_hotel(pk):
+    def retrieve_hotel(pk, only_archived=True):
         try:
             return Hotel.objects.get(pk=pk)
         except Hotel.DoesNotExist:
-            raise NotFound(detail=f"Hotel not found")
+            raise NotFound(detail="Hotel not found")
 
     # POST -------------------------------------------------------------------
 
