@@ -27,9 +27,13 @@ jobs:
           CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
         run: |
           ./codacy-analysis-cli analyze --output json > codacy-report.json
+        
+      - name: Forzar actualización de acciones
+        run: |
+          rm -rf $GITHUB_WORKSPACE/_actions
 
       - name: Subir reporte como artefacto
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: codacy-report
           path: codacy-report.json
