@@ -31,19 +31,21 @@ class Booking(models.Model):
             self.creation_date = date.today()
 
         if self.creation_date > date.today():
-            raise ValidationError("The date of creation cannot be in the future.")
+            raise ValidationError(
+                {"creation_date": "The date of creation cannot be in the future."}
+            )
 
         if self.start_date <= date.today():
             raise ValidationError(
-                {"start_date": "The start date must be in the future"}
+                {"start_date": "The start date must be in the future."}
             )
 
         if self.end_date <= date.today():
-            raise ValidationError({"end_date": "The end date must be in the furure"})
+            raise ValidationError({"end_date": "The end date must be in the furure."})
 
         if self.end_date <= self.start_date:
             raise ValidationError(
-                {"end_date": "End date must be later than start date"}
+                {"end_date": "End date must be later than start date."}
             )
 
     def __str__(self):
