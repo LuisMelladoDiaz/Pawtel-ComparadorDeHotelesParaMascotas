@@ -93,7 +93,7 @@ const applyFilters = () => {
   notyf.success('Filtros aplicados correctamente');
 };
 
-// Aplicar debounce a applyFilters
+// Apply debounce to applyFilters
 const debouncedApplyFilters = debounce(() => {
   applyFilters();
 }, 300);
@@ -104,24 +104,24 @@ watch([selectedCity, selectedRoom, sortBy, direction], () => {
 });
 
 watch([minPrice, maxPrice], () => {
-  debouncedApplyFilters(); // Usar debouncedApplyFilters aquí
+  debouncedApplyFilters(); // Use debouncedApplyFilters here
 });
 
 const removeFilter = (filter) => {
   if (filter.startsWith("Ciudad:")) {
-    selectedCity.value = ""; // Restablecer la ciudad
+    selectedCity.value = ""; // Reset city
   } else if (filter.startsWith("Tipo de habitación:")) {
-    selectedRoom.value = ""; // Restablecer el tipo de habitación
+    selectedRoom.value = ""; // Reset room type
   } else if (filter.startsWith("Max Precio:")) {
-    maxPrice.value = 500; // Restablecer el precio máximo
+    maxPrice.value = 500; // Reset max price
   } else if (filter.startsWith("Min Precio:")) {
-    minPrice.value = 0; // Restablecer el precio mínimo
+    minPrice.value = 0; // Reset min price
   }
 
   appliedFilters.value = appliedFilters.value.filter(f => f !== filter);
   notyf.success('Filtro eliminado');
 
-  // Actualizar la URL
+  // Update URL
   applyFilters();
 };
 
