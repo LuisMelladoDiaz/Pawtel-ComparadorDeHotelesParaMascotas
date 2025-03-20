@@ -37,3 +37,11 @@ class BookingService:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
             raise NotFound(detail="Booking not found.")
+
+    @staticmethod
+    def count_bookings_of_room_type_at_date(room_type_id, date_to_check):
+        return Booking.objects.filter(
+            room_type_id=room_type_id,
+            start_date__lte=date_to_check,  # Booking started before or on this day
+            end_date__gte=date_to_check,  # Booking ends after or on this day
+        ).count()
