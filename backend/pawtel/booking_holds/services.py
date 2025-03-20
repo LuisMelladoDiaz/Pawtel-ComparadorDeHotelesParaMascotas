@@ -11,6 +11,12 @@ class BookingHoldService:
 
     # Others -----------------------------------------------------------------
 
+    __HOLD_EXPIRATION_DURATION = timedelta(minutes=10)
+
+    @staticmethod
+    def __calculate_hold_expiry():
+        return now() + BookingHoldService.__HOLD_EXPIRATION_DURATION
+
     @staticmethod
     def authorize_generic_action_booking_hold(request, pk):
         customer = CustomerService.get_current_customer(request)
@@ -37,20 +43,9 @@ class BookingHoldService:
 
     @staticmethod
     def list_all_booking_holds():
-        return BookingHold.objects
+        return BookingHold.objects.all()
 
     # DELETE -----------------------------------------------------------------
-
-    @staticmethod
-    def authorize_generic_action_booking_hold(request, pk):
-        customer = CustomerService.get_current_customer(request)
-        booking_hold = BookingHoldService.retrieve_booking_hold(pk)
-
-        if not booking_hold:
-            raise NotFound("BookingHold does not exist.")
-
-        if (not customer.user.is_active) or (booking_hold.customer.id != customer.id):
-            raise PermissionDenied("Permission denied.")
 
     @staticmethod
     def delete_booking_hold(pk):
@@ -74,7 +69,7 @@ class BookingHoldService:
         context = {"request": request}
 
         current_customer_id = CustomerService.get_current_customer(request).id
-        hold_expires_at = now() + timedelta(minutes=1)
+        hold_expires_at = BookingHoldService.__calculate_hold_expiry()
 
         data = request.data.copy()
         data["customer"] = current_customer_id

@@ -46,6 +46,8 @@ class BookingHoldViewSet(TestCase):
             name="Archived Hotel", is_archived=True, hotel_owner=self.hotel_owner
         )
 
+        self.in_ten_minutes = now() + timedelta(minutes=10)
+
         self.room_type_unavailable_from_2_to_4 = RoomType.objects.create(
             name="Single",
             hotel=self.hotel,
@@ -58,6 +60,7 @@ class BookingHoldViewSet(TestCase):
         self.active_booking_hold = BookingHold.objects.create(
             customer=self.customer,
             room_type=self.room_type_unavailable_from_2_to_4,
+            hold_expires_at=self.in_ten_minutes,
             booking_start_date=date.today() + timedelta(days=2),
             booking_end_date=date.today() + timedelta(days=4),
         )
