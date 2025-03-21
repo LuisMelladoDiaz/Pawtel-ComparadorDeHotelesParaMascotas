@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand, CommandError
 from pawtel.app_users.models import AppUser
 from pawtel.booking_holds.models import BookingHold
 from pawtel.customers.models import Customer
-from pawtel.hotels.models import Hotel, HotelOwner
+from pawtel.hotels.models import Hotel, HotelImage, HotelOwner
 from pawtel.room_types.models import RoomType
 
 
@@ -38,6 +38,7 @@ class Command(BaseCommand):
                 HotelOwner.objects.all().delete()
                 Customer.objects.all().delete()
                 AppUser.objects.all().delete()
+                HotelImage.objects.all().delete()
                 BookingHold.objects.all().delete()
                 self.stdout.write(self.style.SUCCESS("All relevant data deleted."))
             else:
@@ -50,8 +51,10 @@ class Command(BaseCommand):
             call_command("seed_customers")
             call_command("seed_hotels")
             call_command("seed_room_types")
+            call_command("seed_hotel_images")
             call_command("seed_booking_holds")
             call_command("seed_bookings")
+
         except CommandError as e:
             self.stdout.write(self.style.ERROR(f"Error while seeding: {e}"))
             return

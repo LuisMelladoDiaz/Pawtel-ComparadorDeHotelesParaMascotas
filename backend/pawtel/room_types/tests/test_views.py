@@ -101,3 +101,9 @@ class RoomTypeViewSetTests(APITestCase):
         url = reverse("room-type-detail", args=[self.room_type_1.id])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_get_hotel_of_room_type(self):
+        url = reverse("room-type-get_hotel_of_room_type", args=[self.room_type_1.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["id"], self.hotel.id)
