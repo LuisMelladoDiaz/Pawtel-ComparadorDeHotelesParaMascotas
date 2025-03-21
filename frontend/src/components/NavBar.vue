@@ -81,7 +81,7 @@
           <button @click="logout" class="auth-button bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Cerrar Sesión</button>
         </template>
       <!-- Icono de perfil -->
-        <router-link to="/user-profile" class="bg-terracota hover:bg-terracota-dark rounded p-2 flex items-center justify-center">
+        <router-link v-if="isLoggedIn" to="/user-profile" class="bg-terracota hover:bg-terracota-dark rounded p-2 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
           </svg>
