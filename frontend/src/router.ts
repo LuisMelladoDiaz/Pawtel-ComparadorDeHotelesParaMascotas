@@ -11,8 +11,6 @@ import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
 import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
-import EmailPasswordReset from './views/EmailPasswordReset.vue'
-import PasswordResetConfirm from './views/ResetPassword.vue'
 import Home from './views/Home.vue'
 import MyBookings from './views/MyBookings.vue'
 import AboutUs from './views/AboutUs.vue';
@@ -30,8 +28,6 @@ const routes = [
   { path: '/componentes-2', component: Componentes2},
   { path: '/login', component: LoginView},
   { path: '/register', component: RegisterView},
-  { path: '/email-password-reset', component: EmailPasswordReset},
-  { path: '/auth/password-reset-confirm/:uidb64/:token', component: PasswordResetConfirm },
   { path: '/template-screen-1', component: TemplateScreen1},
   { path: '/template-screen-2', component: TemplateScreen2},
   { path: '/user-profile', component: UserProfile},

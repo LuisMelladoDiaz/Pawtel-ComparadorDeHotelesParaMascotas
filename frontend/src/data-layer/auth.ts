@@ -76,29 +76,6 @@ export const useLogoutMutation = () => {
   });
 };
 
-export const usePasswordResetMutation = () => {
-  return useMutation({
-    mutationFn: async (data) => {
-      const response = await axios.post(`${API_BASE_URL}/email-password-reset/`, data);
-      return response.data;
-    },
-    onError: (error) => {
-      console.error('El email introducido no tiene una cuenta con nosotros', error);
-    },
-  });
-};
-
-export const usePasswordResetConfirmMutation = () => {
-  return useMutation({
-    mutationFn: async ({ uidb64, token, password }: { uidb64: string; token: string; password: string }) => {
-      const response = await axios.post(`${API_BASE_URL}/password-reset-confirm/${uidb64}/${token}/`, { password });
-      return response.data;
-    },
-    onError: (error) => {
-      console.error('Error al restablecer la contraseña', error);
-    },
-  });
-};
 // ROLES
 
 export const useRoleQuery = () => {

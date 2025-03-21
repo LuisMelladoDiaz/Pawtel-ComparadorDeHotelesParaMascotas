@@ -56,19 +56,11 @@ const login = (values) => {
 
                         <div class="mt-4 relative">
                             <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-                            <input :type="showPassword ? 'text' : 'password'" id="password" v-model="password"
-                                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500"
-                                required />
-                            <button type="button" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5 mt-6">
-                                <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-                            </button>
-                        </div>
 
-                        <div class="mt-4 text-center">
-                            <p class="text-sm text-gray-600">
-                                ¿Has olvidado tu contraseña? <br>
-                                <router-link to="/email-password-reset" class="text-blue-600 hover:underline">Restablecer contraseña</router-link>
-                            </p>
+                             <Field name="password" v-slot="{ field, meta }" required>
+                                <input type="password" v-bind="field" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+                                <ErrorMessage name="password" class="text-red-500 text-sm" v-if="errors.password && meta.dirty" />
+                            </Field>
                         </div>
 
                         <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
