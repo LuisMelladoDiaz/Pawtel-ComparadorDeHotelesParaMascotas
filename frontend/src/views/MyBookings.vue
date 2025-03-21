@@ -6,6 +6,7 @@ import Footer from '../components/Footer.vue';
 
 const { data: customer, isLoading: isLoadingCustomer } = useGetCurrentCustomer();
 const { data: bookings, isLoading: isLoadingBookings } = useGetMyBookings();
+console.log(bookings);
 </script>
 
 <template>

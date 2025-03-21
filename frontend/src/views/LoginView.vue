@@ -37,7 +37,6 @@ const login = (values) => {
     });
 };
 </script>
-
 <template>
     <div class="flex flex-col min-h-screen">
         <NavbarTerracota />
@@ -76,7 +75,8 @@ const login = (values) => {
 
                         <div class="mt-6">
                             <button type="submit"
-                                class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
+                                class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave"
+                                :disabled="!meta.valid">
                                 Iniciar Sesión
                             </button>
                         </div>
@@ -87,39 +87,6 @@ const login = (values) => {
                                 <router-link to="/register" class="text-azul-suave hover:underline">Regístrate aquí</router-link>
                             </p>
                         </div>
-                    </form>
-                </div>
-            </div>
-
-                             <Field name="password" v-slot="{ field, meta }" required>
-                                <input type="password" v-bind="field" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
-                                <ErrorMessage name="password" class="text-red-500 text-sm" v-if="errors.password && meta.dirty" />
-                            </Field>
-                        </div>
-
-                        <div class="mt-4 text-center">
-                            <p class="text-sm text-gray-600">
-                                ¿Has olvidado tu contraseña?
-                                <router-link to="/register" class="text-blue-600 hover:underline">Restablecer contraseña</router-link>
-                            </p>
-                        </div>
-
-                        <div v-if="errorMessage" class="mt-4 text-red-500 text-center">{{ errorMessage }}</div>
-
-                        <div class="mt-6">
-                            <button type="submit"
-                                class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave"
-                                :disabled="!meta.valid">
-                                Iniciar Sesión
-                            </button>
-                        </div>
-
-                        <div class="mt-4 text-center">
-                            <p class="text-sm text-gray-600">
-                                ¿No tienes cuenta?
-                                <router-link to="/register" class="text-blue-600 hover:underline">Regístrate aquí</router-link>
-                            </p>
-                        </div>
                     </Form>
                 </div>
             </div>
@@ -128,6 +95,7 @@ const login = (values) => {
         <Footer />
     </div>
 </template>
+
 
 <style scoped>
 @media (max-width: 900px) {
