@@ -126,7 +126,7 @@ class AppUserService:
         if (not request.user) or (not request.user.is_authenticated):
             raise AuthenticationFailed("User is not authenticated.")
 
-        app_user = AppUser.objects.get(user_id=request.user.id)
+        app_user = AppUser.objects.get(id=request.user.id)
         if (not app_user) or (not app_user.is_active):
             raise NotFound("User does not exist.")
 
