@@ -69,7 +69,7 @@ class RoomTypeService:
         hotel = input_serializer.validated_data.get("hotel")
         hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if (hotel.is_archived) or (hotel.hotel_owner.id != hotel_owner.id):
+        if hotel.hotel_owner.id != hotel_owner.id:
             raise ValidationError({"hotel": "Invalid hotel."})
 
         if name and RoomType.objects.filter(hotel_id=hotel.id, name=name).exists():
@@ -124,7 +124,7 @@ class RoomTypeService:
     @staticmethod
     def authorize_room_type_available(request, pk):
         CustomerService.get_current_customer(request)
-        room_type = RoomTypeService.retrieve_room_type(pk)
+        RoomTypeService.retrieve_room_type(pk)
 
     @staticmethod
     def parse_availability_dates(request):
@@ -192,7 +192,7 @@ class RoomTypeService:
     @staticmethod
     def authorize_get_hotel_of_room_type(request, pk):
         AppUserService.get_current_app_user(request)
-        RoomTypeService.retrieve_room_type(pk)  ##! TODO: Put this in authorize
+        RoomTypeService.retrieve_room_type(pk)
 
     @staticmethod
     def get_hotel_of_room_type(pk):

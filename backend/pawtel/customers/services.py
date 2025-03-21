@@ -2,8 +2,7 @@ from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
-from rest_framework.exceptions import (AuthenticationFailed, NotFound,
-                                       PermissionDenied)
+from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class CustomerService:
@@ -30,9 +29,7 @@ class CustomerService:
             target_customer = CustomerService.retrieve_customer(pk)
             AppUserService.retrieve_app_user(target_customer.user_id)
 
-            if (not logged_in_customer) or (
-                target_customer.id != logged_in_customer.id
-            ):
+            if target_customer.id != logged_in_customer.id:
                 raise PermissionDenied("Permission denied.")
 
     @staticmethod
@@ -56,6 +53,19 @@ class CustomerService:
             raise NotFound(detail="Customer not found.")
 
     @staticmethod
+    def get_customer_by_user(app_user_id):
+        try:
+            return Customer.objects.get(user_id=app_user_id)
+        except Customer.DoesNotExist:
+            raise NotFound("Customer does not exist.")
+
+    @staticmethod
+    def get_current_customer(request):
+        app_user = AppUserService.get_current_app_user(request)
+        customer = CustomerService.get_customer_by_user(app_user)
+        return customer
+
+    @staticmethod
     def list_customers(allow_inactive=False):
         if allow_inactive:
             return Customer.objects.all()
@@ -71,16 +81,3 @@ class CustomerService:
     @staticmethod
     def __create_customer(app_user_id):
         return Customer.objects.create(user_id=app_user_id)
-
-    # Other -------------------------------------------------------------------
-
-    @staticmethod
-    def get_current_customer(request):
-        if (not request.user) or (not request.user.is_authenticated):
-            raise AuthenticationFailed("User is not authenticated.")
-
-        customer = Customer.objects.get(user_id=request.user.id)
-        if (not customer) or (not customer.user.is_active):
-            raise NotFound("Customer does not exist.")
-
-        return customer

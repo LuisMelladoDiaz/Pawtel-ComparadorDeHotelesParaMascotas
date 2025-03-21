@@ -36,6 +36,14 @@ class AppUserService:
     def __authorize_action_app_user(request, pk):
         AppUserService.retrieve_app_user(pk)
 
+    @staticmethod
+    def get_current_app_user(request):
+        if (not request.user) or (not request.user.is_authenticated):
+            raise AuthenticationFailed("User is not authenticated.")
+
+        app_user = AppUserService.retrieve_app_user(request.user.id)
+        return app_user
+
     # GET --------------------------------------------------------------------
 
     @staticmethod
@@ -118,16 +126,3 @@ class AppUserService:
     def __delete_app_user(pk):
         app_user = AppUserService.retrieve_app_user(pk)
         app_user.delete()
-
-    # OTHERS -----------------------------------------------------------------
-
-    @staticmethod
-    def get_current_app_user(request):
-        if (not request.user) or (not request.user.is_authenticated):
-            raise AuthenticationFailed("User is not authenticated.")
-
-        app_user = AppUser.objects.get(id=request.user.id)
-        if (not app_user) or (not app_user.is_active):
-            raise NotFound("User does not exist.")
-
-        return app_user
