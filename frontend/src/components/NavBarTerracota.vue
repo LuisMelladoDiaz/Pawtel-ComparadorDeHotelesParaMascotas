@@ -56,7 +56,7 @@
 
     <!-- Menú desplegable en móvil -->
     <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-terracota py-4 border-t-2 border-white shadow-lg rounded-b-lg">
-      <div class="nav-links flex flex-col text-white font-bold text-base">
+      <div class="nav-links flex flex-col text-white font-bold text-base text-center">
         <router-link 
             to="/hotel-owner-panel" 
             class="hover:underline p-2"
@@ -71,8 +71,8 @@
       <!-- Botones de autenticación en el menú móvil -->
       <div class="auth-buttons flex flex-col gap-3 text-terracota mt-4">
         <template v-if="!isLoggedIn">
-          <router-link to="/login" class="auth-button login bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
-          <router-link to="/register" class="auth-button sign-in bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
+          <router-link to="/login" class="auth-button login bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none text-center">Iniciar Sesión</router-link>
+          <router-link to="/register" class="auth-button sign-in bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none text-center">Crear Cuenta</router-link>
         </template>
         <template v-else>
           <button @click="logout" class="auth-button bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-2 border-none">Cerrar Sesión</button>
@@ -80,7 +80,7 @@
 
 
         <!-- Icono de perfil -->
-        <router-link v-if="isLoggedIn" to="/user-profile" class="text-white hover:text-gray-900 flex items-center justify-center mt-2">
+        <router-link v-if="isLoggedIn" to="/user-profile" class="bg-white hover:bg-gray-200 rounded cursor-pointer px-4 py-1 border-none justify-center flex">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5zm0 2c-3.314 0-10 1.671-10 5v1h20v-1c0-3.329-6.686-5-10-5z"/>
           </svg>

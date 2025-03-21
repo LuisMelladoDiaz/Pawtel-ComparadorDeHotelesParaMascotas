@@ -58,7 +58,7 @@
 
     <!-- Menú desplegable en móvil -->
     <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-white py-4 border-t-2 border-terracota shadow-lg rounded-b-lg">
-      <div class="nav-links flex flex-col text-terracota font-bold text-base">
+      <div class="nav-links flex flex-col text-terracota font-bold text-base items-center">
         <router-link 
           to="/hotel-owner-panel" 
           class="hover:underline p-2"
@@ -74,8 +74,8 @@
       <div class="auth-buttons flex flex-col gap-3 text-white mt-4">
 
         <template v-if="!isLoggedIn">
-          <router-link to="/login" class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Iniciar Sesión</router-link>
-        <router-link to="/register" class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Crear Cuenta</router-link>
+          <router-link to="/login" class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-center">Iniciar Sesión</router-link>
+          <router-link to="/register" class="auth-button sign-in bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-center">Crear Cuenta</router-link>
         </template>
         <template v-else>
           <button @click="logout" class="auth-button bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none">Cerrar Sesión</button>
