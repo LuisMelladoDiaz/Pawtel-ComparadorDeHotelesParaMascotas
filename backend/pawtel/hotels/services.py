@@ -31,11 +31,14 @@ class HotelService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_hotel(pk, only_archived=True):
+    def retrieve_hotel(pk, allow_archived=False):
         try:
-            return Hotel.objects.get(pk=pk)
+            if allow_archived:
+                return Hotel.objects.get(pk=pk)
+            else:
+                return Hotel.objects.get(pk=pk, is_archived=False)
         except Hotel.DoesNotExist:
-            raise NotFound(detail="Hotel not found")
+            raise NotFound(detail="Hotel not found.")
 
     @staticmethod
     def get_all_bookings_by_hotel(hotel_id):

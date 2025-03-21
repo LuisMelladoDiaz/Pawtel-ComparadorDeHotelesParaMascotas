@@ -53,13 +53,16 @@ class CustomerService:
     @staticmethod
     def retrieve_customer(pk, allow_inactive=False):
         try:
-            return Customer.objects.get(id=pk)
+            if allow_inactive:
+                return Customer.objects.get(id=pk)
+            else:
+                return Customer.objects.get(id=pk, user__is_active=True)
         except Customer.DoesNotExist:
             raise NotFound(detail="Customer not found.")
 
     @staticmethod
     def list_customers():
-        return Customer.objects
+        return Customer.objects.all()
 
     @staticmethod
     def get_all_bookings_by_customer(customer_id):

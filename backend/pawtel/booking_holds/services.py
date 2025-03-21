@@ -39,7 +39,7 @@ class BookingHoldService:
         try:
             return BookingHold.objects.get(pk=pk)
         except BookingHold.DoesNotExist:
-            raise NotFound(detail=f"BookingHold not found.")
+            raise NotFound(detail="BookingHold not found.")
 
     @staticmethod
     def list_all_booking_holds():

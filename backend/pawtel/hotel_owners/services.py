@@ -55,7 +55,10 @@ class HotelOwnerService:
     @staticmethod
     def retrieve_hotel_owner(pk, allow_inactive=False):
         try:
-            return HotelOwner.objects.get(id=pk)
+            if allow_inactive:
+                return HotelOwner.objects.get(id=pk)
+            else:
+                return HotelOwner.objects.get(id=pk, user__is_active=True)
         except HotelOwner.DoesNotExist:
             raise NotFound(detail="Hotel owner not found.")
 

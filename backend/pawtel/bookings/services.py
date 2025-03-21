@@ -32,7 +32,7 @@ class BookingService:
         return bookings
 
     @staticmethod
-    def retrieve_booking(pk, only_archived=True):
+    def retrieve_booking(pk):
         try:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:

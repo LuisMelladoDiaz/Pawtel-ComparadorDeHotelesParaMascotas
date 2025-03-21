@@ -18,7 +18,7 @@ class AppUserService:
 
     @staticmethod
     def general_update_app_user(request, pk):
-        """This will be called from the views of of each role."""
+        """This will be called from the views of each role."""
         AppUserService.__authorize_action_app_user(request, pk)
         input_serializer = AppUserService.__serialize_input_app_user_update(request, pk)
         AppUserService.__validate_update_app_user(pk, input_serializer)
@@ -26,7 +26,7 @@ class AppUserService:
 
     @staticmethod
     def general_delete_app_user(request, pk):
-        """This will be called from the views of of each role."""
+        """This will be called from the views of each role."""
         AppUserService.__authorize_action_app_user(request, pk)
         AppUserService.__delete_app_user(pk)
 
@@ -44,9 +44,12 @@ class AppUserService:
     @staticmethod
     def retrieve_app_user(pk, allow_inactive=False):
         try:
-            return AppUser.objects.get(id=pk)
+            if allow_inactive:
+                return AppUser.objects.get(id=pk)
+            else:
+                return AppUser.objects.get(id=pk, is_active=True)
         except AppUser.DoesNotExist:
-            raise NotFound(detail=f"User not found.")
+            raise NotFound(detail="User not found.")
 
     # POST -------------------------------------------------------------------
 

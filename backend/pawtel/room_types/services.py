@@ -40,9 +40,12 @@ class RoomTypeService:
         return room_types
 
     @staticmethod
-    def retrieve_room_type(pk, only_archived=True):
+    def retrieve_room_type(pk, allow_archived=False):
         try:
-            return RoomType.objects.get(id=pk)
+            if allow_archived:
+                return RoomType.objects.get(id=pk)
+            else:
+                return RoomType.objects.get(id=pk, is_archived=False)
         except RoomType.DoesNotExist:
             raise NotFound(detail="Room type not found.")
 
