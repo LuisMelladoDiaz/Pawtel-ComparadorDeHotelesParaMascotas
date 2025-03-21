@@ -1,8 +1,10 @@
 from datetime import timedelta
 
 from django.utils.dateparse import parse_date
+from django.utils.timezone import now
 from pawtel.app_users.services import AppUserService
-from pawtel.bookings.models import Booking
+from pawtel.booking_holds.models import BookingHold
+from pawtel.bookings.services import BookingService
 from pawtel.customers.services import CustomerService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.room_types.models import RoomType
@@ -169,13 +171,19 @@ class RoomTypeService:
         ]
 
         for day in days_to_check:
-            bookings_count = Booking.objects.filter(
+            bookings_count = BookingService.count_bookings_of_room_type_at_date(
+                room_type_id, day
+            )
+
+            # Cannot call function due to circular dependency
+            active_booking_holds_count = BookingHold.objects.filter(
                 room_type_id=room_type_id,
-                start_date__lte=day,  # Booking started before or on this day
-                end_date__gte=day,  # Booking ends after this day
+                hold_expires_at__gt=now(),
+                booking_start_date__lte=day,
+                booking_end_date__gte=day,
             ).count()
 
-            if bookings_count >= total_slots:
+            if bookings_count + active_booking_holds_count >= total_slots:
                 return False
 
         return True
