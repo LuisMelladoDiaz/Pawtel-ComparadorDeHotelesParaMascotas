@@ -58,6 +58,7 @@
     </div>
 
     <!-- Mobile Menu -->
+    <transition name="fade">
     <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-terracota py-4 border-t-2 border-white shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-white font-bold text-base text-center">
         <router-link 
@@ -87,6 +88,7 @@
         </router-link>
       </div>
     </div>
+    </transition>
   </nav>
 </template>
 
@@ -115,6 +117,14 @@ const logout = () => {
 </script>
 
 <style scoped>
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
   @media (max-width: 1100px) {
 
     .mobile-menu {
