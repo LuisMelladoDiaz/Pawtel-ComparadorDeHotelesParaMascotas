@@ -67,3 +67,8 @@ export const fetchHotelByRoomTypeId = async (roomTypeId: number) => {
   const response = await axios.get(url);
   return response.data as Hotel;
 };
+export const fetchRoomTypesByHotel = async (hotelId: number) => {
+  const url = `${API_BASE_URL}/hotels/${hotelId}/room-types/`;
+  const response = await axios.get(url);
+  return response.data;
+};

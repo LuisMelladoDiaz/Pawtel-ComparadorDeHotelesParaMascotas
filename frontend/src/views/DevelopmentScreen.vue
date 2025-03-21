@@ -35,6 +35,7 @@ import Footer from '../components/Footer.vue';
             <router-link to="/userProfile" class="text-xl text-terracota hover:underline">Perfil de usuario</router-link>
             <router-link to="/hotelOwnerPanel" class="text-xl text-terracota hover:underline">Hotel Owner Panel</router-link>
             <router-link to="/hotels" class="text-xl text-terracota hover:underline">Hotel List</router-link>
+            <router-link to="/mis-hoteles" class="text-xl text-terracota hover:underline">Mis Hoteles</router-link>
           </div>
           <div class="card bg-white p-6 rounded-lg shadow-lg flex flex-col gap-2">
             <h2 class="text-xl font-semibold mb-4">Componentes</h2>
