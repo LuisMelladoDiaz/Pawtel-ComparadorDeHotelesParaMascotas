@@ -28,12 +28,7 @@ class CustomerService:
 
         if pk:
             target_customer = CustomerService.retrieve_customer(pk)
-            if not target_customer:
-                raise NotFound("Customer does not exist.")
-            target_app_user = AppUserService.retrieve_app_user(target_customer.user_id)
-
-            if (not target_app_user) or (not target_app_user.is_active):
-                raise NotFound("Customer does not exist.")
+            AppUserService.retrieve_app_user(target_customer.user_id)
 
             if (not logged_in_customer) or (
                 target_customer.id != logged_in_customer.id

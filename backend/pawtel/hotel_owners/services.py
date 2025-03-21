@@ -30,14 +30,7 @@ class HotelOwnerService:
 
         if pk:
             target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-            if not target_hotel_owner:
-                raise NotFound("Hotel owner does not exist.")
-            target_app_user = AppUserService.retrieve_app_user(
-                target_hotel_owner.user_id
-            )
-
-            if (not target_app_user) or (not target_app_user.is_active):
-                raise NotFound("Hotel owner does not exist.")
+            AppUserService.retrieve_app_user(target_hotel_owner.user_id)
 
             if target_hotel_owner.id != logged_in_hotel_owner.id:
                 raise PermissionDenied("Permission denied.")

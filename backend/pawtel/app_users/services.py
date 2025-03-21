@@ -34,10 +34,7 @@ class AppUserService:
 
     @staticmethod
     def __authorize_action_app_user(request, pk):
-        app_user = AppUserService.retrieve_app_user(pk)
-
-        if (not app_user) or (not app_user.is_active):
-            raise NotFound("App user does not exist.")
+        AppUserService.retrieve_app_user(pk)
 
     # GET --------------------------------------------------------------------
 

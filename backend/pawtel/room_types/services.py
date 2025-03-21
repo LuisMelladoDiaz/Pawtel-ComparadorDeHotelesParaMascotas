@@ -22,9 +22,6 @@ class RoomTypeService:
         room_type = RoomTypeService.retrieve_room_type(pk)
         hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("Room type does not exist.")
-
         if room_type.hotel.hotel_owner.id != hotel_owner.id:
             raise PermissionDenied("Permission denied.")
 
@@ -129,9 +126,6 @@ class RoomTypeService:
         CustomerService.get_current_customer(request)
         room_type = RoomTypeService.retrieve_room_type(pk)
 
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("Room type does not exist.")
-
     @staticmethod
     def parse_availability_dates(request):
         start_date_str = request.GET.get("start_date")
@@ -198,10 +192,7 @@ class RoomTypeService:
     @staticmethod
     def authorize_get_hotel_of_room_type(request, pk):
         AppUserService.get_current_app_user(request)
-        room_type = RoomTypeService.retrieve_room_type(pk)
-
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("Room type does not exist.")
+        RoomTypeService.retrieve_room_type(pk)  ##! TODO: Put this in authorize
 
     @staticmethod
     def get_hotel_of_room_type(pk):
