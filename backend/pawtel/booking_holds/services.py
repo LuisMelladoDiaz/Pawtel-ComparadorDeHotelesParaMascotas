@@ -42,7 +42,7 @@ class BookingHoldService:
             raise NotFound(detail="BookingHold not found.")
 
     @staticmethod
-    def list_all_booking_holds():
+    def list_booking_holds():
         return BookingHold.objects.all()
 
     # DELETE -----------------------------------------------------------------

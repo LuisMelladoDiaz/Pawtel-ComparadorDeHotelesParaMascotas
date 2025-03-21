@@ -63,7 +63,7 @@ class CustomerService:
             return Customer.objects.filter(user__is_active=True)
 
     @staticmethod
-    def get_all_bookings_by_customer(customer_id):
+    def list_bookings_of_customer(customer_id):
         return Booking.objects.filter(customer_id=customer_id)
 
     # POST -------------------------------------------------------------------

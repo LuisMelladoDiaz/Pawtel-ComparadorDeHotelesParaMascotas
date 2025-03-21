@@ -60,11 +60,11 @@ class HotelViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=["get"],
         url_path="room-types",
-        url_name="get_all_room_types_of_hotel",
+        url_name="list_room_types_of_hotel",
     )
-    def get_all_room_types_of_hotel(self, request, pk=None):
+    def list_room_types_of_hotel(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
-        room_types = HotelService.get_all_room_types_of_hotel(pk)
+        room_types = HotelService.list_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -72,11 +72,11 @@ class HotelViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=["get"],
         url_path="bookings",
-        url_name="get_all_bookings_by_hotel",
+        url_name="list_bookings_of_hotel",
     )
-    def get_all_bookings_by_hotel(self, request, pk=None):
+    def list_bookings_of_hotel(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
-        bookings = HotelService.get_all_bookings_by_hotel(pk)
+        bookings = HotelService.list_bookings_of_hotel(pk)
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -125,11 +125,11 @@ class HotelImageViewSet(viewsets.ViewSet):
         detail=True,
         methods=["get"],
         url_path="hotel-images/all",
-        url_name="get-all-images",
+        url_name="list_images_of_hotel",
     )
-    def get_all_images(self, request, pk=None):
+    def list_images_of_hotel(self, request, pk=None):
         HotelService.authorize_action_hotel(request, pk)
-        hotel_images = HotelService.retrieve_all_images_from_hotel(pk)
+        hotel_images = HotelService.list_images_of_hotel(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             hotel_images, many=True, context={"request": request}
         )
@@ -191,7 +191,7 @@ class HotelImageViewSet(viewsets.ViewSet):
         url_name="get-non-cover-images",
     )
     def get_non_cover_images(self, request, pk=None):
-        non_cover_images = HotelService.retrieve_all_non_cover_images(pk)
+        non_cover_images = HotelService.list_non_cover_images(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             non_cover_images, many=True, context={"request": request}
         )

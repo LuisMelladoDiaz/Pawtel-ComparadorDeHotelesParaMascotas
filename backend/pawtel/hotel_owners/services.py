@@ -71,7 +71,7 @@ class HotelOwnerService:
     # OTHERS -----------------------------------------------------------------
 
     @staticmethod
-    def get_all_hotels_of_hotel_owner(hotel_owner_id):
+    def list_hotels_of_hotel_owner(hotel_owner_id):
         return Hotel.objects.filter(hotel_owner_id=hotel_owner_id, is_archived=False)
 
     @staticmethod

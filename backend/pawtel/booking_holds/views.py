@@ -14,7 +14,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         ##! TODO: In the future, authorize only admin
-        booking_holds = BookingHoldService.list_all_booking_holds()
+        booking_holds = BookingHoldService.list_booking_holds()
         output_serializer_data = BookingHoldService.serialize_output_booking_hold(
             booking_holds, many=True
         )

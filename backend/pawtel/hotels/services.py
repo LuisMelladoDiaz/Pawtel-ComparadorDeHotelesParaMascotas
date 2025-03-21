@@ -38,7 +38,7 @@ class HotelService:
             raise NotFound(detail="Hotel not found.")
 
     @staticmethod
-    def get_all_bookings_by_hotel(hotel_id):
+    def list_bookings_of_hotel(hotel_id):
         return Booking.objects.filter(room_type__hotel=hotel_id)
 
     # POST -------------------------------------------------------------------
@@ -189,7 +189,7 @@ class HotelService:
     # Others -----------------------------------------------------------------
 
     @staticmethod
-    def get_all_room_types_of_hotel(hotel_id):
+    def list_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
 
     # Hotel_Image -------------------------------------------------------------
@@ -235,14 +235,14 @@ class HotelService:
         return HotelImageSerializer(hotel_image, many=many, context=context).data
 
     @staticmethod
-    def retrieve_image_from_hotel(pk, image_id):
+    def retrieve_image_from_hotel(hotel_id, image_id):
         try:
-            return HotelImage.objects.get(id=image_id, hotel_id=pk)
+            return HotelImage.objects.get(id=image_id, hotel_id=hotel_id)
         except HotelImage.DoesNotExist:
             raise NotFound(detail="Hotel Image not found.")
 
     @staticmethod
-    def retrieve_all_images_from_hotel(pk):
+    def list_images_of_hotel(pk):
         hotel_images = HotelImage.objects.filter(hotel_id=pk)
         if not hotel_images:
             raise NotFound(detail="No images found for hotel.")
@@ -293,7 +293,7 @@ class HotelService:
         return hotel_image
 
     @staticmethod
-    def retrieve_all_non_cover_images(pk):
+    def list_non_cover_images(pk):
         hotel_images = HotelImage.objects.filter(hotel__id=pk, is_cover=False)
         return hotel_images
 
