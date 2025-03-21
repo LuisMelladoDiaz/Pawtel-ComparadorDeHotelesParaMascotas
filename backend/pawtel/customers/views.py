@@ -5,7 +5,7 @@ from pawtel.customers.serializers import CustomerSerializer
 from pawtel.customers.services import CustomerService
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
 
 
@@ -28,7 +28,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        raise PermissionDenied("This operation is forbidden.")
+        raise MethodNotAllowed("This operation is forbidden.")
 
     def update(self, request, pk=None):
         CustomerService.authorize_action_customer(request, pk)
