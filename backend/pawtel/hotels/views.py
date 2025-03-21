@@ -178,7 +178,7 @@ class HotelImageViewSet(viewsets.ViewSet):
         url_name="get-cover-image",
     )
     def get_cover_image(self, request, pk=None):
-        cover_image = HotelService.retrieve_cover_image(pk)
+        cover_image = HotelService.retrieve_current_cover_image_or_404(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             cover_image, context={"request": request}
         )
