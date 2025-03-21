@@ -58,9 +58,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     )
     def retrieve_current_customer(self, request):
         hotel_owner = CustomerService.get_current_hotel_owner(request)
-        output_serializer_data = CustomerService.serialize_output_hotel_owner(
-            hotel_owner
-        )
+        output_serializer_data = CustomerService.serialize_output_customer(hotel_owner)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     @action(

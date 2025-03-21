@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from django.utils.dateparse import parse_date
 from django.utils.timezone import now
+from pawtel.app_users.services import AppUserService
 from pawtel.booking_holds.models import BookingHold
 from pawtel.bookings.services import BookingService
 from pawtel.customers.services import CustomerService
@@ -186,3 +187,18 @@ class RoomTypeService:
                 return False
 
         return True
+
+    # Others -----------------------------------------------------------------
+
+    @staticmethod
+    def authorize_get_hotel_of_room_type(request, pk):
+        AppUserService.get_current_app_user(request)
+        room_type = RoomTypeService.retrieve_room_type(pk)
+
+        if (not room_type) or (room_type.is_archived):
+            raise NotFound("Room type does not exist.")
+
+    @staticmethod
+    def get_hotel_of_room_type(pk):
+        room_type = RoomTypeService.retrieve_room_type(pk)
+        return room_type.hotel
