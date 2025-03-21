@@ -28,8 +28,7 @@ class BookingService:
 
     @staticmethod
     def list_bookings():
-        bookings = Booking.objects.all()
-        return bookings
+        return Booking.objects.all()
 
     @staticmethod
     def retrieve_booking(pk):

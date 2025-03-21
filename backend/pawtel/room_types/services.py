@@ -35,9 +35,11 @@ class RoomTypeService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def list_room_types():
-        room_types = RoomType.objects.filter(is_archived=False)
-        return room_types
+    def list_room_types(allow_archived=False):
+        if allow_archived:
+            return RoomType.objects.all()
+        else:
+            return RoomType.objects.filter(is_archived=False)
 
     @staticmethod
     def retrieve_room_type(pk, allow_archived=False):

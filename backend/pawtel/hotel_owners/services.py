@@ -63,8 +63,11 @@ class HotelOwnerService:
             raise NotFound(detail="Hotel owner not found.")
 
     @staticmethod
-    def list_hotel_owners():
-        return HotelOwner.objects
+    def list_hotel_owners(allow_inactive=False):
+        if allow_inactive:
+            return HotelOwner.objects.all()
+        else:
+            return HotelOwner.objects.filter(user__is_active=True)
 
     # POST -------------------------------------------------------------------
 

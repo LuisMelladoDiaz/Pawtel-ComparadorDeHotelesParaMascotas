@@ -61,8 +61,11 @@ class CustomerService:
             raise NotFound(detail="Customer not found.")
 
     @staticmethod
-    def list_customers():
-        return Customer.objects.all()
+    def list_customers(allow_inactive=False):
+        if allow_inactive:
+            return Customer.objects.all()
+        else:
+            return Customer.objects.filter(user__is_active=True)
 
     @staticmethod
     def get_all_bookings_by_customer(customer_id):
