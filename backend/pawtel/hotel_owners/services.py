@@ -90,10 +90,6 @@ class HotelOwnerService:
         else:
             return HotelOwner.objects.filter(user__is_active=True)
 
-    @staticmethod
-    def get_app_user_id_of_hotel_owner(hotel_owner_id):
-        return HotelOwnerService.retrieve_hotel_owner(hotel_owner_id).user.id
-
     # POST -------------------------------------------------------------------
 
     @staticmethod
