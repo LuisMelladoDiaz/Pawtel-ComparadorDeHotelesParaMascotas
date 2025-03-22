@@ -10,7 +10,6 @@ import UserProfile from './views/UserProfile.vue';
 import HotelListScreen from './views/HotelListScreen.vue';
 import LoginView from './views/LoginView.vue';
 import RegisterView from './views/RegisterView.vue';
-import HotelOwnerPanel from './views/HotelOwnerPanel.vue';
 import Home from './views/Home.vue';
 import MyBookings from './views/MyBookings.vue';
 import AboutUs from './views/AboutUs.vue';
