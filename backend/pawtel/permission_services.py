@@ -4,12 +4,26 @@ from rest_framework.exceptions import PermissionDenied
 
 class PermissionService:
 
+    BOOKING_SERVICE_PERMISSIONS = {
+        UserRole.CUSTOMER.value: {
+            "list",  ##! TODO: remove when Admin added; kept for test
+            "retrieve",
+        },
+        UserRole.HOTEL_OWNER.value: {
+            "retrieve",
+        },
+        UserRole.ADMIN.value: {
+            "list",
+            "retrieve",
+        },
+    }
+
     HOTEL_OWNER_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {},
         UserRole.HOTEL_OWNER.value: {
-            "list",  ##! TODO: remove when Admin added to keep test
+            "list",  ##! TODO: remove when Admin added; kept for test
             "retrieve",
-            "create",  ##! TODO: remove when Admin added to keep test
+            "create",  ##! TODO: remove when Admin added; kept for test
             "update",
             "partial_update",
             "destroy",
@@ -55,6 +69,12 @@ class PermissionService:
         role = role_user.user.role
         if action not in permissions_dict.get(role, {}):
             raise PermissionDenied(f"Permission denied for action: {action}.")
+
+    @staticmethod
+    def check_booking_role_permission(role_user, action):
+        PermissionService.__base_check_role_permission(
+            role_user, action, PermissionService.BOOKING_SERVICE_PERMISSIONS
+        )
 
     @staticmethod
     def check_hotel_owner_role_permission(role_user, action):
