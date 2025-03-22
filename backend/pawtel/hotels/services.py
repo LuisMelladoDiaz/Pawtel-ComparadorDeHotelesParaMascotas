@@ -260,17 +260,13 @@ class HotelService:
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-
-        if not hotel_image:
-            raise NotFound(detail="Image not found or does not belong to the hotel.")
+        ##! Should better go in an authorize
+        HotelService.retrieve_image_from_hotel(hotel_id, image_id)
 
     @staticmethod
     def validate_set_image_as_cover(hotel_id, image_id):
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-
-        if not hotel_image:
-            raise NotFound(detail="Image not found or does not belong to the hotel.")
+        ##! Should better go in an authorize
+        HotelService.retrieve_image_from_hotel(hotel_id, image_id)
 
     # GET --------------------------------------------------------------------
 
