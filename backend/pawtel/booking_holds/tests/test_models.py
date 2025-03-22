@@ -78,9 +78,9 @@ class BookingHoldModelTest(TestCase):
             booking_start_date=self.in_two_days,
             booking_end_date=self.in_four_days,
         )
-        self.assertFalse(booking_hold.is_expired())
+        self.assertFalse(booking_hold.is_expired)
         booking_hold.hold_expires_at = now() - timedelta(minutes=1)
-        self.assertTrue(booking_hold.is_expired())
+        self.assertTrue(booking_hold.is_expired)
 
     def test_create_booking_hold_without_customer(self):
         booking_hold = BookingHold(

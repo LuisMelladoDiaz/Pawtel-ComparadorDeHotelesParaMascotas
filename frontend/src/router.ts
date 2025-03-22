@@ -12,6 +12,7 @@ import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
 import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
 import Home from './views/Home.vue'
+import MyBookings from './views/MyBookings.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
 import ClientNotLoggedIn from './views/ClientNotLoggedIn.vue';
@@ -33,6 +34,8 @@ const routes = [
   { path: '/template-screen-2', component: TemplateScreen2},
   { path: '/user-profile', component: UserProfile},
   { path: '/hotel-owner-panel', component: HotelOwnerPanel },
+  { path: '/mis-reservas', component: MyBookings },
+
   { path: '/needed-login', component: ClientNotLoggedIn},
   { path: '/hotel/reservation-form/:id', component: BookingReservationForm},
 ]

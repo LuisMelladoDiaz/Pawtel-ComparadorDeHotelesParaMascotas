@@ -1,6 +1,7 @@
-from pawtel.app_users.models import AppUser
+from pawtel.app_users.models import AppUser, UserRole
 from pawtel.app_users.serializers import AppUserSerializer
-from rest_framework.exceptions import NotFound, ValidationError
+from rest_framework.exceptions import (AuthenticationFailed, NotFound,
+                                       ValidationError)
 
 
 class AppUserService:
@@ -17,7 +18,7 @@ class AppUserService:
 
     @staticmethod
     def general_update_app_user(request, pk):
-        """This will be called from the views of of each role."""
+        """This will be called from the views of each role."""
         AppUserService.__authorize_action_app_user(request, pk)
         input_serializer = AppUserService.__serialize_input_app_user_update(request, pk)
         AppUserService.__validate_update_app_user(pk, input_serializer)
@@ -25,7 +26,7 @@ class AppUserService:
 
     @staticmethod
     def general_delete_app_user(request, pk):
-        """This will be called from the views of of each role."""
+        """This will be called from the views of each role."""
         AppUserService.__authorize_action_app_user(request, pk)
         AppUserService.__delete_app_user(pk)
 
@@ -33,16 +34,36 @@ class AppUserService:
 
     @staticmethod
     def __authorize_action_app_user(request, pk):
-        app_user = AppUserService.retrieve_app_user(pk)
+        AppUserService.retrieve_app_user(pk)
 
-        if (not app_user) or (not app_user.is_active):
-            raise NotFound("App user does not exist.")
+    @staticmethod
+    def get_current_app_user(request):
+        if (not request.user) or (not request.user.is_authenticated):
+            raise AuthenticationFailed("User is not authenticated.")
+
+        app_user = AppUserService.retrieve_app_user(request.user.id)
+        return app_user
+
+    @staticmethod
+    def get_current_role_user(request):
+        app_user = AppUserService.get_current_app_user(request)
+
+        if app_user.role == UserRole.CUSTOMER:
+            return app_user.customer
+        if app_user.role == UserRole.HOTEL_OWNER:
+            return app_user.hotel_owner
 
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_app_user(pk):
-        return AppUser.objects.get(id=pk)
+    def retrieve_app_user(pk, allow_inactive=False):
+        try:
+            if allow_inactive:
+                return AppUser.objects.get(id=pk)
+            else:
+                return AppUser.objects.get(id=pk, is_active=True)
+        except AppUser.DoesNotExist:
+            raise NotFound(detail="User not found.")
 
     # POST -------------------------------------------------------------------
 
@@ -114,5 +135,3 @@ class AppUserService:
     def __delete_app_user(pk):
         app_user = AppUserService.retrieve_app_user(pk)
         app_user.delete()
-
-    # OTHERS -----------------------------------------------------------------

@@ -32,8 +32,6 @@ class BookingService:
     def authorize_action_booking(request, pk):
         booking = BookingService.retrieve_booking(pk)
         customer = CustomerService.get_current_customer(request)
-        if not booking:
-            raise NotFound("Booking does not exist.")
 
         if booking.customer.id != customer.id:
             raise PermissionDenied("Permission denied.")
@@ -48,15 +46,22 @@ class BookingService:
 
     @staticmethod
     def list_bookings():
-        bookings = Booking.objects.all()
-        return bookings
+        return Booking.objects.all()
 
     @staticmethod
     def retrieve_booking(pk):
         try:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
-            raise NotFound(detail=f"Booking with id {pk} not found")
+            raise NotFound(detail="Booking not found.")
+
+    @staticmethod
+    def count_bookings_of_room_type_at_date(room_type_id, date_to_check):
+        return Booking.objects.filter(
+            room_type_id=room_type_id,
+            start_date__lte=date_to_check,  # Booking started before or on this day
+            end_date__gte=date_to_check,  # Booking ends after or on this day
+        ).count()
 
     #  POST Methods -------------------------------------------------------
 
