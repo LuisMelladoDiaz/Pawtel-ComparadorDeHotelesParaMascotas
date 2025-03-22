@@ -12,18 +12,18 @@ class BookingService:
 
     def authorize_action_booking_level_1(request, action_name):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_booking_role_permission(role_user, action_name)
+        PermissionService.check_permission_booking_service(role_user, action_name)
         return role_user
 
     def authorize_action_booking_level_2(request, booking_id, action_name):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_booking_role_permission(role_user, action_name)
+        PermissionService.check_permission_booking_service(role_user, action_name)
         BookingService.retrieve_booking(booking_id)
         return role_user
 
     def authorize_action_booking_level_3(request, booking_id, action_name):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_booking_role_permission(role_user, action_name)
+        PermissionService.check_permission_booking_service(role_user, action_name)
         booking = BookingService.retrieve_booking(booking_id)
         BookingService.check_ownership_booking_service(role_user, booking)
         return role_user

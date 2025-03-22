@@ -25,14 +25,14 @@ class HotelOwnerService:
 
     def authorize_action_hotel_owner_level_1(request, action_name):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_hotel_owner_role_permission(role_user, action_name)
+        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
         return role_user
 
     def authorize_action_hotel_owner_level_2(
         request, target_hotel_owner_id, action_name
     ):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_hotel_owner_role_permission(role_user, action_name)
+        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
         HotelOwnerService.retrieve_hotel_owner(target_hotel_owner_id)
         return role_user
 
@@ -40,7 +40,7 @@ class HotelOwnerService:
         request, target_hotel_owner_id, action_name
     ):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_hotel_owner_role_permission(role_user, action_name)
+        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
         target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(
             target_hotel_owner_id
         )

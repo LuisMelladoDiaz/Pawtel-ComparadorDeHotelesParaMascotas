@@ -24,18 +24,18 @@ class BookingHoldService:
 
     def authorize_action_booking_hold_level_1(request, action_name):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_booking_hold_role_permission(role_user, action_name)
+        PermissionService.check_permission_booking_hold_service(role_user, action_name)
         return role_user
 
     def authorize_action_booking_hold_level_2(request, booking_hold_id, action_name):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_booking_hold_role_permission(role_user, action_name)
+        PermissionService.check_permission_booking_hold_service(role_user, action_name)
         BookingHoldService.retrieve_booking_hold(booking_hold_id)
         return role_user
 
     def authorize_action_booking_hold_level_3(request, booking_hold_id, action_name):
         role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_booking_hold_role_permission(role_user, action_name)
+        PermissionService.check_permission_booking_hold_service(role_user, action_name)
         booking_hold = BookingHoldService.retrieve_booking_hold(booking_hold_id)
         BookingHoldService.check_ownership_booking_hold_service(role_user, booking_hold)
         return role_user

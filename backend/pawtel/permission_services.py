@@ -142,13 +142,13 @@ class PermissionService:
             raise PermissionDenied(f"Permission denied for action: {action}.")
 
     @staticmethod
-    def check_booking_role_permission(role_user, action):
+    def check_permission_booking_service(role_user, action):
         PermissionService.__base_check_role_permission(
             role_user, action, PermissionService.BOOKING_SERVICE_PERMISSIONS
         )
 
     @staticmethod
-    def check_booking_hold_role_permission(role_user, action):
+    def check_permission_booking_hold_service(role_user, action):
         PermissionService.__base_check_role_permission(
             role_user, action, PermissionService.BOOKING_HOLD_SERVICE_PERMISSIONS
         )
@@ -160,7 +160,7 @@ class PermissionService:
         )
 
     @staticmethod
-    def check_hotel_owner_role_permission(role_user, action):
+    def check_permission_hotel_owner_service(role_user, action):
         PermissionService.__base_check_role_permission(
             role_user, action, PermissionService.HOTEL_OWNER_SERVICE_PERMISSIONS
         )
@@ -172,7 +172,7 @@ class PermissionService:
         )
 
     @staticmethod
-    def check_room_type_role_permission(role_user, action):
+    def check_permission_room_type_service(role_user, action):
         PermissionService.__base_check_role_permission(
             role_user, action, PermissionService.ROOM_TYPE_SERVICE_PERMISSIONS
         )
