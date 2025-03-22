@@ -36,6 +36,10 @@ class BookingService:
             if booking.customer.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
 
+        elif role_user.user.role == UserRole.HOTEL_OWNER:
+            if booking.room_type.hotel.hotel_owner.id != role_user.id:
+                raise PermissionDenied("Permission denied.")
+
         else:
             raise PermissionDenied("Permission denied.")
 
