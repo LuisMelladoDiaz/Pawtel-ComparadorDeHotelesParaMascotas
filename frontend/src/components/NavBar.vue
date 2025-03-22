@@ -60,7 +60,7 @@
     <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-white py-4 border-t-2 border-terracota shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-terracota font-bold text-base">
         <router-link 
-          to="/hotel-owner-panel" 
+          to="/mis-hoteles" 
           class="hover:underline p-2"
           v-if="isLoggedIn"
         >
