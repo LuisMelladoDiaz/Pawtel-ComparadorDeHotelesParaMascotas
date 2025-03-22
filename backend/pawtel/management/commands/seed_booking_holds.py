@@ -2,7 +2,7 @@ import random
 from datetime import date
 
 from django.core.management.base import BaseCommand
-from django.utils.timezone import timedelta
+from django.utils.timezone import now, timedelta
 from faker import Faker
 from pawtel.booking_holds.models import BookingHold
 from pawtel.customers.models import Customer
@@ -72,6 +72,7 @@ class Command(BaseCommand):
                     room_type=room_type,
                     booking_start_date=hold_data["booking_start_date"],
                     booking_end_date=hold_data["booking_end_date"],
+                    hold_expires_at=now() + timedelta(minutes=10),
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
@@ -124,6 +125,7 @@ class Command(BaseCommand):
                     room_type=room_type,
                     booking_start_date=booking_start,
                     booking_end_date=booking_end,
+                    hold_expires_at=now() + timedelta(minutes=10),
                 )
                 self.stdout.write(
                     self.style.SUCCESS(
