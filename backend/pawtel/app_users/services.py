@@ -1,4 +1,4 @@
-from pawtel.app_users.models import AppUser
+from pawtel.app_users.models import AppUser, UserRole
 from pawtel.app_users.serializers import AppUserSerializer
 from rest_framework.exceptions import (AuthenticationFailed, NotFound,
                                        ValidationError)
@@ -43,6 +43,15 @@ class AppUserService:
 
         app_user = AppUserService.retrieve_app_user(request.user.id)
         return app_user
+
+    @staticmethod
+    def get_current_role_user(request):
+        app_user = AppUserService.get_current_app_user(request)
+
+        if app_user.role == UserRole.CUSTOMER:
+            return app_user.customer
+        if app_user.role == UserRole.HOTEL_OWNER:
+            return app_user.hotel_owner
 
     # GET --------------------------------------------------------------------
 
