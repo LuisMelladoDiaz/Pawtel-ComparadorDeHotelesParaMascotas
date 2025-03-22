@@ -101,7 +101,7 @@ import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-const defaultProfilePicture = 'https://randomuser.me/api/portraits/men/1.jpg';
+const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';
 const fileInput = ref(null);
 
 const user = ref({
@@ -139,8 +139,6 @@ const fetchUser = async () => {
       window.location.href = '/login';
     }
 };
-
-onMounted(fetchUser);
 
 const logout = async () => {
     try {
