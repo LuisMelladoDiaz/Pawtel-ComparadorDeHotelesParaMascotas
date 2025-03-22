@@ -1,7 +1,21 @@
+import os
+
+import stripe
+from django.db import transaction
+from django.forms import ValidationError
+from django.http import HttpResponse, JsonResponse
+from dotenv import load_dotenv
+from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService
+from pawtel.room_types.models import RoomType
+from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.response import Response
+
+load_dotenv()
+stripe.api_key = str(os.getenv("STRIPE_SECRET_KEY"))
 
 
 class BookingService:
@@ -24,6 +38,12 @@ class BookingService:
         if booking.customer.id != customer.id:
             raise PermissionDenied("Permission denied.")
 
+    @staticmethod
+    def authorize_create_booking(request):
+        return AppUserService._AppUserService__authorize_action_app_user(
+            request, request.user.id
+        )
+
     #  GET Methods --------------------------------------------------------
 
     @staticmethod
@@ -37,3 +57,107 @@ class BookingService:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
             raise NotFound(detail=f"Booking with id {pk} not found")
+
+    #  POST Methods -------------------------------------------------------
+
+    @staticmethod
+    def serialize_input_booking_create(request):
+        return BookingSerializer(data=request.data)
+
+    @staticmethod
+    def validate_create_booking(request, input_serializer):
+
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
+
+        customer = CustomerService.get_current_customer(request)
+
+        # TODO uncomment this validation
+        # Auth validation
+        # if not ( customer == input_serializer.validated_data.get("customer")):
+        # raise ValidationError({"customer": "The customer in the request does not match the customer associated with the booking"})
+
+        room_id = input_serializer.validated_data.get("room_type").id
+
+        try:
+            room_type = RoomType.objects.get(id=room_id)
+        except RoomType.DoesNotExist:
+            raise NotFound("RoomType does not exist.")
+
+        start_date = input_serializer.validated_data.get("start_date")
+        end_date = input_serializer.validated_data.get("end_date")
+
+        # Validate that the client does not have previous reservations for the same room in the same period
+        overlapping_bookings = Booking.objects.filter(
+            customer=customer,
+            room_type=room_type,
+            start_date__lt=end_date,
+            end_date__gt=start_date,
+        ).exists()
+
+        if overlapping_bookings:
+            raise ValidationError(
+                "A customer can have different bookings for the same room, but not overlapping."
+            )
+
+        # TODO: Implement validation for booking_holds
+
+    @staticmethod
+    def create_booking(input_serializer):
+        # Stripe API Call
+        response = BookingService.stripe_checkout_transference(input_serializer)
+        # response = BookingService.stripe_response_manager(transference)
+        return response
+
+    @staticmethod
+    def stripe_checkout_transference(input_serializer):
+        total_price = input_serializer.validated_data.get("total_price")
+        total_price = int(total_price * 100)
+        room_type_name = input_serializer.validated_data.get("room_type").name
+        room_type_description = input_serializer.validated_data.get(
+            "room_type"
+        ).description
+        try:
+            session = stripe.checkout.Session.create(
+                line_items=[
+                    {
+                        "price_data": {
+                            "currency": "eur",
+                            "product_data": {
+                                "name": room_type_name,
+                                "description": room_type_description,
+                            },
+                            "unit_amount": total_price,
+                        },
+                        "quantity": 1,
+                    },
+                ],
+                mode="payment",
+                success_url="http://localhost:5173/",
+                cancel_url="http://localhost:5173/hotels/",
+            )
+
+            return JsonResponse({"url": session.url})
+        except:
+            return Response(
+                {"error": "Something went wrong"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+
+    @staticmethod
+    @transaction.atomic
+    def stripe_response_manager(payload, sig_header):
+
+        event = None
+        try:
+            event = stripe.Webhook.construct_event(payload, sig_header)
+        except ValueError as e:
+            # Invalid payload
+            return HttpResponse(status=400)
+
+        if event.type == "checkout.session.completed":
+            payment_intent = event.data.object  # contains a stripe.PaymentIntent
+            # Then define and call a method to handle the successful payment intent.
+            # handle_payment_intent_succeeded(payment_intent)
+
+        return HttpResponse(status=200)
