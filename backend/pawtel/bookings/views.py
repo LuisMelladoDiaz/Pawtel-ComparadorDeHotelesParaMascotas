@@ -10,6 +10,7 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    http_method_names = ["get"]
 
     def list(self, request):
         # In the future it will be restricted to admin onlyl
