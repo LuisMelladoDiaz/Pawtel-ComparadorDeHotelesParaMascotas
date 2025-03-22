@@ -1,3 +1,5 @@
+import inspect
+
 from drf_spectacular.utils import extend_schema
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.hotels.models import Hotel, HotelImage
@@ -8,12 +10,20 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+# -
+# -------------------------------------------------------------------------
+# Hotels ------------------------------------------------------------------
+# -------------------------------------------------------------------------
+# -
+
 
 class HotelViewSet(viewsets.ModelViewSet):
     queryset = Hotel.objects.all()
     serializer_class = HotelSerializer
 
     def list(self, request):
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_1(request, action_name)
         filters = request.query_params.dict()  # URL filters checked
         hotels = HotelService.list_hotels(filters)
         output_serializer_data = HotelService.serialize_output_hotel(
@@ -22,6 +32,8 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_2(request, pk, action_name)
         hotel = HotelService.retrieve_hotel(pk)
         output_serializer_data = HotelService.serialize_output_hotel(
             hotel, context={"request": request}
@@ -29,6 +41,8 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_1(request, action_name)
         input_serializer = HotelService.serialize_input_hotel_create(request)
         HotelService.validate_create_hotel(input_serializer)
         hotel_created = HotelService.create_hotel(input_serializer)
@@ -38,7 +52,8 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
-        HotelService.authorize_action_hotel(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
         input_serializer = HotelService.serialize_input_hotel_update(request, pk)
         HotelService.validate_update_hotel(pk, input_serializer)
         hotel_updated = HotelService.update_hotel(pk, input_serializer)
@@ -52,7 +67,8 @@ class HotelViewSet(viewsets.ModelViewSet):
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
-        HotelService.authorize_action_hotel(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
         HotelService.delete_hotel(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -63,7 +79,8 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="list_room_types_of_hotel",
     )
     def list_room_types_of_hotel(self, request, pk=None):
-        HotelService.authorize_action_hotel(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_2(request, pk, action_name)
         room_types = HotelService.list_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -75,15 +92,18 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="list_bookings_of_hotel",
     )
     def list_bookings_of_hotel(self, request, pk=None):
-        HotelService.authorize_action_hotel(request, pk)
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
         bookings = HotelService.list_bookings_of_hotel(pk)
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @staticmethod
-    def __serialize_bookings(bookings):
-        serializer = BookingSerializer(bookings, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+# -
+# -------------------------------------------------------------------------
+# HotelImages -------------------------------------------------------------
+# -------------------------------------------------------------------------
+# -
 
 
 @extend_schema(tags=["hotel-images"])

@@ -72,6 +72,30 @@ class PermissionService:
         },
     }
 
+    HOTEL_SERVICE_PERMISSIONS = {
+        UserRole.CUSTOMER.value: {
+            "list",
+            "retrieve",
+            "list_room_types_of_hotel",
+        },
+        UserRole.HOTEL_OWNER.value: {
+            "list",
+            "retrieve",
+            "create",
+            "update",
+            "partial_update",
+            "destroy",
+            "list_room_types_of_hotel",
+            "list_bookings_of_hotel",
+        },
+        UserRole.ADMIN.value: {
+            "list",
+            "retrieve",
+            "list_room_types_of_hotel",
+            "list_bookings_of_hotel",
+        },
+    }
+
     ROOM_TYPE_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {
             "retrieve",
@@ -124,6 +148,12 @@ class PermissionService:
     def check_hotel_owner_role_permission(role_user, action):
         PermissionService.__base_check_role_permission(
             role_user, action, PermissionService.HOTEL_OWNER_SERVICE_PERMISSIONS
+        )
+
+    @staticmethod
+    def check_permission_hotel_service(role_user, action):
+        PermissionService.__base_check_role_permission(
+            role_user, action, PermissionService.HOTEL_SERVICE_PERMISSIONS
         )
 
     @staticmethod
