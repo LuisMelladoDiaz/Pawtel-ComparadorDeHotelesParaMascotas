@@ -32,12 +32,30 @@ class PermissionService:
         },
     }
 
+    CUSTOMER_SERVICE_PERMISSIONS = {
+        UserRole.CUSTOMER.value: {
+            "list",  ##! TODO: remove when Admin added; kept for test
+            "retrieve",
+            "update",
+            "partial_update",
+            "destroy",
+            "retrieve_current_customer",
+            "list_bookings_of_customer_explicit",
+            "list_bookings_of_customer_implicit",
+        },
+        UserRole.HOTEL_OWNER.value: {},
+        UserRole.ADMIN.value: {
+            "list",
+            "retrieve",
+            "list_bookings_of_customer_explicit",
+        },
+    }
+
     HOTEL_OWNER_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {},
         UserRole.HOTEL_OWNER.value: {
             "list",  ##! TODO: remove when Admin added; kept for test
             "retrieve",
-            "create",  ##! TODO: remove when Admin added; kept for test
             "update",
             "partial_update",
             "destroy",
@@ -94,6 +112,12 @@ class PermissionService:
     def check_booking_hold_role_permission(role_user, action):
         PermissionService.__base_check_role_permission(
             role_user, action, PermissionService.BOOKING_HOLD_SERVICE_PERMISSIONS
+        )
+
+    @staticmethod
+    def check_permission_customer_service(role_user, action):
+        PermissionService.__base_check_role_permission(
+            role_user, action, PermissionService.CUSTOMER_SERVICE_PERMISSIONS
         )
 
     @staticmethod
