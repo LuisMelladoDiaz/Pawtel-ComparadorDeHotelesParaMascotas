@@ -18,6 +18,20 @@ class PermissionService:
         },
     }
 
+    BOOKING_HOLD_SERVICE_PERMISSIONS = {
+        UserRole.CUSTOMER.value: {
+            "list",  ##! TODO: remove when Admin added; kept for test
+            "retrieve",
+            "create",
+            "destroy",
+        },
+        UserRole.HOTEL_OWNER.value: {},
+        UserRole.ADMIN.value: {
+            "list",
+            "retrieve",
+        },
+    }
+
     HOTEL_OWNER_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {},
         UserRole.HOTEL_OWNER.value: {
@@ -74,6 +88,12 @@ class PermissionService:
     def check_booking_role_permission(role_user, action):
         PermissionService.__base_check_role_permission(
             role_user, action, PermissionService.BOOKING_SERVICE_PERMISSIONS
+        )
+
+    @staticmethod
+    def check_booking_hold_role_permission(role_user, action):
+        PermissionService.__base_check_role_permission(
+            role_user, action, PermissionService.BOOKING_HOLD_SERVICE_PERMISSIONS
         )
 
     @staticmethod
