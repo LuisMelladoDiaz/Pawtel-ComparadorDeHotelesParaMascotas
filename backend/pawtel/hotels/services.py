@@ -117,6 +117,8 @@ class HotelService:
             "min_price_per_night",
             "sort_by",
             "limit",
+            "start_date",
+            "end_date"
         ]
 
         assert filters is None or all(f in valid_filters for f in filters), filters

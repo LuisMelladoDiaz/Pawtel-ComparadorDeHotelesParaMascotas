@@ -4,9 +4,12 @@ from pawtel.hotels.models import Hotel, HotelImage
 from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.serializers import RoomTypeSerializer
+from pawtel.room_types.services import RoomTypeService
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.utils.dateparse import parse_date
+
 
 
 class HotelViewSet(viewsets.ModelViewSet):
@@ -83,6 +86,72 @@ class HotelViewSet(viewsets.ModelViewSet):
     @staticmethod
     def __serialize_bookings(bookings):
         serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="availables",
+        url_name="available_hotels",
+    )
+    def available_hotels(self, request):
+        start_date_str = request.query_params.get("start_date")
+        end_date_str = request.query_params.get("end_date")
+        if not start_date_str or not end_date_str:
+            return Response(
+                {"detail": "Both start_date and end_date are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        start_date = parse_date(start_date_str)
+        end_date = parse_date(end_date_str)
+        if not start_date or not end_date or end_date < start_date:
+            return Response(
+                {"detail": "Invalid date parameters. Use format yyyy-mm-dd and ensure end_date >= start_date."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        filters = request.query_params.dict()
+        hotels = HotelService.list_hotels(filters)
+        available_hotels = []
+        for hotel in hotels:
+            room_types = HotelService.get_all_room_types_of_hotel(hotel.id)
+            for room in room_types:
+                if RoomTypeService.is_room_type_available(room.id, start_date, end_date):
+                    available_hotels.append(hotel)
+                    break
+        serializer = HotelSerializer(available_hotels, many=True, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="available-room-types",
+        url_name="available_room_types",
+    )
+    def available_room_types(self, request, pk=None):
+        start_date_str = request.query_params.get("start_date")
+        end_date_str = request.query_params.get("end_date")
+        if not start_date_str or not end_date_str:
+            return Response(
+                {"detail": "Both start_date and end_date are required."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        start_date = parse_date(start_date_str)
+        end_date = parse_date(end_date_str)
+        if not start_date or not end_date or end_date < start_date:
+            return Response(
+                {"detail": "Invalid date parameters. Use format yyyy-mm-dd and ensure end_date >= start_date."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        filters = request.query_params.dict()
+        room_types = RoomTypeService.list_room_types(pk, filters)
+        available_room_types = []
+        for room in room_types:
+            if RoomTypeService.is_room_type_available(room.id, start_date, end_date):
+                available_room_types.append(room)
+        serializer = RoomTypeSerializer(available_room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 

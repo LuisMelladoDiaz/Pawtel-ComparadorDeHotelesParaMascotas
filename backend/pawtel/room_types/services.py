@@ -173,3 +173,71 @@ class RoomTypeService:
                 return False
 
         return True
+
+    
+    # Filter -----------------------------------------------------------------
+
+
+    @staticmethod
+    def list_room_types(hotel_id, filters=None):
+        room_types = RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+
+        valid_filters = [
+            "pet_type",
+            "max_price_per_night",
+            "min_price_per_night",
+            "start_date",
+            "end_date",
+        ]
+
+        assert filters is None or all(f in valid_filters for f in filters), filters
+
+        if filters:
+            if "pet_type" in filters:
+                room_types = room_types.filter(pet_type=filters["pet_type"])
+
+            if "max_price_per_night" in filters:
+                fl = float(filters["max_price_per_night"])
+                assert isinstance(fl, float)
+                try:
+                    max_price = float(filters["max_price_per_night"])
+                    room_types = room_types.filter(
+                        price_per_night__lte=max_price
+                    ).distinct()
+                except ValueError:
+                    pass
+
+            if "min_price_per_night" in filters:
+                fl = float(filters["min_price_per_night"])
+                assert isinstance(fl, float)
+                try:
+                    min_price = float(filters["min_price_per_night"])
+                    room_types = room_types.filter(
+                        price_per_night__gte=min_price
+                    ).distinct()
+                except ValueError:
+                    pass
+
+            if "sort_by" in filters:
+                assert isinstance(filters["sort_by"], str)
+
+                valid = ["pet_type", "min_price_per_night", "max_price_per_night"]
+                assert filters["sort_by"] in valid or filters["sort_by"].startswith("-")
+
+                sort_field = filters["sort_by"]
+
+                if sort_field.startswith("-"):
+                    room_types = room_types.order_by(sort_field)
+                else:
+                    room_types = room_types.order_by(sort_field)
+
+            if "limit" in filters:
+                i = int(filters["limit"])
+                assert isinstance(i, int)
+                try:
+                    limit = int(filters["limit"])
+                    room_types = room_types[:limit]
+                except ValueError:
+                    pass
+
+        return room_types
