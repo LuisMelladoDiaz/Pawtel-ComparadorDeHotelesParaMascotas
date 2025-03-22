@@ -15,13 +15,23 @@
 
       <!-- Menú en pantallas grandes -->
       <div class="nav-links flex gap-6 no-underline text-terracota font-bold text-base hidden lg:flex">
+        <!-- Verificar si el usuario está logueado y si su rol es 'customer' o 'hotel_owner' -->
         <router-link 
+          v-if="isLoggedIn && roleQuery == 'customer'" 
+          to="/mis-reservas" 
+          class="hover:underline"
+        >
+          Mis Reservas
+        </router-link>
+
+        <router-link 
+          v-if="isLoggedIn && roleQuery == 'hotel_owner'" 
           to="/mis-hoteles" 
           class="hover:underline"
-          v-if="isLoggedIn"
         >
           Mis Hoteles
         </router-link>
+
         <router-link to="/sobre-nosotros" class="hover:underline">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline">Contacto</router-link>
       </div>
@@ -84,7 +94,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import SearchBar from './SearchBar.vue';
-import { useIsLoggedIn, useLogoutMutation } from '@/data-layer/auth';
+import { useIsLoggedIn, useLogoutMutation, useRoleQuery, useIsRole } from '@/data-layer/auth';
 
 const isMenuOpen = ref(false);
 
@@ -93,6 +103,10 @@ const toggleMenu = () => {
 };
 
 const {data: isLoggedIn} = useIsLoggedIn();
+const {data: roleQuery} = useRoleQuery();
+
+
+
 const {mutate: mutateLogout} = useLogoutMutation();
 
 const logout = () => {

@@ -1,10 +1,12 @@
 from django.db.models import Max, Min
 from django.forms import ValidationError
+from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.services import HotelOwnerService
-from pawtel.hotels.models import Hotel
-from pawtel.hotels.serializers import HotelSerializer
+from pawtel.hotels.models import Hotel, HotelImage
+from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.room_types.models import RoomType
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class HotelService:
@@ -23,17 +25,21 @@ class HotelService:
             raise PermissionDenied("Permission denied.")
 
     @staticmethod
-    def serialize_output_hotel(hotel, many=False):
-        return HotelSerializer(hotel, many=many).data
+    def serialize_output_hotel(hotel, many=False, context=None):
+        return HotelSerializer(hotel, many=many, context=context).data
 
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_hotel(pk):
+    def retrieve_hotel(pk, only_archived=True):
         try:
             return Hotel.objects.get(pk=pk)
         except Hotel.DoesNotExist:
-            raise NotFound(detail=f"Hotel with id {pk} not found")
+            raise NotFound(detail="Hotel not found")
+
+    @staticmethod
+    def get_all_bookings_by_hotel(hotel_id):
+        return Booking.objects.filter(room_type__hotel=hotel_id)
 
     # POST -------------------------------------------------------------------
 
@@ -190,3 +196,138 @@ class HotelService:
     @staticmethod
     def get_all_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+
+    # Hotel_Image -------------------------------------------------------------
+
+    @staticmethod
+    def serialize_input_hotel_image(request, pk):
+        context = {"request": request}
+        hotel = HotelService.retrieve_hotel(pk)
+        data = request.data.copy()
+        data["hotel"] = hotel.id
+        serializer = HotelImageSerializer(data=data, context=context)
+        return serializer
+
+    def validate_upload_image(input_serializer, pk):
+        hotel = HotelService.retrieve_hotel(pk)
+        if not hotel or hotel.is_archived:
+            raise NotFound(detail="Hotel does not exist or is archived.")
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
+        if hotel.images.count() >= 5:
+            raise ValidationError({"hotel": "A hotel cannot have more than 5 images."})
+
+    @staticmethod
+    def upload_image_to_hotel(input_serializer):
+        hotel = input_serializer.validated_data["hotel"]
+        current_image_count = hotel.images.count()
+
+        if current_image_count == 0:
+            input_serializer.validated_data["is_cover"] = True
+
+        if input_serializer.validated_data.get("is_cover", False):
+            current_cover_image = HotelImage.objects.filter(
+                hotel=hotel, is_cover=True
+            ).first()
+
+            if current_cover_image:
+                current_cover_image.is_cover = False
+                current_cover_image.save()
+
+        hotel_image_created = input_serializer.save()
+        return hotel_image_created
+
+    @staticmethod
+    def serialize_output_hotel_image(hotel_image, many=False, context=None):
+        return HotelImageSerializer(hotel_image, many=many, context=context).data
+
+    @staticmethod
+    def retrieve_image_from_hotel(pk, image_id):
+        try:
+            return HotelImage.objects.get(id=image_id, hotel_id=pk)
+        except HotelImage.DoesNotExist:
+            raise NotFound(detail="Hotel Image not found.")
+
+    @staticmethod
+    def retrieve_all_images_from_hotel(pk):
+        hotel_images = HotelImage.objects.filter(hotel_id=pk)
+        if not hotel_images:
+            raise NotFound(detail="No images found for hotel.")
+        return hotel_images
+
+    @staticmethod
+    def validate_update_image(input_serializer, pk, image_id):
+        hotel = HotelService.retrieve_hotel(pk)
+        if not hotel or hotel.is_archived:
+            raise NotFound(detail="Hotel does not exist or is archived.")
+
+        hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
+        if not hotel_image:
+            raise NotFound(detail="Image not found or does not belong to the hotel.")
+
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
+
+    @staticmethod
+    def update_image_to_hotel(input_serializer, pk, image_id):
+        hotel = input_serializer.validated_data["hotel"]
+        current_image_count = hotel.images.count()
+
+        hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
+        if current_image_count == 1:
+            input_serializer.validated_data["is_cover"] = True
+
+        if input_serializer.validated_data.get("is_cover", False):
+            current_cover_image = HotelImage.objects.filter(
+                hotel=hotel, is_cover=True
+            ).first()
+
+            if current_cover_image and current_cover_image != hotel_image:
+                current_cover_image.is_cover = False
+                current_cover_image.save()
+
+        return input_serializer.update(hotel_image, input_serializer.validated_data)
+
+    @staticmethod
+    def delete_image_from_hotel(pk, image_id):
+        hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
+        hotel_image.delete()
+
+    @staticmethod
+    def retrieve_cover_image(pk):
+        try:
+            hotel_image = HotelImage.objects.get(hotel__id=pk, is_cover=True)
+        except HotelImage.DoesNotExist:
+            raise NotFound(detail="No cover image found for the hotel.")
+        return hotel_image
+
+    @staticmethod
+    def retrieve_all_non_cover_images(pk):
+        hotel_images = HotelImage.objects.filter(hotel__id=pk, is_cover=False)
+        return hotel_images
+
+    @staticmethod
+    def validate_set_image_as_cover(pk, image_id):
+        hotel = HotelService.retrieve_hotel(pk)
+        if not hotel or hotel.is_archived:
+            raise NotFound(detail="Hotel does not exist or is archived.")
+
+        hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
+        if not hotel_image:
+            raise NotFound(detail="Image not found or does not belong to the hotel.")
+
+    @staticmethod
+    def set_image_as_cover(pk, image_id):
+        hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
+        current_cover_image = HotelImage.objects.filter(
+            hotel__id=pk, is_cover=True
+        ).first()
+
+        if current_cover_image:
+            current_cover_image.is_cover = False
+            current_cover_image.save()
+
+        hotel_image.is_cover = True
+        hotel_image.save()
+
+        return hotel_image

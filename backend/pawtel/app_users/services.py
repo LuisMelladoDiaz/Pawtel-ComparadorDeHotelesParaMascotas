@@ -1,7 +1,7 @@
-from django.forms import ValidationError
 from pawtel.app_users.models import AppUser
 from pawtel.app_users.serializers import AppUserSerializer
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import (AuthenticationFailed, NotFound,
+                                       ValidationError)
 
 
 class AppUserService:
@@ -42,8 +42,11 @@ class AppUserService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def retrieve_app_user(pk):
-        return AppUser.objects.get(id=pk)
+    def retrieve_app_user(pk, allow_inactive=False):
+        try:
+            return AppUser.objects.get(id=pk)
+        except AppUser.DoesNotExist:
+            raise NotFound(detail=f"User not found.")
 
     # POST -------------------------------------------------------------------
 
@@ -117,3 +120,14 @@ class AppUserService:
         app_user.delete()
 
     # OTHERS -----------------------------------------------------------------
+
+    @staticmethod
+    def get_current_app_user(request):
+        if (not request.user) or (not request.user.is_authenticated):
+            raise AuthenticationFailed("User is not authenticated.")
+
+        app_user = AppUser.objects.get(id=request.user.id)
+        if (not app_user) or (not app_user.is_active):
+            raise NotFound("User does not exist.")
+
+        return app_user

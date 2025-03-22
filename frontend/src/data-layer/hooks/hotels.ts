@@ -8,6 +8,7 @@ import {
   updateHotel,
   partialUpdateHotel,
   deleteHotel,
+  uploadImageToHotel,
   type Hotel,
 } from '@/data-layer/api/hotels';
 
@@ -92,5 +93,20 @@ export const useGetRoomTypesByHotel = (hotelId: MaybeRef<number>) => {
     queryFn: () => fetchRoomTypesByHotel(toValue(hotelId)),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
+  });
+};
+
+export const useUploadImageToHotel = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ hotelId, image, isCover }: { hotelId: MaybeRef<number>; image: MaybeRef<File>; isCover: MaybeRef<boolean> }) => {
+
+      return uploadImageToHotel(toValue(hotelId), toValue(image), toValue(isCover));
+    },
+
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
+    },
   });
 };

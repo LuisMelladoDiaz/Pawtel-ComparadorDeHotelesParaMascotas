@@ -1,25 +1,27 @@
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed } from 'vue';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
-import { useGetAllHotelsOfOwner, useCreateHotelOwner, useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner, useGetHotelOwnerById } from '@/data-layer/hooks/hotelOwners';
 import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { useRouter } from 'vue-router';
-
-
+import { useGetAllHotelsOfOwner, useGetCurrentHotelOwner } from '@/data-layer/hooks/hotelOwners';
+import { Form, Field, ErrorMessage } from 'vee-validate';
+import * as yup from 'yup';
 
 const router = useRouter();
-
 const notyf = new Notyf();
-
 const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
-const hotelOwnerId = computed(() => hotelOwner?.value?.id);
 
-// Obtener los hoteles del dueño desde el backend
-const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(hotelOwnerId, true);
+const hotelOwnerId = computed(() => hotelOwner.value?.id ?? null);
+
+const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(
+  computed(() => hotelOwnerId.value),
+  computed(() => !!hotelOwnerId.value)
+);
+
 const createHotelMutation = useCreateHotel();
 const deleteHotelMutation = useDeleteHotel();
 
@@ -28,7 +30,6 @@ const hotelData = ref({ name: '', address: '', city: '', description: '' });
 
 const currentPage = ref(1);
 const itemsPerPage = 6;
-
 const totalPages = computed(() => Math.ceil((hotels.value?.length || 0) / itemsPerPage));
 const paginatedHotels = computed(() => {
   if (!hotels.value) return [];
@@ -54,12 +55,11 @@ const saveHotel = async () => {
   }
 };
 
-// Eliminar hotel
+
 const deleteHotel = async (id) => {
   if (confirm('¿Estás seguro de eliminar este hotel?')) {
     try {
       await deleteHotelMutation.mutateAsync(id);
-      window.location.reload();
     } catch (error) {
       notyf.error('Error al eliminar hotel.');
       console.error('Error al eliminar hotel', error);
@@ -76,9 +76,7 @@ const editHotel = (id) => {
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
-
 <template>
-  <div class="flex flex-col min-h-screen">
     <NavbarTerracota />
 
     <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
@@ -90,7 +88,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         </button>
       </div>
 
-      <!-- Tabla de hoteles -->
       <div class="overflow-x-auto w-full">
         <table class="w-full border-collapse shadow-md rounded-b-lg overflow-hidden mb-4">
           <thead>
@@ -134,7 +131,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         </table>
       </div>
 
-      <!-- Paginación -->
       <div class="flex justify-between w-full mt-4 flex-col md:flex-row">
         <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels?.length || 0 }}</span>
         <div class="flex gap-2 mt-2 md:mt-0">
@@ -146,7 +142,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Siguiente →</button>
         </div>
       </div>
-
     </div>
 
     <Footer />
@@ -164,6 +159,5 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           <Button type="reject" @click="modalOpen = false">Cancelar</Button>
         </div>
       </div>
-    </div>
   </div>
 </template>

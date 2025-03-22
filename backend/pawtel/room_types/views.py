@@ -1,7 +1,9 @@
+from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
 from pawtel.room_types.services import RoomTypeService
 from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.response import Response
 
 
@@ -50,3 +52,30 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         RoomTypeService.authorize_action_room_type(request, pk)
         RoomTypeService.delete_room_type(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="is-available",
+        url_name="is_room_type_available",
+    )
+    def is_room_type_available(self, request, pk=None):
+        RoomTypeService.authorize_room_type_available(request, pk)
+        start_date, end_date = RoomTypeService.parse_availability_dates(request)
+        RoomTypeService.validate_room_type_available(start_date, end_date)
+        is_available = RoomTypeService.is_room_type_available(pk, start_date, end_date)
+        return Response({"is_available": is_available}, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["get"],
+        url_path="hotel",
+        url_name="get_hotel_of_room_type",
+    )
+    def get_hotel_of_room_type(self, request, pk=None):
+        RoomTypeService.authorize_get_hotel_of_room_type(request, pk)
+        hotel = RoomTypeService.get_hotel_of_room_type(pk)
+        output_serializer_data = HotelService.serialize_output_hotel(
+            hotel, context={"request": request}
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
