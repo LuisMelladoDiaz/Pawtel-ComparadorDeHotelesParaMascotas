@@ -52,7 +52,7 @@ class HotelOwnerService:
         else:
             raise PermissionDenied("Permission denied.")
 
-    # Common -----------------------------------------------------------------
+    # Serialization -----------------------------------------------------------------
 
     @staticmethod
     def serialize_output_hotel_owner(hotel_owner, many=False):

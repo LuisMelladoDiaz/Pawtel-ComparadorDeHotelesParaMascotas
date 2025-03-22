@@ -41,9 +41,10 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def update(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelOwnerService.authorize_action_hotel_owner_level_3(request, pk, action_name)
-        app_user_id = HotelOwnerService.get_app_user_id_of_hotel_owner(pk)
-        AppUserService.general_update_app_user(request, app_user_id)
+        hotel_owner = HotelOwnerService.authorize_action_hotel_owner_level_3(
+            request, pk, action_name
+        )
+        AppUserService.general_update_app_user(request, hotel_owner.user.id)
         hotel_owner_updated = HotelOwnerService.retrieve_hotel_owner(pk)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner_updated
@@ -51,14 +52,15 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):
-        # The context of the request specifies that it is PATCH
+        # The context of the request specifies it is PATCH
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelOwnerService.authorize_action_hotel_owner_level_3(request, pk, action_name)
-        app_user_id = HotelOwnerService.get_app_user_id_of_hotel_owner(pk)
-        AppUserService.general_delete_app_user(request, app_user_id)
+        hotel_owner = HotelOwnerService.authorize_action_hotel_owner_level_3(
+            request, pk, action_name
+        )
+        AppUserService.general_delete_app_user(request, hotel_owner.user.id)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     # Get all hotels of hotel owner ------------------------------------------
@@ -70,7 +72,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_name="list_hotels_of_hotel_owner_explicit",
     )
     def list_hotels_of_hotel_owner_explicit(self, request, pk=None):
-        # Same as list_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
+        # Explicitly recieving the PK in the route (for admin)
         action_name = inspect.currentframe().f_code.co_name
         HotelOwnerService.authorize_action_hotel_owner_level_3(request, pk, action_name)
         return HotelOwnerViewSet.__list_hotels_of_hotel_owner_base(pk, request)
@@ -82,7 +84,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_name="list_hotels_of_hotel_owner_implicit",
     )
     def list_hotels_of_hotel_owner_implicit(self, request):
-        # Same as list_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
+        # Implicitly recieving the PK via the authorized user (prefered)
         action_name = inspect.currentframe().f_code.co_name
         hotel_owner = HotelOwnerService.authorize_action_hotel_owner_level_1(
             request, action_name
@@ -93,7 +95,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def __list_hotels_of_hotel_owner_base(pk, request):
-        # Common logic between both methods
+        # Common logic between both implicit and explicit
         hotels = HotelOwnerService.list_hotels_of_hotel_owner(pk)
         serializer = HotelSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -106,7 +108,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_path="hotels/delete",
         url_name="delete_all_hotels_of_hotel_owner_explicit",
     )
-    # Same as delete_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
+    # Explicitly recieving the PK in the route (not for admin, just in case)
     def delete_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
         HotelOwnerService.authorize_action_hotel_owner_level_3(request, pk, action_name)
@@ -119,7 +121,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_name="delete_all_hotels_of_hotel_owner_implicit",
     )
     def delete_all_hotels_of_hotel_owner_implicit(self, request, pk=None):
-        # Same as delete_all_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
+        # Implicitly recieving the PK via the authorized user (prefered)
         action_name = inspect.currentframe().f_code.co_name
         hotel_owner = HotelOwnerService.authorize_action_hotel_owner_level_1(
             request, action_name
@@ -128,7 +130,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     @staticmethod
     def __delete_all_hotels_of_hotel_owner_base(pk=None):
-        # Common logic between both methods
+        # Common logic between both implicit and explicit
         HotelOwnerService.delete_all_hotels_of_hotel_owner(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
