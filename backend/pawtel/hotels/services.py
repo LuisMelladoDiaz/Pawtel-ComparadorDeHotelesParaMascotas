@@ -51,15 +51,7 @@ class HotelService:
         else:
             raise PermissionDenied("Permission denied.")
 
-    @staticmethod
-    def authorize_action_hotel(request, pk):  # Temporal
-        hotel = HotelService.retrieve_hotel(pk)
-        hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
-
-        if hotel.hotel_owner.id != hotel_owner.id:
-            raise PermissionDenied("Permission denied.")
-
-    # Serialization -----------------------------------------------------------------
+    # Serialization ----------------------------------------------------------
 
     @staticmethod
     def serialize_input_hotel_create(request):
@@ -238,6 +230,8 @@ class HotelService:
     # -------------------------------------------------------------------------
     # -
 
+    # Serialization ----------------------------------------------------------
+
     @staticmethod
     def serialize_input_hotel_image(request, hotel_id):
         context = {"request": request}
@@ -246,6 +240,12 @@ class HotelService:
         data["hotel"] = hotel.id
         serializer = HotelImageSerializer(data=data, context=context)
         return serializer
+
+    @staticmethod
+    def serialize_output_hotel_image(hotel_image, many=False, context=None):
+        return HotelImageSerializer(hotel_image, many=many, context=context).data
+
+    # Validation -------------------------------------------------------------
 
     def validate_upload_image(input_serializer, hotel_id):
         if not input_serializer.is_valid():
@@ -256,25 +256,27 @@ class HotelService:
             raise ValidationError({"hotel": "A hotel cannot have more than 5 images."})
 
     @staticmethod
-    def upload_image_to_hotel(input_serializer):
-        hotel = input_serializer.validated_data["hotel"]
-        current_image_count = hotel.images.count()
+    def validate_update_image(input_serializer, hotel_id, image_id):
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
 
-        if current_image_count == 0:
-            input_serializer.validated_data["is_cover"] = True
+        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
 
-        if input_serializer.validated_data.get("is_cover", False):
-            current_cover_image = HotelService.retrieve_current_cover_image(hotel.id)
-            if current_cover_image:
-                current_cover_image.is_cover = False
-                current_cover_image.save()
-
-        hotel_image_created = input_serializer.save()
-        return hotel_image_created
+        if not hotel_image:
+            raise NotFound(detail="Image not found or does not belong to the hotel.")
 
     @staticmethod
-    def serialize_output_hotel_image(hotel_image, many=False, context=None):
-        return HotelImageSerializer(hotel_image, many=many, context=context).data
+    def validate_set_image_as_cover(hotel_id, image_id):
+        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
+
+        if not hotel_image:
+            raise NotFound(detail="Image not found or does not belong to the hotel.")
+
+    # GET --------------------------------------------------------------------
+
+    @staticmethod
+    def list_images_of_hotel(hotel_id):
+        return HotelImage.objects.filter(hotel_id=hotel_id)
 
     @staticmethod
     def retrieve_image_from_hotel(hotel_id, image_id):
@@ -282,43 +284,6 @@ class HotelService:
             return HotelImage.objects.get(id=image_id, hotel_id=hotel_id)
         except HotelImage.DoesNotExist:
             raise NotFound(detail="Hotel Image not found.")
-
-    @staticmethod
-    def list_images_of_hotel(hotel_id):
-        return HotelImage.objects.filter(hotel_id=hotel_id)
-
-    @staticmethod
-    def validate_update_image(input_serializer, hotel_id, image_id):
-        if not input_serializer.is_valid():
-            raise ValidationError(input_serializer.errors)
-
-        HotelService.retrieve_hotel(hotel_id)  ##! TODO: Put this in authorize
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-
-        if not hotel_image:
-            raise NotFound(detail="Image not found or does not belong to the hotel.")
-
-    @staticmethod
-    def update_image_to_hotel(input_serializer, hotel_id, image_id):
-        hotel = input_serializer.validated_data["hotel"]
-        current_image_count = hotel.images.count()
-
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        if current_image_count == 1:
-            input_serializer.validated_data["is_cover"] = True
-
-        if input_serializer.validated_data.get("is_cover", False):
-            current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
-            if current_cover_image and current_cover_image != hotel_image:
-                current_cover_image.is_cover = False
-                current_cover_image.save()
-
-        return input_serializer.update(hotel_image, input_serializer.validated_data)
-
-    @staticmethod
-    def delete_image_from_hotel(hotel_id, image_id):
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        hotel_image.delete()
 
     @staticmethod
     def retrieve_current_cover_image_or_404(hotel_id):
@@ -340,13 +305,43 @@ class HotelService:
         hotel_images = HotelImage.objects.filter(hotel__id=hotel_id, is_cover=False)
         return hotel_images
 
-    @staticmethod
-    def validate_set_image_as_cover(hotel_id, image_id):
-        HotelService.retrieve_hotel(hotel_id)  ##! TODO: Put this in authorize
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
+    # POST -------------------------------------------------------------------
 
-        if not hotel_image:
-            raise NotFound(detail="Image not found or does not belong to the hotel.")
+    @staticmethod
+    def upload_image_to_hotel(input_serializer):
+        hotel = input_serializer.validated_data["hotel"]
+        current_image_count = hotel.images.count()
+
+        if current_image_count == 0:
+            input_serializer.validated_data["is_cover"] = True
+
+        if input_serializer.validated_data.get("is_cover", False):
+            current_cover_image = HotelService.retrieve_current_cover_image(hotel.id)
+            if current_cover_image:
+                current_cover_image.is_cover = False
+                current_cover_image.save()
+
+        hotel_image_created = input_serializer.save()
+        return hotel_image_created
+
+    # PUT/PATCH --------------------------------------------------------------
+
+    @staticmethod
+    def update_image_to_hotel(input_serializer, hotel_id, image_id):
+        hotel = input_serializer.validated_data["hotel"]
+        current_image_count = hotel.images.count()
+
+        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
+        if current_image_count == 1:
+            input_serializer.validated_data["is_cover"] = True
+
+        if input_serializer.validated_data.get("is_cover", False):
+            current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
+            if current_cover_image and current_cover_image != hotel_image:
+                current_cover_image.is_cover = False
+                current_cover_image.save()
+
+        return input_serializer.update(hotel_image, input_serializer.validated_data)
 
     @staticmethod
     def set_image_as_cover(hotel_id, image_id):
@@ -360,3 +355,10 @@ class HotelService:
         hotel_image.save()
 
         return hotel_image
+
+    # DELETE -----------------------------------------------------------------
+
+    @staticmethod
+    def delete_image_from_hotel(hotel_id, image_id):
+        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
+        hotel_image.delete()
