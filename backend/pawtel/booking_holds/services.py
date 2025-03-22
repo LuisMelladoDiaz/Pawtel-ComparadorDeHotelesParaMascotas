@@ -74,7 +74,7 @@ class BookingHoldService:
     # Validations ------------------------------------------------------------
 
     @staticmethod
-    def validate_booking_hold_create(input_serializer):
+    def validate_booking_hold_create(input_serializer, customer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
@@ -82,8 +82,8 @@ class BookingHoldService:
         booking_start_date = input_serializer.validated_data.get("booking_start_date")
         booking_end_date = input_serializer.validated_data.get("booking_end_date")
 
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("RoomType does not exist.")
+        if BookingHoldService.has_customer_active_booking_hold(customer.id):
+            raise PermissionDenied("Customer already has booking hold.")
 
         is_room_type_available = RoomTypeService.is_room_type_available(
             room_type.id, booking_start_date, booking_end_date
@@ -114,13 +114,6 @@ class BookingHoldService:
         booking_hold.delete()
 
     # POST -------------------------------------------------------------------
-
-    @staticmethod
-    def authorize_booking_hold_create(request):
-        customer = CustomerService.get_current_customer(request)
-
-        if BookingHoldService.has_customer_active_booking_hold(customer.id):
-            raise PermissionDenied("Customer already has booking hold.")
 
     @staticmethod
     def create_booking_hold(input_serializer):

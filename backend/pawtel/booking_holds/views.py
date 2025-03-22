@@ -35,11 +35,14 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        BookingHoldService.authorize_booking_hold_create(request)
+        action_name = inspect.currentframe().f_code.co_name
+        customer = BookingHoldService.authorize_action_booking_hold_level_1(
+            request, action_name
+        )
         input_serializer = BookingHoldService.serialize_input_booking_hold_create(
             request
         )
-        BookingHoldService.validate_booking_hold_create(input_serializer)
+        BookingHoldService.validate_booking_hold_create(input_serializer, customer)
         booking_hold_added = BookingHoldService.create_booking_hold(input_serializer)
         output_serializer_data = BookingHoldService.serialize_output_booking_hold(
             booking_hold_added
