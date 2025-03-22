@@ -37,6 +37,8 @@ class AppUser(AbstractUser):
             return UserRole.CUSTOMER.value
         elif hasattr(self, "hotel_owner"):
             return UserRole.HOTEL_OWNER.value
+        elif hasattr(self, "admin"):
+            return UserRole.ADMIN.value
         else:
             return UserRole.INVALID.value
 

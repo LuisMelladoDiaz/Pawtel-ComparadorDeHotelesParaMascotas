@@ -48,9 +48,9 @@ class AppUserService:
     def get_current_role_user(request):
         app_user = AppUserService.get_current_app_user(request)
 
-        if app_user.role == UserRole.CUSTOMER:
+        if app_user.role == UserRole.CUSTOMER.value:
             return app_user.customer
-        if app_user.role == UserRole.HOTEL_OWNER:
+        if app_user.role == UserRole.HOTEL_OWNER.value:
             return app_user.hotel_owner
 
     # GET --------------------------------------------------------------------

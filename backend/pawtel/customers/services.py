@@ -1,7 +1,9 @@
+from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
+from pawtel.permission_services import PermissionService
 from rest_framework.exceptions import NotFound, PermissionDenied
 
 
@@ -19,26 +21,42 @@ class CustomerService:
         )
         return output_serializer_data
 
-    # Common -----------------------------------------------------------------
+    # Authorization ----------------------------------------------------------
 
-    @staticmethod
-    def authorize_action_customer(request, pk):
-        logged_in_customer = CustomerService.get_current_customer(request)
+    def authorize_action_customer_level_1(request, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_customer_service(role_user, action_name)
+        return role_user
 
-        if pk:
-            target_customer = CustomerService.retrieve_customer(pk)
-            AppUserService.retrieve_app_user(target_customer.user_id)
+    def authorize_action_customer_level_2(request, target_customer_id, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_customer_service(role_user, action_name)
+        CustomerService.retrieve_customer(target_customer_id)
+        return role_user
 
-            if target_customer.id != logged_in_customer.id:
+    def authorize_action_customer_level_3(request, target_customer_id, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_customer_service(role_user, action_name)
+        target_customer = CustomerService.retrieve_customer(target_customer_id)
+        CustomerService.check_ownership_customer(role_user, target_customer)
+        return role_user
+
+    def check_ownership_customer(role_user, target_customer):
+        if role_user.user.role == UserRole.ADMIN:
+            return
+
+        elif role_user.user.role == UserRole.CUSTOMER:
+            if target_customer.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
+
+        else:
+            raise PermissionDenied("Permission denied.")
+
+    # Serialization -----------------------------------------------------------------
 
     @staticmethod
     def serialize_output_customer(customer, many=False):
         return CustomerSerializer(customer, many=many).data
-
-    @staticmethod
-    def get_app_user_id_of_customer(customer_id):
-        return CustomerService.retrieve_customer(customer_id).user.id
 
     # GET --------------------------------------------------------------------
 
