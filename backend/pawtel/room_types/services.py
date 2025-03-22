@@ -22,9 +22,6 @@ class RoomTypeService:
         room_type = RoomTypeService.retrieve_room_type(pk)
         hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("Room type does not exist.")
-
         if room_type.hotel.hotel_owner.id != hotel_owner.id:
             raise PermissionDenied("Permission denied.")
 
@@ -35,14 +32,19 @@ class RoomTypeService:
     # GET --------------------------------------------------------------------
 
     @staticmethod
-    def list_room_types():
-        room_types = RoomType.objects.filter(is_archived=False)
-        return room_types
+    def list_room_types(allow_archived=False):
+        if allow_archived:
+            return RoomType.objects.all()
+        else:
+            return RoomType.objects.filter(is_archived=False)
 
     @staticmethod
-    def retrieve_room_type(pk, only_archived=True):
+    def retrieve_room_type(pk, allow_archived=False):
         try:
-            return RoomType.objects.get(id=pk)
+            if allow_archived:
+                return RoomType.objects.get(id=pk)
+            else:
+                return RoomType.objects.get(id=pk, is_archived=False)
         except RoomType.DoesNotExist:
             raise NotFound(detail="Room type not found.")
 
@@ -67,7 +69,7 @@ class RoomTypeService:
         hotel = input_serializer.validated_data.get("hotel")
         hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
-        if (hotel.is_archived) or (hotel.hotel_owner.id != hotel_owner.id):
+        if hotel.hotel_owner.id != hotel_owner.id:
             raise ValidationError({"hotel": "Invalid hotel."})
 
         if name and RoomType.objects.filter(hotel_id=hotel.id, name=name).exists():
@@ -122,10 +124,7 @@ class RoomTypeService:
     @staticmethod
     def authorize_room_type_available(request, pk):
         CustomerService.get_current_customer(request)
-        room_type = RoomTypeService.retrieve_room_type(pk)
-
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("Room type does not exist.")
+        RoomTypeService.retrieve_room_type(pk)
 
     @staticmethod
     def parse_availability_dates(request):
@@ -193,10 +192,7 @@ class RoomTypeService:
     @staticmethod
     def authorize_get_hotel_of_room_type(request, pk):
         AppUserService.get_current_app_user(request)
-        room_type = RoomTypeService.retrieve_room_type(pk)
-
-        if (not room_type) or (room_type.is_archived):
-            raise NotFound("Room type does not exist.")
+        RoomTypeService.retrieve_room_type(pk)
 
     @staticmethod
     def get_hotel_of_room_type(pk):

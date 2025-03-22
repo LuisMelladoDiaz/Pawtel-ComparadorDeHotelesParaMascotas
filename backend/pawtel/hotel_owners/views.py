@@ -5,7 +5,7 @@ from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.serializers import HotelSerializer
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import MethodNotAllowed
 from rest_framework.response import Response
 
 
@@ -32,7 +32,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        raise PermissionDenied("This operation is forbidden.")
+        raise MethodNotAllowed("This operation is forbidden.")
 
     def update(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
@@ -60,31 +60,31 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         detail=True,
         methods=["get"],
         url_path="hotels",
-        url_name="get_all_hotels_of_hotel_owner_explicit",
+        url_name="list_hotels_of_hotel_owner_explicit",
     )
-    def get_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
-        # Same as get_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
+    def list_hotels_of_hotel_owner_explicit(self, request, pk=None):
+        # Same as list_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
-        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(pk, request)
+        return HotelOwnerViewSet.__list_hotels_of_hotel_owner_base(pk, request)
 
     @action(
         detail=False,
         methods=["get"],
         url_path="my-hotels",
-        url_name="get_all_hotels_of_hotel_owner_implicit",
+        url_name="list_hotels_of_hotel_owner_implicit",
     )
-    def get_all_hotels_of_hotel_owner_implicit(self, request):
-        # Same as get_all_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
+    def list_hotels_of_hotel_owner_implicit(self, request):
+        # Same as list_hotels_of_hotel_owner_explicit, but implicitly recieving the PK via the authorized user (prefered)
         HotelOwnerService.authorize_action_hotel_owner(request, pk=None)
         hotel_owner_id = HotelOwnerService.get_current_hotel_owner(request).id
-        return HotelOwnerViewSet.__get_all_hotels_of_hotel_owner_base(
+        return HotelOwnerViewSet.__list_hotels_of_hotel_owner_base(
             hotel_owner_id, request
         )
 
     @staticmethod
-    def __get_all_hotels_of_hotel_owner_base(pk, request):
+    def __list_hotels_of_hotel_owner_base(pk, request):
         # Common logic between both methods
-        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(pk)
+        hotels = HotelOwnerService.list_hotels_of_hotel_owner(pk)
         serializer = HotelSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -96,7 +96,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_path="hotels/delete",
         url_name="delete_all_hotels_of_hotel_owner_explicit",
     )
-    # Same as get_all_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
+    # Same as list_hotels_of_hotel_owner_implicit, but explicitly recieving the PK in the route (kept for admin)
     def delete_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
         HotelOwnerService.authorize_action_hotel_owner(request, pk)
         return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(pk)

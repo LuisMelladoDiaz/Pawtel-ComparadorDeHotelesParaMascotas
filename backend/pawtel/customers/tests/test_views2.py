@@ -70,16 +70,16 @@ class CustomerViewSetTest2(TestCase):
             total_price=300.00,
         )
 
-    def test_get_all_bookings_by_customer_explicit(self):
+    def test_list_bookings_of_customer_explicit(self):
         url = reverse(
-            "customer-get_all_bookings_by_customer_explicit",
+            "customer-list_bookings_of_customer_explicit",
             kwargs={"pk": self.customer.id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
-    def test_get_all_bookings_by_customer_explicit_unauthorized(self):
+    def test_list_bookings_of_customer_explicit_unauthorized(self):
         other_user = AppUser.objects.create_user(
             username="other_customer",
             email="other@example.com",
@@ -89,14 +89,14 @@ class CustomerViewSetTest2(TestCase):
         Customer.objects.create(user=other_user)
         self.client.force_authenticate(user=other_user)
         url = reverse(
-            "customer-get_all_bookings_by_customer_explicit",
+            "customer-list_bookings_of_customer_explicit",
             kwargs={"pk": self.customer.id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_get_all_bookings_by_customer_implicit(self):
-        url = reverse("customer-get_all_bookings_by_customer_implicit")
+    def test_list_bookings_of_customer_implicit(self):
+        url = reverse("customer-list_bookings_of_customer_implicit")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)

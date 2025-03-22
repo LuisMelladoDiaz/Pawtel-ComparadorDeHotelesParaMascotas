@@ -22,14 +22,7 @@ class BookingHoldService:
         customer = CustomerService.get_current_customer(request)
         booking_hold = BookingHoldService.retrieve_booking_hold(pk)
 
-        if not booking_hold:
-            raise NotFound("BookingHold does not exist.")
-
-        if (
-            (not customer)
-            or (not customer.user.is_active)
-            or (booking_hold.customer.id != customer.id)
-        ):
+        if booking_hold.customer.id != customer.id:
             raise PermissionDenied("Permission denied.")
 
     # GET --------------------------------------------------------------------
@@ -39,10 +32,10 @@ class BookingHoldService:
         try:
             return BookingHold.objects.get(pk=pk)
         except BookingHold.DoesNotExist:
-            raise NotFound(detail=f"BookingHold not found.")
+            raise NotFound(detail="BookingHold not found.")
 
     @staticmethod
-    def list_all_booking_holds():
+    def list_booking_holds():
         return BookingHold.objects.all()
 
     # DELETE -----------------------------------------------------------------
@@ -57,9 +50,6 @@ class BookingHoldService:
     @staticmethod
     def authorize_booking_hold_create(request):
         customer = CustomerService.get_current_customer(request)
-
-        if not customer.user.is_active:
-            raise PermissionDenied("Permission denied.")
 
         if BookingHoldService.has_customer_active_booking_hold(customer.id):
             raise PermissionDenied("Customer already has booking hold.")

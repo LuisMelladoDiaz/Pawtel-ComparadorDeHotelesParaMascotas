@@ -66,12 +66,12 @@ class TestGetAllBookingsByHotel(TestCase):
             total_price=300.00,
         )
 
-    def test_get_all_bookings_by_hotel(self):
+    def test_list_bookings_of_hotel(self):
         """Verifica que el método devuelve todas las reservas de un hotel."""
-        bookings = HotelService.get_all_bookings_by_hotel(self.hotel.id)
+        bookings = HotelService.list_bookings_of_hotel(self.hotel.id)
         self.assertEqual(len(bookings), 2)  # Debe devolver dos reservas
 
     def test_get_all_bookings_by_non_existent_hotel(self):
         """Verifica que si el hotel no existe, devuelve una lista vacía."""
-        bookings = HotelService.get_all_bookings_by_hotel(999)
+        bookings = HotelService.list_bookings_of_hotel(999)
         self.assertEqual(len(bookings), 0)  # No debe haber reservas

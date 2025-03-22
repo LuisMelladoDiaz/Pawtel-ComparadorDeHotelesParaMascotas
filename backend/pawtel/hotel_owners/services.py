@@ -2,10 +2,7 @@ from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
-from rest_framework.exceptions import (AuthenticationFailed, NotFound,
-                                       PermissionDenied)
-
-# to get the current hotel owner
+from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class HotelOwnerService:
@@ -30,14 +27,7 @@ class HotelOwnerService:
 
         if pk:
             target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-            if not target_hotel_owner:
-                raise NotFound("Hotel owner does not exist.")
-            target_app_user = AppUserService.retrieve_app_user(
-                target_hotel_owner.user_id
-            )
-
-            if (not target_app_user) or (not target_app_user.is_active):
-                raise NotFound("Hotel owner does not exist.")
+            AppUserService.retrieve_app_user(target_hotel_owner.user_id)
 
             if target_hotel_owner.id != logged_in_hotel_owner.id:
                 raise PermissionDenied("Permission denied.")
@@ -55,13 +45,32 @@ class HotelOwnerService:
     @staticmethod
     def retrieve_hotel_owner(pk, allow_inactive=False):
         try:
-            return HotelOwner.objects.get(id=pk)
+            if allow_inactive:
+                return HotelOwner.objects.get(id=pk)
+            else:
+                return HotelOwner.objects.get(id=pk, user__is_active=True)
         except HotelOwner.DoesNotExist:
             raise NotFound(detail="Hotel owner not found.")
 
     @staticmethod
-    def list_hotel_owners():
-        return HotelOwner.objects
+    def get_hotel_owner_by_user(app_user_id):
+        try:
+            return HotelOwner.objects.get(user_id=app_user_id)
+        except HotelOwner.DoesNotExist:
+            raise NotFound("Hotel owner does not exist.")
+
+    @staticmethod
+    def get_current_hotel_owner(request):
+        app_user = AppUserService.get_current_app_user(request)
+        hotel_owner = HotelOwnerService.get_hotel_owner_by_user(app_user)
+        return hotel_owner
+
+    @staticmethod
+    def list_hotel_owners(allow_inactive=False):
+        if allow_inactive:
+            return HotelOwner.objects.all()
+        else:
+            return HotelOwner.objects.filter(user__is_active=True)
 
     # POST -------------------------------------------------------------------
 
@@ -72,7 +81,7 @@ class HotelOwnerService:
     # OTHERS -----------------------------------------------------------------
 
     @staticmethod
-    def get_all_hotels_of_hotel_owner(hotel_owner_id):
+    def list_hotels_of_hotel_owner(hotel_owner_id):
         return Hotel.objects.filter(hotel_owner_id=hotel_owner_id, is_archived=False)
 
     @staticmethod
@@ -84,14 +93,3 @@ class HotelOwnerService:
             raise PermissionDenied("No hotels to delete.")
 
         hotels_to_delete.delete()
-
-    @staticmethod
-    def get_current_hotel_owner(request):
-        if (not request.user) or (not request.user.is_authenticated):
-            raise AuthenticationFailed("User is not authenticated.")
-
-        hotel_owner = HotelOwner.objects.get(user_id=request.user.id)
-        if (not hotel_owner) or (not hotel_owner.user.is_active):
-            raise NotFound("Hotel owner does not exist.")
-
-        return hotel_owner

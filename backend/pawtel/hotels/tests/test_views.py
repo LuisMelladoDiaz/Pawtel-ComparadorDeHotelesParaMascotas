@@ -90,8 +90,8 @@ class HotelViewSetTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Hotel.objects.filter(id=self.hotel.id).exists())
 
-    def test_get_all_room_types_of_hotel(self):
-        url = reverse("hotel-get_all_room_types_of_hotel", kwargs={"pk": self.hotel.id})
+    def test_list_room_types_of_hotel(self):
+        url = reverse("hotel-list_room_types_of_hotel", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -193,7 +193,7 @@ class HotelViewSetTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.hotel.refresh_from_db()
 
-        url = reverse("hotel-image-get-all-images", kwargs={"pk": self.hotel.id})
+        url = reverse("hotel-image-list_images_of_hotel", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreater(len(response.data), 0)

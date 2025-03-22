@@ -183,13 +183,13 @@ class BookingHoldViewSet(TestCase):
         url = reverse("booking-hold-detail", kwargs={"pk": self.active_booking_hold.id})
         data = {"booking_end_date": str(now().date() + timedelta(days=7))}
         response = self.client.put(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_partial_update_booking_hold_forbidden(self):
         url = reverse("booking-hold-detail", kwargs={"pk": self.active_booking_hold.id})
         data = {"booking_end_date": str(now().date() + timedelta(days=7))}
         response = self.client.patch(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     # DELETE -----------------------------------------------------------------
 

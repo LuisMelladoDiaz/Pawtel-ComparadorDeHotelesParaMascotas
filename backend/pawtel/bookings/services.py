@@ -18,8 +18,6 @@ class BookingService:
     def authorize_action_booking(request, pk):
         booking = BookingService.retrieve_booking(pk)
         customer = CustomerService.get_current_customer(request)
-        if not booking:
-            raise NotFound("Booking does not exist.")
 
         if booking.customer.id != customer.id:
             raise PermissionDenied("Permission denied.")
@@ -28,11 +26,10 @@ class BookingService:
 
     @staticmethod
     def list_bookings():
-        bookings = Booking.objects.all()
-        return bookings
+        return Booking.objects.all()
 
     @staticmethod
-    def retrieve_booking(pk, only_archived=True):
+    def retrieve_booking(pk):
         try:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
