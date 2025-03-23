@@ -54,10 +54,10 @@ jobs:
         env:
           SECRET_KEY: your-secret-key
           DEBUG: true
-          DB_NAME: pawtel_prueba
-          DB_USER: root
-          DB_PASSWORD: root
-          DB_HOST: localhost
+          DB_NAME: test_db
+          DB_USER: test_user
+          DB_PASSWORD: test_password
+          DB_HOST: 127.0.0.1
           DB_PORT: 3306
           CORS_ALLOWED_ORIGINS: http://localhost:5173
           USE_S3: false
@@ -87,10 +87,10 @@ jobs:
         env:
           SECRET_KEY: your-secret-key
           DEBUG: true
-          DB_NAME: pawtel_prueba
-          DB_USER: root
-          DB_PASSWORD: root
-          DB_HOST: localhost
+          DB_NAME: test_db
+          DB_USER: test_user
+          DB_PASSWORD: test_password
+          DB_HOST: 127.0.0.1
           DB_PORT: 3306
           CORS_ALLOWED_ORIGINS: http://localhost:5173
           USE_S3: false
