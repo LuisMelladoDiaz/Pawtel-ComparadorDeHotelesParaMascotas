@@ -127,6 +127,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
             request, action_name
         )
         return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(hotel_owner.id)
+    
 
     @staticmethod
     def __delete_all_hotels_of_hotel_owner_base(pk=None):
@@ -149,4 +150,18 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner
         )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    
+    @action(
+        detail=True,
+        methods=["post"],
+        url_path="approve",
+        url_name="approve_hotel_owner",
+    )
+    def approve_hotel_owner(self, request, pk=None):
+        action_name = inspect.currentframe().f_code.co_name
+        HotelOwnerService.authorize_action_hotel_owner_level_1(request, action_name)
+        hotel_owner = HotelOwnerService.approve_hotel_owner(pk)
+        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(hotel_owner)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
