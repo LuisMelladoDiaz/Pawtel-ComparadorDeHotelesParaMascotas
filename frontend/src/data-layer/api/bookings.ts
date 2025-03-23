@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type Booking = {
-    id: number;
+    id?: number;
     creation_date: string;
     start_date: string;
     end_date: string;

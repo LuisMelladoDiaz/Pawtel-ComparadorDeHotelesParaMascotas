@@ -3,7 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type BookingHold = {
-    id: number;
+    id?: number;
     hold_expires_at: string;
     booking_start_date: string;
     booking_end_date: string;
