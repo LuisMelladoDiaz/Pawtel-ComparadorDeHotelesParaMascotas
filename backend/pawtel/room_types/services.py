@@ -1,5 +1,6 @@
-from datetime import timedelta
+from datetime import datetime, timedelta
 
+from django.db.models import Q
 from django.utils.dateparse import parse_date
 from django.utils.timezone import now
 from pawtel.app_users.models import UserRole
@@ -208,3 +209,69 @@ class RoomTypeService:
                 return False
 
         return True
+
+    # Filter -----------------------------------------------------------------
+
+    VALID_FILTERS = {
+        "pet_type": str,
+        "max_price_per_night": float,
+        "min_price_per_night": float,
+        "sort_by": str,
+        "limit": int,
+        "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+        "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+    }
+
+    @staticmethod
+    def validate_filters(filters):
+        """Valida que los filtros sean correctos y conviértelos a su tipo esperado."""
+        if filters is None:
+            return {}
+        assert all(
+            f in RoomTypeService.VALID_FILTERS for f in filters
+        ), f"Filtro inválido: {filters}"
+        validated = {}
+        for key, expected_type in RoomTypeService.VALID_FILTERS.items():
+            if key in filters:
+                try:
+                    validated[key] = expected_type(filters[key])
+                except (ValueError, TypeError):
+                    pass
+        return validated
+
+    @staticmethod
+    def apply_filters(room_types, filters):
+        """Aplica los filtros al queryset de RoomType."""
+        q = Q()
+
+        if "pet_type" in filters:
+            q &= Q(pet_type=filters["pet_type"])
+
+        if "max_price_per_night" in filters:
+            q &= Q(price_per_night__lte=filters["max_price_per_night"])
+
+        if "min_price_per_night" in filters:
+            q &= Q(price_per_night__gte=filters["min_price_per_night"])
+
+        return room_types.filter(q).distinct()
+
+    @staticmethod
+    def list_filtered_room_types(hotel_id, filters=None):
+        """Lista los room types con filtrado, ordenamiento y límite."""
+        room_types = RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+
+        filters = RoomTypeService.validate_filters(filters)
+        room_types = RoomTypeService.apply_filters(room_types, filters)
+
+        if "sort_by" in filters:
+            sort_field = filters["sort_by"]
+            valid_sort_fields = ["pet_type", "price_per_night"]
+            assert (
+                sort_field.lstrip("-") in valid_sort_fields
+            ), f"Campo de ordenamiento inválido: {sort_field}"
+            room_types = room_types.order_by(sort_field)
+
+        if "limit" in filters:
+            room_types = room_types[: filters["limit"]]
+
+        return room_types

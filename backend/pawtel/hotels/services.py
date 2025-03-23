@@ -1,4 +1,6 @@
-from django.db.models import Max, Min
+from datetime import datetime
+
+from django.db.models import Max, Min, Q
 from django.forms import ValidationError
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
@@ -131,97 +133,110 @@ class HotelService:
 
     # Filter -----------------------------------------------------------------
 
+    VALID_FILTERS = {
+        "city": str,
+        "name": str,
+        "hotel_owner": int,
+        "pet_type": str,
+        "max_price_per_night": float,
+        "min_price_per_night": float,
+        "sort_by": str,
+        "limit": int,
+        "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+        "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+    }
+
     @staticmethod
-    def list_hotels(filters=None):
+    def validate_filters(filters):
+        """Ensures filters are valid and have correct types."""
+        if filters is None:
+            return {}
+
+        assert all(
+            f in HotelService.VALID_FILTERS for f in filters
+        ), f"Invalid filter: {filters}"
+
+        validated = {}
+        for key, expected_type in HotelService.VALID_FILTERS.items():
+            if key in filters:
+                try:
+                    validated[key] = expected_type(filters[key])
+                except (ValueError, TypeError):
+                    pass
+        return validated
+
+    @staticmethod
+    def apply_filters(hotels, filters):
+        """Applies filters to a queryset."""
+        q = Q()
+
+        if "city" in filters:
+            q &= Q(city__icontains=filters["city"])
+
+        if "name" in filters:
+            q &= Q(name__icontains=filters["name"])
+
+        if "hotel_owner" in filters:
+            q &= Q(hotel_owner__id=filters["hotel_owner"])
+
+        if "pet_type" in filters:
+            q &= Q(roomtype__pet_type=filters["pet_type"], roomtype__is_archived=False)
+
+        if "max_price_per_night" in filters:
+            q &= Q(roomtype__price_per_night__lte=filters["max_price_per_night"])
+
+        if "min_price_per_night" in filters:
+            q &= Q(roomtype__price_per_night__gte=filters["min_price_per_night"])
+
+        hotels = hotels.filter(q).distinct()
+
+        return hotels.annotate(
+            price_max=Max("roomtype__price_per_night"),
+            price_min=Min("roomtype__price_per_night"),
+        )
+
+    @staticmethod
+    def list_filtered_hotels(filters=None):
+        """Lists hotels with filtering, sorting, and limiting."""
         hotels = Hotel.objects.filter(is_archived=False)
 
-        valid_filters = [
-            "city",
-            "name",
-            "hotel_owner",
-            "room_type",
-            "max_price_per_night",
-            "min_price_per_night",
-            "sort_by",
-            "limit",
-        ]
+        filters = HotelService.validate_filters(filters)
+        hotels = HotelService.apply_filters(hotels, filters)
 
-        assert filters is None or all(f in valid_filters for f in filters), filters
+        if "sort_by" in filters:
+            sort_field = filters["sort_by"]
+            valid_sort_fields = [
+                "price_per_night",
+                "city",
+                "name",
+                "price_max",
+                "price_min",
+            ]
+            assert (
+                sort_field.lstrip("-") in valid_sort_fields
+            ), f"Invalid sort field: {sort_field}"
+            hotels = hotels.order_by(sort_field)
 
-        if filters:
-            if "city" in filters:
-                assert isinstance(filters["city"], str)
-                hotels = hotels.filter(city__icontains=filters["city"])
-
-            if "name" in filters:
-                assert isinstance(filters["name"], str)
-                hotels = hotels.filter(name__icontains=filters["name"])
-
-            if "hotel_owner" in filters:
-                hotels = hotels.filter(hotel_owner__id=filters["hotel_owner"])
-
-            if "room_type" in filters:
-                assert isinstance(filters["room_type"], str)
-                hotels = hotels.filter(
-                    roomtype__name__icontains=filters["room_type"]
-                ).distinct()
-
-            if "max_price_per_night" in filters:
-                fl = float(filters["max_price_per_night"])
-                assert isinstance(fl, float)
-                try:
-                    max_price = float(filters["max_price_per_night"])
-                    hotels = hotels.filter(
-                        roomtype__price_per_night__lte=max_price
-                    ).distinct()
-                except ValueError:
-                    pass
-
-            if "min_price_per_night" in filters:
-                fl = float(filters["min_price_per_night"])
-                assert isinstance(fl, float)
-                try:
-                    min_price = float(filters["min_price_per_night"])
-                    hotels = hotels.filter(
-                        roomtype__price_per_night__gte=min_price
-                    ).distinct()
-                except ValueError:
-                    pass
-
-            hotels = hotels.annotate(
-                price_max=Max("roomtype__price_per_night"),
-                price_min=Min("roomtype__price_per_night"),
-            )
-            if "sort_by" in filters:
-                assert isinstance(filters["sort_by"], str)
-
-                valid = ["price_per_night", "city", "name", "price_max", "price_min"]
-                # Verificamos si sort_by está en los campos válidos o si empieza con "-"
-                assert filters["sort_by"] in valid or filters["sort_by"].startswith("-")
-
-                sort_field = filters["sort_by"]
-
-                # Si el campo comienza con "-", orden descendente
-                if sort_field.startswith("-"):
-                    hotels = hotels.order_by(sort_field)  # Orden descendente
-                else:
-                    hotels = hotels.order_by(sort_field)  # Orden ascendente
-
-            if "limit" in filters:
-                i = int(filters["limit"])
-                assert isinstance(i, int)
-                try:
-                    limit = int(filters["limit"])
-                    hotels = hotels[:limit]
-                except ValueError:
-                    pass  # Ignorar si el límite no es un número válido
+        if "limit" in filters:
+            hotels = hotels[: filters["limit"]]
 
         return hotels
 
     # Others -----------------------------------------------------------------
 
     @staticmethod
+    def list_hotels(allow_archived=False):
+        if allow_archived:
+            return Hotel.objects.all()
+        else:
+            return Hotel.objects.filter(is_archived=False)
+
+    @staticmethod
     def list_room_types_of_hotel(hotel_id):
+        return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+
+    @staticmethod
+    def get_all_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
 
     # -
