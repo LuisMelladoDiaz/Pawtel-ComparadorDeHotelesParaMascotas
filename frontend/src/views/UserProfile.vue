@@ -1,389 +1,193 @@
+<script setup>
+import { ref, computed, watch } from 'vue';
+import NavbarTerracota from '../components/NavbarTerracota.vue';
+import Footer from '../components/Footer.vue';
+import Button from '../components/Button.vue';
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { useUserQuery } from "@/data-layer/auth";
+import { useUpdateCustomer, useDeleteCustomer, useGetCurrentCustomer } from "@/data-layer/hooks/customers";
+import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } from "@/data-layer/hooks/hotelOwners";
+
+// Otros imports y referencias
+const fileInput = ref(null);
+const showPassword = ref(false);
+const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';
+
+const { data: userData, isLoading: isLoadingUserData } = useUserQuery();
+const { data: currentCustomer } = useGetCurrentCustomer();
+const { data: currentHotelOwner } = useGetCurrentHotelOwner();
+
+// Computed para acceder a los datos del usuario de forma segura
+const userDataComputed = computed(() => userData?.value || {});
+const currentCustomerId = computed(() => currentCustomer?.value?.id || null);
+const currentHotelOwnerId = computed(() => currentHotelOwner?.value?.id || null);
+
+// Crear un objeto reactivo para almacenar los datos modificados
+const editedUserData = ref({
+  username: userDataComputed.value.username || '',
+  email: userDataComputed.value.email || '',
+  password: '', // Aquí puedes manejar mejor la contraseña si es necesario
+  phone: userDataComputed.value.phone || '',
+  phonePrefix: userDataComputed.value.phonePrefix || '+34', // O el valor que tenga por defecto
+});
+
+// Hooks para actualizar y eliminar
+const { mutate: updateCustomer } = useUpdateCustomer();
+const { mutate: deleteCustomer } = useDeleteCustomer();
+const { mutate: updateHotelOwner } = useUpdateHotelOwner();
+const { mutate: deleteHotelOwner } = useDeleteHotelOwner();
+
+const triggerFileInput = () => fileInput.value.click();
+
+const uploadPhoto = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      userDataComputed.value.profilePicture = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+};
+
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value;
+};
+
+// Actualización del perfil, enviando id y datos
+const updateProfile = () => {
+  console.log("update - ", editedUserData.value.username);
+
+  const updatedData = {
+    username: editedUserData.value.username,
+    email: editedUserData.value.email,
+    phone: editedUserData.value.phone,
+    password: editedUserData.value.password || "password123", // Aquí puedes manejar mejor la contraseña si es necesario
+  };
+
+  if (userDataComputed.value.role === "customer") {
+    const customerId = currentCustomerId.value;
+    updateCustomer({ 
+      customerId, 
+      ownerData: updatedData
+    }, {
+      onSuccess: () => { 
+        alert("Perfil actualizado con éxito.");
+        window.location.href = "/";
+      },
+      onError: () => alert("Error al actualizar el perfil.")
+    });
+  } else if (userDataComputed.value.role === "hotel_owner") {
+    const hotelOwnerId = currentHotelOwnerId.value;
+    updateHotelOwner({ 
+      hotelOwnerId, 
+      partialData: updatedData
+    }, {
+      onSuccess: () => { 
+        alert("Perfil actualizado con éxito.");
+        window.location.href = "/";
+      },
+      onError: () => alert("Error al actualizar el perfil.")
+    });
+  }
+};
+
+// Eliminación de cuenta, enviando id
+const deleteAccount = () => {
+  if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.")) {
+    if (userDataComputed.value.role === "customer") {
+      const customerId = currentCustomerId.value;
+      deleteCustomer(customerId, {
+        onSuccess: () => {
+          alert("Cuenta eliminada.");
+          window.location.href = "/register";
+        },
+        onError: () => alert("Error al eliminar la cuenta.")
+      });
+    } else if (userDataComputed.value.role === "hotel_owner") {
+      const hotelOwnerId = currentHotelOwnerId.value;
+      deleteHotelOwner(hotelOwnerId, {
+        onSuccess: () => {
+          alert("Cuenta eliminada.");
+          window.location.href = "/login";
+        },
+        onError: () => alert("Error al eliminar la cuenta.")
+      });
+    }
+  }
+};
+
+const logout = () => {
+  alert("Sesión cerrada.");
+  window.location.href = "/login";
+};
+</script>
+
 <template>
-  <div class="profile-container">
+  <div class="flex flex-col min-h-screen bg-gray-100">
     <NavbarTerracota />
-    <div class="content-wrapper">
-      <!-- Sidebar (Mantiene su tamaño fijo a la izquierda) -->
-      <aside class="sidebar">
-        <div class="profile-picture-container">
-          <img :src="user.profilePicture || defaultProfilePicture" alt="Foto de perfil" class="profile-picture" />
-          <input type="file" ref="fileInput" @change="uploadPhoto" accept="image/*" class="hidden-file-input" />
-          <button @click="triggerFileInput" class="edit-icon">
-            <font-awesome-icon :icon="['fas', 'pen']" class="edit-icon-svg" />
+    <div class="flex justify-center items-start gap-5 p-5">
+      <!-- Sidebar -->
+      <aside class="w-64 flex flex-col items-center bg-white p-4 border-r border-gray-300">
+        <div class="relative">
+          <img :src="userDataComputed?.profilePicture || defaultProfilePicture" alt="Foto de perfil"
+            class="w-32 h-32 rounded-full object-cover" />
+          <input type="file" ref="fileInput" @change="uploadPhoto" accept="image/*" class="hidden" />
+          <button @click="triggerFileInput" class="absolute bottom-1 right-1 bg-black bg-opacity-60 text-white p-1 rounded-full">
+            <font-awesome-icon :icon="['fas', 'pen']" />
           </button>
         </div>
-        <nav>
-          <ul class="menu-list">
-            <h2> Mi Perfil </h2>
-            <li><router-link to="/UserProfile" class="active">Datos Personales</router-link></li>
-            <li><router-link to="/perfil/mis-mascotas">Mis Reservas</router-link></li>
-            <li><router-link to="/perfil/ayuda">Ayuda y Contacto</router-link></li>
+        <nav class="mt-5 w-full">
+          <h2 class="text-lg font-semibold">Mi Perfil</h2>
+          <ul class="mt-3 space-y-2">
+            <li><router-link to="/UserProfile" class="text-blue-500">Datos Personales</router-link></li>
+            <li><router-link to="/perfil/mis-mascotas" class="text-blue-500">Mis Reservas</router-link></li>
+            <li><router-link to="/perfil/ayuda" class="text-blue-500">Ayuda y Contacto</router-link></li>
           </ul>
         </nav>
-        <Button @click="logout" type="edit" class="w-full">Cerrar Sesión</Button>
+        <Button class="w-full mt-5 bg-red-500 text-white" @click="logout">Cerrar Sesión</Button>
       </aside>
 
-      <!-- Contenedor de los datos (A la derecha) -->
-      <main class="profile-content">
-        <h2>Bienvenid@ de nuevo, {{ user.username }} !</h2>
-
-          <div class="info-container">
-            <div class="info-group full-width">
-              <label>Nombre de Usuario:</label>
-              <input type="text" v-model="user.username" />
+      <!-- Contenido -->
+      <main class="flex-1 max-w-2xl bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold">Bienvenid@ de nuevo, {{ userDataComputed?.username || 'Cargando...' }}!</h2>
+        <div v-if="isLoadingUserData" class="mt-5 text-center text-gray-500">Cargando datos...</div>
+        <div v-else class="mt-5 space-y-4">
+          <div class="flex flex-col">
+            <label class="font-medium">Nombre de Usuario:</label>
+            <input type="text" v-model="editedUserData.username" class="border p-2 rounded" />
+          </div>
+          <div class="flex flex-col">
+            <label class="font-medium">Correo electrónico:</label>
+            <input type="email" v-model="editedUserData.email" class="border p-2 rounded" />
+          </div>
+          <div class="flex flex-col">
+            <label class="font-medium">Contraseña:</label>
+            <div class="relative">
+              <input :type="showPassword ? 'text' : 'password'" v-model="editedUserData.password" class="border p-2 rounded w-full" />
+              <button @click="togglePasswordVisibility" class="absolute right-2 top-2">
+                {{ showPassword ? '👁️' : '🙈' }}
+              </button>
             </div>
           </div>
-
-        <!-- Primera fila: Correo y Contraseña -->
-          <div class="info-container">
-            <div class="info-group full-width">
-              <label>Correo electrónico:</label>
-              <input type="email" v-model="user.email" />
-            </div>
-              <div class="info-group full-width password-group">
-                <label>Contraseña:</label>
-                  <div class="password-container">
-                   <input :type="showPassword ? 'text' : 'password'" v-model="user.password" />
-                      <button type="button" @click="togglePasswordVisibility" class="toggle-password">
-                        {{ showPassword ? '👁️' : '🙈' }}
-                  </button>
-                </div>
-              </div>
-
-          </div>
-          <!-- Segunda fila: Nombre y Apellidos -->
-          <div class="info-container">
-            <div class="info-group">
-              <label>Nombre:</label>
-              <input type="text" v-model="user.firstName" />
-            </div>
-            <div class="info-group">
-              <label>Apellidos:</label>
-              <input type="text" v-model="user.lastName" />
+          <div class="flex flex-col">
+            <label class="font-medium">Móvil:</label>
+            <div class="flex gap-2">
+              <select v-model="editedUserData.phonePrefix" class="border p-2 rounded">
+                <option value="+34">+34</option>
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
+              </select>
+              <input type="text" v-model="editedUserData.phone" class="border p-2 rounded flex-1" />
             </div>
           </div>
-
-        <form @submit.prevent="saveChanges">
-          <!-- Tercera fila: Fecha de nacimiento y Teléfono -->
-          <div class="info-container">
-            <div class="info-group">
-              <label>Fecha de Nacimiento:</label>
-              <input type="date" v-model="user.birthDate" />
-            </div>
-            <div class="info-group phone-group">
-              <label>Móvil:</label>
-              <div class="phone-container">
-                <select v-model="user.phonePrefix">
-                  <option value="+34">+34</option>
-                  <option value="+1">+1</option>
-                  <option value="+44">+44</option>
-                </select>
-                <input type="text" v-model="user.phone" />
-              </div>
-            </div>
+          <div class="flex gap-4 mt-5">
+            <Button class="flex-1 bg-oliva text-white" @click="updateProfile">Guardar cambios</Button>
+            <Button class="flex-1 bg-terracota text-white" @click="deleteAccount">Eliminar Cuenta</Button>
           </div>
-
-          <!-- Botones de acción -->
-          <div class="actions">
-            <Button type="add" class="w-full">Guardar cambios</Button>
-            <Button @click="deleteAccount" type="reject" class="w-full">Eliminar Cuenta</Button>
-          </div>
-        </form>
+        </div>
       </main>
     </div>
     <Footer />
   </div>
 </template>
-
-<script setup>
-import { ref, onMounted } from 'vue';
-import NavbarTerracota from '../components/NavbarTerracota.vue';
-import Footer from '../components/Footer.vue';
-import Button from '../components/Button.vue';
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
-const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';
-const fileInput = ref(null);
-
-const user = ref({
-    profilePicture: '',
-    username: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phonePrefix: '+34',
-    phone: '',
-    birthDate: ''
-});
-
-const showPassword = ref(false);
-
-const fetchUser = async () => {
-    try {
-        const response = await fetch('/api/user', { credentials: 'include' });
-        if (!response.ok) throw new Error('No autenticado');
-        const data = await response.json();
-
-        user.value = {
-            profilePicture: data.profile_picture || defaultProfilePicture,
-            username: data.username,
-            firstName: data.first_name,
-            lastName: data.last_name,
-            email: data.email,
-            password: '',
-            phonePrefix: data.phone_prefix || '+34',
-            phone: data.phone || '',
-            birthDate: data.birth_date || ''
-        };
-    } catch (error) {
-      window.location.href = '/login';
-    }
-};
-
-const logout = async () => {
-    try {
-        await fetch('/api/logout', { method: 'POST', credentials: 'include' });
-        alert('Sesión cerrada.');
-        window.location.href = '/login';
-    } catch (error) {
-        console.error('Error cerrando sesión:', error);
-    }
-};
-
-const deleteAccount = async () => {
-    if (!confirm('¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.')) return;
-
-    try {
-        await fetch('/api/user', { method: 'DELETE', credentials: 'include' });
-        alert('Cuenta eliminada.');
-        window.location.href = '/register';
-    } catch (error) {
-        console.error('Error eliminando cuenta:', error);
-    }
-};
-
-const saveChanges = async () => {
-    try {
-        const response = await fetch('/api/user', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({
-                username: user.value.username,
-                first_name: user.value.firstName,
-                last_name: user.value.lastName,
-                email: user.value.email,
-                phone_prefix: user.value.phonePrefix,
-                phone: user.value.phone,
-                birth_date: user.value.birthDate
-            })
-        });
-
-        if (!response.ok) throw new Error('Error al guardar cambios');
-        alert('Perfil actualizado correctamente.');
-    } catch (error) {
-        console.error('Error actualizando perfil:', error);
-    }
-};
-
-const triggerFileInput = () => {
-    fileInput.value.click();
-};
-
-const uploadPhoto = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            user.value.profilePicture = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-};
-
-const togglePasswordVisibility = () => {
-    showPassword.value = !showPassword.value;
-};
-</script>
-
-
-<style scoped>
-.profile-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: #f8f4f0;
-}
-
-.content-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 20px;
-}
-
-/* Sidebar ajustado */
-.sidebar {
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-/* Contenedor de datos del usuario */
-.profile-content {
-  flex: 1;
-  max-width: 700px;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.profile-picture {
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.profile-picture-container {
-  position: relative;
-  display: inline-block;
-}
-
-.edit-icon {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.edit-icon-svg {
-  font-size: 16px;
-}
-
-/* Contenedores de información */
-.info-container {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-/* Grupos de datos */
-.info-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.full-width {
-  flex: 1 1 100%;
-}
-
-/* Inputs alineados */
-.info-group input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Estilo para el teléfono con prefijo */
-.phone-container {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-
-.phone-container select {
-  width: 20%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.phone-container input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* Botones alineados */
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.actions button {
-  width: 100%;
-}
-
-.password-container {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.password-container input {
-  flex: 1;
-  padding-right: 40px; /* Espacio para el botón */
-}
-
-.toggle-password {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.hidden-file-input {
-  display: none;
-}
-
-/* Estilos de los botones */
-.save-btn {
-  background-color: #6d8f50;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-}
-
-.delete-account {
-  background-color: #b1463c;
-  color: white;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-}
-
-.logout {
-  background-color: #c44;
-  color: white;
-  padding: 10px;
-  border: none;
-  margin-top: 20px;
-}
-
-</style>
