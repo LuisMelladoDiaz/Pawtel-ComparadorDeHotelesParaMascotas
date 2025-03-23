@@ -11,7 +11,7 @@ import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
-import { h, type Component, type VNode } from 'vue';
+import { h, type Component} from 'vue';
 import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
 
@@ -23,10 +23,6 @@ interface CreateComponentOptions {
 }
 
 export function createComponent({ layout, component }: CreateComponentOptions): Component {
-  if (!layout || !component) {
-    throw new Error('[createComponent] Both "layout" and "component" are required.');
-  }
-
   return {
     render() {
       return h(layout, {}, {
