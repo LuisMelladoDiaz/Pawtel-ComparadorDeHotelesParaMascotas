@@ -14,6 +14,7 @@ from rest_framework.response import Response
 class HotelOwnerViewSet(viewsets.ModelViewSet):
     queryset = HotelOwner.objects.all()
     serializer_class = HotelOwnerSerializer
+    http_method_names = ["get", "put", "patch", "delete"]
 
     # Default CRUD -----------------------------------------------------------
 

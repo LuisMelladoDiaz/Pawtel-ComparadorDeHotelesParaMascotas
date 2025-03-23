@@ -11,6 +11,7 @@ from rest_framework.response import Response
 class BookingHoldViewSet(viewsets.ModelViewSet):
     queryset = BookingHold.objects.all()
     serializer_class = BookingHoldSerializer
+    http_method_names = ["get", "post", "delete"]
 
     # Default CRUD -----------------------------------------------------------
 

@@ -12,6 +12,7 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    http_method_names = ["get"]
 
     def list(self, request):
         action_name = inspect.currentframe().f_code.co_name

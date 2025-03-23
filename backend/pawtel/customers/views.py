@@ -14,6 +14,7 @@ from rest_framework.response import Response
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    http_method_names = ["get", "put", "patch", "delete"]
 
     def list(self, request):
         action_name = inspect.currentframe().f_code.co_name
