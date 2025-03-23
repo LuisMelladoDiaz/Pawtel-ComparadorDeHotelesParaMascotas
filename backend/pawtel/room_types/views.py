@@ -19,7 +19,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        RoomTypeService.authorize_action_room_type(request, pk)
+        # RoomTypeService.authorize_action_room_type(request, pk)
         room_type = RoomTypeService.retrieve_room_type(pk)
         output_serializer_data = RoomTypeService.serialize_output_room_type(room_type)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
