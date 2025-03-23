@@ -65,7 +65,7 @@ export const deleteRoomType = async (roomTypeId: number) => {
 };
 
 export const checkRoomTypeAvailability = async (roomTypeId: number, startDate: string, endDate: string) => {
-  const url = `${API_BASE_URL}/room-types/${roomTypeId}is-available?start_date=${startDate}&end_date=${endDate}`;
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/available?start_date=${startDate}&end_date=${endDate}`;
   const response = await axios.get(url);
   return response.data;
 };
