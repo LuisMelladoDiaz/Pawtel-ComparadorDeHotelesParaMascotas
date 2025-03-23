@@ -105,7 +105,7 @@ class HotelService:
     # Filter -----------------------------------------------------------------
 
     @staticmethod
-    def list_hotels(filters=None):
+    def list_filtered_hotels(filters=None):
         hotels = Hotel.objects.filter(is_archived=False)
 
         valid_filters = [
@@ -118,7 +118,7 @@ class HotelService:
             "sort_by",
             "limit",
             "start_date",
-            "end_date"
+            "end_date",
         ]
 
         assert filters is None or all(f in valid_filters for f in filters), filters
@@ -138,8 +138,7 @@ class HotelService:
             if "pet_type" in filters:
                 assert isinstance(filters["pet_type"], str)
                 hotels = hotels.filter(
-                    roomtype__pet_type=filters["pet_type"],
-                    roomtype__is_archived=False
+                    roomtype__pet_type=filters["pet_type"], roomtype__is_archived=False
                 ).distinct()
 
             if "max_price_per_night" in filters:
@@ -193,6 +192,13 @@ class HotelService:
                     pass  # Ignorar si el límite no es un número válido
 
         return hotels
+
+    @staticmethod
+    def list_room_types(allow_archived=False):
+        if allow_archived:
+            return RoomType.objects.all()
+        else:
+            return RoomType.objects.filter(is_archived=False)
 
     # Others -----------------------------------------------------------------
 

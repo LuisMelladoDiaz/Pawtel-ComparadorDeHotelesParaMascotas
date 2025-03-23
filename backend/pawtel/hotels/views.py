@@ -8,8 +8,6 @@ from pawtel.room_types.services import RoomTypeService
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.utils.dateparse import parse_date
-
 
 
 class HotelViewSet(viewsets.ModelViewSet):
@@ -18,7 +16,7 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         filters = request.query_params.dict()  # URL filters checked
-        hotels = HotelService.list_hotels(filters)
+        hotels = HotelService.list_filtered_hotels(filters)
         output_serializer_data = HotelService.serialize_output_hotel(
             hotels, many=True, context={"request": request}
         )
@@ -88,8 +86,6 @@ class HotelViewSet(viewsets.ModelViewSet):
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
-
     @action(
         detail=False,
         methods=["get"],
@@ -100,17 +96,20 @@ class HotelViewSet(viewsets.ModelViewSet):
         start_date, end_date = RoomTypeService.parse_availability_dates(request)
         RoomTypeService.validate_room_type_available(start_date, end_date)
         filters = request.query_params.dict()
-        hotels = HotelService.list_hotels(filters)
+        hotels = HotelService.list_filtered_hotels(filters)
         available_hotels = []
         for hotel in hotels:
             room_types = HotelService.get_all_room_types_of_hotel(hotel.id)
             for room in room_types:
-                if RoomTypeService.is_room_type_available(room.id, start_date, end_date):
+                if RoomTypeService.is_room_type_available(
+                    room.id, start_date, end_date
+                ):
                     available_hotels.append(hotel)
                     break
-        serializer = HotelSerializer(available_hotels, many=True, context={"request": request})
+        serializer = HotelSerializer(
+            available_hotels, many=True, context={"request": request}
+        )
         return Response(serializer.data, status=status.HTTP_200_OK)
-
 
     @action(
         detail=True,
@@ -122,7 +121,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         start_date, end_date = RoomTypeService.parse_availability_dates(request)
         RoomTypeService.validate_room_type_available(start_date, end_date)
         filters = request.query_params.dict()
-        room_types = RoomTypeService.list_availables_room_types_with_filters(pk, filters)
+        room_types = RoomTypeService.list_room_types_with_filters(pk, filters)
         available_room_types = []
         for room in room_types:
             if RoomTypeService.is_room_type_available(room.id, start_date, end_date):
