@@ -224,7 +224,6 @@ class RoomTypeService:
 
     @staticmethod
     def validate_filters(filters):
-        """Valida que los filtros sean correctos y conviértelos a su tipo esperado."""
         if filters is None:
             return {}
         assert all(
@@ -241,7 +240,6 @@ class RoomTypeService:
 
     @staticmethod
     def apply_filters(room_types, filters):
-        """Aplica los filtros al queryset de RoomType."""
         q = Q()
 
         if "pet_type" in filters:
@@ -257,7 +255,6 @@ class RoomTypeService:
 
     @staticmethod
     def list_filtered_room_types(hotel_id, filters=None):
-        """Lista los room types con filtrado, ordenamiento y límite."""
         room_types = RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
 
         filters = RoomTypeService.validate_filters(filters)

@@ -25,8 +25,7 @@ class HotelViewSet(viewsets.ModelViewSet):
     def list(self, request):
         action_name = inspect.currentframe().f_code.co_name
         HotelService.authorize_action_hotel_level_1(request, action_name)
-        filters = request.query_params.dict()  # URL filters checked
-        hotels = HotelService.list_filtered_hotels(filters)
+        hotels = HotelService.list_hotels()
         output_serializer_data = HotelService.serialize_output_hotel(
             hotels, many=True, context={"request": request}
         )
@@ -102,7 +101,7 @@ class HotelViewSet(viewsets.ModelViewSet):
     @action(
         detail=False,
         methods=["get"],
-        url_path="availables",
+        url_path="available",
         url_name="available_hotels",
     )
     def available_hotels(self, request):
@@ -129,7 +128,7 @@ class HotelViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=["get"],
-        url_path="available-room-types",
+        url_path="room-types/available",
         url_name="available_room_types",
     )
     def available_room_types(self, request, pk=None):
