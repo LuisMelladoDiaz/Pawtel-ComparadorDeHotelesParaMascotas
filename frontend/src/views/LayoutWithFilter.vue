@@ -16,15 +16,3 @@ import Footer from '../components/Footer.vue';
     <Footer />
   </div>
 </template>
-
-<style scoped>
-@media (max-width: 900px) {
-  .example {
-    display: flex;
-  }
-
-  .example2 {
-    display: flex;
-  }
-}
-</style>
