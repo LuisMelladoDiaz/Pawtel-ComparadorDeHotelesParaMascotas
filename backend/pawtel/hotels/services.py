@@ -135,10 +135,11 @@ class HotelService:
             if "hotel_owner" in filters:
                 hotels = hotels.filter(hotel_owner__id=filters["hotel_owner"])
 
-            if "room_type" in filters:
-                assert isinstance(filters["room_type"], str)
+            if "pet_type" in filters:
+                assert isinstance(filters["pet_type"], str)
                 hotels = hotels.filter(
-                    roomtype__name__icontains=filters["room_type"]
+                    roomtype__pet_type=filters["pet_type"],
+                    roomtype__is_archived=False
                 ).distinct()
 
             if "max_price_per_night" in filters:

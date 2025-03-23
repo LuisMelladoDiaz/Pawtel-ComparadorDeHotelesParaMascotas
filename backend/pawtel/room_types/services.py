@@ -179,7 +179,7 @@ class RoomTypeService:
 
 
     @staticmethod
-    def list_room_types(hotel_id, filters=None):
+    def list_availables_room_types_with_filters(hotel_id, filters=None):
         room_types = RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
 
         valid_filters = [

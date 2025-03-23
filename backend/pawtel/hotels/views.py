@@ -97,20 +97,8 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="available_hotels",
     )
     def available_hotels(self, request):
-        start_date_str = request.query_params.get("start_date")
-        end_date_str = request.query_params.get("end_date")
-        if not start_date_str or not end_date_str:
-            return Response(
-                {"detail": "Both start_date and end_date are required."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        start_date = parse_date(start_date_str)
-        end_date = parse_date(end_date_str)
-        if not start_date or not end_date or end_date < start_date:
-            return Response(
-                {"detail": "Invalid date parameters. Use format yyyy-mm-dd and ensure end_date >= start_date."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        start_date, end_date = RoomTypeService.parse_availability_dates(request)
+        RoomTypeService.validate_room_type_available(start_date, end_date)
         filters = request.query_params.dict()
         hotels = HotelService.list_hotels(filters)
         available_hotels = []
@@ -131,22 +119,10 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="available_room_types",
     )
     def available_room_types(self, request, pk=None):
-        start_date_str = request.query_params.get("start_date")
-        end_date_str = request.query_params.get("end_date")
-        if not start_date_str or not end_date_str:
-            return Response(
-                {"detail": "Both start_date and end_date are required."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-        start_date = parse_date(start_date_str)
-        end_date = parse_date(end_date_str)
-        if not start_date or not end_date or end_date < start_date:
-            return Response(
-                {"detail": "Invalid date parameters. Use format yyyy-mm-dd and ensure end_date >= start_date."},
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        start_date, end_date = RoomTypeService.parse_availability_dates(request)
+        RoomTypeService.validate_room_type_available(start_date, end_date)
         filters = request.query_params.dict()
-        room_types = RoomTypeService.list_room_types(pk, filters)
+        room_types = RoomTypeService.list_availables_room_types_with_filters(pk, filters)
         available_room_types = []
         for room in room_types:
             if RoomTypeService.is_room_type_available(room.id, start_date, end_date):
