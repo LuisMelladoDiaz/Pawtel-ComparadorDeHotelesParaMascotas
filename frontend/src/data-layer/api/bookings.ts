@@ -3,12 +3,13 @@ import axios from 'axios';
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type Booking = {
-  id?: number;
+  id: number;
   customer_id: number;
   room_type_id: number;
   start_date: string;
   end_date: string;
   total_price: number;
+  hotel_id: number;
 };
 
 export const fetchAllBookings = async () => {
