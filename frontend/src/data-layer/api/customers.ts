@@ -14,8 +14,6 @@ export type Customer = {
 };
 
 
-
-
 export const fetchAllOwners = async () => {
     const url = `${API_BASE_URL}/api/customers/`;
     const response = await axios.get(url);
