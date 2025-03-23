@@ -61,6 +61,31 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         RoomTypeService.delete_room_type(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    def destroy(self, request, pk=None):
+        today = date.today()
+        past_limit = today - timedelta(days=1096)
+
+        past_bookings = Booking.objects.filter(
+            room_type_id=pk, start_date__range=(past_limit, today)
+        )
+        future_bookings = Booking.objects.filter(room_type_id=pk, start_date__gte=today)
+
+        if future_bookings.exists():
+            raise ValidationError(
+                "Cannot delete room type because there is an upcoming booking."
+            )
+
+        if past_bookings.exists():
+            RoomType.objects.filter(pk=pk).update(is_archived=True)
+        raise ValidationError(
+            "Cannot delete room type because there are bookings in the past 3 years. The room type has been archived instead."
+        )
+
+        action_name = inspect.currentframe().f_code.co_name
+        RoomTypeService.authorize_action_room_type_level_3(request, pk, action_name)
+        RoomTypeService.delete_room_type(pk)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     @action(
         detail=True,
         methods=["get"],
