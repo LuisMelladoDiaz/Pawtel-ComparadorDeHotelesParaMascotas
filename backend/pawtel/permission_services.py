@@ -79,6 +79,8 @@ class PermissionService:
             "list_room_types_of_hotel",
             "get_cover_image",
             "get_non_cover_images",
+            "available_room_types",
+            "available_hotels",
         },
         UserRole.HOTEL_OWNER.value: {
             "list",
@@ -98,6 +100,8 @@ class PermissionService:
             "get_cover_image",
             "get_non_cover_images",
             "set_image_as_cover",
+            "available_room_types",
+            "available_hotels",
         },
         UserRole.ADMIN.value: {
             "list",
@@ -108,6 +112,8 @@ class PermissionService:
             "retrieve_image",
             "get_cover_image",
             "get_non_cover_images",
+            "available_room_types",
+            "available_hotels",
         },
     }
 
