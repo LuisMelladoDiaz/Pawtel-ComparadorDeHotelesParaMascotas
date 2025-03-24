@@ -88,6 +88,15 @@ export const useDeleteHotel = () => {
   });
 };
 
+export const useGetRoomTypesByHotel = (hotelId: MaybeRef<number>) => {
+  return useQuery({
+    queryKey: ['roomTypes', hotelId],
+    queryFn: () => fetchRoomTypesByHotel(toValue(hotelId)),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
+  });
+};
+
 export const useUploadImageToHotel = () => {
   const queryClient = useQueryClient();
 
@@ -120,3 +129,4 @@ export const useFilterAvailableRoomTypes = (hotelId: number, filters: Record<str
     refetchOnWindowFocus: false,
   });
 };
+

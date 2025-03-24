@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import HotelDetailsView from './views/HotelDetailView.vue';
-import TemplateScreen from './views/TemplateScreen.vue'
 import UserProfile from './views/UserProfile.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
 import MisHoteles from './views/MisHoteles.vue'
 import MyBookings from './views/MyBookings.vue'
+import EditHotel from './views/EditHotel.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
@@ -158,6 +158,13 @@ const routes = [
   {
     path: '/mis-hoteles',
     component: createComponent({ layout: LayoutDefault, component: MisHoteles }),
+    meta: {
+      allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+    },
+  },
+  {
+    path: '/mis-hoteles/edit/:id',
+    component: createComponent({ layout: LayoutDefault, component: EditHotel }),
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
     },
