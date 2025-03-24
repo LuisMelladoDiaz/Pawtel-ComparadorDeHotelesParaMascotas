@@ -209,6 +209,8 @@ class HotelService:
         if "min_price_per_night" in filters:
             q &= Q(roomtype__price_per_night__gte=filters["min_price_per_night"])
 
+        filtered_hotels = hotels.filter(q).distinct()
+
         if (
             ("is_available" in filters)
             and ("start_date" in filters)
@@ -221,7 +223,7 @@ class HotelService:
 
             available_hotel_ids = [
                 hotel.id
-                for hotel in hotels
+                for hotel in filtered_hotels
                 if HotelService.is_hotel_available(
                     hotel.id,
                     start_date,
@@ -232,11 +234,11 @@ class HotelService:
                 )
             ]
 
-            q &= Q(id__in=available_hotel_ids)
+            filtered_hotels = filtered_hotels.filter(
+                id__in=available_hotel_ids
+            ).distinct()
 
-        hotels = hotels.filter(q).distinct()
-
-        return hotels.annotate(
+        return filtered_hotels.annotate(
             price_max=Max("roomtype__price_per_night"),
             price_min=Min("roomtype__price_per_night"),
         )
