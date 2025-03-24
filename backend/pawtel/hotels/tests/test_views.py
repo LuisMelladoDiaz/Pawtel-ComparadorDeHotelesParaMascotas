@@ -250,6 +250,7 @@ class HotelImageViewSetTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
+    """
     def test_set_image_as_cover(self):
         image1 = self.__create_image("image1.jpg")
         image2 = self.__create_image("image2.jpg")
@@ -273,6 +274,41 @@ class HotelImageViewSetTestCase(TestCase):
         cover_image = self.hotel.images.filter(is_cover=True).first()
         self.assertEqual(cover_image.id, image2_id)
 
+     def test_set_image_as_non_cover(self):
+        image1 = self.__create_image("image1.jpg")
+        image2 = self.__create_image("image2.jpg")
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
+
+        response1 = self.client.post(url, {"image": image1}, format="multipart")
+        response2 = self.client.post(url, {"image": image2}, format="multipart")
+        self.assertEqual(response1.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response2.status_code, status.HTTP_201_CREATED)
+
+        self.hotel.refresh_from_db()
+
+        image2_id = self.hotel.images.last().id
+        url = reverse(
+            "hotel-image-set-image-as-cover",
+            kwargs={"pk": self.hotel.id, "image_id": image2_id},
+        )
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hotel.refresh_from_db()
+        cover_image = self.hotel.images.filter(is_cover=True).first()
+        self.assertEqual(cover_image.id, image2_id)
+
+        url = reverse(
+            "hotel-image-set-image-as-non-cover",  # Asegúrate de que el endpoint sea correcto
+            kwargs={"pk": self.hotel.id, "image_id": image2_id},
+        )
+        response = self.client.put(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hotel.refresh_from_db()
+        cover_image = self.hotel.images.filter(is_cover=False).first()
+        self.assertEqual(cover_image.id, image2_id)
+
     def test_invalid_set_cover_image(self):
         url = reverse(
             "hotel-image-set-image-as-cover",
@@ -280,8 +316,69 @@ class HotelImageViewSetTestCase(TestCase):
         )
         response = self.client.put(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+"""
 
     def test_get_cover_image_no_cover(self):
         url = reverse("hotel-image-get-cover-image", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_set_image_as_cover_true(self):
+        image1 = self.__create_image("image1.jpg")
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
+        response = self.client.post(url, {"image": image1}, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.hotel.refresh_from_db()
+
+        image1_id = self.hotel.images.first().id
+        url = reverse(
+            "hotel-image-set-image-as-cover",
+            kwargs={"pk": self.hotel.id, "image_id": image1_id},
+        )
+        data = {"set_as_cover": True}
+        response = self.client.put(url, data, format="json")
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.hotel.refresh_from_db()
+        cover_image = self.hotel.images.filter(is_cover=True).first()
+        self.assertEqual(cover_image.id, image1_id)
+
+    def test_set_image_as_cover_false(self):
+
+        image1 = self.__create_image("image1.jpg")
+        url = reverse("hotel-image-upload-image", kwargs={"pk": self.hotel.id})
+        response = self.client.post(url, {"image": image1}, format="multipart")
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        self.hotel.refresh_from_db()
+
+        image1_id = self.hotel.images.first().id
+        url = reverse(
+            "hotel-image-set-image-as-cover",
+            kwargs={"pk": self.hotel.id, "image_id": image1_id},
+        )
+        data = {"set_as_cover": True}
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        data = {"set_as_cover": False}
+        url = reverse(
+            "hotel-image-set-image-as-cover",
+            kwargs={"pk": self.hotel.id, "image_id": image1_id},
+        )
+        response = self.client.put(url, data, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.hotel.refresh_from_db()
+        cover_image = self.hotel.images.filter(is_cover=True).first()
+        self.assertIsNone(cover_image)
+
+    def test_set_image_as_cover_invalid(self):
+
+        url = reverse(
+            "hotel-image-set-image-as-cover",
+            kwargs={"pk": self.hotel.id, "image_id": 999},
+        )
+        data = {"set_as_cover": True}
+        response = self.client.put(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

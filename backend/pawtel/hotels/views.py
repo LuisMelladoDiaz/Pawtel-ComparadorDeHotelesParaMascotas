@@ -283,9 +283,42 @@ class HotelImageViewSet(viewsets.ViewSet):
     def set_image_as_cover(self, request, pk=None, image_id=None):
         action_name = inspect.currentframe().f_code.co_name
         HotelService.authorize_action_hotel_level_3(request, pk, action_name)
-        HotelService.validate_set_image_as_cover(pk, image_id)
+        input_serializer = HotelService.serialize_input_set_image_as_cover(request)
+        HotelService.validate_set_image_as_cover(input_serializer)
+        image = HotelService.set_image_as_cover(input_serializer, pk, image_id)
+        output_serializer_data = HotelService.serialize_output_hotel_image(
+            image, context={"request": request}
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    """
+    @action(
+        detail=True,
+        methods=["put"],
+        url_path="hotel-images/(?P<image_id>\\d+)/set-cover",
+        url_name="set-image-as-cover",
+    )
+    def set_image_as_cover(self, request, pk=None, image_id=None):
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
         cover_image = HotelService.set_image_as_cover(pk, image_id)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             cover_image, context={"request": request}
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["put"],
+        url_path="hotel-images/(?P<image_id>\\d+)/set-non-cover",
+        url_name="set-image-as-non-cover",
+    )
+    def set_image_as_non_cover(self, request, pk=None, image_id=None):
+        action_name = inspect.currentframe().f_code.co_name
+        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        image = HotelService.set_image_as_non_cover(pk, image_id)
+        output_serializer_data = HotelService.serialize_output_hotel_image(
+            image, context={"request": request}
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+"""

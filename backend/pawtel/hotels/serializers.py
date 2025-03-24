@@ -11,6 +11,10 @@ class HotelImageSerializer(serializers.ModelSerializer):
         fields = ["id", "image", "is_cover", "hotel"]
 
 
+class SetImageAsCoverSerializer(serializers.Serializer):
+    set_as_cover = serializers.BooleanField(required=True)
+
+
 class HotelSerializer(BaseSerializer):
     fields_required_for_post = ["name", "address", "city", "description", "hotel_owner"]
     fields_editable = ["name", "address", "city", "description"]
