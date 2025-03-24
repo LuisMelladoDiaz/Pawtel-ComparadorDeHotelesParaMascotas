@@ -150,3 +150,19 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
             hotel_owner
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["patch"],
+        url_path="approve",
+        url_name="approve_hotel_owner_patch",
+    )
+    def approve_hotel_owner_patch(self, request, pk=None):
+        action_name = inspect.currentframe().f_code.co_name
+        HotelOwnerService.authorize_action_hotel_owner_level_2(request, pk, action_name)
+
+        hotel_owner = HotelOwnerService.approve_hotel_owner_patch(pk)
+        output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
+            hotel_owner
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)

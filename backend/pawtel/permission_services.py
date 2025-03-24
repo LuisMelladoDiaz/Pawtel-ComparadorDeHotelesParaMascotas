@@ -64,11 +64,13 @@ class PermissionService:
             "delete_all_hotels_of_hotel_owner_explicit",
             "delete_all_hotels_of_hotel_owner_implicit",
             "retrieve_current_hotel_owner",
+            "approve_hotel_owner_patch",  # solo va a ser mientras no tengamos admin
         },
         UserRole.ADMIN.value: {
             "list",
             "retrieve",
             "list_hotels_of_hotel_owner_explicit",
+            "approve_hotel_owner_patch",
         },
     }
 
@@ -79,6 +81,8 @@ class PermissionService:
             "list_room_types_of_hotel",
             "get_cover_image",
             "get_non_cover_images",
+            "available_room_types",
+            "available_hotels",
         },
         UserRole.HOTEL_OWNER.value: {
             "list",
@@ -98,6 +102,8 @@ class PermissionService:
             "get_cover_image",
             "get_non_cover_images",
             "set_image_as_cover",
+            "available_room_types",
+            "available_hotels",
         },
         UserRole.ADMIN.value: {
             "list",
@@ -108,6 +114,8 @@ class PermissionService:
             "retrieve_image",
             "get_cover_image",
             "get_non_cover_images",
+            "available_room_types",
+            "available_hotels",
         },
     }
 

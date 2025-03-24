@@ -117,3 +117,10 @@ class HotelOwnerService:
             raise PermissionDenied("No hotels to delete.")
 
         hotels_to_delete.delete()
+
+    @staticmethod
+    def approve_hotel_owner_patch(hotel_owner_id):
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(hotel_owner_id)
+        hotel_owner.is_approved = True
+        hotel_owner.save()
+        return hotel_owner
