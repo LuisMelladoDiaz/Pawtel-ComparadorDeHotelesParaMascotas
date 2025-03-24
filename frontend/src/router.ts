@@ -61,12 +61,8 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
       }
       const allowedStates = (newRoute.meta as any).allowedAuthStates as AuthRequirement[];
       newRoute.beforeEnter = async (to, from) => {
-        console.log('beforeEnter', to, from);
         const q = useRoleQuery();
         await q.suspense();
-        if (q.isLoading.value) {
-          throw new Error('Loading role');
-        }
         // if error, assume logged out, redirect to login
         if (q.error.value) {
           return '/login';
