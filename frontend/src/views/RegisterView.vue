@@ -11,8 +11,8 @@ import * as yup from 'yup';
 
 const notyf = new Notyf();
 const router = useRouter();
-const { mutateAsync: createCustomer } = useCreateCustomer();
-const { mutateAsync: createHotelOwner } = useCreateHotelOwner();
+const { mutate: createCustomer } = useCreateCustomer();
+const { mutate: createHotelOwner } = useCreateHotelOwner();
 
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
@@ -39,7 +39,6 @@ const register = async (values) => {
           phone: values.phone,
           password: values.password,
           role: values.role,
-          date_joined: currentDate,
         },
         {
           onSuccess: () => {
@@ -60,7 +59,6 @@ const register = async (values) => {
           phone: values.phone,
           password: values.password,
           role: values.role,
-          date_joined: currentDate,
         },
         {
           onSuccess: () => {
@@ -81,64 +79,64 @@ const register = async (values) => {
 </script>
 
 <template>
-      <div class="container flex justify-center items-center mt-10">
-        <div class="w-full sm:w-1/3 bg-white shadow-lg rounded-lg p-6">
-          <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
+  <div class="container flex justify-center items-center mt-10">
+    <div class="w-full sm:w-1/3 bg-white shadow-lg rounded-lg p-6">
+      <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
 
-          <!-- Formulario con validación -->
-          <Form :validation-schema="validationSchema" @submit="register">
-            <div class="mt-4 relative">
-              <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-              <Field name="username" as="input" id="username" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
-              <ErrorMessage name="username" class="text-red-500 text-sm" />
-            </div>
-
-            <div class="mt-4 relative">
-              <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-              <Field name="email" as="input" id="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
-              <ErrorMessage name="email" class="text-red-500 text-sm" />
-            </div>
-
-            <div class="mt-4 relative">
-              <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
-              <Field name="phone" as="input" id="phone" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
-              <ErrorMessage name="phone" class="text-red-500 text-sm" />
-            </div>
-
-            <div class="mt-4 relative">
-              <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
-              <Field name="role" as="select" id="role" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500">
-                <option value="customer">Cliente</option>
-                <option value="hotel_owner">Dueño de hotel</option>
-              </Field>
-              <ErrorMessage name="role" class="text-red-500 text-sm" />
-            </div>
-
-            <div class="mt-4 relative">
-              <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-              <Field :type="showPassword ? 'text' : 'password'" name="password" as="input" id="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
-              <ErrorMessage name="password" class="text-red-500 text-sm" />
-            </div>
-
-            <div class="mt-4 relative">
-              <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
-              <Field :type="showConfirmPassword ? 'text' : 'password'" name="confirmPassword" as="input" id="confirmPassword" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
-              <ErrorMessage name="confirmPassword" class="text-red-500 text-sm" />
-            </div>
-
-            <div class="mt-6">
-              <button type="submit" class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
-                Registrarse
-              </button>
-            </div>
-
-            <div class="mt-4 text-center">
-              <p class="text-sm text-gray-600">
-                ¿Ya tienes cuenta?
-                <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
-              </p>
-            </div>
-          </Form>
+      <!-- Formulario con validación -->
+      <Form :validation-schema="validationSchema" @submit="register">
+        <div class="mt-4 relative">
+          <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
+          <Field name="username" as="input" id="username" placeholder="Introduce tu nombre de usuario" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+          <ErrorMessage name="username" class="text-red-500 text-sm" />
         </div>
-      </div>
+
+        <div class="mt-4 relative">
+          <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+          <Field name="email" as="input" id="email" placeholder="ejemplo@correo.com" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+          <ErrorMessage name="email" class="text-red-500 text-sm" />
+        </div>
+
+        <div class="mt-4 relative">
+          <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
+          <Field name="phone" as="input" id="phone" placeholder="+34612345678" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+          <ErrorMessage name="phone" class="text-red-500 text-sm" />
+        </div>
+
+        <div class="mt-4 relative">
+          <label for="role" class="block text-sm font-medium text-gray-700">¿Qué eres?</label>
+          <Field name="role" as="select" id="role" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500">
+            <option value="customer">Cliente</option>
+            <option value="hotel_owner">Dueño de hotel</option>
+          </Field>
+          <ErrorMessage name="role" class="text-red-500 text-sm" />
+        </div>
+
+        <div class="mt-4 relative">
+          <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <Field :type="showPassword ? 'text' : 'password'" name="password" as="input" id="password" placeholder="Crea una contraseña segura" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+          <ErrorMessage name="password" class="text-red-500 text-sm" />
+        </div>
+
+        <div class="mt-4 relative">
+          <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
+          <Field :type="showConfirmPassword ? 'text' : 'password'" name="confirmPassword" as="input" id="confirmPassword" placeholder="Confirma tu contraseña" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+          <ErrorMessage name="confirmPassword" class="text-red-500 text-sm" />
+        </div>
+
+        <div class="mt-6">
+          <button type="submit" class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
+            Registrarse
+          </button>
+        </div>
+
+        <div class="mt-4 text-center">
+          <p class="text-sm text-gray-600">
+            ¿Ya tienes cuenta?
+            <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
+          </p>
+        </div>
+      </Form>
+    </div>
+  </div>
 </template>
