@@ -30,10 +30,9 @@ export const useGetAllHotelImages = (hotelId: number) => {
     refetchOnWindowFocus: false,
   });
 };
-
 export const useUploadHotelImage = () => {
   return useMutation({
-    mutationFn: (data: { hotelId: number; image: string; isCover: boolean }) =>
+    mutationFn: (data: { hotelId: number; image: File; isCover: boolean }) =>
       uploadHotelImage(data.hotelId, data.image, data.isCover),
   });
 };

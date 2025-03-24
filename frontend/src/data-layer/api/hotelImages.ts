@@ -21,9 +21,16 @@ export const fetchAllHotelImages = async (hotelId: number) => {
   return response.data as HotelImage[];
 };
 
-export const uploadHotelImage = async (hotelId: number, image: string, isCover: boolean) => {
+export const uploadHotelImage = async (hotelId: number, image: File, isCover: boolean) => {
+  const formData = new FormData();
+  formData.append('image', image, image.name);
+  formData.append('is_cover', isCover ? 'true' : 'false');
+
   const url = `${API_BASE_URL}/hotels/${hotelId}/hotel-images/upload/`;
-  const response = await axios.post(url, { image, is_cover: isCover });
+  const response = await axios.post(url, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
+
   return response.data as HotelImage;
 };
 
