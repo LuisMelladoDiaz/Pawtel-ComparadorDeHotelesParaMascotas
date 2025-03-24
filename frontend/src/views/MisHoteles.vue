@@ -48,7 +48,7 @@ const saveHotel = async () => {
   try {
     const newHotel = await createHotelMutation.mutateAsync(hotelData.value);
     
-    router.push(`/mis-hoteles/edit/${newHotel.id}`);
+    router.push(`/mis-hoteles`);
     modalOpen.value = false; 
   } catch (error) {
     console.error('Error al guardar el hotel', error);
@@ -60,6 +60,8 @@ const deleteHotel = async (id) => {
   if (confirm('¿Estás seguro de eliminar este hotel?')) {
     try {
       await deleteHotelMutation.mutateAsync(id);
+      notyf.success('Hotel eliminado exitosamente.');
+      window.location.href = '/mis-hoteles';
     } catch (error) {
       notyf.error('Error al eliminar hotel.');
       console.error('Error al eliminar hotel', error);
