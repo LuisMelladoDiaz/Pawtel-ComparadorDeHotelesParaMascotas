@@ -159,7 +159,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     def approve_hotel_owner_patch(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelOwnerService.authorize_action_hotel_owner_level_1(request, action_name)
+        HotelOwnerService.authorize_action_hotel_owner_level_2(request, pk, action_name)
 
         hotel_owner = HotelOwnerService.approve_hotel_owner_patch(pk)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
