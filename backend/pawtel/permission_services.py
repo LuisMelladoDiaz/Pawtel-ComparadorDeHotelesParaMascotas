@@ -64,6 +64,7 @@ class PermissionService:
             "delete_all_hotels_of_hotel_owner_explicit",
             "delete_all_hotels_of_hotel_owner_implicit",
             "retrieve_current_hotel_owner",
+            "approve_hotel_owner_patch",
         },
         UserRole.ADMIN.value: {
             "list",

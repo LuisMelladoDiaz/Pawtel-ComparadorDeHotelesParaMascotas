@@ -52,8 +52,5 @@ class HotelOwnerServiceTest(TestCase):
             HotelOwnerService.delete_all_hotels_of_hotel_owner(self.hotel_owner.id)
 
     def test_approve_hotel_owner_patch(self):
-        # Ejecutar el método del servicio
-        updated_owner = HotelOwnerService.approve_hotel_owner(self.hotel_owner.id)
-
-        # Verificar que se ha aprobado
+        updated_owner = HotelOwnerService.approve_hotel_owner_patch(self.hotel_owner.id)
         self.assertTrue(updated_owner.is_approved)
