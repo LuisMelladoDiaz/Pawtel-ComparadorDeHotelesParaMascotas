@@ -14,9 +14,9 @@
 
 <br><br>
 
-# 📑 **Informe de uso de IA** - Sprint 1 🚀
+# 📑 **Informe de uso de IA** - Sprint 2 🚀
 
-**📅 Entregable:** Sprint 1
+**📅 Entregable:** Sprint 2
 **📆 Fecha:** 26/03/2025
 **👥 Equipo:** G11
 
@@ -57,6 +57,7 @@
 | 📅 Fecha       | 🔢 N° de Versión | 📄 Descripción                   | ✍️ Elaborado por           |
 |-------------|---------------|-------------------------------|-------------------------|
 | 22/03/2025  | v 1.0         | Versión inicial del documento - Parte de Rafael | Rafael Castillo Cebolla |
+| 24/03/2025  | v 1.1         | Parte de Dani | Daniel Flores de Francisco |
 
 ---
 
@@ -177,7 +178,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Daniel Flores de Francisco
-- **Sprint:** Sprint 1
+- **Sprint:** Sprint 2
 - **Rol en el proyecto:** PM, programador backend, documentación y devops
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -192,34 +193,33 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
 | Asesoramiento de cómo escribir el Workflow. | ChatGPT | Usada para ver los workflows usados, sintaxis y corrección de errores |
-| Fórmula primera de las métricas | ChatGPT | Dado lo que vamos a medir, le pedí una fórmula normalizada |
-| Solución de problemas con git | ChatGPT | Cómo resolver conflictos con git desde la consola |
 | Conversión a markdown | ChatGPT | Recibiendo el documento en word o pdf se le pide pasarlo a markdown |
+| Plantilla y modificaciones del Customer Agreement | DeepSeek | Usada para hacer más largo el Customer Agreement e identificar unfair clauses |
+| Búsqueda de Plataformas de Análisis de Código | ChatGPT | Usada como asesoría de las distintas plataformas de análisis de código estático y sus integración usando GitHub Actions. Apoyado en videos de Youtube |
 
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10 - 15
-- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo a la hora de reescribir la documentación, y hacerme el esqueleto de los Workflows usados teniendo en cuenta los distíntos Sistemas Operativos que el equipo maneja.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5 - 7
+- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo a la hora de ponerme a configurar el CI. Con la documentación tambien me ha ayudado ha pasar documentos a formato Markdown y a perfeccionarlos
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Dame el esqueleto de un workflow lanzado por cada push a una rama main, teniendo en cuenta los distintos OS: Linux, Windows e IOS
-2. Dada esta métricas, necesito una formula que tenga en cuenta que cada persona realiza distínto número de tareas. La quiero normalizada de 0 a 1
-3. Al hacer commit me sale este error de ramas: ¿Qué tengo que hacer para solucionarlo?
-4. Pasame este doc a markdown
+1. ¿Cómo iniciarias un servidor en Sonarqube?
+2. Hazme los cambios necesarios para que sea compatible con la versión de (paqiete) (fichero)
+3. Giving this template of customer agreement, and this document about my business, fullfil this agreement using this template and the information of my business doc
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** La conversión a markdown no es perfecta y no coge las imagenes. Respecto a las métricas, dió una formula rara o no me supe expresar bien, lo cula hizo que posteriormente la volviésemos a cambiar.
+- **Limitaciones detectadas en la IA:** Le falta mucho contexto. Muchas veces patina y en el CI te da mal la sintaxis, paquetes y versiones incompatibles y más cosas.
 
 #### 7. Evaluación General
 
-- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** Ninguno, la utilizo cuando me negro o voy con prisas.
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Si
+- **Comentarios adicionales sobre la experiencia con IA:** Ninguno
 
 ---
 

@@ -37,12 +37,8 @@ const login = (values) => {
     });
 };
 </script>
-
 <template>
-    <div class="flex flex-col min-h-screen">
-        <NavbarTerracota />
-        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
-            <div class="container flex justify-center items-center mt-10 hidden md:flex">
+            <div class="container flex justify-center items-center mt-10">
                 <div class="w-full sm:w-1/3 bg-white shadow-lg rounded-lg p-6">
                     <h2 class="text-2xl font-semibold text-gray-800 text-center">Iniciar Sesión</h2>
 
@@ -77,17 +73,14 @@ const login = (values) => {
                         <div class="mt-4 text-center">
                             <p class="text-sm text-gray-600">
                                 ¿No tienes cuenta?
-                                <router-link to="/register" class="text-blue-600 hover:underline">Regístrate aquí</router-link>
+                                <router-link to="/register" class="text-azul-suave hover:underline">Regístrate aquí</router-link>
                             </p>
                         </div>
                     </Form>
                 </div>
             </div>
-        </div>
-
-        <Footer />
-    </div>
 </template>
+
 
 <style scoped>
 @media (max-width: 900px) {
