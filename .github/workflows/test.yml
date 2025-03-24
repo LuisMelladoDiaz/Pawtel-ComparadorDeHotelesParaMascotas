@@ -48,12 +48,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Wait for database to be ready
-        run: sleep 10  # Asegura que MariaDB esté listo antes de continuar
+        run: sleep 10  
 
       - name: Run migrations
         env:
           SECRET_KEY: your-secret-key
-          DEBUG: true
+          DEBUG: True
           DB_NAME: test_db
           DB_USER: test_user
           DB_PASSWORD: test_password
@@ -86,7 +86,7 @@ jobs:
       - name: Run tests
         env:
           SECRET_KEY: your-secret-key
-          DEBUG: true
+          DEBUG: True
           DB_NAME: test_db
           DB_USER: test_user
           DB_PASSWORD: test_password
