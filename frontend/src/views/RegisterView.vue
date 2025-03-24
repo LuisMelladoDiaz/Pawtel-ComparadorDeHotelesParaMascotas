@@ -1,8 +1,6 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import NavbarTerracota from '../components/NavBarTerracota.vue';
-import Footer from '../components/Footer.vue';
 import { useCreateCustomer } from '@/data-layer/hooks/customers';
 import { useCreateHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { Notyf } from 'notyf';
