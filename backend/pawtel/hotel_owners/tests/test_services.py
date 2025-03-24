@@ -50,3 +50,10 @@ class HotelOwnerServiceTest(TestCase):
     def test_delete_all_hotels_of_hotel_owner_no_hotels(self):
         with self.assertRaises(PermissionDenied, msg="No hotels to delete."):
             HotelOwnerService.delete_all_hotels_of_hotel_owner(self.hotel_owner.id)
+
+    def test_approve_hotel_owner_patch(self):
+        # Ejecutar el método del servicio
+        updated_owner = HotelOwnerService.approve_hotel_owner(self.hotel_owner.id)
+
+        # Verificar que se ha aprobado
+        self.assertTrue(updated_owner.is_approved)
