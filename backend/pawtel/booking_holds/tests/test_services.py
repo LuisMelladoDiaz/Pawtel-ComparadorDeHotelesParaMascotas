@@ -42,8 +42,8 @@ class HotelServiceTest(TestCase):
             pet_type="CAT",
         )
 
-    def test_get_all_room_types_of_hotel(self):
-        room_types = HotelService.get_all_room_types_of_hotel(self.hotel.id)
+    def test_list_room_types_of_hotel(self):
+        room_types = HotelService.list_room_types_of_hotel(self.hotel.id)
         self.assertEqual(len(room_types), 2)
         self.assertEqual(room_types[0].name, "Single")
         self.assertEqual(room_types[1].name, "Double")
