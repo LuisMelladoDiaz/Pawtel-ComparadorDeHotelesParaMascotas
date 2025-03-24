@@ -14,13 +14,10 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     serializer_class = RoomTypeSerializer
 
     def list(self, request):
-        action_name = inspect.currentframe().f_code.co_name
-        RoomTypeService.authorize_action_room_type_level_1(request, action_name)
-        room_types = RoomTypeService.list_room_types()
-        output_serializer_data = RoomTypeService.serialize_output_room_type(
-            room_types, many=True
-        )
-        return Response(output_serializer_data, status=status.HTTP_200_OK)
+        filters = request.query_params.dict()
+        hotels = RoomTypeService.list_filtered_room_types(filters)
+        serializer = RoomTypeSerializer(hotels, many=True, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
