@@ -15,6 +15,7 @@ import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
 import { type RouteRecordRaw } from 'vue-router';
 import { useRoleQuery } from './data-layer/auth';
+import axios from 'axios';
 
 type ComponentLike = Component | (() => Promise<Component>);
 
@@ -61,18 +62,21 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
       }
       const allowedStates = (newRoute.meta as any).allowedAuthStates as AuthRequirement[];
       newRoute.beforeEnter = async (to, from) => {
-        const q = useRoleQuery();
-        await q.suspense();
-        // if error, assume logged out, redirect to login
-        if (q.error.value) {
-          return '/login';
-        }
-        const role = q.data.value;
+        try {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/user-info/`);
+        const role = response.data.role;
         const state = role == 'customer' ? AuthRequirement.LOGGED_IN_CUSTOMER : role == 'hotel_owner' ? AuthRequirement.LOGGED_IN_HOTEL_OWNER : AuthRequirement.LOGGED_OUT;
         if (!allowedStates.includes(state)) {
            return '/';
         }
         return true;
+        } catch (e) {
+          if (allowedStates.includes(AuthRequirement.LOGGED_OUT)) {
+            return true;
+          } else {
+            return '/login';
+          }
+        }
       };
     }
 
