@@ -4,11 +4,8 @@ import Footer from '../components/Footer.vue';
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
-    <NavbarTerracota />
     <section class="relative mx-auto py-16 max-w-7xl px-6 text-center w-full flex flex-col flex-grow">
       <h1 class="text-5xl font-extrabold text-[#6C8CC3] font-titleHome drop-shadow-lg">Sobre Nosotros</h1>
-
       <div class="mt-12 bg-white shadow-lg p-8 rounded-xl border-t-4 border-[#C36C6C] shadow-md transition-all">
         <h2 class="text-3xl font-semibold text-[#C36C6C]">¿Por qué Pawtel?</h2>
         <p class="text-gray-700 mt-4 text-lg">
@@ -18,7 +15,6 @@ import Footer from '../components/Footer.vue';
           hospedaje para tu mascota con facilidad.
         </p>
       </div>
-
       <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-10">
         <div class="bg-white shadow-2xl p-8 rounded-xl border-t-4 border-[#C36C6C] transform hover:scale-105 transition-all">
           <h2 class="text-3xl font-semibold text-[#C36C6C]">Nuestro Objetivo</h2>
@@ -38,6 +34,4 @@ import Footer from '../components/Footer.vue';
         </div>
       </div>
     </section>
-    <Footer />
-  </div>
 </template>
