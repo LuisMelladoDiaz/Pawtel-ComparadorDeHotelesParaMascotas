@@ -64,12 +64,10 @@ class CustomerServiceTest2(TestCase):
             total_price=300.00,
         )
 
-    def test_get_all_bookings_by_customer(self):
-        """Verifica que el método devuelve todas las reservas de un cliente."""
-        bookings = CustomerService.get_all_bookings_by_customer(self.customer.id)
-        self.assertEqual(len(bookings), 2)  # Debe devolver dos reservas
+    def test_list_bookings_of_customer(self):
+        bookings = CustomerService.list_bookings_of_customer(self.customer.id)
+        self.assertEqual(len(bookings), 2)
 
     def test_get_all_bookings_by_non_existent_customer(self):
-        """Verifica que si el cliente no existe, devuelve una lista vacía."""
-        bookings = CustomerService.get_all_bookings_by_customer(999)
-        self.assertEqual(len(bookings), 0)  # No debe haber reservas
+        bookings = CustomerService.list_bookings_of_customer(999)
+        self.assertEqual(len(bookings), 0)

@@ -132,10 +132,7 @@ const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
 <template>
-    <NavbarTerracota />
-
-    <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
-      <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
+      <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1 mt-5">
         <span class="font-semibold">Gestión de Hoteles</span>
         <button @click="openModal()" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
           <i class="fas fa-plus mr-2"></i> Añadir Nuevo
@@ -193,10 +190,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Siguiente →</button>
         </div>
       </div>
-    </div>
-
-    <Footer />
-
     <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div class="bg-white p-6 rounded-lg w-1/3">
         <Form @submit="saveHotel" :validation-schema="hotelSchema" :initial-values="hotelData">

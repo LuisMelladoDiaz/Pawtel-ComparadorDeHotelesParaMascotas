@@ -199,11 +199,6 @@ const hotels = computed(() =>
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
-    <Navbar />
-    <FilterNavbar />
-
-        <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow items-center">
         <!-- Desktop version -->
         <div class="container mt-5 hidden md:flex">
 
@@ -426,10 +421,6 @@ const hotels = computed(() =>
 
       </div>
 
-    </div>
-
-    <Footer />
-  </div>
 </template>
 
 <style scoped>

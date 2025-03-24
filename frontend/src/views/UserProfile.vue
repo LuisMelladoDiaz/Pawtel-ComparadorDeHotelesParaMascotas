@@ -40,9 +40,6 @@ const deleteAccount = () => {
 </script>
 
 <template>
-    <div class="flex flex-col min-h-screen text-sm bg-gray-100">
-        <NavbarTerracota />
-
         <div class="max-w-8xl mx-auto px-4 py-8 flex-grow flex items-center justify-center">
 
             <div class="bg-white shadow-md rounded-md p-5 border w-full max-w-5xl">
@@ -119,5 +116,4 @@ const deleteAccount = () => {
 
             </div>
         </Modal>
-    </div>
 </template>
