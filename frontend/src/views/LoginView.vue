@@ -74,7 +74,7 @@ const login = (values) => {
                         <div class="mt-4 text-center">
                             <p class="text-sm text-gray-600">
                                 ¿No tienes cuenta?
-                                <router-link to="/register" class="text-blue-600 hover:underline">Regístrate aquí</router-link>
+                                <router-link to="/register" class="text-azul-suave hover:underline">Regístrate aquí</router-link>
                             </p>
                         </div>
                     </Form>

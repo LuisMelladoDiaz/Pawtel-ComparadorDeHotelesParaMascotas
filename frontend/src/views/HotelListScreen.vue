@@ -45,6 +45,8 @@ const rooms = ref(["Single",
     const selectedRoom = ref("");
     const minPrice = ref(0);
     const maxPrice = ref(500);
+    const tempMinPrice = ref(minPrice.value);
+    const tempMaxPrice = ref(maxPrice.value);
     const sortBy = ref("");
     const direction = ref("asc");
 
@@ -63,6 +65,8 @@ const updateFiltersFromRoute = () => {
   maxPrice.value = route.query.max_price ? Number(route.query.max_price) : 500;
   sortBy.value = route.query.sort_by || "";
   direction.value = route.query.direction || "asc";
+  tempMinPrice.value = minPrice.value;
+  tempMaxPrice.value = maxPrice.value;
 };
 
 const appliedFilters = ref([]);
@@ -86,12 +90,28 @@ const applyFilters = () => {
   appliedFilters.value = [];
   if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
   if (selectedRoom.value) appliedFilters.value.push(`Tipo de habitación: ${selectedRoom.value}`);
+  if (maxPrice.value !== 500) {
   appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
-  appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
+  }
+  if (minPrice.value !== 0) {
+    appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
+  }
 
   isFiltersOpen.value = false;
   notyf.success('Filtros aplicados correctamente');
 };
+
+const commitPriceFilters = () => {
+  if (
+    tempMinPrice.value !== minPrice.value ||
+    tempMaxPrice.value !== maxPrice.value
+  ) {
+    minPrice.value = tempMinPrice.value;
+    maxPrice.value = tempMaxPrice.value;
+    applyFilters();
+  }
+};
+
 
 // Apply debounce to applyFilters
 const debouncedApplyFilters = debounce(() => {
@@ -103,9 +123,6 @@ watch([selectedCity, selectedRoom, sortBy, direction], () => {
   applyFilters();
 });
 
-watch([minPrice, maxPrice], () => {
-  debouncedApplyFilters(); // Use debouncedApplyFilters here
-});
 
 const removeFilter = (filter) => {
   if (filter.startsWith("Ciudad:")) {
@@ -154,10 +171,6 @@ const sortByWithDir = computed(() => {
 watch([selectedCity, selectedRoom, sortBy, direction], () => {
   refetchHotels();
   notyf.success('Hoteles actualizados con los nuevos filtros');
-});
-
-watch([minPrice, maxPrice], () => {
-  refetchHotels();
 });
 
 const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAllHotels({
@@ -215,12 +228,12 @@ const hotels = computed(() =>
             <div class="flex flex-col gap-2">
                 <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
                 <div class="flex items-center gap-2">
-                <input type="range" :min="0" :max="maxPrice" v-model="minPrice" class="w-full custom-range">
-                <span class="text-sm">{{ minPrice }}€</span>
+                <input type="range" :min="0" :max="tempMaxPrice" v-model="tempMinPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
+                <span class="text-sm">{{ tempMinPrice }}€</span>
                 </div>
                 <div class="flex items-center gap-2">
-                <input type="range" :min="minPrice" :max="500" v-model="maxPrice" class="w-full custom-range">
-                <span class="text-sm">{{ maxPrice }}€</span>
+                <input type="range" :min="tempMinPrice" :max="500" v-model="tempMaxPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
+                <span class="text-sm">{{ tempMaxPrice }}€</span>
                 </div>
             </div>
             </div>
@@ -368,12 +381,12 @@ const hotels = computed(() =>
             <div>
               <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
               <div class="flex items-center gap-2">
-                <input type="range" :min="20" :max="maxPrice" v-model="minPrice" class="w-full">
-                <span class="text-sm">{{ minPrice }}€</span>
+                <input type="range" :min="0" :max="tempMaxPrice" v-model="tempMinPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
+                <span class="text-sm">{{ tempMinPrice }}€</span>
               </div>
               <div class="flex items-center gap-2">
-                <input type="range" :min="minPrice" :max="500" v-model="maxPrice" class="w-full">
-                <span class="text-sm">{{ maxPrice }}€</span>
+                <input type="range" :min="tempMinPrice" :max="500" v-model="tempMaxPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
+                <span class="text-sm">{{ tempMaxPrice }}€</span>
               </div>
             </div>
 

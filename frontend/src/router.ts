@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import HotelDetailsView from './views/HotelDetailView.vue';
-import TemplateScreen1 from './views/TemplateScreen1.vue'
-import TemplateScreen2 from './views/TemplateScreen2.vue'
+import TemplateScreen from './views/TemplateScreen.vue'
 import UserProfile from './views/UserProfile.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
@@ -99,7 +98,7 @@ const routes = [
     path: '/mis-reservas',
     component: createComponent({
       layout: LayoutDefault,
-      component: TemplateScreen1,
+      component: TemplateScreen,
     })
   },
 ];
