@@ -10,27 +10,41 @@ const { data: customer, isLoading: isLoadingCustomer } = useGetCurrentCustomer()
 const { data: bookings, isLoading: isLoadingBookings } = useGetMyBookings();
 const today = new Date().toISOString().split('T')[0];
 
+// Ordenar reservas por fecha de inicio (descendente)
 const sortedBookings = computed(() => {
   if (!bookings?.value) return [];
   return [...bookings.value].sort((a, b) => new Date(b.start_date) - new Date(a.start_date));
 });
 
+// Cache para almacenar las consultas de hoteles y evitar múltiples llamadas a useGetHotelById
+const hotelCache = new Map();
 const hotelDictById = computed(() => {
-  return bookings?.value.reduce((acc, booking) => {
-    const { data: hotelData } = useGetHotelById(booking.hotel_id);
-    acc[booking.hotel_id] = hotelData;
+  if (!bookings?.value) return {};
+
+  return bookings.value.reduce((acc, booking) => {
+    if (!hotelCache.has(booking.hotel_id)) {
+      hotelCache.set(booking.hotel_id, useGetHotelById(booking.hotel_id).data);
+    }
+    acc[booking.hotel_id] = hotelCache.get(booking.hotel_id);
     return acc;
   }, {});
 });
 
+// Cache para almacenar las consultas de tipos de habitación
+const roomTypeCache = new Map();
 const roomTypeDictById = computed(() => {
-  return bookings?.value.reduce((acc, booking) => {
-    const { data: roomTypeData } = useGetRoomTypeById(booking.room_type);
-    acc[booking.room_type] = roomTypeData;
+  if (!bookings?.value) return {};
+
+  return bookings.value.reduce((acc, booking) => {
+    if (!roomTypeCache.has(booking.room_type)) {
+      roomTypeCache.set(booking.room_type, useGetRoomTypeById(booking.room_type).data);
+    }
+    acc[booking.room_type] = roomTypeCache.get(booking.room_type);
     return acc;
   }, {});
 });
 
+// Función para formatear fechas
 const formatDate = (dateStr) => {
   const date = new Date(dateStr);
   return new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: 'long', year: 'numeric' }).format(date);
@@ -42,7 +56,7 @@ const formatDate = (dateStr) => {
     <NavbarTerracota />
     <div class="max-w-4xl mx-auto px-5 w-full flex flex-col flex-grow">
       
-      <!-- Contenedor padre -->
+      <!-- Contenedor principal -->
       <div class="bg-white p-6 rounded-lg shadow-md mt-5 border border-black">
         <h1 class="text-2xl font-bold mb-4 text-center">Mis Reservas</h1>
 
@@ -66,7 +80,9 @@ const formatDate = (dateStr) => {
               <!-- Información de la reserva -->
               <div class="flex-1 flex flex-col justify-between">
                 <div>
-                  <h2 class="text-lg font-semibold">{{ hotelDictById[booking.hotel_id]?.value?.name || 'Hotel Desconocido' }}</h2>
+                  <h2 class="text-lg font-semibold">
+                    {{ hotelDictById[booking.hotel_id]?.value?.name || 'Hotel Desconocido' }}
+                  </h2>
                   <p class="text-gray-500 text-sm">
                     {{ hotelDictById[booking.hotel_id]?.value?.address || 'Dirección desconocida' }},
                     {{ hotelDictById[booking.hotel_id]?.value?.city || 'Ciudad desconocida' }}
@@ -78,7 +94,8 @@ const formatDate = (dateStr) => {
 
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-2 mt-2">
                   <p class="text-gray-600 text-sm">
-                    <strong>Habitación:</strong> {{ roomTypeDictById[booking.room_type]?.value?.name || 'Tipo desconocido' }},
+                    <strong>Habitación:</strong> 
+                    {{ roomTypeDictById[booking.room_type]?.value?.name || 'Tipo desconocido' }},
                     {{ roomTypeDictById[booking.room_type]?.value?.pet_type || 'Tipo desconocido' }}
                   </p>
 
