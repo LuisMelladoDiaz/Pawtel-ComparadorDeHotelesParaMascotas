@@ -13,10 +13,8 @@ import * as yup from 'yup';
 
 const router = useRouter();
 const notyf = new Notyf();
-const { data: hotelOwner, isLoading: isLoadingCurrentOwner } = useGetCurrentHotelOwner();
-
+const { data: hotelOwner } = useGetCurrentHotelOwner();
 const hotelOwnerId = computed(() => hotelOwner.value?.id ?? null);
-
 const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(
   computed(() => hotelOwnerId.value),
   computed(() => !!hotelOwnerId.value)
@@ -24,9 +22,16 @@ const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(
 
 const createHotelMutation = useCreateHotel();
 const deleteHotelMutation = useDeleteHotel();
-
 const modalOpen = ref(false);
+const isEditing = ref(false);
 const hotelData = ref({ name: '', address: '', city: '', description: '' });
+
+const hotelSchema = yup.object({
+  name: yup.string().required('El nombre es obligatorio'),
+  address: yup.string().required('La dirección es obligatoria'),
+  city: yup.string().required('La ciudad es obligatoria'),
+  description: yup.string().required('La descripción es obligatoria'),
+});
 
 const currentPage = ref(1);
 const itemsPerPage = 6;
@@ -51,10 +56,10 @@ const saveHotel = async () => {
     router.push(`/mis-hoteles`);
     modalOpen.value = false; 
   } catch (error) {
+    notyf.error('Error al crear el hotel.');
     console.error('Error al guardar el hotel', error);
   }
 };
-
 
 const deleteHotel = async (id) => {
   if (confirm('¿Estás seguro de eliminar este hotel?')) {
@@ -78,8 +83,6 @@ const editHotel = (id) => {
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
-<template>
-    <NavbarTerracota />
 
     <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
       <!-- Cabecera -->
@@ -162,4 +165,5 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         </div>
       </div>
   </div>
+  <Footer />
 </template>
