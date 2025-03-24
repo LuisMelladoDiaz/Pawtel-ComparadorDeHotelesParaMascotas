@@ -105,8 +105,6 @@ const deleteAccount = () => {
             </div>
         </div>
 
-        <Footer class="mt-auto" />
-
         <!-- Modal para cambiar contraseña -->
         <Modal :isOpen="showPasswordModal" title="Cambiar Contraseña" @close="showPasswordModal = false" class="absolute inset-0 flex items-center justify-center z-50 bg-transparent w-full max-w-4xl mt-6">
             <div class="flex flex-col gap-4">
