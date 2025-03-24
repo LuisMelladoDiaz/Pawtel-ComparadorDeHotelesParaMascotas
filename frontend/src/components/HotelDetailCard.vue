@@ -31,22 +31,24 @@ defineProps({
       <!-- Columna 2: Galería de imágenes -->
       <div class="flex-1">
         <div class="image-gallery grid grid-cols-2 gap-2">
-          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-32 object-cover rounded-lg" />
+          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-36 object-cover rounded-lg" />
         </div>
       </div>
 
       <!-- Columna 3: Precio y Detalles -->
-      <div class="flex-1 flex flex-col items-center text-center">
+      <div class="flex-1 flex flex-col items-center text-center justify-between">
         <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
-        <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col">
+        <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col justify-between">
           <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col">
             <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a> 
             <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
           </div>
-          <p class="text-sm text-justify text-[1rem] text-gray-700 font-bold p-1">Descripción</p> 
-          <p class="text-sm text-justify text-gray-700 max-h-[79px] p-1 overflow-y-auto">
-            {{ description }}{{ description }}
-          </p>
+          <div>
+            <p class="text-sm text-justify text-[1rem] text-gray-700 font-bold p-1">Descripción</p> 
+            <p class="text-sm text-justify text-gray-700 p-1">
+              {{ description }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
