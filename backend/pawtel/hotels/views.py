@@ -29,8 +29,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_2(request, pk, action_name)
+        ##! TODO: Fix this maybe with a better auth system to check object
         hotel = HotelService.retrieve_hotel(pk)
         output_serializer_data = HotelService.serialize_output_hotel(
             hotel, context={"request": request}
