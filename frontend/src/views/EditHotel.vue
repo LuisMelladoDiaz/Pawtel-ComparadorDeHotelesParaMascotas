@@ -1,8 +1,6 @@
 <script setup>
 import { ref, computed, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import NavbarTerracota from '../components/NavBarTerracota.vue';
-import Footer from '../components/Footer.vue';
 import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
@@ -140,7 +138,6 @@ const saveNewRoomType = async () => {
 
 <template>
   <div class="flex flex-col min-h-screen">
-    <NavbarTerracota />
 
     <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
       <div class="flex flex-col lg:flex-row gap-6">
@@ -267,6 +264,5 @@ const saveNewRoomType = async () => {
       </div>
     </div>
 
-    <Footer />
   </div>
 </template>
