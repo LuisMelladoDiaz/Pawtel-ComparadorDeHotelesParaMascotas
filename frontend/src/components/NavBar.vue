@@ -61,13 +61,13 @@
     <transition name="fade">
     <div v-if="isMenuOpen" class="mobile-menu lg:hidden bg-white py-4 border-t-2 border-terracota shadow-lg rounded-b-lg">
       <div class="nav-links flex flex-col text-terracota font-bold text-base items-center">
-        <router-link 
-          to="/hotel-owner-panel" 
-          class="hover:underline p-2"
-          v-if="isLoggedIn"
-        >
-          Mis Hoteles
-        </router-link>
+        <router-link v-if="isLoggedIn && roleQuery == 'customer'" to="/mis-reservas" class="hover:underline">
+            Mis Reservas
+          </router-link>
+
+          <router-link v-if="isLoggedIn && roleQuery == 'hotel_owner'" to="/mis-hoteles" class="hover:underline">
+            Mis Hoteles
+          </router-link>
         <router-link to="/sobre-nosotros" class="hover:underline p-2">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline p-2">Contacto</router-link>
       </div>
