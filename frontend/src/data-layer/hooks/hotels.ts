@@ -10,6 +10,7 @@ import {
   deleteHotel,
   uploadImageToHotel,
   type Hotel,
+  fetchHotelByRoomTypeId,
 } from '@/data-layer/api/hotels';
 
 export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
@@ -109,4 +110,17 @@ export const useUploadImageToHotel = () => {
       queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
     },
   });
+
+  
 };
+
+export const useGetHotelByRoomTypeId = (roomTypeId: MaybeRef<number>) => {
+  return useQuery({
+    queryKey: ['hotelByRoomTypeId', roomTypeId],
+    queryFn: () => fetchHotelByRoomTypeId(toValue(roomTypeId)),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
+  });
+};
+
+
