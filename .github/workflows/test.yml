@@ -52,6 +52,7 @@ jobs:
 
       - name: Run migrations
         env:
+          DEBUG: True
           DB_NAME: test_db
           DB_USER: test_user
           DB_PASSWORD: test_password
@@ -69,6 +70,7 @@ jobs:
 
       - name: Run tests
         env:
+          DEBUG: True
           DB_NAME: test_db
           DB_USER: test_user
           DB_PASSWORD: test_password
