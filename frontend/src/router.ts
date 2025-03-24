@@ -55,7 +55,7 @@ const routes = [
   {
     path: '/hotels',
     component: createComponent({
-      layout: LayoutDefault,
+      layout: LayoutWithFilter,
       component: HotelListScreen,
     })
   },
