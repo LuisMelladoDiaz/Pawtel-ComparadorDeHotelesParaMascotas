@@ -10,6 +10,7 @@ from pawtel.hotels.models import Hotel, HotelImage
 from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.permission_services import PermissionService
 from pawtel.room_types.models import RoomType
+from pawtel.room_types.services import RoomTypeService
 from rest_framework.exceptions import (NotFound, PermissionDenied,
                                        ValidationError)
 
@@ -144,10 +145,11 @@ class HotelService:
         "limit": int,
         "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
         "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+        "is_available": bool,
     }
 
     @staticmethod
-    def validate_filters(filters):
+    def __validate_filters(filters):
         """Ensures filters are valid and have correct types."""
         if filters is None:
             return {}
@@ -166,7 +168,26 @@ class HotelService:
         return validated
 
     @staticmethod
-    def apply_filters(hotels, filters):
+    def is_hotel_available(
+        hotel_id, start_date, end_date, pet_type=None, min_price=None, max_price=None
+    ):
+        room_types = HotelService.get_all_room_types_of_hotel(hotel_id)
+        for room_type in room_types:
+            if pet_type and room_type.pet_type != pet_type:
+                continue
+            if min_price and room_type.price_per_night < min_price:
+                continue
+            if max_price and room_type.price_per_night > max_price:
+                continue
+            if RoomTypeService.is_room_type_available(
+                room_type.id, start_date, end_date
+            ):
+                return True
+
+        return False
+
+    @staticmethod
+    def __apply_filters(hotels, filters):
         """Applies filters to a queryset."""
         q = Q()
 
@@ -188,6 +209,31 @@ class HotelService:
         if "min_price_per_night" in filters:
             q &= Q(roomtype__price_per_night__gte=filters["min_price_per_night"])
 
+        if (
+            ("is_available" in filters)
+            and ("start_date" in filters)
+            and ("end_date" in filters)
+            and filters.get("is_available") == True
+        ):
+            start_date = filters.get("start_date")
+            end_date = filters.get("end_date")
+            RoomTypeService.validate_room_type_available(start_date, end_date)
+
+            available_hotel_ids = [
+                hotel.id
+                for hotel in hotels
+                if HotelService.is_hotel_available(
+                    hotel.id,
+                    start_date,
+                    end_date,
+                    filters.get("pet_type"),
+                    filters.get("min_price_per_night"),
+                    filters.get("max_price_per_night"),
+                )
+            ]
+
+            q &= Q(id__in=available_hotel_ids)
+
         hotels = hotels.filter(q).distinct()
 
         return hotels.annotate(
@@ -196,12 +242,15 @@ class HotelService:
         )
 
     @staticmethod
-    def list_filtered_hotels(filters=None):
+    def list_filtered_hotels(filters=None, allow_archived=False):
         """Lists hotels with filtering, sorting, and limiting."""
-        hotels = Hotel.objects.filter(is_archived=False)
+        if allow_archived:
+            hotels = Hotel.objects.all()
+        else:
+            hotels = Hotel.objects.filter(is_archived=False)
 
-        filters = HotelService.validate_filters(filters)
-        hotels = HotelService.apply_filters(hotels, filters)
+        filters = HotelService.__validate_filters(filters)
+        hotels = HotelService.__apply_filters(hotels, filters)
 
         if "sort_by" in filters:
             sort_field = filters["sort_by"]
@@ -223,13 +272,6 @@ class HotelService:
         return hotels
 
     # Others -----------------------------------------------------------------
-
-    @staticmethod
-    def list_hotels(allow_archived=False):
-        if allow_archived:
-            return Hotel.objects.all()
-        else:
-            return Hotel.objects.filter(is_archived=False)
 
     @staticmethod
     def list_room_types_of_hotel(hotel_id):
