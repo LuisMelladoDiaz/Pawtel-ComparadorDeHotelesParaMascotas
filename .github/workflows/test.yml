@@ -21,6 +21,7 @@ jobs:
         image: mariadb:10.6
 
         env:
+          DEBUG: True
           MYSQL_DATABASE: test_db
           MYSQL_USER: test_user
           MYSQL_PASSWORD: test_password
@@ -48,7 +49,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Wait for database to be ready
-        run: sleep 10  # Asegura que MariaDB esté listo antes de continuar
+        run: sleep 10  
 
       - name: Run migrations
         env:
