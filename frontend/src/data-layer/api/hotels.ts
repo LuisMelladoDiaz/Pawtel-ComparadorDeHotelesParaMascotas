@@ -61,3 +61,14 @@ export const uploadImageToHotel = async (hotelId: number, image: File, isCover: 
   );
   return response.data;
 }
+
+export const fetchHotelByRoomTypeId = async (roomTypeId: number) => {
+  const url = `${API_BASE_URL}/room-types/${roomTypeId}/hotel/`;
+  const response = await axios.get(url);
+  return response.data as Hotel;
+};
+export const fetchRoomTypesByHotel = async (hotelId: number) => {
+  const url = `${API_BASE_URL}/hotels/${hotelId}/room-types/`;
+  const response = await axios.get(url);
+  return response.data;
+};

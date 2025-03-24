@@ -37,7 +37,6 @@ const login = (values) => {
     });
 };
 </script>
-
 <template>
             <div class="container flex justify-center items-center mt-10">
                 <div class="w-full sm:w-1/3 bg-white shadow-lg rounded-lg p-6">
@@ -81,6 +80,7 @@ const login = (values) => {
                 </div>
             </div>
 </template>
+
 
 <style scoped>
 @media (max-width: 900px) {
