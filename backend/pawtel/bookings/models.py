@@ -58,5 +58,10 @@ class Booking(models.Model):
                 "End date cannot be earlier than start date."
             )
 
+        if (self.end_date - self.start_date).days >= 186:
+            errors.setdefault("booking_end_date", []).append(
+                "The booking duration cannot exceed 6 months (186 days)."
+            )
+
         if errors:
             raise ValidationError(errors)
