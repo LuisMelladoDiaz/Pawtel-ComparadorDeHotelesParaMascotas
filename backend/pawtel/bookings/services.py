@@ -169,7 +169,7 @@ class BookingService:
             return HttpResponse(status=400)
 
         if event.type == "checkout.session.completed":
-            print(event.data.object.metadata)
+
             booking_json = json.loads(
                 event.data.object.metadata.get("booking")
             )  # metadata contains the booking JSON in plain text
