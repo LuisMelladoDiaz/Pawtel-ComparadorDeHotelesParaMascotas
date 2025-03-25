@@ -35,7 +35,9 @@
 ## Historial de Versiones
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
-| 26/03/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
+| 24/03/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
+| 25/03/2025  | v 1.0         | Parte de Luis | Luis Mellado Díaz |
+
 
 ---
 
@@ -184,46 +186,34 @@
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 38:26:28
+**Periodo:** 12/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 33:15:40
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Medidas tras Reunión | 00:30:00 |
-| Dirección Tras Seguimiento 1 | 01:25:54 |
-| Clase 7/3 | 07:00:00 |
-| QA KBreport | 00:22:00 |
-| QA presentación | 00:36:12 |
-| Panel CRUD de hoteles | 02:40:07 |
-| Individual Performance | 00:59:24 |
-| Informes de progreso | 00:15:00 |
-| Informe de métricas y rendimiento | 01:04:01 |
-| Preparación Reunión 03/03/2025 | 00:46:15 |
-| Seeders | 01:10:00 |
-| Crear Componentes Globales | 05:29:45 |
-| Plantilla Acta Reunión | 00:31:20 |
-| QA User profile screen and merge conflicts | 01:37:05 |
-| QA Métricas y Rendimiento | 00:19:52 |
-| Reunión 09/03/25 | 00:30:00 |
-| Organización Presentación 07/03/2025 | 00:45:56 |
-| UML Diagram | 01:29:22 |
-| Métricas equipo de dirección | 00:22:08 |
-| Clonado y setup del repositorio | 01:36:36 |
-| QA User profile screen | 01:51:25 |
-| Commitment Agreement | 00:15:00 |
-| Reporte de Progreso 10/03/2025 | 00:11:26 |
-| Revisar Presentación | 00:25:48 |
-| Reunión Seguimiento Sprint 1 | 01:01:08 |
-| Nueva plantilla Informe de IA | 00:22:38 |
-| Registro de Incidencias | 01:05:27 |
-| QA Encuesta Usuarios Piloto | 00:20:00 |
-| Informe IA | 00:25:03 |
-| Organización Sprint 1 | 01:10:00 |
-| Organizar la documentación, pasar a md | 01:47:36 |
+| Descripción                         | Duración  |
+|-------------------------------------|----------|
+| Seeders                             | 02:30:00 |
+| Gestión de Hoteles                  | 05:20:03 |
+| CRUD de Hoteles                     | 01:30:00 |
+| QA frontend - mis reservas          | 01:27:04 |
+| QA frontend - user profile          | 02:12:52 |
+| Metricas equipo de dirección        | 00:22:08 |
+| Clase 15/3                          | 04:00:00 |
+| Refactor hotel list                 | 03:24:14 |
+| Individual Performance              | 00:59:24 |
+| Inicio Sprint 2                     | 02:16:38 |
+| Refactoring Login and Register      | 02:54:42 |
+| Reunión 23/03                       | 01:00:38 |
+| Reunión 16/03                       | 01:20:00 |
+| Reporte IA                          | 00:47:00 |
+| Reporte Tiempo                      | 00:30:57 |
+| Revisión PRs                        | 02:00:00 |
 
-![grafico-de-tiempos](graficas/luis.png)
+
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/bb402c05-8be5-4672-8374-9e90bd0c796c" />
+
 ---
 
 ## Reporte de tiempo de Jorge Gomez de Tovar
