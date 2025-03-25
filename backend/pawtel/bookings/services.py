@@ -10,13 +10,12 @@ from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
+from pawtel.customers.services import CustomerService
 from pawtel.permission_services import PermissionService
 from pawtel.room_types.models import RoomType
 from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.response import Response
-
-from backend.pawtel.customers.services import CustomerService
 
 load_dotenv()
 stripe.api_key = str(os.getenv("STRIPE_SECRET_KEY"))
