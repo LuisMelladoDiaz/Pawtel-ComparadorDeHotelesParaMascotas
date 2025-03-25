@@ -80,12 +80,17 @@ class AppUserService:
 
         email = input_serializer.validated_data.get("email")
         phone = input_serializer.validated_data.get("phone")
+        accept_terms = input_serializer.validated_data.get("accept_terms", False)
+
+        if not accept_terms:
+            raise ValidationError({"accept_terms": "Debes aceptar los términos y condiciones."})
 
         if AppUser.objects.filter(email=email).exists():
             raise ValidationError({"email": "Email already in use."})
 
         if AppUser.objects.filter(phone=phone).exists():
             raise ValidationError({"phone": "Phone number already in use."})
+
 
     @staticmethod
     def __create_app_user(input_serializer):
