@@ -12,7 +12,7 @@ class HotelImageSerializer(serializers.ModelSerializer):
 
 
 class SetImageAsCoverSerializer(serializers.Serializer):
-    set_as_cover = serializers.BooleanField(required=True)
+    is_cover = serializers.BooleanField(required=True, allow_null=False)
 
 
 class HotelSerializer(BaseSerializer):

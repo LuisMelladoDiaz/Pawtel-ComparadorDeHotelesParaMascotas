@@ -262,7 +262,7 @@ class HotelService:
         return HotelImageSerializer(hotel_image, many=many, context=context).data
 
     @staticmethod
-    def serialize_input_set_image_as_cover(request):
+    def serialize_input_set_image_is_cover(request):
         context = {"request": request}
         data = request.data.copy()
         serializer = SetImageAsCoverSerializer(data=data, context=context)
@@ -287,7 +287,7 @@ class HotelService:
         HotelService.retrieve_image_from_hotel(hotel_id, image_id)
 
     @staticmethod
-    def validate_set_image_as_cover(input_serializer):
+    def validate_set_image_is_cover(input_serializer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
@@ -361,17 +361,18 @@ class HotelService:
         return input_serializer.update(hotel_image, input_serializer.validated_data)
 
     @staticmethod
-    def set_image_as_cover(input_serializer, hotel_id, image_id):
+    def set_image_is_cover(input_serializer, hotel_id, image_id):
         hotel = HotelService.retrieve_hotel(hotel_id)
         hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        if input_serializer.validated_data.get("set_as_cover"):
+        if input_serializer.validated_data.get("is_cover"):
             current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
-            if current_cover_image:
+            if current_cover_image and current_cover_image.id != image_id:
                 current_cover_image.is_cover = False
                 current_cover_image.save()
 
-            hotel_image.is_cover = True
-            hotel_image.save()
+            if not hotel_image.is_cover:
+                hotel_image.is_cover = True
+                hotel_image.save()
 
         else:
             current_image_count = hotel.images.count()
@@ -381,32 +382,6 @@ class HotelService:
 
         return hotel_image
 
-    """
-    @staticmethod
-    def set_image_as_cover(hotel_id, image_id):
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
-        if current_cover_image:
-            current_cover_image.is_cover = False
-            current_cover_image.save()
-
-        hotel_image.is_cover = True
-        hotel_image.save()
-
-        return hotel_image
-
-    @staticmethod
-    def set_image_as_non_cover(hotel_id, image_id):
-        hotel=HotelService.retrieve_hotel(hotel_id)
-        hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        current_image_count = hotel.images.count()
-        if hotel_image.is_cover and current_image_count < 5 :
-            hotel_image.is_cover = False
-            hotel_image.save()
-
-        return hotel_image
-
-    """
     # DELETE -----------------------------------------------------------------
 
     @staticmethod
