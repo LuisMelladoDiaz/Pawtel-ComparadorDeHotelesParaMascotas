@@ -112,6 +112,11 @@ class RoomTypeService:
                 {"end_date": "End date cannot be earlier than start date."}
             )
 
+        if (end_date - start_date).days >= 186:
+            raise ValidationError(
+                {"detail": "The booking duration cannot exceed 6 months (186 days)."}
+            )
+
     # GET --------------------------------------------------------------------
 
     @staticmethod
