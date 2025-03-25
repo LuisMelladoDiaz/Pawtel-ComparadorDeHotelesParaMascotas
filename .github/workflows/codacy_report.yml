@@ -1,10 +1,8 @@
 name: Codacy Analysis
 
+
 on:
-  push:
-    branches:
-      - main
-      - test/workflow_target
+  workflow_dispatch:
 
 jobs:
   codacy-analysis:
