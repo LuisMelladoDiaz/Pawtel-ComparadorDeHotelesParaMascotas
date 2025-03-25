@@ -1,10 +1,12 @@
 <script setup>
+import PriceRange from '@/components/hotels/PriceRange.vue';
+
 defineProps({
   cities: {
     type: Array,
     required: true
   },
-  rooms: {
+  petTypes: {
     type: Array,
     required: true
   },
@@ -12,7 +14,7 @@ defineProps({
     type: String,
     required: true
   },
-  selectedRoom: {
+  selectedPetType: {
     type: String,
     required: true
   },
@@ -23,79 +25,137 @@ defineProps({
   tempMaxPrice: {
     type: Number,
     required: true
+  },
+  startDate: {
+    type: String,
+    required: true
+  },
+  endDate: {
+    type: String,
+    required: true
   }
 });
 
 const emit = defineEmits([
   'update:city',
-  'update:room',
+  'update:petType',
   'update:tempMinPrice',
   'update:tempMaxPrice',
+  'update:startDate',
+  'update:endDate',
   'commit-price',
   'close'
 ]);
 </script>
 
 <template>
-  <div class="mobile-menu absolute top-100 left-1/2 transform -translate-x-1/2 z-10 bg-white border-2 w-[90%] border-terracota shadow-lg rounded-b-lg flex flex-col">
-    <div>
-      <h2 class="self-center text-center shadow-lg p-2 font-bold">Filtros</h2>
+  <div class="mobile-menu fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-white border-2 w-[95%] max-w-md border-terracota shadow-xl rounded-lg overflow-hidden">
+    <div class="bg-terracota text-white p-4">
+      <h2 class="text-center font-bold text-lg">Filtros</h2>
     </div>
 
-    <div class="p-5 flex flex-col gap-6">
-      <div class="flex flex-col">
-        <label class="font-semibold">Ciudad:</label>
+    <div class="p-5 flex flex-col gap-6 max-h-[70vh] overflow-y-auto">
+      <!-- Selectores de fecha -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block font-semibold text-sm mb-1">Fecha inicio</label>
+          <input
+            type="date"
+            :value="startDate"
+            @input="emit('update:startDate', $event.target.value)"
+            :min="new Date().toISOString().split('T')[0]"
+            class="border rounded p-2 w-full text-sm"
+          >
+        </div>
+        <div>
+          <label class="block font-semibold text-sm mb-1">Fecha fin</label>
+          <input
+            type="date"
+            :value="endDate"
+            @input="emit('update:endDate', $event.target.value)"
+            :min="startDate"
+            class="border rounded p-2 w-full text-sm"
+          >
+        </div>
+      </div>
+
+      <!-- Filtro ciudad -->
+      <div>
+        <label class="block font-semibold text-sm mb-1">Ciudad:</label>
         <select 
-          :value="selectedCity"
+          :value="selectedCity" 
           @change="emit('update:city', $event.target.value)"
-          class="border rounded p-2 w-full mt-1"
+          class="border rounded p-2 w-full text-sm"
         >
           <option value="">Todas</option>
           <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
         </select>
       </div>
 
-      <div class="flex flex-col">
-        <label class="font-semibold">Habitaciones:</label>
+      <!-- Filtro tipo de mascota -->
+      <div>
+        <label class="block font-semibold text-sm mb-1">Animal:</label>
         <select 
-          :value="selectedRoom"
-          @change="emit('update:room', $event.target.value)"
-          class="border rounded p-2 mt-1 w-full"
+          :value="selectedPetType" 
+          @change="emit('update:petType', $event.target.value)"
+          class="border rounded p-2 w-full text-sm"
         >
-          <option value="">Todas</option>
-          <option v-for="room in rooms" :key="room" :value="room">{{ room }}</option>
+          <option v-for="pet in petTypes" :key="pet" :value="pet">{{ pet }}</option>
         </select>
       </div>
 
-      <div>
-        <label class="font-semibold">Rango de precios: {{ tempMinPrice }}€ - {{ tempMaxPrice }}€</label>
-        <div class="flex items-center gap-2">
-          <input 
-            type="range" 
-            :min="0" 
-            :max="tempMaxPrice" 
-            :value="tempMinPrice"
-            @input="emit('update:tempMinPrice', Number($event.target.value))"
-            @mouseup="emit('commit-price')"
-            @touchend="emit('commit-price')"
-            class="w-full custom-range"
-          >
-          <span class="text-sm">{{ tempMinPrice }}€</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <input 
-            type="range" 
-            :min="tempMinPrice" 
-            :max="500" 
-            :value="tempMaxPrice"
-            @input="emit('update:tempMaxPrice', Number($event.target.value))"
-            @mouseup="emit('commit-price')"
-            @touchend="emit('commit-price')"
-            class="w-full custom-range"
-          >
-          <span class="text-sm">{{ tempMaxPrice }}€</span>
-        </div>
-      </div>
+      <!-- Componente PriceRange adaptado para móvil -->
+      <PriceRange
+        :min="0"
+        :max="500"
+        :minValue="tempMinPrice"
+        :maxValue="tempMaxPrice"
+        @update:minValue="(value) => emit('update:tempMinPrice', value)"
+        @update:maxValue="(value) => emit('update:tempMaxPrice', value)"
+        @change="emit('commit-price')"
+        class="mobile-price-range"
+      />
+
+      <!-- Botón de aplicar -->
+      <button
+        @click="emit('close')"
+        class="mt-4 bg-terracota text-white py-2 px-4 rounded-md font-medium hover:bg-terracota-dark transition-colors"
+      >
+        Aplicar filtros
+      </button>
     </div>
   </div>
 </template>
+
+<style scoped>
+.mobile-menu {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.bg-terracota {
+  background-color: #C36C6C;
+}
+
+.hover\:bg-terracota-dark:hover {
+  background-color: #a55c5c;
+}
+
+.custom-range {
+  accent-color: #C36C6C;
+}
+
+/* Estilos específicos para el PriceRange en móvil */
+.mobile-price-range :deep(.price-range-filter) {
+  padding: 0;
+}
+
+.mobile-price-range :deep(input[type="number"]) {
+  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+.mobile-price-range :deep(.currency) {
+  left: 0.75rem;
+  font-size: 0.875rem;
+}
+</style>

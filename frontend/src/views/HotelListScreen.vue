@@ -19,7 +19,6 @@ import HotelMobileFilters from '@/components/hotels/HotelMobileFilters.vue';
 import HotelSorting from '@/components/hotels/HotelSorting.vue';
 import HotelMobileSorting from '@/components/hotels/HotelMobileSorting.vue';
 import HotelList from '@/components/hotels/HotelList.vue';
-import HotelAppliedFilters from '@/components/hotels/HotelAppliedFilters.vue';
 
 const notyf = new Notyf();
 const route = useRoute();
@@ -89,20 +88,11 @@ const applyFilters = () => {
   });
 
   router.push({ path: route.path, query: queryParams });
-  updateAppliedFilters();
   isFiltersOpen.value = false;
   notyf.success('Filtros aplicados correctamente');
 };
 
-const updateAppliedFilters = () => {
-  appliedFilters.value = [];
-  if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
-  if (selectedPetType.value && selectedPetType.value !== "DOG") {
-    appliedFilters.value.push(`Animal: ${selectedPetType.value}`);
-  }
-  if (maxPrice.value !== 500) appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
-  if (minPrice.value !== 0) appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
-};
+
 
 const commitPriceFilters = () => {
   if (tempMinPrice.value !== minPrice.value || tempMaxPrice.value !== maxPrice.value) {
@@ -112,16 +102,6 @@ const commitPriceFilters = () => {
   }
 };
 
-const removeFilter = (filter) => {
-  if (filter.startsWith("Ciudad:")) selectedCity.value = "";
-  else if (filter.startsWith("Animal:")) selectedPetType.value = "DOG";
-  else if (filter.startsWith("Max Precio:")) maxPrice.value = 500;
-  else if (filter.startsWith("Min Precio:")) minPrice.value = 0;
-
-  appliedFilters.value = appliedFilters.value.filter(f => f !== filter);
-  notyf.success('Filtro eliminado');
-  applyFilters();
-};
 
 const toggleFilters = () => {
   isFiltersOpen.value = !isFiltersOpen.value;
@@ -205,10 +185,7 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
           @toggle-direction="direction = direction === 'asc' ? 'desc' : 'asc'"
         />
         
-        <HotelAppliedFilters 
-          :filters="appliedFilters"
-          @remove-filter="removeFilter"
-        />
+        
       </div>
 
       <HotelList 
@@ -220,12 +197,87 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
 
   <!-- Mobile Version -->
   <div class="container flex flex-col items-start mt-5 md:hidden">
-    <!-- ... (código móvil existente) ... -->
+    <div class="flex flex-row items-center self-center gap-10 pb-5">
+      <button @click="toggleSortBy" class="flex items-center gap-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-[35px] h-[35px]" fill="#C36C6C">
+          <path d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z"/>
+        </svg>
+        <span class="text-terracota font-medium">Ordenar</span>
+      </button>
+      
+      <button @click="toggleFilters" class="flex items-center gap-1">
+        <i class="fa-solid fa-sliders text-terracota text-[30px]"></i>
+        <span class="text-terracota font-medium">Filtrar</span>
+      </button>
+    </div>
+
+    <!-- Menú de ordenamiento móvil -->
+    <HotelMobileSorting
+      v-if="isSortByOpen"
+      :sortBy="sortBy"
+      :direction="direction"
+      @update:sortBy="sortBy = $event"
+      @toggle-direction="direction = direction === 'asc' ? 'desc' : 'asc'"
+      @close="isSortByOpen = false"
+    />
+
+    <!-- Menú de filtros móvil -->
+    <HotelMobileFilters
+      v-if="isFiltersOpen"
+      :cities="cities"
+      :petTypes="petTypes"
+      :selectedCity="selectedCity"
+      :selectedPetType="selectedPetType"
+      :tempMinPrice="tempMinPrice"
+      :tempMaxPrice="tempMaxPrice"
+      :startDate="startDate"
+      :endDate="endDate"
+      @update:city="selectedCity = $event"
+      @update:petType="selectedPetType = $event"
+      @update:tempMinPrice="tempMinPrice = $event"
+      @update:tempMaxPrice="tempMaxPrice = $event"
+      @update:startDate="startDate = $event"
+      @update:endDate="endDate = $event"
+      @commit-price="commitPriceFilters"
+      @close="isFiltersOpen = false"
+    />
+
+    <!-- Lista de hoteles -->
+    <HotelList 
+      :hotels="hotels"
+      :isLoading="isLoading"
+      class="self-center w-full"
+    />
   </div>
 </template>
 
 <style scoped>
 .custom-range {
   accent-color: #6C8CC3;
+}
+
+/* Estilos específicos para móvil */
+@media (max-width: 767px) {
+  .applied-filters-container {
+    padding: 0.5rem 1rem;
+    background: #f8f8f8;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  .hotel-list-container {
+    padding: 0 0.5rem;
+  }
+}
+
+/* Transiciones para los menús móviles */
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-down-enter-from,
+.slide-down-leave-to {
+  opacity: 0;
+  transform: translate(-50%, -20px);
 }
 </style>
