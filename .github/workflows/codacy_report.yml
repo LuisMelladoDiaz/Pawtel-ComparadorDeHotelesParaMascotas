@@ -1,0 +1,38 @@
+name: Codacy Analysis
+
+on:
+  push:
+    branches:
+      - main
+      - test/workflow_target
+
+jobs:
+  codacy-analysis:
+    runs-on: ubuntu-latest  
+
+    permissions:
+      actions: read
+      contents: write
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v3
+
+      - name: Descargar Codacy CLI
+        run: |
+          curl -L -o codacy-analysis-cli https://github.com/codacy/codacy-analysis-cli/releases/latest/download/codacy-analysis-cli-linux
+          chmod +x codacy-analysis-cli
+
+      - name: Verificar Codacy CLI
+        run: |
+          ls -l codacy-analysis-cli
+          file codacy-analysis-cli
+
+      - name: Ejecutar análisis con Codacy
+        run: ./codacy-analysis-cli analyze --output json > codacy-report.json
+
+      - name: Subir reporte como artefacto
+        uses: actions/upload-artifact@v3
+        with:
+          name: codacy-report
+          path: codacy-report.json

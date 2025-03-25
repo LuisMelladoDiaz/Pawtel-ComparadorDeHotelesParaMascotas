@@ -18,7 +18,7 @@ class HotelOwnerServiceTest(TestCase):
         )
         self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
 
-    def test_get_all_hotels_of_hotel_owner(self):
+    def test_list_hotels_of_hotel_owner(self):
         hotel1 = Hotel.objects.create(
             name="Hotel One", hotel_owner=self.hotel_owner, is_archived=False
         )
@@ -28,12 +28,12 @@ class HotelOwnerServiceTest(TestCase):
         hotel_archived = Hotel.objects.create(
             name="Hotel Archived", hotel_owner=self.hotel_owner, is_archived=True
         )
-        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(self.hotel_owner.id)
+        hotels = HotelOwnerService.list_hotels_of_hotel_owner(self.hotel_owner.id)
         self.assertListEqual(list(hotels), [hotel1, hotel2])
         self.assertNotIn(hotel_archived, hotels)
 
-    def test_get_all_hotels_of_hotel_owner_no_hotels(self):
-        hotels = HotelOwnerService.get_all_hotels_of_hotel_owner(self.hotel_owner.id)
+    def test_list_hotels_of_hotel_owner_no_hotels(self):
+        hotels = HotelOwnerService.list_hotels_of_hotel_owner(self.hotel_owner.id)
         self.assertListEqual(list(hotels), [])
 
     def test_delete_all_hotels_of_hotel_owner(self):
