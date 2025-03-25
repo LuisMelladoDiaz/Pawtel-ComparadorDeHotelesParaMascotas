@@ -1,3 +1,4 @@
+import json
 import os
 
 import stripe
@@ -16,6 +17,7 @@ from rest_framework.response import Response
 
 load_dotenv()
 stripe.api_key = str(os.getenv("STRIPE_SECRET_KEY"))
+secret_endpoint = str(os.getenv("STRIPE_SECRET_ENDPOINT"))
 
 
 class BookingService:
@@ -66,8 +68,8 @@ class BookingService:
     #  POST Methods -------------------------------------------------------
 
     @staticmethod
-    def serialize_input_booking_create(request):
-        return BookingSerializer(data=request.data)
+    def serialize_input_booking_create(request_data):
+        return BookingSerializer(data=request_data)
 
     @staticmethod
     def validate_create_booking(request, input_serializer):
@@ -122,6 +124,11 @@ class BookingService:
         room_type_description = input_serializer.validated_data.get(
             "room_type"
         ).description
+        # Must save Booking JSON in plain text
+        output_serializer = BookingService.serialize_output_booking(
+            input_serializer.validated_data
+        )
+        booking_json_str = json.dumps(output_serializer)
         try:
             session = stripe.checkout.Session.create(
                 line_items=[
@@ -137,9 +144,10 @@ class BookingService:
                         "quantity": 1,
                     },
                 ],
+                metadata={"booking": booking_json_str},
                 mode="payment",
-                success_url="http://localhost:5173/",
-                cancel_url="http://localhost:5173/hotels/",
+                success_url=str(os.getenv("FRONTEND_URL") + "/"),
+                cancel_url=str(os.getenv("FRONTEND_URL") + "/hotels/"),
             )
 
             return JsonResponse({"url": session.url})
@@ -155,14 +163,19 @@ class BookingService:
 
         event = None
         try:
-            event = stripe.Webhook.construct_event(payload, sig_header)
+            event = stripe.Webhook.construct_event(payload, sig_header, secret_endpoint)
         except ValueError as e:
             # Invalid payload
             return HttpResponse(status=400)
 
         if event.type == "checkout.session.completed":
-            payment_intent = event.data.object  # contains a stripe.PaymentIntent
-            # Then define and call a method to handle the successful payment intent.
-            # handle_payment_intent_succeeded(payment_intent)
+            print(event.data.object.metadata)
+            booking_json = json.loads(
+                event.data.object.metadata.get("booking")
+            )  # metadata contains the booking JSON in plain text
+            booking = BookingService.serialize_input_booking_create(booking_json)
+            booking.is_valid()
+            booking.save()
+            # TODO remove the asociated booking_hold
 
         return HttpResponse(status=200)

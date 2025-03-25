@@ -29,14 +29,14 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         BookingService.authorize_create_booking(request)
-        input_serializer = BookingService.serialize_input_booking_create(request)
+        input_serializer = BookingService.serialize_input_booking_create(request.data)
         BookingService.validate_create_booking(request, input_serializer)
         response = BookingService.create_booking(input_serializer)
         return response
 
     @csrf_exempt
     @action(detail=False, methods=["post"], url_path="stripe")
-    def stripe_response(request):
+    def stripe_response(self, request):
         payload = request.body
         sig_header = request.META["HTTP_STRIPE_SIGNATURE"]
         response = BookingService.stripe_response_manager(payload, sig_header)
