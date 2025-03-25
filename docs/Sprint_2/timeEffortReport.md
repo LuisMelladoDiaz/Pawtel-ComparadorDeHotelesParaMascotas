@@ -378,31 +378,24 @@
 ## Reporte de tiempo de Claudio Cortes Carrasco
 
 **Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 30:35:55
+**Total de tiempo trabajado:** 28:45:50
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Clases | 08:00:00 |
-| Presentación diapositivas y guión | 00:35:34 |
-| Fix: corrección de feedback crear entidades y serializadores | 01:56:00 |
-| Guión Presentación | 00:34:00 |
-| Feedback Informes IA | 00:24:00 |
-| Revisión de calidad en test de serializadores y modificaciones de entidades | 00:55:00 |
-| Fix: aplicar feedback en modelos, serializadores y tests | 01:35:00 |
-| Aprendizaje Django | 01:42:00 |
-| Ayuda UML | 01:03:00 |
-| Diapositivas Presentación | 02:14:41 |
-| Lectura documentos | 00:33:00 |
-| Feature: crear entidades y serializadores | 04:09:00 |
-| Reporte de IA | 00:25:00 |
-| Presentación | 00:48:33 |
-| Feedback presentación | 00:26:00 |
-| Reunión Backend | 00:40:43 |
-| Presentación | 01:30:14 |
-| Presentación semana 4 | 01:17:00 |
-| Aplicar feedback a las diapositivas | 01:47:10 |
+| Clases | 06:00:00 |
+| Feature: Creación bookings | 05:02:39 |
+| Fix: arreglar bookings | 00:23:00 |
+| fix: arreglar tests bookings | 00:49:00 |
+| feat: crear metodos de getAllBokings por customer y hotel mas sus tests | 03:15:00 |
+| feat: crear room_type_is_available method and tests | 02:29:00 |
+| feat: crear metodos para obtener bookings por hotel y por customer. | 04:17:00 |
+| task: revisar documentación Api automática | 02:23:00 |
+| revisar frontend | 01:02:00 |
+| feat: añadir atributo is_approved a hotel_owner | 01:49:11 |
+| presentación diapositivas | 00:41:00 |
+| Reporte de IA y de tiempo| 00:35:00 |
 
 ![grafico-de-tiempos](graficas/claudio.png)
 ---

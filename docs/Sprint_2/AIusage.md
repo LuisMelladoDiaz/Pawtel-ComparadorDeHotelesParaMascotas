@@ -131,7 +131,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Claudio Cortés Carrasco
-- **Sprint:** Sprint1
+- **Sprint:** Sprint2
 - **Rol en el proyecto:** Programador backend, documentación
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -149,12 +149,13 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 |-------|-----------------------|---------------------------|
 | Mejora de tests |    ChatGPT | Recibiendo el código de las distintas entidades y los respectivos test básicos se pidío que se mejorasen para que abarcasen todas las posibilidades. |
 | Ayuda para generar gráficos |                ChatGPT | Se usó para saber como generar unos gráficos de barras desde el powerpoint para añadirlo a la presentación semanal. |
+| Ayuda para solucionar un error en los tests |                ChatGPT | Se usó para saber como solucionar un error que no asignaba correctamente el hotelOwner al usuario que se registraba. |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 3
-- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para mejorar y ampliar los tests me ahorró mucho tiempo
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
+- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para mejorar y ampliar los tests me ahorró mucho tiempo, asi como solucionar el error que me daba de asignación de hotelOwner al AppUser ya que me lleve un rato intentando solucionarlo y no lo conseguía.
 
 #### 5. Prompts Utilizados
 
@@ -162,10 +163,11 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 1. Dados los siguientes archivos de tests y sus entidades asociadas, mejoralos para que abarquen el 100% de los casos posibles tanto en casos positivos como negativos.
 2. Podrias ayudarme a generar un gráfico de barras desde una presentación de powerpoint.
+3. Dado el problema que te paso por captura, podrías ayudarme a identificar cual es el problema en la asignación del hotelOwner al AppUser?
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos.
+- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos y a veces te genera test con datos repetidos.
 
 
 #### 7. Evaluación General
