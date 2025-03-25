@@ -1,80 +1,59 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
-import Navbar from '../components/NavBar.vue';
-import NavbarTerracota from '../components/NavBarTerracota.vue';
-import FilterNavbar from '../components/FilterNavBar.vue';
-import Footer from '../components/Footer.vue';
-import PetHotelCard from '../components/HotelCard.vue';
-import LoadingSpinner from '@/components/LoadingSpinner.vue';
-import AppliedFilter from '../components/AppliedFilter.vue';
 import { useRoute, useRouter } from 'vue-router';
 import { debounce } from 'lodash';
-import {useGetAllHotels} from '@/data-layer/hooks/hotels';
-import hotel1 from '../assets/hoteles/hotel1.jpg';
-import hotel2 from '../assets/hoteles/hotel2.jpg';
-import hotel3 from '../assets/hoteles/hotel3.jpg';
-import hotel4 from '../assets/hoteles/hotel4.jpg';
-import hotel5 from '../assets/hoteles/hotel5.jpg';
-import hotel6 from '../assets/hoteles/hotel6.jpg';
-
-const defaultImages = [hotel1, hotel2, hotel3, hotel4, hotel5, hotel6];
-
+import { useGetAllHotels } from '@/data-layer/hooks/hotels';
 import { Notyf } from 'notyf';
+
+// Components
+import HotelFilters from '@/components/hotels/HotelFilters.vue';
+import HotelMobileFilters from '@/components/hotels/HotelMobileFilters.vue';
+import HotelSorting from '@/components/hotels/HotelSorting.vue';
+import HotelMobileSorting from '@/components/hotels/HotelMobileSorting.vue';
+import HotelList from '@/components/hotels/HotelList.vue';
+import HotelAppliedFilters from '@/components/hotels/HotelAppliedFilters.vue';
 
 const notyf = new Notyf();
 const route = useRoute();
 const router = useRouter();
 
-// Filters
+// Data
 const cities = ref([
-    "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
-    "Palma de Mallorca", "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
-    "Valladolid", "Vigo", "Gijón"
+  "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
+  "Palma de Mallorca", "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+  "Valladolid", "Vigo", "Gijón"
 ].sort());
-const rooms = ref(["Single",
-    "Doble",
-    "Suite",
-    "Habitación Familiar",
-    "Habitación Deluxe",
-    "Habitación Estándar",
-    "Suite de Lujo",
-    "Habitación Económica",
-    "Habitación Premium"].sort());
 
-    const selectedCity = ref("");
-    const selectedRoom = ref("");
-    const minPrice = ref(0);
-    const maxPrice = ref(500);
-    const tempMinPrice = ref(minPrice.value);
-    const tempMaxPrice = ref(maxPrice.value);
-    const sortBy = ref("");
-    const direction = ref("asc");
 
-onMounted(() => {
-  updateFiltersFromRoute();
-});
+// State
+const selectedCity = ref("");
+const selectedRoom = ref("");
+const minPrice = ref(0);
+const maxPrice = ref(500);
+const tempMinPrice = ref(minPrice.value);
+const tempMaxPrice = ref(maxPrice.value);
+const sortBy = ref("");
+const direction = ref("asc");
+const appliedFilters = ref([]);
+const isSortByOpen = ref(false);
+const isFiltersOpen = ref(false);
 
-watch(() => route.query, () => {
-  updateFiltersFromRoute();
-}, { deep: true });
 
+
+// Methods
 const updateFiltersFromRoute = () => {
   selectedCity.value = route.query.city || "";
-  selectedRoom.value = route.query.room_type || "";
   minPrice.value = route.query.min_price ? Number(route.query.min_price) : 0;
   maxPrice.value = route.query.max_price ? Number(route.query.max_price) : 500;
-  sortBy.value = route.query.sort_by || "";
+  sortBy.value = route.query.sort_by || "name";
   direction.value = route.query.direction || "asc";
   tempMinPrice.value = minPrice.value;
   tempMaxPrice.value = maxPrice.value;
 };
 
-const appliedFilters = ref([]);
-
 const applyFilters = () => {
   const queryParams = {
     city: selectedCity.value || undefined,
-    room_type: selectedRoom.value || undefined,
     min_price: minPrice.value !== 0 ? minPrice.value : undefined,
     max_price: maxPrice.value !== 500 ? maxPrice.value : undefined,
     sort_by: sortBy.value || undefined,
@@ -87,67 +66,34 @@ const applyFilters = () => {
 
   router.push({ path: route.path, query: queryParams });
 
-  appliedFilters.value = [];
-  if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
-  if (selectedRoom.value) appliedFilters.value.push(`Tipo de habitación: ${selectedRoom.value}`);
-  if (maxPrice.value !== 500) {
-  appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
-  }
-  if (minPrice.value !== 0) {
-    appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
-  }
-
+  updateAppliedFilters();
   isFiltersOpen.value = false;
   notyf.success('Filtros aplicados correctamente');
 };
 
+const updateAppliedFilters = () => {
+  appliedFilters.value = [];
+  if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
+  if (maxPrice.value !== 500) appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
+  if (minPrice.value !== 0) appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
+};
+
 const commitPriceFilters = () => {
-  if (
-    tempMinPrice.value !== minPrice.value ||
-    tempMaxPrice.value !== maxPrice.value
-  ) {
+  if (tempMinPrice.value !== minPrice.value || tempMaxPrice.value !== maxPrice.value) {
     minPrice.value = tempMinPrice.value;
     maxPrice.value = tempMaxPrice.value;
     applyFilters();
   }
 };
 
-
-// Apply debounce to applyFilters
-const debouncedApplyFilters = debounce(() => {
-  applyFilters();
-}, 300);
-
-// Watch for changes in filters and apply them to the URL
-watch([selectedCity, selectedRoom, sortBy, direction], () => {
-  applyFilters();
-});
-
-
 const removeFilter = (filter) => {
-  if (filter.startsWith("Ciudad:")) {
-    selectedCity.value = ""; // Reset city
-  } else if (filter.startsWith("Tipo de habitación:")) {
-    selectedRoom.value = ""; // Reset room type
-  } else if (filter.startsWith("Max Precio:")) {
-    maxPrice.value = 500; // Reset max price
-  } else if (filter.startsWith("Min Precio:")) {
-    minPrice.value = 0; // Reset min price
-  }
+  if (filter.startsWith("Ciudad:")) selectedCity.value = "";
+  else if (filter.startsWith("Max Precio:")) maxPrice.value = 500;
+  else if (filter.startsWith("Min Precio:")) minPrice.value = 0;
 
   appliedFilters.value = appliedFilters.value.filter(f => f !== filter);
   notyf.success('Filtro eliminado');
-
-  // Update URL
   applyFilters();
-};
-
-// Menus
-const isSortByOpen = ref(false);
-const isFiltersOpen = ref(false);
-
-const toggleSortDirection = () => {
-  sortDirection.value = sortDirection.value === "asc" ? "desc" : "asc";
 };
 
 const toggleFilters = () => {
@@ -156,271 +102,88 @@ const toggleFilters = () => {
 };
 
 const toggleSortBy = () => {
-    isSortByOpen.value = !isSortByOpen.value;
-    if (isSortByOpen.value) isFiltersOpen.value = false;
+  isSortByOpen.value = !isSortByOpen.value;
+  if (isSortByOpen.value) isFiltersOpen.value = false;
 };
 
-const sortDirection = ref("asc");
-
-const sortByWithDir = computed(() => {
-  if (!sortBy.value) return "city";
-  return direction.value === "desc" ? `-${sortBy.value}` : sortBy.value;
+// Lifecycle
+onMounted(() => {
+  updateFiltersFromRoute();
 });
 
-// Watch for changes in filters and re-fetch data
-watch([selectedCity, selectedRoom, sortBy, direction], () => {
+watch(() => route.query, () => {
+  updateFiltersFromRoute();
+}, { deep: true });
+
+watch([selectedCity, sortBy, direction], () => {
   refetchHotels();
   notyf.success('Hoteles actualizados con los nuevos filtros');
 });
 
+// Fetch hotels
 const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAllHotels({
-  sort_by: sortByWithDir,
+  sort_by: computed(() => direction.value === 'desc' ? `-${sortBy.value}` : sortBy.value),
   max_price_per_night: maxPrice,
   min_price_per_night: minPrice,
   city: selectedCity,
-  room_type: selectedRoom,
 });
 
-const hotels = computed(() =>
-  apiHotels.value?.map((hotel) => ({
-    id: hotel.id,
-    image: hotel.image || defaultImages[hotel.id % defaultImages.length],
-    name: hotel.name || 'Nombre',
-    address: hotel.address || 'Dirección',
-    city: hotel.city || 'Ciudad',
-    description: hotel.description || 'Descripción',
-    price_max: hotel.most_expensive_price || '0',
-    price_min: hotel.cheapest_price || '0',
-    reviews: hotel.reviews || [
-      { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
-    ]
-  })) || []
-);
+// Computed
+const hotels = computed(() => apiHotels.value?.map((hotel) => ({
+  id: hotel.id,
+  image: hotel.image || defaultImages[hotel.id % defaultImages.length],
+  name: hotel.name || 'Nombre',
+  address: hotel.address || 'Dirección',
+  city: hotel.city || 'Ciudad',
+  description: hotel.description || 'Descripción',
+  price_max: hotel.most_expensive_price || '0',
+  price_min: hotel.cheapest_price || '0',
+  reviews: hotel.reviews || [
+    { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
+  ]
+})) || []);
+
+console.log("hotelview", hotels);
+
 </script>
 
 <template>
-        <!-- Desktop version -->
-        <div class="container mt-5 hidden md:flex">
+  <!-- Desktop version -->
+  <div class="container mt-5 hidden md:flex">
+    <HotelFilters 
+      :cities="cities"
+      :selectedCity="selectedCity"
+      :tempMinPrice="tempMinPrice"
+      :tempMaxPrice="tempMaxPrice"
+      @update:city="selectedCity = $event"
+      @update:tempMinPrice="tempMinPrice = $event"
+      @update:tempMaxPrice="tempMaxPrice = $event"
+      @commit-price="commitPriceFilters"
+    />
 
-            <!-- Filters -->
-            <div class="list-filters-container flex-col max-w-70 h-fit border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5">
-            <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60 py-2">Filtrar por:</h2>
-
-            <!-- Cities -->
-            <div class="mt-5">
-                <label class="font-semibold">Ciudad:</label>
-                <select v-model="selectedCity" class="border rounded p-2 mt-1 w-full">
-                <option value="">Todas</option>
-                <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
-                </select>
-            </div>
-
-            <!-- Room Types -->
-            <div class="mt-5">
-                <label class="font-semibold">Habitaciones:</label>
-                <select v-model="selectedRoom" class="border rounded p-2 mt-1 w-full">
-                <option value="">Todas</option>
-                <option v-for="room in rooms" :key="room" :value="room">{{ room }}</option>
-                </select>
-            </div>
-
-            <!-- Prices -->
-            <div class="flex flex-col gap-2">
-                <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
-                <div class="flex items-center gap-2">
-                <input type="range" :min="0" :max="tempMaxPrice" v-model="tempMinPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
-                <span class="text-sm">{{ tempMinPrice }}€</span>
-                </div>
-                <div class="flex items-center gap-2">
-                <input type="range" :min="tempMinPrice" :max="500" v-model="tempMaxPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
-                <span class="text-sm">{{ tempMaxPrice }}€</span>
-                </div>
-            </div>
-            </div>
-
-            <!-- Filtered hotels container -->
-            <div class="hotels-filtered-container flex flex-col flex-auto min-w-0 pl-4">
-
-            <!-- Sort By + Applied filters -->
-            <div class="applied-filters-container flex flex-row flex-wrap items-center text-white gap-2">
-                <!-- Sort By Card -->
-                <div class="order-card min-h-[42px] flex items-center gap-1 border rounded-lg px-3 bg-terracota shadow-lg whitespace-nowrap">
-                <img src="https://site-assets.fontawesome.com/releases/v6.7.2/svgs/solid/arrow-down-arrow-up.svg"
-                    alt="Ordenar" class="w-5 h-5" style="filter: invert(1);">
-                <select v-model="sortBy" class="p-2 w-fit text-white bg-terracota font-bold">
-                    <option value="" disabled selected>Ordenar por...</option>
-                    <option value="name">Nombre</option>
-                    <option value="price_max">Precio Máximo</option>
-                    <option value="price_min">Precio Mínimo</option>
-                </select>
-
-                </div>
-                <button
-                    @click="direction = direction === 'asc' ? 'desc' : 'asc'"
-                    class="p-2 w-fit min-h-[42px] min-w-25 text-white bg-terracota font-bold border rounded-md shadow-md flex items-center justify-center gap-2"
-                    >
-                    <span> {{ direction === 'asc' ? 'ASC' : 'DESC' }} </span>
-                    <i :class="direction === 'asc' ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>
-                </button>
-                <!-- Applied filters -->
-                <AppliedFilter v-for="(filter, index) in appliedFilters" :key="index" :filterName="filter" @remove="removeFilter(filter)" />
-            </div>
-
-            <!-- Hotels list -->
-            <div class="hotel-list-container flex flex-col pt-4">
-                <LoadingSpinner v-if="isLoading" class="text-center py-10 text-xl font-bold text-gray-700 flex-col flex-grow">
-                Cargando detalles del hotel...
-                </LoadingSpinner>
-                <PetHotelCard
-                v-for="hotel in hotels"
-                :key="hotel.id"
-                :id="hotel.id"
-                :image="hotel.image"
-                :name="hotel.name"
-                :city="hotel.city"
-                :description="hotel.description"
-                :rating="hotel.rating"
-                :price_max="hotel.price_max"
-                :price_min="hotel.price_min"
-                />
-            </div>
-
-            </div>
-
+    <div class="hotels-filtered-container flex flex-col flex-auto min-w-0 pl-4">
+      <div class="applied-filters-container flex flex-row flex-wrap items-center text-white gap-2">
+        <HotelSorting 
+          :sortBy="sortBy"
+          :direction="direction"
+          @update:sortBy="sortBy = $event"
+          @toggle-direction="direction = direction === 'asc' ? 'desc' : 'asc'"
+        />
+        
+        <HotelAppliedFilters 
+          :filters="appliedFilters"
+          @remove-filter="removeFilter"
+        />
       </div>
 
-      <!-- Mobile Version -->
-      <div class="container flex flex-col items-start mt-5 md:hidden">
+      <HotelList 
+        :hotels="hotels"
+        :isLoading="isLoading"
+      />
+    </div>
+  </div>
 
-        <!-- Icons -->
-        <div class="icons flex flex-row items-center self-center gap-10 pb-5">
-          <div @click="toggleSortBy">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-[35px] h-[35px]" fill="#C36C6C">
-              <path d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z" />
-            </svg>
-          </div>
-          <div class="menu-icon" @click="toggleFilters">
-            <i class="fa-solid fa-sliders text-terracota text-[30px]"></i>
-          </div>
-        </div>
-
-        <!-- Sorting Menu -->
-        <div v-if="isSortByOpen" class="mobile-menu absolute top-100 left-1/2 transform -translate-x-1/2 z-10 bg-white border-2 w-[90%] border-terracota shadow-lg rounded-b-lg flex flex-col">
-          <div>
-            <h2 class="self-center text-center shadow-lg p-2 font-bold">Ordenar por</h2>
-          </div>
-
-          <div class="p-5 flex flex-col gap-4">
-            <div class="flex flex-col gap-2">
-              <button
-                v-for="option in ['name']"
-                :key="option"
-                @click="sortBy = option; toggleSortBy();"
-                class="p-2 rounded-md text-center cursor-pointer font-bold"
-                :class="{'bg-terracota text-white': sortBy === option, 'bg-gray-100': sortBy !== option}"
-              >
-                {{ option === 'name' ? 'Nombre' : option.charAt(0).toUpperCase() + option.slice(1) }}
-              </button>
-              <button
-                v-for="option in ['price_max']"
-                :key="option"
-                @click="sortBy = option; toggleSortBy();"
-                class="p-2 rounded-md text-center cursor-pointer font-bold"
-                :class="{'bg-terracota text-white': sortBy === option, 'bg-gray-100': sortBy !== option}"
-              >
-                {{ option === 'price_max' ? 'Precio Máximo' : option.charAt(0).toUpperCase() + option.slice(1) }}
-              </button>
-              <button
-                v-for="option in ['price_min']"
-                :key="option"
-                @click="sortBy = option; toggleSortBy();"
-                class="p-2 rounded-md text-center cursor-pointer font-bold"
-                :class="{'bg-terracota text-white': sortBy === option, 'bg-gray-100': sortBy !== option}"
-              >
-                {{ option === 'price_min' ? 'Precio Mínimo' : option.charAt(0).toUpperCase() + option.slice(1) }}
-              </button>
-            </div>
-
-            <button
-              @click="direction = direction === 'asc' ? 'desc' : 'asc'"
-              class="p-2 w-full text-white bg-azul-suave font-bold rounded-md shadow-md flex items-center justify-center gap-2"
-            >
-              <span> {{ direction === 'asc' ? 'Ascendente' : 'Descendente' }} </span>
-              <i :class="direction === 'asc' ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>
-            </button>
-
-          </div>
-        </div>
-
-        <!-- Filter Menu -->
-        <div v-if="isFiltersOpen" class="mobile-menu absolute top-100 left-1/2 transform -translate-x-1/2 z-10 bg-white border-2 w-[90%] border-terracota shadow-lg rounded-b-lg flex flex-col">
-          <div>
-            <h2 class="self-center text-center shadow-lg p-2 font-bold">Filtros</h2>
-          </div>
-
-          <div class="p-5 flex flex-col gap-6">
-            <!-- Cities -->
-            <div class="flex flex-col">
-              <label class="font-semibold">Ciudad:</label>
-              <select v-model="selectedCity" class="border rounded p-2 w-full mt-1">
-                <option value="">Todas</option>
-                <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
-              </select>
-            </div>
-
-            <!-- Rooms -->
-            <div class="flex flex-col">
-              <label class="font-semibold">Habitaciones:</label>
-              <select v-model="selectedRoom" class="border rounded p-2 mt-1 w-full">
-                <option value="">Todas</option>
-                <option v-for="room in rooms" :key="room" :value="room">{{ room }}</option>
-              </select>
-            </div>
-
-            <!-- Prices -->
-            <div>
-              <label class="font-semibold">Rango de precios: {{ minPrice }}€ - {{ maxPrice }}€</label>
-              <div class="flex items-center gap-2">
-                <input type="range" :min="0" :max="tempMaxPrice" v-model="tempMinPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
-                <span class="text-sm">{{ tempMinPrice }}€</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <input type="range" :min="tempMinPrice" :max="500" v-model="tempMaxPrice" class="w-full custom-range" @mouseup="commitPriceFilters" @touchend="commitPriceFilters">
-                <span class="text-sm">{{ tempMaxPrice }}€</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Filtered hotels container -->
-
-        <!-- Applied Filters -->
-        <div v-if="appliedFilters.length > 0" class="applied-filters-container flex flex-row gap-2 pl-3 pb-5 self-start text-white overflow-x-auto w-full whitespace-nowrap">
-          <AppliedFilter v-for="(filter, index) in appliedFilters" :key="index" :filterName="filter" @remove="removeFilter(filter)" />
-        </div>
-
-        <!-- Hotels list -->
-        <div class="hotel-list-container flex flex-col self-center w-full">
-          <LoadingSpinner v-if="isLoading" class="text-center py-10 text-xl font-bold text-gray-700 flex-col flex-grow">
-            Cargando detalles del hotel...
-          </LoadingSpinner>
-          <PetHotelCard
-            v-for="hotel in hotels"
-            :key="hotel.id"
-            :id="hotel.id"
-            :image="hotel.image"
-            :name="hotel.name"
-            :city="hotel.city"
-            :description="hotel.description"
-            :rating="hotel.rating"
-            :price_max="hotel.price_max"
-            :price_min="hotel.price_min"
-          />
-        </div>
-
-      </div>
-
+  
 </template>
 
 <style scoped>
