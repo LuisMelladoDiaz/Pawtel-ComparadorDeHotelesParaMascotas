@@ -1,5 +1,4 @@
 import { useQuery, useMutation } from '@tanstack/vue-query';
-import { ref } from 'vue';
 import {
   fetchHotelImage,
   fetchAllHotelImages,
