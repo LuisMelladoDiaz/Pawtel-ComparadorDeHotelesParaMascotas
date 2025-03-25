@@ -103,7 +103,7 @@ class RoomTypeService:
             raise ValidationError({"name": "Name in use by same hotel."})
 
     @staticmethod
-    def validate_room_type_available(start_date, end_date):
+    def validate_room_type_is_available(start_date, end_date):
         if not start_date or not end_date:
             raise ValidationError({"detail": "Invalid date format. Use yyyy-mm-dd."})
 
@@ -221,7 +221,7 @@ class RoomTypeService:
         "limit": int,
         "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
         "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
-        "is_available": bool,
+        "is_available": lambda v: str(v).lower() in ("true", "1"),  # If true or 1, True
     }
 
     @staticmethod
@@ -265,11 +265,11 @@ class RoomTypeService:
             ("is_available" in filters)
             and ("start_date" in filters)
             and ("end_date" in filters)
-            and filters.get("is_available") == True
+            and filters.get("is_available") is True
         ):
             start_date = filters.get("start_date")
             end_date = filters.get("end_date")
-            RoomTypeService.validate_room_type_available(start_date, end_date)
+            RoomTypeService.validate_room_type_is_available(start_date, end_date)
 
             filtered_room_types = [
                 room_type

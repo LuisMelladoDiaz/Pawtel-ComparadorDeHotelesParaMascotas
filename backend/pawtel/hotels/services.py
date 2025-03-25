@@ -145,7 +145,7 @@ class HotelService:
         "limit": int,
         "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
         "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
-        "is_available": bool,
+        "is_available": lambda v: str(v).lower() in ("true", "1"),  # If true or 1, True
     }
 
     @staticmethod
@@ -215,11 +215,11 @@ class HotelService:
             ("is_available" in filters)
             and ("start_date" in filters)
             and ("end_date" in filters)
-            and filters.get("is_available") == True
+            and filters.get("is_available") is True
         ):
             start_date = filters.get("start_date")
             end_date = filters.get("end_date")
-            RoomTypeService.validate_room_type_available(start_date, end_date)
+            RoomTypeService.validate_room_type_is_available(start_date, end_date)
 
             available_hotel_ids = [
                 hotel.id
