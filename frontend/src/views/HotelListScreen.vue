@@ -4,6 +4,14 @@ import { useRoute, useRouter } from 'vue-router';
 import { debounce } from 'lodash';
 import { useGetAllHotels } from '@/data-layer/hooks/hotels';
 import { Notyf } from 'notyf';
+import hotel1 from '../assets/hoteles/hotel1.jpg';
+import hotel2 from '../assets/hoteles/hotel2.jpg';
+import hotel3 from '../assets/hoteles/hotel3.jpg';
+import hotel4 from '../assets/hoteles/hotel4.jpg';
+import hotel5 from '../assets/hoteles/hotel5.jpg';
+import hotel6 from '../assets/hoteles/hotel6.jpg';
+
+const defaultImages = [hotel1, hotel2, hotel3, hotel4, hotel5, hotel6];
 
 // Components
 import HotelFilters from '@/components/hotels/HotelFilters.vue';
@@ -17,6 +25,14 @@ const notyf = new Notyf();
 const route = useRoute();
 const router = useRouter();
 
+// Helper para formatear fechas
+const formatDate = (date) => date.toISOString().split('T')[0];
+
+// Fechas por defecto
+const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
+
 // Data
 const cities = ref([
   "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
@@ -24,29 +40,33 @@ const cities = ref([
   "Valladolid", "Vigo", "Gijón"
 ].sort());
 
+const petTypes = ["DOG", "CAT", "BIRD", "MIXED"].sort();
 
 // State
 const selectedCity = ref("");
-const selectedRoom = ref("");
+const selectedPetType = ref("DOG");
 const minPrice = ref(0);
 const maxPrice = ref(500);
 const tempMinPrice = ref(minPrice.value);
 const tempMaxPrice = ref(maxPrice.value);
-const sortBy = ref("");
+const sortBy = ref("name");
 const direction = ref("asc");
+const startDate = ref(formatDate(today));
+const endDate = ref(formatDate(tomorrow));
 const appliedFilters = ref([]);
 const isSortByOpen = ref(false);
 const isFiltersOpen = ref(false);
 
-
-
 // Methods
 const updateFiltersFromRoute = () => {
   selectedCity.value = route.query.city || "";
+  selectedPetType.value = route.query.pet_type || "DOG";
   minPrice.value = route.query.min_price ? Number(route.query.min_price) : 0;
   maxPrice.value = route.query.max_price ? Number(route.query.max_price) : 500;
   sortBy.value = route.query.sort_by || "name";
   direction.value = route.query.direction || "asc";
+  startDate.value = route.query.start_date || formatDate(today);
+  endDate.value = route.query.end_date || formatDate(tomorrow);
   tempMinPrice.value = minPrice.value;
   tempMaxPrice.value = maxPrice.value;
 };
@@ -54,10 +74,14 @@ const updateFiltersFromRoute = () => {
 const applyFilters = () => {
   const queryParams = {
     city: selectedCity.value || undefined,
+    pet_type: selectedPetType.value || undefined,
     min_price: minPrice.value !== 0 ? minPrice.value : undefined,
     max_price: maxPrice.value !== 500 ? maxPrice.value : undefined,
     sort_by: sortBy.value || undefined,
-    direction: direction.value || "asc"
+    direction: direction.value || "asc",
+    is_available: true,
+    start_date: startDate.value,
+    end_date: endDate.value
   };
 
   Object.keys(queryParams).forEach(key => {
@@ -65,7 +89,6 @@ const applyFilters = () => {
   });
 
   router.push({ path: route.path, query: queryParams });
-
   updateAppliedFilters();
   isFiltersOpen.value = false;
   notyf.success('Filtros aplicados correctamente');
@@ -74,6 +97,9 @@ const applyFilters = () => {
 const updateAppliedFilters = () => {
   appliedFilters.value = [];
   if (selectedCity.value) appliedFilters.value.push(`Ciudad: ${selectedCity.value}`);
+  if (selectedPetType.value && selectedPetType.value !== "DOG") {
+    appliedFilters.value.push(`Animal: ${selectedPetType.value}`);
+  }
   if (maxPrice.value !== 500) appliedFilters.value.push(`Max Precio: ${maxPrice.value}€`);
   if (minPrice.value !== 0) appliedFilters.value.push(`Min Precio: ${minPrice.value}€`);
 };
@@ -88,6 +114,7 @@ const commitPriceFilters = () => {
 
 const removeFilter = (filter) => {
   if (filter.startsWith("Ciudad:")) selectedCity.value = "";
+  else if (filter.startsWith("Animal:")) selectedPetType.value = "DOG";
   else if (filter.startsWith("Max Precio:")) maxPrice.value = 500;
   else if (filter.startsWith("Min Precio:")) minPrice.value = 0;
 
@@ -115,7 +142,7 @@ watch(() => route.query, () => {
   updateFiltersFromRoute();
 }, { deep: true });
 
-watch([selectedCity, sortBy, direction], () => {
+watch([selectedCity, selectedPetType, sortBy, direction, startDate, endDate], () => {
   refetchHotels();
   notyf.success('Hoteles actualizados con los nuevos filtros');
 });
@@ -126,6 +153,10 @@ const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAl
   max_price_per_night: maxPrice,
   min_price_per_night: minPrice,
   city: selectedCity,
+  pet_type: selectedPetType,
+  is_available: true,
+  start_date: startDate,
+  end_date: endDate
 });
 
 // Computed
@@ -142,9 +173,6 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
     { user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }
   ]
 })) || []);
-
-console.log("hotelview", hotels);
-
 </script>
 
 <template>
@@ -152,12 +180,19 @@ console.log("hotelview", hotels);
   <div class="container mt-5 hidden md:flex">
     <HotelFilters 
       :cities="cities"
+      :petTypes="petTypes"
       :selectedCity="selectedCity"
+      :selectedPetType="selectedPetType"
       :tempMinPrice="tempMinPrice"
       :tempMaxPrice="tempMaxPrice"
+      :startDate="startDate"
+      :endDate="endDate"
       @update:city="selectedCity = $event"
+      @update:petType="selectedPetType = $event"
       @update:tempMinPrice="tempMinPrice = $event"
       @update:tempMaxPrice="tempMaxPrice = $event"
+      @update:startDate="startDate = $event"
+      @update:endDate="endDate = $event"
       @commit-price="commitPriceFilters"
     />
 
@@ -183,7 +218,10 @@ console.log("hotelview", hotels);
     </div>
   </div>
 
-  
+  <!-- Mobile Version -->
+  <div class="container flex flex-col items-start mt-5 md:hidden">
+    <!-- ... (código móvil existente) ... -->
+  </div>
 </template>
 
 <style scoped>

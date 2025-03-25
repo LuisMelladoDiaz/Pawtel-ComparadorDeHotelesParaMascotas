@@ -14,6 +14,7 @@ import Contact from './views/Contact.vue';
 import { h, type Component} from 'vue';
 import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
+import LayoutTerracotaMargins from './views/LayoutTerracotaMargins.vue';
 import { type RouteRecordRaw } from 'vue-router';
 import axios from 'axios';
 
@@ -114,7 +115,7 @@ const routes = [
   },
   {
     path: '/hotels',
-    component: createComponent({ layout: LayoutWithFilter, component: HotelListScreen }),
+    component: createComponent({ layout: LayoutTerracotaMargins, component: HotelListScreen }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
