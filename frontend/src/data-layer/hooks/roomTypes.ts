@@ -7,24 +7,26 @@ import {
   updateRoomType,
   partialUpdateRoomType,
   deleteRoomType,
+  checkRoomTypeAvailability,
+  fetchHotelOfRoomType,
   fetchTotalVacancyForRoomType,
   fetchVacancyForEachRoomInRoomType,
   type RoomType,
 } from '@/data-layer/api/roomTypes';
 
+export const useGetRoomTypeById = (roomTypeId: MaybeRef<number>) => {
+  return useQuery({
+    queryKey: ['roomType', roomTypeId],
+    queryFn: () => fetchRoomTypeById(toValue(roomTypeId)),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
+  });
+};
+
 export const useGetAllRoomTypes = (hotelId?: MaybeRef<number>) => {
   return useQuery({
     queryKey: ['roomTypes', hotelId],
     queryFn: () => fetchAllRoomTypes(toValue(hotelId)),
-    staleTime: 1000 * 60, // Los datos se mantienen frescos por 1 minuto
-    refetchOnWindowFocus: false, // No refrescar los datos cuando la ventana vuelve al foco
-  });
-};
-
-export const useGetRoomTypeById = (roomTypeId: MaybeRef<number>) => {
-  return useQuery({
-    queryKey: ['roomTypeId', roomTypeId],
-    queryFn: () => fetchRoomTypeById(toValue(roomTypeId)),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
@@ -34,7 +36,8 @@ export const useCreateRoomType = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: createRoomType,
+    mutationFn: (data: Omit<RoomType, 'id'>) => createRoomType(data),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['roomTypes'] });
     },
@@ -50,7 +53,7 @@ export const useUpdateRoomType = () => {
 
     onSuccess: (data: RoomType) => {
       queryClient.invalidateQueries({ queryKey: ['roomTypes'] });
-      queryClient.invalidateQueries({ queryKey: ['roomTypeId', data.id] });
+      queryClient.invalidateQueries({ queryKey: ['roomType', data.id] });
     },
   });
 };
@@ -62,7 +65,7 @@ export const usePartialUpdateRoomType = () => {
     mutationFn: ({ roomTypeId, partialData }: { roomTypeId: number; partialData: Partial<RoomType> }) =>
       partialUpdateRoomType(roomTypeId, partialData),
 
-    onSuccess: (data) => {
+    onSuccess: (data: RoomType) => {
       queryClient.invalidateQueries({ queryKey: ['roomType', data.id] });
       queryClient.invalidateQueries({ queryKey: ['roomTypes'] });
     },
@@ -81,19 +84,26 @@ export const useDeleteRoomType = () => {
   });
 };
 
-export const useGetTotalVacancyForRoomType = (roomTypeId: MaybeRef<number>) => {
+export const useCheckRoomTypeAvailability = () => {
+  return useMutation({
+    mutationFn: (data: { roomTypeId: number; startDate: string; endDate: string }) =>
+      checkRoomTypeAvailability(data.roomTypeId, data.startDate, data.endDate),
+  });
+};
+
+export const useGetHotelOfRoomType = (roomTypeId: MaybeRef<number>) => {
   return useQuery({
-    queryKey: ['roomTypeVacancy', roomTypeId],
-    queryFn: () => fetchTotalVacancyForRoomType(toValue(roomTypeId)),
+    queryKey: ['roomTypeHotel', roomTypeId],
+    queryFn: () => fetchHotelOfRoomType(toValue(roomTypeId)),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
 };
 
-export const useGetAllRoomsForRoomType = (roomTypeId: MaybeRef<number>) => {
+export const useGetTotalVacancyForRoomType = (roomTypeId: MaybeRef<number>) => {
   return useQuery({
-    queryKey: ['roomTypeRooms', roomTypeId],
-    queryFn: () => fetchAllRoomsForRoomType(toValue(roomTypeId)),
+    queryKey: ['roomTypeVacancy', roomTypeId],
+    queryFn: () => fetchTotalVacancyForRoomType(toValue(roomTypeId)),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
