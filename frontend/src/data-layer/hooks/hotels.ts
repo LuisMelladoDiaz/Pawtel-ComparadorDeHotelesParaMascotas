@@ -11,6 +11,7 @@ import {
   filterAvailableHotels,
   filterAvailableRoomTypes,
   type Hotel,
+  fetchRoomTypesByHotel,
 } from '@/data-layer/api/hotels';
 
 export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
