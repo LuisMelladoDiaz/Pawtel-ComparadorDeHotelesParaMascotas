@@ -90,4 +90,3 @@ export const useGetMyBookings = () => {
       refetchOnWindowFocus: false,
     });
   };
-  

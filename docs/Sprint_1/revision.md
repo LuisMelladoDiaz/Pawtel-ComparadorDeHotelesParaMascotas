@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,7 +7,7 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
 📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
@@ -16,12 +16,12 @@
 
 # 📑 **Revision - Sprint 1** 🚀
 
-**📅 Entregable:** Sprint 1  
-**📆 Fecha:** 10/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 1
+**📆 Fecha:** 10/03/2025
+**👥 Equipo:** G11
 
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -34,14 +34,14 @@
 
 ---
 
-## Índice  
-1. [Control de versiones](#control-de-versiones)  
-2. [Resumen Ejecutivo](#resumen-ejecutivo)  
-3. [Desarrollo](#desarrollo)   
+## Índice
+1. [Control de versiones](#control-de-versiones)
+2. [Resumen Ejecutivo](#resumen-ejecutivo)
+3. [Desarrollo](#desarrollo)
 
 ---
 
-## **Control de versiones**  
+## **Control de versiones**
 
 | Versión | Fecha       | Autor    | Descripción de cambios |
 |---------|------------|----------|------------------------|
@@ -111,13 +111,13 @@ Como dueños de hoteles: hotelowner1, con contraseña password123 y hotelowner2,
 
 La información de estos dos usuarios es la siguiente:
 
---- 
+---
 HotelOwner 1:
 
 - Nombre de usuario: hotelowner1
 - Correo electrónico: example1@example.com
 - Teléfono: +34600000000
-- Hotel: 
+- Hotel:
 1. Nombre: Posada Puchero
 2. Dirección: Calle Este 8
 3. Ciudad: Términa
@@ -127,7 +127,7 @@ HotelOwner 1:
 1. Nombre: A10
 2. Tipo de habitación: Suite Ejecutiva
 
---- 
+---
 HotelOwner 2:
 
 - Nombre de usuario: hotelowner2
@@ -148,7 +148,7 @@ HotelOwner 2:
 
 
 En el alcance de este sprint solo teníamos pensado este tipo de usuario, pero igualmente adjuntamos el super usuario de django como sustituto temporal del usuario administrador, que se implementará en el siguiente sprint.
-Usuario: pawtel_admin 
+Usuario: pawtel_admin
 Contraseña: 4dm1n
 
 La aplicación cuenta con apartados, pantallas misceláneas o extras y secciones preparadas para el siguiente sprint, por lo que se ruega no tener en cuenta: Contáctanos, Sobre Nosotros, Perfil de usuario, Reservas y Habitaciones, Iconos de la NavBar...
@@ -161,5 +161,3 @@ Todo esta preparado y programado para futuros sprints. Se evaluarán los casos d
 - La URL de nuestro repositorio de GitHub es: [github.com/Pawtel](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas)
 - La URL a nuestro sistema de seguimiento de tiempo es: [Clockify.me/Pawtel](https://app.clockify.me/projects/67bb0478254a3a5bd06e2d53/), usando la cuenta pawteles@gmail.com con la contraseña Grupo11@
 - La URL al vídeo de demostración es: https://drive.google.com/file/d/1pb2-VGNGUgia30zzA9S3uhaGpwnS7e3s/view?usp=sharing
-
-

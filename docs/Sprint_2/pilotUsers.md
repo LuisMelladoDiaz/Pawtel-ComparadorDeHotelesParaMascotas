@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,12 +16,12 @@
 
 # **Usuarios Piloto. Gestión del Feedback y Comunicación**
 
-**📅 Entregable:** Sprint 2  
-**📆 Fecha:** 10/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 2
+**📆 Fecha:** 10/03/2025
+**👥 Equipo:** G11
 
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -33,11 +33,11 @@
 
 
 ---
- 
+
 ## 📌 **Índice**
- 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)  
- 2. 🧑‍💻 [**Lista de Usuarios Piloto**](#lista-de-usuarios-piloto)  
- 3. 💬 [**Gestión de la Comunicación y Feedback**](#gestión-de-la-comunicación-y-feedback-de-los-usuarios-piloto)  
+ 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)
+ 2. 🧑‍💻 [**Lista de Usuarios Piloto**](#lista-de-usuarios-piloto)
+ 3. 💬 [**Gestión de la Comunicación y Feedback**](#gestión-de-la-comunicación-y-feedback-de-los-usuarios-piloto)
 
 ---
 
@@ -152,7 +152,7 @@ Los usuarios serán seleccionados bajo criterios diversificados, considerando:
 
 Ejemplo de usuario piloto: *Hombre de 31-50 años, casado, 1 conviviente, viaje familiar, residente en Sevilla, 2 mascotas, nivel socioeconómico alto.*
 
-Se seleccionarán entre 20 y 40 perfiles de especial interés. 
+Se seleccionarán entre 20 y 40 perfiles de especial interés.
 
 **Duración:** 5 días.
 
@@ -161,7 +161,7 @@ Se seleccionarán entre 20 y 40 perfiles de especial interés.
 ## 4. Ejecutar Prueba
 Fase operativa donde los usuarios reciben y utilizan la aplicación, completando posteriormente el cuestionario.
 
-- Se enviará un correo con la información necesaria: 
+- Se enviará un correo con la información necesaria:
   - Descripción del proceso.
   - Plazos.
   - Acceso a la aplicación.
@@ -197,8 +197,7 @@ Este plan busca asegurar que la aplicación se ajuste a las necesidades y expect
 **Política de privacidad:** La información proporcionada será utilizada exclusivamente para mejorar la experiencia dentro de la aplicación. No se compartirán ni venderán datos a terceros. Los usuarios piloto deberán aceptar esta política para participar.
 
 ## 7. Anexos. Informes del Feedback
-Los informes del seguimiento del feedback los podrá encontrar en la carpeta **docs/Sprint_2/PMBOK/seguimiento_y_control/usuarios_piloto**. Se adjuntarán las dos sesiones de feedback que el Grupo 11 ha realizado. 
+Los informes del seguimiento del feedback los podrá encontrar en la carpeta **docs/Sprint_2/PMBOK/seguimiento_y_control/usuarios_piloto**. Se adjuntarán las dos sesiones de feedback que el Grupo 11 ha realizado.
 - La primera, referente a la validación de los mock-ups. Los usuarios piloto han validado su aceptación hacia los moch-ups mediante una encuesta.
 
 - La segunda, referente a el despliegue de la primera versión de Pawtel. Los usuarios piloto han trabajado y probado la snapshot del Sprint 1. La recopilación se ha realizado mediante una encuesta en la cual se ha pedido valorar la usabilidad, defectos, UX, funcionalidad y otros aspectos de las features desarrolladas en este primer Sprint.
-

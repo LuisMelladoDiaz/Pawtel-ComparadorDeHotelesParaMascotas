@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,7 +7,7 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
 📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
@@ -16,12 +16,12 @@
 
 # **Performance Evaluation**
 
-**📅 Entregable:** Sprint 2  
-**📆 Fecha:** 20/02/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 2
+**📆 Fecha:** 20/02/2025
+**👥 Equipo:** G11
 
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -33,14 +33,14 @@
 
 
 ---
- 
+
 ## 📌 **Índice**
- 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)  
- 2. 📝 [**Evaluación Individual Acordada**](#evaluación-individual-acordada)  
- 
+ 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)
+ 2. 📝 [**Evaluación Individual Acordada**](#evaluación-individual-acordada)
+
  ---
 
-## 📜 **Historial de Versiones**  
+## 📜 **Historial de Versiones**
 | 📅 **Fecha**       | 🔢 **N° de Versión** | 📝 **Descripción**               | ✍️ **Elaborado por**           |
 |------------------|----------------|---------------------------|-------------------------|
 | 📆 20/02/2025  | 🔹 v 1.0         | 🏁 Versión inicial del documento. #DP| ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
@@ -96,7 +96,7 @@
 - Tareas de QA y reparto de actividades.
 - Creación de las plantillas para documentos.
 - Presentador la tercera semana.
-- Pantalla 
+- Pantalla
 
 #### González Martínez, David
 - Responsable del stack tecnológico junto con Manuel.
@@ -196,7 +196,7 @@
 - Jefe de equipo: informes de desempeño, reparto de tareas, QAs y reuniones
 - Configuración inicial del proyecto. USAGE.md
 - Registro de usuarios
-- Ajuste de errores menores: filtro, creación y listado de hoteles 
+- Ajuste de errores menores: filtro, creación y listado de hoteles
 - Conexión backend - frontend junto a Sergio
 - Deploy Render
 - Disposición alta

@@ -21,17 +21,17 @@ const { data: isLoggedIn } = useIsLoggedIn();
             <span class="italic" style="color: var(--color-terracota);">mascota.</span>
           </h1>
           <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
-          
+
           <router-link to="/register" v-if="!isLoggedIn">
             <Button type="reject" class="m-0!">Crear cuenta</Button>
           </router-link>
 
           <p class="text-sm text-gray-600 mt-4" v-if="!isLoggedIn">
-            ¿Ya tienes una cuenta? 
+            ¿Ya tienes una cuenta?
             <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
           </p>
         </div>
-        
+
         <div class="lg:w-1/2">
           <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">
         </div>

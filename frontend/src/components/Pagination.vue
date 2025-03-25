@@ -7,7 +7,7 @@
       <button @click="nextPage" :disabled="currentPage === totalPages">Siguiente</button>
     </div>
   </template>
-  
+
   <script>
   export default {
     props: {
@@ -31,7 +31,7 @@
     },
   };
   </script>
-  
+
   <style scoped>
   .pagination {
     display: flex;
@@ -48,4 +48,3 @@
     color: white;
   }
   </style>
-  

@@ -52,7 +52,7 @@ const formatDate = (dateStr) => {
 </script>
 
 <template>
-    
+
 <!-- Versión escritorio -->
 <div class="container mt-5 hidden md:flex">
 
@@ -68,4 +68,3 @@ const formatDate = (dateStr) => {
 
 <style scoped>
 </style>
-

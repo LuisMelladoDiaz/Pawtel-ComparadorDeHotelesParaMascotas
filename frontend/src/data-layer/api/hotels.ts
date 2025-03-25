@@ -81,4 +81,3 @@ export const filterAvailableRoomTypes = async (hotelId: number, filters: Record<
   const response = await axios.get(url.toString());
   return response.data as RoomType[];
 };
-

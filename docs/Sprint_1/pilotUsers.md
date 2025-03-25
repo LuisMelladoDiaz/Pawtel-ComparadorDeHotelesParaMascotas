@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,12 +16,12 @@
 
 # **Usuarios Piloto. Gestión del Feedback y Comunicación**
 
-**📅 Entregable:** Sprint 1  
-**📆 Fecha:** 10/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 1
+**📆 Fecha:** 10/03/2025
+**👥 Equipo:** G11
 
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -33,11 +33,11 @@
 
 
 ---
- 
+
 ## 📌 **Índice**
- 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)  
- 2. 🧑‍💻 [**Lista de Usuarios Piloto**](#lista-de-usuarios-piloto)  
- 3. 💬 [**Gestión de la Comunicación y Feedback**](#gestión-de-la-comunicación-y-feedback-de-los-usuarios-piloto)  
+ 1. 📅 [**Tabla de Versiones**](#historial-de-versiones)
+ 2. 🧑‍💻 [**Lista de Usuarios Piloto**](#lista-de-usuarios-piloto)
+ 3. 💬 [**Gestión de la Comunicación y Feedback**](#gestión-de-la-comunicación-y-feedback-de-los-usuarios-piloto)
 
 ---
 
@@ -151,7 +151,7 @@ Los usuarios serán seleccionados bajo criterios diversificados, considerando:
 
 Ejemplo de usuario piloto: *Hombre de 31-50 años, casado, 1 conviviente, viaje familiar, residente en Sevilla, 2 mascotas, nivel socioeconómico alto.*
 
-Se seleccionarán entre 20 y 40 perfiles de especial interés. 
+Se seleccionarán entre 20 y 40 perfiles de especial interés.
 
 **Duración:** 5 días.
 
@@ -160,7 +160,7 @@ Se seleccionarán entre 20 y 40 perfiles de especial interés.
 ## 4. Ejecutar Prueba
 Fase operativa donde los usuarios reciben y utilizan la aplicación, completando posteriormente el cuestionario.
 
-- Se enviará un correo con la información necesaria: 
+- Se enviará un correo con la información necesaria:
   - Descripción del proceso.
   - Plazos.
   - Acceso a la aplicación.
@@ -194,4 +194,3 @@ Se documentarán los hallazgos para futuras optimizaciones.
 Este plan busca asegurar que la aplicación se ajuste a las necesidades y expectativas de los usuarios, permitiendo una mejora continua basada en datos reales y experiencias directas. Todos los tiempos serán definidos con exactitud en la primera fase de cada ciclo.
 
 **Política de privacidad:** La información proporcionada será utilizada exclusivamente para mejorar la experiencia dentro de la aplicación. No se compartirán ni venderán datos a terceros. Los usuarios piloto deberán aceptar esta política para participar.
-
