@@ -14,9 +14,9 @@
 
 <br><br>
 
-# 📑 **Informe de uso de IA** - Sprint 1 🚀
+# 📑 **Informe de uso de IA** - Sprint 2 🚀
 
-**📅 Entregable:** Sprint 1
+**📅 Entregable:** Sprint 2
 **📆 Fecha:** 26/03/2025
 **👥 Equipo:** G11
 
@@ -57,6 +57,9 @@
 | 📅 Fecha       | 🔢 N° de Versión | 📄 Descripción                   | ✍️ Elaborado por           |
 |-------------|---------------|-------------------------------|-------------------------|
 | 22/03/2025  | v 1.0         | Versión inicial del documento - Parte de Rafael | Rafael Castillo Cebolla |
+| 24/03/2025  | v 1.1         | Parte de Dani | Daniel Flores de Francisco |
+| 25/03/2025  | v 1.2         | Parte de Luis | Luis Mellado Díaz |
+
 
 ---
 
@@ -128,7 +131,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Claudio Cortés Carrasco
-- **Sprint:** Sprint1
+- **Sprint:** Sprint2
 - **Rol en el proyecto:** Programador backend, documentación
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -146,12 +149,13 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 |-------|-----------------------|---------------------------|
 | Mejora de tests |    ChatGPT | Recibiendo el código de las distintas entidades y los respectivos test básicos se pidío que se mejorasen para que abarcasen todas las posibilidades. |
 | Ayuda para generar gráficos |                ChatGPT | Se usó para saber como generar unos gráficos de barras desde el powerpoint para añadirlo a la presentación semanal. |
+| Ayuda para solucionar un error en los tests |                ChatGPT | Se usó para saber como solucionar un error que no asignaba correctamente el hotelOwner al usuario que se registraba. |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 3
-- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para mejorar y ampliar los tests me ahorró mucho tiempo
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
+- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para mejorar y ampliar los tests me ahorró mucho tiempo, asi como solucionar el error que me daba de asignación de hotelOwner al AppUser ya que me lleve un rato intentando solucionarlo y no lo conseguía.
 
 #### 5. Prompts Utilizados
 
@@ -159,10 +163,11 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 1. Dados los siguientes archivos de tests y sus entidades asociadas, mejoralos para que abarquen el 100% de los casos posibles tanto en casos positivos como negativos.
 2. Podrias ayudarme a generar un gráfico de barras desde una presentación de powerpoint.
+3. Dado el problema que te paso por captura, podrías ayudarme a identificar cual es el problema en la asignación del hotelOwner al AppUser?
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos.
+- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos y a veces te genera test con datos repetidos.
 
 
 #### 7. Evaluación General
@@ -177,7 +182,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Daniel Flores de Francisco
-- **Sprint:** Sprint 1
+- **Sprint:** Sprint 2
 - **Rol en el proyecto:** PM, programador backend, documentación y devops
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -192,34 +197,33 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
 | Asesoramiento de cómo escribir el Workflow. | ChatGPT | Usada para ver los workflows usados, sintaxis y corrección de errores |
-| Fórmula primera de las métricas | ChatGPT | Dado lo que vamos a medir, le pedí una fórmula normalizada |
-| Solución de problemas con git | ChatGPT | Cómo resolver conflictos con git desde la consola |
 | Conversión a markdown | ChatGPT | Recibiendo el documento en word o pdf se le pide pasarlo a markdown |
+| Plantilla y modificaciones del Customer Agreement | DeepSeek | Usada para hacer más largo el Customer Agreement e identificar unfair clauses |
+| Búsqueda de Plataformas de Análisis de Código | ChatGPT | Usada como asesoría de las distintas plataformas de análisis de código estático y sus integración usando GitHub Actions. Apoyado en videos de Youtube |
 
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10 - 15
-- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo a la hora de reescribir la documentación, y hacerme el esqueleto de los Workflows usados teniendo en cuenta los distíntos Sistemas Operativos que el equipo maneja.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5 - 7
+- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo a la hora de ponerme a configurar el CI. Con la documentación tambien me ha ayudado ha pasar documentos a formato Markdown y a perfeccionarlos
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Dame el esqueleto de un workflow lanzado por cada push a una rama main, teniendo en cuenta los distintos OS: Linux, Windows e IOS
-2. Dada esta métricas, necesito una formula que tenga en cuenta que cada persona realiza distínto número de tareas. La quiero normalizada de 0 a 1
-3. Al hacer commit me sale este error de ramas: ¿Qué tengo que hacer para solucionarlo?
-4. Pasame este doc a markdown
+1. ¿Cómo iniciarias un servidor en Sonarqube?
+2. Hazme los cambios necesarios para que sea compatible con la versión de (paqiete) (fichero)
+3. Giving this template of customer agreement, and this document about my business, fullfil this agreement using this template and the information of my business doc
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** La conversión a markdown no es perfecta y no coge las imagenes. Respecto a las métricas, dió una formula rara o no me supe expresar bien, lo cula hizo que posteriormente la volviésemos a cambiar.
+- **Limitaciones detectadas en la IA:** Le falta mucho contexto. Muchas veces patina y en el CI te da mal la sintaxis, paquetes y versiones incompatibles y más cosas.
 
 #### 7. Evaluación General
 
-- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** Ninguno, la utilizo cuando me negro o voy con prisas.
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Si
+- **Comentarios adicionales sobre la experiencia con IA:** Ninguno
 
 ---
 
@@ -594,15 +598,15 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Luis Mellado Díaz
-- **Sprint:** Sprint1
+- **Sprint:** Sprint2
 - **Rol en el proyecto:** PM, programador frontend, documentación
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
 - Generación de código (x)
 - Refactorización de código (x)
-- Generación de documentación (x)
-- Asesoramiento técnico (x)
+- Generación de documentación ()
+- Asesoramiento técnico ()
 
 #### 3. Uso de IA en las Tareas
 
@@ -610,34 +614,35 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Creación de Componentes Reusables | ChatGPT | Usada como guía de instalación de Vue, Vite y Tailwind CSS y para resolver cuestiones acerca de la creación de componentes como botones o modales |
-| Pantalla CRUD de hoteles | ChatGPT | Recibiendo el código de la pantalla se pidió consejo para hacerla más responsiva (de cara a los usuarios de móvil) |
-| Pantalla Perfil de Usuario | ChatGPT | Recibiendo el código de la pantalla se pidió consejo para hacerla más responsiva (de cara a los usuarios de móvil) |
-| Conversión a markdown | ChatGPT | Recibiendo el documento en word o pdf se le pide pasarlo a markdown |
+| Refactorización del frontend | ChatGPT | Usada como apoyo para limpiar el código de diferentes pantallas siguiendo instrucciones concretas |
+| Gestión de Residencias | ChatGPT | Apoyo completo en la creación de la feature |
+| Listado de mis reservas | ChatGPT | Recibiendo el código de la pantalla se realizaron mejoras mínimas de caracter estético |
+
 
 
 
 #### 4. Impacto en Productividad
 
 - **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo de prueba error ya que nos estamos adaptando a un nuevo stack tecnológico.
+- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo de trabajo  de "fuerza bruta" y me he podido dedicar a gestionar los errores de gestión y organización del grupo.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Estoy haciendo un frontend con vue vite y tailwind css, quiero crear los componentes reusables como los botones de aceptar o el navbar, me explicas como lo hago?
-2. ayúdame a que la pantalla sea mas responsiva, quiero decir, que se vea también super genial en móvil, el diseño actual es de ordenador
-3. Observa este documento, pásalo a markdown
+1. Te voy a pasar una pantalla que funciona, ayudame a limpiar y refactorizar el codigo. ¿Recomiendas que la divida en distintos componentes ?
+2. Vamos a llevar a cabo una feat que me permite gestionar las habitaciones en la pantalla de editar un hotel, aquí tienes el código... Te paso los hooks y llamadas a la api que vamos a necesitar.
+3. Dada esta pantalla de listado de reservas, haz que las tarjetas tengan un borde color terracota y se encuentren dentro de un contenedor padre con un scroll vertical...
 
 #### 6. Problemas Encontrados y Limitaciones
 
 - **Limitaciones detectadas en la IA:** A la hora de hacer algunas correcciones de estilo es bastante imprecisa, esta claro que "no tiene ojos" y si no recibe instrucciones muy concretas no diseña lo que tienes en mente.
+- **Errores encontrados:** no es especialmente buena a la hora de generar scripts para frontend, tiende a complicar la estructura de la pantalla usando watch o useEffects a diestro y siniestro. Es mejor aclarar el patrón que estas usando, en nuestro caso computed, y proveerle el codigo de los hooks y mutatations.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** He empezado a juguetear con deepseek, el servidor da problemas bastante a menudo pero no tiene las limitaciones de pago de chatgpt, sería muy útil tener todo lo relacionado con el proyecto en un solo chat.
+- **Comentarios adicionales sobre la experiencia con IA:** He empezado a juguetear con deepseek, el servidor da problemas bastante a menudo pero no tiene algunas de las limitaciones de pago de chatgpt, sería muy útil tener todo lo relacionado con el proyecto en un solo chat.
 
 ---
 

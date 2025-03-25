@@ -9,6 +9,7 @@ import {
     deleteCustomer,
     getCurrentCustomer,
     type Customer,
+    fetchMyBookings,
 } from '@/data-layer/api/customers';
 
 
@@ -80,3 +81,12 @@ export const useGetCurrentCustomer = () => {
         refetchOnWindowFocus: false,
     });
 }
+
+export const useGetMyBookings = () => {
+    return useQuery({
+      queryKey: ['my-bookings'],
+      queryFn: fetchMyBookings,
+      staleTime: 1000 * 60,
+      refetchOnWindowFocus: false,
+    });
+  };

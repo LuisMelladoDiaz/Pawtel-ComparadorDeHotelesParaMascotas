@@ -1,11 +1,11 @@
 <template>
-  <div 
-    v-if="isOpen" 
+  <div
+    v-if="isOpen"
     class="fixed bg-black bg-opacity-30 flex justify-center items-center"
     :style="{ top: `${y}px`, left: `${x}px`, position: 'absolute' }"
   >
-    <div 
-      class="bg-white p-6 rounded-lg" 
+    <div
+      class="bg-white p-6 rounded-lg"
       :style="modalStyles"
     >
       <!-- Título y botón de cerrar -->

@@ -5,7 +5,7 @@
     <div class="text-base text-gray-600">{{ price }} €</div>
   </div>
 </template>
-  
+
 <script>
   export default {
     props: {

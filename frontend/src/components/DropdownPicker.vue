@@ -1,6 +1,6 @@
 <template>
   <div class="relative inline-block text-left w-full" ref="dropdownRef">
-    
+
     <!-- Agregar el label -->
     <h4 v-if="label" class="text-lg font-semibold mb-2">{{ label }}</h4>
 

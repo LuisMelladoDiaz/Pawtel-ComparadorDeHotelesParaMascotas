@@ -1,11 +1,14 @@
-from django.db.models import Max, Min
+from datetime import datetime
+
+from django.db.models import Max, Min, Q
 from django.forms import ValidationError
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel, HotelImage
-from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
+from pawtel.hotels.serializers import (HotelImageSerializer, HotelSerializer,
+                                       SetImageAsCoverSerializer)
 from pawtel.permission_services import PermissionService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.services import RoomTypeService
@@ -138,90 +141,142 @@ class HotelService:
 
     # Filter -----------------------------------------------------------------
 
+    VALID_FILTERS = {
+        "city": str,
+        "name": str,
+        "hotel_owner": int,
+        "pet_type": str,
+        "max_price_per_night": float,
+        "min_price_per_night": float,
+        "sort_by": str,
+        "limit": int,
+        "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+        "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+        "is_available": bool,
+    }
+
     @staticmethod
-    def list_hotels(filters=None):
-        hotels = Hotel.objects.filter(is_archived=False)
+    def __validate_filters(filters):
+        """Ensures filters are valid and have correct types."""
+        if filters is None:
+            return {}
 
-        valid_filters = [
-            "city",
-            "name",
-            "hotel_owner",
-            "room_type",
-            "max_price_per_night",
-            "min_price_per_night",
-            "sort_by",
-            "limit",
-        ]
+        assert all(
+            f in HotelService.VALID_FILTERS for f in filters
+        ), f"Invalid filter: {filters}"
 
-        assert filters is None or all(f in valid_filters for f in filters), filters
-
-        if filters:
-            if "city" in filters:
-                assert isinstance(filters["city"], str)
-                hotels = hotels.filter(city__icontains=filters["city"])
-
-            if "name" in filters:
-                assert isinstance(filters["name"], str)
-                hotels = hotels.filter(name__icontains=filters["name"])
-
-            if "hotel_owner" in filters:
-                hotels = hotels.filter(hotel_owner__id=filters["hotel_owner"])
-
-            if "room_type" in filters:
-                assert isinstance(filters["room_type"], str)
-                hotels = hotels.filter(
-                    roomtype__name__icontains=filters["room_type"]
-                ).distinct()
-
-            if "max_price_per_night" in filters:
-                fl = float(filters["max_price_per_night"])
-                assert isinstance(fl, float)
+        validated = {}
+        for key, expected_type in HotelService.VALID_FILTERS.items():
+            if key in filters:
                 try:
-                    max_price = float(filters["max_price_per_night"])
-                    hotels = hotels.filter(
-                        roomtype__price_per_night__lte=max_price
-                    ).distinct()
-                except ValueError:
+                    validated[key] = expected_type(filters[key])
+                except (ValueError, TypeError):
                     pass
+        return validated
 
-            if "min_price_per_night" in filters:
-                fl = float(filters["min_price_per_night"])
-                assert isinstance(fl, float)
-                try:
-                    min_price = float(filters["min_price_per_night"])
-                    hotels = hotels.filter(
-                        roomtype__price_per_night__gte=min_price
-                    ).distinct()
-                except ValueError:
-                    pass
+    @staticmethod
+    def is_hotel_available(
+        hotel_id, start_date, end_date, pet_type=None, min_price=None, max_price=None
+    ):
+        room_types = HotelService.get_all_room_types_of_hotel(hotel_id)
+        for room_type in room_types:
+            if pet_type and room_type.pet_type != pet_type:
+                continue
+            if min_price and room_type.price_per_night < min_price:
+                continue
+            if max_price and room_type.price_per_night > max_price:
+                continue
+            if RoomTypeService.is_room_type_available(
+                room_type.id, start_date, end_date
+            ):
+                return True
 
-            hotels = hotels.annotate(
-                price_max=Max("roomtype__price_per_night"),
-                price_min=Min("roomtype__price_per_night"),
-            )
-            if "sort_by" in filters:
-                assert isinstance(filters["sort_by"], str)
+        return False
 
-                valid = ["price_per_night", "city", "name", "price_max", "price_min"]
-                # Verificamos si sort_by está en los campos válidos o si empieza con "-"
-                assert filters["sort_by"] in valid or filters["sort_by"].startswith("-")
+    @staticmethod
+    def __apply_filters(hotels, filters):
+        """Applies filters to a queryset."""
+        q = Q()
 
-                sort_field = filters["sort_by"]
+        if "city" in filters:
+            q &= Q(city__icontains=filters["city"])
 
-                # Si el campo comienza con "-", orden descendente
-                if sort_field.startswith("-"):
-                    hotels = hotels.order_by(sort_field)  # Orden descendente
-                else:
-                    hotels = hotels.order_by(sort_field)  # Orden ascendente
+        if "name" in filters:
+            q &= Q(name__icontains=filters["name"])
 
-            if "limit" in filters:
-                i = int(filters["limit"])
-                assert isinstance(i, int)
-                try:
-                    limit = int(filters["limit"])
-                    hotels = hotels[:limit]
-                except ValueError:
-                    pass  # Ignorar si el límite no es un número válido
+        if "hotel_owner" in filters:
+            q &= Q(hotel_owner__id=filters["hotel_owner"])
+
+        if "pet_type" in filters:
+            q &= Q(roomtype__pet_type=filters["pet_type"], roomtype__is_archived=False)
+
+        if "max_price_per_night" in filters:
+            q &= Q(roomtype__price_per_night__lte=filters["max_price_per_night"])
+
+        if "min_price_per_night" in filters:
+            q &= Q(roomtype__price_per_night__gte=filters["min_price_per_night"])
+
+        filtered_hotels = hotels.filter(q).distinct()
+
+        if (
+            ("is_available" in filters)
+            and ("start_date" in filters)
+            and ("end_date" in filters)
+            and filters.get("is_available") == True
+        ):
+            start_date = filters.get("start_date")
+            end_date = filters.get("end_date")
+            RoomTypeService.validate_room_type_available(start_date, end_date)
+
+            available_hotel_ids = [
+                hotel.id
+                for hotel in filtered_hotels
+                if HotelService.is_hotel_available(
+                    hotel.id,
+                    start_date,
+                    end_date,
+                    filters.get("pet_type"),
+                    filters.get("min_price_per_night"),
+                    filters.get("max_price_per_night"),
+                )
+            ]
+
+            filtered_hotels = filtered_hotels.filter(
+                id__in=available_hotel_ids
+            ).distinct()
+
+        return filtered_hotels.annotate(
+            price_max=Max("roomtype__price_per_night"),
+            price_min=Min("roomtype__price_per_night"),
+        )
+
+    @staticmethod
+    def list_filtered_hotels(filters=None, allow_archived=False):
+        """Lists hotels with filtering, sorting, and limiting."""
+        if allow_archived:
+            hotels = Hotel.objects.all()
+        else:
+            hotels = Hotel.objects.filter(is_archived=False)
+
+        filters = HotelService.__validate_filters(filters)
+        hotels = HotelService.__apply_filters(hotels, filters)
+
+        if "sort_by" in filters:
+            sort_field = filters["sort_by"]
+            valid_sort_fields = [
+                "price_per_night",
+                "city",
+                "name",
+                "price_max",
+                "price_min",
+            ]
+            assert (
+                sort_field.lstrip("-") in valid_sort_fields
+            ), f"Invalid sort field: {sort_field}"
+            hotels = hotels.order_by(sort_field)
+
+        if "limit" in filters:
+            hotels = hotels[: filters["limit"]]
 
         return hotels
 
@@ -229,6 +284,10 @@ class HotelService:
 
     @staticmethod
     def list_room_types_of_hotel(hotel_id):
+        return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+
+    @staticmethod
+    def get_all_room_types_of_hotel(hotel_id):
         return RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
 
     # -
@@ -252,6 +311,13 @@ class HotelService:
     def serialize_output_hotel_image(hotel_image, many=False, context=None):
         return HotelImageSerializer(hotel_image, many=many, context=context).data
 
+    @staticmethod
+    def serialize_input_set_image_is_cover(request):
+        context = {"request": request}
+        data = request.data.copy()
+        serializer = SetImageAsCoverSerializer(data=data, context=context)
+        return serializer
+
     # Validation -------------------------------------------------------------
 
     def validate_upload_image(input_serializer, hotel_id):
@@ -271,9 +337,9 @@ class HotelService:
         HotelService.retrieve_image_from_hotel(hotel_id, image_id)
 
     @staticmethod
-    def validate_set_image_as_cover(hotel_id, image_id):
-        ##! Should better go in an authorize
-        HotelService.retrieve_image_from_hotel(hotel_id, image_id)
+    def validate_set_image_is_cover(input_serializer):
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
 
     # GET --------------------------------------------------------------------
 
@@ -335,8 +401,6 @@ class HotelService:
         current_image_count = hotel.images.count()
 
         hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        if current_image_count == 1:
-            input_serializer.validated_data["is_cover"] = True
 
         if input_serializer.validated_data.get("is_cover", False):
             current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
@@ -347,15 +411,24 @@ class HotelService:
         return input_serializer.update(hotel_image, input_serializer.validated_data)
 
     @staticmethod
-    def set_image_as_cover(hotel_id, image_id):
+    def set_image_is_cover(input_serializer, hotel_id, image_id):
+        hotel = HotelService.retrieve_hotel(hotel_id)
         hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
-        if current_cover_image:
-            current_cover_image.is_cover = False
-            current_cover_image.save()
+        if input_serializer.validated_data.get("is_cover"):
+            current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
+            if current_cover_image and current_cover_image.id != image_id:
+                current_cover_image.is_cover = False
+                current_cover_image.save()
 
-        hotel_image.is_cover = True
-        hotel_image.save()
+            if not hotel_image.is_cover:
+                hotel_image.is_cover = True
+                hotel_image.save()
+
+        else:
+            current_image_count = hotel.images.count()
+            if current_image_count <= 5 and hotel_image.is_cover:
+                hotel_image.is_cover = False
+                hotel_image.save()
 
         return hotel_image
 

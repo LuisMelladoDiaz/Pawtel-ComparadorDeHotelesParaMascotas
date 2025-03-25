@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,11 +16,11 @@
 
 # 📑 **KBReport - Sprint 1** 🚀
 
-**📅 Entregable:** Sprint 1  
-**📆 Fecha:** 10/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 1
+**📆 Fecha:** 10/03/2025
+**👥 Equipo:** G11
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -33,34 +33,34 @@
 
 ---
 
-## 📌 **Índice** 📖  
-1. [📝 Historial de Versiones](#historial-de-versiones)  
-2. [📌 Resumen Ejecutivo](#resumen-ejecutivo)  
-3. [⚙️ Desarrollo](#desarrollo)  
-4. [🗂️ Feedback Aportado](#feedback-aportado)  
-   - [Semana 1 🏁](#semana-1)  
-   - [Semana 2 ✏️](#semana-2)  
-   - [Semana 3 🔍](#semana-3)  
-   - [Semana 5 🏅](#semana-5)  
+## 📌 **Índice** 📖
+1. [📝 Historial de Versiones](#historial-de-versiones)
+2. [📌 Resumen Ejecutivo](#resumen-ejecutivo)
+3. [⚙️ Desarrollo](#desarrollo)
+4. [🗂️ Feedback Aportado](#feedback-aportado)
+   - [Semana 1 🏁](#semana-1)
+   - [Semana 2 ✏️](#semana-2)
+   - [Semana 3 🔍](#semana-3)
+   - [Semana 5 🏅](#semana-5)
 
 ---
 
-## 📝 **Historial de Versiones**  
+## 📝 **Historial de Versiones**
 
-| 📆 Fecha | 🔢 N° de Versión | 📄 Descripción | ✍️ Elaborado por |  
-|-------------|---------------|---------------------------|-------------------------|  
-| 20/02/2025  | v 1.0         | Versión inicial del documento | Manuel Castillejo Vela |  
-| 22/02/2025  | v 1.1         | Corrección de especificaciones | Manuel Castillejo Vela |  
-| 10/03/2025  | v 2.0         | Feedback Sprint 1 y formato .md | Manuel Castillejo Vela |  
+| 📆 Fecha | 🔢 N° de Versión | 📄 Descripción | ✍️ Elaborado por |
+|-------------|---------------|---------------------------|-------------------------|
+| 20/02/2025  | v 1.0         | Versión inicial del documento | Manuel Castillejo Vela |
+| 22/02/2025  | v 1.1         | Corrección de especificaciones | Manuel Castillejo Vela |
+| 10/03/2025  | v 2.0         | Feedback Sprint 1 y formato .md | Manuel Castillejo Vela |
 
 ---
 
-## 📌 **Resumen Ejecutivo**  
-📍 **Objetivo:** Explicar cómo el equipo ha contribuido a la base de conocimiento grupal.  
-📍 **Contenido:**  
-- Se detallan nuestras **contribuciones** 📖.  
-- Se incluyen enlaces a la **base de conocimiento** 🔗.  
-- Se presentan **acciones tomadas** según el feedback obtenido ✍️.  
+## 📌 **Resumen Ejecutivo**
+📍 **Objetivo:** Explicar cómo el equipo ha contribuido a la base de conocimiento grupal.
+📍 **Contenido:**
+- Se detallan nuestras **contribuciones** 📖.
+- Se incluyen enlaces a la **base de conocimiento** 🔗.
+- Se presentan **acciones tomadas** según el feedback obtenido ✍️.
 
 ---
 

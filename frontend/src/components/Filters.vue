@@ -13,7 +13,7 @@
       <Button type="accept" @click="applyFilters">Aceptar</Button>
     </div>
   </template>
-  
+
   <script setup>
   import RangeSlider from "./RangeSlider.vue";
   import NumericStepper from "./NumericStepper.vue";
@@ -21,7 +21,7 @@
   import CheckboxGroup from "./CheckboxGroup.vue";
   import Button from "../components/Button.vue";
   </script>
-  
+
   <script>
   export default {
     data() {
@@ -45,4 +45,3 @@
     }
   };
   </script>
-  

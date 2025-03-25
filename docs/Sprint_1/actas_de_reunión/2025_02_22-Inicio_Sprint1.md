@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -17,12 +17,12 @@
 
 # 📑 **Acta de Reunión - Inicio Sprint 1** 🚀
 
-**Fecha:** 22/02/2025  
-**Hora:** 11:00  
-**Equipo:** G11  
-**Lugar:** Google Meets  
-**Duración:** 1h  
-**Moderadores:** Luis Mellado Díaz, Daniel Flores de Francisco  
+**Fecha:** 22/02/2025
+**Hora:** 11:00
+**Equipo:** G11
+**Lugar:** Google Meets
+**Duración:** 1h
+**Moderadores:** Luis Mellado Díaz, Daniel Flores de Francisco
 **Entregable:** Sprint 1
 
 ---
