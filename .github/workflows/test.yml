@@ -21,6 +21,7 @@ jobs:
         image: mariadb:10.6
 
         env:
+          DEBUG: True
           MYSQL_DATABASE: test_db
           MYSQL_USER: test_user
           MYSQL_PASSWORD: test_password
