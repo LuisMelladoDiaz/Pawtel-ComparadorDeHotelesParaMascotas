@@ -51,6 +51,7 @@
  | 1.0     | 02/02/2025  | Versión inicial del acuerdo        | Luis Mellado Díaz |
  | 1.1     | 11/03/2025  | Versión Sprint 1. Se añadió portada y el concepto de hall of shame/fame       | Luis Mellado Díaz |
  | 1.2     | 24/03/2025  | Versión Sprint 2.       | Daniel Flores de Francisco |
+| 1.2.1     | 25/03/2025  | Se añadio Tabla de Incidencias.       | Daniel Flores de Francisco |
 
  ---
  
@@ -109,3 +110,21 @@
  - [x] Sergio Trenado González  
  
  ---
+
+ ## Tabla de Incidencias
+
+| Nombre | Strike 1 | Strike 2 | Strike 3 | Comentario |
+|--------|--------------------|---------|---------|---------|
+| Luis Mellado Díaz | [ ] | [ ] | [ ] | |
+| David González Martínez | [ ] | [ ] | [ ] | |
+| Andrés Martínez Reviriego | [ ] | [ ] | [ ] | |
+| Claudio Cortés Carrasco | [ ] | [ ] | [ ] | |
+| Sergio Trenado González | [ ] | [ ] | [ ] | |
+| Daniel Flores De Francisco | [ ] | [ ] | [ ] | |
+| Francisco Miguel Jiménez Morales | [ ] | [ ] | [ ] | |
+| Jorge Gómez de Tovar | [ ] | [ ] | [ ] | |
+| Javier Ruiz Garrido | [🚫] | [ ] | [ ] | No cumplió los plazos. Indiferencia en las tareas del grupo. |
+| Rafael Castillo Cebolla | [ ] | [ ] | [ ] | |
+| Fernando Castelló Sánchez | [🚫] | [ ] | [ ] | Diapositivas de muy baja calidad. Desaparece de repente. Poca iniciativa|
+| Javier García Sebastián | [🚫] | [ ] | [ ] | No hacía caso a las correcciones. Retraso en los plazos.|
+
