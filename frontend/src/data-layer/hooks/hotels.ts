@@ -3,12 +3,14 @@ import { type MaybeRef, toValue } from 'vue';
 import {
   fetchAllHotels,
   fetchHotelById,
+  fetchRoomTypesByHotel,
   createHotel,
   updateHotel,
   partialUpdateHotel,
   deleteHotel,
   uploadImageToHotel,
   type Hotel,
+  fetchHotelByRoomTypeId,
 } from '@/data-layer/api/hotels';
 
 export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
@@ -86,6 +88,15 @@ export const useDeleteHotel = () => {
   });
 };
 
+export const useGetRoomTypesByHotel = (hotelId: MaybeRef<number>) => {
+  return useQuery({
+    queryKey: ['roomTypes', hotelId],
+    queryFn: () => fetchRoomTypesByHotel(toValue(hotelId)),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
+  });
+};
+
 export const useUploadImageToHotel = () => {
   const queryClient = useQueryClient();
 
@@ -99,4 +110,17 @@ export const useUploadImageToHotel = () => {
       queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
     },
   });
+
+  
 };
+
+export const useGetHotelByRoomTypeId = (roomTypeId: MaybeRef<number>) => {
+  return useQuery({
+    queryKey: ['hotelByRoomTypeId', roomTypeId],
+    queryFn: () => fetchHotelByRoomTypeId(toValue(roomTypeId)),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
+  });
+};
+
+

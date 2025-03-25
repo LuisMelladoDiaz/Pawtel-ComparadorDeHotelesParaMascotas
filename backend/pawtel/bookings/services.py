@@ -6,14 +6,17 @@ from django.db import transaction
 from django.forms import ValidationError
 from django.http import HttpResponse, JsonResponse
 from dotenv import load_dotenv
+from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
-from pawtel.customers.services import CustomerService
+from pawtel.permission_services import PermissionService
 from pawtel.room_types.models import RoomType
 from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.response import Response
+
+from backend.pawtel.customers.services import CustomerService
 
 load_dotenv()
 stripe.api_key = str(os.getenv("STRIPE_SECRET_KEY"))
@@ -22,7 +25,42 @@ secret_endpoint = str(os.getenv("STRIPE_SECRET_ENDPOINT"))
 
 class BookingService:
 
-    # Common ------------------------------------------------------------
+    # Authorization ----------------------------------------------------------
+
+    def authorize_action_booking_level_1(request, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_booking_service(role_user, action_name)
+        return role_user
+
+    def authorize_action_booking_level_2(request, booking_id, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_booking_service(role_user, action_name)
+        BookingService.retrieve_booking(booking_id)
+        return role_user
+
+    def authorize_action_booking_level_3(request, booking_id, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_booking_service(role_user, action_name)
+        booking = BookingService.retrieve_booking(booking_id)
+        BookingService.check_ownership_booking_service(role_user, booking)
+        return role_user
+
+    def check_ownership_booking_service(role_user, booking):
+        if role_user.user.role == UserRole.ADMIN:
+            return
+
+        elif role_user.user.role == UserRole.CUSTOMER:
+            if booking.customer.id != role_user.id:
+                raise PermissionDenied("Permission denied.")
+
+        elif role_user.user.role == UserRole.HOTEL_OWNER:
+            if booking.room_type.hotel.hotel_owner.id != role_user.id:
+                raise PermissionDenied("Permission denied.")
+
+        else:
+            raise PermissionDenied("Permission denied.")
+
+    # Serialization -----------------------------------------------------------------
 
     @staticmethod
     def serialize_output_booking(booking, many=False):
@@ -30,14 +68,7 @@ class BookingService:
 
     # Authorization -----------------------------------------------------
 
-    @staticmethod
-    def authorize_action_booking(request, pk):
-        booking = BookingService.retrieve_booking(pk)
-        customer = CustomerService.get_current_customer(request)
-
-        if booking.customer.id != customer.id:
-            raise PermissionDenied("Permission denied.")
-
+    # TODO This auth with the news auth_action_levels
     @staticmethod
     def authorize_create_booking(request):
         return AppUserService._AppUserService__authorize_action_app_user(

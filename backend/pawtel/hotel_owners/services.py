@@ -1,7 +1,9 @@
+from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
+from pawtel.permission_services import PermissionService
 from rest_framework.exceptions import NotFound, PermissionDenied
 
 
@@ -19,26 +21,48 @@ class HotelOwnerService:
         )
         return output_serializer_data
 
-    # Common -----------------------------------------------------------------
+    # Authorize --------------------------------------------------------------
 
-    @staticmethod
-    def authorize_action_hotel_owner(request, pk=None):
-        logged_in_hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
+    def authorize_action_hotel_owner_level_1(request, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
+        return role_user
 
-        if pk:
-            target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
-            AppUserService.retrieve_app_user(target_hotel_owner.user_id)
+    def authorize_action_hotel_owner_level_2(
+        request, target_hotel_owner_id, action_name
+    ):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
+        HotelOwnerService.retrieve_hotel_owner(target_hotel_owner_id)
+        return role_user
 
-            if target_hotel_owner.id != logged_in_hotel_owner.id:
+    def authorize_action_hotel_owner_level_3(
+        request, target_hotel_owner_id, action_name
+    ):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
+        target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(
+            target_hotel_owner_id
+        )
+        HotelOwnerService.check_ownership_hotel_owner(role_user, target_hotel_owner)
+        return role_user
+
+    def check_ownership_hotel_owner(role_user, target_hotel_owner):
+        if role_user.user.role == UserRole.ADMIN:
+            return
+
+        elif role_user.user.role == UserRole.HOTEL_OWNER:
+            if target_hotel_owner.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
+
+        else:
+            raise PermissionDenied("Permission denied.")
+
+    # Serialization -----------------------------------------------------------------
 
     @staticmethod
     def serialize_output_hotel_owner(hotel_owner, many=False):
         return HotelOwnerSerializer(hotel_owner, many=many).data
-
-    @staticmethod
-    def get_app_user_id_of_hotel_owner(hotel_owner_id):
-        return HotelOwnerService.retrieve_hotel_owner(hotel_owner_id).user.id
 
     # GET --------------------------------------------------------------------
 
@@ -78,7 +102,7 @@ class HotelOwnerService:
     def __create_hotel_owner(app_user_id):
         return HotelOwner.objects.create(user_id=app_user_id)
 
-    # OTHERS -----------------------------------------------------------------
+    # Hotels -----------------------------------------------------------------
 
     @staticmethod
     def list_hotels_of_hotel_owner(hotel_owner_id):
@@ -93,3 +117,10 @@ class HotelOwnerService:
             raise PermissionDenied("No hotels to delete.")
 
         hotels_to_delete.delete()
+
+    @staticmethod
+    def approve_hotel_owner_patch(hotel_owner_id):
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(hotel_owner_id)
+        hotel_owner.is_approved = True
+        hotel_owner.save()
+        return hotel_owner

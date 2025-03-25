@@ -81,9 +81,6 @@ const register = async (values) => {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
-    <NavbarTerracota />
-    <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
       <div class="container flex justify-center items-center mt-10">
         <div class="w-full sm:w-1/3 bg-white shadow-lg rounded-lg p-6">
           <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
@@ -144,7 +141,4 @@ const register = async (values) => {
           </Form>
         </div>
       </div>
-    </div>
-    <Footer />
-  </div>
 </template>

@@ -35,3 +35,16 @@ export const createBooking = async (BookingData: Omit<Booking, 'id'>) => {
         }
     }
 };
+
+
+export const fetchAllBookings = async () => {
+  const url = `${API_BASE_URL}/bookings/`;
+  const response = await axios.get(url);
+  return response.data as Booking[];
+};
+
+export const fetchBookingById = async (bookingId: number) => {
+  const url = `${API_BASE_URL}/bookings/${bookingId}/`;
+  const response = await axios.get(url);
+  return response.data as Booking;
+};
