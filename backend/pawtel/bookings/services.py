@@ -98,8 +98,20 @@ class BookingService:
     #  POST Methods -------------------------------------------------------
 
     @staticmethod
-    def serialize_input_booking_create(request_data):
-        return BookingSerializer(data=request_data)
+    def serialize_input_booking_create(request):
+        from pawtel.room_types.services import RoomTypeService
+
+        context = {"request": request}
+        print(request.user)
+        current_customer_id = CustomerService.get_current_customer(request).id
+        data = request.data.copy()
+        data["customer"] = current_customer_id
+        room_type_price = RoomTypeService.retrieve_room_type(
+            data["room_type"]
+        ).price_per_night
+        total_price = room_type_price * (data["end_date"] - data["start_date"]).days
+        data["total_price"] = total_price
+        return BookingSerializer(data=data, context=context)
 
     @staticmethod
     def validate_create_booking(request, input_serializer):

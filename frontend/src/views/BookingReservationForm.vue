@@ -4,13 +4,17 @@ import Footer from '../components/Footer.vue';
 import FilterNavbar from '../components/FilterNavBar.vue';
 import Carrusel from '../components/Carrusel.vue';
 import Button from '../components/Button.vue';
-import DatePicker from '../components/DatePicker.vue';
 import { ref, watch, defineProps, defineEmits, onMounted } from 'vue';
 import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
+import { useRoute } from 'vue-router';
 
+
+const route = useRoute();
+const room_type_id = route.params.id;
 const notyf = new Notyf();
-
+const internalStartDate = ref('');
+const internalEndDate = ref('');
 const { mutateAsync: createBooking } = useCreateBooking();
 const props = defineProps({
   hotelId: String,
@@ -21,16 +25,21 @@ const role = ref('customer');
 const submitBooking = async () => {
   try{
   // This will need real values
-    await createBooking(
-                {
-                  start_date: new Date(2025,6,7).toISOString().split('T')[0],
-                  end_date: new Date(2025,6,12).toISOString().split('T')[0],
-                  total_price: 70.0,
-                  customer: 1,
-                  room_type: 1,
-                },
+    let startDate = new Date(internalStartDate.value + "T00:00:00Z");
+    let endDate = new Date(internalEndDate.value + "T00:00:00Z");
 
-            );
+    if(endDate > startDate){
+      await createBooking(
+                  {
+                    start_date: startDate.toISOString().split('T')[0],
+                    end_date: endDate.toISOString().split('T')[0],
+                    room_type: room_type_id,
+                  },
+
+              );
+            }else{
+              notyf.error('Fecha de fin debe de ser posterior a la de inicio.');
+            }
   }catch (error) {
         notyf.error('Hubo un error al reservar. Inténtalo de nuevo.');
     }
@@ -46,16 +55,16 @@ const submitBooking = async () => {
     <!-- Sección Mensaje final -->
     <section class="relative mx-auto py-25 max-w-7xl px-5 rounded-lg overflow-hidden items-center text-center">
       <div class="relative">
-        <h2 class="text-2xl font-bold mb-4">Esto es una versión de prueba</h2>
-        <p class="text-gray-700 mb-6">
-          En el futuro la cosa funcionará así:<br>
-            1. Al darle a siguiente este form se mandará un POST al backend de create Booking_Hold<br>
-            2. Luego se te redirigirá a una vista de confirmar datos, ahí le darás a pagar, se mandará un post create de Booking al backend y serás redirigido a stripe para realizar el pago<br>
+        <h2 class="text-2xl font-bold mb-4">Escoge tus fechas para la reserva en formato YYYY-MM-DD</h2>
+        <!--
+          En el futuro la cosa funcionará así:
+            1. Al darle a siguiente este form se mandará un POST al backend de create Booking_Hold
+            2. Luego se te redirigirá a una vista de confirmar datos, ahí le darás a pagar, se mandará un post create de Booking al backend y serás redirigido a stripe para realizar el pago
             3. Según la respuesta de stripe al backend, se va a una pantala de todo ok, o de no se ha comprado
-        </p>
-        <p>
+
+
             Como extra, esto debería verse bien, yo solo he puesto el form de lo que necesito
-        </p>
+        -->
 
       </div>
     </section>
@@ -68,10 +77,10 @@ const submitBooking = async () => {
             id="start-date"
             ref="startDateRef"
             v-model="internalStartDate"
-            class="w-full min-w-[150px] p-2 border rounded-lg text-black"
-            placeholder="Fecha inicio"
+            class=" min-w-[250px] p-2 border rounded-lg text-black"
+            placeholder="      Fecha inicio"
           />
-          <i class="fas fa-calendar absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-600"></i>
+
         </div>
 
         <!-- Input de Fecha de Fin -->
@@ -80,16 +89,18 @@ const submitBooking = async () => {
             id="end-date"
             ref="endDateRef"
             v-model="internalEndDate"
-            class="w-full min-w-[150px] p-2 border rounded-lg text-black"
-            placeholder="Fecha fin"
+            class="min-w-[250px] p-2 border rounded-lg text-black"
+            placeholder="     Fecha Fin"
           />
-          <i class="fas fa-calendar absolute left-2.5 top-1/2 transform -translate-y-1/2 text-gray-600"></i>
+
         </div>
+
+
 
         <div class="mt-6">
             <button type="submit"
                 class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
-                Siguiente
+                Pagar
             </button>
         </div>
     </form>
