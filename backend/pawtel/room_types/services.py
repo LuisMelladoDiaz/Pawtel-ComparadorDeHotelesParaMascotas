@@ -109,7 +109,7 @@ class RoomTypeService:
 
         if end_date < start_date:
             raise ValidationError(
-                {"detail": "End date cannot be earlier than start date."}
+                {"end_date": "End date cannot be earlier than start date."}
             )
 
     # GET --------------------------------------------------------------------

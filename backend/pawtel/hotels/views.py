@@ -23,17 +23,13 @@ class HotelViewSet(viewsets.ModelViewSet):
     serializer_class = HotelSerializer
 
     def list(self, request):
-        action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_1(request, action_name)
-        hotels = HotelService.list_hotels()
-        output_serializer_data = HotelService.serialize_output_hotel(
-            hotels, many=True, context={"request": request}
-        )
-        return Response(output_serializer_data, status=status.HTTP_200_OK)
+        filters = request.query_params.dict()
+        hotels = HotelService.list_filtered_hotels(filters)
+        serializer = HotelSerializer(hotels, many=True, context={"request": request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_2(request, pk, action_name)
+        ##! TODO: Fix this maybe with a better auth system to check object
         hotel = HotelService.retrieve_hotel(pk)
         output_serializer_data = HotelService.serialize_output_hotel(
             hotel, context={"request": request}
@@ -96,33 +92,6 @@ class HotelViewSet(viewsets.ModelViewSet):
         HotelService.authorize_action_hotel_level_3(request, pk, action_name)
         bookings = HotelService.list_bookings_of_hotel(pk)
         serializer = BookingSerializer(bookings, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    @action(
-        detail=False,
-        methods=["get"],
-        url_path="available",
-        url_name="available_hotels",
-    )
-    def available_hotels(self, request):
-        action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_1(request, action_name)
-        start_date, end_date = RoomTypeService.parse_availability_dates(request)
-        RoomTypeService.validate_room_type_available(start_date, end_date)
-        filters = request.query_params.dict()
-        hotels = HotelService.list_filtered_hotels(filters)
-        available_hotels = []
-        for hotel in hotels:
-            room_types = HotelService.get_all_room_types_of_hotel(hotel.id)
-            for room in room_types:
-                if RoomTypeService.is_room_type_available(
-                    room.id, start_date, end_date
-                ):
-                    available_hotels.append(hotel)
-                    break
-        serializer = HotelSerializer(
-            available_hotels, many=True, context={"request": request}
-        )
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     @action(
