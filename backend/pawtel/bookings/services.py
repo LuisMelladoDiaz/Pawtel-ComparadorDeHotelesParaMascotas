@@ -103,7 +103,6 @@ class BookingService:
 
     @staticmethod
     def validate_create_booking(request, input_serializer):
-
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
@@ -156,7 +155,7 @@ class BookingService:
         ).description
         # Must save Booking JSON in plain text
         output_serializer = BookingService.serialize_output_booking(
-            input_serializer.validated_data
+            Booking(**input_serializer.validated_data)
         )
         booking_json_str = json.dumps(output_serializer)
         try:
