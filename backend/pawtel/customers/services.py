@@ -6,7 +6,8 @@ from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
 from pawtel.permission_services import PermissionService
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class CustomerService:
