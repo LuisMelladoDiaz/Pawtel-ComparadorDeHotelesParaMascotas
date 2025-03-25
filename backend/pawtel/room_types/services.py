@@ -1,10 +1,11 @@
-from datetime import timedelta
+from datetime import date, timedelta
 
 from django.utils.dateparse import parse_date
 from django.utils.timezone import now
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.booking_holds.models import BookingHold
+from pawtel.bookings.models import Booking
 from pawtel.bookings.services import BookingService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
@@ -155,6 +156,24 @@ class RoomTypeService:
     def delete_room_type(pk):
         room_type = RoomType.objects.get(pk=pk)
         room_type.delete()
+
+    def validate_room_type_deletion(pk):
+        today = date.today()
+        past_limit = today - timedelta(days=1096)
+
+        past_bookings = Booking.objects.filter(
+            room_type_id=pk, start_date__range=(past_limit, today)
+        )
+        future_bookings = Booking.objects.filter(room_type_id=pk, start_date__gte=today)
+
+        if future_bookings.exists():
+            raise ValidationError("Cannot delete because there is an upcoming booking.")
+
+        if past_bookings.exists():
+            RoomType.objects.filter(pk=pk).update(is_archived=True)
+            raise ValidationError(
+                "Cannot delete because there are bookings in the past 3 years. It has been archived instead."
+            )
 
     # Availability -----------------------------------------------------------
 

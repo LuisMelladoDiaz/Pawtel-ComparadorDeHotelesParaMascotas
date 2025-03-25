@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
@@ -99,3 +101,23 @@ class CustomerService:
     @staticmethod
     def __create_customer(app_user_id):
         return Customer.objects.create(user_id=app_user_id)
+
+    # DELETE -----------------------------------------------------------------
+
+    def validate_customer_deletion(pk):
+        today = date.today()
+        past_limit = today - timedelta(days=1096)
+
+        past_bookings = Booking.objects.filter(
+            customer_id=pk, start_date__range=(past_limit, today)
+        )
+        future_bookings = Booking.objects.filter(customer_id=pk, start_date__gte=today)
+
+        if future_bookings.exists():
+            raise ValidationError("Cannot delete because there is an upcoming booking.")
+
+        if past_bookings.exists():
+            Customer.objects.filter(pk=pk).update(is_archived=True)
+            raise ValidationError(
+                "Cannot delete because there are bookings in the past 3 years. It has been archived instead."
+            )

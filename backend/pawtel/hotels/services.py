@@ -8,6 +8,7 @@ from pawtel.hotels.models import Hotel, HotelImage
 from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
 from pawtel.permission_services import PermissionService
 from pawtel.room_types.models import RoomType
+from pawtel.room_types.services import RoomTypeService
 from rest_framework.exceptions import (NotFound, PermissionDenied,
                                        ValidationError)
 
@@ -128,6 +129,12 @@ class HotelService:
     def delete_hotel(pk):
         hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
+
+    def validate_all_room_types_deletion(hotel_pk):
+        hotel = Hotel.objects.get(pk=hotel_pk)
+        room_types = RoomType.objects.filter(hotel=hotel)
+        for room_type in room_types:
+            RoomTypeService.validate_room_type_deletion(room_type.id)
 
     # Filter -----------------------------------------------------------------
 
