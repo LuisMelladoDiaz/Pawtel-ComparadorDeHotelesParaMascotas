@@ -19,7 +19,11 @@ class BookingSerializer(BaseSerializer):
     hotel_id = serializers.SerializerMethodField()
 
     def get_hotel_id(self, obj):
-        return obj.room_type.hotel.id if obj.room_type and obj.room_type.hotel else None
+        return (
+            obj.get("room_type").hotel.id
+            if obj.get("room_type") and obj.get("room_type").hotel
+            else None
+        )
 
     class Meta:
         model = Booking
