@@ -13,59 +13,77 @@ from rest_framework.test import APIClient
 
 
 class HotelOwnerViewSetTest(TestCase):
+    def create_app_user(self, username, email, phone, password, is_active=True):
+        return AppUser.objects.create_user(
+            username=username,
+            email=email,
+            phone=phone,
+            password=password,
+            is_active=is_active,
+        )
+
+    def create_hotel_owner(self, user):
+        return HotelOwner.objects.create(user_id=user.id)
+
+    def create_hotel(self, name, owner, address, city, description="Desc"):
+        return Hotel.objects.create(
+            name=name,
+            hotel_owner=owner,
+            address=address,
+            city=city,
+            description=description,
+        )
+
+    def create_room_type(
+        self, hotel, name, capacity, num_rooms, price_per_night, pet_type
+    ):
+        return RoomType.objects.create(
+            hotel=hotel,
+            name=name,
+            description="Habitación para mascotas",
+            capacity=capacity,
+            num_rooms=num_rooms,
+            price_per_night=price_per_night,
+            pet_type=pet_type,
+            is_archived=False,
+        )
+
     def setUp(self):
         self.client = APIClient()
-        self.authenticated_user = AppUser.objects.create_user(
-            username="authenticated_user",
-            email="authenticated_user@example.com",
-            phone="+34111222333",
-            password="123456",
-            is_active=True,
+
+        self.authenticated_user = self.create_app_user(
+            "authenticated_user",
+            "authenticated_user@example.com",
+            "+34111222333",
+            "123456",
         )
-        self.authenticated_hotel_owner = HotelOwner.objects.create(
-            user_id=self.authenticated_user.id
+        self.authenticated_hotel_owner = self.create_hotel_owner(
+            self.authenticated_user
         )
         self.client.force_authenticate(user=self.authenticated_user)
 
-        self.inactive_app_user = AppUser.objects.create(
-            username="inactive_owner",
-            email="inactive_owner@example.com",
-            phone="+34123456788",
-            password="123456",
+        self.inactive_app_user = self.create_app_user(
+            "inactive_owner",
+            "inactive_owner@example.com",
+            "+34123456788",
+            "123456",
             is_active=False,
         )
-        self.inactive_hotel_owner = HotelOwner.objects.create(
-            user_id=self.inactive_app_user.id
+        self.inactive_hotel_owner = self.create_hotel_owner(self.inactive_app_user)
+
+        self.hotel1 = self.create_hotel(
+            "Hotel 1", self.authenticated_hotel_owner, "Calle 1", "Ciudad1"
         )
-        self.hotel1 = Hotel.objects.create(
-            name="Hotel 1",
-            hotel_owner=self.authenticated_hotel_owner,
-            address="Calle 1",
-            city="Ciudad1",
-            description="Desc",
+        self.hotel2 = self.create_hotel(
+            "Hotel 2", self.authenticated_hotel_owner, "Calle 2", "Ciudad2"
         )
-        self.hotel2 = Hotel.objects.create(
-            name="Hotel 2",
-            hotel_owner=self.authenticated_hotel_owner,
-            address="Calle 2",
-            city="Ciudad2",
-            description="Desc",
+
+        self.room_type1 = self.create_room_type(
+            self.hotel1, "RoomType 1", 10, 5, 100.00, PetType.DOG
         )
-        self.room_type1 = RoomType.objects.create(
-            hotel=self.hotel1,
-            name="RoomType 1",
-            description="Habitación para mascotas",
-            capacity=10,
-            num_rooms=5,
-            price_per_night=100.00,
-            pet_type=PetType.DOG,
-            is_archived=False,
-        )
-        self.user_customer = AppUser.objects.create_user(
-            username="customer_user",
-            email="customer@example.com",
-            phone="+34987654321",
-            password="password123",
+
+        self.user_customer = self.create_app_user(
+            "customer_user", "customer@example.com", "+34987654321", "password123"
         )
         self.customer = Customer.objects.create(user=self.user_customer)
 
