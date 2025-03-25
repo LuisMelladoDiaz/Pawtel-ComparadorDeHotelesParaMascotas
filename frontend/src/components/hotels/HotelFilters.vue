@@ -1,7 +1,8 @@
 <script setup>
+import { computed, watch, onMounted } from 'vue';
 import PriceRange from '@/components/hotels/PriceRange.vue';
 
-defineProps({
+const props = defineProps({
   cities: {
     type: Array,
     required: true
@@ -45,6 +46,36 @@ const emit = defineEmits([
   'update:endDate',
   'commit-price'
 ]);
+
+// Mapeo de tipos de mascotas en inglés a español
+const petTypeMapping = {
+  DOG: 'Perro',
+  CAT: 'Gato',
+  BIRD: 'Pájaro',
+  MIXED: 'Mixto'
+};
+
+// Crear una propiedad computada solo después de que petTypes esté disponible
+const petTypesInSpanish = computed(() => {
+  // Verifica si petTypes está definido y es un array
+  return Array.isArray(props.petTypes) 
+    ? props.petTypes.map(petType => petTypeMapping[petType] || petType) 
+    : [];
+});
+
+// Verificar si petTypes ha cambiado o si la propiedad está vacía y emitir un mensaje de depuración
+watch(() => props.petTypes, (newPetTypes) => {
+  if (!Array.isArray(newPetTypes)) {
+    console.error("petTypes no está definido correctamente", newPetTypes);
+  }
+});
+
+// Llamar alguna lógica cuando el componente se haya montado, por ejemplo, verificar que las propiedades estén presentes
+onMounted(() => {
+  if (!Array.isArray(props.petTypes)) {
+    console.error('petTypes no está disponible o no es un array');
+  }
+});
 </script>
 
 <template>
@@ -89,6 +120,7 @@ const emit = defineEmits([
     </div>
 
     <!-- Filtro tipo de mascota -->
+    <!-- Filtro tipo de mascota -->
     <div class="mt-5">
       <label class="font-semibold">Animal:</label>
       <select 
@@ -96,7 +128,9 @@ const emit = defineEmits([
         @change="emit('update:petType', $event.target.value)"
         class="border rounded p-2 mt-1 w-full"
       >
-        <option v-for="pet in petTypes" :key="pet" :value="pet">{{ pet }}</option>
+        <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">
+          {{ pet }}
+        </option>
       </select>
     </div>
 
