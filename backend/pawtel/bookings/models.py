@@ -24,29 +24,39 @@ class Booking(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=False)
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE, null=False)
 
+    # Meta configuration -----------------------------------------------------
+
+    def __str__(self):
+        return f"Booking {self.id}: {self.start_date} - {self.end_date}"
+
     def clean(self):
         super().clean()
+
+        today = date.today()
+        errors = {}
 
         if not self.creation_date:
             self.creation_date = date.today()
 
-        if self.creation_date > date.today():
-            raise ValidationError(
-                {"creation_date": "The date of creation cannot be in the future."}
+        if self.creation_date > today:
+            errors.setdefault("creation_date", []).append(
+                "The date of creation cannot be in the future."
             )
 
-        if self.start_date <= date.today():
-            raise ValidationError(
-                {"start_date": "The start date must be in the future."}
+        if self.start_date <= today:
+            errors.setdefault("start_date", []).append(
+                "The start date must be in the future."
             )
 
-        if self.end_date <= date.today():
-            raise ValidationError({"end_date": "The end date must be in the furure."})
-
-        if self.end_date <= self.start_date:
-            raise ValidationError(
-                {"end_date": "End date must be later than start date."}
+        if self.end_date <= today:
+            errors.setdefault("end_date", []).append(
+                "The end date must be in the future."
             )
 
-    def __str__(self):
-        return f"Booking {self.id}: {self.start_date} - {self.end_date}"
+        if self.end_date < self.start_date:
+            errors.setdefault("end_date", []).append(
+                "End date cannot be earlier than start date."
+            )
+
+        if errors:
+            raise ValidationError(errors)
