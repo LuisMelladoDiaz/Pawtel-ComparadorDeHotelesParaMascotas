@@ -65,12 +65,7 @@ defineProps({
 
       <!-- Columna 3: Precio y Detalles -->
       <div class="flex-1 flex flex-col items-center text-center">
-        <router-link to="/needed-login" v-if="!isLoggedIn" class="w-full !mt-0 mb-4">
-            <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
-          </router-link>
-          <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full !mt-0 mb-4">
-            <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
-          </router-link>
+
         <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col">
           <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col">
             <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a>
@@ -90,8 +85,12 @@ defineProps({
           </div>
         </div>
 
-        <!-- Botón de Reserva (debajo de la descripción) -->
-        <Button type="add" class="w-full !mt-4 mb-4">Reservar</Button>
+          <router-link to="/login" v-if="!isLoggedIn" class="w-full !mt-0 mb-4">
+            <Button type="add" class="w-full !mt-0 mb-4">Inicia sesión para reservar</Button>
+          </router-link>
+          <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full !mt-0 mb-4">
+            <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
+          </router-link>
       </div>
     </div>
   </div>
@@ -142,10 +141,10 @@ defineProps({
       </div>
     </div>
 
-    <router-link to="/needed-login" v-if="!isLoggedIn" class="w-full !mt-0 mb-4">
+    <router-link to="/login" v-if="!isLoggedIn" class="w-full !mt-0 mb-4">
       <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
     </router-link>
-    <router-link to="`/hotel/${id}/reservation-form`" v-if="isLoggedIn" class="w-full !mt-0 mb-4">
+    <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full !mt-0 mb-4">
       <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
     </router-link>
   </div>

@@ -1,5 +1,6 @@
 <template>
   <button
+    :disabled="disabled"
     :class="[
       'px-4 py-2 font-semibold rounded-lg focus:outline-none transition-transform duration-200',
       type === 'accept' ? 'bg-oliva text-white hover:bg-oliva-dark hover:scale-105' :
@@ -15,10 +16,16 @@
 </template>
 
 <script setup>
+import { disable } from 'ol/rotationconstraint';
+
 defineProps({
   type: {
     type: String,
     required: true
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 </script>

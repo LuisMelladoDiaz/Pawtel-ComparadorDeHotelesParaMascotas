@@ -100,7 +100,6 @@ class BookingService:
     def serialize_input_booking_create(request):
         from pawtel.room_types.services import RoomTypeService
 
-        context = {"request": request}
         # Hack to get the current customer id
         if hasattr(request, "user"):
             current_customer_id = CustomerService.get_current_customer(request).id
@@ -127,11 +126,6 @@ class BookingService:
             raise ValidationError(input_serializer.errors)
 
         customer = CustomerService.get_current_customer(request)
-
-        # TODO uncomment this validation
-        # Auth validation
-        # if not ( customer == input_serializer.validated_data.get("customer")):
-        # raise ValidationError({"customer": "The customer in the request does not match the customer associated with the booking"})
 
         room_id = input_serializer.validated_data.get("room_type").id
 
@@ -177,6 +171,7 @@ class BookingService:
         output_serializer = BookingService.serialize_output_booking(
             Booking(**input_serializer.validated_data)
         )
+        customer = CustomerService.retrieve_customer(output_serializer.get("customer"))
         booking_json_str = json.dumps(output_serializer)
         try:
             session = stripe.checkout.Session.create(
@@ -197,6 +192,7 @@ class BookingService:
                 mode="payment",
                 success_url=str(settings.FRONTEND_URL + "/"),
                 cancel_url=str(settings.FRONTEND_URL + "/hotels/"),
+                customer_email=customer.user.email,
             )
 
             return JsonResponse({"url": session.url})
@@ -209,7 +205,6 @@ class BookingService:
     @staticmethod
     @transaction.atomic
     def stripe_response_manager(payload, sig_header):
-        print("Stripe response received")
         event = None
         try:
             event = stripe.Webhook.construct_event(payload, sig_header, secret_endpoint)
