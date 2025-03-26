@@ -41,56 +41,6 @@ const hotel = computed(() => ({
   </div>
 
   <template v-else>
-    <!-- Versión escritorio -->
-    <div class="hidden md:flex items-center max-w-7xl mx-auto px-5 w-full flex-col flex-grow">
-      <div class="bg-white shadow-md py-3 flex justify-between max-w-7xl mx-auto w-full px-10 text-black text-lg border-b">
-        <div class="flex flex-row w-full justify-center space-x-2">
-          <router-link
-            :to="$route.path"
-            class="w-1/2 text-center py-2 px-4 bg-gray-200 rounded-tl-md rounded-bl-md cursor-default"
-          >
-            Vista General
-          </router-link>
-
-          <router-link
-            :to="`${$route.path}/rooms`"
-            class="w-1/2 text-center py-2 px-4 bg-gray-100 rounded-tr-md rounded-br-md hover:bg-azul-suave hover:text-white transition duration-200 ease-in-out"
-            :class="{ 'bg-blue-500 text-white': $route.path === `/hotel/${$route.params.id}/rooms` }"
-          >
-            Habitaciones y Precios
-          </router-link>
-        </div>
-      </div>
-
-      <div class="max-w-7xl mx-auto py-10 w-full">
-        <HotelDetailCard
-          v-bind="hotel"
-        />
-      </div>
-    </div>
-
-    <!-- Versión móvil -->
-    <div class="md:hidden flex flex-col items-center px-4 py-6">
-      <div class="bg-white shadow-md py-3 flex items-center justify-between max-w-7xl mx-auto w-full px-10 text-black text-lg border-b">
-        <div class="flex flex-col items-center w-full justify-center space-y-2">
-          <router-link
-            :to="$route.path"
-            class="w-full text-center py-2 px-4 bg-gray-200 rounded-md cursor-default"
-          >
-            Vista General
-          </router-link>
-
-          <router-link
-            :to="`${$route.path}/rooms`"
-            class="w-full text-center py-2 px-4 bg-gray-100 rounded-md hover:bg-azul-suave hover:text-white transition duration-200 ease-in-out"
-            :class="{ 'bg-blue-500 text-white': $route.path === `/hotel/${$route.params.id}/rooms` }"
-          >
-            Habitaciones y Precios
-          </router-link>
-        </div>
-      </div>
-
-      <HotelDetailCard v-bind="hotel" />
-    </div>
+    <HotelDetailCard v-bind="hotel" />
   </template>
 </template>

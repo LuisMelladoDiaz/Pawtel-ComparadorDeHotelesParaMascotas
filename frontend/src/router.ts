@@ -14,6 +14,7 @@ import Contact from './views/Contact.vue';
 import { h, type Component} from 'vue';
 import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
+import LayoutDefaultWhite from './views/LayoutDefaultWhite.vue';
 import { type RouteRecordRaw } from 'vue-router';
 import axios from 'axios';
 
@@ -122,7 +123,7 @@ const routes = [
   {
     path: '/hotel/:id',
     name: 'HotelDetail',
-    component: createComponent({ layout: LayoutWithFilter, component: HotelDetailsView }),
+    component: createComponent({ layout: LayoutDefaultWhite, component: HotelDetailsView }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
