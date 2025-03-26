@@ -17,6 +17,7 @@ export const fetchAllHotels = async (filters?: Record<string, any>) => {
   const queryParams = new URLSearchParams(filters).toString();
   const url = `${API_BASE_URL}/hotels?${queryParams}`;
   const response = await axios.get(url);
+  console.log("api - ",response.data as Hotel[])
   return response.data as Hotel[];
 };
 
