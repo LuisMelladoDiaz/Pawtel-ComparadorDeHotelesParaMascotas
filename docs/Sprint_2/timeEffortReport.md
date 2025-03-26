@@ -162,24 +162,25 @@
 
 ## Reporte de tiempo de Manuel Castillejo Vela
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 25:41:35
+**Periodo:** 12/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 27:44:33
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Queries tanStack y configuración inicial de proyecto | 00:56:58 |
-| Revisión del proyecto y base de conocimiento común | 01:10:12 |
-| Pulir contributing.md | 01:05:10 |
-| Adición de feedback a la base de datos común | 00:17:21 |
-| Informe de IA | 00:29:47 |
-| KBReport | 00:58:44 |
-| Formación sobre TypeScript y TanStack | 00:22:02 |
-| Clase | 08:00:00 |
-| Queries tanStack | 04:35:09 |
-| Gestión de usuarios pilotos | 02:39:48 |
-| Screen Login and Register | 05:06:24 |
+| Description                                                   | Time (h)  |
+|---------------------------------------------------------------|-----------|
+| #181 Feature: Hotel owner queries Tan Stack                 | 00:22:00  |
+| Mensajes CRUD creación hoteles                              | 00:54:36  |
+| KBReport                                                    | 00:51:33  |
+| #158 Feature: Validación de formularios con librerías.     | 07:07:27  |
+| Clase                                                       | 08:00:00  |
+| #205 Feature: Actualizar queries de Tan Stack con nuevas URLs | 03:29:51  |
+| #225 Feature: Mejorar funcionalidad Hotel Details          | 00:54:08  |
+| Añadir mensajes de error al frontend y botones de login y register | 03:17:15  |
+| Informe de IA                                              | 00:26:50  |
+| Adición de feedback a la base de datos común               | 02:06:45  |
+| Calendario de usuarios pilotos sprint 2                    | 00:14:08  |
+
 
 ![grafico-de-tiempos](graficas/manuel.png)
 ---
@@ -235,24 +236,37 @@
 
 ## Reporte de tiempo de Javier Ruiz Garrido
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 46:59:07
+**Periodo:** 12/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 29:52:11
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Reunión mitad de sprint 1 backend | 00:38:41 |
-| Backend: Servicios y controladores RoomType y Room | 09:52:40 |
-| Devising a Project | 24:34:00 |
-| Documentación: Informe uso de IA | 00:24:10 |
-| Backend: Test de los serializadores | 04:38:37 |
-| Backend: Llamadas API Room y RoomType | 02:00:00 |
-| Documentación: Commitment Agreement de usuarios piloto | 00:50:59 |
-| Clase | 04:00:00 |
+| Logica de archivado y borrado | 00:35:40 |
+| Logica de archivado y borrado | 02:37:18 |
+| Rehacer filtros de hoteles y rooms | 00:31:44 |
+| Logica de archivado y borrado | 01:40:52 |
+| Rehacer filtros de hoteles y rooms | 01:12:49 |
+| Rehacer filtros de hoteles y rooms | 00:45:51 |
+| Rehacer filtros de hoteles y rooms | 01:17:04 |
+| Rehacer filtros de hoteles y rooms | 00:54:30 |
+| clase | 04:00:00 |
+| Rehacer filtros de hoteles y rooms | 01:53:22 |
+| Rehacer filtros de hoteles y rooms | 00:47:26 |
+| Rehacer filtros de hoteles y rooms | 00:23:27 |
+| clase | 04:00:00 |
+| review pr | 00:28:29 |
+| fix migrations | 00:36:10 |
+| BookingHold seeder | 01:16:21 |
+| Refactorizacion variada backend | 01:17:16 |
+| Refactorizacion variada backend | 02:07:58 |
+| Refactorizacion variada backend | 03:02:39 |
+| Revision Pull Request | 00:17:34 |
+| clase | 04:00:00 |
 
-![grafico-de-tiempos](graficas/javi_ruiz.png)
 
+![grafico-de-tiempos](graficas/javier_ruiz.png)
 ---
 
 ## Reporte de tiempo de Francisco Miguel Jimenez Morales

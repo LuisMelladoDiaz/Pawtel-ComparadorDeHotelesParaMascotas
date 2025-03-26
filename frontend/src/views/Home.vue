@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import Navbar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
 import FilterNavbar from '../components/FilterNavBar.vue';
@@ -7,6 +8,14 @@ import Button from '../components/Button.vue';
 import { useIsLoggedIn } from '@/data-layer/auth';
 
 const { data: isLoggedIn } = useIsLoggedIn();
+
+const cities = ref([
+  "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
+  "Palma de Mallorca", "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+  "Valladolid", "Vigo", "Gijón"
+].sort());
+
+const petTypes = ["DOG", "CAT", "BIRD", "MIXED"].sort();
 </script>
 
 <template>
@@ -38,7 +47,17 @@ const { data: isLoggedIn } = useIsLoggedIn();
       </div>
 
       <div class="max-w-7xl mx-auto bg-white p-2 rounded-lg shadow-lg mt-6">
-        <FilterNavbar />
+        <FilterNavbar 
+        :cities="cities"
+        :petTypes="petTypes"
+        :selectedCity="selectedCity"
+        :selectedPetType="selectedPetType"
+        :startDate="startDate"
+        :endDate="endDate"
+        @update:city="selectedCity = $event"
+        @update:petType="selectedPetType = $event"
+        @update:startDate="startDate = $event"
+        @update:endDate="endDate = $event"/>
       </div>
     </section>
 

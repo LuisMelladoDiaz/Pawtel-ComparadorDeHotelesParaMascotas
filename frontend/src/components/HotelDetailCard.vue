@@ -2,8 +2,17 @@
 import { defineProps } from 'vue';
 import Button from '../components/Button.vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { useIsLoggedIn } from '@/data-layer/auth';
+import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
+
+const { data: isLoggedIn } = useIsLoggedIn();
+const router = useRouter();
+const route = useRoute();
+  const hotelId = route.params.id
 
 defineProps({
+  id: { type: String, required: true },
   image: { type: String, required: true },
   name: { type: String, required: true },
   address: { type: String, required: true },
@@ -66,14 +75,16 @@ defineProps({
 
           <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col mt-4">
             <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a>
-            <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
+            <a class="bg-white text-right! rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
           </div>
         </div>
 
-        <!-- Botón de Reserva (debajo de la descripción) -->
-         <div class="w-full m-0!">
-          <Button type="add" class="w-full !mt-4 m-0!">Reservar</Button>
-          </div>
+          <router-link to="/login" v-if="!isLoggedIn" class="w-full mt-4">
+            <Button type="add" class="w-full m-0!">Inicia sesión para reservar</Button>
+          </router-link>
+          <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full mt-4">
+            <Button type="add" class="w-full m-0!">Reservar</Button>
+          </router-link>
       </div>
     </div>
   </div>
@@ -124,7 +135,12 @@ defineProps({
       </div>
     </div>
 
-    <Button type="add" class="w-full mt-4">Reservar</Button>
+    <router-link to="/login" v-if="!isLoggedIn" class="w-full !mt-0 mb-4">
+      <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
+    </router-link>
+    <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full !mt-0 mb-4">
+      <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
+    </router-link>
   </div>
 </template>
 

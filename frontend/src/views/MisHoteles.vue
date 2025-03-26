@@ -82,7 +82,7 @@ const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
 <template>
-  <div class="max-w-7xl mx-auto px-5 w-full flex flex-col items-center flex-grow mt-8">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center flex-grow mt-8">
     <!-- Cabecera -->
     <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
       <span class="font-semibold">Gestión de Hoteles</span>

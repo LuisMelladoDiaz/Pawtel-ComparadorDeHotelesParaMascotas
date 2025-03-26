@@ -89,6 +89,7 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
     return newRoute;
   });
 }
+import BookingReservationForm from './views/BookingReservationForm.vue';
 
 
 const routes = [
@@ -168,6 +169,13 @@ const routes = [
     component: createComponent({ layout: LayoutDefault, component: EditHotel }),
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+    },
+  },
+  {
+    path: '/hotel/reservation-form/:id',
+    component: createComponent({ layout: LayoutDefault, component: BookingReservationForm }),
+    meta: {
+      allowedAuthStates: ALLOW_LOGGED_IN,
     },
   },
 ];

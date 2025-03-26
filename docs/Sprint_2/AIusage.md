@@ -542,7 +542,7 @@ Poner en marcha el frontend como PWA.
 #### 1. Información General
 
 - **Nombre del programador:** Javier Ruiz Garrido
-- **Sprint:** Sprint 1
+- **Sprint:** Sprint 2
 - **Rol en el proyecto:** Desarrollador backend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -556,29 +556,22 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Generacion de tests para servicios y controladores | ChatGPT | Se ha usado la IA para que genere una primera version de tests que prueben los servicios y controladores desarrollados |
-| Asesoramiento tecnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de los servicios, controladores y sus tests |
+| Generacion de tests | ChatGPT | Se ha usado la IA para que genere una primera version de tests que prueben los nuevos filtros implementados además de para la logica de archivado y borrado |
+| Pequeñas correcciones | ChatGPT | Se ha usado la IA para correcciones como sacar funciones auxiliares para reducir la complejidad |
+| Asesoramiento tecnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de las tareas de filtros y logica de archivado y borrado |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 1-2 horas
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 2 horas
 - **Comparación con trabajo sin IA:** El resultado fue mas eficiente manteniendo la calidad
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1.
-- Pasarle el codigo del servicio, controlador, serializador y modelo para pedirle los tests del servicio y controlador
-2.
-- def test_get_total_vacancy_of_room_type_valid(self):
-        url = reverse("room-type-total-vacancy", args=[self.room_type.id])
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["total_vacancy"], 2)
-
-    Que tengo que poner en url para que funcione bien
+1. Pasarle ciertas partes del codigo para pedirle los tests tanto para pobrar los filtros como para la logica de borrado.
+2. Pasarle la funcion setUp de los tests y pedirle que reduzca el numero de lineas sacando alguna parte a una funcion auxiliar.
 
 #### 6. Problemas Encontrados y Limitaciones
 
@@ -757,3 +750,58 @@ Algunos de los prompts más efectivos utilizados:
   - Depende del caso. Es útil para generar ideas y optimizar tiempos, pero es necesario validar la información obtenida.
 - **Comentarios adicionales sobre la experiencia con IA:**
   - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios.
+---
+### 👨‍💻 Manuel Castillejo Vela
+
+## 1. Información General
+
+- **Nombre del programador:** Manuel Castillejo Vela
+- **Sprint:** Sprint 2
+- **Rol en el proyecto:** Desarrollador Fullstack
+
+## 2. Tipo de Tareas en las que se Utilizó IA
+
+- [x] Generación de código
+- [x] Refactorización de código
+- [x] Generación de documentación
+- [x] Asesoramiento técnico
+- [x] Eliminación de comentarios en código (GitHub Copilot)
+
+## 3. Uso de IA en las Tareas
+
+| Tarea | Herramienta utilizada | Descripción del uso de IA |
+|-------|-----------------------|---------------------------|
+| Implementación de CRUD en Vue.js | ChatGPT | Generación de hooks para llamadas a la API y validaciones con Vee-Validate |
+| Refactorización de actualización de hoteles | ChatGPT | Corrección de errores en el flujo de actualización para mantener datos previos |
+| Documentación del API para gestión de hoteles | ChatGPT | Generación de documentación estructurada en Markdown |
+| Eliminación de comentarios innecesarios en código | GitHub Copilot | Automatización de la limpieza del código eliminando comentarios redundantes |
+
+## 4. Impacto en Productividad
+
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 6-8 horas
+- **Comparación con trabajo sin IA:** Más eficiente, permitió detectar errores rápidamente y mejorar rendimiento en menos tiempo
+
+## 5. Prompts Utilizados
+
+### Prompt para mejorar el flujo de actualización en Vue.js
+```plaintext
+En Vue.js, quiero que al actualizar un hotel, se mantengan los datos previos y solo se modifiquen los campos editados. ¿Cómo puedo hacerlo?
+
+Usando GitHub Copilot, quiero limpiar mi código eliminando comentarios redundantes y manteniendo solo los esenciales. ¿Cómo hacerlo de forma eficiente?
+
+Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso `computed` para calcular los elementos por página, pero quiero optimizar la lógica y mejorar el rendimiento. ¿Cómo puedo hacerlo de manera eficiente?
+
+```
+
+## 6. Problemas Encontrados y Limitaciones
+
+- **Errores o respuestas incorrectas de la IA:** En algunos casos, ChatGPT sugirió soluciones con hooks de Vue obsoletos.
+- **Limitaciones detectadas en la IA:** Limitaciones relacionadas con últimas versiones de algunos componentes.
+- **Propuestas de mejora en el uso de IA:**  Ajustar los prompts y validar siempre las respuestas generadas.
+
+## 7. Evaluación General
+
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
+- **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad del código.
+
+---
