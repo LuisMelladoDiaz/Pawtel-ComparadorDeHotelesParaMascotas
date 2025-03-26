@@ -43,7 +43,7 @@ export default {
       ];
 
       const vectorSource = new VectorSource();
-      
+
       // Agregar marcadores al mapa
       locations.forEach((location) => {
         const marker = new Feature({

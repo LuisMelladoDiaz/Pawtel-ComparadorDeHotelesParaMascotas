@@ -77,16 +77,17 @@ class HotelViewSetTestCase2(TestCase):
         )
         self.customer = Customer.objects.create(user_id=self.app_user2.id)
         self.booking1 = self.create_booking(self.customer, self.room_type, 6, 8, 450.00)
+
         self.booking2 = self.create_booking(
             self.customer, self.room_type, 10, 12, 300.00
         )
 
 
 class TestNuevasRutasHotel(HotelViewSetTestCase2):
-    def test_available_hotels_con_room_type_disponible(self):
+    def test_available_hotels_with_available_room_type(self):
         start_date = date.today() + timedelta(days=2)
         end_date = start_date + timedelta(days=2)
-        url = reverse("hotel-available_hotels")
+        url = reverse("hotel-list")
         response = self.client.get(
             url,
             {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
@@ -95,7 +96,7 @@ class TestNuevasRutasHotel(HotelViewSetTestCase2):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["city"], "Madrid")
 
-    def test_available_room_types_con_disponibilidad(self):
+    def test_available_room_types(self):
         start_date = date.today() + timedelta(days=4)
         end_date = start_date + timedelta(days=1)
 
@@ -108,18 +109,33 @@ class TestNuevasRutasHotel(HotelViewSetTestCase2):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["id"], self.room_type.id)
 
-    def test_available_hotels_sin_room_type_disponible(self):
+    def test_available_hotels_without_available_room_type(self):
         start_date = date.today() + timedelta(days=6)
         end_date = date.today() + timedelta(days=8)
-        url = reverse("hotel-available_hotels")
+        url = reverse("hotel-list")
+        response = self.client.get(
+            url,
+            {
+                "is_available": True,
+                "start_date": start_date.isoformat(),
+                "end_date": end_date.isoformat(),
+            },
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 0)
+
+    def test_available_hotels_ignores_dates_without_is_available(self):
+        start_date = date.today() + timedelta(days=6)
+        end_date = date.today() + timedelta(days=8)
+        url = reverse("hotel-list")
         response = self.client.get(
             url,
             {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 0)
+        self.assertEqual(len(response.data), 1)
 
-    def test_available_room_types_sin_disponibilidad(self):
+    def test_available_room_types_no_availability(self):
         start_date = date.today() + timedelta(days=4)
         end_date = date.today() + timedelta(days=7)
 

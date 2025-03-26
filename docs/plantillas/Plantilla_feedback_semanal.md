@@ -2,10 +2,10 @@
 
 ## Portada
 
-**Universidad de Sevilla**  
-**Escuela Técnia Superior de Ingeniería Informática**  
-**Ingeniería de Software y Práctica Profesional (ISPP)**  
-**Curso 2024-25**  
+**Universidad de Sevilla**
+**Escuela Técnia Superior de Ingeniería Informática**
+**Ingeniería de Software y Práctica Profesional (ISPP)**
+**Curso 2024-25**
 
 ---
 
@@ -13,10 +13,10 @@
 ![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
 
 
-**Proyecto:** Pawtel 
-**Entregable:** 
-**Versión:** 1.0  
-**Fecha:** 
+**Proyecto:** Pawtel
+**Entregable:**
+**Versión:** 1.0
+**Fecha:**
 
 **Grupo:** G11
 **Equipo:**
@@ -38,14 +38,14 @@
 
 ---
 
-## Índice  
-1. [Control de versiones](#control-de-versiones)  
-2. [Resumen Ejecutivo](#resumen-ejecutivo)  
-3. [Desarrollo](#desarrollo)   
+## Índice
+1. [Control de versiones](#control-de-versiones)
+2. [Resumen Ejecutivo](#resumen-ejecutivo)
+3. [Desarrollo](#desarrollo)
 
 ---
 
-## **Control de versiones**  
+## **Control de versiones**
 
 | Versión | Fecha       | Autor    | Descripción de cambios |
 |---------|------------|----------|------------------------|
@@ -56,7 +56,7 @@
 
 ## **Resumen ejecutivo**
 
-Este documento tiene como objetivo recopilar el feedback proporcionado por los profesores durante las presentaciones semanales de los grupos en la asignatura de Ingeniería del Software y Práctica Profesional (ISPP).  
+Este documento tiene como objetivo recopilar el feedback proporcionado por los profesores durante las presentaciones semanales de los grupos en la asignatura de Ingeniería del Software y Práctica Profesional (ISPP).
 Es importante registrar los comentarios clave, observaciones adicionales y las tareas pendientes para mejorar nuestro proyecto.
 
 
@@ -78,7 +78,7 @@ Es importante registrar los comentarios clave, observaciones adicionales y las t
 
 
 <br>
-                                                
+
 ## Para hacer pero no necesariamente para la presentación
 
 ## Para la presentación

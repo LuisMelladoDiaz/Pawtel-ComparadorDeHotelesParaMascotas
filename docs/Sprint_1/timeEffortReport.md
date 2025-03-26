@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,11 +16,11 @@
 
 # 📑 **Reporte de Tiempo - Sprint 1** 🚀
 
-**📅 Entregable:** Sprint 1  
-**📆 Fecha:** 10/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 1
+**📆 Fecha:** 10/03/2025
+**👥 Equipo:** G11
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -47,7 +47,7 @@
 
 ## Reporte de tiempo de Javier García Sebastián
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 23:37:23
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -71,7 +71,7 @@
 
 ## Reporte de tiempo de Yesica Garate Fuentes
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 51:08:51
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -101,7 +101,7 @@
 
 ## Reporte de tiempo de Sergio Trenado Gonzalez
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 52:58:39
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -136,7 +136,7 @@
 
 ## Reporte de tiempo de Rafael Castillo Cebolla
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 58:12:11
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -161,7 +161,7 @@
 
 ## Reporte de tiempo de Manuel Castillejo Vela
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 25:41:35
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -185,7 +185,7 @@
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 38:26:28
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -229,7 +229,7 @@
 
 ## Reporte de tiempo de Jorge Gomez de Tovar
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 20:20:00
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -246,7 +246,7 @@
 
 ## Reporte de tiempo de Javier Ruiz Garrido
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 46:59:07
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -268,7 +268,7 @@
 
 ## Reporte de tiempo de Francisco Miguel Jimenez Morales
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 48:11:30
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -293,7 +293,7 @@
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 24:30:27
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -313,7 +313,7 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 32:59:06
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -348,7 +348,7 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 33:18:26
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -378,7 +378,7 @@
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 30:35:55
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -410,7 +410,7 @@
 
 ## Reporte de tiempo de Andres Martinez Revriego
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 14:21:36
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -427,4 +427,3 @@
 | Filtro de búsqueda | 02:20:46 |
 
 ![grafico-de-tiempos](graficas/andres.png)
-
