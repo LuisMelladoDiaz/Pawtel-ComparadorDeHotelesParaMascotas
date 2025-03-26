@@ -12,6 +12,8 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 class CustomerService:
 
+    THREE_YEARS = timedelta(days=3 * 365)
+
     # General processes ------------------------------------------------------
 
     @staticmethod
@@ -107,7 +109,8 @@ class CustomerService:
 
     def validate_customer_deletion(pk):
         today = date.today()
-        past_limit = today - timedelta(days=1096)
+        past_limit = today - CustomerService.THREE_YEARS
+        delete = True
 
         past_bookings = Booking.objects.filter(
             customer_id=pk, start_date__range=(past_limit, today)
@@ -118,7 +121,9 @@ class CustomerService:
             raise ValidationError("Cannot delete because there is an upcoming booking.")
 
         if past_bookings.exists():
+            delete = False
+
+        if not delete:
             Customer.objects.filter(pk=pk).update(is_archived=True)
-            raise ValidationError(
-                "Cannot delete because there are bookings in the past 3 years. It has been archived instead."
-            )
+
+        return delete

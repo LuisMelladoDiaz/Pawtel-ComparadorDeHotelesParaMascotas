@@ -65,9 +65,14 @@ class HotelViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
         HotelService.authorize_action_hotel_level_3(request, pk, action_name)
-        HotelService.validate_all_room_types_deletion(pk)
-        HotelService.delete_hotel(pk)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if HotelService.validate_all_room_types_deletion(pk):
+            HotelService.delete_hotel(pk)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(
+                {"message": "Hotel archived instead of deleted due to past bookings."},
+                status=status.HTTP_200_OK,
+            )
 
     @action(
         detail=True,

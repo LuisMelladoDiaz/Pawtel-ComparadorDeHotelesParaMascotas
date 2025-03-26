@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime, timedelta
 
 from django.db.models import Max, Min, Q
 from django.forms import ValidationError
@@ -17,6 +17,8 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 
 class HotelService:
+
+    THREE_YEARS = timedelta(days=3 * 365)
 
     # -
     # -------------------------------------------------------------------------
@@ -133,11 +135,37 @@ class HotelService:
         hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
 
+    @staticmethod
     def validate_all_room_types_deletion(hotel_pk):
         hotel = Hotel.objects.get(pk=hotel_pk)
         room_types = RoomType.objects.filter(hotel=hotel)
+        today = date.today()
+        delete = True
+
         for room_type in room_types:
-            RoomTypeService.validate_room_type_deletion(room_type.id)
+            past_limit = today - HotelService.THREE_YEARS
+
+            past_bookings = Booking.objects.filter(
+                room_type_id=room_type.id, start_date__range=(past_limit, today)
+            )
+            future_bookings = Booking.objects.filter(
+                room_type_id=room_type.id, start_date__gte=today
+            )
+
+            if future_bookings.exists():
+                raise ValidationError(
+                    "Cannot delete because there is an upcoming booking."
+                )
+
+            if past_bookings.exists():
+                delete = False
+                break
+
+        if not delete:
+            Hotel.objects.filter(pk=hotel_pk).update(is_archived=True)
+            RoomType.objects.filter(hotel_id=hotel_pk).update(is_archived=True)
+
+        return delete
 
     # Filter -----------------------------------------------------------------
 

@@ -132,20 +132,12 @@ class HotelOwnerViewSetTest(TestCase):
             end_date=past_end,
             total_price=100.00,
         )
-        with self.assertRaises(ValidationError) as context:
-            HotelOwnerService.validate_all_hotels_deletion(
-                self.authenticated_hotel_owner.id
-            )
-        error_message = (
-            context.exception.detail
-            if hasattr(context.exception, "detail")
-            else context.exception.args[0]
+
+        HotelOwnerService.validate_all_hotels_deletion(
+            self.authenticated_hotel_owner.id
         )
-        self.assertEqual(
-            error_message,
-            [
-                "Cannot delete because there are bookings in the past 3 years. It has been archived instead."
-            ],
-        )
+
         self.room_type1.refresh_from_db()
+        self.hotel1.refresh_from_db()
+        self.assertTrue(self.hotel1.is_archived)
         self.assertTrue(self.room_type1.is_archived)

@@ -14,6 +14,8 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 class HotelOwnerService:
 
+    THREE_YEARS = timedelta(days=3 * 365)
+
     # General processes ------------------------------------------------------
 
     @staticmethod
@@ -109,15 +111,17 @@ class HotelOwnerService:
 
     # Delete -----------------------------------------------------------------
 
+    @staticmethod
     def validate_all_hotels_deletion(hotel_owner_pk):
         hotel_owner = HotelOwner.objects.get(pk=hotel_owner_pk)
         hotels = Hotel.objects.filter(hotel_owner=hotel_owner)
+        today = date.today()
+        delete = True
+
         for hotel in hotels:
             room_types = RoomType.objects.filter(hotel=hotel)
             for room_type in room_types:
-                today = date.today()
-                past_limit = today - timedelta(days=1096)
-
+                past_limit = today - HotelOwnerService.THREE_YEARS
                 past_bookings = Booking.objects.filter(
                     room_type_id=room_type.id, start_date__range=(past_limit, today)
                 )
@@ -131,10 +135,16 @@ class HotelOwnerService:
                     )
 
                 if past_bookings.exists():
-                    RoomType.objects.filter(pk=room_type.id).update(is_archived=True)
-                    raise ValidationError(
-                        "Cannot delete because there are bookings in the past 3 years. It has been archived instead."
-                    )
+                    delete = False
+                    break
+
+        if not delete:
+            Hotel.objects.filter(hotel_owner=hotel_owner).update(is_archived=True)
+            RoomType.objects.filter(hotel__hotel_owner=hotel_owner).update(
+                is_archived=True
+            )
+
+        return delete
 
     # Hotels -----------------------------------------------------------------
 

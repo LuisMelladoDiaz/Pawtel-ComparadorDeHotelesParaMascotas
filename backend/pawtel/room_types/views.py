@@ -59,9 +59,16 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
         RoomTypeService.authorize_action_room_type_level_3(request, pk, action_name)
-        RoomTypeService.validate_room_type_deletion(pk)
-        RoomTypeService.delete_room_type(pk)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if RoomTypeService.validate_room_type_deletion(pk):
+            RoomTypeService.delete_room_type(pk)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            return Response(
+                {
+                    "message": "Room type archived instead of deleted due to past bookings."
+                },
+                status=status.HTTP_200_OK,
+            )
 
     @action(
         detail=True,
