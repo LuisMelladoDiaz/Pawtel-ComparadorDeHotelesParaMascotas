@@ -30,6 +30,7 @@
 | Manuel Castillejo Vela | Rafael Castillo Cebolla |
 | Claudio Cortés Carrasco | Sergio Trenado González |
 | Yesica Garate Fuentes | David González Martínez |
+| Andrés Martínez Reviriego
 
 ---
 
@@ -79,7 +80,7 @@
 #### 1. Información General
 
 - **Nombre del programador:** Andrés Martínez Reviriego
-- **Sprint:** Sprint1
+- **Sprint:** Sprint2
 - **Rol en el proyecto:** Full-Stack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -95,25 +96,23 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Resolver conflictos git | ChatGPT | Resolución de conflictos con git pull origin main |
-| Explicación cookies | ChatGPT | Explicación de motivo por el que las cookies no funcionaban correctamente |
-| Error con pre-commit | ChatGPT | Solución de error con pre-commit no permitía realizar el commit |
-| Añadir filtro con foreign key | ChatGPT | Consulta sobre cómo añadir un filtro teniendo en cuenta que está asociado con la entidad usando una foreign key |
+| Consejo tecnológico	| ChatGPT	| Ofrecimiento de ideas para crear un mecanismo de restablecimiento de contraseña|
+| Solución error de commit	| ChatGPT	| Explicación de motivo por el que un commit no sigue las reglas del conventional commit|
+| Eliminar rama git	|ChatGPT	| Explicación de cómo eliminar ramas locales y remotas en git|
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 7
 - **Comparación con trabajo sin IA:** Mejora en eficiencia y explicación de conceptos
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Ayúdame a resolver conflictos de merge tras hacer git pull origin main a mi rama.
-2. ¿Por qué aparece "Cookie "access_token" has been rejected because it is in a cross-site context and its "SameSite" is "Lax" or "Strict" " ?
-3. Ayúdame a resolver errores con el pre-commit patch (files reformatted)
-4. Teniendo en cuenta que el room_types es un modelo aparte que se ascocia con los hoteles por medio de una foreign key, ¿cómo influye esto en un filtro de búsqueda de hoteles?
+1. ¿Cuál es la mejor forma de implementar un "¿olvidaste tu contraseña?"" en mi página web?
+2. Explícame el error con este commit: feat(user role): added customer seed Conventional Commits 🚫 According to the conventional-commits specification, some of the commit messages are not valid.
+3. ¿Cómo puedo eliminar una rama en github tanto remota como local?
 
 #### 6. Problemas Encontrados y Limitaciones
 
