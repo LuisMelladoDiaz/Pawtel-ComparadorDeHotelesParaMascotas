@@ -55,48 +55,28 @@ const submitBooking = async () => {
     <!-- Sección Mensaje final -->
     <section class="relative mx-auto py-25 max-w-7xl px-5 rounded-lg overflow-hidden items-center text-center">
       <div class="relative">
-        <h2 class="text-2xl font-bold mb-4">Escoge tus fechas para la reserva en formato YYYY-MM-DD</h2>
-        <!--
-          En el futuro la cosa funcionará así:
-            1. Al darle a siguiente este form se mandará un POST al backend de create Booking_Hold
-            2. Luego se te redirigirá a una vista de confirmar datos, ahí le darás a pagar, se mandará un post create de Booking al backend y serás redirigido a stripe para realizar el pago
-            3. Según la respuesta de stripe al backend, se va a una pantala de todo ok, o de no se ha comprado
-
-
-            Como extra, esto debería verse bien, yo solo he puesto el form de lo que necesito
-        -->
-
       </div>
     </section>
 
     <form @submit.prevent="submitBooking">
-
-        <!-- Input de Fecha de Inicio -->
-        <div class="relative">
+        <div class="relative my-4">
+          <label for="start-date" class="block mb-1 text-sm font-medium">Fecha de inicio</label>
           <input
+            type="date"
             id="start-date"
-            ref="startDateRef"
             v-model="internalStartDate"
-            class=" min-w-[250px] p-2 border rounded-lg text-black"
-            placeholder="      Fecha inicio"
+            class="min-w-[250px] p-2 border rounded-lg text-black"
           />
-
         </div>
-
-        <!-- Input de Fecha de Fin -->
-        <div class="relative">
+        <div class="relative my-4">
+          <label for="end-date" class="block mb-1 text-sm font-medium">Fecha de fin</label>
           <input
+            type="date"
             id="end-date"
-            ref="endDateRef"
             v-model="internalEndDate"
             class="min-w-[250px] p-2 border rounded-lg text-black"
-            placeholder="     Fecha Fin"
           />
-
         </div>
-
-
-
         <div class="mt-6">
             <button type="submit"
                 class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">

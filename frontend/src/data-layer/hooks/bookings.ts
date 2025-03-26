@@ -18,6 +18,7 @@ export const useGetAllBookings = () => {
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
+}
 export const useGetBookingById = (id: number) => {
     return useQuery({
         queryKey: ['booking', id],

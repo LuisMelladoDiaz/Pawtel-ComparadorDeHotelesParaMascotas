@@ -149,6 +149,7 @@ defineProps({
       <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
     </router-link>
   </div>
+</div>
 </template>
 
 <style scoped>

@@ -1,5 +1,4 @@
 import json
-import os
 from datetime import datetime
 
 import stripe
@@ -102,9 +101,13 @@ class BookingService:
         from pawtel.room_types.services import RoomTypeService
 
         context = {"request": request}
-        current_customer_id = CustomerService.get_current_customer(request).id
-        data = request.data.copy()
-        data["customer"] = current_customer_id
+        # Hack to get the current customer id
+        if hasattr(request, "user"):
+            current_customer_id = CustomerService.get_current_customer(request).id
+            data = request.data.copy()
+            data["customer"] = current_customer_id
+        else:
+            data = request
         room_type_price = RoomTypeService.retrieve_room_type(
             data["room_type"]
         ).price_per_night
@@ -116,7 +119,7 @@ class BookingService:
             ).days
         )
         data["total_price"] = total_price
-        return BookingSerializer(data=data, context=context)
+        return BookingSerializer(data=data)
 
     @staticmethod
     def validate_create_booking(request, input_serializer):
@@ -192,12 +195,12 @@ class BookingService:
                 ],
                 metadata={"booking": booking_json_str},
                 mode="payment",
-                success_url=str(os.getenv("FRONTEND_URL") + "/"),
-                cancel_url=str(os.getenv("FRONTEND_URL") + "/hotels/"),
+                success_url=str(settings.FRONTEND_URL + "/"),
+                cancel_url=str(settings.FRONTEND_URL + "/hotels/"),
             )
 
             return JsonResponse({"url": session.url})
-        except:
+        except Exception:
             return Response(
                 {"error": "Something went wrong"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -206,12 +209,13 @@ class BookingService:
     @staticmethod
     @transaction.atomic
     def stripe_response_manager(payload, sig_header):
-
+        print("Stripe response received")
         event = None
         try:
             event = stripe.Webhook.construct_event(payload, sig_header, secret_endpoint)
         except ValueError as e:
             # Invalid payload
+            print(e)
             return HttpResponse(status=400)
 
         if event.type == "checkout.session.completed":

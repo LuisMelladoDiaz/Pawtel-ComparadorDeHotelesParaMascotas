@@ -218,3 +218,9 @@ else:
             "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
     }
+
+
+FRONTEND_URL = os.getenv("FRONTEND_URL")
+
+if not FRONTEND_URL:
+    raise ValueError("FRONTEND_URL must be set")
