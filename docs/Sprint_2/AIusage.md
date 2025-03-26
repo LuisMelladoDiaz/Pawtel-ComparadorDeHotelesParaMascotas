@@ -50,6 +50,7 @@
     - [Luis Mellado Díaz](#luis-mellado-díaz)
     - [Rafael Castillo Cebolla](#-rafael-castillo-cebolla)
     - [Yesica Garate Fuentes](#yesica-garate-fuentes)
+    - [Javier Garcia Sebastian](#-javier-garcia-sebastian)
 
 ---
 
@@ -60,6 +61,7 @@
 | 24/03/2025  | v 1.1         | Parte de Dani | Daniel Flores de Francisco |
 | 25/03/2025  | v 1.2         | Parte de Luis | Luis Mellado Díaz |
 | 26/03/2025  | v 1.3         | Parte de Fernando | Fernando Castelló Sánchez |
+| 26/03/2025  | v 1.4         | Parte de Javi G | Javier García Sebastián |
 
 
 ---
@@ -802,3 +804,53 @@ Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso
 - **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad del código.
 
 ---
+
+### 👨‍💻 Javier García Sebastián
+
+#### 1. Información General
+
+- **Nombre del programador:** Javier García Sebastián
+- **Sprint:** Sprint2
+- **Rol en el proyecto:** Backend
+
+#### 2. Tipo de Tareas en las que se Utilizó IA
+
+- Generación de código (x)
+- Refactorización de código (x)
+- Generación de documentación (x)
+- Asesoramiento técnico ()
+
+#### 3. Uso de IA en las Tareas
+
+Para cada tarea en la que se usó IA, completar la siguiente tabla:
+
+| Tarea | Herramienta utilizada | Descripción del uso de IA |
+|-------|-----------------------|---------------------------|
+| solución error en mi código	| ChatGPT	| Explicaxión detallada sobre porque mi código no funcionaba como debería|
+| Solución error de la bd	| ChatGPT	| Explicación de como solucionar un error con mi mariadb|
+| plantilla para documento general de tiempo	|ChatGPT	| generarme una plantilla para los informes de tiempo|
+
+
+#### 4. Impacto en Productividad
+
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Comparación con trabajo sin IA:** Mejora en eficiencia y explicación de conceptos
+
+#### 5. Prompts Utilizados
+
+Listar los prompts que fueron más efectivos para completar las tareas:
+
+1. Explica que hacer cuando me ocurre este error: Can't connect to local server through socket '/tmp/mysql.sock' (61).
+2. Basandote en este informe de tiempo de clockify, genera una plantilla en formato md que comprenda las horas utilizadas
+
+#### 6. Problemas Encontrados y Limitaciones
+
+- **Limitaciones detectadas en la IA:** -
+
+#### 7. Evaluación General
+
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
+- **Comentarios adicionales sobre la experiencia con IA:** -
+
+---
+
