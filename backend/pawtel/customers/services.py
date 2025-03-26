@@ -112,18 +112,19 @@ class CustomerService:
         past_limit = today - CustomerService.THREE_YEARS
         delete = True
 
-        past_bookings = Booking.objects.filter(
+        recent_bookings = Booking.objects.filter(
             customer_id=pk, start_date__range=(past_limit, today)
         )
         future_bookings = Booking.objects.filter(customer_id=pk, start_date__gte=today)
 
         if future_bookings.exists():
-            raise ValidationError("Cannot delete because there is an upcoming booking.")
+            raise ValidationError(
+                {
+                    "detail": "Object cannot be deleted because there is an upcoming booking."
+                }
+            )
 
-        if past_bookings.exists():
+        if recent_bookings.exists():
             delete = False
-
-        if not delete:
-            Customer.objects.filter(pk=pk).update(is_archived=True)
 
         return delete

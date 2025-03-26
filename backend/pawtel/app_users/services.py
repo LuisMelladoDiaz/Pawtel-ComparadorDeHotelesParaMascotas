@@ -1,5 +1,7 @@
 from pawtel.app_users.models import AppUser, UserRole
 from pawtel.app_users.serializers import AppUserSerializer
+from pawtel.hotels.models import Hotel
+from pawtel.room_types.models import RoomType
 from rest_framework.exceptions import (AuthenticationFailed, NotFound,
                                        ValidationError)
 
@@ -29,6 +31,12 @@ class AppUserService:
         """This will be called from the views of each role."""
         AppUserService.__authorize_action_app_user(request, pk)
         AppUserService.__delete_app_user(pk)
+
+    @staticmethod
+    def general_deactivate_app_user(request, pk):
+        """This will be called from the views of each role."""
+        AppUserService.__authorize_action_app_user(request, pk)
+        AppUserService.__deactivate_app_user(pk)
 
     # Common -----------------------------------------------------------------
 
@@ -128,6 +136,19 @@ class AppUserService:
     def __update_app_user(pk, input_serializer):
         app_user = AppUserService.retrieve_app_user(pk)
         return input_serializer.update(app_user, input_serializer.validated_data)
+
+    @staticmethod
+    def __deactivate_app_user(pk):
+        app_user = AppUserService.retrieve_app_user(pk)
+
+        if app_user.role == UserRole.HOTEL_OWNER:
+            hotel_owner = app_user.hotel_owner
+            RoomType.objects.filter(hotel__hotel_owner=hotel_owner).update(
+                is_archived=True
+            )
+            Hotel.objects.filter(hotel_owner=hotel_owner).update(is_archived=True)
+
+        AppUser.objects.filter(pk=pk).update(is_active=False)
 
     # DELETE -----------------------------------------------------------------
 

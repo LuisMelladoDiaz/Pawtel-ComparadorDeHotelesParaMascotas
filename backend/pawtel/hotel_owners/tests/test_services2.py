@@ -118,10 +118,13 @@ class HotelOwnerViewSetTest(TestCase):
             else context.exception.args[0]
         )
         self.assertEqual(
-            error_message, ["Cannot delete because there is an upcoming booking."]
+            error_message,
+            {
+                "detail": "Object cannot be deleted because there is an upcoming booking."
+            },
         )
 
-    def test_validate_all_hotels_deletion_with_past_booking(self):
+    def test_validate_all_hotels_deletion_with_recent_booking(self):
         today = date.today()
         past_start = today - timedelta(days=100)
         past_end = past_start + timedelta(days=5)
@@ -133,11 +136,24 @@ class HotelOwnerViewSetTest(TestCase):
             total_price=100.00,
         )
 
-        HotelOwnerService.validate_all_hotels_deletion(
+        delete = HotelOwnerService.validate_all_hotels_deletion(
             self.authenticated_hotel_owner.id
         )
+        self.assertFalse(delete)
 
-        self.room_type1.refresh_from_db()
-        self.hotel1.refresh_from_db()
-        self.assertTrue(self.hotel1.is_archived)
-        self.assertTrue(self.room_type1.is_archived)
+    def test_validate_all_hotels_deletion_with_not_recent_booking(self):
+        today = date.today()
+        past_start = today - timedelta(days=5 * 365)
+        past_end = past_start + timedelta(days=10)
+        Booking.objects.create(
+            room_type=self.room_type1,
+            customer=self.customer,
+            start_date=past_start,
+            end_date=past_end,
+            total_price=100.00,
+        )
+
+        delete = HotelOwnerService.validate_all_hotels_deletion(
+            self.authenticated_hotel_owner.id
+        )
+        self.assertTrue(delete)

@@ -145,7 +145,7 @@ class HotelService:
         for room_type in room_types:
             past_limit = today - HotelService.THREE_YEARS
 
-            past_bookings = Booking.objects.filter(
+            recent_bookings = Booking.objects.filter(
                 room_type_id=room_type.id, start_date__range=(past_limit, today)
             )
             future_bookings = Booking.objects.filter(
@@ -154,18 +154,20 @@ class HotelService:
 
             if future_bookings.exists():
                 raise ValidationError(
-                    "Cannot delete because there is an upcoming booking."
+                    {
+                        "detail": "Object cannot be deleted because there is an upcoming booking."
+                    }
                 )
 
-            if past_bookings.exists():
+            if recent_bookings.exists():
                 delete = False
                 break
 
-        if not delete:
-            Hotel.objects.filter(pk=hotel_pk).update(is_archived=True)
-            RoomType.objects.filter(hotel_id=hotel_pk).update(is_archived=True)
-
         return delete
+
+    def archive_hotel(hotel_id):
+        RoomType.objects.filter(hotel_id=hotel_id).update(is_archived=True)
+        Hotel.objects.filter(pk=hotel_id).update(is_archived=True)
 
     # Filter -----------------------------------------------------------------
 

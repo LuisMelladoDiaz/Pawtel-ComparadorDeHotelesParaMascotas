@@ -56,13 +56,15 @@ class CustomerViewSet(viewsets.ModelViewSet):
         customer = CustomerService.authorize_action_customer_level_3(
             request, pk, action_name
         )
-        if CustomerService.validate_customer_deletion(pk):
+        delete = CustomerService.validate_customer_deletion(pk)
+        if delete:
             AppUserService.general_delete_app_user(request, customer.user.id)
             return Response(status=status.HTTP_204_NO_CONTENT)
         else:
+            AppUserService.general_deactivate_app_user(request, customer.user.id)
             return Response(
                 {
-                    "message": "Customer archived instead of deleted due to past bookings."
+                    "detail": "Customer archived instead of deleted due to past bookings."
                 },
                 status=status.HTTP_200_OK,
             )
