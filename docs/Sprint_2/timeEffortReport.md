@@ -381,7 +381,7 @@
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
 
-**Periodo:** 21/02/2025 - 14/03/2025
+**Periodo:** 14/03/2025 - 25/03/2025
 **Total de tiempo trabajado:** 28:45:50
 
 ### Proyecto Pawtel - Distribución del tiempo
