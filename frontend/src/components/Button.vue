@@ -9,7 +9,6 @@
       type === 'edit' ? 'bg-beige text-white hover:bg-beige-dark hover:scale-105' :
       'bg-gray-200 text-black hover:bg-gray-300 hover:scale-105'
     ]"
-    @click="$emit('click')"
   >
     <slot>Botón</slot>
   </button>
