@@ -40,6 +40,7 @@
 | 26/03/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
 | 26/03/2025  | v 1.3         | Parte de Javi G | Javier García Sebastián |
 | 26/03/2025  | v 1.4         | Parte de David | David González Martínez |
+| 26/03/2025  | v 1.5         | Parte de Francisco | Francisco Miguel Jiménez Morales |
 
 
 ---
@@ -278,29 +279,51 @@
 ![grafico-de-tiempos](graficas/javier_ruiz.png)
 ---
 
-## Reporte de tiempo de Francisco Miguel Jimenez Morales
+## Reporte de tiempo de Francisco Miguel Jiménez Morales
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 48:11:30
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 42:12:03
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Fix PWA Structure | 01:08:29 |
-| Preparar presentación | 05:04:22 |
+| Preparar presentación | 01:00:00 |
+| Feedback revisión | 02:29:26 |
+| Feedback revisión | 00:59:32 |
+| Solucionar conflictos | 00:21:49 |
+| Solucionar conflictos | 00:53:08 |
+| Implementar pasarela de pago | 02:20:45 |
+| Implementar pasarela de pago | 00:58:04 |
+| Implementar pasarela de pago | 00:42:02 |
+| Implementar pasarela de pago | 01:08:38 |
+| Implementar pasarela de pago | 00:33:00 |
 | Clase | 04:00:00 |
-| Convertir la SPA en una PWA instalable | 02:50:59 |
-| Devising a Project | 26:11:11 |
+| Implementar pasarela de pago | 00:56:15 |
+| Implementar pasarela de pago | 01:26:22 |
+| Preparar presentación | 02:28:56 |
+| Implementar pasarela de pago | 00:54:04 |
+| Implementar pasarela de pago | 03:14:39 |
+| Preparar presentación | 00:17:40 |
+| Implementar pasarela de pago | 00:44:44 |
+| Organización y planificación usuarios piloto | 00:03:03 |
+| Implementar pasarela de pago | 00:53:35 |
+| Implementar pasarela de pago | 00:24:48 |
+| Implementar pasarela de pago | 01:09:54 |
+| Organización y planificación usuarios piloto | 00:34:16 |
+| Implementar pasarela de pago | 00:41:10 |
+| Implementar pasarela de pago | 02:05:56 |
+| Implementar pasarela de pago | 02:12:42 |
+| Organización y planificación usuarios piloto | 00:22:54 |
+| Implementar pasarela de pago | 01:59:44 |
+| Misc | 00:33:56 |
+| Clase | 04:00:00 |
 | Gestión de usuarios pilotos - Redactar informe | 01:36:03 |
-| Organización y planificación usuarios piloto | 01:59:22 |
-| Gestión de usuarios pilotos | 01:29:57 |
-| Ver tutoriales Vite + Vue PWA | 01:25:29 |
-| Gestión de usuarios pilotos - Preparar informe | 00:58:56 |
-| Informe IA | 00:05:08 |
-| Preparar entorno de trabajo y ver tutoriales | 01:21:34 |
+| Preparar presentación | 00:04:58 |
 
-![grafico-de-tiempos](graficas/francisco.png)
+
+
+![grafico-de-tiempos](graficas/francisco2.png)
 ---
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
