@@ -162,24 +162,25 @@
 
 ## Reporte de tiempo de Manuel Castillejo Vela
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 25:41:35
+**Periodo:** 12/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 27:44:33
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Queries tanStack y configuración inicial de proyecto | 00:56:58 |
-| Revisión del proyecto y base de conocimiento común | 01:10:12 |
-| Pulir contributing.md | 01:05:10 |
-| Adición de feedback a la base de datos común | 00:17:21 |
-| Informe de IA | 00:29:47 |
-| KBReport | 00:58:44 |
-| Formación sobre TypeScript y TanStack | 00:22:02 |
-| Clase | 08:00:00 |
-| Queries tanStack | 04:35:09 |
-| Gestión de usuarios pilotos | 02:39:48 |
-| Screen Login and Register | 05:06:24 |
+| Description                                                   | Time (h)  |
+|---------------------------------------------------------------|-----------|
+| #181 Feature: Hotel owner queries Tan Stack                 | 00:22:00  |
+| Mensajes CRUD creación hoteles                              | 00:54:36  |
+| KBReport                                                    | 00:51:33  |
+| #158 Feature: Validación de formularios con librerías.     | 07:07:27  |
+| Clase                                                       | 08:00:00  |
+| #205 Feature: Actualizar queries de Tan Stack con nuevas URLs | 03:29:51  |
+| #225 Feature: Mejorar funcionalidad Hotel Details          | 00:54:08  |
+| Añadir mensajes de error al frontend y botones de login y register | 03:17:15  |
+| Informe de IA                                              | 00:26:50  |
+| Adición de feedback a la base de datos común               | 02:06:45  |
+| Calendario de usuarios pilotos sprint 2                    | 00:14:08  |
+
 
 ![grafico-de-tiempos](graficas/manuel.png)
 ---
