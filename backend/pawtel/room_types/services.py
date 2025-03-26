@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 from django.db.models import Q
 from django.utils.dateparse import parse_date
@@ -6,6 +6,7 @@ from django.utils.timezone import now
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.booking_holds.models import BookingHold
+from pawtel.bookings.models import Booking
 from pawtel.bookings.services import BookingService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
@@ -16,6 +17,8 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 
 class RoomTypeService:
+
+    THREE_YEARS = timedelta(days=3 * 365)
 
     # Authorization ----------------------------------------------------------
 
@@ -161,6 +164,31 @@ class RoomTypeService:
     def delete_room_type(pk):
         room_type = RoomType.objects.get(pk=pk)
         room_type.delete()
+
+    def validate_room_type_deletion(pk):
+        today = date.today()
+        past_limit = today - RoomTypeService.THREE_YEARS
+        delete = True
+
+        recent_bookings = Booking.objects.filter(
+            room_type_id=pk, start_date__range=(past_limit, today)
+        )
+        future_bookings = Booking.objects.filter(room_type_id=pk, start_date__gte=today)
+
+        if future_bookings.exists():
+            raise ValidationError(
+                {
+                    "detail": "Object cannot be deleted because there is an upcoming booking."
+                }
+            )
+
+        if recent_bookings.exists():
+            delete = False
+
+        return delete
+
+    def archive_room_type(pk):
+        RoomType.objects.filter(pk=pk).update(is_archived=True)
 
     # Availability -----------------------------------------------------------
 

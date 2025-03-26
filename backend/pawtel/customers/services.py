@@ -1,13 +1,18 @@
+from datetime import date, timedelta
+
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
 from pawtel.permission_services import PermissionService
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class CustomerService:
+
+    THREE_YEARS = timedelta(days=3 * 365)
 
     # General processes ------------------------------------------------------
 
@@ -99,3 +104,27 @@ class CustomerService:
     @staticmethod
     def __create_customer(app_user_id):
         return Customer.objects.create(user_id=app_user_id)
+
+    # DELETE -----------------------------------------------------------------
+
+    def validate_customer_deletion(pk):
+        today = date.today()
+        past_limit = today - CustomerService.THREE_YEARS
+        delete = True
+
+        recent_bookings = Booking.objects.filter(
+            customer_id=pk, start_date__range=(past_limit, today)
+        )
+        future_bookings = Booking.objects.filter(customer_id=pk, start_date__gte=today)
+
+        if future_bookings.exists():
+            raise ValidationError(
+                {
+                    "detail": "Object cannot be deleted because there is an upcoming booking."
+                }
+            )
+
+        if recent_bookings.exists():
+            delete = False
+
+        return delete

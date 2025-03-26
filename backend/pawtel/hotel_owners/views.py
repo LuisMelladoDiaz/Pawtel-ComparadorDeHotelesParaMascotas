@@ -60,8 +60,18 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         hotel_owner = HotelOwnerService.authorize_action_hotel_owner_level_3(
             request, pk, action_name
         )
-        AppUserService.general_delete_app_user(request, hotel_owner.user.id)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        delete = HotelOwnerService.validate_all_hotels_deletion(pk)
+        if delete:
+            AppUserService.general_delete_app_user(request, hotel_owner.user.id)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            AppUserService.general_deactivate_app_user(request, hotel_owner.user.id)
+            return Response(
+                {
+                    "detail": "Hotel owner archived instead of deleted due to past bookings."
+                },
+                status=status.HTTP_200_OK,
+            )
 
     # Get all hotels of hotel owner ------------------------------------------
 

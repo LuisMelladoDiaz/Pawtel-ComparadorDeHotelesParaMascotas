@@ -1,13 +1,20 @@
+from datetime import date, timedelta
+
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
+from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
 from pawtel.hotels.models import Hotel
 from pawtel.permission_services import PermissionService
-from rest_framework.exceptions import NotFound, PermissionDenied
+from pawtel.room_types.models import RoomType
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 
 
 class HotelOwnerService:
+
+    THREE_YEARS = timedelta(days=3 * 365)
 
     # General processes ------------------------------------------------------
 
@@ -101,6 +108,39 @@ class HotelOwnerService:
     @staticmethod
     def __create_hotel_owner(app_user_id):
         return HotelOwner.objects.create(user_id=app_user_id)
+
+    # Delete -----------------------------------------------------------------
+
+    @staticmethod
+    def validate_all_hotels_deletion(hotel_owner_pk):
+        hotel_owner = HotelOwner.objects.get(pk=hotel_owner_pk)
+        hotels = Hotel.objects.filter(hotel_owner=hotel_owner)
+        today = date.today()
+        delete = True
+
+        for hotel in hotels:
+            room_types = RoomType.objects.filter(hotel=hotel)
+            for room_type in room_types:
+                past_limit = today - HotelOwnerService.THREE_YEARS
+                recent_bookings = Booking.objects.filter(
+                    room_type_id=room_type.id, start_date__range=(past_limit, today)
+                )
+                future_bookings = Booking.objects.filter(
+                    room_type_id=room_type.id, start_date__gte=today
+                )
+
+                if future_bookings.exists():
+                    raise ValidationError(
+                        {
+                            "detail": "Object cannot be deleted because there is an upcoming booking."
+                        }
+                    )
+
+                if recent_bookings.exists():
+                    delete = False
+                    break
+
+        return delete
 
     # Hotels -----------------------------------------------------------------
 
