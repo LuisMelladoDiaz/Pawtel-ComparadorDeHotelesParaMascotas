@@ -230,7 +230,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Fernando Castelló Sánchez
-- **Sprint:** Sprint1
+- **Sprint:** Sprint2
 - **Rol en el proyecto:** Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -246,26 +246,23 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Ayuda con vue | ChatGPT | Dudas técnicas sobre el lenguaje. |
-| Pantalla detalles de hoteles | ChatGPT | Recibiendo el código de la pantalla se pidió consejo para hacerla más responsiva (de cara a los usuarios de móvil) |
-| Pantallas Sobre Nosotros y Contacto | ChatGPT | Revisar la estructura y proponer posibles mejoras visuales. |
-| PantallaContacto | ChatGPT | Revisar el funcionamiento de la caja de mensajes. |
-| Ayuda con markdown | ChatGPT | Asesoramiento técnico sobre como manejar los archivos markdown. |
+| Pantalla habitaciones y precios de hoteles | DeepSeek | Corrigiendo el posicionamiento de algunos elementos. |
+| Feedback | DeepSeek | Dada la plantilla del archivo de feedback, pedir que añada la información recabada en clase. |
 
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ayudado a entender mejor los formatos que usamos en el proyecto, además de ayudarme con cuestiones técnicas y visuales.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 6
+- **Comparación con trabajo sin IA:** El uso de la IA me ha facilitado completar mi código de la mejor manera y ahorrar tiempo con la documentación.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. dado el código actual de mi archivo, revisa si hay inconsistencias y proponme posibles mejoras tanto estructurales como de estética de la pantalla.
-2. ayúdame a que la pantalla sea responsiva, que se adapte a pantallas de teléfonos móviles.
-3. como puedo ponerle el logo de nuestro proyecto a un archivo markdown?
+1. dada esta plantilla y esta información, añádela al documento.
+2. haz que estos botones se centren dentro de su columna.
+3. haz que el espacio entre estos componentes sea el mismo que en esta otra pantalla.
 
 #### 6. Problemas Encontrados y Limitaciones
 
