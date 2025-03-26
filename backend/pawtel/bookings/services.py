@@ -1,5 +1,4 @@
 import json
-import os
 from datetime import datetime
 
 import stripe
@@ -101,10 +100,13 @@ class BookingService:
     def serialize_input_booking_create(request):
         from pawtel.room_types.services import RoomTypeService
 
-        context = {"request": request}
-        current_customer_id = CustomerService.get_current_customer(request).id
-        data = request.data.copy()
-        data["customer"] = current_customer_id
+        # Hack to get the current customer id
+        if hasattr(request, "user"):
+            current_customer_id = CustomerService.get_current_customer(request).id
+            data = request.data.copy()
+            data["customer"] = current_customer_id
+        else:
+            data = request
         room_type_price = RoomTypeService.retrieve_room_type(
             data["room_type"]
         ).price_per_night
@@ -116,7 +118,7 @@ class BookingService:
             ).days
         )
         data["total_price"] = total_price
-        return BookingSerializer(data=data, context=context)
+        return BookingSerializer(data=data)
 
     @staticmethod
     def validate_create_booking(request, input_serializer):
@@ -124,11 +126,6 @@ class BookingService:
             raise ValidationError(input_serializer.errors)
 
         customer = CustomerService.get_current_customer(request)
-
-        # TODO uncomment this validation
-        # Auth validation
-        # if not ( customer == input_serializer.validated_data.get("customer")):
-        # raise ValidationError({"customer": "The customer in the request does not match the customer associated with the booking"})
 
         room_id = input_serializer.validated_data.get("room_type").id
 
@@ -174,6 +171,7 @@ class BookingService:
         output_serializer = BookingService.serialize_output_booking(
             Booking(**input_serializer.validated_data)
         )
+        customer = CustomerService.retrieve_customer(output_serializer.get("customer"))
         booking_json_str = json.dumps(output_serializer)
         try:
             session = stripe.checkout.Session.create(
@@ -192,12 +190,13 @@ class BookingService:
                 ],
                 metadata={"booking": booking_json_str},
                 mode="payment",
-                success_url=str(os.getenv("FRONTEND_URL") + "/"),
-                cancel_url=str(os.getenv("FRONTEND_URL") + "/hotels/"),
+                success_url=str(settings.FRONTEND_URL + "/"),
+                cancel_url=str(settings.FRONTEND_URL + "/hotels/"),
+                customer_email=customer.user.email,
             )
 
             return JsonResponse({"url": session.url})
-        except:
+        except Exception:
             return Response(
                 {"error": "Something went wrong"},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -206,12 +205,12 @@ class BookingService:
     @staticmethod
     @transaction.atomic
     def stripe_response_manager(payload, sig_header):
-
         event = None
         try:
             event = stripe.Webhook.construct_event(payload, sig_header, secret_endpoint)
         except ValueError as e:
             # Invalid payload
+            print(e)
             return HttpResponse(status=400)
 
         if event.type == "checkout.session.completed":

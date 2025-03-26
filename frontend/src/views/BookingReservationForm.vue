@@ -8,95 +8,122 @@ import { ref, watch, defineProps, defineEmits, onMounted } from 'vue';
 import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
 import { useRoute } from 'vue-router';
+import { useGetRoomTypesByHotel } from '@/data-layer/hooks/hotels';
+import { computed } from 'vue';
 
 
 const route = useRoute();
-const room_type_id = route.params.id;
+const hotelId = route.params.id;
 const notyf = new Notyf();
 const internalStartDate = ref('');
 const internalEndDate = ref('');
-const { mutateAsync: createBooking } = useCreateBooking();
-const props = defineProps({
-  hotelId: String,
+const { mutate: createBooking } = useCreateBooking();
 
-});
-const role = ref('customer');
+const { data: roomTypes, isLoading } = useGetRoomTypesByHotel(hotelId);
+
+const selectedRoomTypeId = ref(null);
 
 const submitBooking = async () => {
-  try{
-  // This will need real values
-    let startDate = new Date(internalStartDate.value + "T00:00:00Z");
-    let endDate = new Date(internalEndDate.value + "T00:00:00Z");
+  try {
+    const startDate = new Date(`${internalStartDate.value}T00:00:00Z`);
+    const endDate = new Date(`${internalEndDate.value}T00:00:00Z`);
 
-    if(endDate > startDate){
-      await createBooking(
-                  {
-                    start_date: startDate.toISOString().split('T')[0],
-                    end_date: endDate.toISOString().split('T')[0],
-                    room_type: room_type_id,
-                  },
-
-              );
-            }else{
-              notyf.error('Fecha de fin debe de ser posterior a la de inicio.');
-            }
-  }catch (error) {
-        notyf.error('Hubo un error al reservar. Inténtalo de nuevo.');
+    if (endDate > startDate) {
+      createBooking(
+        {
+          start_date: startDate.toISOString().split('T')[0],
+          end_date: endDate.toISOString().split('T')[0],
+          room_type: selectedRoomTypeId.value,
+        },
+        {
+          onSuccess: () => {
+            notyf.success('Reserva realizada con éxito.');
+          },
+          onError: () => {
+            notyf.error('Hubo un error al reservar. Inténtalo de nuevo.');
+          },
+        }
+      );
+    } else {
+      notyf.error('Fecha de fin debe de ser posterior a la de inicio.');
     }
-
+  } catch (error) {
+    notyf.error('Ocurrió un error inesperado.');
+  }
 };
+
+const totalPrice = computed(() => {
+  if (!internalStartDate.value || !internalEndDate.value) return 0;
+
+  const startDate = new Date(`${internalStartDate.value}T00:00:00Z`);
+  const endDate = new Date(`${internalEndDate.value}T00:00:00Z`);
+
+  if (endDate < startDate) return 0;
+
+  const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
+
+  console.log(days);
+
+
+  if (!roomTypes.value || !roomTypes.value.length) return 0;
+
+
+  const selectedRoomType = roomTypes.value.find((roomType) => roomType.id === selectedRoomTypeId.value);
+
+  if (!selectedRoomType) return 0;
+
+  return days * selectedRoomType.price_per_night;
+});
 
 </script>
 
 
 <template>
   <div>
-    <Navbar />
-    <!-- Sección Mensaje final -->
     <section class="relative mx-auto py-25 max-w-7xl px-5 rounded-lg overflow-hidden items-center text-center">
       <div class="relative">
-        <h2 class="text-2xl font-bold mb-4">Escoge tus fechas para la reserva en formato YYYY-MM-DD</h2>
-        <!--
-          En el futuro la cosa funcionará así:
-            1. Al darle a siguiente este form se mandará un POST al backend de create Booking_Hold
-            2. Luego se te redirigirá a una vista de confirmar datos, ahí le darás a pagar, se mandará un post create de Booking al backend y serás redirigido a stripe para realizar el pago
-            3. Según la respuesta de stripe al backend, se va a una pantala de todo ok, o de no se ha comprado
-
-
-            Como extra, esto debería verse bien, yo solo he puesto el form de lo que necesito
-        -->
-
       </div>
     </section>
 
     <form @submit.prevent="submitBooking">
-
-        <!-- Input de Fecha de Inicio -->
-        <div class="relative">
+        <div class="relative my-4">
+          <label for="start-date" class="block mb-1 text-sm font-medium">Fecha de inicio</label>
           <input
+            type="date"
             id="start-date"
-            ref="startDateRef"
             v-model="internalStartDate"
-            class=" min-w-[250px] p-2 border rounded-lg text-black"
-            placeholder="      Fecha inicio"
+            class="min-w-[250px] p-2 border rounded-lg text-black"
           />
-
         </div>
-
-        <!-- Input de Fecha de Fin -->
-        <div class="relative">
+        <div class="relative my-4">
+          <label for="end-date" class="block mb-1 text-sm font-medium">Fecha de fin</label>
           <input
+            type="date"
             id="end-date"
-            ref="endDateRef"
             v-model="internalEndDate"
             class="min-w-[250px] p-2 border rounded-lg text-black"
-            placeholder="     Fecha Fin"
           />
-
         </div>
-
-
-
+        <div class="relative my-4">
+          <label for="room-type" class="block mb-1 text-sm font-medium">Tipo de habitación</label>
+          <select
+            id="room-type"
+            v-model="selectedRoomTypeId"
+            class="min-w-[250px] p-2 border rounded-lg text-black"
+          >
+            <option value="" disabled>Selecciona un tipo de habitación</option>
+            <option
+              v-for="roomType in roomTypes"
+              :key="roomType.id"
+              :value="roomType.id"
+            >
+              {{ roomType.name }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <p class="text-sm font-medium">Precio total: {{ totalPrice }}€</p>
+        </div>
         <div class="mt-6">
             <button type="submit"
                 class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
@@ -105,7 +132,6 @@ const submitBooking = async () => {
         </div>
     </form>
 
-    <Footer />
   </div>
 </template>
 
