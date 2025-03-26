@@ -115,7 +115,7 @@ const routes = [
   },
   {
     path: '/hotels',
-    component: createComponent({ layout: LayoutTerracotaMargins, component: HotelListScreen }),
+    component: createComponent({ layout: LayoutWithFilter, component: HotelListScreen }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
