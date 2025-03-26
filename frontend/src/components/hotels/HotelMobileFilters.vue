@@ -1,5 +1,6 @@
 <script setup>
 import PriceRange from '@/components/hotels/PriceRange.vue';
+import DatePicker from '@/components/DatePicker.vue';
 
 defineProps({
   cities: {
@@ -49,34 +50,25 @@ const emit = defineEmits([
 </script>
 
 <template>
-  <div class="mobile-menu fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-white border-2 w-[95%] max-w-md border-terracota shadow-xl rounded-lg overflow-hidden">
-    <div class="bg-terracota text-white p-4">
-      <h2 class="text-center font-bold text-lg">Filtros</h2>
+  <div class="mobile-menu fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-white border-2 w-[97%] max-w-md border-terracota shadow-xl rounded-lg overflow-hidden text-pawtel-black font-complementario">
+    <div class="relative inline-block w-full">
+      <h2 class="self-center text-center shadow-lg p-2 font-bold m-0!">Filtrar por</h2>
+      <button @click="emit('close')" class="absolute right-5 top-2 transform">
+        <i class="fa-solid fa-xmark text-[18px]"></i>
+      </button>
     </div>
 
-    <div class="p-5 flex flex-col gap-6 max-h-[70vh] overflow-y-auto">
+    <div class="p-5 py-7 flex flex-col gap-6 max-h-[70vh] overflow-y-auto">
       <!-- Selectores de fecha -->
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <label class="block font-semibold text-sm mb-1">Fecha inicio</label>
-          <input
-            type="date"
-            :value="startDate"
-            @input="emit('update:startDate', $event.target.value)"
-            :min="new Date().toISOString().split('T')[0]"
-            class="border rounded p-2 w-full text-sm"
-          >
-        </div>
-        <div>
-          <label class="block font-semibold text-sm mb-1">Fecha fin</label>
-          <input
-            type="date"
-            :value="endDate"
-            @input="emit('update:endDate', $event.target.value)"
-            :min="startDate"
-            class="border rounded p-2 w-full text-sm"
-          >
-        </div>
+      <div class="mt-0">
+        <label class="font-semibold">Rango de fechas:</label>
+        <DatePicker
+          class="bg-white border rounded mt-1 min-w-[200px]!"
+          :startDate="startDate"
+          :endDate="endDate"
+          @update:startDate="emit('update:startDate', $event)"
+          @update:endDate="emit('update:endDate', $event)"
+        />
       </div>
 
       <!-- Filtro ciudad -->

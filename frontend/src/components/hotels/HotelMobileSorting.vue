@@ -14,12 +14,15 @@ const emit = defineEmits(['update:sortBy', 'toggle-direction', 'close']);
 </script>
 
 <template>
-  <div class="mobile-menu absolute top-100 left-1/2 transform -translate-x-1/2 z-10 bg-white border-2 w-[90%] border-terracota shadow-lg rounded-b-lg flex flex-col">
-    <div>
-      <h2 class="self-center text-center shadow-lg p-2 font-bold">Ordenar por</h2>
+  <div class="mobile-menu fixed top-20 left-1/2 transform -translate-x-1/2 z-10 bg-white border-2 w-[90%] border-terracota shadow-xl rounded-lg flex flex-col text-pawtel-black font-complementario">
+    <div class="relative inline-block w-full">
+      <h2 class="self-center text-center shadow-lg p-2 font-bold m-0!">Ordenar por</h2>
+      <button @click="emit('close')" class="absolute right-5 top-2 transform">
+        <i class="fa-solid fa-xmark text-[18px]"></i>
+      </button>
     </div>
 
-    <div class="p-5 flex flex-col gap-4">
+    <div class="p-5 py-10 flex flex-col gap-7">
       <div class="flex flex-col gap-2">
         <button
           @click="emit('update:sortBy', 'name'); emit('close')"

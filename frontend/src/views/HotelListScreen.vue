@@ -157,7 +157,7 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
 
 <template>
   <!-- Desktop version -->
-  <div class="container mt-5 hidden md:flex">
+  <div class="container mt-5 hidden md:flex self-center">
     <HotelFilters 
       :cities="cities"
       :petTypes="petTypes"
@@ -197,21 +197,25 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
 
   <!-- Mobile Version -->
   <div class="container flex flex-col items-start mt-5 md:hidden">
-    <div class="flex flex-row items-center self-center gap-10 pb-5">
-      <button @click="toggleSortBy" class="flex items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-[35px] h-[35px]" fill="#C36C6C">
-          <path d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z"/>
-        </svg>
+    <div class="flex flex-row items-center self-center gap-10 pb-4">
+      <div class="flex flex-col items-center justify-between h-15">
+        <button @click="toggleSortBy">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-[35px] h-[35px]" fill="#C36C6C">
+            <path d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z"/>
+          </svg>
+        </button>
         <span class="text-terracota font-medium">Ordenar</span>
-      </button>
-      
-      <button @click="toggleFilters" class="flex items-center gap-1">
-        <i class="fa-solid fa-sliders text-terracota text-[30px]"></i>
+      </div>
+      <div class="flex flex-col items-center justify-between h-15">
+        <button @click="toggleFilters">
+          <i class="fa-solid fa-sliders text-terracota text-[31px] mt-[1px]"></i>
+        </button>
         <span class="text-terracota font-medium">Filtrar</span>
-      </button>
+      </div>
     </div>
 
     <!-- Menú de ordenamiento móvil -->
+    <transition name="fade">
     <HotelMobileSorting
       v-if="isSortByOpen"
       :sortBy="sortBy"
@@ -220,8 +224,10 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
       @toggle-direction="direction = direction === 'asc' ? 'desc' : 'asc'"
       @close="isSortByOpen = false"
     />
+    </transition>
 
     <!-- Menú de filtros móvil -->
+    <transition name="fade">
     <HotelMobileFilters
       v-if="isFiltersOpen"
       :cities="cities"
@@ -241,6 +247,7 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
       @commit-price="commitPriceFilters"
       @close="isFiltersOpen = false"
     />
+    </transition>
 
     <!-- Lista de hoteles -->
     <HotelList 
@@ -255,6 +262,14 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
 .custom-range {
   accent-color: #6C8CC3;
 }
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 
 /* Estilos específicos para móvil */
 @media (max-width: 767px) {
