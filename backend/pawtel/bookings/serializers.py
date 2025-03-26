@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from pawtel.base_serializer import BaseSerializer
 from pawtel.bookings.models import Booking
+from rest_framework import serializers
 
 
 class BookingSerializer(BaseSerializer):
@@ -15,6 +16,11 @@ class BookingSerializer(BaseSerializer):
     fields_editable = []
     fields_not_readable = []
 
+    hotel_id = serializers.SerializerMethodField()
+
+    def get_hotel_id(self, obj):
+        return obj.room_type.hotel.id if obj.room_type and obj.room_type.hotel else None
+
     class Meta:
         model = Booking
         fields = [
@@ -25,6 +31,7 @@ class BookingSerializer(BaseSerializer):
             "total_price",
             "customer",
             "room_type",
+            "hotel_id",
         ]
         extra_kwargs = {
             "id": {"read_only": True},

@@ -59,6 +59,17 @@ class CustomerViewSet(viewsets.ModelViewSet):
         AppUserService.general_delete_app_user(request, customer.user.id)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="me",
+        url_name="retrieve_current_customer",
+    )
+    def retrieve_current_customer(self, request):
+        customer = CustomerService.get_current_customer(request)
+        output_serializer_data = CustomerService.serialize_output_customer(customer)
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
+
     # List bookings of customer ----------------------------------------------
 
     @action(

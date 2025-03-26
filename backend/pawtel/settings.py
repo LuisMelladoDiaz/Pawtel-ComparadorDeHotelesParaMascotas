@@ -126,6 +126,8 @@ DATABASES = {
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
+STRIPE_SECRET_KEY = str(os.getenv("STRIPE_SECRET_KEY"))
+STRIPE_SECRET_ENDPOINT = str(os.getenv("STRIPE_SECRET_ENDPOINT"))
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -216,3 +218,9 @@ else:
             "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
         },
     }
+
+
+FRONTEND_URL = os.getenv("FRONTEND_URL")
+
+if not FRONTEND_URL:
+    raise ValueError("FRONTEND_URL must be set")

@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,12 +16,12 @@
 
 # 📑 **Informe de uso de IA** - Sprint 1 🚀
 
-**📅 Entregable:** Sprint 1  
-**📆 Fecha:** 12/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 1
+**📆 Fecha:** 12/03/2025
+**👥 Equipo:** G11
 
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -34,9 +34,9 @@
 ---
 
 ### 📌 Índice
-1. 📜 [**Historial de versiones**](#1-historial-de-versiones)  
-2. 🏆 [**Resumen ejecutivo**](#2-resumen-ejecutivo)  
-3. 📂 [**Informes**](#3-informes)  
+1. 📜 [**Historial de versiones**](#1-historial-de-versiones)
+2. 🏆 [**Resumen ejecutivo**](#2-resumen-ejecutivo)
+3. 📂 [**Informes**](#3-informes)
     - [Andrés Martínez Reviriego](#andrés-martínez-reviriego)
     - [Claudio Cortés Carrasco](#claudio-cortés-carrasco)
     - [Daniel Flores de Francisco](#daniel-flores-de-francisco)
@@ -53,17 +53,17 @@
 
 ---
 
-### 📜 1. Historial de versiones  
+### 📜 1. Historial de versiones
 | 📅 Fecha       | 🔢 N° de Versión | 📄 Descripción                   | ✍️ Elaborado por           |
 |-------------|---------------|-------------------------------|-------------------------|
 | 12/03/2025  | v 1.0         | Versión inicial del documento | Sergio Trenado González |
 
 ---
 
-### 🏆 2. Resumen ejecutivo  
+### 🏆 2. Resumen ejecutivo
 
-📌 **Descripción:**  
-📖 Recopilación de los diferentes **informes de uso de IA** 🤖 durante el **Sprint 1** hasta la fecha **12/03/2025**.  
+📌 **Descripción:**
+📖 Recopilación de los diferentes **informes de uso de IA** 🤖 durante el **Sprint 1** hasta la fecha **12/03/2025**.
 
 ---
 
@@ -374,50 +374,50 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ### 👨‍💻 Jorge Gómez de Tovar
 
-#### 1. Información General  
+#### 1. Información General
 
-- **Nombre del programador:** Jorge Gómez de Tovar  
-- **Sprint:** Sprint 1  
-- **Rol en el proyecto:** Desarrollador backend  
+- **Nombre del programador:** Jorge Gómez de Tovar
+- **Sprint:** Sprint 1
+- **Rol en el proyecto:** Desarrollador backend
 
-#### 2. Tipo de Tareas en las que se Utilizó IA  
+#### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (X)  
-- Asesoramiento técnico (X)  
+- Generación de código (X)
+- Asesoramiento técnico (X)
 
-#### 3. Uso de IA en las Tareas  
+#### 3. Uso de IA en las Tareas
 
-Para cada tarea en la que se usó IA, completar la siguiente tabla:  
+Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
-| Tarea | Herramienta utilizada | Descripción del uso de IA |  
-|-------|-----------------------|---------------------------|  
-| Generación de tests para servicios y controladores | ChatGPT | Se ha usado la IA para que genere una primera versión de tests que prueben los servicios y controladores desarrollados durante el sprint. |  
-| Asesoramiento técnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de los servicios, controladores y sus tests correspondientes. |  
+| Tarea | Herramienta utilizada | Descripción del uso de IA |
+|-------|-----------------------|---------------------------|
+| Generación de tests para servicios y controladores | ChatGPT | Se ha usado la IA para que genere una primera versión de tests que prueben los servicios y controladores desarrollados durante el sprint. |
+| Asesoramiento técnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de los servicios, controladores y sus tests correspondientes. |
 
-#### 4. Impacto en Productividad  
+#### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 1-2 horas  
-- **Comparación con trabajo sin IA:** Trabajo más eficaz que sin el uso de la IA.  
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 1-2 horas
+- **Comparación con trabajo sin IA:** Trabajo más eficaz que sin el uso de la IA.
 
-#### 5. Prompts Utilizados  
+#### 5. Prompts Utilizados
 
-Listar los prompts que fueron más efectivos para completar las tareas:  
+Listar los prompts que fueron más efectivos para completar las tareas:
 
-1.  
-   - Dado los controladores y los servicios, crea un test para cada uno teniendo en cuenta su modelo y su serializador.  
-2.  
-   - Dado el controlador, ¿cómo debería hacer las llamadas desde Postman para probar cada una de las URLs que hay en el controlador?  
+1.
+   - Dado los controladores y los servicios, crea un test para cada uno teniendo en cuenta su modelo y su serializador.
+2.
+   - Dado el controlador, ¿cómo debería hacer las llamadas desde Postman para probar cada una de las URLs que hay en el controlador?
 
-#### 6. Problemas Encontrados y Limitaciones  
+#### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** Los tests generados por la IA tenían fallos debido a que el setup que creó no era el correcto para probar los métodos del controlador y, además, incluían algunos casos de prueba incorrectos.  
-- **Limitaciones detectadas en la IA:** La IA no tiene en cuenta todos los casos de prueba.  
-- **Propuestas de mejora en el uso de IA:** Seguir moderando su uso y probar todo el código generado.  
+- **Errores o respuestas incorrectas de la IA:** Los tests generados por la IA tenían fallos debido a que el setup que creó no era el correcto para probar los métodos del controlador y, además, incluían algunos casos de prueba incorrectos.
+- **Limitaciones detectadas en la IA:** La IA no tiene en cuenta todos los casos de prueba.
+- **Propuestas de mejora en el uso de IA:** Seguir moderando su uso y probar todo el código generado.
 
-#### 7. Evaluación General  
+#### 7. Evaluación General
 
-- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí.  
-- **Comentarios adicionales sobre la experiencia con IA:**  
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí.
+- **Comentarios adicionales sobre la experiencia con IA:**
 
 ---
 
@@ -483,7 +483,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 - Refactorización de código (X)
 - Generación de documentación (X)
 - Asesoramiento técnico (X)
-- Otro (especificar): 
+- Otro (especificar):
 
 #### 3. Uso de IA en las Tareas
 
@@ -512,7 +512,7 @@ Poner en marcha el frontend como PWA.
 2. Hazme un resumen ejecutivo para el documento de calendario de gestion de usuarios pilotos
 
 3. cuando yo defino el type en vue.js esto estaria bien aun que no cogiera todos los atributos de la clase HotelOwner pero si los modificables: export type HotelOwner = {
-    id: number; 
+    id: number;
     username: string;
     email: string;
     phone: string;
@@ -524,7 +524,7 @@ Poner en marcha el frontend como PWA.
 
 - **Errores o respuestas incorrectas de la IA:** El error fue mayor parte humano al no ser capaz de escribir prompts que fueran correctamente entendibles por la IA utilizada.
 - **Limitaciones detectadas en la IA:** En algunos momentos proporcionó código incoherente que tuvo que ser corregido.
-- **Propuestas de mejora en el uso de IA:** A nivel personal ser más meticuloso con los prompts seleccionados. 
+- **Propuestas de mejora en el uso de IA:** A nivel personal ser más meticuloso con los prompts seleccionados.
 
 #### 7. Evaluación General
 
@@ -565,15 +565,15 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. 
+1.
 - Pasarle el codigo del servicio, controlador, serializador y modelo para pedirle los tests del servicio y controlador
-2. 
+2.
 - def test_get_total_vacancy_of_room_type_valid(self):
         url = reverse("room-type-total-vacancy", args=[self.room_type.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["total_vacancy"], 2)
-    
+
     Que tengo que poner en url para que funcione bien
 
 #### 6. Problemas Encontrados y Limitaciones
@@ -691,62 +691,62 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 ### 👨‍💻 Yesica Garate Fuentes
 
-#### 1. Información General 
+#### 1. Información General
 
-- **Nombre del programador:** Yesica Leydi Garate Fuentes  
-- **Sprint:** 01  
-- **Rol en el proyecto:** Frontend, Publicidad y Marketing  
+- **Nombre del programador:** Yesica Leydi Garate Fuentes
+- **Sprint:** 01
+- **Rol en el proyecto:** Frontend, Publicidad y Marketing
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (**X**)  
-- Refactorización de código ( )  
-- Generación de documentación (**X**)  
-- Asesoramiento técnico ( )  
-- Otro (especificar): Diseño y resolución de dudas sobre implementación  
+- Generación de código (**X**)
+- Refactorización de código ( )
+- Generación de documentación (**X**)
+- Asesoramiento técnico ( )
+- Otro (especificar): Diseño y resolución de dudas sobre implementación
 
-#### 3. Uso de IA en las Tareas 
+#### 3. Uso de IA en las Tareas
 
-Para cada tarea en la que se usó IA, se completa la siguiente tabla:  
+Para cada tarea en la que se usó IA, se completa la siguiente tabla:
 
-| Tarea | Herramienta utilizada | Descripción del uso de IA |  
-|-----------|--------------------------|------------------------------|  
-| SCREEN: Home Page | ChatGPT | Me ayudó con la programación en Tailwind CSS, resolviendo dudas sobre estilos y cómo aplicarlos correctamente. Me proporcionó fragmentos de código de ejemplo, algunos muy generales que podía reutilizar. |  
-| Mock-Ups Extra | ChatGPT | Me ayudó a comprender cómo generar los mockups para dar al usuario la alternativa correcta. Sugerencias sobre maquetación basadas en casos anteriores y demandas teóricas, especialmente en secciones como el Perfil de Usuario y las Operaciones CRUD de hoteles. |  
-| Presentación (Slides) del Proyecto | ChatGPT | Utilicé IA para estructurar las diapositivas, obtener ideas de contenido y mejorar la claridad del mensaje, asegurando que la información clave estuviera bien organizada y explicada. |  
+| Tarea | Herramienta utilizada | Descripción del uso de IA |
+|-----------|--------------------------|------------------------------|
+| SCREEN: Home Page | ChatGPT | Me ayudó con la programación en Tailwind CSS, resolviendo dudas sobre estilos y cómo aplicarlos correctamente. Me proporcionó fragmentos de código de ejemplo, algunos muy generales que podía reutilizar. |
+| Mock-Ups Extra | ChatGPT | Me ayudó a comprender cómo generar los mockups para dar al usuario la alternativa correcta. Sugerencias sobre maquetación basadas en casos anteriores y demandas teóricas, especialmente en secciones como el Perfil de Usuario y las Operaciones CRUD de hoteles. |
+| Presentación (Slides) del Proyecto | ChatGPT | Utilicé IA para estructurar las diapositivas, obtener ideas de contenido y mejorar la claridad del mensaje, asegurando que la información clave estuviera bien organizada y explicada. |
 
-#### 4. Impacto en Productividad 
+#### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** Aproximadamente 30 horas o más.  
-- **Comparación con trabajo sin IA:**  
-  - Sin IA, la búsqueda de información me habría tomado más tiempo.  
-  - Aunque la IA me ayudó a resolver dudas rápidamente, en algunos casos tuve inseguridad sobre si las respuestas eran realmente correctas.  
+- **Horas estimadas ahorradas en comparación con trabajo manual:** Aproximadamente 30 horas o más.
+- **Comparación con trabajo sin IA:**
+  - Sin IA, la búsqueda de información me habría tomado más tiempo.
+  - Aunque la IA me ayudó a resolver dudas rápidamente, en algunos casos tuve inseguridad sobre si las respuestas eran realmente correctas.
 
-#### 5. Prompts Utilizados  
+#### 5. Prompts Utilizados
 
-Algunos de los prompts más efectivos utilizados:  
+Algunos de los prompts más efectivos utilizados:
 
-1. "¿Cómo puedo mejorar el diseño de una pantalla en Tailwind CSS para que sea más atractiva y responsiva, que etiquetas me ayudan a mejorar el diseño segun el código que te he proporcionado?" 
-2. "¿Cuáles son las mejores prácticas para crear mockups de interfaces de usuario, revisa info sobre UI/UX?"  
+1. "¿Cómo puedo mejorar el diseño de una pantalla en Tailwind CSS para que sea más atractiva y responsiva, que etiquetas me ayudan a mejorar el diseño segun el código que te he proporcionado?"
+2. "¿Cuáles son las mejores prácticas para crear mockups de interfaces de usuario, revisa info sobre UI/UX?"
 3. "Ayúdame a estructurar una presentación para explicar de manera dinamica mi app revisa las buenas practicas que deben aplicarse"
 4. "Podrias hacer una revision acerca de todos los negocios relacionados a mascotas a nivel europeo."
-5. "Que instituciones me pueden ofrecer estadisticas reales acerca de las mascotas? Dame una lista a nivel europeo y americano"  
+5. "Que instituciones me pueden ofrecer estadisticas reales acerca de las mascotas? Dame una lista a nivel europeo y americano"
 
-#### 6. Problemas Encontrados y Limitaciones  
+#### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:**  
-  - En programación, la IA no siempre deduce correctamente lo que necesito; suele ser mecánica en sus respuestas.  
-  - Algunos ejemplos de código generados no eran aplicables directamente y requerían modificaciones.  
-- **Limitaciones detectadas en la IA:**  
-  - No siempre relaciona bien el contexto de preguntas anteriores con nuevas solicitudes.  
-  - Para obtener respuestas más precisas, a veces es necesario proporcionar mucha información detallada.  
-- **Propuestas de mejora en el uso de IA:**  
-  - Ser más específica en los prompts y proporcionar contexto adicional para obtener respuestas más relevantes.  
-  - Complementar el uso de IA con la búsqueda de información en videos o foros con experiencia de otros programadores.  
+- **Errores o respuestas incorrectas de la IA:**
+  - En programación, la IA no siempre deduce correctamente lo que necesito; suele ser mecánica en sus respuestas.
+  - Algunos ejemplos de código generados no eran aplicables directamente y requerían modificaciones.
+- **Limitaciones detectadas en la IA:**
+  - No siempre relaciona bien el contexto de preguntas anteriores con nuevas solicitudes.
+  - Para obtener respuestas más precisas, a veces es necesario proporcionar mucha información detallada.
+- **Propuestas de mejora en el uso de IA:**
+  - Ser más específica en los prompts y proporcionar contexto adicional para obtener respuestas más relevantes.
+  - Complementar el uso de IA con la búsqueda de información en videos o foros con experiencia de otros programadores.
 
-#### 7. Evaluación General  
+#### 7. Evaluación General
 
-- **¿Recomendarías la IA para estas tareas en futuras iteraciones?**  
-  - Depende del caso. Es útil para generar ideas y optimizar tiempos, pero es necesario validar la información obtenida.  
-- **Comentarios adicionales sobre la experiencia con IA:**  
-  - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios.  
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?**
+  - Depende del caso. Es útil para generar ideas y optimizar tiempos, pero es necesario validar la información obtenida.
+- **Comentarios adicionales sobre la experiencia con IA:**
+  - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios.

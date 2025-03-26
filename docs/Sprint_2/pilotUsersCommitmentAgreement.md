@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,7 +7,7 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
 📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
@@ -16,11 +16,11 @@
 
 # 📑 **Acuerdo con Usuarios Piloto - Sprint 2** 🚀
 
-**📅 Entregable:** Sprint 2 
-**📆 Fecha:** 10/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 2
+**📆 Fecha:** 10/03/2025
+**👥 Equipo:** G11
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |

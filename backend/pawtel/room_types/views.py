@@ -20,6 +20,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
+        # RoomTypeService.authorize_action_room_type(request, pk)
         action_name = inspect.currentframe().f_code.co_name
         RoomTypeService.authorize_action_room_type_level_2(request, pk, action_name)
         room_type = RoomTypeService.retrieve_room_type(pk)

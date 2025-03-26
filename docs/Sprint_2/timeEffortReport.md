@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,11 +16,11 @@
 
 # 📑 **Reporte de Tiempo - Sprint 2** 🚀
 
-**📅 Entregable:** Sprint 2  
-**📆 Fecha:** 26/03/2025  
-**👥 Equipo:** G11 
+**📅 Entregable:** Sprint 2
+**📆 Fecha:** 26/03/2025
+**👥 Equipo:** G11
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -35,7 +35,9 @@
 ## Historial de Versiones
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
-| 26/03/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
+| 24/03/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
+| 25/03/2025  | v 1.0         | Parte de Luis | Luis Mellado Díaz |
+
 
 ---
 
@@ -46,7 +48,7 @@
 
 ## Reporte de tiempo de Javier García Sebastián
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 23:37:23
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -70,7 +72,7 @@
 
 ## Reporte de tiempo de Yesica Garate Fuentes
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 51:08:51
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -100,7 +102,7 @@
 
 ## Reporte de tiempo de Sergio Trenado Gonzalez
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 52:58:39
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -135,100 +137,85 @@
 
 ## Reporte de tiempo de Rafael Castillo Cebolla
 
-**Periodo:** 21/02/2025 - 14/03/2025  
-**Total de tiempo trabajado:** 58:12:11
+**Periodo:** 14/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 38:42:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Rutas API | 02:45:00 |
-| Preparar presentación | 01:00:00 |
-| Reunión mitad de sprint 1 backend | 00:47:12 |
-| QA y diseñar backend | 01:25:00 |
-| Clases | 12:00:00 |
-| Diseñando backend y QA | 02:10:00 |
-| Preparar sprint 1 backend | 08:59:32 |
-| Arreglando backend | 02:00:00 |
-| Diseño backend + documentación + QA | 01:30:00 |
-| QA Controladores y diseño | 03:00:00 |
-| UML | 02:20:00 |
-| Preparar entrega Devising a Project | 03:00:00 |
+| QA | 10:21:00 |
+| Refactorizar autenticación en backend  | 06:48:00 |
+| Arreglando problemas varios | 02:06:00  |
+| Booking Hold  | 03:42:00 |
+| Clases | 4:00:00 |
+| Diseñar backend sprint 2 | 07:00:00 |
+| Reunión | 00:45:00 |
+| Planificar sprint 2 backend | 04:00:00 |
 
-![grafico-de-tiempos](graficas/rafa.png)
+![grafico-de-tiempos](graficas/rafael.png)
 ---
 
 ## Reporte de tiempo de Manuel Castillejo Vela
 
-**Periodo:** 21/02/2025 - 14/03/2025  
-**Total de tiempo trabajado:** 25:41:35
+**Periodo:** 12/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 27:44:33
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Queries tanStack y configuración inicial de proyecto | 00:56:58 |
-| Revisión del proyecto y base de conocimiento común | 01:10:12 |
-| Pulir contributing.md | 01:05:10 |
-| Adición de feedback a la base de datos común | 00:17:21 |
-| Informe de IA | 00:29:47 |
-| KBReport | 00:58:44 |
-| Formación sobre TypeScript y TanStack | 00:22:02 |
-| Clase | 08:00:00 |
-| Queries tanStack | 04:35:09 |
-| Gestión de usuarios pilotos | 02:39:48 |
-| Screen Login and Register | 05:06:24 |
+| Description                                                   | Time (h)  |
+|---------------------------------------------------------------|-----------|
+| #181 Feature: Hotel owner queries Tan Stack                 | 00:22:00  |
+| Mensajes CRUD creación hoteles                              | 00:54:36  |
+| KBReport                                                    | 00:51:33  |
+| #158 Feature: Validación de formularios con librerías.     | 07:07:27  |
+| Clase                                                       | 08:00:00  |
+| #205 Feature: Actualizar queries de Tan Stack con nuevas URLs | 03:29:51  |
+| #225 Feature: Mejorar funcionalidad Hotel Details          | 00:54:08  |
+| Añadir mensajes de error al frontend y botones de login y register | 03:17:15  |
+| Informe de IA                                              | 00:26:50  |
+| Adición de feedback a la base de datos común               | 02:06:45  |
+| Calendario de usuarios pilotos sprint 2                    | 00:14:08  |
+
 
 ![grafico-de-tiempos](graficas/manuel.png)
 ---
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 21/02/2025 - 14/03/2025  
-**Total de tiempo trabajado:** 38:26:28
+**Periodo:** 12/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 33:15:40
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Medidas tras Reunión | 00:30:00 |
-| Dirección Tras Seguimiento 1 | 01:25:54 |
-| Clase 7/3 | 07:00:00 |
-| QA KBreport | 00:22:00 |
-| QA presentación | 00:36:12 |
-| Panel CRUD de hoteles | 02:40:07 |
-| Individual Performance | 00:59:24 |
-| Informes de progreso | 00:15:00 |
-| Informe de métricas y rendimiento | 01:04:01 |
-| Preparación Reunión 03/03/2025 | 00:46:15 |
-| Seeders | 01:10:00 |
-| Crear Componentes Globales | 05:29:45 |
-| Plantilla Acta Reunión | 00:31:20 |
-| QA User profile screen and merge conflicts | 01:37:05 |
-| QA Métricas y Rendimiento | 00:19:52 |
-| Reunión 09/03/25 | 00:30:00 |
-| Organización Presentación 07/03/2025 | 00:45:56 |
-| UML Diagram | 01:29:22 |
-| Métricas equipo de dirección | 00:22:08 |
-| Clonado y setup del repositorio | 01:36:36 |
-| QA User profile screen | 01:51:25 |
-| Commitment Agreement | 00:15:00 |
-| Reporte de Progreso 10/03/2025 | 00:11:26 |
-| Revisar Presentación | 00:25:48 |
-| Reunión Seguimiento Sprint 1 | 01:01:08 |
-| Nueva plantilla Informe de IA | 00:22:38 |
-| Registro de Incidencias | 01:05:27 |
-| QA Encuesta Usuarios Piloto | 00:20:00 |
-| Informe IA | 00:25:03 |
-| Organización Sprint 1 | 01:10:00 |
-| Organizar la documentación, pasar a md | 01:47:36 |
+| Descripción                         | Duración  |
+|-------------------------------------|----------|
+| Seeders                             | 02:30:00 |
+| Gestión de Hoteles                  | 05:20:03 |
+| CRUD de Hoteles                     | 01:30:00 |
+| QA frontend - mis reservas          | 01:27:04 |
+| QA frontend - user profile          | 02:12:52 |
+| Metricas equipo de dirección        | 00:22:08 |
+| Clase 15/3                          | 04:00:00 |
+| Refactor hotel list                 | 03:24:14 |
+| Individual Performance              | 00:59:24 |
+| Inicio Sprint 2                     | 02:16:38 |
+| Refactoring Login and Register      | 02:54:42 |
+| Reunión 23/03                       | 01:00:38 |
+| Reunión 16/03                       | 01:20:00 |
+| Reporte IA                          | 00:47:00 |
+| Reporte Tiempo                      | 00:30:57 |
+| Revisión PRs                        | 02:00:00 |
 
-![grafico-de-tiempos](graficas/luis.png)
+
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/bb402c05-8be5-4672-8374-9e90bd0c796c" />
+
 ---
 
 ## Reporte de tiempo de Jorge Gomez de Tovar
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 20:20:00
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -245,29 +232,42 @@
 
 ## Reporte de tiempo de Javier Ruiz Garrido
 
-**Periodo:** 21/02/2025 - 14/03/2025  
-**Total de tiempo trabajado:** 46:59:07
+**Periodo:** 12/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 29:52:11
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Reunión mitad de sprint 1 backend | 00:38:41 |
-| Backend: Servicios y controladores RoomType y Room | 09:52:40 |
-| Devising a Project | 24:34:00 |
-| Documentación: Informe uso de IA | 00:24:10 |
-| Backend: Test de los serializadores | 04:38:37 |
-| Backend: Llamadas API Room y RoomType | 02:00:00 |
-| Documentación: Commitment Agreement de usuarios piloto | 00:50:59 |
-| Clase | 04:00:00 |
+| Logica de archivado y borrado | 00:35:40 |
+| Logica de archivado y borrado | 02:37:18 |
+| Rehacer filtros de hoteles y rooms | 00:31:44 |
+| Logica de archivado y borrado | 01:40:52 |
+| Rehacer filtros de hoteles y rooms | 01:12:49 |
+| Rehacer filtros de hoteles y rooms | 00:45:51 |
+| Rehacer filtros de hoteles y rooms | 01:17:04 |
+| Rehacer filtros de hoteles y rooms | 00:54:30 |
+| clase | 04:00:00 |
+| Rehacer filtros de hoteles y rooms | 01:53:22 |
+| Rehacer filtros de hoteles y rooms | 00:47:26 |
+| Rehacer filtros de hoteles y rooms | 00:23:27 |
+| clase | 04:00:00 |
+| review pr | 00:28:29 |
+| fix migrations | 00:36:10 |
+| BookingHold seeder | 01:16:21 |
+| Refactorizacion variada backend | 01:17:16 |
+| Refactorizacion variada backend | 02:07:58 |
+| Refactorizacion variada backend | 03:02:39 |
+| Revision Pull Request | 00:17:34 |
+| clase | 04:00:00 |
 
-![grafico-de-tiempos](graficas/javi_ruiz.png)
 
+![grafico-de-tiempos](graficas/javier_ruiz.png)
 ---
 
 ## Reporte de tiempo de Francisco Miguel Jimenez Morales
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 48:11:30
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -292,7 +292,7 @@
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 24:30:27
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -312,7 +312,7 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 32:59:06
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -347,7 +347,7 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 21/02/2025 - 14/03/2025  
+**Periodo:** 21/02/2025 - 14/03/2025
 **Total de tiempo trabajado:** 33:18:26
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -377,53 +377,53 @@
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
 
-**Periodo:** 21/02/2025 - 14/03/2025  
-**Total de tiempo trabajado:** 30:35:55
+**Periodo:** 14/03/2025 - 25/03/2025
+**Total de tiempo trabajado:** 28:45:50
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Clases | 08:00:00 |
-| Presentación diapositivas y guión | 00:35:34 |
-| Fix: corrección de feedback crear entidades y serializadores | 01:56:00 |
-| Guión Presentación | 00:34:00 |
-| Feedback Informes IA | 00:24:00 |
-| Revisión de calidad en test de serializadores y modificaciones de entidades | 00:55:00 |
-| Fix: aplicar feedback en modelos, serializadores y tests | 01:35:00 |
-| Aprendizaje Django | 01:42:00 |
-| Ayuda UML | 01:03:00 |
-| Diapositivas Presentación | 02:14:41 |
-| Lectura documentos | 00:33:00 |
-| Feature: crear entidades y serializadores | 04:09:00 |
-| Reporte de IA | 00:25:00 |
-| Presentación | 00:48:33 |
-| Feedback presentación | 00:26:00 |
-| Reunión Backend | 00:40:43 |
-| Presentación | 01:30:14 |
-| Presentación semana 4 | 01:17:00 |
-| Aplicar feedback a las diapositivas | 01:47:10 |
+| Clases | 06:00:00 |
+| Feature: Creación bookings | 05:02:39 |
+| Fix: arreglar bookings | 00:23:00 |
+| fix: arreglar tests bookings | 00:49:00 |
+| feat: crear metodos de getAllBokings por customer y hotel mas sus tests | 03:15:00 |
+| feat: crear room_type_is_available method and tests | 02:29:00 |
+| feat: crear metodos para obtener bookings por hotel y por customer. | 04:17:00 |
+| task: revisar documentación Api automática | 02:23:00 |
+| revisar frontend | 01:02:00 |
+| feat: añadir atributo is_approved a hotel_owner | 01:49:11 |
+| presentación diapositivas | 00:41:00 |
+| Reporte de IA y de tiempo| 00:35:00 |
 
 ![grafico-de-tiempos](graficas/claudio.png)
 ---
 
 ## Reporte de tiempo de Andres Martinez Revriego
 
-**Periodo:** 21/02/2025 - 14/03/2025  
-**Total de tiempo trabajado:** 14:21:36
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 37:38:54
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Informe de Tiempo | 00:05:00 |
-| Informe de IA | 00:28:00 |
-| Informe de IA actualizado | 00:17:00 |
-| Tarea: Autenticación básica (frontend) | 07:05:53 |
-| Formación de TypeScript, TanStack y PWA | 00:59:16 |
-| Tarea: Autenticación básica (backend) | 02:26:15 |
-| Lectura Documentación | 00:39:26 |
+| Informe IA y tiempo | 00:04:55 |
+| Evidencias términos y condiciones | 01:54:40 |
+| Presentación | 04:11:09 |
+| Informe de IA | 00:14:00 |
+| Asistencia a clase | 04:00:00 |
+| Reestablecimiento de contraseña | 05:20:55 |
+| Customer | 04:36:19 |
+| Asistencia a clase | 04:00:00 |
+| Revisión código filtros | 01:06:48 |
+| Ayuda con revisión.md | 00:24:29 |
+| Filtros | 04:11:56 |
+| Editar hoteles | 02:17:56 |
+| Reunión de emergencia | 00:47:27 |
+| Editar hoteles | 01:50:34 |
 | Filtro de búsqueda | 02:20:46 |
+| Informe de IA actualizado | 00:17:00 |
 
-![grafico-de-tiempos](graficas/andres.png)
-
+![grafico-de-tiempos](graficas/andres2.png)

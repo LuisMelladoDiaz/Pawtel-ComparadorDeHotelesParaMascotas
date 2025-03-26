@@ -1,20 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import HotelDetailsView from './views/HotelDetailView.vue';
-import TemplateScreen from './views/TemplateScreen.vue'
 import UserProfile from './views/UserProfile.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
-import HotelOwnerPanel from './views/HotelOwnerPanel.vue'
+import MisHoteles from './views/MisHoteles.vue'
+import MyBookings from './views/MyBookings.vue'
+import EditHotel from './views/EditHotel.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
 import { h, type Component} from 'vue';
 import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
+import LayoutDefaultWhite from './views/LayoutDefaultWhite.vue';
 import { type RouteRecordRaw } from 'vue-router';
-import { useRoleQuery } from './data-layer/auth';
 import axios from 'axios';
 
 type ComponentLike = Component | (() => Promise<Component>);
@@ -88,6 +89,7 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
     return newRoute;
   });
 }
+import BookingReservationForm from './views/BookingReservationForm.vue';
 
 
 const routes = [
@@ -122,7 +124,7 @@ const routes = [
   {
     path: '/hotel/:id',
     name: 'HotelDetail',
-    component: createComponent({ layout: LayoutWithFilter, component: HotelDetailsView }),
+    component: createComponent({ layout: LayoutDefaultWhite, component: HotelDetailsView }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
@@ -150,16 +152,30 @@ const routes = [
   },
   {
     path: '/mis-reservas',
-    component: createComponent({ layout: LayoutDefault, component: TemplateScreen }),
+    component: createComponent({ layout: LayoutDefault, component: MyBookings }),
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_CUSTOMER],
     },
   },
   {
     path: '/mis-hoteles',
-    component: createComponent({ layout: LayoutDefault, component: HotelOwnerPanel }),
+    component: createComponent({ layout: LayoutDefault, component: MisHoteles }),
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+    },
+  },
+  {
+    path: '/mis-hoteles/edit/:id',
+    component: createComponent({ layout: LayoutDefault, component: EditHotel }),
+    meta: {
+      allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+    },
+  },
+  {
+    path: '/hotel/reservation-form/:id',
+    component: createComponent({ layout: LayoutDefault, component: BookingReservationForm }),
+    meta: {
+      allowedAuthStates: ALLOW_LOGGED_IN,
     },
   },
 ];

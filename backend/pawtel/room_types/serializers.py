@@ -21,6 +21,7 @@ class RoomTypeSerializer(BaseSerializer):
         "capacity",
         "num_rooms",
         "price_per_night",
+        "pet_type",
     ]
     fields_not_readable = []
 

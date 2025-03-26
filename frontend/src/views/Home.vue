@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import Navbar from '../components/NavBar.vue';
 import Footer from '../components/Footer.vue';
 import FilterNavbar from '../components/FilterNavBar.vue';
@@ -7,6 +8,14 @@ import Button from '../components/Button.vue';
 import { useIsLoggedIn } from '@/data-layer/auth';
 
 const { data: isLoggedIn } = useIsLoggedIn();
+
+const cities = ref([
+  "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
+  "Palma de Mallorca", "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+  "Valladolid", "Vigo", "Gijón"
+].sort());
+
+const petTypes = ["DOG", "CAT", "BIRD", "MIXED"].sort();
 </script>
 
 <template>
@@ -21,24 +30,34 @@ const { data: isLoggedIn } = useIsLoggedIn();
             <span class="italic" style="color: var(--color-terracota);">mascota.</span>
           </h1>
           <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
-          
+
           <router-link to="/register" v-if="!isLoggedIn">
             <Button type="reject" class="m-0!">Crear cuenta</Button>
           </router-link>
 
           <p class="text-sm text-gray-600 mt-4" v-if="!isLoggedIn">
-            ¿Ya tienes una cuenta? 
+            ¿Ya tienes una cuenta?
             <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
           </p>
         </div>
-        
+
         <div class="lg:w-1/2">
           <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">
         </div>
       </div>
 
       <div class="max-w-7xl mx-auto bg-white p-2 rounded-lg shadow-lg mt-6">
-        <FilterNavbar />
+        <FilterNavbar 
+        :cities="cities"
+        :petTypes="petTypes"
+        :selectedCity="selectedCity"
+        :selectedPetType="selectedPetType"
+        :startDate="startDate"
+        :endDate="endDate"
+        @update:city="selectedCity = $event"
+        @update:petType="selectedPetType = $event"
+        @update:startDate="startDate = $event"
+        @update:endDate="endDate = $event"/>
       </div>
     </section>
 

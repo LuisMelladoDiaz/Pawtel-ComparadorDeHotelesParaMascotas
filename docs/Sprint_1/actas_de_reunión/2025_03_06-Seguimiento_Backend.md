@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -16,12 +16,12 @@
 
 # 📑 **Acta de Reunión - Seguimiento Sprint 1 Backend** 🚀
 
-**Fecha:** 06/03/2025  
-**Hora:** 16:00 - 16:45  
-**Equipo:** G11  
-**Lugar:** Google Meets  
-**Duración:** 45 minutos  
-**Moderadores:** Rafael Castillo Cebolla  
+**Fecha:** 06/03/2025
+**Hora:** 16:00 - 16:45
+**Equipo:** G11
+**Lugar:** Google Meets
+**Duración:** 45 minutos
+**Moderadores:** Rafael Castillo Cebolla
 **Entregable:** Sprint 1
 
 ---

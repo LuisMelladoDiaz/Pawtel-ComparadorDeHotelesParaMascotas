@@ -99,7 +99,7 @@ class PermissionService:
             "destroy_image",
             "get_cover_image",
             "get_non_cover_images",
-            "set_image_as_cover",
+            "set_image_is_cover",
         },
         UserRole.ADMIN.value: {
             "list",

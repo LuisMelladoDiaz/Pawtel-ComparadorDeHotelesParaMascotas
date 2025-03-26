@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -17,13 +17,13 @@
 
 # 📑 **Feedback Semanal - ISPP** 🚀
 
-**📅 Versión::** 1.0  
-**📅 Entregable:** Sprint 1  
-**📆 Fecha:** 08/03/2025 
-**👥 Equipo:** G11 
+**📅 Versión::** 1.0
+**📅 Entregable:** Sprint 1
+**📆 Fecha:** 08/03/2025
+**👥 Equipo:** G11
 
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -36,14 +36,14 @@
 
 ---
 
-## Índice  
-1. [Control de versiones](#control-de-versiones)  
-2. [Resumen Ejecutivo](#resumen-ejecutivo)  
-3. [Desarrollo](#desarrollo)   
+## Índice
+1. [Control de versiones](#control-de-versiones)
+2. [Resumen Ejecutivo](#resumen-ejecutivo)
+3. [Desarrollo](#desarrollo)
 
 ---
 
-## **Control de versiones**  
+## **Control de versiones**
 
 | Versión | Fecha       | Autor    | Descripción de cambios |
 |---------|------------|----------|------------------------|
@@ -54,7 +54,7 @@
 
 ## **Resumen ejecutivo**
 
-Este documento tiene como objetivo recopilar el feedback proporcionado por los profesores durante las presentaciones semanales de los grupos en la asignatura de Ingeniería del Software y Práctica Profesional (ISPP).  
+Este documento tiene como objetivo recopilar el feedback proporcionado por los profesores durante las presentaciones semanales de los grupos en la asignatura de Ingeniería del Software y Práctica Profesional (ISPP).
 Es importante registrar los comentarios clave, observaciones adicionales y las tareas pendientes para mejorar nuestro proyecto.
 
 
@@ -76,7 +76,7 @@ Es importante registrar los comentarios clave, observaciones adicionales y las t
 
 
 <br>
-                                                
+
 ## Para hacer pero no necesariamente para la presentación
 - Métricas cuantitativas para seguir el rendimiento. Sacar números para saber cómo van las cosas. De GitHub por ejemplo. Cuidado con las normas basadas en estas métricas, por si la gente infla el número de commits con tonterías.
 

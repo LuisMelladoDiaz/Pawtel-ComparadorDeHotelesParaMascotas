@@ -7,7 +7,8 @@ from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.hotels.models import Hotel, HotelImage
-from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
+from pawtel.hotels.serializers import (HotelImageSerializer, HotelSerializer,
+                                       SetImageAsCoverSerializer)
 from pawtel.permission_services import PermissionService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.services import RoomTypeService
@@ -304,6 +305,13 @@ class HotelService:
     def serialize_output_hotel_image(hotel_image, many=False, context=None):
         return HotelImageSerializer(hotel_image, many=many, context=context).data
 
+    @staticmethod
+    def serialize_input_set_image_is_cover(request):
+        context = {"request": request}
+        data = request.data.copy()
+        serializer = SetImageAsCoverSerializer(data=data, context=context)
+        return serializer
+
     # Validation -------------------------------------------------------------
 
     def validate_upload_image(input_serializer, hotel_id):
@@ -323,9 +331,9 @@ class HotelService:
         HotelService.retrieve_image_from_hotel(hotel_id, image_id)
 
     @staticmethod
-    def validate_set_image_as_cover(hotel_id, image_id):
-        ##! Should better go in an authorize
-        HotelService.retrieve_image_from_hotel(hotel_id, image_id)
+    def validate_set_image_is_cover(input_serializer):
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
 
     # GET --------------------------------------------------------------------
 
@@ -387,8 +395,6 @@ class HotelService:
         current_image_count = hotel.images.count()
 
         hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        if current_image_count == 1:
-            input_serializer.validated_data["is_cover"] = True
 
         if input_serializer.validated_data.get("is_cover", False):
             current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
@@ -399,15 +405,24 @@ class HotelService:
         return input_serializer.update(hotel_image, input_serializer.validated_data)
 
     @staticmethod
-    def set_image_as_cover(hotel_id, image_id):
+    def set_image_is_cover(input_serializer, hotel_id, image_id):
+        hotel = HotelService.retrieve_hotel(hotel_id)
         hotel_image = HotelService.retrieve_image_from_hotel(hotel_id, image_id)
-        current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
-        if current_cover_image:
-            current_cover_image.is_cover = False
-            current_cover_image.save()
+        if input_serializer.validated_data.get("is_cover"):
+            current_cover_image = HotelService.retrieve_current_cover_image(hotel_id)
+            if current_cover_image and current_cover_image.id != image_id:
+                current_cover_image.is_cover = False
+                current_cover_image.save()
 
-        hotel_image.is_cover = True
-        hotel_image.save()
+            if not hotel_image.is_cover:
+                hotel_image.is_cover = True
+                hotel_image.save()
+
+        else:
+            current_image_count = hotel.images.count()
+            if current_image_count <= 5 and hotel_image.is_cover:
+                hotel_image.is_cover = False
+                hotel_image.save()
 
         return hotel_image
 
