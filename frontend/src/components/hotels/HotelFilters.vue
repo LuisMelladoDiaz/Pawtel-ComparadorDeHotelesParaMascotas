@@ -1,6 +1,7 @@
 <script setup>
 import { computed, watch, onMounted } from 'vue';
 import PriceRange from '@/components/hotels/PriceRange.vue';
+import DatePicker from '@/components/DatePicker.vue';
 
 const props = defineProps({
   cities: {
@@ -79,31 +80,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="list-filters-container flex-col max-w-70 h-fit border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5">
+  <div class="list-filters-container flex-col  h-fit w-fit max-w-[355px] border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5 text-pawtel-black font-complementario">
     <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60 py-2">Filtrar por:</h2>
 
     <!-- Selectores de fecha -->
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <label class="block font-semibold">Fecha inicio</label>
-        <input
-          type="date"
-          :value="startDate"
-          @input="emit('update:startDate', $event.target.value)"
-          :min="new Date().toISOString().split('T')[0]"
-          class="border rounded p-2 mt-1 w-full"
-        >
-      </div>
-      <div>
-        <label class="block font-semibold">Fecha fin</label>
-        <input
-          type="date"
-          :value="endDate"
-          @input="emit('update:endDate', $event.target.value)"
-          :min="startDate"
-          class="border rounded p-2 mt-1 w-full"
-        >
-      </div>
+    <div class="mt-0">
+      <label class="font-semibold">Rango de fechas:</label>
+      <DatePicker
+        class="bg-white border rounded mt-1 min-w-[200px]!"
+        :startDate="startDate"
+        :endDate="endDate"
+        @update:startDate="emit('update:startDate', $event)"
+        @update:endDate="emit('update:endDate', $event)"
+      />
     </div>
 
     <!-- Filtro ciudad -->
@@ -112,7 +101,7 @@ onMounted(() => {
       <select 
         :value="selectedCity" 
         @change="emit('update:city', $event.target.value)"
-        class="border rounded p-2 mt-1 w-full"
+        class="border rounded p-2 mt-1 w-full text-[18px]"
       >
         <option value="">Todas</option>
         <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
@@ -120,13 +109,12 @@ onMounted(() => {
     </div>
 
     <!-- Filtro tipo de mascota -->
-    <!-- Filtro tipo de mascota -->
     <div class="mt-5">
       <label class="font-semibold">Animal:</label>
       <select 
         :value="selectedPetType" 
         @change="emit('update:petType', $event.target.value)"
-        class="border rounded p-2 mt-1 w-full"
+        class="border rounded p-2 mt-1 w-full text-[18px]"
       >
         <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">
           {{ pet }}
