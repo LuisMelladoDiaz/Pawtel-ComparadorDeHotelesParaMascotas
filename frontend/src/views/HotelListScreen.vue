@@ -140,24 +140,17 @@ const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAl
 });
 
 // Computed
-const hotels = computed(() => apiHotels.value?.map((hotel) => {
-  const { 
-    id, image, name, address, city, description, 
-    most_expensive_price, cheapest_price, reviews 
-  } = hotel;
-
-  return {
-    id,
-    image: image || defaultImages[id % defaultImages.length],
-    name: name ?? 'Nombre',
-    address: address ?? 'Dirección',
-    city: city ?? 'Ciudad',
-    description: description ?? 'Descripción',
-    price_max: most_expensive_price ?? '0',
-    price_min: cheapest_price ?? '0',
-    reviews: reviews ?? [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
-  };
-}) || []);
+const hotels = computed(() => apiHotels.value?.map((hotel) => ({
+  id: hotel.id,
+  image: hotel.image || defaultImages[hotel.id % defaultImages.length],
+  name: hotel.name ?? 'Nombre',
+  address: hotel.address ?? 'Dirección',
+  city: hotel.city ?? 'Ciudad',
+  description: hotel.description ?? 'Descripción',
+  price_max: hotel.most_expensive_price ?? '0',
+  price_min: hotel.cheapest_price ?? '0',
+  reviews: hotel.reviews?.length ? hotel.reviews : [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
+})) || []);
 </script>
 
 <template>
