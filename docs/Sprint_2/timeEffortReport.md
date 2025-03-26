@@ -37,6 +37,7 @@
 |-------------|---------------|---------------------------|-------------------------|
 | 24/03/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
 | 25/03/2025  | v 1.0         | Parte de Luis | Luis Mellado Díaz |
+| 26/03/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
 
 
 ---
@@ -301,20 +302,28 @@
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 24:30:27
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 28:14:33
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
 | Documentación (Feedback), Reporte IA | 01:22:29 |
-| Issues y Aprendizaje VUE | 01:03:37 |
-| Frontend | 16:07:10 |
+| Frontend | 02:40:09 |
+| revision.md | 01:38:19 |
+| Reunión | 00:44:27 |
 | Clase | 04:00:00 |
-| Aprendizaje VUE | 01:01:21 |
-| Feedback | 00:38:42 |
-| Documentación (Feedback) | 00:17:08 |
+| Documentación (Feedback) | 01:24:51 |
+| Frontend | 02:02:02 |
+| Frontend | 02:10:12 |
+| Frontend | 00:20:50 |
+| Clase | 04:00:00 |
+| Documentación (Feedback) | 01:01:27 |
+| Frontend | 01:17:17 |
+| Frontend | 00:17:59 |
+| Frontend | 02:23:00 |
+| Frontend, Informe IA | 02:51:31 |
 
 ![grafico-de-tiempos](graficas/fernando.png)
 ---
