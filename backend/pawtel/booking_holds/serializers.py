@@ -40,26 +40,38 @@ class BookingHoldSerializer(BaseSerializer):
 
     # Added here because they are syntactic validations
     def validate(self, data):
-        if data.get("hold_expires_at") and data["hold_expires_at"] < now():
-            raise serializers.ValidationError(
-                {"hold_expires_at": "Hold expiration date cannot be in the past."}
+        hold_expires_at = data.get("hold_expires_at")
+        booking_start_date = data.get("booking_start_date")
+        booking_end_date = data.get("booking_end_date")
+
+        errors = {}
+
+        if hold_expires_at and hold_expires_at < now():
+            errors.setdefault("hold_expires_at", []).append(
+                "Hold expiration date cannot be in the past."
             )
 
-        if data.get("booking_start_date") <= date.today():
-            raise serializers.ValidationError(
-                {"booking_start_date": "Booking start date must be in the future."}
+        if booking_start_date <= date.today():
+            errors.setdefault("booking_start_date", []).append(
+                "Booking start date must be in the future."
             )
 
-        if data.get("booking_end_date") <= date.today():
-            raise serializers.ValidationError(
-                {"booking_end_date": "Booking end date must be in the future."}
+        if booking_end_date <= date.today():
+            errors.setdefault("booking_end_date", []).append(
+                "Booking end date must be in the future."
             )
 
-        if data.get("booking_end_date") < data.get("booking_start_date"):
-            raise serializers.ValidationError(
-                {
-                    "end_date": "Booking end date cannot be earlier than booking start date."
-                }
+        if booking_end_date < booking_start_date:
+            errors.setdefault("booking_end_date", []).append(
+                "Booking end date cannot be earlier than booking start date."
             )
+
+        if (booking_end_date - booking_start_date).days >= 186:
+            errors.setdefault("booking_end_date", []).append(
+                "The booking duration cannot exceed 6 months (186 days)."
+            )
+
+        if errors:
+            raise serializers.ValidationError(errors)
 
         return data
