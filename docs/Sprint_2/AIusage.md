@@ -62,7 +62,7 @@
 | 25/03/2025  | v 1.2         | Parte de Luis | Luis Mellado Díaz |
 | 26/03/2025  | v 1.3         | Parte de Fernando | Fernando Castelló Sánchez |
 | 26/03/2025  | v 1.4         | Parte de Javi G | Javier García Sebastián |
-
+| 26/03/2025  | v 1.5         | Parte de David | David González Martínez |
 
 ---
 
@@ -329,14 +329,14 @@ Ninguno
 
 #### 1. Información General
 
-- **Nombre del programador:** Claudio Cortés Carrasco
-- **Sprint:** Sprint1
-- **Rol en el proyecto:** Programador backend, documentación
+- **Nombre del programador:** David González Martínez
+- **Sprint:** Sprint 2
+- **Rol en el proyecto:** Programador full-stack, Jefe de equipo full-stack, Devops
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
 - Generación de código (x)
-- Refactorización de código ( )
+- Refactorización de código (x)
 - Generación de documentación ( )
 - Asesoramiento técnico (x)
 
@@ -346,25 +346,25 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Mejora de tests |    ChatGPT | Recibiendo el código de las distintas entidades y los respectivos test básicos se pidío que se mejorasen para que abarcasen todas las posibilidades. |
-| Ayuda para generar gráficos |                ChatGPT | Se usó para saber como generar unos gráficos de barras desde el powerpoint para añadirlo a la presentación semanal. |
-
+| Generación de código nuevo o mejora |    ChatGPT | Se ha utilizado para crear primeras versiones de componentes lógicos del sistema; por ejemplo, la creación de componentes de UI. También para mejorar lo existente.|
+| Autocompletado de código|    Copilot | Autocompletado de código. |
+| Asesoramiento sobre bugs |    ChatGPT  | Se ha utilizado para guiar al programador en la resolución de bugs. |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 3
-- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para mejorar y ampliar los tests me ahorró mucho tiempo
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Comparación con trabajo sin IA:** Pilló un par de bugs difíciles. Rápida para prototipar en relación a hacerlo manualmente.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Dados los siguientes archivos de tests y sus entidades asociadas, mejoralos para que abarquen el 100% de los casos posibles tanto en casos positivos como negativos.
-2. Podrias ayudarme a generar un gráfico de barras desde una presentación de powerpoint.
+1. <código> \n Ocurre <bug>. Dime que puede ser.
+2. Mejora la interfaz de esta pantalla.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos.
+- **Limitaciones detectadas en la IA:** Se pega patinadas a veces.
 
 
 #### 7. Evaluación General
