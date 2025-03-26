@@ -89,6 +89,8 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
     return newRoute;
   });
 }
+import ClientNotLoggedIn from './views/ClientNotLoggedIn.vue';
+import BookingReservationForm from './views/BookingReservationForm.vue';
 
 
 const routes = [
@@ -169,6 +171,15 @@ const routes = [
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
     },
+  },
+  // TODO check new routes AuthRequiment
+  {
+    path: '/needed-login',
+    component: ClientNotLoggedIn
+  },
+  {
+    path: '/hotel/reservation-form/:id',
+    component: BookingReservationForm
   },
 ];
 
