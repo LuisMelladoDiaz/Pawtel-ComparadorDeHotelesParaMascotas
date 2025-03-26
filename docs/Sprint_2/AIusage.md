@@ -456,8 +456,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 1. ¿Cómo puedo editar un componente de selección de rango de fechas en Vue con Flatpickr para que limite el rango a 6 meses desde la fecha de inicio y resetee correctamente esa restricción al limpiar la selección?
 2. ¿Cómo puedo sincronizar correctamente la selección de ciudad, tipo de mascota y rango de fechas desde una navbar en Vue, asegurando que al borrar uno de los campos no se reseteen los demás?
-3. ¿Cómo puedo posicionar correctamente un ícono dentro de un elemento <select> en Vue sin que afecte el alineamiento del texto y sin consumir espacio del contenido?
-
+3. ¿Cómo puedo posicionar correctamente un ícono dentro de un elemento select en Vue sin que afecte el alineamiento del texto y sin consumir espacio del contenido?
 
 #### 6. Problemas Encontrados y Limitaciones
 
