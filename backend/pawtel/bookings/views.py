@@ -33,7 +33,7 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         BookingService.authorize_create_booking(request)
-        input_serializer = BookingService.serialize_input_booking_create(request.data)
+        input_serializer = BookingService.serialize_input_booking_create(request)
         BookingService.validate_create_booking(request, input_serializer)
         response = BookingService.create_booking(input_serializer)
         return response

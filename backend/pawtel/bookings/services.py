@@ -1,11 +1,12 @@
 import json
 import os
+from datetime import datetime
 
 import stripe
+from django.conf import settings
 from django.db import transaction
 from django.forms import ValidationError
 from django.http import HttpResponse, JsonResponse
-from dotenv import load_dotenv
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
@@ -17,9 +18,8 @@ from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.response import Response
 
-load_dotenv()
-stripe.api_key = str(os.getenv("STRIPE_SECRET_KEY"))
-secret_endpoint = str(os.getenv("STRIPE_SECRET_ENDPOINT"))
+stripe.api_key = settings.STRIPE_SECRET_KEY
+secret_endpoint = settings.STRIPE_SECRET_ENDPOINT
 
 
 class BookingService:
@@ -102,14 +102,19 @@ class BookingService:
         from pawtel.room_types.services import RoomTypeService
 
         context = {"request": request}
-        print(request.user)
         current_customer_id = CustomerService.get_current_customer(request).id
         data = request.data.copy()
         data["customer"] = current_customer_id
         room_type_price = RoomTypeService.retrieve_room_type(
             data["room_type"]
         ).price_per_night
-        total_price = room_type_price * (data["end_date"] - data["start_date"]).days
+        total_price = (
+            room_type_price
+            * (
+                datetime.strptime(data["end_date"], "%Y-%m-%d").date()
+                - datetime.strptime(data["start_date"], "%Y-%m-%d").date()
+            ).days
+        )
         data["total_price"] = total_price
         return BookingSerializer(data=data, context=context)
 
