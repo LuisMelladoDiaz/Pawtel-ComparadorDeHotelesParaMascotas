@@ -30,7 +30,6 @@
 | Manuel Castillejo Vela | Rafael Castillo Cebolla |
 | Claudio Cortés Carrasco | Sergio Trenado González |
 | Yesica Garate Fuentes | David González Martínez |
-| Andrés Martínez Reviriego
 
 ---
 
