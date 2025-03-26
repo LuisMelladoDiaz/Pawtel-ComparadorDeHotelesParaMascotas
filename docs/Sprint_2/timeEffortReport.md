@@ -402,20 +402,28 @@
 
 ## Reporte de tiempo de Andres Martinez Revriego
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 14:21:36
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 37:38:54
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Informe de Tiempo | 00:05:00 |
-| Informe de IA | 00:28:00 |
-| Informe de IA actualizado | 00:17:00 |
-| Tarea: Autenticación básica (frontend) | 07:05:53 |
-| Formación de TypeScript, TanStack y PWA | 00:59:16 |
-| Tarea: Autenticación básica (backend) | 02:26:15 |
-| Lectura Documentación | 00:39:26 |
+| Informe IA y tiempo | 00:04:55 |
+| Evidencias términos y condiciones | 01:54:40 |
+| Presentación | 04:11:09 |
+| Informe de IA | 00:14:00 |
+| Asistencia a clase | 04:00:00 |
+| Reestablecimiento de contraseña | 05:20:55 |
+| Customer | 04:36:19 |
+| Asistencia a clase | 04:00:00 |
+| Revisión código filtros | 01:06:48 |
+| Ayuda con revisión.md | 00:24:29 |
+| Filtros | 04:11:56 |
+| Editar hoteles | 02:17:56 |
+| Reunión de emergencia | 00:47:27 |
+| Editar hoteles | 01:50:34 |
 | Filtro de búsqueda | 02:20:46 |
+| Informe de IA actualizado | 00:17:00 |
 
-![grafico-de-tiempos](graficas/andres.png)
+![grafico-de-tiempos](graficas/andres2.png)
