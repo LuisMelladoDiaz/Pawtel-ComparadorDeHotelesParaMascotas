@@ -428,7 +428,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Sergio Trenado González
-- **Sprint:** Sprint 1
+- **Sprint:** Sprint 2
 - **Rol en el proyecto:** Líder de Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -442,22 +442,21 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Crear componentes globales | ChatGPT | Asesoramiento sobre la tecnología de Vue, Tailwind y Vite |
-| Listado de hoteles | ChatGPT | Ayuda para hacer la web responsiva |
-| Conectar Backend con Frontend | ChatGPT | Ayuda para poder conectar todo con diferentes funciones y métodos |
+| Pulir y mejorar detalles de pantallas en general | ChatGPT | Ayuda sobre cómo realizar ciertas cosas para que algunos elementos se vean mejor |
+| Mejorar filtros de la Navbar | ChatGPT | Ayuda para intentar que los filtros funcionen y se vean mejor |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** Me ha ahorrado mucho tiempo en cuestión de buscar tutoriales y documentación para entender las tecnologías, también a la hora de hacer la web responsiva y conectar las pantallas con el backend, sin la IA me habría costado todo muchisimo más esfuerzo y tiempo.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Comparación con trabajo sin IA:** Me ha ahorrado algo de tiempo de general, ya que si no tendría que haber estado mucho tiempo probando ciertas cosas hasta que funcionara.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Quiero configurar Tailwind CSS en un proyecto Vue y aprender a usarlo correctamente. ¿Cómo instalo y configuro Tailwind en Vue con Vite? Además, ¿cuál es la mejor forma de crear y estructurar componentes reutilizables en Vue con Tailwind CSS para usarlos en diferentes pantallas? ¿Puedes darme ejemplos?
-2. Quiero hacer que esta pantalla sea completamente responsiva usando Vue y Tailwind CSS. ¿Cuáles son las mejores prácticas para diseñar componentes adaptables a diferentes tamaños de pantalla?
-3. Quiero que la pantalla de hotel details obtenga el ID con Vue Router y muestre sus detalles, pero además quiero agregar información manualmente como imágenes, precio, rating, etc., ya que estos datos no están en la base de datos. ¿Cómo lo hago?
+1. ¿Cómo puedo editar un componente de selección de rango de fechas en Vue con Flatpickr para que limite el rango a 6 meses desde la fecha de inicio y resetee correctamente esa restricción al limpiar la selección?
+2. ¿Cómo puedo sincronizar correctamente la selección de ciudad, tipo de mascota y rango de fechas desde una navbar en Vue, asegurando que al borrar uno de los campos no se reseteen los demás?
+3. ¿Cómo puedo posicionar correctamente un ícono dentro de un elemento <select> en Vue sin que afecte el alineamiento del texto y sin consumir espacio del contenido?
 
 
 #### 6. Problemas Encontrados y Limitaciones
