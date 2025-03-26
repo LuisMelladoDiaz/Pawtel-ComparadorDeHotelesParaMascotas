@@ -63,6 +63,7 @@
 | 26/03/2025  | v 1.3         | Parte de Fernando | Fernando Castelló Sánchez |
 | 26/03/2025  | v 1.4         | Parte de Javi G | Javier García Sebastián |
 | 26/03/2025  | v 1.5         | Parte de David | David González Martínez |
+| 26/03/2025  | v 1.6         | Parte de Francisco | Francisco Miguel Jiménez Morales |
 
 ---
 
@@ -283,15 +284,15 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Francisco Miguel Jiménez Morales
-- **Sprint:** 1
+- **Sprint:** 2
 - **Rol en el proyecto:** Analista, programador Full-Stack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código ( )
+- Generación de código (X)
 - Refactorización de código ( )
 - Generación de documentación ( )
-- Asesoramiento técnico ( )
+- Asesoramiento técnico (X)
 - Otro (especificar): [Especificar si aplica]
 
 #### 3. Uso de IA en las Tareas
@@ -300,28 +301,32 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| No se ha utilizado para ninguna tarea | - | - |
+| Implementar pasarela de pago | ChatGPT | Ayuda en problemas con vue, resolución de errores, entendimiento de la documentación de stripe y en la búsqueda de documentación dentro de la página de stripe |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 0
-- **Comparación con trabajo sin IA:** Igual
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
+- **Comparación con trabajo sin IA:** Más largo y frustrante, probablemente no se entregase a tiempo
 
 #### 5. Prompts Utilizados
 
-Ninguno
+Listar los prompts que fueron más efectivos para completar las tareas:
+
+1. Pasame un enlace a la documentación de stripe en el que explique X (ejemplo: en el que explique las propiedades del objeto session).
+2. Qué significa este error.
+3. Cómo obtengo en vue un parámetro de la URL.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** Ninguno
-- **Limitaciones detectadas en la IA:** Ninguno
+- **Errores o respuestas incorrectas de la IA:** A la hora de responder sobre un error se inventaba código; el cual casi siempre era incoherente
+- **Limitaciones detectadas en la IA:** Es incapaz de programar algo útil para el proyecto; es mejor usarla puntualmente para dudas y consejos 
 - **Propuestas de mejora en el uso de IA:** Ninguno
 
 #### 7. Evaluación General
 
-- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** No la he usado
-- **Comentarios adicionales sobre la experiencia con IA:** No la he usado
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Si
+- **Comentarios adicionales sobre la experiencia con IA:** Darle el mismo uso y no confiar mucho en ella
 
 ---
 
