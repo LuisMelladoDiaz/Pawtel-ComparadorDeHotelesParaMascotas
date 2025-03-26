@@ -379,7 +379,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Jorge Gómez de Tovar
-- **Sprint:** Sprint 1
+- **Sprint:** Sprint 2
 - **Rol en el proyecto:** Desarrollador backend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -398,7 +398,7 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 1-2 horas
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 3 horas
 - **Comparación con trabajo sin IA:** Trabajo más eficaz que sin el uso de la IA.
 
 #### 5. Prompts Utilizados
@@ -410,9 +410,12 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 2.
    - Dado el controlador, ¿cómo debería hacer las llamadas desde Postman para probar cada una de las URLs que hay en el controlador?
 
+3.
+  - Dado este modelo, ¿cómo deberia hacer un seeder para que cada hotel tenga imagenes ficticias y una de ellas se portada?
+
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** Los tests generados por la IA tenían fallos debido a que el setup que creó no era el correcto para probar los métodos del controlador y, además, incluían algunos casos de prueba incorrectos.
+- **Errores o respuestas incorrectas de la IA:** Los tests generados por la IA tenían fallos debido a que el setup que creó no era el correcto para probar los métodos del controlador y, además, incluían algunos casos de prueba incorrectos. Tambíen algunas llamadas a Postman no se correspondian con el controlador.
 - **Limitaciones detectadas en la IA:** La IA no tiene en cuenta todos los casos de prueba.
 - **Propuestas de mejora en el uso de IA:** Seguir moderando su uso y probar todo el código generado.
 
