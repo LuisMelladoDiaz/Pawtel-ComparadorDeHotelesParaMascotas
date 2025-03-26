@@ -11,6 +11,7 @@ export type Customer = {
     date_joined?: string;
     last_login?: string;
     is_active?: boolean;
+    accept_terms?: boolean;
 };
 
 export type Booking = {
