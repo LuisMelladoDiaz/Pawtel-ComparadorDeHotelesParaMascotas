@@ -12,7 +12,7 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   export default {
     data() {
@@ -31,40 +31,39 @@
     },
   };
   </script>
-  
+
   <style scoped>
   .faq-container {
     max-width: 600px;
     margin: auto;
     padding: 20px;
   }
-  
+
   .title {
     font-size: 24px;
     text-align: center;
     margin-bottom: 20px;
   }
-  
+
   .faq-item {
     border-bottom: 1px solid #ccc;
     padding: 10px;
     cursor: pointer;
   }
-  
+
   .faq-question {
     display: flex;
     justify-content: space-between;
     font-weight: bold;
   }
-  
+
   .faq-answer {
     margin-top: 5px;
     padding-left: 10px;
     color: #555;
   }
-  
+
   .icon {
     font-size: 20px;
   }
   </style>
-  

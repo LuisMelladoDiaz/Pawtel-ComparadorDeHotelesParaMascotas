@@ -1,4 +1,4 @@
-# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾 
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
 <p align="center">
@@ -7,8 +7,8 @@
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
-📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)   
-📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)  
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
 
 ---
 
@@ -18,7 +18,7 @@
 **Fecha:** 12/03/2025
 **Equipo:** G11
 
-|  |   | 
+|  |   |
 |--------------------------|---|
 | `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
 | Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
@@ -30,20 +30,20 @@
 
 
 ---
- 
+
  ## **Índice**
- 1. [Tabla de Versiones](#tabla-de-versiones)  
- 2. [Evaluación de Usuario Piloto](#evaluación-de-usuarios-piloto) 
+ 1. [Tabla de Versiones](#tabla-de-versiones)
+ 2. [Evaluación de Usuario Piloto](#evaluación-de-usuarios-piloto)
 
  ---
- 
+
  ## **Tabla de Versiones**
  | Versión | Fecha       | Descripción de Cambios              | Autor  |
  |---------|-------------|-------------------------------------|--------|
  | 1.0     | 12/02/2025  | Versión inicial del acuerdo        | Daniel Flores de Francisco |
 
 
- 
+
  ---
 
 
@@ -88,7 +88,7 @@ Este documento tiene como objetivo evaluar el compromiso y la participación de 
 
 ## 4. Observaciones Adicionales
 
-Ha sido el único en dar un feedback profundo y estar atento a los distintos avisos dados por el grupo. Siempre indicaba si ha respondido o no a la encuesta sin tener que preguntarle 
+Ha sido el único en dar un feedback profundo y estar atento a los distintos avisos dados por el grupo. Siempre indicaba si ha respondido o no a la encuesta sin tener que preguntarle
 
 ---
 
@@ -228,6 +228,6 @@ Ninguna observación ni incidencia. Hizo lo que tenía que hacer.
 
 ## 4. Observaciones Adicionales
 
-Igual que Javier, ha cumplido con su parte. Valoraríamos más positivamente la interacción con nosotros. En general bien. 
+Igual que Javier, ha cumplido con su parte. Valoraríamos más positivamente la interacción con nosotros. En general bien.
 
 ---

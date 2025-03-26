@@ -3,14 +3,15 @@ import { type MaybeRef, toValue } from 'vue';
 import {
   fetchAllHotels,
   fetchHotelById,
-  fetchRoomTypesByHotel,
   createHotel,
   updateHotel,
   partialUpdateHotel,
   deleteHotel,
   uploadImageToHotel,
+  filterAvailableHotels,
+  filterAvailableRoomTypes,
   type Hotel,
-  fetchHotelByRoomTypeId,
+  fetchRoomTypesByHotel,
 } from '@/data-layer/api/hotels';
 
 export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
@@ -19,8 +20,8 @@ export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
     queryFn: () => fetchAllHotels({
       ...Object.fromEntries(Object.entries(filters || {}).map(([key, value]) => [key, toValue(value)])),
     }),
-    staleTime: 1000 * 60, // Los datos se mantienen frescos por 1 minuto
-    refetchOnWindowFocus: false, // No refrescar los datos cuando la ventana vuelve al foco
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
   });
 };
 
@@ -110,17 +111,22 @@ export const useUploadImageToHotel = () => {
       queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
     },
   });
-
-  
 };
 
-export const useGetHotelByRoomTypeId = (roomTypeId: MaybeRef<number>) => {
+export const useFilterAvailableHotels = (filters: Record<string, any>) => {
   return useQuery({
-    queryKey: ['hotelByRoomTypeId', roomTypeId],
-    queryFn: () => fetchHotelByRoomTypeId(toValue(roomTypeId)),
+    queryKey: ['available-hotels', filters],
+    queryFn: () => filterAvailableHotels(filters),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
 };
 
-
+export const useFilterAvailableRoomTypes = (hotelId: number, filters: Record<string, any>) => {
+  return useQuery({
+    queryKey: ['available-room-types', hotelId, filters],
+    queryFn: () => filterAvailableRoomTypes(hotelId, filters),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: false,
+  });
+};
