@@ -54,7 +54,7 @@ const formatDate = (dateStr) => {
 <template>
   <div class="flex flex-col min-h-screen bg-gray-100">
     <div class="max-w-4xl mx-auto px-5 w-full flex flex-col flex-grow">
-      
+
       <!-- Contenedor principal -->
       <div class="bg-white p-6 rounded-lg shadow-md mt-5 border border-black">
         <h1 class="text-2xl font-bold mb-4 text-center">Mis Reservas</h1>
@@ -64,15 +64,15 @@ const formatDate = (dateStr) => {
 
         <div v-else>
           <div v-if="bookings?.length">
-            <div 
-              v-for="booking in sortedBookings" 
+            <div
+              v-for="booking in sortedBookings"
               :key="booking.id"
               class="flex flex-col md:flex-row items-center md:items-start p-4 rounded-lg shadow-md mb-4 transition-transform hover:scale-105 border border-terracota bg-white gap-2"
             >
               <!-- Imagen del hotel -->
-              <img 
-                src="frontend/src/assets/hoteles/hotel1.jpg" 
-                alt="Hotel Placeholder" 
+              <img
+                src="frontend/src/assets/hoteles/hotel1.jpg"
+                alt="Hotel Placeholder"
                 class="w-full md:w-32 h-32 object-cover rounded-md"
               />
 
@@ -93,7 +93,7 @@ const formatDate = (dateStr) => {
 
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-2 mt-2">
                   <p class="text-gray-600 text-sm">
-                    <strong>Habitación:</strong> 
+                    <strong>Habitación:</strong>
                     {{ roomTypeDictById[booking.room_type]?.value?.name || 'Tipo desconocido' }},
                     {{ roomTypeDictById[booking.room_type]?.value?.pet_type || 'Tipo desconocido' }}
                   </p>

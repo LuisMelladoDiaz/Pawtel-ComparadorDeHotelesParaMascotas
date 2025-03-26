@@ -50,9 +50,9 @@ const openModal = () => {
 const saveHotel = async () => {
   try {
     const newHotel = await createHotelMutation.mutateAsync(hotelData.value);
-    
+
     router.push(`/mis-hoteles`);
-    modalOpen.value = false; 
+    modalOpen.value = false;
   } catch (error) {
     notyf.error('Error al crear el hotel.');
     console.error('Error al guardar el hotel', error);

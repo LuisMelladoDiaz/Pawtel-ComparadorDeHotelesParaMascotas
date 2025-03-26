@@ -1,12 +1,14 @@
+from datetime import date, timedelta
+from random import choice, randint
+
 from django.core.management.base import BaseCommand
 from faker import Faker
-from datetime import timedelta, date
-from random import randint, choice
+from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.room_types.models import RoomType
-from pawtel.bookings.models import Booking
 
 fake = Faker("es_ES")
+
 
 class Command(BaseCommand):
     help = "Seed database with bookings"
@@ -35,14 +37,20 @@ class Command(BaseCommand):
                 end_date=end_date,
                 total_price=total_price,
             )
-            self.stdout.write(self.style.SUCCESS(f"Created deterministic booking for {customer}"))
+            self.stdout.write(
+                self.style.SUCCESS(f"Created deterministic booking for {customer}")
+            )
 
     def create_random_bookings(self, num_random):
         customers = list(Customer.objects.all())
         room_types = list(RoomType.objects.all())
 
         if not customers or not room_types:
-            self.stdout.write(self.style.ERROR("No customers or room types found. Cannot create bookings."))
+            self.stdout.write(
+                self.style.ERROR(
+                    "No customers or room types found. Cannot create bookings."
+                )
+            )
             return
 
         for _ in range(num_random):
@@ -61,4 +69,6 @@ class Command(BaseCommand):
                 total_price=total_price,
             )
 
-            self.stdout.write(self.style.SUCCESS(f"Created Booking for {customer.user.username}"))
+            self.stdout.write(
+                self.style.SUCCESS(f"Created Booking for {customer.user.username}")
+            )

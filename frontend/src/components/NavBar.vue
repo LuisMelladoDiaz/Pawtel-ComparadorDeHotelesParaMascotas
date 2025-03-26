@@ -3,11 +3,11 @@
 
     <!-- Desktop version -->
     <div class="navbar-content hidden lg:flex max-w-7xl px-5 mx-auto flex-row justify-between items-center h-full ">
-      
+
       <router-link to="/">
         <img src="../assets/pawtel-logo.png" alt="Logo" class="logo h-[50px]" />
       </router-link>
-      
+
       <div class="flex items-center gap-10">
         <div class="nav-links flex gap-6 no-underline text-terracota font-bold text-base">
           <router-link v-if="isLoggedIn && roleQuery == 'customer'" to="/mis-reservas" class="hover:underline">
@@ -26,7 +26,7 @@
             Contacto
           </router-link>
         </div>
-      
+
         <div class="auth-buttons flex items-center gap-5">
           <template v-if="!isLoggedIn">
             <router-link to="/login" class="auth-button login bg-terracota hover:bg-terracota-dark rounded cursor-pointer px-4 py-2 border-none text-white">Iniciar Sesión</router-link>
@@ -44,7 +44,7 @@
           </router-link>
         </div>
       </div>
-      
+
     </div>
 
     <!-- Mobile version -->

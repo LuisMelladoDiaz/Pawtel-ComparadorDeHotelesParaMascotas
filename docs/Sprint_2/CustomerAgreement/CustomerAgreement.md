@@ -6,9 +6,9 @@ Welcome to Pawtel! By using our platform, you agree to the following terms and c
 
 ### **1. Acceptance of Terms**
 
-By accessing and using Pawtel, you acknowledge that you have read, understood, and agree to be bound by this Customer Agreement. If you do not agree with these terms, you must refrain from using our platform. Continued use of Pawtel after updates to this Agreement constitutes acceptance of the revised terms. 
+By accessing and using Pawtel, you acknowledge that you have read, understood, and agree to be bound by this Customer Agreement. If you do not agree with these terms, you must refrain from using our platform. Continued use of Pawtel after updates to this Agreement constitutes acceptance of the revised terms.
 
-This Agreement applies to all users, including pet owners, service providers, and visitors to the platform. 
+This Agreement applies to all users, including pet owners, service providers, and visitors to the platform.
 
 ---
 
@@ -109,4 +109,3 @@ This Agreement shall be governed by and interpreted in accordance with the laws 
 If you have any questions regarding this Agreement, please contact us at pawteles@gmail.com.
 
 By using Pawtel, you acknowledge that you have read, understood, and agreed to these terms.
-

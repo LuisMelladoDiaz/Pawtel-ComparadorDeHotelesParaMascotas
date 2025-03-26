@@ -1,22 +1,21 @@
 import { useQuery } from '@tanstack/vue-query';
-import { type MaybeRef, toValue } from 'vue';
-import { fetchAllBookings, fetchBookingById } from '../api/bookings';
+import { fetchBookingById, fetchAllBookings } from '@/data-layer/api/bookings';
 
-
-export const useGetAllBookings = () => {
-  return useQuery({
-    queryKey: ['bookings'],
-    queryFn: fetchAllBookings,
-    staleTime: 1000 * 60,
-    refetchOnWindowFocus: false,
-  });
+export const useGetBookingById = (id: number) => {
+    return useQuery({
+        queryKey: ['booking', id],
+        queryFn: () => fetchBookingById(id),
+        staleTime: 1000 * 60,
+        refetchOnWindowFocus: false,
+        enabled: !!id,
+    });
 };
 
-export const useGetBookingById = (bookingId: MaybeRef<number>) => {
-  return useQuery({
-    queryKey: ['booking', bookingId],
-    queryFn: () => fetchBookingById(toValue(bookingId)),
-    staleTime: 1000 * 60,
-    refetchOnWindowFocus: false,
-  });
+export const useGetAllBookings = () => {
+    return useQuery({
+        queryKey: ['bookings'],
+        queryFn: fetchAllBookings,
+        staleTime: 1000 * 60,
+        refetchOnWindowFocus: false,
+    });
 };
