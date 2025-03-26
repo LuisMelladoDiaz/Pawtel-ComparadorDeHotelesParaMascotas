@@ -39,6 +39,7 @@
 | 25/03/2025  | v 1.0         | Parte de Luis | Luis Mellado Díaz |
 | 26/03/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
 | 26/03/2025  | v 1.3         | Parte de Javi G | Javier García Sebastián |
+| 26/03/2025  | v 1.4         | Parte de David | David González Martínez |
 
 
 ---
@@ -332,37 +333,49 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 32:59:06
+**Periodo:** 12/02/2025 - 26/03/2025
+**Total de tiempo trabajado:** 42:16:15
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Deployment | 01:33:24 |
-| Register/auth | 01:57:18 |
-| Reunión | 00:31:24 |
-| Organización | 00:05:01 |
-| Conexión frontend-backend | 02:36:26 |
-| Form | 00:04:11 |
-| Preparar reunión | 00:09:00 |
-| Misc, gestión | 00:23:00 |
-| Clases | 04:00:00 |
-| Desempeño | 00:38:39 |
-| Reviews | 00:10:19 |
-| Reunión jefes de equipo | 01:00:00 |
-| Reunión Jefes | 01:10:00 |
-| Deployment on Render | 01:41:44 |
-| Ponerme al día, ver agenda reunión, review | 01:05:00 |
-| QOL changes in frontend | 00:41:00 |
-| Rendimiento | 00:42:22 |
-| Review | 01:58:57 |
-| Conexión backend-frontend | 01:48:00 |
-| Misc | 05:39:21 |
-| Planificación Full Stack | 01:04:00 |
-| Clase | 04:00:00 |
+| Descripción                                 | Duración   |
+|---------------------------------------------|------------|
+| Clase                                       | 04:00:00   |
+| Reunion                                     | 01:00:00   |
+| Fix bug                                     | 00:42:21   |
+| Autenticacion                               | 02:34:52   |
+| Conexion frontend backend                   | 02:36:26   |
+| Performance                                 | 00:17:19   |
+| Review                                      | 00:43:57   |
+| Reunión de urgencia                         | 00:47:00   |
+| Review/Trabajo en Reservas                  | 00:31:43   |
+| Planificar                                  | 00:10:58   |
+| Ayudar                                      | 01:10:18   |
+| Workflow                                    | 00:10:00   |
+| Review pagos/reservas                       | 00:20:13   |
+| Actualizarme, aclarar dudas, cosas varias   | 00:50:00   |
+| Fix double login bug                        | 00:02:00   |
+| Review/Fix bugs in frontend permissions     | 00:26:17   |
+| Review PR Andres                            | 00:08:46   |
+| Documentos                                  | 00:14:55   |
+| Review/Misc                                 | 00:30:03   |
+| Pulir reservas                              | 01:48:27   |
+| Mirar bug autenticacion                     | 00:10:12   |
+| Reviews, aclarar dudas, misc                | 00:47:00   |
+| Refactorizacion frontend                    | 01:25:18   |
+| Bug                                         | 00:16:49   |
+| Ver problema compañero                      | 00:32:00   |
+| Images                                      | 03:49:39   |
+| Reunion y organizacion                      | 01:42:00   |
+| Misc                                        | 05:42:04   |
+| Documento guidelines frontend/feedback pantallas | 01:23:49   |
+| Deployment                                  | 02:20:12   |
+| Permissions in frontend                     | 00:53:26   |
+| Class                                       | 04:00:00   |
+| Review a lo de Andrés                       | 00:08:11   |
 
-![grafico-de-tiempos](graficas/david.png)
+![{4DC49BB5-393E-469D-B7AA-F179388E8F28}](https://github.com/user-attachments/assets/4d868b92-8c81-4273-aa18-ea3ca6154765)
+
 ---
 
 ## Reporte de tiempo de Daniel Flores de Francisco
