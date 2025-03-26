@@ -59,6 +59,7 @@
 | 22/03/2025  | v 1.0         | Versión inicial del documento - Parte de Rafael | Rafael Castillo Cebolla |
 | 24/03/2025  | v 1.1         | Parte de Dani | Daniel Flores de Francisco |
 | 25/03/2025  | v 1.2         | Parte de Luis | Luis Mellado Díaz |
+| 26/03/2025  | v 1.3         | Parte de Fernando | Fernando Castelló Sánchez |
 
 
 ---
