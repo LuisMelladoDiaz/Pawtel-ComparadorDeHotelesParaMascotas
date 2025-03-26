@@ -137,27 +137,23 @@
 
 ## Reporte de tiempo de Rafael Castillo Cebolla
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 58:12:11
+**Periodo:** 14/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 38:42:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Rutas API | 02:45:00 |
-| Preparar presentación | 01:00:00 |
-| Reunión mitad de sprint 1 backend | 00:47:12 |
-| QA y diseñar backend | 01:25:00 |
-| Clases | 12:00:00 |
-| Diseñando backend y QA | 02:10:00 |
-| Preparar sprint 1 backend | 08:59:32 |
-| Arreglando backend | 02:00:00 |
-| Diseño backend + documentación + QA | 01:30:00 |
-| QA Controladores y diseño | 03:00:00 |
-| UML | 02:20:00 |
-| Preparar entrega Devising a Project | 03:00:00 |
+| QA | 10:21:00 |
+| Refactorizar autenticación en backend  | 06:48:00 |
+| Arreglando problemas varios | 02:06:00  |
+| Booking Hold  | 03:42:00 |
+| Clases | 4:00:00 |
+| Diseñar backend sprint 2 | 07:00:00 |
+| Reunión | 00:45:00 |
+| Planificar sprint 2 backend | 04:00:00 |
 
-![grafico-de-tiempos](graficas/rafa.png)
+![grafico-de-tiempos](graficas/rafael.png)
 ---
 
 ## Reporte de tiempo de Manuel Castillejo Vela
