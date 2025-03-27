@@ -397,30 +397,28 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 14/03/2025 - 25/03/2025
-**Total de tiempo trabajado:** 33:18:26
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 30:42:28
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Gestión Usuarios Piloto | 00:53:00 |
-| Reporte de IA y QA presentación | 01:19:04 |
-| Reunión Mitad Sprint | 00:34:00 |
-| Reunión Inicial Sprint 1 | 01:30:00 |
-| USAGE.md | 00:38:54 |
-| Documento de la delivery. Métricas actualizadas y organización. | 02:30:00 |
-| Configuración app | 00:47:09 |
-| Tarea Semanal. Informe de Métricas usadas | 01:36:08 |
-| Informe de desempeño, usuarios piloto y métricas. Presentación. | 01:31:01 |
-| Dirección, gestión de usuarios piloto y cambios en el repo | 02:43:10 |
-| CI. Pre-commit formatter. | 01:42:00 |
-| Presentación con Claudio | 01:34:00 |
-| Terminando documentación delivery | 01:46:11 |
-| Weekly Contributing Report WF | 00:50:52 |
-| Presentación | 04:00:43 |
-| Clase ISPP | 08:00:00 |
-| CI. Añadiendo Workflows | 01:22:14 |
+| Delirvery Sprint 1 (No se conto en el anterior sprint)                                      | 06:00:00   |
+| Workflow for testing django                              | 01:41:00   |
+| EditHotelScreen fix. Double Requests fix.               | 02:47:00   |
+| Preparar presentación                                    | 01:30:00   |
+| Presentation. Arreglar petición back. Arreglar y mergear CI. Arreglar Queries. Aumento Calidad de Código. | 02:13:37   |
+| Presentacio. Slides                                      | 02:00:35   |
+| Integración con Codacy y Workflow                       | 01:30:00   |
+| Terminos y Condiciones. Back                            | 01:47:32   |
+| Clase ISPP                                              | 04:00:00   |
+| Delivery Sprint 2  Preparación de docs                                     | 00:34:00   |
+| Reunion Sprint 2                                        | 01:00:00   |
+| Metrics with SonarQube                                  | 01:00:00   |
+| Terminando documentación delivery                       | 01:46:11   |
+| Customer Agreement, Presentation and Feedback. Arreglando CI | 01:54:00   |
+| QA de las PR. Fixing Codacy Issues | 00:58:33   |
 
 ![grafico-de-tiempos](graficas/dani.png)
 ---
