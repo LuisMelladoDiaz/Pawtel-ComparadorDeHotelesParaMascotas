@@ -4,12 +4,51 @@ El proyecto consta de dos partes: el backend y el frontend. El frontend está de
 
 El frontend se encuentra en la carpeta `frontend` y el backend en la carpeta `backend`.
 
+
+
+
+## Poner en marcha el frontend
+Es necesario tener instalado Node.js (se recomienda la versión 20 o cercana) para poder ejecutar el frontend.
+Para poner en marcha el frontend, sigue estos pasos (asumiendo que estás en la raíz del proyecto):
+
+1. Rellena el archivo `.env` con los datos pertinentes.
+
+2. Instala las dependencias del proyecto.
+```bash
+npm install
+```
+
+3. Inicia el servidor de desarrollo.
+```bash
+npm run dev
+```
+
+4. Abre tu navegador en la dirección `http://localhost:3000` para ver la aplicación.
+
+### Poner en marcha el frontend como PWA
+
+Tras unos cambios en teoría la aplicación debe funcionar como una PWA mediante "*npm run dev*". En caso de que diese problemas, para desplegar la aplicación específicamente como una PWA necesitarás ejecutar lo siguientes comandos teniendo npm instalado:
+
+Primero será necesario construirla:
+
+```bash
+npm run build
+```
+
+
+Y paro ejecutarla debes usar:
+
+
+```bash
+npm run preview
+```
+
 ## Poner en marcha el backend
 Es necesario tener instalado Python 3.8 o superior para poder ejecutar el backend. Adicionalmente, se recomienda utilizar un entorno virtual (por ejemplo, mediante el uso de Conda o virtualenv) para instalar las dependencias del proyecto.
 También es necesario tener instalado MySQL o MariaDB para poder utilizar la base de datos.
 Para poner en marcha el backend, sigue estos pasos (asumiendo que estás en la carpeta `backend` del proyecto):
 
-1. Crea la base de datos y rellena el archivo `.env` con las credenciales de la base de datos (siguiendo el archivo `.env.example`), entre otros datos.
+1. Crea la base de datos y rellena el archivo `.env` con las credenciales de la base de datos (siguiendo el archivo `.env.example`), entre otros datos. En la sección siguiente se detallará mejor el uso de las variables de entorno.
 
 2. Instala las dependencias del proyecto.
 ```bash
@@ -60,47 +99,7 @@ No obstante como paso opcional, puedes correrlo manualmente sin hacer commit as�
 pre-commit run --all-files
 ```
 
-
-
-## Poner en marcha el frontend
-Es necesario tener instalado Node.js (se recomienda la versión 20 o cercana) para poder ejecutar el frontend.
-Para poner en marcha el frontend, sigue estos pasos (asumiendo que estás en la raíz del proyecto):
-
-1. Rellena el archivo `.env` con los datos pertinentes.
-
-2. Instala las dependencias del proyecto.
-```bash
-npm install
-```
-
-3. Inicia el servidor de desarrollo.
-```bash
-npm run dev
-```
-
-4. Abre tu navegador en la dirección `http://localhost:3000` para ver la aplicación.
-
-### Poner en marcha el frontend como PWA
-
-Tras unos cambios en teoría la aplicación debe funcionar como una PWA mediante "*npm run dev*". En caso de que diese problemas, para desplegar la aplicación específicamente como una PWA necesitarás ejecutar lo siguientes comandos teniendo npm instalado:
-
-Primero será necesario construirla:
-
-```bash
-npm run build
-```
-
-
-Y paro ejecutarla debes usar:
-
-
-```bash
-npm run preview
-```
-
-Para comprobar que efectivamente estás ejecutando la app puedes probar a descargarla, viendo que funciona también de manera local; o puedes comprobar en las herramientas de desarrollador, que en el apartado de aplicación te sale el archivo de manifiesto de la aplicación.
-
-## Guía configuración STRIPE
+### Guía configuración STRIPE
 
 ### Cómo configurar las variables de entorno para poder ejecutar el proyecto
 
@@ -156,3 +155,18 @@ Para pagar con stripe existe una tarjeta de crédito de prueba cuyo número es 4
 
 **Nota**: si no tienes configurado el STRIPE_SECRET_ENDPOINT, ni abres el puerto ni te configuras el endpoint en stripe lo único que pasará es que no se guardará la reserva en la base de datos.
 
+### Gestión de imágenes
+
+La aplicación permite el almacenamiento de imágenes en la nube con API de AWS S3 o en el sistema de archivos de la máquina.
+En producción (DEBUG=False) es obligatorio el uso de almacenamiento en la nube.
+
+Se deben rellenar las siguientes variables de entorno. Se expone un ejemplo ilustrativo para Cloudflare R2:
+```
+AWS_ACCESS_KEY_ID=your-access-key
+AWS_SECRET_ACCESS_KEY=your-secret-key
+AWS_STORAGE_BUCKET_NAME=bucket-name
+AWS_S3_REGION_NAME=weur
+AWS_S3_ENDPOINT_URL=https://something.r2.cloudflarestorage.com
+AWS_S3_CUSTOM_DOMAIN=https://something.r2.dev
+```
+Para activar el uso del almacenamiento en la nube, se utiliza la variable de entorno USE_S3=True.
