@@ -1,3 +1,64 @@
+# 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
+**🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
+
+<p align="center">
+  <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
+</p>
+
+🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
+
+📌 **Página Web:** [www.pawtel.es](https://www.pawtel.es)
+📩 **Contáctanos:** [📧 hello@pawtel.es](mailto:chello@pawtel.es)
+
+---
+
+<br><br>
+
+# 📑 **Compromiso de Participación en la Asignatura ISPP** 🚀
+
+**📅 Entregable:** Sprint 2
+**📆 Fecha:** 02/02/2025
+**👥 Equipo:** G11
+
+
+|  |   |
+|--------------------------|---|
+| `Luis Mellado Díaz (PM🏆)` | `Daniel Flores De Francisco (PM🏆)` |
+| Fernando Castelló Sánchez | Francisco Miguel Jiménez Morales |
+| Javier García Sebastián | Javier Ruiz Garrido |
+| Jorge Gómez de Tovar | Andrés Martínez Reviriego |
+| Manuel Castillejo Vela | Rafael Castillo Cebolla |
+| Claudio Cortés Carrasco | Sergio Trenado González |
+| Yesica Garate Fuentes | David González Martínez |
+
+
+---
+# Table of Contents
+
+## [Customer Agreement](#customer-agreement)
+  - [1. Acceptance of Terms](#1-acceptance-of-terms)
+  - [2. Description of Service](#2-description-of-service)
+  - [3. User Accounts](#3-user-accounts)
+  - [4. Booking and Payment](#4-booking-and-payment)
+  - [5. Privacy and Data Protection](#5-privacy-and-data-protection)
+  - [6. Governing Law](#6-governing-law)
+  - [7. Contact Information](#7-contact-information)
+
+## [Service Level Agreement (SLA)](#service-level-agreement-sla)
+  - [1. Introduction](#1-introduction)
+  - [2. Definitions](#2-definitions)
+  - [3. Service Availability](#3-service-availability)
+  - [4. Payment Processing](#4-payment-processing)
+  - [5. Customer Support](#5-customer-support)
+  - [6. Responsibilities of Each Party](#6-responsibilities-of-each-party)
+    - [Pawtel’s Responsibilities](#pawtels-responsibilities)
+    - [Hotel Owners’ Responsibilities](#hotel-owners-responsibilities)
+    - [Users’ Responsibilities](#users-responsibilities)
+  - [7. Penalties and Compensation](#7-penalties-and-compensation)
+  - [8. SLA Modifications](#8-sla-modifications)
+  - [9. Dispute Resolution](#9-dispute-resolution)
+  - [10. Agreement Acceptance](#10-agreement-acceptance)
+---
 # Customer Agreement
 
 Welcome to Pawtel! By using our platform, you agree to the following terms and conditions. This agreement establishes the legal framework governing the use of our services, ensuring a transparent and secure experience for all users. Please read this agreement carefully before accessing or using our services.
