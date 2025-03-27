@@ -68,7 +68,7 @@
 | Castillo Cebolla, Rafael    | 10   | 10   | 10   |      |      |      | 30    |
 | Castelló Sánchez, Fernando  | 10   | 10   | 10   |      |      |      | 30    |
 | García Sebastián, Javier    | 10   | 8    | 9    |      |      |      | 27    |
-| Garate Fuentes, Yesica      | 10   | 9    | 7    |      |      |      | 27    |
+| Garate Fuentes, Yesica      | 10   | 9    | 7    |      |      |      | 26    |
 | Castillejo Vela, Manuel     | 10   | 10   | 10   |      |      |      | 30    |
 
 **Total:** 405  
