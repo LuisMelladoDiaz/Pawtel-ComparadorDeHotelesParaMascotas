@@ -47,7 +47,7 @@
 |---------|------------|----------|------------------------|
 | 1.0     | 13/03/2025 | Fernando Castelló Sánchez   | Creación del documento |
 | 1.1     | 13/03/2025 | Daniel Flores de Francisco   | Última revisión |
-
+| 1.2     | 27/03/2025 | David González Martínez   | No se ha modifcado el contenido. Solo se han retirado las contraseñas. |
 ---
 
 ## **Resumen ejecutivo**
@@ -155,9 +155,7 @@ La aplicación cuenta con apartados, pantallas misceláneas o extras y secciones
 Todo esta preparado y programado para futuros sprints. Se evaluarán los casos de uso core mencionados anteriormente.
 
 - La URL de nuestra landing page es: [landing.pawtel.es](https://landing.pawtel.es/)
-- La URL de nuestro despliegue es: pawtel-frontend-sprint1.onrender.com, con credenciales de Render:
-    - Correo electrónico: pawteles@gmail.com
-    - Contraseña: pawtel123
+- La URL de nuestro despliegue es: pawtel-frontend-sprint1.onrender.com, con credenciales de Render enviadas por correo.
 - La URL de nuestro repositorio de GitHub es: [github.com/Pawtel](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas)
-- La URL a nuestro sistema de seguimiento de tiempo es: [Clockify.me/Pawtel](https://app.clockify.me/projects/67bb0478254a3a5bd06e2d53/), usando la cuenta pawteles@gmail.com con la contraseña Grupo11@
+- La URL a nuestro sistema de seguimiento de tiempo es: [Clockify.me/Pawtel](https://app.clockify.me/projects/67bb0478254a3a5bd06e2d53/), con credeciales enviadas por correo.
 - La URL al vídeo de demostración es: https://drive.google.com/file/d/1pb2-VGNGUgia30zzA9S3uhaGpwnS7e3s/view?usp=sharing
