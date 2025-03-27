@@ -18,8 +18,3 @@ self.addEventListener('activate', (event) => {
     })()
   )
 })
-
-// Always bypass cache, fetch everything fresh
-self.addEventListener('fetch', (event) => {
-  event.respondWith(fetch(event.request))
-})
