@@ -10,7 +10,16 @@ export default defineConfig({
   plugins: [
     vue(),
     tailwindcss(),
-    VitePWA({ manifest:{
+    VitePWA({
+      registerType: 'autoUpdate',
+      injectRegister: false, // prevent default registration script
+      srcDir: 'src',
+      filename: 'custom-sw.js',
+      strategies: 'injectManifest',
+      injectManifest: {
+        globPatterns: [],
+      },
+      manifest:{
         display: 'standalone',
         display_override: ['window-controls-overlay'],
         theme_color: '#FFFFFF',
