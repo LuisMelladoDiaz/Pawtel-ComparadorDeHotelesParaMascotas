@@ -46,6 +46,8 @@
 | 📆 20/02/2025  | 🔹 v 1.0         | 🏁 Versión inicial del documento. #DP| ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 13/03/2025  | 🔹 v 1.1         | 🏁 #S1| ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 24/03/2025  | 🔹 v 1.2         | 🏁 #S2 | ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
+| 📆 24/03/2025  | 🔹 v 1.3         | 🏁 #S2 Evaluación Individual | ✍️ Luis Mellado Diaz |
+
 
 
 ---
@@ -54,22 +56,22 @@
 
 | Student                     | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
 |-----------------------------|------|------|------|------|------|------|-------|
-| Flores de Francisco, Daniel | 10   | 10   |      |      |      |      | 20    |
-| Mellado Díaz, Luis          | 10   | 10   |      |      |      |      | 20    |
-| González Martínez, David    | 10   | 10   |      |      |      |      | 20    |
-| Martínez Reviriego, Andrés  | 10   | 10   |      |      |      |      | 20    |
-| Cortés Carrasco, Claudio    | 10   | 9   |      |      |      |      | 19    |
-| Trenado González, Sergio    | 10   | 10   |      |      |      |      | 20    |
-| Jiménez Morales, Francisco Miguel | 10 | 9   |      |      |      |      | 19    |
-| Gómez de Tovar, Jorge       | 10   | 8    |      |      |      |      | 18    |
-| Ruiz Garrido, Javier        | 10   | 8    |      |      |      |      | 18    |
-| Castillo Cebolla, Rafael    | 10   | 10   |      |      |      |      | 20    |
-| Castelló Sánchez, Fernando  | 10   | 10   |      |      |      |      | 20    |
-| García Sebastián, Javier    | 10   | 8    |      |      |      |      | 18    |
-| Garate Fuentes, Yesica      | 10   | 9    |      |      |      |      | 19    |
-| Castillejo Vela, Manuel     | 10   | 10   |      |      |      |      | 20    |
+| Flores de Francisco, Daniel | 10   | 10   | 10   |      |      |      | 30    |
+| Mellado Díaz, Luis          | 10   | 10   | 10   |      |      |      | 30    |
+| González Martínez, David    | 10   | 10   | 10   |      |      |      | 30    |
+| Martínez Reviriego, Andrés  | 10   | 10   | 10   |      |      |      | 30    |
+| Cortés Carrasco, Claudio    | 10   | 9    | 8    |      |      |      | 27    |
+| Trenado González, Sergio    | 10   | 10   | 10   |      |      |      | 30    |
+| Jiménez Morales, Francisco Miguel | 10 | 9   | 9    |      |      |      | 28    |
+| Gómez de Tovar, Jorge       | 10   | 8    | 10   |      |      |      | 28    |
+| Ruiz Garrido, Javier        | 10   | 8    | 10   |      |      |      | 28    |
+| Castillo Cebolla, Rafael    | 10   | 10   | 10   |      |      |      | 30    |
+| Castelló Sánchez, Fernando  | 10   | 10   | 10   |      |      |      | 30    |
+| García Sebastián, Javier    | 10   | 8    | 9    |      |      |      | 27    |
+| Garate Fuentes, Yesica      | 10   | 9    | 8    |      |      |      | 27    |
+| Castillejo Vela, Manuel     | 10   | 10   | 10   |      |      |      | 30    |
 
-**Total:** 264
+**Total:** 405  
 
 ---
 
