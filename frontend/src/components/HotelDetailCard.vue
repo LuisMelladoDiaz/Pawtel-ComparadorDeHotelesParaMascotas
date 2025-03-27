@@ -67,10 +67,7 @@ defineProps({
       <div class="flex-1 flex flex-col items-center text-center">
 
         <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col">
-          <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col">
-            <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a>
-            <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
-          </div>
+          
         <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col">
           <!-- Descripción primero -->
           <p class="text-sm text-justify text-[1rem] text-gray-700 font-bold p-1">Descripción</p>
