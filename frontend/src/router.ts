@@ -64,6 +64,11 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
       }
       const allowedStates = (newRoute.meta as any).allowedAuthStates as AuthRequirement[];
       newRoute.beforeEnter = async (to, from) => {
+        // if ALLOW_ALL is present, we don't need to check anything
+        if (new Set(allowedStates).size === new Set(ALLOW_ALL).size && [...new Set(allowedStates)].every(value => new Set(ALLOW_ALL).has(value))) {
+          return true;
+        }
+
         try {
         const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/user-info/`);
         const role = response.data.role;
