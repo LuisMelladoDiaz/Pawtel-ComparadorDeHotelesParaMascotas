@@ -17,6 +17,7 @@ defineRule('required', required);
 
 configure({
   validateOnInput: true,
+  //@ts-ignore
   messages: customMessages,  // Usar solo los mensajes personalizados
 });
 
