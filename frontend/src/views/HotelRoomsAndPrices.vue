@@ -31,8 +31,7 @@ const roomsData = ref([
     pet_type: 'Gato',
     capacity: 15,
     price_per_night: 292,
-    num_rooms: 30,
-    quantity: 1
+    num_rooms: 30
   },
   {
     id: 2,
@@ -41,8 +40,7 @@ const roomsData = ref([
     pet_type: 'Perro',
     capacity: 2,
     price_per_night: 22,
-    num_rooms: 18,
-    quantity: 1
+    num_rooms: 18
   },
   {
     id: 3,
@@ -51,8 +49,7 @@ const roomsData = ref([
     pet_type: 'Pájaro',
     capacity: 1,
     price_per_night: 28,
-    num_rooms: 12,
-    quantity: 1
+    num_rooms: 12
   },
   {
     id: 4,
@@ -61,8 +58,7 @@ const roomsData = ref([
     pet_type: 'Mixto',
     capacity: 4,
     price_per_night: 35,
-    num_rooms: 8,
-    quantity: 1
+    num_rooms: 8
   }
 ]);
 
@@ -146,10 +142,7 @@ const handleReservation = (roomId, quantity) => {
               <h3 class="text-xl font-bold text-terracota">{{ room.name }}</h3>
               <p class="text-gray-600 text-sm mt-1">{{ room.description || 'Sin descripción disponible.' }}</p>
             </div>
-            <div class="min-w-40 text-right">
-              <p class="text-gray-500">Precio por noche:</p>
-              <p class="text-2xl font-bold text-terracota leading-tight">{{ room.price_per_night }}€</p>
-            </div>
+            
           </div>
 
           <div class="grid grid-cols-3 gap-4 text-sm text-gray-700 mt-2">
@@ -168,21 +161,15 @@ const handleReservation = (roomId, quantity) => {
             
           </div>
 
-          <div class="flex items-center justify-between mt-4">
-            <div class="flex items-center border border-gray-300 rounded-md">
-              <button @click="decrementQuantity(room)" class="px-3 py-1 text-gray-600 hover:bg-gray-100">
-                <font-awesome-icon :icon="faMinus" />
-              </button>
-              <span class="px-3">{{ room.quantity }}</span>
-              <button @click="incrementQuantity(room)" class="px-3 py-1 text-gray-600 hover:bg-gray-100">
-                <font-awesome-icon :icon="faPlus" />
-              </button>
+          <div class="flex items-center justify-between mt-4 w-full">
+            <div class="min-w-40 text-left">
+              <p class="text-gray-500">Precio por noche:</p>
+              <p class="text-2xl font-bold text-terracota leading-tight">{{ room.price_per_night }}€</p>
             </div>
-
             <Button
               v-if="isLoggedIn"
               type="add"
-              class="!m-0 !py-2 !px-4 text-sm"
+              class="!m-0 !py-2 !px-4 text-sm self-end"
               @click="handleReservation(room.id, room.quantity)"
             >
               Reservar
@@ -264,26 +251,16 @@ const handleReservation = (roomId, quantity) => {
             </div>
             
           </div>
-          <div class="min-w-40 mt-4 text-right">
+
+          <div class="flex items-center justify-between">
+            <div class="min-w-40 mt-4 text-left">
               <p class="text-gray-500">Precio por noche:</p>
               <p class="text-2xl font-bold text-terracota leading-tight">{{ room.price_per_night }}€</p>
             </div>
-
-          <div class="flex items-center justify-between mt-4">
-            <div class="flex items-center border border-gray-300 rounded-md">
-              <button @click="decrementQuantity(room)" class="px-3 py-1 text-gray-600 hover:bg-gray-100">
-                <font-awesome-icon :icon="faMinus" />
-              </button>
-              <span class="px-3">{{ room.quantity }}</span>
-              <button @click="incrementQuantity(room)" class="px-3 py-1 text-gray-600 hover:bg-gray-100">
-                <font-awesome-icon :icon="faPlus" />
-              </button>
-            </div>
-
             <Button
               v-if="isLoggedIn"
               type="add"
-              class="!m-0 !py-2 !px-4 text-sm"
+              class="!m-0 !py-2 !px-4 text-sm self-end"
               @click="handleReservation(room.id, room.quantity)"
             >
               Reservar
