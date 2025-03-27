@@ -70,7 +70,7 @@ const totalPrice = computed(() => {
         </div>
         <div class="mb-4">
           <label for="room-type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de habitación</label>
-          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg font-complementario text-[17px] text-gray-700">
+          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg font-complementario text-[17px] text-gray-700 cursor-pointer">
             <option value="null" disabled>Selecciona un tipo de habitación</option>
             <option v-for="roomType in roomTypes" :key="roomType.id" :value="roomType.id">
               {{ roomType.name }}

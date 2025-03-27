@@ -24,7 +24,7 @@ const emit = defineEmits(['update:sortBy', 'toggle-direction']);
     <select 
       :value="sortBy"
       @change="emit('update:sortBy', $event.target.value)"
-      class="p-2 w-fit text-white bg-terracota font-bold"
+      class="p-2 w-fit text-white bg-terracota font-bold cursor-pointer"
     >
       <option value="" disabled selected>Ordenar por...</option>
       <option value="name">Nombre</option>
@@ -35,7 +35,7 @@ const emit = defineEmits(['update:sortBy', 'toggle-direction']);
 
   <button
     @click="emit('toggle-direction')"
-    class="p-2 w-fit min-h-[42px] min-w-25 text-white bg-terracota font-bold border rounded-md shadow-md flex items-center justify-center gap-2"
+    class="p-2 w-fit min-h-[42px] min-w-25 text-white bg-terracota font-bold border rounded-md shadow-md flex items-center justify-center gap-2 cursor-pointer"
   >
     <span> {{ direction === 'asc' ? 'ASC' : 'DESC' }} </span>
     <i :class="direction === 'asc' ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>

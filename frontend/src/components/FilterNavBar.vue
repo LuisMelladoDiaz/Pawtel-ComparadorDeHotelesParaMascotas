@@ -86,7 +86,7 @@ const onSearch = () => {
         <select
           :value="selectedCity"
           @change="emit('update:city', $event.target.value)"
-          class="bg-white min-h-[42px] pl-8 text-[18px] shadow-sm font-complementario rounded-lg min-w-[300px]"
+          class="bg-white min-h-[42px] pl-8 text-[18px] shadow-sm font-complementario rounded-lg min-w-[300px] cursor-pointer"
         >
           <option disabled value="">Selecciona una ciudad</option>
           <option value="">Todas</option>
@@ -116,7 +116,7 @@ const onSearch = () => {
         <select 
           :value="selectedPetType" 
           @change="emit('update:petType', $event.target.value)"
-          class="bg-white min-h-[42px] pl-8 text-[18px] text-pawtel-black shadow-sm font-complementario rounded-lg p-2 min-w-[300px]"
+          class="bg-white min-h-[42px] pl-8 text-[18px] text-pawtel-black shadow-sm font-complementario rounded-lg p-2 min-w-[300px] cursor-pointer"
         >
           <option disabled value="">Elige un tipo de mascota</option>
           <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">

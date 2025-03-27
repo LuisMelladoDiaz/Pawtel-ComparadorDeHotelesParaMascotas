@@ -2,7 +2,7 @@
   <button
     :disabled="disabled"
     :class="[
-      'px-4 py-2 font-semibold rounded-lg focus:outline-none transition-transform duration-200',
+      'px-4 py-2 font-semibold rounded-lg focus:outline-none transition-transform duration-200 cursor-pointer',
       type === 'accept' ? 'bg-oliva text-white hover:bg-oliva-dark hover:scale-105' :
       type === 'reject' ? 'bg-terracota text-white hover:bg-terracota-dark hover:scale-105' :
       type === 'add' ? 'bg-azul-suave text-white hover:bg-azul-suave-dark hover:scale-105' :

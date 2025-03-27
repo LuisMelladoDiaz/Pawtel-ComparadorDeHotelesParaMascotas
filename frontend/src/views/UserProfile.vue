@@ -188,7 +188,7 @@ const logout = () => {
           <div class="flex flex-col">
             <label class="font-medium">Móvil:</label>
             <div class="flex gap-2">
-              <select v-model="editedUserData.phonePrefix" class="border p-2 rounded">
+              <select v-model="editedUserData.phonePrefix" class="border p-2 rounded cursor-pointer">
                 <option value="+34">+34</option>
                 <option value="+1">+1</option>
                 <option value="+44">+44</option>
