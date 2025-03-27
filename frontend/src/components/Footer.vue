@@ -1,6 +1,9 @@
 <template>
-  <footer class="footer bg-terracota">
+  <footer class="footer bg-terracota flex flex-col items-center">
     <p>© 2025 Pawtel (Grupo 11). Todos los derechos reservados.</p>
+    <RouterLink to="/terminos-y-condiciones">
+      <p class="underline hover:font-bold">Términos y condiciones</p>
+    </RouterLink>
     <img src="../assets/pawtel-logo-white.png" alt="Logo" class="footer-logo" />
   </footer>
 </template>

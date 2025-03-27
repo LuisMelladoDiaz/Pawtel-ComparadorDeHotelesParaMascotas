@@ -144,7 +144,7 @@ const register = async (values) => {
           />
           <label for="accept_terms" class="text-sm text-gray-700">
             Acepto los
-            <a href="/terms-and-conditions" target="_blank" class="text-azul-suave hover:underline">términos y condiciones</a>
+            <a href="/terminos-y-condiciones" target="_blank" class="text-azul-suave hover:underline">términos y condiciones</a>
           </label>
         </div>
 

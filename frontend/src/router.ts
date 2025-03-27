@@ -91,6 +91,7 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
   });
 }
 import BookingReservationForm from './views/BookingReservationForm.vue';
+import TermsAndConditions from './views/TermsAndConditions.vue';
 
 
 const routes = [
@@ -189,6 +190,14 @@ const routes = [
     path: '/hotel/:id/rooms',
     name: 'HotelRooms',
     component: createComponent({ layout: LayoutWithFilter, component: HotelRoomsAndPrices }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
+    },
+  },
+  {
+    path: '/terminos-y-condiciones',
+    name: 'TermsAndConditions',
+    component: createComponent({ layout: LayoutDefault, component: TermsAndConditions }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
