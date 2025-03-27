@@ -82,8 +82,6 @@ class HotelViewSet(viewsets.ModelViewSet):
         url_name="list_room_types_of_hotel",
     )
     def list_room_types_of_hotel(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_2(request, pk, action_name)
         room_types = HotelService.list_room_types_of_hotel(pk)
         serializer = RoomTypeSerializer(room_types, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
