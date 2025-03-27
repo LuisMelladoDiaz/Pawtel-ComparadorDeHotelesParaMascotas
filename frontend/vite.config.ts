@@ -11,13 +11,21 @@ export default defineConfig({
     vue(),
     tailwindcss(),
     VitePWA({
-      registerType: 'autoUpdate',
-      injectRegister: false, // prevent default registration script
-      srcDir: 'src',
-      filename: 'custom-sw.js',
-      strategies: 'injectManifest',
+      strategies: "injectManifest",
+      filename: "sw.js",
+      srcDir: "src",
+      workbox: {
+        disableDevLogs: true,
+      },
+      // Controls whether the browser should update the pwa automatically, or prompt the user
+      registerType: "autoUpdate",
+      devOptions: {
+        enabled: true,
+        type: "module",
+      },
       injectManifest: {
-        globPatterns: [],
+        rollupFormat: "iife",
+        injectionPoint: undefined,
       },
       manifest:{
         display: 'standalone',
@@ -53,11 +61,7 @@ export default defineConfig({
             purpose: 'maskable'
           }
         ],
-      },
-      devOptions:{
-        enabled:true,
-        type: "module",
-      } }),
+      },}),
   ],
   resolve: {
     alias: {

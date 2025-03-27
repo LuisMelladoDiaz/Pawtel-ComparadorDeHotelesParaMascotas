@@ -478,67 +478,58 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 ---
 
 ### 👨‍💻 Manuel Castillejo Vela
-
+ 
 #### 1. Información General
-
+ 
 - **Nombre del programador:** Manuel Castillejo Vela
-- **Sprint:** Sprint 1
-- **Rol en el proyecto:** Desarrollador Full-Stack
-
+- **Sprint:** Sprint 2
+- **Rol en el proyecto:** Desarrollador Fullstack
+ 
 #### 2. Tipo de Tareas en las que se Utilizó IA
-
-- Generación de código (X)
-- Refactorización de código (X)
-- Generación de documentación (X)
-- Asesoramiento técnico (X)
-- Otro (especificar):
+ 
+- [x] Generación de código
+- [x] Refactorización de código
+- [x] Generación de documentación
+- [x] Asesoramiento técnico
+- [x] Eliminación de comentarios en código (GitHub Copilot)
 
 #### 3. Uso de IA en las Tareas
-
-Para cada tarea en la que se usó IA, completar la siguiente tabla:
-
+ 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Asesoramiento técnico sobre la buena estructura de las queries en usando Tan Stack | ChatGPT | Se le pidió a la IA un asesoramiento técnico sobre como deberían estar estructurados las queries para que fueran mantenibles y eficientes. |
-| Mejorar el aspecto visual de un archivo .md | Copilot | Se le describe en que secciones se quiere mejorar el aspecto visual (ya sea con ordenación, emojis...) y se revisa que la IA haya aplicados los cambios de la manera deseada |
-| Gestión de calendario de usuarios pilotos | ChatGPT | Se le proporcionó a la IA el tiempo limitado que teníamos y la IA nos propuso un calendario base al que le añadimos nuestras especificaciones. |
+| Implementación de CRUD en Vue.js | ChatGPT | Generación de hooks para llamadas a la API y validaciones con Vee-Validate |
+| Refactorización de actualización de hoteles | ChatGPT | Corrección de errores en el flujo de actualización para mantener datos previos |
+| Documentación del API para gestión de hoteles | ChatGPT | Generación de documentación estructurada en Markdown |
+| Eliminación de comentarios innecesarios en código | GitHub Copilot | Automatización de la limpieza del código eliminando comentarios redundantes |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** Mejoró considerablemente la eficiencia en prácticamente todos los aspectos.
-
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 6-8 horas
+- **Comparación con trabajo sin IA:** Más eficiente, permitió detectar errores rápidamente y mejorar rendimiento en menos tiempo
+ 
 #### 5. Prompts Utilizados
+ 
+#### Prompt para mejorar el flujo de actualización en Vue.js
 
-Listar los prompts que fueron más efectivos para completar las tareas:
+```plaintext
+En Vue.js, quiero que al actualizar un hotel, se mantengan los datos previos y solo se modifiquen los campos editados. ¿Cómo puedo hacerlo?
 
-1. ponle emojis relacionados a esto: - Poner en marcha el backend y frontend.
+Usando GitHub Copilot, quiero limpiar mi código eliminando comentarios redundantes y manteniendo solo los esenciales. ¿Cómo hacerlo de forma eficiente?
 
-Poner en marcha el pre-commit.yaml.
-Poner en marcha el frontend como PWA.
-
-2. Hazme un resumen ejecutivo para el documento de calendario de gestion de usuarios pilotos
-
-3. cuando yo defino el type en vue.js esto estaria bien aun que no cogiera todos los atributos de la clase HotelOwner pero si los modificables: export type HotelOwner = {
-    id: number;
-    username: string;
-    email: string;
-    phone: string;
-    password: string;
-    date_joined: string;
-}
+Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso `computed` para calcular los elementos por página, pero quiero optimizar la lógica y mejorar el rendimiento. ¿Cómo puedo hacerlo de manera eficiente?
+```
 
 #### 6. Problemas Encontrados y Limitaciones
-
-- **Errores o respuestas incorrectas de la IA:** El error fue mayor parte humano al no ser capaz de escribir prompts que fueran correctamente entendibles por la IA utilizada.
-- **Limitaciones detectadas en la IA:** En algunos momentos proporcionó código incoherente que tuvo que ser corregido.
-- **Propuestas de mejora en el uso de IA:** A nivel personal ser más meticuloso con los prompts seleccionados.
-
+ 
+- **Errores o respuestas incorrectas de la IA:** En algunos casos, ChatGPT sugirió soluciones con hooks de Vue obsoletos.
+- **Limitaciones detectadas en la IA:** Limitaciones relacionadas con últimas versiones de algunos componentes.
+- **Propuestas de mejora en el uso de IA:**  Ajustar los prompts y validar siempre las respuestas generadas.
+ 
 #### 7. Evaluación General
-
+ 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** No hay comentarios adicionales.
-
+- **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad del código.
+ 
 ---
 
 ### 👨‍💻 Javier Ruiz Garrido
