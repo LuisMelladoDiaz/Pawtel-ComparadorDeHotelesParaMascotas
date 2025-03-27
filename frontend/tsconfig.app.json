@@ -12,6 +12,7 @@
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "noEmitOnError": false,
 
     "baseUrl": "./src",
 
