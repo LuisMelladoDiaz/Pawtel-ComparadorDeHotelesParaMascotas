@@ -35,7 +35,8 @@ export default defineConfig({
         background_color: '#FFFFFF',
         lang: 'es-ES',
         name: 'Pawtel',
-        description: 'Bienvenido a PawTel, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.',
+        short_name: 'Pawtel',
+        description: 'Bienvenido a Pawtel, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.',
         icons: [
           {
             src: '/pwa-192x192.png',
