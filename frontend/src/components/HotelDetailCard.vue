@@ -26,8 +26,8 @@ defineProps({
 
 <template>
   <!-- Versión Escritorio -->
-  <div class="hotel-detail-container max-w-7xl mx-auto flex-col hidden md:flex mt-2">
-    <div class="bg-terracota text-white text-center py-4 rounded-t-lg max-w-full! w-full!">
+  <div class="hotel-detail-container max-w-7xl mx-auto flex-col hidden md:flex mt-4">
+    <div class="bg-terracota text-white text-center py-4 rounded-b-lg max-w-full! w-full!">
       <h2 class="text-3xl font-bold">{{ name }}</h2>
       <p class="text-lg flex items-center justify-center underline">
         <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
@@ -36,7 +36,7 @@ defineProps({
     </div>
 
     <!-- Enlaces para "Vista General" y "Habitaciones y Precios" -->
-    <div class="bg-white shadow-md py-3 flex justify-between w-full px-6 text-black text-lg border-t mt-4">
+    <div class="bg-white shadow-md py-3 flex justify-between w-full px-6 text-black text-lg border-b">
       <div class="flex flex-row w-full justify-center space-x-2">
         <router-link
           :to="$route.path"
@@ -59,7 +59,7 @@ defineProps({
       <!-- Columna 2: Galería de imágenes -->
       <div class="flex-1">
         <div class="image-gallery grid grid-cols-2 gap-2">
-          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-45 object-cover rounded-lg" />
+          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-40 object-cover rounded-lg" />
         </div>
       </div>
 
@@ -135,11 +135,11 @@ defineProps({
       </div>
     </div>
 
-    <router-link to="/login" v-if="!isLoggedIn" class="w-full !mt-0 mb-4">
-      <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
+    <router-link to="/login" v-if="!isLoggedIn" class="w-full !mt-4 mb-4">
+      <Button type="add" class="w-full !m-0 mb-4">Inicia sesión para reservar</Button>
     </router-link>
-    <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full !mt-0 mb-4">
-      <Button type="add" class="w-full !mt-0 mb-4">Reservar</Button>
+    <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full !mt-4 mb-4">
+      <Button type="add" class="w-full !m-0 mb-4">Reservar</Button>
     </router-link>
   </div>
 </template>

@@ -6,6 +6,7 @@ import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import Button from '@/components/Button.vue';
 import { useGetHotelById } from '@/data-layer/hooks/hotels';
 import { useIsLoggedIn } from '@/data-layer/auth';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -88,8 +89,8 @@ const handleReservation = (roomId, quantity) => {
 
   <template v-else>
     <!-- Contenedor con nombre y ubicación -->
-    <div class="hotel-rooms-container max-w-6xl mx-auto flex-col mt-2">
-      <div class="bg-terracota text-white text-center py-4 rounded-t-lg">
+    <div class="hotel-rooms-container max-w-7xl mx-auto flex-col mt-4 hidden md:flex">
+      <div class="bg-terracota text-white py-4 text-center py-4 rounded-b-lg w-full">
         <h2 class="text-3xl font-bold">{{ hotel.name }}</h2>
         <p class="text-lg flex items-center justify-center underline">
           <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
@@ -98,7 +99,7 @@ const handleReservation = (roomId, quantity) => {
       </div>
 
       <!-- Enlaces para "Vista General" y "Habitaciones y Precios" -->
-      <div class="bg-white shadow-md py-3 flex justify-between w-full px-6 text-black text-lg border-t mt-4">
+      <div class="bg-white shadow-md py-3 flex justify-between w-full px-6 text-black text-lg border-b">
         <div class="flex flex-row w-full justify-center space-x-2">
           <router-link
             :to="`/hotel/${hotelId}`"
@@ -118,7 +119,7 @@ const handleReservation = (roomId, quantity) => {
       </div>
 
       <!-- Mensaje sobre filtros -->
-      <div class="bg-gray-50 py-3 px-4 my-4 rounded-md">
+      <div class="bg-gray-50 py-3 px-4 rounded-md">
         <p class="text-azul-suave text-sm md:text-base text-center">
           Los resultados mostrados se basan en los filtros seleccionados. Si no encuentras la opción ideal, ajusta los filtros para encontrar más alternativas.
         </p>
