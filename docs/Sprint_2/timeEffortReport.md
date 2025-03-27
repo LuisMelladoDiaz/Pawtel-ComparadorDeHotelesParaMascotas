@@ -75,10 +75,11 @@
 
 ---
 
+
 ## Reporte de tiempo de Yesica Garate Fuentes
 
-**Periodo:** 21/02/2025 - 25/03/2025
-**Total de tiempo trabajado:** 52:21:30
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 40:54:19
 
 ### Proyecto Pawtel - Distribución del tiempo
 
@@ -101,7 +102,6 @@
 | Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto (SPRINT 01) | 04:00:00 |
 | Creación de Mock-Ups en Balsamiq (Perfil de Usuario final, Home Page y Sobre Nosotros) | 03:44:58 |
 | Creación de Mock-Ups en Balsamiq (Perfil de Usuario) | 04:54:00 |
-| Clases - Presentación de Avance del Proyecto | 04:00:00 |
 | Ajustes del desarrollo de la Presentación según el feedback recibido II | 03:40:00 |
 | Ajustes en Home Page según feedback recibido | 00:29:00 |
 | Ajustes del desarrollo de la Presentación según el feedback recibido | 04:36:00 |
@@ -109,7 +109,6 @@
 | Creación de Mock-Ups en Balsamiq (Perfil de Usuario final, Home Page y Sobre Nosotros) | 03:44:58 |
 | Creación de Mock-Ups en Balsamiq (Perfil de Usuario) | 04:54:00 |
 | Desarrollo de Presentación: Introducción, Business Model y Análisis del Proyecto (SPRINT 01) | 00:37:10 |
-| Clases - Presentación de Avance del Proyecto | 04:00:00 |
 | Revisión y refinamiento de presentación (slides) | 02:52:00 |
 | Autoformación en tecnologías y frameworks del proyecto I | 01:33:00 |
 | Finalización versión 1.0 de Home Page | 03:25:00 |
