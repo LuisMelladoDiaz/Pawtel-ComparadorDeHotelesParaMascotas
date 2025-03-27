@@ -29,6 +29,10 @@ class RoomTypeService:
 
     def authorize_action_room_type_level_2(request, room_type_id, action_name):
         role_user = AppUserService.get_current_role_user(request)
+
+        if action_name == "retrieve" and role_user is None:
+            return
+        
         PermissionService.check_permission_room_type_service(role_user, action_name)
         RoomTypeService.retrieve_room_type(room_type_id)
         return role_user
