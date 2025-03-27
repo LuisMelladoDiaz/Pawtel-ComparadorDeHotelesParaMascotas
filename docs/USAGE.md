@@ -99,3 +99,60 @@ npm run preview
 ```
 
 Para comprobar que efectivamente estás ejecutando la app puedes probar a descargarla, viendo que funciona también de manera local; o puedes comprobar en las herramientas de desarrollador, que en el apartado de aplicación te sale el archivo de manifiesto de la aplicación.
+
+## Guía configuración STRIPE
+
+### Cómo configurar las variables de entorno para poder ejecutar el proyecto
+
+Añade en el .env la siguiente clave de stripe para poder realizar pagos asociados a nuestra cuenta.     
+STRIPE_SECRET_KEY (pongase en contacto con nosotros para obtener la SECRET_KEY)
+
+**En caso de error darle un valor aleatorio a la variable de entorno STRIPE_SECRET_ENDPOINT**
+
+Gracias a esta variable de entorno, podrás darle a pagar y te enviará a stripe para pagar; pero para que la reserva se guarda en la base de dato necesitarás los siguientes datos extra.
+
+
+### Cómo configurar las variables de entorno para que el pago de la reserva en stripe se vea reflejado en tu BD
+
+Primero tenemos que **configurar la variable de entorno STRIPE_SECRET_ENDPOINT** para que pueda procesar el evento de respuesta enviado por stripe al servidor.
+
+Tendrás que **acceder a nuestra cuenta de stripe** con las credenciales de pawtel (pongase en contacto con nosotros para obtener el correo y contraseña)
+
+Ahí accede a la url https://dashboard.stripe.com/test/workbench/webhooks/
+
+Una vez dentro, en "destinos de eventos", pulsa "Añade un destino" para añadir tu endpoint de escucha. Te obligará a seleccionar que eventos quieres que escuche; selecciona todos los eventos de **checkout**.
+
+Selecciona "Punto de conexión de webhook".
+
+Finalmente te pedirá una dirección URL para el endpoint y una descripción. Una vez que le des a crear ya casi estará listo, pero antes debemos conseguir la URL.
+
+Para ello, deberemos **exponer el puerto 8000** (el backend) para que podamos recibir el evento de stripe. Puedes usar la herramienta ngrok; al instalarla te puede saltar el antivirus pero es porque al ser un programa que te abre puertos y los expone a internet.
+
+Una vez descargado ngrok en https://ngrok.com/downloads/windows
+
+Deberás regitrarte y obtener tu tokken personal de autorización.
+
+Ejecutar los siguientes comandos
+
+```bash
+ngrok config add-authtoken TU_AUTHTOKEN
+```
+
+```bash
+ngrok http 8000
+```
+
+**Esto te proporcionará una URL temporal que cambiará cada vez que vuelvas a abrir el puerto; por lo que si quiere volver a testear que funciona la pasarela deberás modificar el webhook en la página de stripe.**
+
+Ya con la URL creada deberás añadir como endpint **URL/bookings/stripe/** 
+
+Es importante que acabe en / o te saltará un error al probarlo.
+
+Una vez creada, pulsas en el destino para ver sus datos y a tu derecha deberás ver el campo "Secreto de firma"; ese será el valor de STRIPE_SECRET_ENDPOINT.
+
+### Cómo pagar con stripe
+
+Para pagar con stripe existe una tarjeta de crédito de prueba cuyo número es 4242 4242 4242 4242. Puedes usar cualquier fecha de caducidad válida y cualquier CVV.Esta tarjeta siempre te va a aceptar el pago.
+
+**Nota**: si no tienes configurado el STRIPE_SECRET_ENDPOINT, ni abres el puerto ni te configuras el endpoint en stripe lo único que pasará es que no se guardará la reserva en la base de datos.
+
