@@ -31,178 +31,178 @@
 | Claudio Cortés Carrasco | Sergio Trenado González |
 | Yesica Garate Fuentes | David González Martínez |
 
-
 ---
-# Table of Contents
+# Tabla de Contenidos
 
-## [Customer Agreement](#customer-agreement)
-  - [1. Acceptance of Terms](#1-acceptance-of-terms)
-  - [2. Description of Service](#2-description-of-service)
-  - [3. User Accounts](#3-user-accounts)
-  - [4. Booking and Payment](#4-booking-and-payment)
-  - [5. Privacy and Data Protection](#5-privacy-and-data-protection)
-  - [6. Governing Law](#6-governing-law)
-  - [7. Contact Information](#7-contact-information)
+## [Acuerdo con el Cliente](#acuerdo-con-el-cliente)
+  - [1. Aceptación de los Términos](#1-aceptacion-de-los-terminos)
+  - [2. Descripción del Servicio](#2-descripcion-del-servicio)
+  - [3. Cuentas de Usuario](#3-cuentas-de-usuario)
+  - [4. Reservas y Pagos](#4-reservas-y-pagos)
+  - [5. Privacidad y Protección de Datos](#5-privacidad-y-proteccion-de-datos)
+  - [6. Ley Aplicable](#6-ley-aplicable)
+  - [7. Información de Contacto](#7-informacion-de-contacto)
 
-## [Service Level Agreement (SLA)](#service-level-agreement-sla)
-  - [1. Introduction](#1-introduction)
-  - [2. Definitions](#2-definitions)
-  - [3. Service Availability](#3-service-availability)
-  - [4. Payment Processing](#4-payment-processing)
-  - [5. Customer Support](#5-customer-support)
-  - [6. Responsibilities of Each Party](#6-responsibilities-of-each-party)
-    - [Pawtel’s Responsibilities](#pawtels-responsibilities)
-    - [Hotel Owners’ Responsibilities](#hotel-owners-responsibilities)
-    - [Users’ Responsibilities](#users-responsibilities)
-  - [7. Penalties and Compensation](#7-penalties-and-compensation)
-  - [8. SLA Modifications](#8-sla-modifications)
-  - [9. Dispute Resolution](#9-dispute-resolution)
-  - [10. Agreement Acceptance](#10-agreement-acceptance)
----
-# Customer Agreement
-
-Welcome to Pawtel! By using our platform, you agree to the following terms and conditions. This agreement establishes the legal framework governing the use of our services, ensuring a transparent and secure experience for all users. Please read this agreement carefully before accessing or using our services.
-
+## [Acuerdo de Nivel de Servicio (SLA)](#acuerdo-de-nivel-de-servicio-sla)
+  - [1. Introducción](#1-introduccion)
+  - [2. Definiciones](#2-definiciones)
+  - [3. Disponibilidad del Servicio](#3-disponibilidad-del-servicio)
+  - [4. Procesamiento de Pagos](#4-procesamiento-de-pagos)
+  - [5. Soporte al Cliente](#5-soporte-al-cliente)
+  - [6. Responsabilidades de Cada Parte](#6-responsabilidades-de-cada-parte)
+    - [Responsabilidades de Pawtel](#responsabilidades-de-pawtel)
+    - [Responsabilidades de los Propietarios de Hoteles](#responsabilidades-de-los-propietarios-de-hoteles)
+    - [Responsabilidades de los Usuarios](#responsabilidades-de-los-usuarios)
+  - [7. Penalizaciones y Compensaciones](#7-penalizaciones-y-compensaciones)
+  - [8. Modificaciones del SLA](#8-modificaciones-del-sla)
+  - [9. Resolución de Conflictos](#9-resolucion-de-conflictos)
+  - [10. Aceptación del Acuerdo](#10-aceptacion-del-acuerdo)
 ---
 
-## 1. Acceptance of Terms
+# Acuerdo con el Cliente
 
-By accessing and using Pawtel, you acknowledge that you have read, understood, and agree to be bound by this Customer Agreement. If you do not agree with these terms, you must refrain from using our platform. Continued use of Pawtel after updates to this Agreement constitutes acceptance of the revised terms.
-
-This Agreement applies to all users, including pet owners, service providers, and visitors to the platform.
+¡Bienvenido a Pawtel! Al utilizar nuestra plataforma, aceptas los siguientes términos y condiciones. Este acuerdo establece el marco legal que regula el uso de nuestros servicios, asegurando una experiencia transparente y segura para todos los usuarios. Por favor, lee este acuerdo cuidadosamente antes de acceder o utilizar nuestros servicios.
 
 ---
 
-## 2. Description of Service
+## 1. Aceptación de los Términos
 
-Pawtel is an online platform designed to help pet owners find the best accommodations for their pets. Our service enables users to search, compare, and book pet residences or hotels efficiently. The platform provides a seamless experience by offering detailed listings, verified customer reviews, and secure payment options.
+Al acceder y usar Pawtel, reconoces que has leído, comprendido y aceptas estar sujeto a este Acuerdo con el Cliente. Si no estás de acuerdo con estos términos, debes abstenerte de usar nuestra plataforma. El uso continuo de Pawtel después de las actualizaciones de este Acuerdo constituye la aceptación de los términos revisados.
 
-Pawtel acts as an intermediary and does not own, operate, or manage any pet accommodations. We facilitate transactions between users and service providers but do not assume responsibility for the quality or safety of services provided by third parties.
-
----
-
-## 3. User Accounts
-
-- To access certain features, users must create an account with accurate and complete information, including their name, contact details, and pet information.
-- Users are responsible for maintaining the confidentiality of their account credentials and must notify Pawtel immediately of any unauthorized use.
-- The creation of multiple accounts by a single user for fraudulent purposes is strictly prohibited.
-- Pawtel reserves the right to suspend or terminate accounts that provide false information or engage in misconduct.
+Este Acuerdo se aplica a todos los usuarios, incluidos propietarios de mascotas, proveedores de servicios y visitantes de la plataforma.
 
 ---
 
-## 4. Booking and Payment
+## 2. Descripción del Servicio
 
-- All bookings must be made exclusively through Pawtel’s platform to ensure transparency and secure transactions.
-- Users agree to pay all applicable fees at the time of booking. Payments are processed through a secure payment gateway to protect financial data.
-- Service providers set their own cancellation and refund policies, which will be displayed on their listings. Users must review these terms before booking.
-- In the event of a dispute regarding payments, users may contact Pawtel's customer support, but Pawtel is not liable for disputes arising between users and service providers.
+Pawtel es una plataforma en línea diseñada para ayudar a los propietarios de mascotas a encontrar los mejores alojamientos para sus mascotas. Nuestro servicio permite a los usuarios buscar, comparar y reservar residencias o hoteles para mascotas de manera eficiente. La plataforma ofrece una experiencia fluida al proporcionar listados detallados, reseñas verificadas de clientes y opciones de pago seguras.
 
----
-
-## 5. Privacy and Data Protection
-
-- Pawtel collects and processes user data in accordance with our Privacy Policy, ensuring compliance with applicable laws.
-- Users consent to the collection and use of their personal information for the purpose of providing and improving our services.
-- Pawtel complies with the **General Data Protection Regulation (GDPR) (EU) 2016/679** and **Spanish Organic Law 3/2018 on the Protection of Personal Data and Digital Rights (LOPDGDD)**.
-- Users have the right to access, rectify, delete, or restrict the processing of their personal data. Requests can be made by contacting **pawteles@gmail.com**.
-- Pawtel employs encryption and other security measures to protect user data from unauthorized access.
+Pawtel actúa como un intermediario y no posee, opera ni gestiona ningún alojamiento para mascotas. Facilitamos transacciones entre usuarios y proveedores de servicios, pero no asumimos responsabilidad por la calidad o seguridad de los servicios proporcionados por terceros.
 
 ---
 
-## 6. Governing Law
+## 3. Cuentas de Usuario
 
-This Agreement shall be governed by and interpreted in accordance with the laws of **Spain and the European Union**. Any legal disputes must be resolved in the competent courts of Spain.
-
----
-
-## 7. Contact Information
-
-If you have any questions regarding this Agreement, please contact us at **pawteles@gmail.com**.
-
-By using Pawtel, you acknowledge that you have read, understood, and agreed to these terms.
+- Para acceder a ciertas funciones, los usuarios deben crear una cuenta con información precisa y completa, incluyendo su nombre, detalles de contacto e información sobre la mascota.
+- Los usuarios son responsables de mantener la confidencialidad de sus credenciales de cuenta y deben notificar a Pawtel inmediatamente de cualquier uso no autorizado.
+- La creación de múltiples cuentas por un solo usuario con fines fraudulentos está estrictamente prohibida.
+- Pawtel se reserva el derecho de suspender o terminar cuentas que proporcionen información falsa o participen en conductas inapropiadas.
 
 ---
 
-# Service Level Agreement (SLA)
+## 4. Reservas y Pagos
 
-## 1. Introduction
-
-This Service Level Agreement (SLA) defines the terms and conditions under which **Pawtel** provides its booking platform for pet accommodations to **users** and **hotel owners**. It establishes the service quality, availability, and response times we guarantee.
-
----
-
-## 2. Definitions
-
-- **Pawtel:** An intermediary platform that allows users to book stays at pet accommodations.
-- **Users:** Individuals booking pet accommodations through Pawtel.
-- **Hotel Owners:** Owners or managers of pet accommodations listed on the platform.
-- **Commission:** A percentage deducted from the user's payment before transferring the remaining amount to hotel owners.
-- **Response Time:** The period within which Pawtel commits to responding to support requests.
+- Todas las reservas deben realizarse exclusivamente a través de la plataforma de Pawtel para garantizar transacciones transparentes y seguras.
+- Los usuarios aceptan pagar todas las tarifas aplicables en el momento de la reserva. Los pagos se procesan a través de una pasarela de pago segura para proteger los datos financieros.
+- Los proveedores de servicios establecen sus propias políticas de cancelación y reembolsos, que se mostrarán en sus listados. Los usuarios deben revisar estos términos antes de hacer una reserva.
+- En caso de una disputa relacionada con pagos, los usuarios pueden ponerse en contacto con el soporte de Pawtel, pero Pawtel no es responsable de disputas entre usuarios y proveedores de servicios.
 
 ---
 
-## 3. Service Availability
+## 5. Privacidad y Protección de Datos
 
-- Pawtel guarantees **99.5% uptime**, except for scheduled maintenance or force majeure events.
-- Scheduled maintenance will be announced at least **48 hours** in advance and, whenever possible, performed during low-traffic hours.
-
----
-
-## 4. Payment Processing
-
-- Users will pay the full booking amount through the platform.
-- Pawtel will retain a **10% commission** before transferring the remaining funds to hotel owners.
-- Transfers to hotel owners will be processed within **7 to 10 business days** after the stay is confirmed.
+- Pawtel recopila y procesa los datos de los usuarios de acuerdo con nuestra Política de Privacidad, asegurando el cumplimiento de las leyes aplicables.
+- Los usuarios consienten la recopilación y el uso de su información personal con el propósito de proporcionar y mejorar nuestros servicios.
+- Pawtel cumple con el **Reglamento General de Protección de Datos (GDPR) (UE) 2016/679** y la **Ley Orgánica 3/2018 de Protección de Datos Personales y Garantía de los Derechos Digitales (LOPDGDD)**.
+- Los usuarios tienen el derecho de acceder, rectificar, eliminar o restringir el procesamiento de sus datos personales. Las solicitudes se pueden realizar contactando a **pawteles@gmail.com**.
+- Pawtel emplea medidas de seguridad, como cifrado, para proteger los datos de los usuarios contra el acceso no autorizado.
 
 ---
 
-## 5. Customer Support
+## 6. Ley Aplicable
 
-- **Support hours:** Monday to Friday, **9:00 AM - 6:00 PM (CET)**.
-- **Response times:**
-  - General inquiries: **24 business hours**.
-  - Urgent issues (e.g., payment failures): **4 business hours**.
-- **Contact channel:** **pawteles@gmail.com**.
+Este Acuerdo se regirá e interpretará de acuerdo con las leyes de **España y la Unión Europea**. Cualquier disputa legal debe resolverse en los tribunales competentes de España.
 
 ---
 
-## 6. Responsibilities of Each Party
+## 7. Información de Contacto
 
-### Pawtel’s Responsibilities:
-- Ensure proper platform functionality.
-- Manage payments and transfers to hotel owners as agreed.
-- Provide technical support and customer service within the specified timeframes.
+Si tienes alguna pregunta sobre este Acuerdo, por favor contáctanos a **pawteles@gmail.com**.
 
-### Hotel Owners’ Responsibilities:
-- Honor confirmed bookings made through Pawtel.
-- Provide a safe and high-quality service for pets.
-- Keep their pricing and availability information up to date on the platform.
-
-### Users’ Responsibilities:
-- Provide accurate information about their pets and needs.
-- Comply with cancellation and refund policies set by each hotel.
+Al usar Pawtel, reconoces que has leído, comprendido y aceptas estos términos.
 
 ---
 
-## 7. Penalties and Compensation
+# Acuerdo de Nivel de Servicio (SLA)
 
-- If Pawtel fails to meet the guaranteed availability level, affected users may receive compensation, such as credits or discounts.
-- If a hotel cancels a reservation without justification, Pawtel reserves the right to apply penalties, including removal from the platform.
+## 1. Introducción
 
----
-
-## 8. SLA Modifications
-
-Pawtel reserves the right to modify this SLA at any time. Changes will be announced at least **30 days in advance**.
+Este Acuerdo de Nivel de Servicio (SLA) define los términos y condiciones bajo los cuales **Pawtel** proporciona su plataforma de reservas para alojamientos para mascotas a **usuarios** y **propietarios de hoteles**. Establece la calidad del servicio, disponibilidad y tiempos de respuesta que garantizamos.
 
 ---
 
-## 9. Dispute Resolution
+## 2. Definiciones
 
-Any disputes related to this SLA will first be resolved through negotiation. If no agreement is reached, arbitration will be conducted under Spanish law.
+- **Pawtel:** Plataforma intermediaria que permite a los usuarios reservar estancias en alojamientos para mascotas.
+- **Usuarios:** Personas que reservan alojamientos para mascotas a través de Pawtel.
+- **Propietarios de Hoteles:** Propietarios o gerentes de alojamientos para mascotas listados en la plataforma.
+- **Comisión:** Porcentaje descontado del pago del usuario antes de transferir el monto restante a los propietarios de hoteles.
+- **Tiempo de Respuesta:** El período dentro del cual Pawtel se compromete a responder a las solicitudes de soporte.
 
 ---
 
-## 10. Agreement Acceptance
+## 3. Disponibilidad del Servicio
 
-By using the Pawtel platform, users and service providers agree to the terms outlined in this SLA.
+- Pawtel garantiza un **99.5% de tiempo de actividad**, excepto por mantenimiento programado o eventos de fuerza mayor.
+- El mantenimiento programado será anunciado con al menos **48 horas** de anticipación y, siempre que sea posible, se realizará durante horas de baja demanda.
+
+---
+
+## 4. Procesamiento de Pagos
+
+- Los usuarios pagarán el monto total de la reserva a través de la plataforma.
+- Pawtel retendrá una **comisión del 10%** antes de transferir los fondos restantes a los propietarios de los hoteles.
+- Las transferencias a los propietarios de los hoteles se procesarán dentro de **7 a 10 días hábiles** después de que se confirme la estancia.
+
+---
+
+## 5. Soporte al Cliente
+
+- **Horas de soporte:** De lunes a viernes, **9:00 AM - 6:00 PM (CET)**.
+- **Tiempos de respuesta:**
+  - Consultas generales: **24 horas hábiles**.
+  - Problemas urgentes (por ejemplo, fallos en pagos): **4 horas hábiles**.
+- **Canal de contacto:** **pawteles@gmail.com**.
+
+---
+
+## 6. Responsabilidades de Cada Parte
+
+### Responsabilidades de Pawtel:
+- Asegurar el correcto funcionamiento de la plataforma.
+- Gestionar pagos y transferencias a los propietarios de los hoteles según lo acordado.
+- Proporcionar soporte técnico y atención al cliente dentro de los plazos establecidos.
+
+### Responsabilidades de los Propietarios de Hoteles:
+- Cumplir con las reservas confirmadas realizadas a través de Pawtel.
+- Ofrecer un servicio seguro y de alta calidad para las mascotas.
+- Mantener actualizada la información sobre precios y disponibilidad en la plataforma.
+
+### Responsabilidades de los Usuarios:
+- Proporcionar información precisa sobre sus mascotas y necesidades.
+- Cumplir con las políticas de cancelación y reembolso establecidas por cada hotel.
+
+---
+
+## 7. Penalizaciones y Compensaciones
+
+- Si Pawtel no cumple con el nivel de disponibilidad garantizado, los usuarios afectados pueden recibir compensación, como créditos o descuentos.
+- Si un hotel cancela una reserva sin justificación, Pawtel se reserva el derecho de aplicar penalizaciones, incluida la eliminación de la plataforma.
+
+---
+
+## 8. Modificaciones del SLA
+
+Pawtel se reserva el derecho de modificar este SLA en cualquier momento. Los cambios se anunciarán con al menos **30 días** de anticipación.
+
+---
+
+## 9. Resolución de Conflictos
+
+Cualquier disputa relacionada con este SLA se resolverá primero mediante negociación. Si no se llega a un acuerdo, se llevará a cabo un arbitraje bajo la ley española.
+
+---
+
+## 10. Aceptación del Acuerdo
+
+Al usar la plataforma Pawtel, los usuarios y proveedores de servicios aceptan los términos establecidos en este SLA.
