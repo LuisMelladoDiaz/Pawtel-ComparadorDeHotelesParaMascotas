@@ -1,7 +1,5 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
-import NavbarTerracota from '../components/NavbarTerracota.vue';
-import Footer from '../components/Footer.vue';
 import Button from '../components/Button.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserQuery } from "@/data-layer/auth";
@@ -26,9 +24,9 @@ const currentHotelOwnerId = computed(() => currentHotelOwner?.value?.id || null)
 const editedUserData = ref({
   username: userDataComputed.value.username || '',
   email: userDataComputed.value.email || '',
-  password: '', // Aquí puedes manejar mejor la contraseña si es necesario
+  password: '',
   phone: userDataComputed.value.phone || '',
-  phonePrefix: userDataComputed.value.phonePrefix || '+34', // O el valor que tenga por defecto
+  phonePrefix: userDataComputed.value.phonePrefix || '+34',
 });
 
 // Hooks para actualizar y eliminar
@@ -62,7 +60,7 @@ const updateProfile = () => {
     username: editedUserData.value.username,
     email: editedUserData.value.email,
     phone: editedUserData.value.phone,
-    password: editedUserData.value.password || "password123", // Aquí puedes manejar mejor la contraseña si es necesario
+    password: editedUserData.value.password || "password123",
   };
 
   if (userDataComputed.value.role === "customer") {
@@ -125,7 +123,6 @@ const logout = () => {
 
 <template>
   <div class="flex flex-col min-h-screen bg-gray-100">
-    <NavbarTerracota />
     <div class="flex justify-center items-start gap-5 p-5">
       <!-- Sidebar -->
       <aside class="w-64 flex flex-col items-center bg-white p-4 border-r border-gray-300">
@@ -188,6 +185,5 @@ const logout = () => {
         </div>
       </main>
     </div>
-    <Footer />
   </div>
 </template>
