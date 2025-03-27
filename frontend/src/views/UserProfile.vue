@@ -1,117 +1,189 @@
 <script setup>
-import { ref } from 'vue';
-import NavbarTerracota from '../components/NavBarTerracota.vue';
-import Footer from '../components/Footer.vue';
+import { ref, computed, watch } from 'vue';
 import Button from '../components/Button.vue';
-import Modal from '../components/Modal.vue';
-import Alert from '../components/Alert.vue';
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { useUserQuery } from "@/data-layer/auth";
+import { useUpdateCustomer, useDeleteCustomer, useGetCurrentCustomer } from "@/data-layer/hooks/customers";
+import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } from "@/data-layer/hooks/hotelOwners";
 
-const defaultProfilePicture = 'https://randomuser.me/api/portraits/lego/2.jpg';
+// Otros imports y referencias
+const fileInput = ref(null);
+const showPassword = ref(false);
+const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';
 
-const user = ref({
-    profilePicture: '',
-    username: 'lego_leguez',
-    firstName: 'Lego',
-    lastName: 'Leguez',
-    email: 'lego.leguez@gmail.com',
-    phone: '+34 600 123 456',
-    address: 'Calle Falsa 123, Legoland, Florida',
-    registeredSince: '15 de enero de 2023'
+const { data: userData, isLoading: isLoadingUserData } = useUserQuery();
+const { data: currentCustomer } = useGetCurrentCustomer();
+const { data: currentHotelOwner } = useGetCurrentHotelOwner();
+
+// Computed para acceder a los datos del usuario de forma segura
+const userDataComputed = computed(() => userData?.value || {});
+const currentCustomerId = computed(() => currentCustomer?.value?.id || null);
+const currentHotelOwnerId = computed(() => currentHotelOwner?.value?.id || null);
+
+// Crear un objeto reactivo para almacenar los datos modificados
+const editedUserData = ref({
+  username: userDataComputed.value.username || '',
+  email: userDataComputed.value.email || '',
+  password: '',
+  phone: userDataComputed.value.phone || '',
+  phonePrefix: userDataComputed.value.phonePrefix || '+34',
 });
 
-const showPasswordModal = ref(false);
-const showAlert = ref('');
-const isLoggingOut = ref(false);
-const isDeletingAccount = ref(false);
+// Hooks para actualizar y eliminar
+const { mutate: updateCustomer } = useUpdateCustomer();
+const { mutate: deleteCustomer } = useDeleteCustomer();
+const { mutate: updateHotelOwner } = useUpdateHotelOwner();
+const { mutate: deleteHotelOwner } = useDeleteHotelOwner();
 
-const logout = () => {
-    isLoggingOut.value = true;
-    setTimeout(() => {
-        isLoggingOut.value = false;
-    }, 3000);
+const triggerFileInput = () => fileInput.value.click();
+
+const uploadPhoto = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      userDataComputed.value.profilePicture = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
 };
 
+const togglePasswordVisibility = () => {
+  showPassword.value = !showPassword.value;
+};
+
+// Actualización del perfil, enviando id y datos
+const updateProfile = () => {
+  console.log("update - ", editedUserData.value.username);
+
+  const updatedData = {
+    username: editedUserData.value.username,
+    email: editedUserData.value.email,
+    phone: editedUserData.value.phone,
+    password: editedUserData.value.password || "password123",
+  };
+
+  if (userDataComputed.value.role === "customer") {
+    const customerId = currentCustomerId.value;
+    updateCustomer({ 
+      customerId, 
+      ownerData: updatedData
+    }, {
+      onSuccess: () => { 
+        alert("Perfil actualizado con éxito.");
+        window.location.href = "/";
+      },
+      onError: () => alert("Error al actualizar el perfil.")
+    });
+  } else if (userDataComputed.value.role === "hotel_owner") {
+    const hotelOwnerId = currentHotelOwnerId.value;
+    updateHotelOwner({ 
+      hotelOwnerId, 
+      partialData: updatedData
+    }, {
+      onSuccess: () => { 
+        alert("Perfil actualizado con éxito.");
+        window.location.href = "/";
+      },
+      onError: () => alert("Error al actualizar el perfil.")
+    });
+  }
+};
+
+// Eliminación de cuenta, enviando id
 const deleteAccount = () => {
-    isDeletingAccount.value = true;
-    setTimeout(() => {
-        isDeletingAccount.value = false;
-    }, 3000);
+  if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.")) {
+    if (userDataComputed.value.role === "customer") {
+      const customerId = currentCustomerId.value;
+      deleteCustomer(customerId, {
+        onSuccess: () => {
+          alert("Cuenta eliminada.");
+          window.location.href = "/register";
+        },
+        onError: () => alert("Error al eliminar la cuenta.")
+      });
+    } else if (userDataComputed.value.role === "hotel_owner") {
+      const hotelOwnerId = currentHotelOwnerId.value;
+      deleteHotelOwner(hotelOwnerId, {
+        onSuccess: () => {
+          alert("Cuenta eliminada.");
+          window.location.href = "/login";
+        },
+        onError: () => alert("Error al eliminar la cuenta.")
+      });
+    }
+  }
+};
+
+const logout = () => {
+  alert("Sesión cerrada.");
+  window.location.href = "/login";
 };
 </script>
 
 <template>
-        <div class="max-w-8xl mx-auto px-4 py-8 flex-grow flex items-center justify-center">
-
-            <div class="bg-white shadow-md rounded-md p-5 border w-full max-w-5xl">
-                <h2 class="text-2xl font-semibold mb-5 text-center border-b pb-3">Perfil de Usuario</h2>
-                <div class="flex flex-col md:flex-row">
-                    <!-- Contenedor Izquierdo -->
-                    <div class="w-full md:w-3/8 p-4 border-r flex flex-col items-center text-center mb-6 md:mb-0">
-                        <div class="w-24 h-24 mb-3 flex justify-center items-center mx-auto">
-                            <img :src="user.profilePicture || defaultProfilePicture" alt="Foto de perfil" class="w-24 h-24 rounded-full mx-auto" />
-                        </div>
-                        <Button type="add" class="w-full mb-3">Subir Foto</Button>
-
-                        <hr class="w-full my-3 border-gray-300" />
-
-                        <h2 class="text-lg font-semibold mb-3">Avanzado</h2>
-                        <Button @click="showPasswordModal = true" type="add" class="w-full mb-3">Cambiar Contraseña</Button>
-                        <Button @click="deleteAccount" type="reject" class="w-full mb-3 mt-1">Borrar Cuenta</Button>
-                        <div v-if="isDeletingAccount" class="flex flex-col items-center mt-3">
-                            <p class="text-gray-600 text-lg mb-2">Borrando su cuenta...</p>
-                            <div class="w-8 h-8 border-4 border-gray-300 border-t-red-500 rounded-full animate-spin"></div>
-                        </div>
-                    </div>
-
-                    <!-- Contenedor Derecho -->
-                    <div class="w-full md:flex-1 p-4">
-                        <h2 class="text-xl font-semibold mb-5">Información Personal</h2>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-gray-700">Nombre de Usuario</label>
-                                <input v-model="user.username" type="text" class="w-full p-1.5 border rounded" />
-                            </div>
-                            <div>
-                                <label class="block text-gray-700">Correo Electrónico</label>
-                                <input v-model="user.email" type="email" class="w-full p-1.5 border rounded" />
-                            </div>
-                            <div>
-                                <label class="block text-gray-700">Nombre</label>
-                                <input v-model="user.firstName" type="text" class="w-full p-1.5 border rounded" />
-                            </div>
-                            <div>
-                                <label class="block text-gray-700">Apellidos</label>
-                                <input v-model="user.lastName" type="text" class="w-full p-1.5 border rounded" />
-                            </div>
-                            <div>
-                                <label class="block text-gray-700">Teléfono</label>
-                                <input v-model="user.phone" type="text" class="w-full p-1.5 border rounded" />
-                            </div>
-                            <div>
-                                <label class="block text-gray-700">Dirección</label>
-                                <input v-model="user.address" type="text" class="w-full p-1.5 border rounded" />
-                            </div>
-                        </div>
-                        <div class="sm:mt-10 flex flex-col sm:flex-row justify-center gap-4 items-center">
-                            <Button type="accept" class="px-4 py-2 w-full sm:w-auto">Guardar Cambios</Button>
-                            <Button @click="logout" type="reject" class="px-4 py-2 w-full sm:w-auto">Cerrar Sesión</Button>
-                            <div v-if="isLoggingOut" class="flex flex-col items-center mt-3">
-                                <p class="text-gray-600 text-lg mb-2">Cerrando sesión...</p>
-                                <div class="w-8 h-8 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="flex flex-col min-h-screen bg-gray-100">
+    <div class="flex justify-center items-start gap-5 p-5">
+      <!-- Sidebar -->
+      <aside class="w-64 flex flex-col items-center bg-white p-4 border-r border-gray-300">
+        <div class="relative">
+          <img :src="userDataComputed?.profilePicture || defaultProfilePicture" alt="Foto de perfil"
+            class="w-32 h-32 rounded-full object-cover" />
+          <input type="file" ref="fileInput" @change="uploadPhoto" accept="image/*" class="hidden" />
+          <button @click="triggerFileInput" class="absolute bottom-1 right-1 bg-black bg-opacity-60 text-white p-1 rounded-full">
+            <font-awesome-icon :icon="['fas', 'pen']" />
+          </button>
         </div>
+        <nav class="mt-5 w-full">
+          <h2 class="text-lg font-semibold">Mi Perfil</h2>
+          <ul class="mt-3 space-y-2">
+            <li><router-link to="/UserProfile" class="text-blue-500">Datos Personales</router-link></li>
+            <li><router-link to="/perfil/mis-mascotas" class="text-blue-500">Mis Reservas</router-link></li>
+            <li><router-link to="/perfil/ayuda" class="text-blue-500">Ayuda y Contacto</router-link></li>
+          </ul>
+        </nav>
+        <Button class="w-full mt-5 bg-red-500 text-white" @click="logout">Cerrar Sesión</Button>
+      </aside>
 
-        <!-- Modal para cambiar contraseña -->
-        <Modal :isOpen="showPasswordModal" title="Cambiar Contraseña" @close="showPasswordModal = false" class="absolute inset-0 flex items-center justify-center z-50 bg-transparent w-full max-w-4xl mt-6">
-            <div class="flex flex-col gap-4">
-                <input type="password" placeholder="Antigua Contraseña" class="w-full p-2 mb-2 border rounded" />
-                <input type="password" placeholder="Nueva Contraseña" class="w-full p-2 mb-2 border rounded" />
-                <input type="password" placeholder="Repetir Nueva Contraseña" class="w-full p-2 mb-3 border rounded" />
-
+      <!-- Contenido -->
+      <main class="flex-1 max-w-2xl bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-xl font-semibold">Bienvenid@ de nuevo, {{ userDataComputed?.username || 'Cargando...' }}!</h2>
+        <div v-if="isLoadingUserData" class="mt-5 text-center text-gray-500">Cargando datos...</div>
+        <div v-else class="mt-5 space-y-4">
+          <div class="flex flex-col">
+            <label class="font-medium">Nombre de Usuario:</label>
+            <input type="text" v-model="editedUserData.username" class="border p-2 rounded" />
+          </div>
+          <div class="flex flex-col">
+            <label class="font-medium">Correo electrónico:</label>
+            <input type="email" v-model="editedUserData.email" class="border p-2 rounded" />
+          </div>
+          <div class="flex flex-col">
+            <label class="font-medium">Contraseña:</label>
+            <div class="relative">
+              <input :type="showPassword ? 'text' : 'password'" v-model="editedUserData.password" class="border p-2 rounded w-full" />
+              <button @click="togglePasswordVisibility" class="absolute right-2 top-2">
+                {{ showPassword ? '👁️' : '🙈' }}
+              </button>
             </div>
-        </Modal>
+          </div>
+          <div class="flex flex-col">
+            <label class="font-medium">Móvil:</label>
+            <div class="flex gap-2">
+              <select v-model="editedUserData.phonePrefix" class="border p-2 rounded">
+                <option value="+34">+34</option>
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
+              </select>
+              <input type="text" v-model="editedUserData.phone" class="border p-2 rounded flex-1" />
+            </div>
+          </div>
+          <div class="flex gap-4 mt-5">
+            <Button class="flex-1 bg-oliva text-white" @click="updateProfile">Guardar cambios</Button>
+            <Button class="flex-1 bg-terracota text-white" @click="deleteAccount">Eliminar Cuenta</Button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
 </template>
