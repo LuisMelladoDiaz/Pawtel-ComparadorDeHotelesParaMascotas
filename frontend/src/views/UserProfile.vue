@@ -132,7 +132,7 @@ const logout = () => {
           <input type="file" ref="fileInput" @change="uploadPhoto" accept="image/*" class="hidden" />
           <button
             @click="triggerFileInput"
-            class="absolute bottom-1 right-1 w-8 h-8 flex items-center justify-center bg-terracota-dark bg-opacity-60 text-white rounded-full hover:bg-opacity-80 transition">
+            class="absolute bottom-1 right-1 w-8 h-8 flex items-center justify-center bg-terracota bg-opacity-60 text-white rounded-full hover:bg-opacity-80 transition">
             <i class="fas fa-pen text-sm"></i>
           </button>
         </div>
