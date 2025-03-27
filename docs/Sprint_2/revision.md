@@ -202,11 +202,11 @@ Igualmente, adjuntamos el super usuario de django por si fuese necesario:
 Usuario: pawtel_admin 
 Contraseña: 4dm1n
 
-- La URL de nuestra landing page es: [landing.pawtel.es](https://landing.pawtel.es/)
-- La URL de nuestro despliegue del Sprint1 es: [pawtel-v1.com](pawtel-frontend-sprint1.onrender.com)
-- La URL de nuestro despliegue del Sprint2 es: [pawtel.com](https://pawtel-frontend-sprint2.onrender.com/)
-- La URL de nuestro repositorio de GitHub es: [github.com/Pawtel](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas)
+- La URL de nuestra landing page es:  https://landing.pawtel.es
+- La URL de nuestro despliegue del Sprint1 es: https://pawtel-frontend-sprint1.onrender.com
+- La URL de nuestro despliegue del Sprint2 es: https://pawtel-frontend-sprint2.onrender.com
+- La URL de nuestro repositorio de GitHub es: https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas
 - La URL a nuestro sistema de seguimiento de tiempo es: [Clockify.me/Pawtel](https://app.clockify.me/projects/67bb0478254a3a5bd06e2d53/)
-- La URL al vídeo de demostración es: [Video-sprint2-Pawtel]https://drive.google.com/file/d/1SkNgQs_dzQlxsgtxrNMBJIisFfX5zF5Q/view?usp=sharing
+- La URL al vídeo de demostración es:  https://drive.google.com/file/d/1SkNgQs_dzQlxsgtxrNMBJIisFfX5zF5Q/view?usp=sharing
 
 
