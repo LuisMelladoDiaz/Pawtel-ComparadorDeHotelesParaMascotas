@@ -58,9 +58,9 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
 
-    def test_get_all_hotels_of_hotel_owner_explicit(self):
+    def test_list_hotels_of_hotel_owner_explicit(self):
         url = reverse(
-            "hotel-owner-get_all_hotels_of_hotel_owner_explicit",
+            "hotel-owner-list_hotels_of_hotel_owner_explicit",
             kwargs={"pk": self.authenticated_hotel_owner.id},
         )
         response = self.client.get(url)
@@ -69,14 +69,14 @@ class HotelOwnerViewSetTest(TestCase):
 
     def test_get_all_hotels_of_inactive_hotel_owner_explicit(self):
         url = reverse(
-            "hotel-owner-get_all_hotels_of_hotel_owner_explicit",
+            "hotel-owner-list_hotels_of_hotel_owner_explicit",
             kwargs={"pk": self.inactive_hotel_owner.id},
         )
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    def test_get_all_hotels_of_hotel_owner_implicit(self):
-        url = reverse("hotel-owner-get_all_hotels_of_hotel_owner_implicit")
+    def test_list_hotels_of_hotel_owner_implicit(self):
+        url = reverse("hotel-owner-list_hotels_of_hotel_owner_implicit")
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
@@ -186,3 +186,13 @@ class HotelOwnerViewSetTest(TestCase):
         url = reverse("hotel-owner-detail", kwargs={"pk": self.inactive_hotel_owner.id})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_approve_hotel_owner_patch_view(self):
+        self.client.force_authenticate(user=self.authenticated_user)
+        url = reverse(
+            "hotel-owner-approve_hotel_owner_patch",
+            kwargs={"pk": self.authenticated_hotel_owner.id},
+        )
+        response = self.client.patch(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["is_approved"], True)

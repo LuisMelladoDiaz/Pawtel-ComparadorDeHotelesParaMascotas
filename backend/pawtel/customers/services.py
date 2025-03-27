@@ -1,9 +1,10 @@
+from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.customers.serializers import CustomerSerializer
-from rest_framework.exceptions import (AuthenticationFailed, NotFound,
-                                       PermissionDenied)
+from pawtel.permission_services import PermissionService
+from rest_framework.exceptions import NotFound, PermissionDenied
 
 
 class CustomerService:
@@ -20,49 +21,77 @@ class CustomerService:
         )
         return output_serializer_data
 
-    # Common -----------------------------------------------------------------
+    # Authorization ----------------------------------------------------------
 
-    @staticmethod
-    def authorize_action_customer(request, pk):
-        logged_in_customer = CustomerService.get_current_customer(request)
+    def authorize_action_customer_level_1(request, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_customer_service(role_user, action_name)
+        return role_user
 
-        if pk:
-            target_customer = CustomerService.retrieve_customer(pk)
-            if not target_customer:
-                raise NotFound("Customer does not exist.")
-            target_app_user = AppUserService.retrieve_app_user(target_customer.user_id)
+    def authorize_action_customer_level_2(request, target_customer_id, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_customer_service(role_user, action_name)
+        CustomerService.retrieve_customer(target_customer_id)
+        return role_user
 
-            if (not target_app_user) or (not target_app_user.is_active):
-                raise NotFound("Customer does not exist.")
+    def authorize_action_customer_level_3(request, target_customer_id, action_name):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_customer_service(role_user, action_name)
+        target_customer = CustomerService.retrieve_customer(target_customer_id)
+        CustomerService.check_ownership_customer(role_user, target_customer)
+        return role_user
 
-            if (not logged_in_customer) or (
-                target_customer.id != logged_in_customer.id
-            ):
+    def check_ownership_customer(role_user, target_customer):
+        if role_user.user.role == UserRole.ADMIN:
+            return
+
+        elif role_user.user.role == UserRole.CUSTOMER:
+            if target_customer.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
+
+        else:
+            raise PermissionDenied("Permission denied.")
+
+    # Serialization -----------------------------------------------------------------
 
     @staticmethod
     def serialize_output_customer(customer, many=False):
         return CustomerSerializer(customer, many=many).data
-
-    @staticmethod
-    def get_app_user_id_of_customer(customer_id):
-        return CustomerService.retrieve_customer(customer_id).user.id
 
     # GET --------------------------------------------------------------------
 
     @staticmethod
     def retrieve_customer(pk, allow_inactive=False):
         try:
-            return Customer.objects.get(id=pk)
+            if allow_inactive:
+                return Customer.objects.get(id=pk)
+            else:
+                return Customer.objects.get(id=pk, user__is_active=True)
         except Customer.DoesNotExist:
             raise NotFound(detail="Customer not found.")
 
     @staticmethod
-    def list_customers():
-        return Customer.objects
+    def get_customer_by_user(app_user_id):
+        try:
+            return Customer.objects.get(user_id=app_user_id)
+        except Customer.DoesNotExist:
+            raise NotFound("Customer does not exist.")
 
     @staticmethod
-    def get_all_bookings_by_customer(customer_id):
+    def get_current_customer(request):
+        app_user = AppUserService.get_current_app_user(request)
+        customer = CustomerService.get_customer_by_user(app_user)
+        return customer
+
+    @staticmethod
+    def list_customers(allow_inactive=False):
+        if allow_inactive:
+            return Customer.objects.all()
+        else:
+            return Customer.objects.filter(user__is_active=True)
+
+    @staticmethod
+    def list_bookings_of_customer(customer_id):
         return Booking.objects.filter(customer_id=customer_id)
 
     # POST -------------------------------------------------------------------
@@ -70,16 +99,3 @@ class CustomerService:
     @staticmethod
     def __create_customer(app_user_id):
         return Customer.objects.create(user_id=app_user_id)
-
-    # Other -------------------------------------------------------------------
-
-    @staticmethod
-    def get_current_customer(request):
-        if (not request.user) or (not request.user.is_authenticated):
-            raise AuthenticationFailed("User is not authenticated.")
-
-        customer = Customer.objects.get(user_id=request.user.id)
-        if (not customer) or (not customer.user.is_active):
-            raise NotFound("Customer does not exist.")
-
-        return customer

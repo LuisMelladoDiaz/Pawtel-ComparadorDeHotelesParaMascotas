@@ -71,8 +71,8 @@ class HotelViewSetTestCase2(TestCase):
             total_price=300.00,
         )
 
-    def test_get_all_bookings_by_hotel_explicit(self):
-        url = reverse("hotel-get_all_bookings_by_hotel", kwargs={"pk": self.hotel.id})
+    def test_list_bookings_of_hotel(self):
+        url = reverse("hotel-list_bookings_of_hotel", kwargs={"pk": self.hotel.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)

@@ -21,6 +21,7 @@ jobs:
         image: mariadb:10.6
 
         env:
+          DEBUG: True
           MYSQL_DATABASE: test_db
           MYSQL_USER: test_user
           MYSQL_PASSWORD: test_password
@@ -48,34 +49,66 @@ jobs:
           pip install -r requirements.txt
 
       - name: Wait for database to be ready
-        run: sleep 10  # Asegura que MariaDB esté listo antes de continuar
+        run: sleep 10
 
       - name: Run migrations
         env:
+          SECRET_KEY: your-secret-key
+          DEBUG: True
           DB_NAME: test_db
           DB_USER: test_user
           DB_PASSWORD: test_password
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-          CORS_ALLOWED_ORIGINS: "http://localhost,http://127.0.0.1"
-          SECRET_KEY: "supersecreto"
+          CORS_ALLOWED_ORIGINS: http://localhost:5173
+          USE_S3: false
+          AWS_ACCESS_KEY_ID: your-access-key
+          AWS_SECRET_ACCESS_KEY: your-secret-key
+          AWS_STORAGE_BUCKET_NAME: your-bucket-name
+          AWS_S3_REGION_NAME: weur
+          AWS_S3_ENDPOINT_URL: end-point-url-without-bucket
+          AWS_S3_MEDIA_URL: public-url
+          EMAIL_BACKEND: "your email backend"
+          EMAIL_HOST: "your email host"
+          EMAIL_PORT: 64
+          EMAIL_USE_TLS: true
+          EMAIL_HOST_USER: "your email"
+          EMAIL_HOST_PASSWORD: "your application password"
+          DEFAULT_FROM_EMAIL: "email sender"
+          FRONTEND_URL: "frontend url"
         run: |
           cd backend
           python manage.py migrate
-          
+
       - name: Grant privileges to test_user
         run: |
           mysql -h 127.0.0.1 -u root -proot_password -e "GRANT ALL PRIVILEGES ON *.* TO 'test_user'@'%'; FLUSH PRIVILEGES;"
 
       - name: Run tests
         env:
+          SECRET_KEY: your-secret-key
+          DEBUG: True
           DB_NAME: test_db
           DB_USER: test_user
           DB_PASSWORD: test_password
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-          CORS_ALLOWED_ORIGINS: "http://localhost,http://127.0.0.1"
-          SECRET_KEY: "supersecreto"
+          CORS_ALLOWED_ORIGINS: http://localhost:5173
+          USE_S3: false
+          AWS_ACCESS_KEY_ID: your-access-key
+          AWS_SECRET_ACCESS_KEY: your-secret-key
+          AWS_STORAGE_BUCKET_NAME: your-bucket-name
+          AWS_S3_REGION_NAME: weur
+          AWS_S3_ENDPOINT_URL: end-point-url-without-bucket
+          AWS_S3_MEDIA_URL: public-url
+          EMAIL_BACKEND: "your email backend"
+          EMAIL_HOST: "your email host"
+          EMAIL_PORT: 64
+          EMAIL_USE_TLS: true
+          EMAIL_HOST_USER: "your email"
+          EMAIL_HOST_PASSWORD: "your application password"
+          DEFAULT_FROM_EMAIL: "email sender"
+          FRONTEND_URL: "frontend url"
         run: |
           cd backend
           python manage.py test pawtel

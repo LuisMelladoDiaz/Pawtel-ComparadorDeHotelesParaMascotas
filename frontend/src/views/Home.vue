@@ -16,22 +16,32 @@ const { data: isLoggedIn } = useIsLoggedIn();
     <section class="banner-section relative mx-auto py-4 max-w-7xl px-5">
       <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
         <div class="lg:w-1/2 text-left p-6">
-          <h1 class="text-4xl font-bold mb-4 font-titleHome" style="color: var(--color-azul-suave); font-family: var(--font-titleHome);">Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu
+          <h1 class="text-4xl font-bold mb-4 font-titleHome" style="color: var(--color-azul-suave); font-family: var(--font-titleHome);">
+            Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu
             <span class="italic" style="color: var(--color-terracota);">mascota.</span>
           </h1>
           <p class="text-lg text-gray-600 mb-6">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
-          <router-link to="/login" v-if="!isLoggedIn">
-            <Button type="reject">Iniciar Sesión</Button>
+
+          <router-link to="/register" v-if="!isLoggedIn">
+            <Button type="reject" class="m-0!">Crear cuenta</Button>
           </router-link>
+
+          <p class="text-sm text-gray-600 mt-4" v-if="!isLoggedIn">
+            ¿Ya tienes una cuenta?
+            <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
+          </p>
         </div>
+
         <div class="lg:w-1/2">
           <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">
         </div>
       </div>
+
       <div class="max-w-7xl mx-auto bg-white p-2 rounded-lg shadow-lg mt-6">
         <FilterNavbar />
       </div>
     </section>
+
 
     <!-- Pasos para reservar alojamiento -->
     <section class="bg-[#ffffff] relative mx-auto py-15 max-w-7xl px-5">

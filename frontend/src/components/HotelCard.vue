@@ -21,7 +21,7 @@
       <img :src="image" alt="Hotel"
         class="w-full h-full object-cover object-center border rounded-lg border-gray-400" />
     </div>
-    
+
     <div class="flex flex-col flex-[1_1_0%] h-full p-2">
 
       <h2 class="hotel-name text-[1.4rem] font-bold mb-4 border-b-[#ccc] border-b border-solid text-terracota">
@@ -48,9 +48,9 @@
 
         <div class="right-column flex flex-col items-end justify-end gap-2 p-[5px] min-w-50 font-titulos">
             <div class="price-disponibilidad flex flex-col items-end justify-between gap-3">
-              
+
               <span class="price text-[1.55rem] text-[#C36C6C] font-bold flex flex-col">
-                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a> 
+                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a>
                 <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
               </span>
               <RouterLink :to="`/hotel/${id}`">
@@ -94,7 +94,7 @@
 
         <div class="flex flex-col items-center justify-between">
           <span class="price text-[1.35rem] text-[#C36C6C] font-bold flex flex-col self-end">
-                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a> 
+                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a>
                 <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
               </span>
           <div class="flex items-center !w-full mt-2">
@@ -103,7 +103,7 @@
             </RouterLink>
         </div>
         </div>
-        
+
       </div>
     </div>
 

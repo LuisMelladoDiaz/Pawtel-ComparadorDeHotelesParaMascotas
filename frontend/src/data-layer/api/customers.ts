@@ -13,11 +13,18 @@ export type Customer = {
     is_active?: boolean;
 };
 
-
+export type Booking = {
+    id?: number;
+    customer_id: number;
+    room_type_id: number;
+    start_date: string;
+    end_date: string;
+    total_price: number;
+  };
 
 
 export const fetchAllOwners = async () => {
-    const url = `${API_BASE_URL}/api/customers/`;
+    const url = `${API_BASE_URL}/customers/`;
     const response = await axios.get(url);
     return response.data as Customer[];
 };
@@ -67,3 +74,9 @@ export const getCurrentCustomer = async () => {
     const response = await axios.get(url);
     return response.data as Customer;
 }
+
+export const fetchMyBookings = async () => {
+    const url = `${API_BASE_URL}/customers/my-bookings`;
+    const response = await axios.get(url);
+    return response.data as Booking[];
+  };

@@ -91,7 +91,7 @@ export const useRoleQuery = () => {
 
 export const useIsRole = (role: string) => {
   const roleQuery = useRoleQuery();
-  
+
   const isRole = computed(() => {
     return roleQuery.isLoading.value ? false : roleQuery.data.value == role;
   });
