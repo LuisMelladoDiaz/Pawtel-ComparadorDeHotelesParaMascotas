@@ -59,7 +59,7 @@ defineProps({
       <!-- Columna 2: Galería de imágenes -->
       <div class="flex-1">
         <div class="image-gallery grid grid-cols-2 gap-2">
-          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-40 object-cover rounded-lg" />
+          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-45 object-cover rounded-lg" />
         </div>
       </div>
 
@@ -147,13 +147,6 @@ defineProps({
 <style scoped>
 .hotel-detail-container {
   background: white;
-}
-
-@media (max-width: 768px) {
-  .hotel-detail-container {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
 }
 
 </style>
