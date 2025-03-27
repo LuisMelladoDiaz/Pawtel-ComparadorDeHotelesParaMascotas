@@ -52,7 +52,7 @@ const totalPrice = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="flex items-center justify-center py-10">
     <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
       <h2 class="text-2xl font-semibold text-center mb-4">Reserva tu habitación</h2>
       <form @submit.prevent="submitBooking">
@@ -76,7 +76,7 @@ const totalPrice = computed(() => {
         <div class="text-lg font-semibold text-gray-800 mb-4">
           Precio total: {{ totalPrice }}€
         </div>
-        <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        <button type="submit" class="w-full py-2 px-4 bg-azul-suave text-white rounded-lg hover:bg-azul-suave-dark">
           Pagar
         </button>
       </form>
