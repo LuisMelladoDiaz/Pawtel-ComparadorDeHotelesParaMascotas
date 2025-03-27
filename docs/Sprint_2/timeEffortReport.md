@@ -77,13 +77,32 @@
 
 ## Reporte de tiempo de Yesica Garate Fuentes
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 51:08:51
+**Periodo:** 21/02/2025 - 25/03/2025
+**Total de tiempo trabajado:** 52:21:30
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
+| Desarrollo de Presentación: Introduccion, Business Model, StoryBoard y Uso de la IA (SPRINT 02) | 04:42:00|
+| Ajuste y Finalización de StoryBoards para capturar audiencia II | 02:35:00 |
+| Ajuste y Finalización de StoryBoards para capturar audiencia I | 04:22:00 |
+| Desarrollo de Presentación: Impacto legal del Proyecto | 03:10:00 |
+| Desarrollo de StoryBoards para capturar audiencia I | 04:30:00 |
+| Ajuste y Finalización de Mockups según el Backend II | 03:56:00|
+| Ajuste y Finalización de Mockups según el Backend I | 03:23:28|
+| Clases - Presentación de Avance del Proyecto SPRINT1| 04:00:00 |
+| Tareas varias para la entrega del proyecto (SPRINT 01) | 06:30:00 |
+| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto  FINAL (SPRINT 01) | 03:45:00 |
+| Reunión Imprevista de emergencia | 00:38:43 |
+| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto III (SPRINT 01) | 03:00:26 |
+| Creacion del Documento de IA Usage | 00:18:10 |
+| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto II (SPRINT 01) | 03:30:33 |
+| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto (SPRINT 01) | 04:00:00 |
+| Creación de Mock-Ups en Balsamiq (Perfil de Usuario final, Home Page y Sobre Nosotros) | 03:44:58 |
+| Creación de Mock-Ups en Balsamiq (Perfil de Usuario) | 04:54:00 |
+| Clases - Presentación de Avance del Proyecto | 04:00:00 |
+| Ajustes del desarrollo de la Presentación según el feedback recibido II | 03:40:00 |
 | Ajustes en Home Page según feedback recibido | 00:29:00 |
 | Ajustes del desarrollo de la Presentación según el feedback recibido | 04:36:00 |
 | Desarrollo de Presentación: Introducción, Business Model y Análisis del Proyecto | 07:07:00 |
