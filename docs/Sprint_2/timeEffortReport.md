@@ -350,7 +350,7 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 12/02/2025 - 26/03/2025
+**Periodo:** 12/03/2025 - 26/03/2025
 **Total de tiempo trabajado:** 42:16:15
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -397,7 +397,7 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 21/02/2025 - 14/03/2025
+**Periodo:** 14/03/2025 - 25/03/2025
 **Total de tiempo trabajado:** 33:18:26
 
 ### Proyecto Pawtel - Distribución del tiempo
