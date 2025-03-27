@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import HotelDetailsView from './views/HotelDetailView.vue';
+import HotelRoomsAndPrices from './views/HotelRoomsAndPrices.vue';
 import UserProfile from './views/UserProfile.vue'
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
@@ -172,10 +173,24 @@ const routes = [
     },
   },
   {
-    path: '/hotel/reservation-form/:id',
+    path: '/hotel/:id/reservation-form',
+    name: 'BookingReservation',
     component: createComponent({ layout: LayoutDefault, component: BookingReservationForm }),
     meta: {
       allowedAuthStates: ALLOW_LOGGED_IN,
+    },
+    props: (route) => ({
+      id: route.params.id,
+      room: route.query.room,
+      quantity: route.query.quantity
+    }),
+  },
+  {
+    path: '/hotel/:id/rooms',
+    name: 'HotelRooms',
+    component: createComponent({ layout: LayoutDefaultWhite, component: HotelRoomsAndPrices }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
     },
   },
 ];

@@ -46,6 +46,8 @@
 | 📆 20/02/2025  | 🔹 v 1.0         | 🏁 Versión inicial del documento. #DP| ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 13/03/2025  | 🔹 v 1.1         | 🏁 #S1| ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 24/03/2025  | 🔹 v 1.2         | 🏁 #S2 | ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
+| 📆 24/03/2025  | 🔹 v 1.3         | 🏁 #S2 Evaluación Individual y trabajo S2 | ✍️ Luis Mellado Diaz |
+
 
 
 ---
@@ -54,22 +56,22 @@
 
 | Student                     | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
 |-----------------------------|------|------|------|------|------|------|-------|
-| Flores de Francisco, Daniel | 10   | 10   |      |      |      |      | 20    |
-| Mellado Díaz, Luis          | 10   | 10   |      |      |      |      | 20    |
-| González Martínez, David    | 10   | 10   |      |      |      |      | 20    |
-| Martínez Reviriego, Andrés  | 10   | 10   |      |      |      |      | 20    |
-| Cortés Carrasco, Claudio    | 10   | 9   |      |      |      |      | 19    |
-| Trenado González, Sergio    | 10   | 10   |      |      |      |      | 20    |
-| Jiménez Morales, Francisco Miguel | 10 | 9   |      |      |      |      | 19    |
-| Gómez de Tovar, Jorge       | 10   | 8    |      |      |      |      | 18    |
-| Ruiz Garrido, Javier        | 10   | 8    |      |      |      |      | 18    |
-| Castillo Cebolla, Rafael    | 10   | 10   |      |      |      |      | 20    |
-| Castelló Sánchez, Fernando  | 10   | 10   |      |      |      |      | 20    |
-| García Sebastián, Javier    | 10   | 8    |      |      |      |      | 18    |
-| Garate Fuentes, Yesica      | 10   | 9    |      |      |      |      | 19    |
-| Castillejo Vela, Manuel     | 10   | 10   |      |      |      |      | 20    |
+| Flores de Francisco, Daniel | 10   | 10   | 10   |      |      |      | 30    |
+| Mellado Díaz, Luis          | 10   | 10   | 10   |      |      |      | 30    |
+| González Martínez, David    | 10   | 10   | 10   |      |      |      | 30    |
+| Martínez Reviriego, Andrés  | 10   | 10   | 10   |      |      |      | 30    |
+| Cortés Carrasco, Claudio    | 10   | 9    | 8    |      |      |      | 27    |
+| Trenado González, Sergio    | 10   | 10   | 10   |      |      |      | 30    |
+| Jiménez Morales, Francisco Miguel | 10 | 9   | 9    |      |      |      | 28    |
+| Gómez de Tovar, Jorge       | 10   | 8    | 10   |      |      |      | 28    |
+| Ruiz Garrido, Javier        | 10   | 8    | 10   |      |      |      | 28    |
+| Castillo Cebolla, Rafael    | 10   | 10   | 10   |      |      |      | 30    |
+| Castelló Sánchez, Fernando  | 10   | 10   | 10   |      |      |      | 30    |
+| García Sebastián, Javier    | 10   | 8    | 9    |      |      |      | 27    |
+| Garate Fuentes, Yesica      | 10   | 9    | 8    |      |      |      | 27    |
+| Castillejo Vela, Manuel     | 10   | 10   | 10   |      |      |      | 30    |
 
-**Total:** 264
+**Total:** 405  
 
 ---
 
@@ -288,7 +290,78 @@
 
 ## Sprint 2 (#S2)
 
-*(Por completar con las contribuciones de cada miembro.)*
+### Flores de Francisco, Daniel  
+- Gestión de usuarios piloto  
+- Configuración de CI/CD (pre-commit, workflows)  
+- Documentación de métricas y entregables  
+- Presentaciones y organización del equipo  
+
+### González Martínez, David  
+- Autenticación y permisos en frontend  
+- Conexión frontend-backend (reservas, pagos)  
+- Revisión y fixes de bugs  
+- Deployment y documentación de guidelines  
+
+### García Sebastián, Javier  
+- Desarrollo frontend: perfil de usuario (varias iteraciones)  
+- Organización de reportes de tiempo  
+- Preparación de presentaciones  
+
+### Trenado González, Sergio  
+- Integración frontend-backend (pantallas principales)  
+- Refactorización y mejora de componentes  
+- Revisión de PRs y documentación metodológica  
+
+### Castillo Cebolla, Rafael  
+- Refactorización de autenticación en backend  
+- Diseño y planificación del backend (Sprint 2)  
+- QA y solución de problemas
+- Lógica de las reservas.
+
+### Castillejo Vela, Manuel  
+- Validación de formularios con librerías  
+- Gestión de queries (TanStack)  
+- Integración de feedback en base de datos
+- Gestión de usuarios piloto
+- KBreport 
+
+### Mellado Díaz, Luis  
+- Gestión de hoteles
+- Pantalla Mis reservas  
+- QAs y Refactorización del frontend  
+- Reuniones y revisión de PRs
+- Dirección del equipo
+- Documentos del entregable
+
+### Gómez de Tovar, Jorge  
+- Servicios y controladores: Hotel y HotelOwner  
+- Manejo de imágenes (seeders, autorizaciones)  
+- Documentación de rutas API  
+
+### Ruiz Garrido, Javier  
+- Lógica de archivado/borrado (backend)  
+- Refactorización de filtros (hoteles y rooms)  
+- Tests y migraciones  
+
+### Jiménez Morales, Francisco Miguel  
+- Implementación de pasarela de pago  
+- Gestión de usuarios piloto  
+- Preparación de presentaciones  
+
+### Castelló Sánchez, Fernando  
+- Documentación
+- Desarrollo frontend
+
+### Cortés Carrasco, Claudio  
+- Gestión de bookings (creación, tests)  
+- Documentación API automática  
+- Revisión frontend  
+
+### Martínez Reviriego, Andrés  
+- Reestablecimiento de contraseña  
+- Edición de hoteles y filtros de búsqueda  
+- Revisión de código
+- Evidencia de Términos y Condiciones
 
 ## Sprint 3 (#S3)
 

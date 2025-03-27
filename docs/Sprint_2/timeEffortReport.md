@@ -107,35 +107,29 @@
 
 ## Reporte de tiempo de Sergio Trenado Gonzalez
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 52:58:39
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 37:44:38
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Clase 14 mar | 04:00:00 |
-| Feature: Pantalla de Listado de hoteles | 06:06:32 |
-| Frontend Organización Sprint 1 | 04:04:04 |
-| Resolviendo conflictos de una PR | 00:51:00 |
-| Instalación proyecto | 00:23:20 |
-| Reunión Primer Tercio Sprint 1 | 01:00:33 |
-| Commits and PR | 00:12:02 |
-| Informe de rendimiento | 01:03:07 |
-| Informe de desempeño | 00:52:01 |
-| Clase 7 mar | 04:00:00 |
-| Haciendo web responsiva | 01:57:42 |
-| Clase 21 feb | 04:00:00 |
-| Reunión Inicio Sprint 1 | 01:11:00 |
-| Fix pantalla detalles de hotel + merge main | 00:38:17 |
-| Fixeando cosas | 00:29:27 |
-| Reorganización y actualización del Excel de organización | 00:22:35 |
-| Fix de imports + resolviendo dudas | 00:41:20 |
-| Feature: Conectar Backend y Frontend | 05:33:48 |
-| Instalación proyecto + componentes | 01:20:52 |
-| Reunión Mitad Sprint 1 | 00:30:37 |
-| Informe de trabajo - 6 mar | 00:23:27 |
-| Feature: Crear Componentes Globales | 13:16:55 |
+| Descripción                                      | Duración    |
+|-------------------------------------------------|------------|
+| Feature: Conectar Backend y Frontend            | 05:33:48   |
+| Revisión + Mejora de PR + Feature: Pulir detalles de las pantallas | 05:06:36   |
+| Feature: Pulir detalles de las pantallas        | 04:31:22   |
+| Clase 14 marzo                                  | 04:00:00   |
+| Clase 21 marzo                                  | 04:00:00   |
+| Feature: Adaptar componentes y pantallas + Cosas extras | 03:27:02   |
+| Feature: Adaptar componentes y pantallas        | 02:55:57   |
+| Juntando Docs de Mejoras Frontend + Revisando PRs | 01:29:13   |
+| Puliendo pantallas + nuevos filtros de ordenamiento + imágenes nuevas | 01:27:56   |
+| Reunión Inicio Sprint 2                         | 01:14:51   |
+| Frontend Organización Sprint 2                  | 01:04:01   |
+| Reunión Mitad Sprint 2                          | 01:00:00   |
+| Feature: Pulir detalles de las pantallas + Revisando PRs | 00:35:37   |
+| Revisando PRs                                   | 00:27:49   |
+| Documento de metodología para Frontend          | 00:27:23   |
+| Frontend Organización                           | 00:23:03   |
 
 ![grafico-de-tiempos](graficas/sergio.png)
 ---
@@ -356,7 +350,7 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 12/02/2025 - 26/03/2025
+**Periodo:** 12/03/2025 - 26/03/2025
 **Total de tiempo trabajado:** 42:16:15
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -403,7 +397,7 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 21/02/2025 - 14/03/2025
+**Periodo:** 14/03/2025 - 25/03/2025
 **Total de tiempo trabajado:** 33:18:26
 
 ### Proyecto Pawtel - Distribución del tiempo
