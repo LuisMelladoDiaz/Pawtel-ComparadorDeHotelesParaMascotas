@@ -1,27 +1,19 @@
 <script setup>
-import Navbar from '../components/NavBar.vue';
-import Footer from '../components/Footer.vue';
-import FilterNavbar from '../components/FilterNavBar.vue';
-import Carrusel from '../components/Carrusel.vue';
-import Button from '../components/Button.vue';
-import { ref, watch, defineProps, defineEmits, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
 import { useRoute } from 'vue-router';
 import { useGetRoomTypesByHotel } from '@/data-layer/hooks/hotels';
-import { computed } from 'vue';
-
 
 const route = useRoute();
 const hotelId = route.params.id;
 const notyf = new Notyf();
 const internalStartDate = ref('');
 const internalEndDate = ref('');
-const { mutate: createBooking } = useCreateBooking();
-
-const { data: roomTypes, isLoading } = useGetRoomTypesByHotel(hotelId);
-
 const selectedRoomTypeId = ref(null);
+
+const { mutate: createBooking } = useCreateBooking();
+const { data: roomTypes, isLoading } = useGetRoomTypesByHotel(hotelId);
 
 const submitBooking = async () => {
   try {
@@ -36,16 +28,12 @@ const submitBooking = async () => {
           room_type: selectedRoomTypeId.value,
         },
         {
-          onSuccess: () => {
-            notyf.success('Reserva realizada con éxito.');
-          },
-          onError: () => {
-            notyf.error('Hubo un error al reservar. Inténtalo de nuevo.');
-          },
+          onSuccess: () => notyf.success('Reserva realizada con éxito.'),
+          onError: () => notyf.error('Hubo un error al reservar. Inténtalo de nuevo.'),
         }
       );
     } else {
-      notyf.error('Fecha de fin debe de ser posterior a la de inicio.');
+      notyf.error('Fecha de fin debe ser posterior a la de inicio.');
     }
   } catch (error) {
     notyf.error('Ocurrió un error inesperado.');
@@ -54,89 +42,50 @@ const submitBooking = async () => {
 
 const totalPrice = computed(() => {
   if (!internalStartDate.value || !internalEndDate.value) return 0;
-
   const startDate = new Date(`${internalStartDate.value}T00:00:00Z`);
   const endDate = new Date(`${internalEndDate.value}T00:00:00Z`);
-
   if (endDate < startDate) return 0;
-
   const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
-
-  console.log(days);
-
-
-  if (!roomTypes.value || !roomTypes.value.length) return 0;
-
-
-  const selectedRoomType = roomTypes.value.find((roomType) => roomType.id === selectedRoomTypeId.value);
-
-  if (!selectedRoomType) return 0;
-
-  return days * selectedRoomType.price_per_night;
+  const selectedRoomType = roomTypes.value?.find(room => room.id === selectedRoomTypeId.value);
+  return selectedRoomType ? days * selectedRoomType.price_per_night : 0;
 });
-
 </script>
 
-
 <template>
-  <div>
-    <section class="relative mx-auto py-25 max-w-7xl px-5 rounded-lg overflow-hidden items-center text-center">
-      <div class="relative">
-      </div>
-    </section>
-
-    <form @submit.prevent="submitBooking">
-        <div class="relative my-4">
-          <label for="start-date" class="block mb-1 text-sm font-medium">Fecha de inicio</label>
-          <input
-            type="date"
-            id="start-date"
-            v-model="internalStartDate"
-            class="min-w-[250px] p-2 border rounded-lg text-black"
-          />
+  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
+      <h2 class="text-2xl font-semibold text-center mb-4">Reserva tu habitación</h2>
+      <form @submit.prevent="submitBooking">
+        <div class="mb-4">
+          <label for="start-date" class="block text-sm font-medium text-gray-700">Fecha de inicio</label>
+          <input type="date" id="start-date" v-model="internalStartDate" class="w-full p-2 border rounded-lg text-gray-700" />
         </div>
-        <div class="relative my-4">
-          <label for="end-date" class="block mb-1 text-sm font-medium">Fecha de fin</label>
-          <input
-            type="date"
-            id="end-date"
-            v-model="internalEndDate"
-            class="min-w-[250px] p-2 border rounded-lg text-black"
-          />
+        <div class="mb-4">
+          <label for="end-date" class="block text-sm font-medium text-gray-700">Fecha de fin</label>
+          <input type="date" id="end-date" v-model="internalEndDate" class="w-full p-2 border rounded-lg text-gray-700" />
         </div>
-        <div class="relative my-4">
-          <label for="room-type" class="block mb-1 text-sm font-medium">Tipo de habitación</label>
-          <select
-            id="room-type"
-            v-model="selectedRoomTypeId"
-            class="min-w-[250px] p-2 border rounded-lg text-black"
-          >
+        <div class="mb-4">
+          <label for="room-type" class="block text-sm font-medium text-gray-700">Tipo de habitación</label>
+          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg text-gray-700">
             <option value="" disabled>Selecciona un tipo de habitación</option>
-            <option
-              v-for="roomType in roomTypes"
-              :key="roomType.id"
-              :value="roomType.id"
-            >
+            <option v-for="roomType in roomTypes" :key="roomType.id" :value="roomType.id">
               {{ roomType.name }}
             </option>
           </select>
         </div>
-        <div>
-          <p class="text-sm font-medium">Precio total: {{ totalPrice }}€</p>
+        <div class="text-lg font-semibold text-gray-800 mb-4">
+          Precio total: {{ totalPrice }}€
         </div>
-        <div class="mt-6">
-            <button type="submit"
-                class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">
-                Pagar
-            </button>
-        </div>
-    </form>
-
+        <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          Pagar
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
 <style scoped>
-  .banner-section {
-    background: #f7f7f7;
+  input, select {
+    outline: none;
   }
 </style>
