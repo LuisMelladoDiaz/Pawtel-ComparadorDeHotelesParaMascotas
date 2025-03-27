@@ -175,7 +175,6 @@
 - CI del proyecto: Commit Syntax Checker, Weeky Contributing Report, PR Agent (del repositorio)
 - Creación y configuración del custom hook pre-commit para formateo de codigo automatico
 - Tareas de PM: gestión, reparto de tareas, QAs, reuniones y organización semanal.
-- Disposición alta
 
 #### Mellado Díaz, Luis
 - Organización de presentaciones y reuniones.
@@ -201,13 +200,11 @@
 - Ajuste de errores menores: filtro, creación y listado de hoteles
 - Conexión backend - frontend junto a Sergio
 - Deploy Render
-- Disposición alta
 
 #### Martínez Reviriego, Andrés
 - Autenticación básica (fullstack)
 - Filtro de búsqueda de hoteles
 - Otras tareas menores
-- Disposición alta
 
 #### Cortés Carrasco, Claudio
 - Serializadores
@@ -215,34 +212,29 @@
 - Documentación
 - Presentación
 - Otras tareas menores
-- Disposición alta
 
 #### Trenado González, Sergio
 - Creación de componentes reutilizables
 - Jefe de equipo: informes de desempeño, reparto de tareas, QAs y reuniones
 - Listado de hoteles
 - Otras tareas menores en el frontend como conexión pantallas backend - frontend
-- Disposición alta
 
 #### Jiménez Morales, Francisco Miguel
 - Gestión de usuarios piloto junto a Manuel y Daniel
 - Preparar la aplicación para ser una PWA (tarea fullstack)
 - Presentaciones
-- Disposición media
 
 #### Gómez de Tovar, Jorge
 - Servicios y controladores de la clase Hotel
 - Servicios y controladores de la clase HotelOwner
 - Otras tareas menores backend
 - Tareas muy bien hechas desde el principio
-- Disposición baja, poco participativo pero hace bien lo que se le pide
 
 #### Ruiz Garrido, Javier
 - Servicios y controladores de la clase Room
 - Servicios y controladores de la clase RoomType
 - Pilot User Commitment Agreement
 - Test
-- Disposición media/baja
 
 #### Castillo Cebolla, Rafael
 - Arreglos y mejoras en el backend.
@@ -265,25 +257,21 @@
 - Pantalla de detalles de hotel
 - Pantalla de gestión de CRUD de hoteles junto con Luis
 - Pantalla Sobre Nosotros y Contáctanos
-- Disposición media
 
 #### García Sebastián, Javier
 - Presentaciones
 - Pantalla de perfil de usuario
-- Disposición media
 
 #### Garate Fuentes, Yesica
 - Maquetación de presentaciones.
 - Creación de pantalla home/bienvenida
 - Creación de mockups
-- Disposición media
 
 #### Castillejo Vela, Manuel
 - Documentación usuarios piloto junto a Curro y Daniel
 - Contribución base conocimiento común - gestión del feedback
 - Queries usando TankStack queries. Sincronías
 - Otras tareas menores como pulir el CONTRIBUTING.md
-- Disposición alta
 
 
 ---
@@ -305,8 +293,14 @@
 ### García Sebastián, Javier  
 - Desarrollo frontend: perfil de usuario (varias iteraciones)  
 - Organización de reportes de tiempo  
-- Preparación de presentaciones  
-
+- Preparación de presentaciones
+  
+#### Garate Fuentes, Yesica
+- Maquetación, desarrollo y Ajuste de Presentaciones
+- Introducción, Business Model, Análisis del Proyecto e Impacto Legal
+- Creación y Refinamiento de Storyboards
+- Diseño y Ajuste de Mockups
+- 
 ### Trenado González, Sergio  
 - Integración frontend-backend (pantallas principales)  
 - Refactorización y mejora de componentes  
