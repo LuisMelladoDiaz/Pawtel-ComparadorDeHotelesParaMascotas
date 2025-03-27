@@ -7,6 +7,7 @@ import Button from '@/components/Button.vue';
 import { useGetHotelById } from '@/data-layer/hooks/hotels';
 import { useIsLoggedIn } from '@/data-layer/auth';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
+import { useGetAllRoomTypes } from '@/data-layer/hooks/roomTypes';
 
 const route = useRoute();
 const router = useRouter();
@@ -14,6 +15,7 @@ const hotelId = computed(() => Number(route.params.id));
 const { data: isLoggedIn } = useIsLoggedIn();
 
 const { data: apiHotel, isLoading, error } = useGetHotelById(hotelId);
+const { data: roomTypes } = useGetAllRoomTypes(hotelId);
 
 const hotel = computed(() => ({
   id: apiHotel.value?.id ?? null,
@@ -22,61 +24,10 @@ const hotel = computed(() => ({
   city: apiHotel.value?.city ?? 'Ciudad del Hotel',
 }));
 
-// Datos de ejemplo
-const roomsData = ref([
-  {
-    id: 1,
-    name: 'Habitación Para Gatos',
-    description: 'Amplia habitación con espacio suficiente para que tu mascota juegue y descanse cómodamente.',
-    pet_type: 'Gato',
-    capacity: 15,
-    price_per_night: 292,
-    num_rooms: 30
-  },
-  {
-    id: 2,
-    name: 'Habitación Pequeña Para Perros',
-    description: 'Ideal para perros pequeños. Ambiente acogedor con cama suave y ventilación natural.',
-    pet_type: 'Perro',
-    capacity: 2,
-    price_per_night: 22,
-    num_rooms: 18
-  },
-  {
-    id: 3,
-    name: 'Habitación Grande Para Pájaros',
-    description: 'Espacio amplio diseñado para pájaros',
-    pet_type: 'Pájaro',
-    capacity: 1,
-    price_per_night: 28,
-    num_rooms: 12
-  },
-  {
-    id: 4,
-    name: 'Suite Familiar',
-    description: 'Suite premium para varias mascotas, equipada con zonas separadas y juguetes.',
-    pet_type: 'Mixto',
-    capacity: 4,
-    price_per_night: 35,
-    num_rooms: 8
-  }
-]);
-
-
-const incrementQuantity = (room) => {
-  room.quantity += 1;
-};
-
-const decrementQuantity = (room) => {
-  if (room.quantity > 1) {
-    room.quantity -= 1;
-  }
-};
-
-const handleReservation = (roomId, quantity) => {
+const handleReservation = (roomId) => {
   router.push({
     path: `/hotel/${hotelId.value}/reservation-form`,
-    query: { room: roomId, quantity }
+    query: { room: roomId }
   });
 };
 </script>
@@ -133,7 +84,7 @@ const handleReservation = (roomId, quantity) => {
       <!-- Vista tipo tarjeta en grid de 2 columnas -->
       <div class="rooms-cards-container w-full  grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
-          v-for="room in roomsData"
+          v-for="room in roomTypes"
           :key="room.id"
           class="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col justify-between"
         >
@@ -142,7 +93,6 @@ const handleReservation = (roomId, quantity) => {
               <h3 class="text-xl font-bold text-terracota">{{ room.name }}</h3>
               <p class="text-gray-600 text-sm mt-1">{{ room.description || 'Sin descripción disponible.' }}</p>
             </div>
-            
           </div>
 
           <div class="grid grid-cols-3 gap-4 text-sm text-gray-700 mt-2">
@@ -156,9 +106,8 @@ const handleReservation = (roomId, quantity) => {
             </div>
             <div>
               <p class="text-gray-500">Habitaciones disponibles:</p>
-              <p>{{ room.num_rooms || 3 }}</p>
+              <p>{{ room.num_rooms ?? '—' }}</p>
             </div>
-            
           </div>
 
           <div class="flex items-center justify-between mt-4 w-full">
@@ -170,7 +119,7 @@ const handleReservation = (roomId, quantity) => {
               v-if="isLoggedIn"
               type="add"
               class="!m-0 !py-2 !px-4 text-sm self-end"
-              @click="handleReservation(room.id, room.quantity)"
+              @click="handleReservation(room.id, 1)"
             >
               Reservar
             </Button>
@@ -181,6 +130,7 @@ const handleReservation = (roomId, quantity) => {
             </router-link>
           </div>
         </div>
+
       </div>
 
 
