@@ -101,7 +101,7 @@ onMounted(() => {
       <select 
         :value="selectedCity" 
         @change="emit('update:city', $event.target.value)"
-        class="border rounded p-2 mt-1 w-full text-[18px]"
+        class="border rounded p-2 mt-1 w-full text-[18px] cursor-pointer"
       >
         <option value="">Todas</option>
         <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
@@ -114,7 +114,7 @@ onMounted(() => {
       <select 
         :value="selectedPetType" 
         @change="emit('update:petType', $event.target.value)"
-        class="border rounded p-2 mt-1 w-full text-[18px]"
+        class="border rounded p-2 mt-1 w-full text-[18px] cursor-pointer"
       >
         <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">
           {{ pet }}

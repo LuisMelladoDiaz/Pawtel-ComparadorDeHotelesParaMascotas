@@ -52,7 +52,7 @@ const formatDate = (dateStr) => {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen bg-gray-100">
+  <div class="flex flex-col py-5">
     <div class="max-w-4xl mx-auto px-5 w-full flex flex-col flex-grow">
 
       <!-- Contenedor principal -->
@@ -67,7 +67,7 @@ const formatDate = (dateStr) => {
             <div
               v-for="booking in sortedBookings"
               :key="booking.id"
-              class="flex flex-col md:flex-row items-center md:items-start p-4 rounded-lg shadow-md mb-4 transition-transform hover:scale-105 border border-terracota bg-white gap-2"
+              class="flex flex-col md:flex-row items-center md:items-start p-4 rounded-lg shadow-md mb-4 transition-transform hover:scale-101 border border-terracota bg-white gap-2"
             >
               <!-- Imagen del hotel -->
               <img

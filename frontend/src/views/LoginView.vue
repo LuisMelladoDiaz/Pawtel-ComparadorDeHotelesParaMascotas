@@ -39,16 +39,19 @@ const login = async (values) => {
       <Form @submit="login" :validation-schema="validationSchema">
         <div class="mt-4">
           <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-          <Field name="username" as="input" id="username" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+          <Field name="username" as="input" id="username" 
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
           <ErrorMessage name="username" class="text-red-500 text-sm" />
         </div>
 
         <div class="mt-4 relative">
           <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
           <div class="relative">
-            <Field :type="showPassword ? 'text' : 'password'" name="password" as="input" id="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
-            <button type="button" @click="showPassword = !showPassword" class="absolute inset-y-0 right-3 flex items-center text-gray-500">
-              {{ showPassword ? '🙈' : '👁️' }}
+            <Field :type="showPassword ? 'text' : 'password'" name="password" as="input" id="password"
+              class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
+            <button type="button" @click="showPassword = !showPassword"
+              class="absolute top-1/2 right-3 -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 transition" >
+              <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
             </button>
           </div>
           <ErrorMessage name="password" class="text-red-500 text-sm" />

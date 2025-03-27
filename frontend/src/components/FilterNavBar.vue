@@ -3,6 +3,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 import InputText from './InputText.vue';
 import InputNumber from './InputNumber.vue';
 import DatePicker from '../components/DatePicker.vue';
+import DatePickerMobile from './DatePickerMobile.vue';
 import Button from '../components/Button.vue';
 import { useRouter } from 'vue-router';
 
@@ -85,7 +86,7 @@ const onSearch = () => {
         <select
           :value="selectedCity"
           @change="emit('update:city', $event.target.value)"
-          class="bg-white min-h-[42px] pl-8 text-[18px] shadow-sm font-complementario rounded-lg min-w-[300px]"
+          class="bg-white min-h-[42px] pl-8 text-[18px] shadow-sm font-complementario rounded-lg min-w-[300px] cursor-pointer"
         >
           <option disabled value="">Selecciona una ciudad</option>
           <option value="">Todas</option>
@@ -94,19 +95,28 @@ const onSearch = () => {
       </div>
 
       <DatePicker
-        class="bg-white"
+        class="bg-white hidden md:flex"
         :startDate="startDate"
         :endDate="endDate"
         @update:startDate="emit('update:startDate', $event)"
         @update:endDate="emit('update:endDate', $event)"
       />
+
+      <DatePicker
+        class="bg-white md:hidden"
+        :startDate="startDate"
+        :endDate="endDate"
+        @update:startDate="emit('update:startDate', $event)"
+        @update:endDate="emit('update:endDate', $event)"
+      />
+
       
       <div class="relative inline-block">
         <i class="fa-solid fa-paw absolute left-2 bottom-1 transform -translate-y-1/2 text-pawtel-black text-[18px]"></i>
         <select 
           :value="selectedPetType" 
           @change="emit('update:petType', $event.target.value)"
-          class="bg-white min-h-[42px] pl-8 text-[18px] text-pawtel-black shadow-sm font-complementario rounded-lg p-2 min-w-[300px]"
+          class="bg-white min-h-[42px] pl-8 text-[18px] text-pawtel-black shadow-sm font-complementario rounded-lg p-2 min-w-[300px] cursor-pointer"
         >
           <option disabled value="">Elige un tipo de mascota</option>
           <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">
@@ -117,7 +127,7 @@ const onSearch = () => {
 
       <Button
         @click="onSearch"
-        class="bg-white m-0! rounded-lg cursor-pointer h-[42px] max-w-[150px] w-full shadow-sm flex items-center justify-between text-xl gap-1 font-bold text-pawtel-black"
+        class="bg-white m-0! rounded-lg cursor-pointer h-[42px]! max-w-[150px]! w-full! shadow-sm flex items-center justify-between text-xl gap-1 font-bold text-pawtel-black"
       >
         <p class="grow text-center">Buscar</p>
       </Button>

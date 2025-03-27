@@ -4,6 +4,9 @@ import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
 import { useRoute } from 'vue-router';
 import { useGetRoomTypesByHotel } from '@/data-layer/hooks/hotels';
+import DatePicker from '@/components/DatePicker.vue';
+import Button from '@/components/Button.vue';
+import DatePickerMobile from '@/components/DatePickerMobile.vue';
 
 const route = useRoute();
 const hotelId = route.params.id;
@@ -52,22 +55,23 @@ const totalPrice = computed(() => {
 </script>
 
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="flex items-center justify-center py-10">
     <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
       <h2 class="text-2xl font-semibold text-center mb-4">Reserva tu habitación</h2>
       <form @submit.prevent="submitBooking">
         <div class="mb-4">
-          <label for="start-date" class="block text-sm font-medium text-gray-700">Fecha de inicio</label>
-          <input type="date" id="start-date" v-model="internalStartDate" class="w-full p-2 border rounded-lg text-gray-700" />
+          <label class="block text-sm font-medium text-gray-700 mb-2">Fechas</label>
+          <DatePickerMobile class="border!"
+            :startDate="internalStartDate"
+            :endDate="internalEndDate"
+            @update:startDate="(val) => internalStartDate = val"
+            @update:endDate="(val) => internalEndDate = val"
+          />
         </div>
         <div class="mb-4">
-          <label for="end-date" class="block text-sm font-medium text-gray-700">Fecha de fin</label>
-          <input type="date" id="end-date" v-model="internalEndDate" class="w-full p-2 border rounded-lg text-gray-700" />
-        </div>
-        <div class="mb-4">
-          <label for="room-type" class="block text-sm font-medium text-gray-700">Tipo de habitación</label>
-          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg text-gray-700">
-            <option value="" disabled>Selecciona un tipo de habitación</option>
+          <label for="room-type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de habitación</label>
+          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg font-complementario text-[17px] text-gray-700 cursor-pointer">
+            <option value="null" disabled>Selecciona un tipo de habitación</option>
             <option v-for="roomType in roomTypes" :key="roomType.id" :value="roomType.id">
               {{ roomType.name }}
             </option>
@@ -76,16 +80,10 @@ const totalPrice = computed(() => {
         <div class="text-lg font-semibold text-gray-800 mb-4">
           Precio total: {{ totalPrice }}€
         </div>
-        <button type="submit" class="w-full py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        <Button type="add" class="w-full m-0! text-white rounded-lg hover:bg-azul-suave-dark">
           Pagar
-        </button>
+        </Button>
       </form>
     </div>
   </div>
 </template>
-
-<style scoped>
-  input, select {
-    outline: none;
-  }
-</style>

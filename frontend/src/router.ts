@@ -125,7 +125,7 @@ const routes = [
   {
     path: '/hotel/:id',
     name: 'HotelDetail',
-    component: createComponent({ layout: LayoutDefaultWhite, component: HotelDetailsView }),
+    component: createComponent({ layout: LayoutWithFilter, component: HotelDetailsView }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
@@ -188,7 +188,7 @@ const routes = [
   {
     path: '/hotel/:id/rooms',
     name: 'HotelRooms',
-    component: createComponent({ layout: LayoutDefaultWhite, component: HotelRoomsAndPrices }),
+    component: createComponent({ layout: LayoutWithFilter, component: HotelRoomsAndPrices }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
