@@ -138,7 +138,7 @@ defineProps({
     <router-link to="/login" v-if="!isLoggedIn" class="w-full !mt-4 mb-4">
       <Button type="add" class="w-full !m-0 mb-4">Inicia sesión para reservar</Button>
     </router-link>
-    <router-link :to="`reservation-form/${hotelId}`" v-if="isLoggedIn" class="w-full !mt-4 mb-4">
+    <router-link :to="`${hotelId}/reservation-form`" v-if="isLoggedIn" class="w-full !mt-4 mb-4">
       <Button type="add" class="w-full !m-0 mb-4">Reservar</Button>
     </router-link>
   </div>

@@ -170,12 +170,15 @@ const handleReservation = (roomId) => {
           Los resultados mostrados se basan en los filtros seleccionados. Si no encuentras la opción ideal, ajusta los
           filtros para encontrar más alternativas.
         </p>
+        <p class="text-azul-suave text-sm md:text-base text-center font-bold">
+          (Aún en desarrollo)
+        </p>
       </div>
 
       <!-- Habitaciones en móvil -->
       <div class="rooms-cards-container w-full grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
-          v-for="room in roomsData"
+          v-for="room in roomTypes"
           :key="room.id"
           class="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col justify-between"
         >

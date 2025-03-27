@@ -77,7 +77,7 @@ const formatDisplay = (date) => {
     <input
       id="date-picker"
       ref="flatpickrRef"
-      class="w-full min-w-[300px] min-h-[40px] p-2 border rounded-lg pl-8 pr-10 text-white shadow-sm"
+      class="w-full min-w-[100px] min-h-[40px] p-2 border rounded-lg pl-8 pr-10 text-white shadow-sm"
       placeholder="Selecciona un rango de fechas"
     />
 
@@ -93,7 +93,7 @@ const formatDisplay = (date) => {
 
     <!-- Texto de fechas formateadas -->
     <p
-      class="text-[18px] text-pawtel-black absolute left-[35px] bottom-[7px] w-auto pointer-events-none whitespace-nowrap overflow-hidden text-ellipsis">
+      class="text-[17px] text-pawtel-black absolute left-[35px] bottom-[8px] w-auto pointer-events-none whitespace-nowrap overflow-hidden text-ellipsis">
       {{ formattedDate || 'Establece un rango de fechas' }}
     </p>
   </div>

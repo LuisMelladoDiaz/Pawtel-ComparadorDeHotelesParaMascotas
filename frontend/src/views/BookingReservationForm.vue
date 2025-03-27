@@ -6,6 +6,7 @@ import { useRoute } from 'vue-router';
 import { useGetRoomTypesByHotel } from '@/data-layer/hooks/hotels';
 import DatePicker from '@/components/DatePicker.vue';
 import Button from '@/components/Button.vue';
+import DatePickerMobile from '@/components/DatePickerMobile.vue';
 
 const route = useRoute();
 const hotelId = route.params.id;
@@ -60,7 +61,7 @@ const totalPrice = computed(() => {
       <form @submit.prevent="submitBooking">
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 mb-2">Fechas</label>
-          <DatePicker class="border"
+          <DatePickerMobile class="border!"
             :startDate="internalStartDate"
             :endDate="internalEndDate"
             @update:startDate="(val) => internalStartDate = val"
@@ -69,8 +70,8 @@ const totalPrice = computed(() => {
         </div>
         <div class="mb-4">
           <label for="room-type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de habitación</label>
-          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg font-complementario text-[18px] text-gray-700">
-            <option value="" disabled>Selecciona un tipo de habitación</option>
+          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg font-complementario text-[17px] text-gray-700">
+            <option value="null" disabled>Selecciona un tipo de habitación</option>
             <option v-for="roomType in roomTypes" :key="roomType.id" :value="roomType.id">
               {{ roomType.name }}
             </option>

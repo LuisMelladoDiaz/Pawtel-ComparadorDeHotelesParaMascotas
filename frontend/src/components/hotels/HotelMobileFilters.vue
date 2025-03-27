@@ -1,8 +1,9 @@
 <script setup>
+import { computed } from 'vue';
 import PriceRange from '@/components/hotels/PriceRange.vue';
 import DatePicker from '@/components/DatePicker.vue';
 
-defineProps({
+const props = defineProps({
   cities: {
     type: Array,
     required: true
@@ -47,6 +48,19 @@ const emit = defineEmits([
   'commit-price',
   'close'
 ]);
+
+const petTypeMapping = {
+  DOG: 'Perro',
+  CAT: 'Gato',
+  BIRD: 'Pájaro',
+  MIXED: 'Mixto'
+};
+
+const petTypesInSpanish = computed(() => {
+  return Array.isArray(props.petTypes) 
+    ? props.petTypes.map(petType => petTypeMapping[petType] || petType) 
+    : [];
+});
 </script>
 
 <template>
@@ -77,7 +91,7 @@ const emit = defineEmits([
         <select 
           :value="selectedCity" 
           @change="emit('update:city', $event.target.value)"
-          class="border rounded p-2 w-full text-sm"
+          class="border rounded p-2 w-full text-sm font-complementario text-[18px]"
         >
           <option value="">Todas</option>
           <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
@@ -90,9 +104,11 @@ const emit = defineEmits([
         <select 
           :value="selectedPetType" 
           @change="emit('update:petType', $event.target.value)"
-          class="border rounded p-2 w-full text-sm"
+          class="border rounded p-2 w-full text-sm font-complementario text-[18px]"
         >
-          <option v-for="pet in petTypes" :key="pet" :value="pet">{{ pet }}</option>
+        <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">
+          {{ pet }}
+        </option>
         </select>
       </div>
 
@@ -111,7 +127,7 @@ const emit = defineEmits([
       <!-- Botón de aplicar -->
       <button
         @click="emit('close')"
-        class="mt-4 bg-terracota text-white py-2 px-4 rounded-md font-medium hover:bg-terracota-dark transition-colors"
+        class="mt-4 bg-terracota text-white py-2 px-4 rounded-md font-medium hover:bg-terracota-dark transition-colors font-complementario text-[18px]"
       >
         Aplicar filtros
       </button>

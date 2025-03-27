@@ -3,6 +3,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 import InputText from './InputText.vue';
 import InputNumber from './InputNumber.vue';
 import DatePicker from '../components/DatePicker.vue';
+import DatePickerMobile from './DatePickerMobile.vue';
 import Button from '../components/Button.vue';
 import { useRouter } from 'vue-router';
 
@@ -94,12 +95,21 @@ const onSearch = () => {
       </div>
 
       <DatePicker
-        class="bg-white"
+        class="bg-white hidden md:flex"
         :startDate="startDate"
         :endDate="endDate"
         @update:startDate="emit('update:startDate', $event)"
         @update:endDate="emit('update:endDate', $event)"
       />
+
+      <DatePicker
+        class="bg-white md:hidden"
+        :startDate="startDate"
+        :endDate="endDate"
+        @update:startDate="emit('update:startDate', $event)"
+        @update:endDate="emit('update:endDate', $event)"
+      />
+
       
       <div class="relative inline-block">
         <i class="fa-solid fa-paw absolute left-2 bottom-1 transform -translate-y-1/2 text-pawtel-black text-[18px]"></i>
