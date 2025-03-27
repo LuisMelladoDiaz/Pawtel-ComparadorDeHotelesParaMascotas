@@ -259,15 +259,6 @@ const saveNewRoomType = async () => {
                 <input v-model="editingRoomType.price_per_night" type="number" class="w-full p-1 border rounded">
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Tipo de Mascota:</label>
-                <select v-model="editingRoomType.pet_type" class="w-full p-1 border rounded">
-                  <option value="DOG">🐶 Perros</option>
-                  <option value="CAT">🐱 Gatos</option>
-                  <option value="BIRD">🐦 Pájaros</option>
-                  <option value="MIXED">🐾 Mixto</option>
-                </select>
-              </div>
-              <div>
                 <label class="text-sm font-semibold text-gray-700">Número de Habitaciones:</label>
                 <input v-model="editingRoomType.num_rooms" type="number" class="w-full p-1 border rounded">
               </div>

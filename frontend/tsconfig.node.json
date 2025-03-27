@@ -20,6 +20,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "baseUrl": "./src",
+    "noEmitOnError": false,
 
     "paths": {
       "@/*": ["./*"]
