@@ -1,7 +1,7 @@
 <template>
 
     <!-- Versión escritorio -->
-    <div class="container mt-5 hidden md:flex flex-col text-gray-800 bg-white p-8 rounded-lg shadow-lg leading-relaxed max-w-7xl mx-auto text-justify">
+    <div class="container mt-5 flex flex-col text-gray-800 bg-white p-8 rounded-lg shadow-lg leading-relaxed max-w-7xl mx-auto text-justify">
         <h1 class="text-2xl font-bold text-terracota mb-8">Términos y Condiciones de Uso</h1>
 
         <p class="mb-8">Bienvenido a Pawtel. Al utilizar nuestra plataforma, aceptas los siguientes términos y condiciones. Este acuerdo establece el marco legal para el uso de nuestros servicios, garantizando una experiencia transparente y segura para todos los usuarios. Por favor, léelo detenidamente antes de utilizar nuestros servicios.</p>
@@ -65,14 +65,6 @@
         <h2 class="text-lg font-semibold text-terracota mt-8 mb-3">13. Contacto</h2>
         <p class="mb-8">Si tienes preguntas sobre estos términos, contáctanos en <a href="mailto:pawteles@gmail.com" class="text-azul-suave hover:underline">pawteles@gmail.com</a>.</p>
         
-    </div>
-
-
-    
-    
-    <!-- Versión móvil -->
-    <div class="container flex flex-col items-start mt-5 md:hidden">
-    
     </div>
     
 </template>
