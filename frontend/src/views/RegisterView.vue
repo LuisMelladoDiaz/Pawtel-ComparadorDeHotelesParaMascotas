@@ -14,6 +14,8 @@ const { mutate: createHotelOwner } = useCreateHotelOwner();
 
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
+const acceptTerms = ref(false);
+
 
 // Esquema de validación usando Yup
 const validationSchema = yup.object({
@@ -23,6 +25,14 @@ const validationSchema = yup.object({
   password: yup.string().min(6, 'La contraseña debe tener al menos 6 caracteres').required('La contraseña es obligatoria'),
   confirmPassword: yup.string().oneOf([yup.ref('password')], 'Las contraseñas no coinciden').required('Es necesario confirmar la contraseña'),
   role: yup.string().oneOf(['customer', 'hotel_owner'], 'Selecciona un rol válido').required('Es obligatorio seleccionar un rol'),
+  accept_terms: yup.boolean().oneOf([true], 'Debes aceptar los términos y condiciones').default(false),
+});
+
+const { handleSubmit, values } = useForm({
+  initialValues: {
+    accept_terms: false,
+  },
+  validationSchema,
 });
 
 const register = async (values) => {
@@ -37,6 +47,7 @@ const register = async (values) => {
           phone: values.phone,
           password: values.password,
           role: values.role,
+          accept_terms: values.accept_terms,
         },
         {
           onSuccess: () => {
@@ -57,6 +68,7 @@ const register = async (values) => {
           phone: values.phone,
           password: values.password,
           role: values.role,
+          accept_terms: values.accept_terms,
         },
         {
           onSuccess: () => {
@@ -121,6 +133,25 @@ const register = async (values) => {
           <Field :type="showConfirmPassword ? 'text' : 'password'" name="confirmPassword" as="input" id="confirmPassword" placeholder="Confirma tu contraseña" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
           <ErrorMessage name="confirmPassword" class="text-red-500 text-sm" />
         </div>
+
+        <div class="mt-4 flex items-start">
+          <Field
+            name="accept_terms"
+            type="checkbox"
+            id="accept_terms"
+            value="true"
+            class="mr-2"
+          />
+          <label for="accept_terms" class="text-sm text-gray-700">
+            Acepto los
+            <a href="/terms-and-conditions" target="_blank" class="text-azul-suave hover:underline">términos y condiciones</a>
+          </label>
+        </div>
+
+        <!-- Mostrar el mensaje de error solo si el valor de accept_terms es incorrecto -->
+        <ErrorMessage name="accept_terms" class="text-red-500 text-sm" />
+
+
 
         <div class="mt-6">
           <button type="submit" class="w-full py-2 px-4 bg-azul-suave text-white hover:bg-azul-suave-dark focus:outline-none focus:ring-2 focus:ring-azul-suave">

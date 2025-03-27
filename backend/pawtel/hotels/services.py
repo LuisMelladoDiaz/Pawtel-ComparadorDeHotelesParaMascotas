@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime, timedelta
 
 from django.db.models import Max, Min, Q
 from django.forms import ValidationError
@@ -17,6 +17,8 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 
 class HotelService:
+
+    THREE_YEARS = timedelta(days=3 * 365)
 
     # -
     # -------------------------------------------------------------------------
@@ -133,6 +135,40 @@ class HotelService:
         hotel = HotelService.retrieve_hotel(pk)
         hotel.delete()
 
+    @staticmethod
+    def validate_all_room_types_deletion(hotel_pk):
+        hotel = Hotel.objects.get(pk=hotel_pk)
+        room_types = RoomType.objects.filter(hotel=hotel)
+        today = date.today()
+        delete = True
+
+        for room_type in room_types:
+            past_limit = today - HotelService.THREE_YEARS
+
+            recent_bookings = Booking.objects.filter(
+                room_type_id=room_type.id, start_date__range=(past_limit, today)
+            )
+            future_bookings = Booking.objects.filter(
+                room_type_id=room_type.id, start_date__gte=today
+            )
+
+            if future_bookings.exists():
+                raise ValidationError(
+                    {
+                        "detail": "Object cannot be deleted because there is an upcoming booking."
+                    }
+                )
+
+            if recent_bookings.exists():
+                delete = False
+                break
+
+        return delete
+
+    def archive_hotel(hotel_id):
+        RoomType.objects.filter(hotel_id=hotel_id).update(is_archived=True)
+        Hotel.objects.filter(pk=hotel_id).update(is_archived=True)
+
     # Filter -----------------------------------------------------------------
 
     VALID_FILTERS = {
@@ -146,7 +182,7 @@ class HotelService:
         "limit": int,
         "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
         "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
-        "is_available": bool,
+        "is_available": lambda v: str(v).lower() in ("true", "1"),  # If true or 1, True
     }
 
     @staticmethod
@@ -216,11 +252,11 @@ class HotelService:
             ("is_available" in filters)
             and ("start_date" in filters)
             and ("end_date" in filters)
-            and filters.get("is_available") == True
+            and filters.get("is_available") is True
         ):
             start_date = filters.get("start_date")
             end_date = filters.get("end_date")
-            RoomTypeService.validate_room_type_available(start_date, end_date)
+            RoomTypeService.validate_room_type_is_available(start_date, end_date)
 
             available_hotel_ids = [
                 hotel.id

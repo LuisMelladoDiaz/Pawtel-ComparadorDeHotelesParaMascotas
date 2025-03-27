@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 from django.db.models import Q
 from django.utils.dateparse import parse_date
@@ -6,6 +6,7 @@ from django.utils.timezone import now
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.booking_holds.models import BookingHold
+from pawtel.bookings.models import Booking
 from pawtel.bookings.services import BookingService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
@@ -16,6 +17,8 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 
 
 class RoomTypeService:
+
+    THREE_YEARS = timedelta(days=3 * 365)
 
     # Authorization ----------------------------------------------------------
 
@@ -103,13 +106,18 @@ class RoomTypeService:
             raise ValidationError({"name": "Name in use by same hotel."})
 
     @staticmethod
-    def validate_room_type_available(start_date, end_date):
+    def validate_room_type_is_available(start_date, end_date):
         if not start_date or not end_date:
             raise ValidationError({"detail": "Invalid date format. Use yyyy-mm-dd."})
 
         if end_date < start_date:
             raise ValidationError(
                 {"end_date": "End date cannot be earlier than start date."}
+            )
+
+        if (end_date - start_date).days >= 186:
+            raise ValidationError(
+                {"detail": "The booking duration cannot exceed 6 months (186 days)."}
             )
 
     # GET --------------------------------------------------------------------
@@ -156,6 +164,31 @@ class RoomTypeService:
     def delete_room_type(pk):
         room_type = RoomType.objects.get(pk=pk)
         room_type.delete()
+
+    def validate_room_type_deletion(pk):
+        today = date.today()
+        past_limit = today - RoomTypeService.THREE_YEARS
+        delete = True
+
+        recent_bookings = Booking.objects.filter(
+            room_type_id=pk, start_date__range=(past_limit, today)
+        )
+        future_bookings = Booking.objects.filter(room_type_id=pk, start_date__gte=today)
+
+        if future_bookings.exists():
+            raise ValidationError(
+                {
+                    "detail": "Object cannot be deleted because there is an upcoming booking."
+                }
+            )
+
+        if recent_bookings.exists():
+            delete = False
+
+        return delete
+
+    def archive_room_type(pk):
+        RoomType.objects.filter(pk=pk).update(is_archived=True)
 
     # Availability -----------------------------------------------------------
 
@@ -213,6 +246,7 @@ class RoomTypeService:
     # Filter -----------------------------------------------------------------
 
     VALID_FILTERS = {
+        "hotel": int,
         "pet_type": str,
         "max_price_per_night": float,
         "min_price_per_night": float,
@@ -220,15 +254,19 @@ class RoomTypeService:
         "limit": int,
         "start_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
         "end_date": lambda s: datetime.strptime(s, "%Y-%m-%d").date(),
+        "is_available": lambda v: str(v).lower() in ("true", "1"),  # If true or 1, True
     }
 
     @staticmethod
-    def validate_filters(filters):
+    def __validate_filters(filters):
+        """Ensures filters are valid and have correct types."""
         if filters is None:
             return {}
+
         assert all(
             f in RoomTypeService.VALID_FILTERS for f in filters
-        ), f"Filtro inválido: {filters}"
+        ), f"Invalid filter: {filters}"
+
         validated = {}
         for key, expected_type in RoomTypeService.VALID_FILTERS.items():
             if key in filters:
@@ -239,8 +277,11 @@ class RoomTypeService:
         return validated
 
     @staticmethod
-    def apply_filters(room_types, filters):
+    def __apply_filters(room_types, filters):
         q = Q()
+
+        if "hotel" in filters:
+            q &= Q(hotel__id=filters["hotel"])
 
         if "pet_type" in filters:
             q &= Q(pet_type=filters["pet_type"])
@@ -251,21 +292,44 @@ class RoomTypeService:
         if "min_price_per_night" in filters:
             q &= Q(price_per_night__gte=filters["min_price_per_night"])
 
-        return room_types.filter(q).distinct()
+        filtered_room_types = room_types.filter(q).distinct()
+
+        if (
+            ("is_available" in filters)
+            and ("start_date" in filters)
+            and ("end_date" in filters)
+            and filters.get("is_available") is True
+        ):
+            start_date = filters.get("start_date")
+            end_date = filters.get("end_date")
+            RoomTypeService.validate_room_type_is_available(start_date, end_date)
+
+            filtered_room_types = [
+                room_type
+                for room_type in filtered_room_types
+                if RoomTypeService.is_room_type_available(
+                    room_type.id, start_date, end_date
+                )
+            ]
+
+        return filtered_room_types
 
     @staticmethod
-    def list_filtered_room_types(hotel_id, filters=None):
-        room_types = RoomType.objects.filter(hotel_id=hotel_id, is_archived=False)
+    def list_filtered_room_types(filters=None, allow_archived=False):
+        if allow_archived:
+            room_types = RoomType.objects.all()
+        else:
+            room_types = RoomType.objects.filter(is_archived=False)
 
-        filters = RoomTypeService.validate_filters(filters)
-        room_types = RoomTypeService.apply_filters(room_types, filters)
+        filters = RoomTypeService.__validate_filters(filters)
+        room_types = RoomTypeService.__apply_filters(room_types, filters)
 
         if "sort_by" in filters:
             sort_field = filters["sort_by"]
             valid_sort_fields = ["pet_type", "price_per_night"]
             assert (
                 sort_field.lstrip("-") in valid_sort_fields
-            ), f"Campo de ordenamiento inválido: {sort_field}"
+            ), f"Invalid sort field: {sort_field}"
             room_types = room_types.order_by(sort_field)
 
         if "limit" in filters:

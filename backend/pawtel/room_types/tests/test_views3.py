@@ -12,7 +12,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 
-class HotelViewSetTestCase3(TestCase):
+class RoomTypeViewSetTestCase3(TestCase):
     def __create_user(self, username, first_name, last_name, email, phone, password):
         return AppUser.objects.create_user(
             username=username,
@@ -79,30 +79,27 @@ class HotelViewSetTestCase3(TestCase):
         self.booking1 = self.__create_booking(
             self.customer, self.room_type, 6, 8, 450.00
         )
-
         self.booking2 = self.__create_booking(
             self.customer, self.room_type, 10, 12, 300.00
         )
 
-
-class TestAvailabilityHotelFilter(HotelViewSetTestCase3):
-    def test_available_hotels_with_available_room_type(self):
+    def test_available_room_type(self):
         start_date = date.today() + timedelta(days=2)
         end_date = start_date + timedelta(days=2)
-        url = reverse("hotel-list")
+        url = reverse("room-type-list")
         response = self.client.get(
             url,
             {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
-        self.assertEqual(response.data[0]["city"], "Madrid")
+        self.assertEqual(response.data[0]["name"], "Suite")
 
-    def __CAMBIAR_test_available_room_types(self):
+    def test_available_room_types(self):
         start_date = date.today() + timedelta(days=4)
         end_date = start_date + timedelta(days=1)
 
-        url = reverse("hotel-available_room_types", kwargs={"pk": self.hotel.id})
+        url = reverse("room-type-list")
         response = self.client.get(
             url,
             {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
@@ -111,25 +108,10 @@ class TestAvailabilityHotelFilter(HotelViewSetTestCase3):
         self.assertEqual(len(response.data), 1)
         self.assertEqual(response.data[0]["id"], self.room_type.id)
 
-    def test_available_hotels_without_available_room_type(self):
+    def test_available_room_types_ignores_dates_without_is_available(self):
         start_date = date.today() + timedelta(days=6)
         end_date = date.today() + timedelta(days=8)
-        url = reverse("hotel-list")
-        response = self.client.get(
-            url,
-            {
-                "is_available": True,
-                "start_date": start_date.isoformat(),
-                "end_date": end_date.isoformat(),
-            },
-        )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 0)
-
-    def test_available_hotels_ignores_dates_without_is_available(self):
-        start_date = date.today() + timedelta(days=6)
-        end_date = date.today() + timedelta(days=8)
-        url = reverse("hotel-list")
+        url = reverse("room-type-list")
         response = self.client.get(
             url,
             {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
@@ -137,14 +119,18 @@ class TestAvailabilityHotelFilter(HotelViewSetTestCase3):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
 
-    def __CAMBIAR_test_available_room_types_no_availability(self):
+    def test_available_room_types_no_availability(self):
         start_date = date.today() + timedelta(days=4)
         end_date = date.today() + timedelta(days=7)
 
-        url = reverse("hotel-available_room_types", kwargs={"pk": self.hotel.id})
+        url = reverse("room-type-list")
         response = self.client.get(
             url,
-            {"start_date": start_date.isoformat(), "end_date": end_date.isoformat()},
+            {
+                "is_available": True,
+                "start_date": start_date.isoformat(),
+                "end_date": end_date.isoformat(),
+            },
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 0)

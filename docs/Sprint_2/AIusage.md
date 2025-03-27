@@ -50,6 +50,7 @@
     - [Luis Mellado Díaz](#luis-mellado-díaz)
     - [Rafael Castillo Cebolla](#-rafael-castillo-cebolla)
     - [Yesica Garate Fuentes](#yesica-garate-fuentes)
+    - [Javier Garcia Sebastian](#-javier-garcia-sebastian)
 
 ---
 
@@ -59,7 +60,10 @@
 | 22/03/2025  | v 1.0         | Versión inicial del documento - Parte de Rafael | Rafael Castillo Cebolla |
 | 24/03/2025  | v 1.1         | Parte de Dani | Daniel Flores de Francisco |
 | 25/03/2025  | v 1.2         | Parte de Luis | Luis Mellado Díaz |
-
+| 26/03/2025  | v 1.3         | Parte de Fernando | Fernando Castelló Sánchez |
+| 26/03/2025  | v 1.4         | Parte de Javi G | Javier García Sebastián |
+| 26/03/2025  | v 1.5         | Parte de David | David González Martínez |
+| 26/03/2025  | v 1.6         | Parte de Francisco | Francisco Miguel Jiménez Morales |
 
 ---
 
@@ -79,7 +83,7 @@
 #### 1. Información General
 
 - **Nombre del programador:** Andrés Martínez Reviriego
-- **Sprint:** Sprint1
+- **Sprint:** Sprint2
 - **Rol en el proyecto:** Full-Stack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -95,25 +99,23 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Resolver conflictos git | ChatGPT | Resolución de conflictos con git pull origin main |
-| Explicación cookies | ChatGPT | Explicación de motivo por el que las cookies no funcionaban correctamente |
-| Error con pre-commit | ChatGPT | Solución de error con pre-commit no permitía realizar el commit |
-| Añadir filtro con foreign key | ChatGPT | Consulta sobre cómo añadir un filtro teniendo en cuenta que está asociado con la entidad usando una foreign key |
+| Consejo tecnológico	| ChatGPT	| Ofrecimiento de ideas para crear un mecanismo de restablecimiento de contraseña|
+| Solución error de commit	| ChatGPT	| Explicación de motivo por el que un commit no sigue las reglas del conventional commit|
+| Eliminar rama git	|ChatGPT	| Explicación de cómo eliminar ramas locales y remotas en git|
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 7
 - **Comparación con trabajo sin IA:** Mejora en eficiencia y explicación de conceptos
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Ayúdame a resolver conflictos de merge tras hacer git pull origin main a mi rama.
-2. ¿Por qué aparece "Cookie "access_token" has been rejected because it is in a cross-site context and its "SameSite" is "Lax" or "Strict" " ?
-3. Ayúdame a resolver errores con el pre-commit patch (files reformatted)
-4. Teniendo en cuenta que el room_types es un modelo aparte que se ascocia con los hoteles por medio de una foreign key, ¿cómo influye esto en un filtro de búsqueda de hoteles?
+1. ¿Cuál es la mejor forma de implementar un "¿olvidaste tu contraseña?"" en mi página web?
+2. Explícame el error con este commit: feat(user role): added customer seed Conventional Commits 🚫 According to the conventional-commits specification, some of the commit messages are not valid.
+3. ¿Cómo puedo eliminar una rama en github tanto remota como local?
 
 #### 6. Problemas Encontrados y Limitaciones
 
@@ -232,7 +234,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Fernando Castelló Sánchez
-- **Sprint:** Sprint1
+- **Sprint:** Sprint2
 - **Rol en el proyecto:** Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -248,26 +250,23 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Ayuda con vue | ChatGPT | Dudas técnicas sobre el lenguaje. |
-| Pantalla detalles de hoteles | ChatGPT | Recibiendo el código de la pantalla se pidió consejo para hacerla más responsiva (de cara a los usuarios de móvil) |
-| Pantallas Sobre Nosotros y Contacto | ChatGPT | Revisar la estructura y proponer posibles mejoras visuales. |
-| PantallaContacto | ChatGPT | Revisar el funcionamiento de la caja de mensajes. |
-| Ayuda con markdown | ChatGPT | Asesoramiento técnico sobre como manejar los archivos markdown. |
+| Pantalla habitaciones y precios de hoteles | DeepSeek | Corrigiendo el posicionamiento de algunos elementos. |
+| Feedback | DeepSeek | Dada la plantilla del archivo de feedback, pedir que añada la información recabada en clase. |
 
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ayudado a entender mejor los formatos que usamos en el proyecto, además de ayudarme con cuestiones técnicas y visuales.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 6
+- **Comparación con trabajo sin IA:** El uso de la IA me ha facilitado completar mi código de la mejor manera y ahorrar tiempo con la documentación.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. dado el código actual de mi archivo, revisa si hay inconsistencias y proponme posibles mejoras tanto estructurales como de estética de la pantalla.
-2. ayúdame a que la pantalla sea responsiva, que se adapte a pantallas de teléfonos móviles.
-3. como puedo ponerle el logo de nuestro proyecto a un archivo markdown?
+1. dada esta plantilla y esta información, añádela al documento.
+2. haz que estos botones se centren dentro de su columna.
+3. haz que el espacio entre estos componentes sea el mismo que en esta otra pantalla.
 
 #### 6. Problemas Encontrados y Limitaciones
 
@@ -285,15 +284,15 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Francisco Miguel Jiménez Morales
-- **Sprint:** 1
+- **Sprint:** 2
 - **Rol en el proyecto:** Analista, programador Full-Stack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código ( )
+- Generación de código (X)
 - Refactorización de código ( )
 - Generación de documentación ( )
-- Asesoramiento técnico ( )
+- Asesoramiento técnico (X)
 - Otro (especificar): [Especificar si aplica]
 
 #### 3. Uso de IA en las Tareas
@@ -302,28 +301,32 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| No se ha utilizado para ninguna tarea | - | - |
+| Implementar pasarela de pago | ChatGPT | Ayuda en problemas con vue, resolución de errores, entendimiento de la documentación de stripe y en la búsqueda de documentación dentro de la página de stripe |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 0
-- **Comparación con trabajo sin IA:** Igual
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
+- **Comparación con trabajo sin IA:** Más largo y frustrante, probablemente no se entregase a tiempo
 
 #### 5. Prompts Utilizados
 
-Ninguno
+Listar los prompts que fueron más efectivos para completar las tareas:
+
+1. Pasame un enlace a la documentación de stripe en el que explique X (ejemplo: en el que explique las propiedades del objeto session).
+2. Qué significa este error.
+3. Cómo obtengo en vue un parámetro de la URL.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** Ninguno
-- **Limitaciones detectadas en la IA:** Ninguno
+- **Errores o respuestas incorrectas de la IA:** A la hora de responder sobre un error se inventaba código; el cual casi siempre era incoherente
+- **Limitaciones detectadas en la IA:** Es incapaz de programar algo útil para el proyecto; es mejor usarla puntualmente para dudas y consejos 
 - **Propuestas de mejora en el uso de IA:** Ninguno
 
 #### 7. Evaluación General
 
-- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** No la he usado
-- **Comentarios adicionales sobre la experiencia con IA:** No la he usado
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Si
+- **Comentarios adicionales sobre la experiencia con IA:** Darle el mismo uso y no confiar mucho en ella
 
 ---
 
@@ -331,14 +334,14 @@ Ninguno
 
 #### 1. Información General
 
-- **Nombre del programador:** Claudio Cortés Carrasco
-- **Sprint:** Sprint1
-- **Rol en el proyecto:** Programador backend, documentación
+- **Nombre del programador:** David González Martínez
+- **Sprint:** Sprint 2
+- **Rol en el proyecto:** Programador full-stack, Jefe de equipo full-stack, Devops
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
 - Generación de código (x)
-- Refactorización de código ( )
+- Refactorización de código (x)
 - Generación de documentación ( )
 - Asesoramiento técnico (x)
 
@@ -348,25 +351,25 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Mejora de tests |    ChatGPT | Recibiendo el código de las distintas entidades y los respectivos test básicos se pidío que se mejorasen para que abarcasen todas las posibilidades. |
-| Ayuda para generar gráficos |                ChatGPT | Se usó para saber como generar unos gráficos de barras desde el powerpoint para añadirlo a la presentación semanal. |
-
+| Generación de código nuevo o mejora |    ChatGPT | Se ha utilizado para crear primeras versiones de componentes lógicos del sistema; por ejemplo, la creación de componentes de UI. También para mejorar lo existente.|
+| Autocompletado de código|    Copilot | Autocompletado de código. |
+| Asesoramiento sobre bugs |    ChatGPT  | Se ha utilizado para guiar al programador en la resolución de bugs. |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 3
-- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para mejorar y ampliar los tests me ahorró mucho tiempo
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Comparación con trabajo sin IA:** Pilló un par de bugs difíciles. Rápida para prototipar en relación a hacerlo manualmente.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Dados los siguientes archivos de tests y sus entidades asociadas, mejoralos para que abarquen el 100% de los casos posibles tanto en casos positivos como negativos.
-2. Podrias ayudarme a generar un gráfico de barras desde una presentación de powerpoint.
+1. <código> \n Ocurre <bug>. Dime que puede ser.
+2. Mejora la interfaz de esta pantalla.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos.
+- **Limitaciones detectadas en la IA:** Se pega patinadas a veces.
 
 
 #### 7. Evaluación General
@@ -381,7 +384,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Jorge Gómez de Tovar
-- **Sprint:** Sprint 1
+- **Sprint:** Sprint 2
 - **Rol en el proyecto:** Desarrollador backend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -400,7 +403,7 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 1-2 horas
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 3 horas
 - **Comparación con trabajo sin IA:** Trabajo más eficaz que sin el uso de la IA.
 
 #### 5. Prompts Utilizados
@@ -412,9 +415,12 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 2.
    - Dado el controlador, ¿cómo debería hacer las llamadas desde Postman para probar cada una de las URLs que hay en el controlador?
 
+3.
+  - Dado este modelo, ¿cómo deberia hacer un seeder para que cada hotel tenga imagenes ficticias y una de ellas se portada?
+
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** Los tests generados por la IA tenían fallos debido a que el setup que creó no era el correcto para probar los métodos del controlador y, además, incluían algunos casos de prueba incorrectos.
+- **Errores o respuestas incorrectas de la IA:** Los tests generados por la IA tenían fallos debido a que el setup que creó no era el correcto para probar los métodos del controlador y, además, incluían algunos casos de prueba incorrectos. Tambíen algunas llamadas a Postman no se correspondian con el controlador.
 - **Limitaciones detectadas en la IA:** La IA no tiene en cuenta todos los casos de prueba.
 - **Propuestas de mejora en el uso de IA:** Seguir moderando su uso y probar todo el código generado.
 
@@ -430,7 +436,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Sergio Trenado González
-- **Sprint:** Sprint 1
+- **Sprint:** Sprint 2
 - **Rol en el proyecto:** Líder de Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -444,23 +450,21 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Crear componentes globales | ChatGPT | Asesoramiento sobre la tecnología de Vue, Tailwind y Vite |
-| Listado de hoteles | ChatGPT | Ayuda para hacer la web responsiva |
-| Conectar Backend con Frontend | ChatGPT | Ayuda para poder conectar todo con diferentes funciones y métodos |
+| Pulir y mejorar detalles de pantallas en general | ChatGPT | Ayuda sobre cómo realizar ciertas cosas para que algunos elementos se vean mejor |
+| Mejorar filtros de la Navbar | ChatGPT | Ayuda para intentar que los filtros funcionen y se vean mejor |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** Me ha ahorrado mucho tiempo en cuestión de buscar tutoriales y documentación para entender las tecnologías, también a la hora de hacer la web responsiva y conectar las pantallas con el backend, sin la IA me habría costado todo muchisimo más esfuerzo y tiempo.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Comparación con trabajo sin IA:** Me ha ahorrado algo de tiempo de general, ya que si no tendría que haber estado mucho tiempo probando ciertas cosas hasta que funcionara.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Quiero configurar Tailwind CSS en un proyecto Vue y aprender a usarlo correctamente. ¿Cómo instalo y configuro Tailwind en Vue con Vite? Además, ¿cuál es la mejor forma de crear y estructurar componentes reutilizables en Vue con Tailwind CSS para usarlos en diferentes pantallas? ¿Puedes darme ejemplos?
-2. Quiero hacer que esta pantalla sea completamente responsiva usando Vue y Tailwind CSS. ¿Cuáles son las mejores prácticas para diseñar componentes adaptables a diferentes tamaños de pantalla?
-3. Quiero que la pantalla de hotel details obtenga el ID con Vue Router y muestre sus detalles, pero además quiero agregar información manualmente como imágenes, precio, rating, etc., ya que estos datos no están en la base de datos. ¿Cómo lo hago?
-
+1. ¿Cómo puedo editar un componente de selección de rango de fechas en Vue con Flatpickr para que limite el rango a 6 meses desde la fecha de inicio y resetee correctamente esa restricción al limpiar la selección?
+2. ¿Cómo puedo sincronizar correctamente la selección de ciudad, tipo de mascota y rango de fechas desde una navbar en Vue, asegurando que al borrar uno de los campos no se reseteen los demás?
+3. ¿Cómo puedo posicionar correctamente un ícono dentro de un elemento select en Vue sin que afecte el alineamiento del texto y sin consumir espacio del contenido?
 
 #### 6. Problemas Encontrados y Limitaciones
 
@@ -805,3 +809,53 @@ Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso
 - **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad del código.
 
 ---
+
+### 👨‍💻 Javier García Sebastián
+
+#### 1. Información General
+
+- **Nombre del programador:** Javier García Sebastián
+- **Sprint:** Sprint2
+- **Rol en el proyecto:** Backend
+
+#### 2. Tipo de Tareas en las que se Utilizó IA
+
+- Generación de código (x)
+- Refactorización de código (x)
+- Generación de documentación (x)
+- Asesoramiento técnico ()
+
+#### 3. Uso de IA en las Tareas
+
+Para cada tarea en la que se usó IA, completar la siguiente tabla:
+
+| Tarea | Herramienta utilizada | Descripción del uso de IA |
+|-------|-----------------------|---------------------------|
+| solución error en mi código	| ChatGPT	| Explicaxión detallada sobre porque mi código no funcionaba como debería|
+| Solución error de la bd	| ChatGPT	| Explicación de como solucionar un error con mi mariadb|
+| plantilla para documento general de tiempo	|ChatGPT	| generarme una plantilla para los informes de tiempo|
+
+
+#### 4. Impacto en Productividad
+
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Comparación con trabajo sin IA:** Mejora en eficiencia y explicación de conceptos
+
+#### 5. Prompts Utilizados
+
+Listar los prompts que fueron más efectivos para completar las tareas:
+
+1. Explica que hacer cuando me ocurre este error: Can't connect to local server through socket '/tmp/mysql.sock' (61).
+2. Basandote en este informe de tiempo de clockify, genera una plantilla en formato md que comprenda las horas utilizadas
+
+#### 6. Problemas Encontrados y Limitaciones
+
+- **Limitaciones detectadas en la IA:** -
+
+#### 7. Evaluación General
+
+- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
+- **Comentarios adicionales sobre la experiencia con IA:** -
+
+---
+

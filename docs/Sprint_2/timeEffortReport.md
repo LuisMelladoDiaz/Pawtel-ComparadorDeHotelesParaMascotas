@@ -37,6 +37,10 @@
 |-------------|---------------|---------------------------|-------------------------|
 | 24/03/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
 | 25/03/2025  | v 1.0         | Parte de Luis | Luis Mellado Díaz |
+| 26/03/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
+| 26/03/2025  | v 1.3         | Parte de Javi G | Javier García Sebastián |
+| 26/03/2025  | v 1.4         | Parte de David | David González Martínez |
+| 26/03/2025  | v 1.5         | Parte de Francisco | Francisco Miguel Jiménez Morales |
 
 
 ---
@@ -48,23 +52,24 @@
 
 ## Reporte de tiempo de Javier García Sebastián
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 23:37:23
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 28:20:57
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
-|-------------|---------|
-| GUIÓN: dividir trabajo de presentación para el 14 | 00:18:07 |
-| CLASE DEL 07/03/2025 | 04:00:00 |
-| FRONTEND: perfil de usuario | 04:05:23 |
-| FRONTEND: perfil de usuario (versión 2.0) | 03:48:43 |
-| FRONTEND: perfil de usuario (arreglos) | 02:49:03 |
-| Clase 21/02/2025 | 04:00:00 |
-| Repaso slides 7/3/2025 | 00:28:58 |
+|-------------|----------|
+| GUIÓN: dividir trabajo de presentación para el 21 | 00:28:29 |
+| clase 14/03/2025 | 04:00:00 |
+| FRONTEND: perfil de usuario (versión 3.0) | 02:13:45 |
+| FRONTEND: perfil de usuario (versión 2.0) | 02:34:43 |
+| FRONTEND: corregir errores perfil de usuario | 00:20:42 |
+| clase 21/03/2025 | 04:00:00 |
+| preparar presentación 21/03/2025 | 04:57:21 |
 | DOCUMENTACIÓN: organizar reporte del tiempo del equipo | 00:51:11 |
-| PRESENTACIÓN: diapositivas presentación día 7/3/2025 | 02:26:48 |
-| USUARIOS PILOTO: crear grupo y realizar encuesta para el feedback | 00:49:10 |
+| PRESENTACION: diapositivas presentacion dia 14/3/2025 | 01:50:38 |
+| conectar pantalla de UserProfile con backend | 01:45:58 |
+| GUIÓN: dividir trabajo de presentación para el 28 | 00:29:00 |
 
 ![grafico-de-tiempos](graficas/javi_garcia.png)
 
@@ -102,62 +107,52 @@
 
 ## Reporte de tiempo de Sergio Trenado Gonzalez
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 52:58:39
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 37:44:38
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Clase 14 mar | 04:00:00 |
-| Feature: Pantalla de Listado de hoteles | 06:06:32 |
-| Frontend Organización Sprint 1 | 04:04:04 |
-| Resolviendo conflictos de una PR | 00:51:00 |
-| Instalación proyecto | 00:23:20 |
-| Reunión Primer Tercio Sprint 1 | 01:00:33 |
-| Commits and PR | 00:12:02 |
-| Informe de rendimiento | 01:03:07 |
-| Informe de desempeño | 00:52:01 |
-| Clase 7 mar | 04:00:00 |
-| Haciendo web responsiva | 01:57:42 |
-| Clase 21 feb | 04:00:00 |
-| Reunión Inicio Sprint 1 | 01:11:00 |
-| Fix pantalla detalles de hotel + merge main | 00:38:17 |
-| Fixeando cosas | 00:29:27 |
-| Reorganización y actualización del Excel de organización | 00:22:35 |
-| Fix de imports + resolviendo dudas | 00:41:20 |
-| Feature: Conectar Backend y Frontend | 05:33:48 |
-| Instalación proyecto + componentes | 01:20:52 |
-| Reunión Mitad Sprint 1 | 00:30:37 |
-| Informe de trabajo - 6 mar | 00:23:27 |
-| Feature: Crear Componentes Globales | 13:16:55 |
+| Descripción                                      | Duración    |
+|-------------------------------------------------|------------|
+| Feature: Conectar Backend y Frontend            | 05:33:48   |
+| Revisión + Mejora de PR + Feature: Pulir detalles de las pantallas | 05:06:36   |
+| Feature: Pulir detalles de las pantallas        | 04:31:22   |
+| Clase 14 marzo                                  | 04:00:00   |
+| Clase 21 marzo                                  | 04:00:00   |
+| Feature: Adaptar componentes y pantallas + Cosas extras | 03:27:02   |
+| Feature: Adaptar componentes y pantallas        | 02:55:57   |
+| Juntando Docs de Mejoras Frontend + Revisando PRs | 01:29:13   |
+| Puliendo pantallas + nuevos filtros de ordenamiento + imágenes nuevas | 01:27:56   |
+| Reunión Inicio Sprint 2                         | 01:14:51   |
+| Frontend Organización Sprint 2                  | 01:04:01   |
+| Reunión Mitad Sprint 2                          | 01:00:00   |
+| Feature: Pulir detalles de las pantallas + Revisando PRs | 00:35:37   |
+| Revisando PRs                                   | 00:27:49   |
+| Documento de metodología para Frontend          | 00:27:23   |
+| Frontend Organización                           | 00:23:03   |
 
 ![grafico-de-tiempos](graficas/sergio.png)
 ---
 
 ## Reporte de tiempo de Rafael Castillo Cebolla
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 58:12:11
+**Periodo:** 14/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 38:42:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Rutas API | 02:45:00 |
-| Preparar presentación | 01:00:00 |
-| Reunión mitad de sprint 1 backend | 00:47:12 |
-| QA y diseñar backend | 01:25:00 |
-| Clases | 12:00:00 |
-| Diseñando backend y QA | 02:10:00 |
-| Preparar sprint 1 backend | 08:59:32 |
-| Arreglando backend | 02:00:00 |
-| Diseño backend + documentación + QA | 01:30:00 |
-| QA Controladores y diseño | 03:00:00 |
-| UML | 02:20:00 |
-| Preparar entrega Devising a Project | 03:00:00 |
+| QA | 10:21:00 |
+| Refactorizar autenticación en backend  | 06:48:00 |
+| Arreglando problemas varios | 02:06:00  |
+| Booking Hold  | 03:42:00 |
+| Clases | 4:00:00 |
+| Diseñar backend sprint 2 | 07:00:00 |
+| Reunión | 00:45:00 |
+| Planificar sprint 2 backend | 04:00:00 |
 
-![grafico-de-tiempos](graficas/rafa.png)
+![grafico-de-tiempos](graficas/rafael.png)
 ---
 
 ## Reporte de tiempo de Manuel Castillejo Vela
@@ -219,17 +214,26 @@
 
 ## Reporte de tiempo de Jorge Gomez de Tovar
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 20:20:00
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 29:52:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Controladores y servicios hotel y hotel owner | 09:40:00 |
+| Revisión frontend | 00:45:00 |
+| Mensajes error login y register | 01:30:00 |
+| Actualizar covers de HotelImage | 02:50:00 |
+| Revisión PR autorización | 00:30:00 |
+| Restricciones hotel image test y seeders | 05:55:00 |
+| Revisión Pull-request Image handling | 00:52:00 |
 | Clase | 08:00:00 |
-| Reunión mitad de sprint 1 backend | 00:40:00 |
-| Endpoints backend | 02:00:00 |
+| Revisión PR refactorizar | 00:30:00 |
+| Arreglar error en seeder | 00:30:00 |
+| Autorización y permiso controladores y servicios | 06:30:00 |
+| Informe IA | 00:30:00 |
+| Revisión PR filtros room type | 01:00:00 |
+| Añadir endpoints a documento rutas API | 00:30:00 |
 
 ![grafico-de-tiempos](graficas/jorge.png)
 ---
@@ -269,84 +273,126 @@
 ![grafico-de-tiempos](graficas/javier_ruiz.png)
 ---
 
-## Reporte de tiempo de Francisco Miguel Jimenez Morales
+## Reporte de tiempo de Francisco Miguel Jiménez Morales
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 48:11:30
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 42:12:03
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Fix PWA Structure | 01:08:29 |
-| Preparar presentación | 05:04:22 |
+| Preparar presentación | 01:00:00 |
+| Feedback revisión | 02:29:26 |
+| Feedback revisión | 00:59:32 |
+| Solucionar conflictos | 00:21:49 |
+| Solucionar conflictos | 00:53:08 |
+| Implementar pasarela de pago | 02:20:45 |
+| Implementar pasarela de pago | 00:58:04 |
+| Implementar pasarela de pago | 00:42:02 |
+| Implementar pasarela de pago | 01:08:38 |
+| Implementar pasarela de pago | 00:33:00 |
 | Clase | 04:00:00 |
-| Convertir la SPA en una PWA instalable | 02:50:59 |
-| Devising a Project | 26:11:11 |
+| Implementar pasarela de pago | 00:56:15 |
+| Implementar pasarela de pago | 01:26:22 |
+| Preparar presentación | 02:28:56 |
+| Implementar pasarela de pago | 00:54:04 |
+| Implementar pasarela de pago | 03:14:39 |
+| Preparar presentación | 00:17:40 |
+| Implementar pasarela de pago | 00:44:44 |
+| Organización y planificación usuarios piloto | 00:03:03 |
+| Implementar pasarela de pago | 00:53:35 |
+| Implementar pasarela de pago | 00:24:48 |
+| Implementar pasarela de pago | 01:09:54 |
+| Organización y planificación usuarios piloto | 00:34:16 |
+| Implementar pasarela de pago | 00:41:10 |
+| Implementar pasarela de pago | 02:05:56 |
+| Implementar pasarela de pago | 02:12:42 |
+| Organización y planificación usuarios piloto | 00:22:54 |
+| Implementar pasarela de pago | 01:59:44 |
+| Misc | 00:33:56 |
+| Clase | 04:00:00 |
 | Gestión de usuarios pilotos - Redactar informe | 01:36:03 |
-| Organización y planificación usuarios piloto | 01:59:22 |
-| Gestión de usuarios pilotos | 01:29:57 |
-| Ver tutoriales Vite + Vue PWA | 01:25:29 |
-| Gestión de usuarios pilotos - Preparar informe | 00:58:56 |
-| Informe IA | 00:05:08 |
-| Preparar entorno de trabajo y ver tutoriales | 01:21:34 |
+| Preparar presentación | 00:04:58 |
 
-![grafico-de-tiempos](graficas/francisco.png)
+
+
+![grafico-de-tiempos](graficas/francisco2.png)
 ---
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 24:30:27
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 28:14:33
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
 | Documentación (Feedback), Reporte IA | 01:22:29 |
-| Issues y Aprendizaje VUE | 01:03:37 |
-| Frontend | 16:07:10 |
+| Frontend | 02:40:09 |
+| revision.md | 01:38:19 |
+| Reunión | 00:44:27 |
 | Clase | 04:00:00 |
-| Aprendizaje VUE | 01:01:21 |
-| Feedback | 00:38:42 |
-| Documentación (Feedback) | 00:17:08 |
+| Documentación (Feedback) | 01:24:51 |
+| Frontend | 02:02:02 |
+| Frontend | 02:10:12 |
+| Frontend | 00:20:50 |
+| Clase | 04:00:00 |
+| Documentación (Feedback) | 01:01:27 |
+| Frontend | 01:17:17 |
+| Frontend | 00:17:59 |
+| Frontend | 02:23:00 |
+| Frontend, Informe IA | 02:51:31 |
 
 ![grafico-de-tiempos](graficas/fernando.png)
 ---
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 32:59:06
+**Periodo:** 12/02/2025 - 26/03/2025
+**Total de tiempo trabajado:** 42:16:15
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Deployment | 01:33:24 |
-| Register/auth | 01:57:18 |
-| Reunión | 00:31:24 |
-| Organización | 00:05:01 |
-| Conexión frontend-backend | 02:36:26 |
-| Form | 00:04:11 |
-| Preparar reunión | 00:09:00 |
-| Misc, gestión | 00:23:00 |
-| Clases | 04:00:00 |
-| Desempeño | 00:38:39 |
-| Reviews | 00:10:19 |
-| Reunión jefes de equipo | 01:00:00 |
-| Reunión Jefes | 01:10:00 |
-| Deployment on Render | 01:41:44 |
-| Ponerme al día, ver agenda reunión, review | 01:05:00 |
-| QOL changes in frontend | 00:41:00 |
-| Rendimiento | 00:42:22 |
-| Review | 01:58:57 |
-| Conexión backend-frontend | 01:48:00 |
-| Misc | 05:39:21 |
-| Planificación Full Stack | 01:04:00 |
-| Clase | 04:00:00 |
+| Descripción                                 | Duración   |
+|---------------------------------------------|------------|
+| Clase                                       | 04:00:00   |
+| Reunion                                     | 01:00:00   |
+| Fix bug                                     | 00:42:21   |
+| Autenticacion                               | 02:34:52   |
+| Conexion frontend backend                   | 02:36:26   |
+| Performance                                 | 00:17:19   |
+| Review                                      | 00:43:57   |
+| Reunión de urgencia                         | 00:47:00   |
+| Review/Trabajo en Reservas                  | 00:31:43   |
+| Planificar                                  | 00:10:58   |
+| Ayudar                                      | 01:10:18   |
+| Workflow                                    | 00:10:00   |
+| Review pagos/reservas                       | 00:20:13   |
+| Actualizarme, aclarar dudas, cosas varias   | 00:50:00   |
+| Fix double login bug                        | 00:02:00   |
+| Review/Fix bugs in frontend permissions     | 00:26:17   |
+| Review PR Andres                            | 00:08:46   |
+| Documentos                                  | 00:14:55   |
+| Review/Misc                                 | 00:30:03   |
+| Pulir reservas                              | 01:48:27   |
+| Mirar bug autenticacion                     | 00:10:12   |
+| Reviews, aclarar dudas, misc                | 00:47:00   |
+| Refactorizacion frontend                    | 01:25:18   |
+| Bug                                         | 00:16:49   |
+| Ver problema compañero                      | 00:32:00   |
+| Images                                      | 03:49:39   |
+| Reunion y organizacion                      | 01:42:00   |
+| Misc                                        | 05:42:04   |
+| Documento guidelines frontend/feedback pantallas | 01:23:49   |
+| Deployment                                  | 02:20:12   |
+| Permissions in frontend                     | 00:53:26   |
+| Class                                       | 04:00:00   |
+| Review a lo de Andrés                       | 00:08:11   |
 
-![grafico-de-tiempos](graficas/david.png)
+![{4DC49BB5-393E-469D-B7AA-F179388E8F28}](https://github.com/user-attachments/assets/4d868b92-8c81-4273-aa18-ea3ca6154765)
+
 ---
 
 ## Reporte de tiempo de Daniel Flores de Francisco
@@ -381,7 +427,7 @@
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
 
-**Periodo:** 21/02/2025 - 14/03/2025
+**Periodo:** 14/03/2025 - 25/03/2025
 **Total de tiempo trabajado:** 28:45:50
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -406,20 +452,28 @@
 
 ## Reporte de tiempo de Andres Martinez Revriego
 
-**Periodo:** 21/02/2025 - 14/03/2025
-**Total de tiempo trabajado:** 14:21:36
+**Periodo:** 12/03/2025 - 26/03/2025
+**Total de tiempo trabajado:** 37:38:54
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Informe de Tiempo | 00:05:00 |
-| Informe de IA | 00:28:00 |
-| Informe de IA actualizado | 00:17:00 |
-| Tarea: Autenticación básica (frontend) | 07:05:53 |
-| Formación de TypeScript, TanStack y PWA | 00:59:16 |
-| Tarea: Autenticación básica (backend) | 02:26:15 |
-| Lectura Documentación | 00:39:26 |
+| Informe IA y tiempo | 00:04:55 |
+| Evidencias términos y condiciones | 01:54:40 |
+| Presentación | 04:11:09 |
+| Informe de IA | 00:14:00 |
+| Asistencia a clase | 04:00:00 |
+| Reestablecimiento de contraseña | 05:20:55 |
+| Customer | 04:36:19 |
+| Asistencia a clase | 04:00:00 |
+| Revisión código filtros | 01:06:48 |
+| Ayuda con revisión.md | 00:24:29 |
+| Filtros | 04:11:56 |
+| Editar hoteles | 02:17:56 |
+| Reunión de emergencia | 00:47:27 |
+| Editar hoteles | 01:50:34 |
 | Filtro de búsqueda | 02:20:46 |
+| Informe de IA actualizado | 00:17:00 |
 
-![grafico-de-tiempos](graficas/andres.png)
+![grafico-de-tiempos](graficas/andres2.png)

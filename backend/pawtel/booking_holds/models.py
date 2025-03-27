@@ -37,28 +37,33 @@ class BookingHold(models.Model):
     def clean(self):
         super().clean()
 
-        if (self.hold_expires_at) and (self.hold_expires_at) < now():
-            raise ValidationError(
-                {"hold_expires_at": "Hold expiration date cannot be in the past."}
+        errors = {}
+
+        if self.hold_expires_at and self.hold_expires_at < now():
+            errors.setdefault("hold_expires_at", []).append(
+                "Hold expiration date cannot be in the past."
             )
 
-        if (self.booking_start_date) and (self.booking_start_date) <= date.today():
-            raise ValidationError(
-                {"booking_start_date": "Booking start date must be in the future."}
+        if self.booking_start_date and self.booking_start_date <= date.today():
+            errors.setdefault("booking_start_date", []).append(
+                "Booking start date must be in the future."
             )
 
-        if (self.booking_end_date) and (self.booking_end_date) <= date.today():
-            raise ValidationError(
-                {"booking_end_date": "Booking end date must be in the future."}
+        if self.booking_end_date and self.booking_end_date <= date.today():
+            errors.setdefault("booking_end_date", []).append(
+                "Booking end date must be in the future."
             )
 
-        if (
-            (self.booking_start_date)
-            and (self.booking_end_date)
-            and (self.booking_end_date < self.booking_start_date)
-        ):
-            raise ValidationError(
-                {
-                    "booking_end_date": "Booking end date cannot be earlier than booking start date."
-                }
-            )
+        if self.booking_start_date and self.booking_end_date:
+            if self.booking_end_date < self.booking_start_date:
+                errors.setdefault("booking_end_date", []).append(
+                    "Booking end date cannot be earlier than booking start date."
+                )
+
+            if (self.booking_end_date - self.booking_start_date).days >= 186:
+                errors.setdefault("booking_end_date", []).append(
+                    "The booking duration cannot exceed 6 months (186 days)."
+                )
+
+        if errors:
+            raise ValidationError(errors)
