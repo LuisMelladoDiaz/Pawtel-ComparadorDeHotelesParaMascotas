@@ -3,7 +3,7 @@ import { ref, computed } from 'vue';
 import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
 import { useRoute } from 'vue-router';
-import { useGetRoomTypesByHotel } from '@/data-layer/hooks/hotels';
+import { useGetRoomTypesByHotel, useGetHotelById } from '@/data-layer/hooks/hotels';
 import DatePicker from '@/components/DatePicker.vue';
 import Button from '@/components/Button.vue';
 import DatePickerMobile from '@/components/DatePickerMobile.vue';
@@ -17,6 +17,8 @@ const selectedRoomTypeId = ref(null);
 
 const { mutate: createBooking } = useCreateBooking();
 const { data: roomTypes, isLoading } = useGetRoomTypesByHotel(hotelId);
+const { data: hotel } = useGetHotelById(hotelId);
+const hotelName = computed(() => hotel.value?.name || 'Cargando hotel...');
 
 const submitBooking = async () => {
   try {
@@ -57,7 +59,8 @@ const totalPrice = computed(() => {
 <template>
   <div class="flex items-center justify-center py-10">
     <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-      <h2 class="text-2xl font-semibold text-center mb-4">Reserva tu habitación</h2>
+      <h2 class="text-2xl font-semibold text-center mb-0!">Reserva tu habitación en</h2>
+      <h2 class="text-2xl font-semibold text-center mb-4">{{ hotelName }}</h2>
       <form @submit.prevent="submitBooking">
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 mb-2">Fechas</label>
