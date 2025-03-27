@@ -64,6 +64,7 @@
 | 26/03/2025  | v 1.4         | Parte de Javi G | Javier García Sebastián |
 | 26/03/2025  | v 1.5         | Parte de David | David González Martínez |
 | 26/03/2025  | v 1.6         | Parte de Francisco | Francisco Miguel Jiménez Morales |
+| 26/03/2025  | v 1.7         | Parte de Yesica |
 
 ---
 
@@ -478,67 +479,58 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 ---
 
 ### 👨‍💻 Manuel Castillejo Vela
-
+ 
 #### 1. Información General
-
+ 
 - **Nombre del programador:** Manuel Castillejo Vela
-- **Sprint:** Sprint 1
-- **Rol en el proyecto:** Desarrollador Full-Stack
-
+- **Sprint:** Sprint 2
+- **Rol en el proyecto:** Desarrollador Fullstack
+ 
 #### 2. Tipo de Tareas en las que se Utilizó IA
-
-- Generación de código (X)
-- Refactorización de código (X)
-- Generación de documentación (X)
-- Asesoramiento técnico (X)
-- Otro (especificar):
+ 
+- [x] Generación de código
+- [x] Refactorización de código
+- [x] Generación de documentación
+- [x] Asesoramiento técnico
+- [x] Eliminación de comentarios en código (GitHub Copilot)
 
 #### 3. Uso de IA en las Tareas
-
-Para cada tarea en la que se usó IA, completar la siguiente tabla:
-
+ 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Asesoramiento técnico sobre la buena estructura de las queries en usando Tan Stack | ChatGPT | Se le pidió a la IA un asesoramiento técnico sobre como deberían estar estructurados las queries para que fueran mantenibles y eficientes. |
-| Mejorar el aspecto visual de un archivo .md | Copilot | Se le describe en que secciones se quiere mejorar el aspecto visual (ya sea con ordenación, emojis...) y se revisa que la IA haya aplicados los cambios de la manera deseada |
-| Gestión de calendario de usuarios pilotos | ChatGPT | Se le proporcionó a la IA el tiempo limitado que teníamos y la IA nos propuso un calendario base al que le añadimos nuestras especificaciones. |
+| Implementación de CRUD en Vue.js | ChatGPT | Generación de hooks para llamadas a la API y validaciones con Vee-Validate |
+| Refactorización de actualización de hoteles | ChatGPT | Corrección de errores en el flujo de actualización para mantener datos previos |
+| Documentación del API para gestión de hoteles | ChatGPT | Generación de documentación estructurada en Markdown |
+| Eliminación de comentarios innecesarios en código | GitHub Copilot | Automatización de la limpieza del código eliminando comentarios redundantes |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** Mejoró considerablemente la eficiencia en prácticamente todos los aspectos.
-
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 6-8 horas
+- **Comparación con trabajo sin IA:** Más eficiente, permitió detectar errores rápidamente y mejorar rendimiento en menos tiempo
+ 
 #### 5. Prompts Utilizados
+ 
+#### Prompt para mejorar el flujo de actualización en Vue.js
 
-Listar los prompts que fueron más efectivos para completar las tareas:
+```plaintext
+En Vue.js, quiero que al actualizar un hotel, se mantengan los datos previos y solo se modifiquen los campos editados. ¿Cómo puedo hacerlo?
 
-1. ponle emojis relacionados a esto: - Poner en marcha el backend y frontend.
+Usando GitHub Copilot, quiero limpiar mi código eliminando comentarios redundantes y manteniendo solo los esenciales. ¿Cómo hacerlo de forma eficiente?
 
-Poner en marcha el pre-commit.yaml.
-Poner en marcha el frontend como PWA.
-
-2. Hazme un resumen ejecutivo para el documento de calendario de gestion de usuarios pilotos
-
-3. cuando yo defino el type en vue.js esto estaria bien aun que no cogiera todos los atributos de la clase HotelOwner pero si los modificables: export type HotelOwner = {
-    id: number;
-    username: string;
-    email: string;
-    phone: string;
-    password: string;
-    date_joined: string;
-}
+Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso `computed` para calcular los elementos por página, pero quiero optimizar la lógica y mejorar el rendimiento. ¿Cómo puedo hacerlo de manera eficiente?
+```
 
 #### 6. Problemas Encontrados y Limitaciones
-
-- **Errores o respuestas incorrectas de la IA:** El error fue mayor parte humano al no ser capaz de escribir prompts que fueran correctamente entendibles por la IA utilizada.
-- **Limitaciones detectadas en la IA:** En algunos momentos proporcionó código incoherente que tuvo que ser corregido.
-- **Propuestas de mejora en el uso de IA:** A nivel personal ser más meticuloso con los prompts seleccionados.
-
+ 
+- **Errores o respuestas incorrectas de la IA:** En algunos casos, ChatGPT sugirió soluciones con hooks de Vue obsoletos.
+- **Limitaciones detectadas en la IA:** Limitaciones relacionadas con últimas versiones de algunos componentes.
+- **Propuestas de mejora en el uso de IA:**  Ajustar los prompts y validar siempre las respuestas generadas.
+ 
 #### 7. Evaluación General
-
+ 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** No hay comentarios adicionales.
-
+- **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad del código.
+ 
 ---
 
 ### 👨‍💻 Javier Ruiz Garrido
@@ -698,7 +690,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Yesica Leydi Garate Fuentes
-- **Sprint:** 01
+- **Sprint:** 02
 - **Rol en el proyecto:** Frontend, Publicidad y Marketing
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -707,7 +699,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 - Refactorización de código ( )
 - Generación de documentación (**X**)
 - Asesoramiento técnico ( )
-- Otro (especificar): Diseño y resolución de dudas sobre implementación
+- Otro (especificar): Diseño y resolución de dudas sobre implementación, Creación de StoryBoard
 
 #### 3. Uso de IA en las Tareas
 
@@ -718,13 +710,15 @@ Para cada tarea en la que se usó IA, se completa la siguiente tabla:
 | SCREEN: Home Page | ChatGPT | Me ayudó con la programación en Tailwind CSS, resolviendo dudas sobre estilos y cómo aplicarlos correctamente. Me proporcionó fragmentos de código de ejemplo, algunos muy generales que podía reutilizar. |
 | Mock-Ups Extra | ChatGPT | Me ayudó a comprender cómo generar los mockups para dar al usuario la alternativa correcta. Sugerencias sobre maquetación basadas en casos anteriores y demandas teóricas, especialmente en secciones como el Perfil de Usuario y las Operaciones CRUD de hoteles. |
 | Presentación (Slides) del Proyecto | ChatGPT | Utilicé IA para estructurar las diapositivas, obtener ideas de contenido y mejorar la claridad del mensaje, asegurando que la información clave estuviera bien organizada y explicada. |
+| Creación de StoryBoard | Midjourney y ChatGPT | Utilicé IA para estructurar las diapositivas, obtener ideas de contenido y mejorar la claridad del mensaje, asegurando que la información clave estuviera bien organizada y explicada. |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** Aproximadamente 30 horas o más.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** Aproximadamente 40 horas o más.
 - **Comparación con trabajo sin IA:**
   - Sin IA, la búsqueda de información me habría tomado más tiempo.
   - Aunque la IA me ayudó a resolver dudas rápidamente, en algunos casos tuve inseguridad sobre si las respuestas eran realmente correctas.
+  - Intervención humana para asegurar la coherencia narrativa, emocional y estética del resultado final.
 
 #### 5. Prompts Utilizados
 
@@ -735,25 +729,33 @@ Algunos de los prompts más efectivos utilizados:
 3. "Ayúdame a estructurar una presentación para explicar de manera dinamica mi app revisa las buenas practicas que deben aplicarse"
 4. "Podrias hacer una revision acerca de todos los negocios relacionados a mascotas a nivel europeo."
 5. "Que instituciones me pueden ofrecer estadisticas reales acerca de las mascotas? Dame una lista a nivel europeo y americano"
+6. "A well-preserved dog hotel building in the middle of an abandoned town, comic book style. The hotel looks charming but lonely, with colorful signage, a paw-shaped logo, and clean architecture. The surroundings are desolate: dusty streets, broken-down houses, dry vegetation, and a soft wind lifting sand. The atmosphere feels like an old Western movie, dramatic lighting, expressive lines, cinematic angle, dramatic shadows, clear contrast between the lively building and the abandoned neighborhood --ar 16:9"
+7. "A film storyboard frame. A man in his 30s stands in the busy lobby of a modern pet hotel. He has a relieved and proud expression and is clearly the owner. He wears slightly wrinkled business casual clothes. The hotel is full of activity: pet owners chatting, dogs wagging their tails, cats in carriers, and pets playing or being groomed. Around him are elements of a high-end pet hotel: designer dog beds, scratching posts, toys, food bowls, colorful leashes hanging from hooks, grooming supplies, framed photos of happy dogs and cats on the walls, shelves with pet treats, and a stylish reception desk with a visible paw logo. Include the name "Hotel Pets" subtly in the environment. The scene is bathed in soft natural light from urban windows."
 
 #### 6. Problemas Encontrados y Limitaciones
 
 - **Errores o respuestas incorrectas de la IA:**
   - En programación, la IA no siempre deduce correctamente lo que necesito; suele ser mecánica en sus respuestas.
   - Algunos ejemplos de código generados no eran aplicables directamente y requerían modificaciones.
+  - Falta de coherencia visual entre imágenes generadas.
+
 - **Limitaciones detectadas en la IA:**
   - No siempre relaciona bien el contexto de preguntas anteriores con nuevas solicitudes.
   - Para obtener respuestas más precisas, a veces es necesario proporcionar mucha información detallada.
+  - Pequeños cambios en el prompt para las imagenes, resultados muy diferentes y se demasiado tiempo em prueba y error.
+  - Aunque use chatgpt para ayudar a estructurar los prompts demasiada precisión no era entendida.
+
 - **Propuestas de mejora en el uso de IA:**
   - Ser más específica en los prompts y proporcionar contexto adicional para obtener respuestas más relevantes.
   - Complementar el uso de IA con la búsqueda de información en videos o foros con experiencia de otros programadores.
+  - Usar ChatGPT para ayudar a estructurar la narrativa y elementos visuales clave.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?**
   - Depende del caso. Es útil para generar ideas y optimizar tiempos, pero es necesario validar la información obtenida.
 - **Comentarios adicionales sobre la experiencia con IA:**
-  - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios.
+  - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios. La intervención humana para asegurar la coherencia narrativa, emocional y estética del resultado final. Encontre elementos narrativos sueltos que puedo usar para representar segun mi conveniencia. 
 ---
 ### 👨‍💻 Manuel Castillejo Vela
 
