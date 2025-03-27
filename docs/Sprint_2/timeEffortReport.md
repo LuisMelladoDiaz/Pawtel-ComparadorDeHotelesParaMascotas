@@ -76,7 +76,7 @@
 ---
 
 
-## Reporte de tiempo de Yesica Garate Fuentes
+## Reporte de tiempo de Yesica Leydi Garate Fuentes
 
 **Periodo:** 12/03/2025 - 26/03/2025
 **Total de tiempo trabajado:** 40:54:19
