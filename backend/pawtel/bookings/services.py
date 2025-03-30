@@ -25,25 +25,20 @@ class BookingService:
 
     # Authorization ----------------------------------------------------------
 
-    def authorize_action_booking_level_1(request, action_name):
+    def authorize_action_booking(
+        request, action_name, booking_id=None, check_ownership=False
+    ):
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_booking_service(role_user, action_name)
+
+        if booking_id:
+            booking = BookingService.retrieve_booking(booking_id)
+            if check_ownership:
+                BookingService.__check_ownership_booking_service(role_user, booking)
+
         return role_user
 
-    def authorize_action_booking_level_2(request, booking_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_booking_service(role_user, action_name)
-        BookingService.retrieve_booking(booking_id)
-        return role_user
-
-    def authorize_action_booking_level_3(request, booking_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_booking_service(role_user, action_name)
-        booking = BookingService.retrieve_booking(booking_id)
-        BookingService.check_ownership_booking_service(role_user, booking)
-        return role_user
-
-    def check_ownership_booking_service(role_user, booking):
+    def __check_ownership_booking_service(role_user, booking):
         if role_user.user.role == UserRole.ADMIN:
             return
 

@@ -46,14 +46,31 @@ class HotelService:
         HotelService.check_ownership_hotel(role_user, hotel)
         return role_user
 
-    def check_ownership_hotel(role_user, hotel):
+    def authorize_action_hotel(
+        request, action_name, hotel_id=None, check_ownership=False
+    ):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_hotel_service(role_user, action_name)
+
+        if hotel_id:
+            hotel = HotelService.__perform_retrieve_hotel(role_user, hotel_id)
+            if check_ownership:
+                HotelService.__check_ownership_hotel(role_user, hotel)
+
+        return role_user
+
+    def __perform_retrieve_hotel(role_user, hotel_id):
+        if role_user.user.role == UserRole.ADMIN:
+            return HotelService.retrieve_hotel(hotel_id, allow_archived=True)
+        else:
+            return HotelService.retrieve_hotel(hotel_id)
+
+    def __check_ownership_hotel(role_user, hotel):
         if role_user.user.role == UserRole.ADMIN:
             return
-
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if hotel.hotel_owner.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
-
         else:
             raise PermissionDenied("Permission denied.")
 

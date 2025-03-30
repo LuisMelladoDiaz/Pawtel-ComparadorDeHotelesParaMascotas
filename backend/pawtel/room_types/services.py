@@ -29,7 +29,7 @@ class RoomTypeService:
         PermissionService.check_permission_room_type_service(role_user, action_name)
 
         if room_type_id:
-            room_type = RoomTypeService.__perform_retrieve_booking_hotel(
+            room_type = RoomTypeService.__perform_retrieve_room_type(
                 role_user, room_type_id
             )
             if check_ownership:
@@ -37,7 +37,7 @@ class RoomTypeService:
 
         return role_user
 
-    def __perform_retrieve_booking_hotel(role_user, room_type_id):
+    def __perform_retrieve_room_type(role_user, room_type_id):
         if role_user.user.role == UserRole.ADMIN:
             return RoomTypeService.retrieve_room_type(room_type_id, allow_archived=True)
         else:
