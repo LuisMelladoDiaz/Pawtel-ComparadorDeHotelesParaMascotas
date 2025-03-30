@@ -28,24 +28,6 @@ class HotelService:
 
     # Authorization ----------------------------------------------------------
 
-    def authorize_action_hotel_level_1(request, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_service(role_user, action_name)
-        return role_user
-
-    def authorize_action_hotel_level_2(request, hotel_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_service(role_user, action_name)
-        HotelService.retrieve_hotel(hotel_id)
-        return role_user
-
-    def authorize_action_hotel_level_3(request, hotel_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_service(role_user, action_name)
-        hotel = HotelService.retrieve_hotel(hotel_id)
-        HotelService.check_ownership_hotel(role_user, hotel)
-        return role_user
-
     def authorize_action_hotel(
         request, action_name, hotel_id=None, check_ownership=False
     ):
