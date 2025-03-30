@@ -12,6 +12,7 @@ class AppUserServiceTest(TestCase):
             "phone": "+34123456781",
             "password": "abcdef",
             "is_active": True,
+            "accept_terms": True,
         }
         request = type("Request", (), {"data": data, "method": "POST"})
         response = AppUserService.general_create_app_user(request)

@@ -12,6 +12,7 @@ class AppUserSerializerTest(TestCase):
             "email": "appuser1@example.com",
             "phone": "+34111222333",
             "password": "securepassword123",
+            "accept_terms": True,
         }
         self.invalid_data = {
             "id": 1,
@@ -19,6 +20,7 @@ class AppUserSerializerTest(TestCase):
             "email": "invalid-email",  # Invalid email
             "phone": "123",  # Invalid phone number format
             "password": "short",  # Password too short
+            "accept_terms": True,
         }
 
     # POST tests -------------------------------------------------------------
@@ -79,6 +81,7 @@ class AppUserSerializerTest(TestCase):
             "password": "securepassword",
             "date_joined": "2025-03-02T12:00:00Z",  # This should be ignored
             "is_active": True,  # This should be ignored
+            "accept_terms": True,
         }
         context = {"request": type("Request", (), {"method": "POST"})}
 
@@ -116,6 +119,7 @@ class AppUserSerializerTest(TestCase):
             "password": "securepassword",
             "date_joined": "2025-03-02T12:00:00Z",  # This should be ignored
             "is_active": True,  # This should be ignored
+            "accept_terms": True,
         }
         context = {"request": type("Request", (), {"method": "PUT"})}
 
@@ -151,6 +155,7 @@ class AppUserSerializerTest(TestCase):
             "password": "newpassword",
             "date_joined": "2025-03-02T12:00:00Z",  # This should be ignored
             "is_active": False,  # This should be ignored
+            "accept_terms": True,
             "whatever": "ignored...",
         }
         context = {"request": type("Request", (), {"method": "PATCH"})}
