@@ -16,7 +16,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         action_name = inspect.currentframe().f_code.co_name
-        BookingHoldService.authorize_action_booking_hold_level_1(request, action_name)
+        BookingHoldService.authorize_action_booking_hold(request, action_name)
         booking_holds = BookingHoldService.list_booking_holds()
         output_serializer_data = BookingHoldService.serialize_output_booking_hold(
             booking_holds, many=True
@@ -25,8 +25,8 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        BookingHoldService.authorize_action_booking_hold_level_3(
-            request, pk, action_name
+        BookingHoldService.authorize_action_booking_hold(
+            request, action_name, booking_hold_id=pk
         )
         booking_hold = BookingHoldService.retrieve_booking_hold(pk)
         output_serializer_data = BookingHoldService.serialize_output_booking_hold(
@@ -36,7 +36,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         action_name = inspect.currentframe().f_code.co_name
-        customer = BookingHoldService.authorize_action_booking_hold_level_1(
+        customer = BookingHoldService.authorize_action_booking_hold(
             request, action_name
         )
         input_serializer = BookingHoldService.serialize_input_booking_hold_create(
@@ -57,8 +57,8 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        BookingHoldService.authorize_action_booking_hold_level_3(
-            request, pk, action_name
+        BookingHoldService.authorize_action_booking_hold(
+            request, action_name, booking_hold_id=pk
         )
         BookingHoldService.delete_booking_hold(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)

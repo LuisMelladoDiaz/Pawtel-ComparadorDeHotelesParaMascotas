@@ -22,25 +22,22 @@ class BookingHoldService:
 
     # Authorization ----------------------------------------------------------
 
-    def authorize_action_booking_hold_level_1(request, action_name):
+    def authorize_action_booking_hold(
+        request, action_name, booking_hold_id=None, check_ownership=False
+    ):
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_booking_hold_service(role_user, action_name)
+
+        if booking_hold_id:
+            booking_hold = BookingHoldService.retrieve_booking_hold(booking_hold_id)
+            if check_ownership:
+                BookingHoldService.__check_ownership_booking_hold_service(
+                    role_user, booking_hold
+                )
+
         return role_user
 
-    def authorize_action_booking_hold_level_2(request, booking_hold_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_booking_hold_service(role_user, action_name)
-        BookingHoldService.retrieve_booking_hold(booking_hold_id)
-        return role_user
-
-    def authorize_action_booking_hold_level_3(request, booking_hold_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_booking_hold_service(role_user, action_name)
-        booking_hold = BookingHoldService.retrieve_booking_hold(booking_hold_id)
-        BookingHoldService.check_ownership_booking_hold_service(role_user, booking_hold)
-        return role_user
-
-    def check_ownership_booking_hold_service(role_user, booking_hold):
+    def __check_ownership_booking_hold_service(role_user, booking_hold):
         if role_user.user.role == UserRole.ADMIN:
             return
 
