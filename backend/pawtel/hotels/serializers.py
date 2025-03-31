@@ -52,8 +52,10 @@ class HotelSerializer(BaseSerializer):
         }
 
     def get_lowest_price_current_filters(self, obj):
-        if obj.min_price_filters:
-            return obj.min_price_filters  # computed by annotate in filter
+        min_price_filters = getattr(obj, "min_price_filters", None)
+
+        if min_price_filters is not None:  # computed by annotate in filter
+            return min_price_filters
         else:
             lowest_price = RoomType.objects.filter(hotel=obj).aggregate(
                 min_price=Min("price_per_night")
@@ -61,8 +63,10 @@ class HotelSerializer(BaseSerializer):
             return lowest_price if lowest_price is not None else None
 
     def get_highest_price_current_filters(self, obj):
-        if obj.max_price_filters:
-            return obj.max_price_filters  # computed by annotate in filter
+        max_price_filters = getattr(obj, "max_price_filters", None)
+
+        if max_price_filters is not None:  # computed by annotate in filter
+            return max_price_filters
         else:
             highest_price = RoomType.objects.filter(hotel=obj).aggregate(
                 max_price=Max("price_per_night")
