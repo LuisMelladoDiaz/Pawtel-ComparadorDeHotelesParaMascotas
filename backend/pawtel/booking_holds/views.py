@@ -26,7 +26,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
         BookingHoldService.authorize_action_booking_hold(
-            request, action_name, booking_hold_id=pk
+            request, action_name, booking_hold_id=pk, check_ownership=True
         )
         booking_hold = BookingHoldService.retrieve_booking_hold(pk)
         output_serializer_data = BookingHoldService.serialize_output_booking_hold(
@@ -58,7 +58,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
         BookingHoldService.authorize_action_booking_hold(
-            request, action_name, booking_hold_id=pk
+            request, action_name, booking_hold_id=pk, check_ownership=True
         )
         BookingHoldService.delete_booking_hold(pk)
         return Response(status=status.HTTP_204_NO_CONTENT)
