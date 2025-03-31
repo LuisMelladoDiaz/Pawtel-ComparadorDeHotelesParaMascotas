@@ -4,9 +4,21 @@ from rest_framework.exceptions import PermissionDenied
 
 class PermissionService:
 
+    ADMIN_SERVICE_PERMISSIONS = {
+        UserRole.CUSTOMER.value: {},
+        UserRole.HOTEL_OWNER.value: {},
+        UserRole.ADMIN.value: {
+            "list",
+            "retrieve",
+            "destroy",
+            "update",
+            "partial_update",
+        },
+    }
+
     BOOKING_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {
-            "list",  ##! TODO: remove when Admin added; kept for test
+            # "list",  ##! TODO: remove when Admin added; kept for test
             "retrieve",
         },
         UserRole.HOTEL_OWNER.value: {
@@ -20,7 +32,7 @@ class PermissionService:
 
     BOOKING_HOLD_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {
-            "list",  ##! TODO: remove when Admin added; kept for test
+            # "list",  ##! TODO: remove when Admin added; kept for test
             "retrieve",
             "create",
             "destroy",
@@ -34,7 +46,7 @@ class PermissionService:
 
     CUSTOMER_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {
-            "list",  ##! TODO: remove when Admin added; kept for test
+            # "list",  ##! TODO: remove when Admin added; kept for test
             "retrieve",
             "update",
             "partial_update",
@@ -54,7 +66,7 @@ class PermissionService:
     HOTEL_OWNER_SERVICE_PERMISSIONS = {
         UserRole.CUSTOMER.value: {},
         UserRole.HOTEL_OWNER.value: {
-            "list",  ##! TODO: remove when Admin added; kept for test
+            # "list",  ##! TODO: remove when Admin added; kept for test
             "retrieve",
             "update",
             "partial_update",
@@ -64,7 +76,7 @@ class PermissionService:
             "delete_all_hotels_of_hotel_owner_explicit",
             "delete_all_hotels_of_hotel_owner_implicit",
             "retrieve_current_hotel_owner",
-            "approve_hotel_owner_patch",  ##! TODO: remove when Admin added; kept for test
+            # "approve_hotel_owner_patch",  ##! TODO: remove when Admin added; kept for test
         },
         UserRole.ADMIN.value: {
             "list",
@@ -142,6 +154,12 @@ class PermissionService:
         role = role_user.user.role
         if action not in permissions_dict.get(role, {}):
             raise PermissionDenied(f"Permission denied for action: {action}.")
+
+    @staticmethod
+    def check_permission_admin_service(role_user, action):
+        PermissionService.__base_check_role_permission(
+            role_user, action, PermissionService.ADMIN_SERVICE_PERMISSIONS
+        )
 
     @staticmethod
     def check_permission_booking_service(role_user, action):
