@@ -49,14 +49,14 @@ class BookingService:
 
         elif role_user.user.role == UserRole.CUSTOMER:
             if booking.customer.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
+                raise PermissionDenied("Permiso denegado.")
 
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if booking.room_type.hotel.hotel_owner.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
+                raise PermissionDenied("Permiso denegado.")
 
         else:
-            raise PermissionDenied("Permission denied.")
+            raise PermissionDenied("Permiso denegado.")
 
     # Serialization -----------------------------------------------------------------
 
@@ -84,7 +84,7 @@ class BookingService:
         try:
             return Booking.objects.get(pk=pk)
         except Booking.DoesNotExist:
-            raise NotFound(detail="Booking not found.")
+            raise NotFound(detail="Reserva no encontrada.")
 
     @staticmethod
     def count_bookings_of_room_type_at_date(room_type_id, date_to_check):
@@ -132,7 +132,7 @@ class BookingService:
         try:
             room_type = RoomType.objects.get(id=room_id)
         except RoomType.DoesNotExist:
-            raise NotFound("RoomType does not exist.")
+            raise NotFound("El tipo de habitación no existe.")
 
         start_date = input_serializer.validated_data.get("start_date")
         end_date = input_serializer.validated_data.get("end_date")
@@ -147,7 +147,7 @@ class BookingService:
 
         if overlapping_bookings:
             raise ValidationError(
-                "A customer can have different bookings for the same room, but not overlapping."
+                "Un cliente puede tener diferentes reservas de la misma habitación pero que no coincidan."
             )
 
         # TODO: Implement validation for booking_holds
@@ -198,7 +198,7 @@ class BookingService:
             return JsonResponse({"url": session.url})
         except Exception:
             return Response(
-                {"error": "Something went wrong"},
+                {"error": "Algo salió mal."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 

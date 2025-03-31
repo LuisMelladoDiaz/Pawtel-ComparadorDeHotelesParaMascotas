@@ -46,10 +46,10 @@ class BookingHoldService:
 
         elif role_user.user.role == UserRole.CUSTOMER:
             if booking_hold.customer.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
+                raise PermissionDenied("Permiso denegado.")
 
         else:
-            raise PermissionDenied("Permission denied.")
+            raise PermissionDenied("Permiso denegado.")
 
     # Serialization ----------------------------------------------------------
 
@@ -83,14 +83,16 @@ class BookingHoldService:
         booking_end_date = input_serializer.validated_data.get("booking_end_date")
 
         if BookingHoldService.has_customer_active_booking_hold(customer.id):
-            raise PermissionDenied("Customer already has booking hold.")
+            raise PermissionDenied("El cliente ya tiene un booking hold.")
 
         is_room_type_available = RoomTypeService.is_room_type_available(
             room_type.id, booking_start_date, booking_end_date
         )
         if not is_room_type_available:
             raise ValidationError(
-                {"room_type": "RoomType is not available during indicated period."}
+                {
+                    "room_type": "El tipo de habitación no se encuentra disponible en esta fecha."
+                }
             )
 
     # GET --------------------------------------------------------------------
@@ -100,7 +102,7 @@ class BookingHoldService:
         try:
             return BookingHold.objects.get(pk=pk)
         except BookingHold.DoesNotExist:
-            raise NotFound(detail="BookingHold not found.")
+            raise NotFound(detail="BookingHold no encontrado.")
 
     @staticmethod
     def list_booking_holds():

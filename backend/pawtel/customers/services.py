@@ -52,10 +52,10 @@ class CustomerService:
 
         elif role_user.user.role == UserRole.CUSTOMER:
             if target_customer.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
+                raise PermissionDenied("Permiso denegado.")
 
         else:
-            raise PermissionDenied("Permission denied.")
+            raise PermissionDenied("Permiso denegado.")
 
     # Serialization -----------------------------------------------------------------
 
@@ -73,14 +73,14 @@ class CustomerService:
             else:
                 return Customer.objects.get(id=pk, user__is_active=True)
         except Customer.DoesNotExist:
-            raise NotFound(detail="Customer not found.")
+            raise NotFound(detail="Cliente no encontrado.")
 
     @staticmethod
     def get_customer_by_user(app_user_id):
         try:
             return Customer.objects.get(user_id=app_user_id)
         except Customer.DoesNotExist:
-            raise NotFound("Customer does not exist.")
+            raise NotFound("El cliente no existe.")
 
     @staticmethod
     def get_current_customer(request):
@@ -120,7 +120,7 @@ class CustomerService:
         if future_bookings.exists():
             raise ValidationError(
                 {
-                    "detail": "Object cannot be deleted because there is an upcoming booking."
+                    "detail": "No se puede eliminar el objeto porque tiene una reserva asociada próximamente."
                 }
             )
 
