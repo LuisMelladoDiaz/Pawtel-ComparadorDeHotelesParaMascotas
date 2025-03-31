@@ -4,6 +4,7 @@ import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
 import { useRoute } from 'vue-router';
 import { useGetRoomTypesByHotel, useGetHotelById } from '@/data-layer/hooks/hotels';
+import { handleApiError } from '@/utils/errorHandler';
 import DatePicker from '@/components/DatePicker.vue';
 import Button from '@/components/Button.vue';
 import DatePickerMobile from '@/components/DatePickerMobile.vue';
@@ -34,14 +35,13 @@ const submitBooking = async () => {
         },
         {
           onSuccess: () => notyf.success('Reserva realizada con éxito.'),
-          onError: () => notyf.error('Hubo un error al reservar. Inténtalo de nuevo.'),
-        }
-      );
-    } else {
-      notyf.error('Fecha de fin debe ser posterior a la de inicio.');
-    }
+          onError: (error) => {
+        handleApiError(error);
+      }
+    });
+  }
   } catch (error) {
-    notyf.error('Ocurrió un error inesperado.');
+    handleApiError(error);
   }
 };
 

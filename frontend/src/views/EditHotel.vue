@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { handleApiError } from '@/utils/errorHandler';
 import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
@@ -56,10 +57,14 @@ const { mutate: updateHotel, isLoading: isSaving } = useUpdateHotel();
 // Guardar cambios en el hotel
 const saveChanges = async () => {
   try {
-    await updateHotel({ hotelId: hotel.value.id, hotelData: editableHotel.value });
-    window.location.href = "/mis-hoteles";
+    await updateHotel({
+      hotelId: hotel.value.id,
+      hotelData: editableHotel.value
+    });
+    notyf.success('Cambios guardados correctamente');
+    router.push('/mis-hoteles');
   } catch (error) {
-    console.error("Error al guardar los cambios:", error);
+    handleApiError(error);
   }
 };
 
