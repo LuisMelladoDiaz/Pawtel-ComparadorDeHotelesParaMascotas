@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 from pawtel.app_users.models import AppUser
 from pawtel.app_users.services import AppUserService
 
@@ -14,7 +14,12 @@ class AppUserServiceTest(TestCase):
             "is_active": True,
             "accept_terms": True,
         }
-        request = type("Request", (), {"data": data, "method": "POST"})
+
+        factory = RequestFactory()
+        request = factory.post("/fake-url/", data=data)
+        request.META.update({"REMOTE_ADDR": "127.0.0.1"})
+        request.data = data
+
         response = AppUserService.general_create_app_user(request)
         self.assertEqual(response.username, "newowner")
         self.assertTrue(AppUser.objects.filter(username="newowner").exists())
