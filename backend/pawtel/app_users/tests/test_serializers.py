@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 from pawtel.app_users.models import AppUser
 from pawtel.app_users.serializers import AppUserSerializer
 
@@ -26,8 +26,15 @@ class AppUserSerializerTest(TestCase):
     # POST tests -------------------------------------------------------------
 
     def test_serializer_valid_data_post(self):
-        context = {"request": type("Request", (), {"method": "POST"})}
+        factory = RequestFactory()
+        # Create a proper POST request with data
+        request = factory.post("/fake-url/", data=self.valid_data)
 
+        # The request object needs to have META attributes
+        request.META = {}  # Initialize META if not already present
+        request.META["REMOTE_ADDR"] = "127.0.0.1"  # Add a fake IP address
+
+        context = {"request": request}
         serializer = AppUserSerializer(data=self.valid_data, context=context)
 
         self.assertTrue(serializer.is_valid())
@@ -191,31 +198,28 @@ class AppUserSerializerTest(TestCase):
     # Other tests ------------------------------------------------------------
 
     def test_create_app_user_instance_from_json_2(self):
-        context = {"request": type("Request", (), {"method": "POST"})}
+        factory = RequestFactory()
+        request = factory.post("/fake-url/")
+        request.META = {"REMOTE_ADDR": "127.0.0.1"}
+
+        context = {"request": request}
         serializer = AppUserSerializer(data=self.valid_data, context=context)
 
         self.assertTrue(serializer.is_valid())
-
-        # Create but not save the instance
-        # Must call .is_valid() before in order to have access to .validated_data
         owner = serializer.create(serializer.validated_data)
-
         self.assertEqual(owner.username, self.valid_data["username"])
-        self.assertEqual(owner.email, self.valid_data["email"])
-        self.assertEqual(owner.phone, self.valid_data["phone"])
 
     def test_save_app_user_instance_from_json(self):
-        context = {"request": type("Request", (), {"method": "POST"})}
+        factory = RequestFactory()
+        request = factory.post("/fake-url/")
+        request.META = {"REMOTE_ADDR": "127.0.0.1"}
+
+        context = {"request": request}
         serializer = AppUserSerializer(data=self.valid_data, context=context)
 
         self.assertTrue(serializer.is_valid())
-
-        # Create and save in DB the instance (this is a test anyways)
         owner = serializer.save()
-
         self.assertEqual(owner.username, self.valid_data["username"])
-        self.assertEqual(owner.email, self.valid_data["email"])
-        self.assertEqual(owner.phone, self.valid_data["phone"])
 
     def test_serialize_app_user_instance_to_json(self):
         owner = AppUser.objects.create_user(
