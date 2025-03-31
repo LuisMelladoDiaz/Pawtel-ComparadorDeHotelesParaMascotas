@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed, watch } from 'vue';
 import Button from '../components/Button.vue';
+import { useRouter } from 'vue-router';
+import { Notyf } from 'notyf';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserQuery, useLogoutMutation } from "@/data-layer/auth";
 import { useUpdateCustomer, useDeleteCustomer, useGetCurrentCustomer } from "@/data-layer/hooks/customers";
@@ -8,7 +10,9 @@ import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } fro
 
 // Otros imports y referencias
 const fileInput = ref(null);
+const notyf = new Notyf();
 const showPassword = ref(false);
+const router = useRouter();
 const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';
 
 const { data: userData, isLoading: isLoadingUserData } = useUserQuery();
@@ -65,27 +69,27 @@ const updateProfile = () => {
 
   if (userDataComputed.value.role === "customer") {
     const customerId = currentCustomerId.value;
-    updateCustomer({ 
-      customerId, 
+    updateCustomer({
+      customerId,
       ownerData: updatedData
     }, {
-      onSuccess: () => { 
-        alert("Perfil actualizado con éxito.");
-        window.location.href = "/";
+      onSuccess: () => {
+        notyf.success("Perfil actualizado con éxito.");
+        router.push('/');
       },
-      onError: () => alert("Error al actualizar el perfil.")
+      onError: () => notyf.error("Error al actualizar el perfil.")
     });
   } else if (userDataComputed.value.role === "hotel_owner") {
     const hotelOwnerId = currentHotelOwnerId.value;
-    updateHotelOwner({ 
-      hotelOwnerId, 
+    updateHotelOwner({
+      hotelOwnerId,
       partialData: updatedData
     }, {
-      onSuccess: () => { 
-        alert("Perfil actualizado con éxito.");
-        window.location.href = "/";
+      onSuccess: () => {
+        notyf.success("Perfil actualizado con éxito.");
+        router.push('/');
       },
-      onError: () => alert("Error al actualizar el perfil.")
+      onError: () => notyf.error("Error al actualizar el perfil.")
     });
   }
 };
@@ -97,19 +101,19 @@ const deleteAccount = () => {
       const customerId = currentCustomerId.value;
       deleteCustomer(customerId, {
         onSuccess: () => {
-          alert("Cuenta eliminada.");
-          window.location.href = "/register";
+          notyf.success("Cuenta eliminada.");
+          router.push('/register');
         },
-        onError: () => alert("Error al eliminar la cuenta.")
+        onError: () => notyf.error("Error al eliminar la cuenta.")
       });
     } else if (userDataComputed.value.role === "hotel_owner") {
       const hotelOwnerId = currentHotelOwnerId.value;
       deleteHotelOwner(hotelOwnerId, {
         onSuccess: () => {
-          alert("Cuenta eliminada.");
-          window.location.href = "/login";
+          notyf.success("Cuenta eliminada.");
+          router.push('/register');
         },
-        onError: () => alert("Error al eliminar la cuenta.")
+        onError: () => notyf.error("Error al eliminar la cuenta.")
       });
     }
   }
