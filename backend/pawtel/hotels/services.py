@@ -298,6 +298,8 @@ class HotelService:
                 "name",
                 "price_max",
                 "price_min",
+                "max_price_filters",
+                "min_price_filters",
             ]
             if sort_field.lstrip("-") not in valid_sort_fields:
                 raise ValidationError(f"Invalid sort field: {sort_field}")
