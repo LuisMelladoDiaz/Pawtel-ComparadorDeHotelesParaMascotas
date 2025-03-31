@@ -13,10 +13,25 @@ jobs:
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+        
     - name: Install dependencies
       run: cd frontend && npm install
+
     - name: Install Playwright Browsers
       run: cd frontend && npx playwright install --with-deps
+
+    - name: Start frontend server
+      run: |
+        cd frontend
+        npm run dev &
+
+    - name: Wait for server to be ready
+      run: |
+        until curl --silent http://localhost:5173; do
+          echo "Waiting for server..."
+          sleep 1
+        done
+
     - name: Run Playwright tests
       run: cd frontend && npx playwright test
     - uses: actions/upload-artifact@v4
