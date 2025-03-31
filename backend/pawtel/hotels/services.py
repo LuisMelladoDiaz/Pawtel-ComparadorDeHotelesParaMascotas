@@ -275,8 +275,8 @@ class HotelService:
             ).distinct()
 
         return filtered_hotels.annotate(
-            price_max=Max("roomtype__price_per_night"),
-            price_min=Min("roomtype__price_per_night"),
+            min_price_filters=Min("roomtype__price_per_night"),
+            max_price_filters=Max("roomtype__price_per_night"),
         )
 
     @staticmethod

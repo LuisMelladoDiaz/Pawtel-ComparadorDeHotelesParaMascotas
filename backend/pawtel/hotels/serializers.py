@@ -20,8 +20,8 @@ class HotelSerializer(BaseSerializer):
     fields_editable = ["name", "address", "city", "description"]
     fields_not_readable = []
 
-    cheapest_price = serializers.SerializerMethodField()
-    most_expensive_price = serializers.SerializerMethodField()
+    lowest_price_current_filters = serializers.SerializerMethodField()
+    highest_price_current_filters = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
     cover_image = serializers.SerializerMethodField()
 
@@ -35,8 +35,8 @@ class HotelSerializer(BaseSerializer):
             "city",
             "description",
             "hotel_owner",
-            "cheapest_price",
-            "most_expensive_price",
+            "lowest_price_current_filters",
+            "highest_price_current_filters",
             "images",
             "cover_image",
         ]
@@ -51,17 +51,27 @@ class HotelSerializer(BaseSerializer):
             "hotel_owner": {"allow_null": False},
         }
 
-    def get_cheapest_price(self, obj):
-        cheapest = RoomType.objects.filter(hotel=obj).aggregate(
-            min_price=Min("price_per_night")
-        )["min_price"]
-        return cheapest if cheapest is not None else None
+    def get_lowest_price_current_filters(self, obj):
+        min_price_filters = getattr(obj, "min_price_filters", None)
 
-    def get_most_expensive_price(self, obj):
-        most_expensive = RoomType.objects.filter(hotel=obj).aggregate(
-            max_price=Max("price_per_night")
-        )["max_price"]
-        return most_expensive if most_expensive is not None else None
+        if min_price_filters is not None:  # computed by annotate in filter
+            return min_price_filters
+        else:
+            lowest_price = RoomType.objects.filter(hotel=obj).aggregate(
+                min_price=Min("price_per_night")
+            )["min_price"]
+            return lowest_price if lowest_price is not None else None
+
+    def get_highest_price_current_filters(self, obj):
+        max_price_filters = getattr(obj, "max_price_filters", None)
+
+        if max_price_filters is not None:  # computed by annotate in filter
+            return max_price_filters
+        else:
+            highest_price = RoomType.objects.filter(hotel=obj).aggregate(
+                max_price=Max("price_per_night")
+            )["max_price"]
+            return highest_price if highest_price is not None else None
 
     def get_images(self, obj):
         images = obj.images.all()
