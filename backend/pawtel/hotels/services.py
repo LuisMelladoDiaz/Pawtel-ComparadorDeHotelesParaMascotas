@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 
+from django.core.exceptions import ValidationError
 from django.db.models import Max, Min, Q
-from django.forms import ValidationError
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
@@ -190,9 +190,9 @@ class HotelService:
         if filters is None:
             return {}
 
-        assert all(
-            f in HotelService.VALID_FILTERS for f in filters
-        ), f"Invalid filter: {filters}"
+        invalid_filters = [f for f in filters if f not in HotelService.VALID_FILTERS]
+        if invalid_filters:
+            raise ValidationError(f"Invalid filters: {invalid_filters}")
 
         validated = {}
         for key, expected_type in HotelService.VALID_FILTERS.items():
@@ -299,9 +299,8 @@ class HotelService:
                 "price_max",
                 "price_min",
             ]
-            assert (
-                sort_field.lstrip("-") in valid_sort_fields
-            ), f"Invalid sort field: {sort_field}"
+            if sort_field.lstrip("-") not in valid_sort_fields:
+                raise ValidationError(f"Invalid sort field: {sort_field}")
             hotels = hotels.order_by(sort_field)
 
         if "limit" in filters:

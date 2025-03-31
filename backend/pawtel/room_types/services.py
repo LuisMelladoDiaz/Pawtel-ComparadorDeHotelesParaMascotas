@@ -264,9 +264,9 @@ class RoomTypeService:
         if filters is None:
             return {}
 
-        assert all(
-            f in RoomTypeService.VALID_FILTERS for f in filters
-        ), f"Invalid filter: {filters}"
+        invalid_filters = [f for f in filters if f not in RoomTypeService.VALID_FILTERS]
+        if invalid_filters:
+            raise ValidationError(f"Invalid filters: {invalid_filters}")
 
         validated = {}
         for key, expected_type in RoomTypeService.VALID_FILTERS.items():
@@ -328,9 +328,8 @@ class RoomTypeService:
         if "sort_by" in filters:
             sort_field = filters["sort_by"]
             valid_sort_fields = ["pet_type", "price_per_night"]
-            assert (
-                sort_field.lstrip("-") in valid_sort_fields
-            ), f"Invalid sort field: {sort_field}"
+            if sort_field.lstrip("-") not in valid_sort_fields:
+                raise ValidationError(f"Invalid sort field: {sort_field}")
             room_types = room_types.order_by(sort_field)
 
         if "limit" in filters:
