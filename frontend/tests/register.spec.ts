@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:5173/');
-  await page.getByRole('link', { name: 'Crear Cuenta', exact: true }).click();
+  await page.goto('http://localhost:5173/register');
+  // await page.getByRole('link', { name: 'Crear Cuenta', exact: true }).click();
   await page.getByRole('textbox', { name: 'Nombre de Usuario' }).click();
   await page.getByRole('textbox', { name: 'Nombre de Usuario' }).fill('dfloress');
   await page.getByRole('textbox', { name: 'Correo Electrónico' }).click();
