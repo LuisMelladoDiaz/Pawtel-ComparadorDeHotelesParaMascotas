@@ -30,6 +30,7 @@
     "vee-validate": "^4.15.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
+    "vue-slider-component": "^3.2.24",
     "yup": "^1.6.1"
   },
   "devDependencies": {

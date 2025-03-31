@@ -147,8 +147,8 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
   address: hotel.address ?? 'Dirección',
   city: hotel.city ?? 'Ciudad',
   description: hotel.description ?? 'Descripción',
-  price_max: hotel.most_expensive_price ?? '0',
-  price_min: hotel.cheapest_price ?? '0',
+  price_max: hotel.highest_price_current_filters ?? '0',
+  price_min: hotel.lowest_price_current_filters ?? '0',
   reviews: hotel.reviews?.length ? hotel.reviews : [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
 })) || []);
 </script>

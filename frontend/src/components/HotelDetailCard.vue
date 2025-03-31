@@ -74,8 +74,23 @@ defineProps({
           </div>
 
           <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col mt-4">
-            <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a>
-            <a class="bg-white text-right! rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
+            <a
+              v-if="price_min !== price_max"
+              class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
+            >
+              Rango de Precios
+            </a>
+            <a
+              v-else
+              class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
+            >
+              Precio
+            </a>
+            <a
+              class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3"
+            >
+              {{ price_min === price_max ? `${price_min}€` : `${price_min}€ - ${price_max}€` }}
+            </a>
           </div>
         </div>
 
