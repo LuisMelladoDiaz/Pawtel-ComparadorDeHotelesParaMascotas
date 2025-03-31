@@ -60,6 +60,6 @@ class TermsAcceptance(models.Model):
     ip_address = models.GenericIPAddressField(null=False)  
     
     def __str__(self):
-        return f"Términos aceptados por {self.user} en {self.accepted_at}"
+        return f"Términos aceptados por {self.user} en {self.accepted_at}."
     
     

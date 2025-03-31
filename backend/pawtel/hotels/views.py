@@ -37,7 +37,7 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_1(request, action_name)
+        HotelService.authorize_action_hotel(request, action_name)
         input_serializer = HotelService.serialize_input_hotel_create(request)
         HotelService.validate_create_hotel(input_serializer)
         hotel_created = HotelService.create_hotel(input_serializer)
@@ -48,7 +48,7 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def update(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         input_serializer = HotelService.serialize_input_hotel_update(request, pk)
         HotelService.validate_update_hotel(pk, input_serializer)
         hotel_updated = HotelService.update_hotel(pk, input_serializer)
@@ -63,7 +63,7 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         delete = HotelService.validate_all_room_types_deletion(pk)
         if delete:
             HotelService.delete_hotel(pk)
@@ -94,7 +94,7 @@ class HotelViewSet(viewsets.ModelViewSet):
     )
     def list_bookings_of_hotel(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         bookings = HotelService.list_bookings_of_hotel(pk)
         serializer = BookingSerializer(bookings, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -120,7 +120,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def list_images_of_hotel(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         hotel_images = HotelService.list_images_of_hotel(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             hotel_images, many=True, context={"request": request}
@@ -135,7 +135,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def retrieve_image(self, request, pk=None, image_id=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         hotel_image = HotelService.retrieve_image_from_hotel(pk, image_id)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             hotel_image, context={"request": request}
@@ -150,7 +150,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def upload_image(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         input_serializer = HotelService.serialize_input_hotel_image(request, pk)
         HotelService.validate_upload_image(input_serializer, pk)
         hotel_image = HotelService.upload_image_to_hotel(input_serializer)
@@ -167,7 +167,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def update_image(self, request, pk=None, image_id=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         input_serializer = HotelService.serialize_input_hotel_image(request, pk)
         HotelService.validate_update_image(input_serializer, pk, image_id)
         hotel_image = HotelService.update_image_to_hotel(input_serializer, pk, image_id)
@@ -194,7 +194,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def destroy_image(self, request, pk=None, image_id=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         HotelService.delete_image_from_hotel(pk, image_id)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -206,7 +206,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def get_cover_image(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_2(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk)
         cover_image = HotelService.retrieve_current_cover_image_or_404(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             cover_image, context={"request": request}
@@ -221,7 +221,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def get_non_cover_images(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_2(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk)
         non_cover_images = HotelService.list_non_cover_images(pk)
         output_serializer_data = HotelService.serialize_output_hotel_image(
             non_cover_images, many=True, context={"request": request}
@@ -236,7 +236,7 @@ class HotelImageViewSet(viewsets.ViewSet):
     )
     def set_image_is_cover(self, request, pk=None, image_id=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelService.authorize_action_hotel_level_3(request, pk, action_name)
+        HotelService.authorize_action_hotel(request, action_name, pk, True)
         input_serializer = HotelService.serialize_input_set_image_is_cover(request)
         HotelService.validate_set_image_is_cover(input_serializer)
         image = HotelService.set_image_is_cover(input_serializer, pk, image_id)

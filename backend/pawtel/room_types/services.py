@@ -22,36 +22,33 @@ class RoomTypeService:
 
     # Authorization ----------------------------------------------------------
 
-    def authorize_action_room_type_level_1(request, action_name):
+    def authorize_action_room_type(
+        request, action_name, room_type_id=None, check_ownership=False
+    ):
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_room_type_service(role_user, action_name)
+
+        if room_type_id:
+            room_type = RoomTypeService.__perform_retrieve_room_type(
+                role_user, room_type_id
+            )
+            if check_ownership:
+                RoomTypeService.__check_ownership_room_type(role_user, room_type)
+
         return role_user
 
-    def authorize_action_room_type_level_2(request, room_type_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
+    def __perform_retrieve_room_type(role_user, room_type_id):
+        if role_user.user.role == UserRole.ADMIN:
+            return RoomTypeService.retrieve_room_type(room_type_id, allow_archived=True)
+        else:
+            return RoomTypeService.retrieve_room_type(room_type_id)
 
-        if action_name == "retrieve" and role_user is None:
-            return
-        
-        PermissionService.check_permission_room_type_service(role_user, action_name)
-        RoomTypeService.retrieve_room_type(room_type_id)
-        return role_user
-
-    def authorize_action_room_type_level_3(request, room_type_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_room_type_service(role_user, action_name)
-        room_type = RoomTypeService.retrieve_room_type(room_type_id)
-        RoomTypeService.check_ownership_room_type(role_user, room_type)
-        return role_user
-
-    def check_ownership_room_type(role_user, room_type):
+    def __check_ownership_room_type(role_user, room_type):
         if role_user.user.role == UserRole.ADMIN:
             return
-
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if room_type.hotel.hotel_owner.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
-
         else:
             raise PermissionDenied("Permission denied.")
 

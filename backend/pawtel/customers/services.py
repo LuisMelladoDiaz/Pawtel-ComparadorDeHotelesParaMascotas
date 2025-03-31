@@ -43,17 +43,38 @@ class CustomerService:
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_customer_service(role_user, action_name)
         target_customer = CustomerService.retrieve_customer(target_customer_id)
-        CustomerService.check_ownership_customer(role_user, target_customer)
+        CustomerService.__check_ownership_customer(role_user, target_customer)
         return role_user
 
-    def check_ownership_customer(role_user, target_customer):
+    def authorize_action_customer(
+        request, action_name, target_customer_id=None, check_ownership=False
+    ):
+        role_user = AppUserService.get_current_role_user(request)
+        PermissionService.check_permission_customer_service(role_user, action_name)
+
+        if target_customer_id:
+            target_customer = CustomerService.__perform_retrieve_customer(
+                role_user, target_customer_id
+            )
+            if check_ownership:
+                CustomerService.__check_ownership_customer(role_user, target_customer)
+
+        return role_user
+
+    def __perform_retrieve_customer(role_user, target_customer_id):
+        if role_user.user.role == UserRole.ADMIN:
+            return CustomerService.retrieve_customer(
+                target_customer_id, allow_inactive=True
+            )
+        else:
+            return CustomerService.retrieve_customer(target_customer_id)
+
+    def __check_ownership_customer(role_user, target_customer):
         if role_user.user.role == UserRole.ADMIN:
             return
-
         elif role_user.user.role == UserRole.CUSTOMER:
             if target_customer.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
-
         else:
             raise PermissionDenied("Permission denied.")
 
