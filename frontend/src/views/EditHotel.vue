@@ -2,8 +2,11 @@
 import { ref, computed, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
+import { useUploadHotelImage } from '@/data-layer/hooks/hotelImages';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
+import { boolean, number, string } from 'yup';
+import { integer } from '@vee-validate/rules';
 
 const route = useRoute();
 const router = useRouter();
@@ -27,20 +30,57 @@ const editableHotel = ref({
 // Subir y eliminar fotos de los hoteles
 const uploadedImages = ref([]);
 const fileInputRef = ref(null);
+const selectedFiles = ref([]);
+
+const { mutate: uploadImage, isPending, isError } = useUploadHotelImage();
 
 const handleImageUpload = (event) => {
-  const files = Array.from(event.target.files);
-  files.forEach((file) => {
+  const files = event.target.files;
+  for (const file of files) {
     const reader = new FileReader();
     reader.onload = (e) => {
       uploadedImages.value.push(e.target.result);
     };
     reader.readAsDataURL(file);
+    selectedFiles.value.push(file);
+  }
+};
+const submitImages = (hotelId) => {
+  if (selectedFiles.value.length === 0) {
+    console.log('No hay archivos seleccionados.');
+    return;
+  }
+
+  selectedFiles.value.forEach((file) => {
+    console.log('Procesando archivo:', file);
+
+    if (!file) {
+      console.error('Archivo inválido:', file);
+      return;
+    }
+
+    uploadImage(
+      { hotelId, image: file, isCover: false }, // Aquí parece que falta la conversión de la imagen
+      {
+        onSuccess: () => {
+          console.log('Imagen subida con éxito');
+          uploadedImages.value = [];
+          selectedFiles.value = [];
+        },
+        onError: (error) => {
+          console.error('Error al subir imagen:', error);
+        },
+      }
+    );
   });
 };
 
+
+
+
 const removeImage = (index) => {
   uploadedImages.value.splice(index, 1);
+  selectedFiles.value.splice(index, 1);
 };
 
 // Llenar los valores del formulario de manera reactiva
@@ -145,24 +185,33 @@ const saveNewRoomType = async () => {
       <div class="flex flex-col lg:flex-row gap-6">
         <!-- Contenedor lateral de imágenes -->
         <div class="w-full lg:w-80 border border-gray-300 rounded-lg p-4 h-fit">
-          <h2 class="text-lg font-bold text-gray-800 mb-4"></h2>
+          <h2 class="text-lg font-bold text-gray-800 mb-4">Subir Imágenes</h2>
+
           <div class="flex flex-col items-center justify-center border border-dashed border-gray-400 rounded-md p-4">
-            <p class="text-sm text-gray-600 mb-2"></p>
-            <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden"
-              @change="handleImageUpload" />
-            <Button type="accept" @click="fileInputRef.click()"
-              class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+            <p class="text-sm text-gray-600 mb-2">Selecciona imágenes para subir</p>
+            <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden" @change="handleImageUpload" />
+
+            <Button @click="fileInputRef.click()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
               Subir imágenes
             </Button>
           </div>
-          <div class="mt-4 grid grid-cols-1 gap-4">
+
+          <div v-if="uploadedImages.length" class="mt-4 grid grid-cols-1 gap-4">
             <div v-for="(img, index) in uploadedImages" :key="index" class="relative">
               <img :src="img" alt="imagen subida" class="w-full h-40 object-cover rounded shadow" />
               <button @click="removeImage(index)"
-                class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700"
-                title="Eliminar">✕</button>
+                class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700">
+                ✕
+              </button>
             </div>
           </div>
+
+          <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotel.id)"
+            class="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+            {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
+          </Button>
+
+          <p v-if="isError" class="text-red-600 text-sm mt-2">Error al subir las imágenes</p>
         </div>
 
         <!-- Contenido principal -->
