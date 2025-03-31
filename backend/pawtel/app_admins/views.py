@@ -55,7 +55,7 @@ class AdminViewSet(viewsets.ViewSet):
         detail=False,
         methods=["get"],
         url_path="me",
-        url_name="retrieve_current_customer",
+        url_name="retrieve_current_admin",
     )
     def retrieve_current_admin(self, request):
         admin = AdminService.retrieve_current_admin(request)

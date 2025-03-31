@@ -68,7 +68,7 @@ class AdminViewSetTest(TestCase):
         self.assertFalse(App_Admin.objects.filter(id=self.admin.id).exists())
 
     def test_retrieve_current_admin(self):
-        url = reverse("admin-retrieve_current_customer")
+        url = reverse("admin-retrieve_current_admin")
         response = self.client.get(url, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["user"]["username"], self.admin_user.username)

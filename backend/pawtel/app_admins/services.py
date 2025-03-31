@@ -9,20 +9,14 @@ class AdminService:
 
     # General processes------------------------------------------------------
 
-    @staticmethod
-    def general_create_admin(request):
-        app_user = AppUserService.general_create_app_user(request)
-        admin_created = AdminService.__create_admin(app_user.id)
-        output_serializer_data = AdminService.serialize_output_admin(admin_created)
-        return output_serializer_data
-
     # Authorization----------------------------------------------------------
     def authorize_action_admin(request, action_name, admin_id=None):
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_admin_service(role_user, action_name)
         if admin_id:
             target_admin = AdminService.__perform_retrieve_admin(role_user, admin_id)
-
+            if not target_admin:
+                raise ValueError("Admin not found")
         return role_user
 
     def __perform_retrieve_admin(role_user, target_admin_id):
@@ -60,12 +54,6 @@ class AdminService:
             return App_Admin.objects.get(user_id=app_user_id)
         except App_Admin.DoesNotExist:
             raise ValueError("Admin not found")
-
-    # POST--------------------------------------------------------
-
-    @staticmethod
-    def __create_admin(app_user_id):
-        return App_Admin.objects.create(app_user_id=app_user_id)
 
     # DELETE--------------------------------------------------------
 
