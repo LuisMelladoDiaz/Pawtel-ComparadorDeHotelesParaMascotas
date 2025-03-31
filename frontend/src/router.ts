@@ -215,4 +215,42 @@ const router = createRouter({
   routes: transformRoutes(routes),
 });
 
+router.beforeEach((to, from, next) => {
+  // Keys of filters we want to preserve
+  const preservedQueryKeys = ['filterCity', 'filterType', 'filterStartDate', 'filterEndDate']
+
+  const preservedQuery = {}
+
+  preservedQueryKeys.forEach((key) => {
+    if (from.query.hasOwnProperty(key) && !to.query.hasOwnProperty(key)) {
+      preservedQuery[key] = from.query[key]
+    } else if (to.query.hasOwnProperty(key)) {
+      preservedQuery[key] = to.query[key]
+    }
+  })
+
+  const nextQuery = {
+    ...to.query,
+    ...preservedQuery,
+  }
+
+  // if is equal, no need to change `nextQuery`
+  if (JSON.stringify(nextQuery) === JSON.stringify(to.query)) {
+    return next()
+  }
+
+
+  if (Object.keys(preservedQuery).length > 0) {
+    return next({
+      ...to,
+      query: {
+        ...to.query,
+        ...preservedQuery,
+      },
+    })
+  } else {
+    return next()
+  }
+})
+
 export default router;
