@@ -295,33 +295,58 @@ const saveNewRoomType = async () => {
           </div>
 
           <!-- Formulario de Edición de Tipo de Habitación -->
-          <div v-if="editingRoomType">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Editar Tipo de Habitación</h2>
-            <div class="grid grid-cols-2 gap-4">
+          <div v-if="editingRoomType" class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
+            <h2 class="text-xl font-semibold text-terracota mb-6 border-b pb-2">Editar Tipo de Habitación</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label class="text-sm font-semibold text-gray-700">Nombre:</label>
-                <input v-model="editingRoomType.name" type="text" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre:</label>
+                <input
+                  v-model="editingRoomType.name"
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                >
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Descripción:</label>
-                <input v-model="editingRoomType.description" type="text" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Descripción:</label>
+                <input
+                  v-model="editingRoomType.description"
+                  type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                >
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Capacidad:</label>
-                <input v-model="editingRoomType.capacity" type="number" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Capacidad:</label>
+                <input
+                  v-model="editingRoomType.capacity"
+                  type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                >
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Precio por Noche:</label>
-                <input v-model="editingRoomType.price_per_night" type="number" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Precio por Noche:</label>
+                <input
+                  v-model="editingRoomType.price_per_night"
+                  type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                >
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Número de Habitaciones:</label>
-                <input v-model="editingRoomType.num_rooms" type="number" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Número de Habitaciones:</label>
+                <input
+                  v-model="editingRoomType.num_rooms"
+                  type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                >
               </div>
             </div>
-            <div class="mt-4 text-right">
-              <Button type="accept" @click="saveUpdatedRoomType" :disabled="isUpdatingRoom" class="w-48 mb-3">
-                {{ isUpdatingRoom ? "Actualizando..." : "Guardar Cambios" }}
+            <div class="flex justify-end gap-3 pt-4">
+              <Button
+                type="accept"
+                @click="saveUpdatedRoomType"
+                :disabled="isUpdatingRoom"
+                class="w-full md:w-48"
+              >
+                <i class="fas fa-save mr-2"></i> {{ isUpdatingRoom ? "Actualizando..." : "Guardar Cambios" }}
               </Button>
             </div>
           </div>
