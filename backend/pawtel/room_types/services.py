@@ -34,11 +34,6 @@ class RoomTypeService:
             )
             if check_ownership:
                 RoomTypeService.__check_ownership_room_type(role_user, room_type)
-        if action_name == "retrieve" and role_user is None:
-            return
-
-        PermissionService.check_permission_room_type_service(role_user, action_name)
-        RoomTypeService.retrieve_room_type(room_type_id)
         return role_user
 
     def __perform_retrieve_room_type(role_user, room_type_id):
