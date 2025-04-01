@@ -147,7 +147,7 @@ const logout = () => {
           <h2 class="text-lg font-semibold">Mi Perfil</h2>
           <ul class="mt-3 space-y-2">
             <li>
-              <router-link to="/UserProfile" class="text-azul-suave-dark font-bold pointer-events-none">
+              <router-link to="/user-profile" class="text-azul-suave-dark font-bold pointer-events-none">
               Datos Personales
               </router-link>
             </li>
@@ -230,7 +230,7 @@ const logout = () => {
           <h2 class="text-lg font-semibold">Mi Perfil</h2>
           <ul class="mt-3 space-y-2">
             <li>
-              <router-link to="/UserProfile" class="text-azul-suave-dark font-bold pointer-events-none">
+              <router-link to="/user-profile" class="text-azul-suave-dark font-bold pointer-events-none">
               Datos Personales
               </router-link>
             </li>
