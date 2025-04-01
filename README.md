@@ -1,5 +1,7 @@
 # 🐾 Pawtel - Comparador de Hoteles para Mascotas
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c84fc472f9b4b0480af6ebba8edd723)](https://app.codacy.com/gh/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas?utm_source=github.com&utm_medium=referral&utm_content=LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas&utm_campaign=Badge_Grade)
+
 ![Logo de PAWTEL](https://raw.githubusercontent.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/refs/heads/main/frontend/src/assets/pawtel-logo-white.png)
 
 Bienvenido a **Pawtel**, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
