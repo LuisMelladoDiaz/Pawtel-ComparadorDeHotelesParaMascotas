@@ -17,7 +17,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         filters = request.query_params.dict()
         action_name = inspect.currentframe().f_code.co_name
         role_user = RoomTypeService.authorize_action_room_type(request, action_name)
-        allow_admin = RoomTypeService.check_admin_role(role_user)
+        allow_admin = RoomTypeService.check_admin_permission(role_user)
         hotels = RoomTypeService.list_filtered_room_types(filters, allow_admin)
         serializer = RoomTypeSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -25,7 +25,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
         role_user = RoomTypeService.authorize_action_room_type(request, action_name)
-        allow_admin = RoomTypeService.check_admin_role(role_user)
+        allow_admin = RoomTypeService.check_admin_permission(role_user)
         room_type = RoomTypeService.retrieve_room_type(pk, allow_admin)
         output_serializer_data = RoomTypeService.serialize_output_room_type(room_type)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
