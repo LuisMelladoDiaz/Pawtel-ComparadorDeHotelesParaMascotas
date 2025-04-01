@@ -25,6 +25,7 @@
     "lodash.debounce": "^4.0.8",
     "notyf": "^3.10.0",
     "ol": "^10.4.0",
+    "pinia": "^3.0.1",
     "swiper": "^11.2.4",
     "tailwindcss": "^4.0.8",
     "vee-validate": "^4.15.0",

@@ -2,6 +2,7 @@
 import { ref, onMounted, defineProps, defineEmits } from 'vue';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.css';
+import { computed } from 'vue';
 
 const props = defineProps({
   startDate: String,
@@ -11,7 +12,6 @@ const props = defineProps({
 const emit = defineEmits(['update:startDate', 'update:endDate']);
 
 const flatpickrRef = ref(null);
-const formattedDate = ref('');
 let isManuallyClearing = false;
 
 const clearDate = () => {
@@ -34,6 +34,7 @@ onMounted(() => {
     dateFormat: "d-m-Y",
     minDate: "today",
     locale: { firstDayOfWeek: 1 },
+    defaultDate: [props.startDate, props.endDate].filter(Boolean),
     onChange: (selectedDates) => {
       if (isManuallyClearing) return;
 
@@ -47,12 +48,6 @@ onMounted(() => {
       if (startDate) emit('update:startDate', formatForInput(startDate));
       if (endDate) emit('update:endDate', formatForInput(endDate));
 
-      if (startDate && endDate) {
-        formattedDate.value = `${formatDisplay(startDate)} - ${formatDisplay(endDate)}`;
-      } else {
-        formattedDate.value = '';
-      }
-
       if (startDate) {
         const maxRangeDate = new Date(startDate);
         maxRangeDate.setMonth(maxRangeDate.getMonth() + 6);
@@ -60,6 +55,15 @@ onMounted(() => {
       }
     }
   });
+});
+
+const formattedDate = computed(() => {
+  if (!props.startDate || !props.endDate) return '';
+
+  const startDate = new Date(props.startDate);
+  const endDate = new Date(props.endDate);
+
+  return `${formatDisplay(startDate)} - ${formatDisplay(endDate)}`;
 });
 
 const formatForInput = (date) =>
