@@ -91,7 +91,9 @@ class RoomTypeService:
             raise ValidationError({"hotel": "Hotel inválido."})
 
         if name and RoomType.objects.filter(hotel_id=hotel.id, name=name).exists():
-            raise ValidationError({"name": "Nombre ya en uso para el hotel."})
+            raise ValidationError(
+                {"name": "Nombre ya en uso para un tipo de habitación."}
+            )
 
     @staticmethod
     def validate_update_room_type(pk, input_serializer):
@@ -107,7 +109,9 @@ class RoomTypeService:
             .exclude(id=pk)
             .exists()
         ):
-            raise ValidationError({"name": "Nombre ya en uso para el hotel."})
+            raise ValidationError(
+                {"name": "Nombre ya en uso para un tipo de habitación."}
+            )
 
     @staticmethod
     def validate_room_type_is_available(start_date, end_date):

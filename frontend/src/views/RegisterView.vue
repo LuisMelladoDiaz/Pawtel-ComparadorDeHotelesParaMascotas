@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { useCreateCustomer } from '@/data-layer/hooks/customers';
 import { useCreateHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { Notyf } from 'notyf';
+import { handleApiError} from '@/utils/errorHandler';
 import { Form, Field, ErrorMessage, useForm } from 'vee-validate';
 import * as yup from 'yup';
 import axios from 'axios';
@@ -36,27 +37,6 @@ const { handleSubmit, values } = useForm({
   validationSchema,
 });
 
-const showBackendErrors = (error) => {
-
-  if (error?.response?.data) {
-    const errorData = error.response.data;
-
-    if (errorData.email && Array.isArray(errorData.email)) {
-      notyf.error(`${errorData.email[0]}`);
-      return;
-    }
-    if (typeof errorData === 'object') {
-      for (const [field, messages] of Object.entries(errorData)) {
-        const errorMessages = Array.isArray(messages) ? messages : [messages];
-        errorMessages.forEach(msg => notyf.error(` ${msg}`));
-      }
-      return;
-    }
-  }
-
-  notyf.error(error?.message || 'Error durante el registro');
-};
-
 const register = async (values) => {
   try {
     if (values.role === 'hotel_owner') {
@@ -75,7 +55,7 @@ const register = async (values) => {
             router.push('/login');
           },
           onError: (error) => {
-            showBackendErrors(error);
+            handleApiError(error);
           },
         }
       );
@@ -95,13 +75,13 @@ const register = async (values) => {
             router.push('/login');
           },
           onError: (error) => {
-            showBackendErrors(error);
+            handleApiError(error);
           },
         }
       );
     }
   } catch (error) {
-    showBackendErrors(error);
+    handleApiError(error);
   }
 };
 

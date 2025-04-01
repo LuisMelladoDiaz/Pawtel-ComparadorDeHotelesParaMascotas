@@ -19,7 +19,7 @@ export const handleApiError = (error: unknown) => {
 
     switch (error.response.status) {
       case 500:
-        notyf.error('Error interno del servidor');
+        notyf.error('Error interno del servidor, inténtelo de nuevo más tarde.');
         break;
       default:
         notyf.error(errorData?.message || 'Error en la solicitud');
