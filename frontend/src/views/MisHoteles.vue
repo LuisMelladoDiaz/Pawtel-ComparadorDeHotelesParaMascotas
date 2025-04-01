@@ -49,25 +49,24 @@ const openModal = () => {
 
 // Guardar hotel (Crear)
 const saveHotel = async () => {
-  try {
-    const loadingNotification = notyf.open({
-      type: 'loading',
-      message: 'Guardando hotel...',
-      dismissible: false
-    });
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Guardando hotel...',
+    dismissible: false
+  });
 
-    const newHotel = await createHotelMutation.mutateAsync(hotelData.value);
-
-    notyf.dismiss(loadingNotification);
-
-    notyf.success('Hotel creado exitosamente');
-    router.push('/mis-hoteles');
-    modalOpen.value = false;
-
-  } catch (error) {
-    notyf.dismissAll();
-    handleApiError(error);
-  }
+  createHotelMutation.mutate(hotelData.value, {
+    onSuccess: () => {
+      notyf.dismiss(loadingNotification);
+      notyf.success('Hotel creado exitosamente');
+      router.push('/mis-hoteles');
+      modalOpen.value = false;
+    },
+    onError: (error) => {
+      notyf.dismissAll();
+      handleApiError(error);
+    }
+  });
 };
 
 const deleteHotel = async (id) => {

@@ -17,18 +17,31 @@ const validationSchema = yup.object({
   password: yup.string().required('La contraseña es obligatoria')
 });
 
-const login = async (values) => {
-  try {
-    await loginMutation.mutateAsync({
+const login = handleSubmit((values) => {
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Iniciando sesión...',
+    dismissible: false
+  });
+
+  loginMutation.mutate(
+    {
       username: values.username,
       password: values.password
-    });
-    notyf.success('Inicio de sesión exitoso');
-    router.push('/');
-  } catch (error) {
-    handleApiError(error);
-  }
-};
+    },
+    {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
+        notyf.success('Inicio de sesión exitoso');
+        router.push('/');
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      }
+    }
+  );
+});
 </script>
 
 <template>

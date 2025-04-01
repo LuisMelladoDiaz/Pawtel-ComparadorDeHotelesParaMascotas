@@ -9,7 +9,7 @@ import Button from '../components/Button.vue';
 
 const route = useRoute();
 const router = useRouter();
-const notyf = new Notyf(); // Initialize Notyf
+const notyf = new Notyf();
 
 const hotelId = computed(() => route.params.id);
 
@@ -54,20 +54,33 @@ watchEffect(() => {
 });
 
 // Hook para actualizar el hotel
-const { mutateAsync: updateHotelAsync, isLoading: isSaving } = useUpdateHotel();
+const { mutate: updateHotel, isLoading: isSaving } = useUpdateHotel();
 
 // Guardar cambios en el hotel
-const saveChanges = async () => {
-  try {
-    await updateHotelAsync({
+const saveChanges = () => {
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Guardando cambios...',
+    dismissible: false
+  });
+
+  updateHotel(
+    {
       hotelId: hotel.value.id,
       hotelData: editableHotel.value
-    });
-    notyf.success('Cambios guardados correctamente');
-    router.push('/mis-hoteles');
-  } catch (error) {
-    handleApiError(error);
-  }
+    },
+    {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
+        notyf.success('Cambios guardados correctamente');
+        router.push('/mis-hoteles');
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      }
+    }
+  );
 };
 
 // Formatear tipo de mascota
@@ -83,9 +96,9 @@ const formatPetType = (petType) => {
 };
 
 // Nuevos hooks para crear y eliminar tipos de habitación
-const { mutateAsync: createRoomTypeAsync, isLoading: isCreatingRoom } = useCreateRoomType();
-const { mutateAsync: deleteRoomTypeAsync, isLoading: isDeletingRoom } = useDeleteRoomType();
-const { mutateAsync: updateRoomTypeAsync, isLoading: isUpdatingRoom } = useUpdateRoomType();
+const { mutate: createRoomType } = useCreateRoomType();
+const { mutate: deleteRoomType } = useDeleteRoomType();
+const { mutate: updateRoomType } = useUpdateRoomType();
 
 // Estado para manejar la creación de un nuevo tipo de habitación
 const newRoomType = ref({
@@ -107,46 +120,49 @@ const openEditForm = (roomType) => {
 };
 
 // Guardar cambios en un tipo de habitación
-const saveUpdatedRoomType = async () => {
-  try {
-    await updateRoomTypeAsync({
+const saveUpdatedRoomType = () => {
+  updateRoomType(
+    {
       roomTypeId: editingRoomType.value.id,
       roomTypeData: editingRoomType.value
-    });
-    notyf.success('Tipo de habitación actualizado correctamente');
-    editingRoomType.value = null;
-  } catch (error) {
-    handleApiError(error);
-  }
+    },
+    {
+      onSuccess: () => {
+        notyf.success('Tipo de habitación actualizado correctamente');
+        editingRoomType.value = null;
+      },
+      onError: handleApiError
+    }
+  );
 };
 
 // Eliminar un tipo de habitación
-const handleDeleteRoomType = async (roomTypeId) => {
-  try {
-    await deleteRoomTypeAsync(roomTypeId);
-    notyf.success('Tipo de habitación eliminado correctamente');
-  } catch (error) {
-    handleApiError(error);
-  }
+const handleDeleteRoomType = (roomTypeId) => {
+  deleteRoomType(roomTypeId, {
+    onSuccess: () => {
+      notyf.success('Tipo de habitación eliminado correctamente');
+    },
+    onError: handleApiError
+  });
 };
 
 // Guardar un nuevo tipo de habitación
-const saveNewRoomType = async () => {
-  try {
-    await createRoomTypeAsync(newRoomType.value);
-    notyf.success('Tipo de habitación creado correctamente');
-    newRoomType.value = {
-      name: '',
-      description: '',
-      capacity: 1,
-      price_per_night: 1,
-      pet_type: 'DOG',
-      num_rooms: 1,
-      hotel: hotelId.value,
-    };
-  } catch (error) {
-    handleApiError(error);
-  }
+const saveNewRoomType = () => {
+  createRoomType(newRoomType.value, {
+    onSuccess: () => {
+      notyf.success('Tipo de habitación creado correctamente');
+      newRoomType.value = {
+        name: '',
+        description: '',
+        capacity: 1,
+        price_per_night: 1,
+        pet_type: 'DOG',
+        num_rooms: 1,
+        hotel: hotelId.value,
+      };
+    },
+    onError: handleApiError
+  });
 };
 </script>
 

@@ -22,7 +22,6 @@ const { data: hotel } = useGetHotelById(hotelId);
 const hotelName = computed(() => hotel.value?.name || 'Cargando hotel...');
 
 const submitBooking = async () => {
-  try {
     const startDate = new Date(`${internalStartDate.value}T00:00:00Z`);
     const endDate = new Date(`${internalEndDate.value}T00:00:00Z`);
 
@@ -39,8 +38,8 @@ const submitBooking = async () => {
         handleApiError(error);
       }
     });
-  }
 };
+}
 
 const totalPrice = computed(() => {
   if (!internalStartDate.value || !internalEndDate.value) return 0;
