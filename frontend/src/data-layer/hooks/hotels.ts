@@ -21,7 +21,7 @@ export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
       ...Object.fromEntries(
         Object.entries(filters ?? {})
           .map(([key, value]) => [key, toValue(value)])
-          .filter(([_, value]) => Boolean(value))
+          .filter((keyval) => Boolean(keyval[1]))
       ),
     }),
     staleTime: 1000 * 60,

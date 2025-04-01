@@ -242,13 +242,14 @@ router.beforeEach((to, from, next) => {
 
 
   if (Object.keys(preservedQuery).length > 0) {
-    return next({
+    next({
       ...to,
       query: {
         ...to.query,
         ...preservedQuery,
       },
     })
+    return;
   } else {
     next()
     return;
