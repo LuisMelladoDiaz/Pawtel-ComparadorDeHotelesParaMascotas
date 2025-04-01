@@ -25,8 +25,8 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'http://localhost:5173', // Asegúrate de que apunta a tu Vite frontend
-    headless: true, // Cambia a true si no quieres ver el navegador
+    baseURL: 'http://localhost:5173', 
+    headless: true, 
     trace: 'on-first-retry',
   },
 
