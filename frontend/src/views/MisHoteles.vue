@@ -13,7 +13,7 @@ const router = useRouter();
 const notyf = new Notyf();
 const { data: hotelOwner } = useGetCurrentHotelOwner();
 const hotelOwnerId = computed(() => hotelOwner.value?.id ?? null);
-const { data: hotels, isLoading, isError } = useGetAllHotelsOfOwner(
+const { data: hotels, isLoading, isError, refetch: refetchHotels } = useGetAllHotelsOfOwner(
   computed(() => hotelOwnerId.value),
   computed(() => !!hotelOwnerId.value)
 );
@@ -23,6 +23,12 @@ const deleteHotelMutation = useDeleteHotel();
 const modalOpen = ref(false);
 const isEditing = ref(false);
 const hotelData = ref({ name: '', address: '', city: '', description: '' });
+
+// Nuevas refs para el modal de confirmación
+const showDeleteModal = ref(false);
+const hotelToDelete = ref(null);
+const isDeleting = ref(false);
+const hotelToDeleteName = ref('');
 
 const hotelSchema = yup.object({
   name: yup.string().required('El nombre es obligatorio'),
@@ -49,26 +55,37 @@ const openModal = () => {
 // Guardar hotel (Crear)
 const saveHotel = async () => {
   try {
-    const newHotel = await createHotelMutation.mutateAsync(hotelData.value);
-
-    router.push(`/mis-hoteles`);
+    await createHotelMutation.mutateAsync(hotelData.value);
+    notyf.success('Hotel creado correctamente');
     modalOpen.value = false;
+    await refetchHotels();
   } catch (error) {
-    notyf.error('Error al crear el hotel.');
+    notyf.error('Error al crear el hotel');
     console.error('Error al guardar el hotel', error);
   }
 };
 
-const deleteHotel = async (id) => {
-  if (confirm('¿Estás seguro de eliminar este hotel?')) {
-    try {
-      await deleteHotelMutation.mutateAsync(id);
-      notyf.success('Hotel eliminado exitosamente.');
-      window.location.href = '/mis-hoteles';
-    } catch (error) {
-      notyf.error('Error al eliminar hotel.');
-      console.error('Error al eliminar hotel', error);
-    }
+// Mostrar modal de confirmación para eliminar
+const confirmDelete = (id) => {
+  const hotel = hotels.value.find(h => h.id === id);
+  hotelToDelete.value = id;
+  hotelToDeleteName.value = hotel?.name || 'este hotel';
+  showDeleteModal.value = true;
+};
+
+// Eliminar hotel después de confirmación
+const deleteHotel = async () => {
+  isDeleting.value = true;
+  try {
+    await deleteHotelMutation.mutateAsync(hotelToDelete.value);
+    await refetchHotels();
+    notyf.success('Hotel eliminado correctamente');
+  } catch (error) {
+    notyf.error('Error al eliminar el hotel');
+    console.error('Error al eliminar hotel', error);
+  } finally {
+    showDeleteModal.value = false;
+    isDeleting.value = false;
   }
 };
 
@@ -81,14 +98,69 @@ const editHotel = (id) => {
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
+
 <template>
-  <div class="max-w-7xl mx-auto w-full flex flex-col items-center flex-grow mt-8">
+  <div class="max-w-7xl mx-auto w-full flex flex-col items-center flex-grow mt-8 relative">
     <!-- Cabecera -->
     <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
       <span class="font-semibold">Gestión de Hoteles</span>
       <button @click="openModal" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
         <i class="fas fa-plus mr-2"></i> Añadir Nuevo
       </button>
+    </div>
+
+    <!-- Modal de confirmación para eliminar hotel -->
+    <div v-if="showDeleteModal" class="w-full mb-2 bg-white border border-terracota rounded-lg shadow-md">
+      <div class="p-3">
+        <h2 class="text-lg font-bold text-terracota">Confirmar eliminación</h2>
+        <p class="text-gray-700 my-2">¿Estás seguro de que deseas eliminar <span class="font-semibold">"{{ hotelToDeleteName }}"</span>?</p>
+        <p class="text-sm text-gray-500 mb-3">Esta acción no se puede deshacer.</p>
+        <div class="flex justify-end gap-2">
+          <Button type="reject" @click="showDeleteModal = false" class="px-3 py-1 text-sm">Cancelar</Button>
+          <Button type="accept" @click="deleteHotel" :loading="isDeleting" class="px-3 py-1 text-sm">
+            {{ isDeleting ? 'Eliminando...' : 'Eliminar' }}
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para Añadir Hotel -->
+    <div v-if="modalOpen" class="w-full mb-4 bg-white border border-terracota rounded-lg shadow-lg">
+      <div class="p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-bold text-terracota">Añadir Nuevo Hotel</h2>
+          <button @click="modalOpen = false" class="text-gray-500 hover:text-gray-700">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
+            <input v-model="hotelData.name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
+            <input v-model="hotelData.address" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
+            <input v-model="hotelData.city" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota">
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
+            <textarea v-model="hotelData.description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota"></textarea>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end gap-3">
+          <Button type="reject" @click="modalOpen = false">Cancelar</Button>
+          <Button type="accept" @click="saveHotel">Crear Hotel</Button>
+        </div>
+      </div>
     </div>
 
     <div class="overflow-x-auto w-full">
@@ -124,7 +196,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
                 <i class="fas fa-edit"></i>
               </button>
               <!-- Botón de eliminar -->
-              <button @click="deleteHotel(hotel.id)" class="text-terracota hover:text-terracota-dark text-[20px]">
+              <button @click="confirmDelete(hotel.id)" class="text-terracota hover:text-terracota-dark text-[20px]">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -143,22 +215,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           {{ page }}
         </button>
         <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">Siguiente →</button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Modal para Añadir Hotel -->
-  <div v-if="modalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
-    <div class="bg-white p-6 rounded-lg w-1/3">
-      <h2 class="text-xl font-bold mb-4">Añadir Hotel</h2>
-      <input v-model="hotelData.name" placeholder="Nombre" class="w-full p-2 mb-2 border rounded" />
-      <input v-model="hotelData.address" placeholder="Dirección" class="w-full p-2 mb-2 border rounded" />
-      <input v-model="hotelData.city" placeholder="Ciudad" class="w-full p-2 mb-2 border rounded" />
-      <textarea v-model="hotelData.description" placeholder="Descripción" class="w-full p-2 mb-2 border rounded"></textarea>
-      <div class="flex justify-end gap-2">
-        <Button type="accept" @click="saveHotel">Crear</Button>
-        <Button type="reject" @click="modalOpen = false">Cancelar</Button>
       </div>
     </div>
   </div>
