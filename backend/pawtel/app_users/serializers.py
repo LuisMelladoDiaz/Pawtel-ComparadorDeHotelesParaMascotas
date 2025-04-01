@@ -1,16 +1,22 @@
-from rest_framework import serializers
 from pawtel.app_users.models import AppUser, TermsAcceptance
 from pawtel.base_serializer import BaseSerializer
-from pawtel.utils import get_client_ip  
+from pawtel.utils import get_client_ip
+from rest_framework import serializers
 
 
 class AppUserSerializer(BaseSerializer):
 
-    fields_required_for_post = ["username", "email", "phone", "password", "accept_terms"]
+    fields_required_for_post = [
+        "username",
+        "email",
+        "phone",
+        "password",
+        "accept_terms",
+    ]
     fields_editable = ["username", "email", "phone", "password"]
     fields_not_readable = ["password"]
 
-    accept_terms = serializers.BooleanField(write_only=True) 
+    accept_terms = serializers.BooleanField(write_only=True)
 
     class Meta:
         model = AppUser
@@ -41,11 +47,13 @@ class AppUserSerializer(BaseSerializer):
         }
 
     def create(self, validated_data):
-        request = self.context.get("request")  
+        request = self.context.get("request")
         accept_terms = validated_data.pop("accept_terms", False)
 
         if not accept_terms:
-            raise serializers.ValidationError({"accept_terms": "Debe aceptar los términos y condiciones"})
+            raise serializers.ValidationError(
+                {"accept_terms": "Debe aceptar los términos y condiciones"}
+            )
 
         password = validated_data.pop("password")
         user = AppUser(**validated_data)
@@ -53,9 +61,7 @@ class AppUserSerializer(BaseSerializer):
         user.save()
 
         TermsAcceptance.objects.create(
-            user=user,
-            terms_version="1.0",  
-            ip_address=get_client_ip(request)
+            user=user, terms_version="1.0", ip_address=get_client_ip(request)
         )
 
         return user

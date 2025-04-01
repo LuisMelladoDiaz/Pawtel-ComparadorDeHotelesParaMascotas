@@ -52,9 +52,9 @@ class HotelService:
             return
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if hotel.hotel_owner.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
+                raise PermissionDenied("Permiso denegado.")
         else:
-            raise PermissionDenied("Permission denied.")
+            raise PermissionDenied("Permiso denegado.")
 
     # Serialization ----------------------------------------------------------
 
@@ -88,7 +88,7 @@ class HotelService:
             else:
                 return Hotel.objects.get(pk=pk, is_archived=False)
         except Hotel.DoesNotExist:
-            raise NotFound(detail="Hotel not found.")
+            raise NotFound(detail="Hotel no encontrado.")
 
     @staticmethod
     def list_bookings_of_hotel(hotel_id):
@@ -103,7 +103,7 @@ class HotelService:
 
         name = input_serializer.validated_data.get("name")
         if name and Hotel.objects.filter(name=name).exists():
-            raise ValidationError({"name": "Name in use."})
+            raise ValidationError({"name": "Nombre en uso."})
 
     @staticmethod
     def create_hotel(input_serializer):
@@ -120,7 +120,7 @@ class HotelService:
         name = input_serializer.validated_data.get("name")
 
         if name and Hotel.objects.filter(name=name).exclude(id=pk).exists():
-            raise ValidationError({"name": "Name in use."})
+            raise ValidationError({"name": "Nombre en uso."})
 
     @staticmethod
     def update_hotel(pk, input_serializer):
@@ -154,7 +154,7 @@ class HotelService:
             if future_bookings.exists():
                 raise ValidationError(
                     {
-                        "detail": "Object cannot be deleted because there is an upcoming booking."
+                        "detail": "No se puede borrar el objeto porque existe una reserva asociada próximamente."
                     }
                 )
 
@@ -299,8 +299,9 @@ class HotelService:
                 "price_max",
                 "price_min",
             ]
-            if sort_field.lstrip("-") not in valid_sort_fields:
-                raise ValidationError(f"Invalid sort field: {sort_field}")
+            assert (
+                sort_field.lstrip("-") in valid_sort_fields
+            ), f"Filtro de orden inválido: {sort_field}"
             hotels = hotels.order_by(sort_field)
 
         if "limit" in filters:
@@ -354,7 +355,9 @@ class HotelService:
 
         hotel = HotelService.retrieve_hotel(hotel_id)
         if hotel.images.count() >= 5:
-            raise ValidationError({"hotel": "A hotel cannot have more than 5 images."})
+            raise ValidationError(
+                {"hotel": "Un hotel no puede tener más de 5 imágenes."}
+            )
 
     @staticmethod
     def validate_update_image(input_serializer, hotel_id, image_id):
@@ -380,7 +383,7 @@ class HotelService:
         try:
             return HotelImage.objects.get(id=image_id, hotel_id=hotel_id)
         except HotelImage.DoesNotExist:
-            raise NotFound(detail="Hotel Image not found.")
+            raise NotFound(detail="Imagen de hotel no encontrada.")
 
     @staticmethod
     def retrieve_current_cover_image_or_404(hotel_id):
@@ -388,7 +391,7 @@ class HotelService:
             cover_image = HotelImage.objects.get(hotel__id=hotel_id, is_cover=True)
             return cover_image
         except HotelImage.DoesNotExist:
-            raise NotFound(detail="No cover image found for the hotel.")
+            raise NotFound(detail="Imagen de portada de hotel no encontrada.")
 
     @staticmethod
     def retrieve_current_cover_image(hotel_id):

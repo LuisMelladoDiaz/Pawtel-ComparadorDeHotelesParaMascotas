@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from pawtel.hotel_owners.models import HotelOwner
 
 
@@ -8,7 +9,15 @@ class Hotel(models.Model):
 
     is_archived = models.BooleanField(default=False, null=False)
 
-    name = models.CharField(max_length=100, unique=True, blank=False, null=False)
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        error_messages={
+            "unique": _("El nombre del hotel ya está en uso. Por favor, elige otro."),
+        },
+        blank=False,
+        null=False,
+    )
 
     address = models.CharField(max_length=100, blank=False, null=False)
 
