@@ -142,21 +142,24 @@ const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAl
 // Computed
 const hotels = computed(() => apiHotels.value?.map((hotel) => ({
   id: hotel.id,
-  image: hotel.image || defaultImages[hotel.id % defaultImages.length],
+  image: hotel.cover_image?.image || defaultImages[hotel.id % defaultImages.length], // Usamos cover_image si está disponible
   name: hotel.name ?? 'Nombre',
   address: hotel.address ?? 'Dirección',
   city: hotel.city ?? 'Ciudad',
   description: hotel.description ?? 'Descripción',
   price_max: hotel.most_expensive_price ?? '0',
   price_min: hotel.cheapest_price ?? '0',
-  reviews: hotel.reviews?.length ? hotel.reviews : [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
+  reviews: hotel.reviews?.length
+    ? hotel.reviews
+    : [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
 })) || []);
+
 </script>
 
 <template>
   <!-- Desktop version -->
   <div class="container mt-5 hidden md:flex self-center">
-    <HotelFilters 
+    <HotelFilters
       :cities="cities"
       :petTypes="petTypes"
       :selectedCity="selectedCity"
@@ -176,17 +179,17 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
 
     <div class="hotels-filtered-container flex flex-col flex-auto min-w-0 pl-4">
       <div class="applied-filters-container flex flex-row flex-wrap items-center text-white gap-2">
-        <HotelSorting 
+        <HotelSorting
           :sortBy="sortBy"
           :direction="direction"
           @update:sortBy="sortBy = $event"
           @toggle-direction="direction = direction === 'asc' ? 'desc' : 'asc'"
         />
-        
-        
+
+
       </div>
 
-      <HotelList 
+      <HotelList
         :hotels="hotels"
         :isLoading="isLoading"
       />
@@ -248,7 +251,7 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
     </transition>
 
     <!-- Lista de hoteles -->
-    <HotelList 
+    <HotelList
       :hotels="hotels"
       :isLoading="isLoading"
       class="self-center w-full"
@@ -277,7 +280,7 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
     border-radius: 0.5rem;
     margin: 0.5rem 0;
   }
-  
+
   .hotel-list-container {
     padding: 0 0.5rem;
   }
