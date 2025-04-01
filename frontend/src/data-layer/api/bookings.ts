@@ -29,13 +29,12 @@ export const createBooking = async (BookingData: Omit<Booking, 'id'>) => {
     return response.data as string;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error("Error en la solicitud:", error.response?.data);
-      throw new Error(error.response?.data?.detail || 'Error desconocido');
-    } else {
-      console.error("Error desconocido:", error);
-      throw new Error('Error desconocido');
+        console.error("Error en la solicitud:", error.response?.data);
+        throw error;
     }
-  }
+    console.error("Error desconocido:", error);
+    throw error;
+}
 };
 
 export const fetchAllBookings = async () => {

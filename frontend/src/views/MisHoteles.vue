@@ -5,6 +5,7 @@ import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hoo
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { useRouter } from 'vue-router';
+import { handleApiError } from '@/utils/errorHandler';
 import { useGetAllHotelsOfOwner, useGetCurrentHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
@@ -54,38 +55,44 @@ const openModal = () => {
 
 // Guardar hotel (Crear)
 const saveHotel = async () => {
-  try {
-    await createHotelMutation.mutateAsync(hotelData.value);
-    notyf.success('Hotel creado correctamente');
-    modalOpen.value = false;
-    await refetchHotels();
-  } catch (error) {
-    notyf.error('Error al crear el hotel');
-    console.error('Error al guardar el hotel', error);
-  }
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Guardando hotel...',
+    dismissible: false
+  });
+
+  createHotelMutation.mutate(hotelData.value, {
+    onSuccess: () => {
+      notyf.dismiss(loadingNotification);
+      notyf.success('Hotel creado exitosamente');
+      router.push('/mis-hoteles');
+      modalOpen.value = false;
+    },
+    onError: (error) => {
+      notyf.dismissAll();
+      handleApiError(error);
+    }
+  });
 };
 
-// Mostrar modal de confirmación para eliminar
-const confirmDelete = (id) => {
-  const hotel = hotels.value.find(h => h.id === id);
-  hotelToDelete.value = id;
-  hotelToDeleteName.value = hotel?.name || 'este hotel';
-  showDeleteModal.value = true;
-};
+const deleteHotel = async (id) => {
+  const confirmed = confirm('¿Estás seguro de eliminar este hotel? Esta acción es irreversible');
+  if (!confirmed) return;
 
-// Eliminar hotel después de confirmación
-const deleteHotel = async () => {
-  isDeleting.value = true;
   try {
-    await deleteHotelMutation.mutateAsync(hotelToDelete.value);
-    await refetchHotels();
-    notyf.success('Hotel eliminado correctamente');
+    const loadingNotification = notyf.open({
+      type: 'loading',
+      message: 'Eliminando hotel...',
+      dismissible: false
+    });
+
+    await deleteHotelMutation.mutateAsync(id);
+    notyf.dismiss(loadingNotification);
+    notyf.success('Hotel eliminado exitosamente');
+    router.push('/mis-hoteles');
   } catch (error) {
-    notyf.error('Error al eliminar el hotel');
-    console.error('Error al eliminar hotel', error);
-  } finally {
-    showDeleteModal.value = false;
-    isDeleting.value = false;
+    notyf.dismissAll();
+    handleApiError(error);
   }
 };
 

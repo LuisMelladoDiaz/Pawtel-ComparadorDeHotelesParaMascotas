@@ -122,5 +122,6 @@ class TestRoomTypeViewSet(TestCase):
         response = self.client.get(url, data={}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertIn(
-            "Both start_date and end_date are required.", response.json().get("detail")
+            "La fecha inicial y la fecha final son obligatorias.",
+            response.json().get("detail"),
         )

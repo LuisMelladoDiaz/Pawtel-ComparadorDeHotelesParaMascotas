@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 
 from pawtel.booking_holds.models import BookingHold
 from pawtel.booking_holds.serializers import BookingHoldSerializer
@@ -15,7 +15,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
     # Default CRUD -----------------------------------------------------------
 
     def list(self, request):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         BookingHoldService.authorize_action_booking_hold(request, action_name)
         booking_holds = BookingHoldService.list_booking_holds()
         output_serializer_data = BookingHoldService.serialize_output_booking_hold(
@@ -24,7 +24,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         BookingHoldService.authorize_action_booking_hold(
             request, action_name, booking_hold_id=pk, check_ownership=True
         )
@@ -35,7 +35,7 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         customer = BookingHoldService.authorize_action_booking_hold(
             request, action_name
         )
@@ -50,13 +50,13 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida.")
 
     def partial_update(self, request, pk=None):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida.")
 
     def destroy(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         BookingHoldService.authorize_action_booking_hold(
             request, action_name, booking_hold_id=pk, check_ownership=True
         )
