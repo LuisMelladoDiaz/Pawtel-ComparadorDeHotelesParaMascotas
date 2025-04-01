@@ -120,7 +120,7 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(
             error_message,
             {
-                "detail": "No se puede borrar el objeto porque existe una reserva asociada próximamente.",
+                "detail": "El objeto no se puede eliminar porque existe una reserva asociada próximamente.",
             },
         )
 
