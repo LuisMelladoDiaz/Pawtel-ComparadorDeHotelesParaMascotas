@@ -78,13 +78,13 @@ defineProps({
               v-if="price_min !== price_max"
               class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
             >
-              Rango de Precios
+              Precios por Noche
             </a>
             <a
               v-else
               class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
             >
-              Precio
+              Precio por Noche
             </a>
             <a
               class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3"
