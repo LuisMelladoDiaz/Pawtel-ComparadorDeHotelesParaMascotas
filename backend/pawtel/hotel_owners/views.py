@@ -19,8 +19,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         action_name = inspect.currentframe().f_code.co_name
-        HotelOwnerService.authorize_action_hotel_owner(request, action_name)
-        hotel_owners = HotelOwnerService.list_hotel_owners()
+        role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
+        admin_allow = HotelOwnerService.check_admin_permission(role_user)
+        hotel_owners = HotelOwnerService.list_hotel_owners(admin_allow)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owners, many=True
         )
@@ -28,8 +29,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        HotelOwnerService.authorize_action_hotel_owner(request, action_name, pk, True)
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk)
+        role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
+        admin_allow = HotelOwnerService.check_admin_permission(role_user)
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk, admin_allow)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner
         )

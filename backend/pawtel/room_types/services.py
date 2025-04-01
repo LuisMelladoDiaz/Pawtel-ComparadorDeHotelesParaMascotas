@@ -52,6 +52,12 @@ class RoomTypeService:
         else:
             raise PermissionDenied("Permission denied.")
 
+    def check_admin_permission(role_user):
+        if role_user.user.role == UserRole.ADMIN:
+            return True
+        else:
+            raise False
+
     # Serialization -----------------------------------------------------------------
 
     @staticmethod
