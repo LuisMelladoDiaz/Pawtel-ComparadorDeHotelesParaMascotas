@@ -17,7 +17,7 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         action_name = inspect.currentframe().f_code.co_name
-        BookingService.authorize_action_booking_level_1(request, action_name)
+        BookingService.authorize_action_booking(request, action_name)
         bookings = BookingService.list_bookings()
         output_serializer_data = BookingService.serialize_output_booking(
             bookings, many=True
@@ -26,7 +26,7 @@ class BookingViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
-        BookingService.authorize_action_booking_level_3(request, pk, action_name)
+        BookingService.authorize_action_booking(request, action_name, pk, True)
         booking = BookingService.retrieve_booking(pk)
         output_serializer_data = BookingService.serialize_output_booking(booking)
         return Response(output_serializer_data, status=status.HTTP_200_OK)

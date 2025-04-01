@@ -45,14 +45,13 @@ class AppUserSerializer(BaseSerializer):
         accept_terms = validated_data.pop("accept_terms", False)
 
         if not accept_terms:
-            raise serializers.ValidationError({"accept_terms": "Debes aceptar los términos y condiciones"})
+            raise serializers.ValidationError({"accept_terms": "Debe aceptar los términos y condiciones"})
 
         password = validated_data.pop("password")
         user = AppUser(**validated_data)
         user.set_password(password)
         user.save()
 
-        
         TermsAcceptance.objects.create(
             user=user,
             terms_version="1.0",  

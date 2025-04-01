@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 
+from django.core.exceptions import ValidationError
 from django.db.models import Max, Min, Q
-from django.forms import ValidationError
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
@@ -28,32 +28,31 @@ class HotelService:
 
     # Authorization ----------------------------------------------------------
 
-    def authorize_action_hotel_level_1(request, action_name):
+    def authorize_action_hotel(
+        request, action_name, hotel_id=None, check_ownership=False
+    ):
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_hotel_service(role_user, action_name)
+
+        if hotel_id:
+            hotel = HotelService.__perform_retrieve_hotel(role_user, hotel_id)
+            if check_ownership:
+                HotelService.__check_ownership_hotel(role_user, hotel)
+
         return role_user
 
-    def authorize_action_hotel_level_2(request, hotel_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_service(role_user, action_name)
-        HotelService.retrieve_hotel(hotel_id)
-        return role_user
+    def __perform_retrieve_hotel(role_user, hotel_id):
+        if role_user.user.role == UserRole.ADMIN:
+            return HotelService.retrieve_hotel(hotel_id, allow_archived=True)
+        else:
+            return HotelService.retrieve_hotel(hotel_id)
 
-    def authorize_action_hotel_level_3(request, hotel_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_service(role_user, action_name)
-        hotel = HotelService.retrieve_hotel(hotel_id)
-        HotelService.check_ownership_hotel(role_user, hotel)
-        return role_user
-
-    def check_ownership_hotel(role_user, hotel):
+    def __check_ownership_hotel(role_user, hotel):
         if role_user.user.role == UserRole.ADMIN:
             return
-
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if hotel.hotel_owner.id != role_user.id:
                 raise PermissionDenied("Permission denied.")
-
         else:
             raise PermissionDenied("Permission denied.")
 
@@ -191,9 +190,9 @@ class HotelService:
         if filters is None:
             return {}
 
-        assert all(
-            f in HotelService.VALID_FILTERS for f in filters
-        ), f"Invalid filter: {filters}"
+        invalid_filters = [f for f in filters if f not in HotelService.VALID_FILTERS]
+        if invalid_filters:
+            raise ValidationError(f"Invalid filters: {invalid_filters}")
 
         validated = {}
         for key, expected_type in HotelService.VALID_FILTERS.items():
@@ -276,8 +275,8 @@ class HotelService:
             ).distinct()
 
         return filtered_hotels.annotate(
-            price_max=Max("roomtype__price_per_night"),
-            price_min=Min("roomtype__price_per_night"),
+            min_price_filters=Min("roomtype__price_per_night"),
+            max_price_filters=Max("roomtype__price_per_night"),
         )
 
     @staticmethod
@@ -300,9 +299,8 @@ class HotelService:
                 "price_max",
                 "price_min",
             ]
-            assert (
-                sort_field.lstrip("-") in valid_sort_fields
-            ), f"Invalid sort field: {sort_field}"
+            if sort_field.lstrip("-") not in valid_sort_fields:
+                raise ValidationError(f"Invalid sort field: {sort_field}")
             hotels = hotels.order_by(sort_field)
 
         if "limit" in filters:
