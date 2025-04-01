@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import { nextTick } from 'vue'
 
 export const useFiltersStore = defineStore('filters', () => {
   const selectedCity = ref(null)
@@ -38,7 +37,7 @@ export const useFiltersStore = defineStore('filters', () => {
         filterStartDate: newQuery.startDate,
         filterEndDate: newQuery.endDate,
       }
-      router.push({ query: updatedQuery, path: '/hotels' })
+      void router.push({ query: updatedQuery, path: '/hotels' })
     },
     { deep: true }
   )

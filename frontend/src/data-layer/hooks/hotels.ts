@@ -19,9 +19,9 @@ export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
     queryKey: ['hotels', filters],
     queryFn: () => fetchAllHotels({
       ...Object.fromEntries(
-        Object.entries(filters || {})
+        Object.entries(filters ?? {})
           .map(([key, value]) => [key, toValue(value)])
-          .filter(([key, value]) => Boolean(value))
+          .filter(([_, value]) => Boolean(value))
       ),
     }),
     staleTime: 1000 * 60,

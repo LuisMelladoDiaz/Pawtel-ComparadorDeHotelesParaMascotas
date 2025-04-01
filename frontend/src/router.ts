@@ -222,9 +222,9 @@ router.beforeEach((to, from, next) => {
   const preservedQuery = {}
 
   preservedQueryKeys.forEach((key) => {
-    if (from.query.hasOwnProperty(key) && !to.query.hasOwnProperty(key)) {
+    if (key in from.query && !(key in to.query)) {
       preservedQuery[key] = from.query[key]
-    } else if (to.query.hasOwnProperty(key)) {
+    } else if (key in to.query) {
       preservedQuery[key] = to.query[key]
     }
   })
@@ -236,7 +236,8 @@ router.beforeEach((to, from, next) => {
 
   // if is equal, no need to change `nextQuery`
   if (JSON.stringify(nextQuery) === JSON.stringify(to.query)) {
-    return next()
+    next()
+    return;
   }
 
 
@@ -249,7 +250,8 @@ router.beforeEach((to, from, next) => {
       },
     })
   } else {
-    return next()
+    next()
+    return;
   }
 })
 
