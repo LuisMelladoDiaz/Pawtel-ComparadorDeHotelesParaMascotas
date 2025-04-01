@@ -103,7 +103,7 @@ pre-commit run --all-files
 
 ### Cómo configurar las variables de entorno para poder ejecutar el proyecto
 
-Añade en el .env la siguiente clave de stripe para poder realizar pagos asociados a nuestra cuenta.     
+Añade en el .env la siguiente clave de stripe para poder realizar pagos asociados a nuestra cuenta.
 STRIPE_SECRET_KEY (pongase en contacto con nosotros para obtener la SECRET_KEY)
 
 **En caso de error darle un valor aleatorio a la variable de entorno STRIPE_SECRET_ENDPOINT**
@@ -143,7 +143,7 @@ ngrok http 8000
 
 **Esto te proporcionará una URL temporal que cambiará cada vez que vuelvas a abrir el puerto; por lo que si quiere volver a testear que funciona la pasarela deberás modificar el webhook en la página de stripe.**
 
-Ya con la URL creada deberás añadir como endpint **URL/bookings/stripe/** 
+Ya con la URL creada deberás añadir como endpint **URL/bookings/stripe/**
 
 Es importante que acabe en / o te saltará un error al probarlo.
 
@@ -170,3 +170,24 @@ AWS_S3_ENDPOINT_URL=https://something.r2.cloudflarestorage.com
 AWS_S3_CUSTOM_DOMAIN=https://something.r2.dev
 ```
 Para activar el uso del almacenamiento en la nube, se utiliza la variable de entorno USE_S3=True.
+
+
+### Test Coverage
+
+Para ejecutar los tests con cobertura en un paquete específico de tu proyecto Django, usa este comando:
+```bash
+coverage run --source=<ruta_del_paquete> manage.py test
+```
+Para ejecutar los tests de toda la aplicación, simplemente usa:
+```bash
+coverage run manage.py test
+```
+Para generar un reporte de la cobertura, ejecuta:
+```bash
+coverage report
+```
+Para obtener un reporte visual en formato HTML, puedes usar:
+```bash
+coverage html
+```
+Este comando generará un reporte visual dentro del directorio htmlcov.

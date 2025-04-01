@@ -30,38 +30,35 @@ class HotelOwnerService:
 
     # Authorize --------------------------------------------------------------
 
-    def authorize_action_hotel_owner_level_1(request, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
-        return role_user
-
-    def authorize_action_hotel_owner_level_2(
-        request, target_hotel_owner_id, action_name
+    def authorize_action_hotel_owner(
+        request, action_name, target_hotel_owner_id=None, check_ownership=False
     ):
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_hotel_owner_service(role_user, action_name)
-        HotelOwnerService.retrieve_hotel_owner(target_hotel_owner_id)
+
+        if target_hotel_owner_id:
+            target_hotel_owner = HotelOwnerService.__perform_retrieve_hotel_owner(
+                role_user, target_hotel_owner_id
+            )
+            if check_ownership:
+                HotelOwnerService.__check_ownership_hotel_owner(
+                    role_user, target_hotel_owner
+                )
+
         return role_user
 
-    def authorize_action_hotel_owner_level_3(
-        request, target_hotel_owner_id, action_name
-    ):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_owner_service(role_user, action_name)
-        target_hotel_owner = HotelOwnerService.retrieve_hotel_owner(
-            target_hotel_owner_id
-        )
-        HotelOwnerService.check_ownership_hotel_owner(role_user, target_hotel_owner)
-        return role_user
+    def __perform_retrieve_hotel_owner(role_user, target_hotel_owner_id):
+        if role_user.user.role == UserRole.ADMIN:
+            return HotelOwnerService.retrieve_hotel_owner(target_hotel_owner_id, True)
+        else:
+            return HotelOwnerService.retrieve_hotel_owner(target_hotel_owner_id)
 
-    def check_ownership_hotel_owner(role_user, target_hotel_owner):
+    def __check_ownership_hotel_owner(role_user, target_hotel_owner):
         if role_user.user.role == UserRole.ADMIN:
             return
-
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if target_hotel_owner.id != role_user.id:
                 raise PermissionDenied("Permiso denegado.")
-
         else:
             raise PermissionDenied("Permiso denegado.")
 
