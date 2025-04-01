@@ -40,9 +40,6 @@ const submitBooking = async () => {
       }
     });
   }
-  } catch (error) {
-    handleApiError(error);
-  }
 };
 
 const totalPrice = computed(() => {

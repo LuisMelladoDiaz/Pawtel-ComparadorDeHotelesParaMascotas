@@ -9,7 +9,7 @@ export const handleApiError = (error: unknown) => {
 
     if (error.response.status == 400 || error.response.status === 401 || error.response.status === 403 || error.response.status === 404 && errorData) {
       if (typeof errorData === 'object') {
-        for (const [x, messages] of Object.entries(errorData)) {
+        for (const [_, messages] of Object.entries(errorData)) {
           const errorList = Array.isArray(messages) ? messages : [messages];
           errorList.forEach(msg => notyf.error(`${msg}`));
         }
