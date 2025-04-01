@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 
 from django.views.decorators.csrf import csrf_exempt
 from pawtel.bookings.models import Booking
@@ -16,8 +16,8 @@ class BookingViewSet(viewsets.ModelViewSet):
     serializer_class = BookingSerializer
 
     def list(self, request):
-        action_name = inspect.currentframe().f_code.co_name
-        BookingService.authorize_action_booking_level_1(request, action_name)
+        action_name = currentframe().f_code.co_name
+        BookingService.authorize_action_booking(request, action_name)
         bookings = BookingService.list_bookings()
         output_serializer_data = BookingService.serialize_output_booking(
             bookings, many=True
@@ -25,8 +25,8 @@ class BookingViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
-        BookingService.authorize_action_booking_level_3(request, pk, action_name)
+        action_name = currentframe().f_code.co_name
+        BookingService.authorize_action_booking(request, action_name, pk, True)
         booking = BookingService.retrieve_booking(pk)
         output_serializer_data = BookingService.serialize_output_booking(booking)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
