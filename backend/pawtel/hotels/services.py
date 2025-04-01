@@ -79,10 +79,10 @@ class HotelService:
         return HotelSerializer(hotel, many=many, context=context).data
 
     def check_admin_permission(role_user):
+        allow_admin = False
         if role_user.user.role == UserRole.ADMIN:
-            return True
-        else:
-            raise False
+            allow_admin = True
+        return allow_admin
 
     # GET --------------------------------------------------------------------
 
