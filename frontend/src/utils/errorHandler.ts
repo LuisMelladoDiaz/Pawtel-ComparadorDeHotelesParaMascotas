@@ -7,9 +7,10 @@ export const handleApiError = (error: unknown) => {
   if (axios.isAxiosError(error) && error.response) {
     const errorData = error.response.data;
 
-    if (error.response.status == 400 || error.response.status === 401 || error.response.status === 403 || error.response.status === 404 && errorData) {
+    if ([400, 401, 403, 404].includes(error.response.status) && errorData) {
       if (typeof errorData === 'object') {
-        for (const [_, messages] of Object.entries(errorData)) {
+        // Usando Object.values() en lugar de Object.entries()
+        for (const messages of Object.values(errorData)) {
           const errorList = Array.isArray(messages) ? messages : [messages];
           errorList.forEach(msg => notyf.error(`${msg}`));
         }

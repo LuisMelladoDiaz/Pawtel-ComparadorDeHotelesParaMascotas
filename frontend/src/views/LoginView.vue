@@ -17,7 +17,7 @@ const validationSchema = yup.object({
   password: yup.string().required('La contraseña es obligatoria')
 });
 
-const login = handleSubmit((values) => {
+const login = (values) => {
   const loadingNotification = notyf.open({
     type: 'loading',
     message: 'Iniciando sesión...',
@@ -41,7 +41,7 @@ const login = handleSubmit((values) => {
       }
     }
   );
-});
+};
 </script>
 
 <template>
@@ -86,7 +86,6 @@ const login = handleSubmit((values) => {
     </div>
   </div>
 </template>
-
 
 <style scoped>
 @media (max-width: 900px) {
