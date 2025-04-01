@@ -64,7 +64,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
             RoomTypeService.archive_room_type(pk)
             return Response(
                 {
-                    "detail": "Room type archived instead of deleted due to past bookings."
+                    "detail": "Tipo de habitación archivado en vez de eliminado por reservas pasadas."
                 },
                 status=status.HTTP_200_OK,
             )

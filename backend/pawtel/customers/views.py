@@ -33,7 +33,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida.")
 
     def update(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
@@ -64,7 +64,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
             AppUserService.general_deactivate_app_user(request, customer.user.id)
             return Response(
                 {
-                    "detail": "Customer archived instead of deleted due to past bookings."
+                    "detail": "Cliente archivado en vez de eliminado por reservas pasadas."
                 },
                 status=status.HTTP_200_OK,
             )

@@ -71,7 +71,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         else:
             HotelService.archive_hotel(pk)
             return Response(
-                {"detail": "Hotel archived instead of deleted due to past bookings."},
+                {"detail": "Hotel archivado en vez de eliminado por reservas pasadas."},
                 status=status.HTTP_200_OK,
             )
 

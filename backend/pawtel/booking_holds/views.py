@@ -50,10 +50,10 @@ class BookingHoldViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida.")
 
     def partial_update(self, request, pk=None):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida.")
 
     def destroy(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name

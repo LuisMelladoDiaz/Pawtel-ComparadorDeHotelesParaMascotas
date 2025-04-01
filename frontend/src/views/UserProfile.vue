@@ -4,10 +4,12 @@ import Button from '../components/Button.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserQuery, useLogoutMutation } from "@/data-layer/auth";
 import { handleApiError } from '@/utils/errorHandler';
+import { Notyf } from 'notyf';
 import { useUpdateCustomer, useDeleteCustomer, useGetCurrentCustomer } from "@/data-layer/hooks/customers";
 import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } from "@/data-layer/hooks/hotelOwners";
 
 // Otros imports y referencias
+const notyf = new Notyf();
 const fileInput = ref(null);
 const showPassword = ref(false);
 const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';

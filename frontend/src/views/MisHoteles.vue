@@ -71,26 +71,7 @@ const saveHotel = async () => {
 };
 
 const deleteHotel = async (id) => {
-  const confirmed = await new Promise((resolve) => {
-    notyf.open({
-      type: 'confirm',
-      message: '¿Estás seguro de eliminar este hotel? Esta acción es irreversible',
-      dismissible: true,
-      actions: [
-        {
-          text: 'Cancelar',
-          class: 'cancel-button',
-          onClick: () => resolve(false)
-        },
-        {
-          text: 'Eliminar',
-          class: 'delete-button',
-          onClick: () => resolve(true)
-        }
-      ]
-    });
-  });
-
+  const confirmed = confirm('¿Estás seguro de eliminar este hotel? Esta acción es irreversible');
   if (!confirmed) return;
 
   try {
@@ -101,12 +82,9 @@ const deleteHotel = async (id) => {
     });
 
     await deleteHotelMutation.mutateAsync(id);
-
     notyf.dismiss(loadingNotification);
-
     notyf.success('Hotel eliminado exitosamente');
     router.push('/mis-hoteles');
-
   } catch (error) {
     notyf.dismissAll();
     handleApiError(error);

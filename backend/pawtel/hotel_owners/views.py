@@ -37,7 +37,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Esta operación no está permitida")
 
     def update(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
@@ -68,7 +68,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
             AppUserService.general_deactivate_app_user(request, hotel_owner.user.id)
             return Response(
                 {
-                    "detail": "Hotel owner archived instead of deleted due to past bookings."
+                    "detail": "Dueño de hotel archivado en vez de eliminado por reservas pasadas."
                 },
                 status=status.HTTP_200_OK,
             )

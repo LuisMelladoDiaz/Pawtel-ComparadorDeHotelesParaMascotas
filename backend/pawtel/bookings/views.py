@@ -49,10 +49,10 @@ class BookingViewSet(viewsets.ModelViewSet):
     # Forbidden Methods ----------------------------------------------------
 
     def update(self, request, pk=None):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida..")
 
     def partial_update(self, request, pk=None):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida..")
 
     def destroy(self, request, pk=None):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida..")
