@@ -7,17 +7,24 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserQuery, useLogoutMutation } from "@/data-layer/auth";
 import { useUpdateCustomer, useDeleteCustomer, useGetCurrentCustomer } from "@/data-layer/hooks/customers";
 import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } from "@/data-layer/hooks/hotelOwners";
+import { ErrorMessage, Field, Form } from "vee-validate";
+import * as yup from 'yup';
 
 // Otros imports y referencias
-const fileInput = ref(null);
 const notyf = new Notyf();
 const showPassword = ref(false);
 const router = useRouter();
-const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';
+
 
 const { data: userData, isLoading: isLoadingUserData } = useUserQuery();
 const { data: currentCustomer } = useGetCurrentCustomer();
 const { data: currentHotelOwner } = useGetCurrentHotelOwner();
+const validationSchema = yup.object({
+  username: yup.string().required('El nombre de usuario es obligatorio'),
+  password: yup.string().required('La contraseña es obligatoria'),
+  email: yup.string().required('La dirección de correo es obligatoria'),
+  phone: yup.string().required('El teléfono es obligatorio')
+});
 
 // Computed para acceder a los datos del usuario de forma segura
 const userDataComputed = computed(() => userData?.value || {});
@@ -30,7 +37,6 @@ const editedUserData = ref({
   email: userDataComputed.value.email || '',
   password: '',
   phone: userDataComputed.value.phone || '',
-  phonePrefix: userDataComputed.value.phonePrefix || '+34',
 });
 
 // Hooks para actualizar y eliminar
@@ -39,32 +45,20 @@ const { mutate: deleteCustomer } = useDeleteCustomer();
 const { mutate: updateHotelOwner } = useUpdateHotelOwner();
 const { mutate: deleteHotelOwner } = useDeleteHotelOwner();
 
-const triggerFileInput = () => fileInput.value.click();
 
-const uploadPhoto = (event) => {
-  const file = event.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      userDataComputed.value.profilePicture = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  }
-};
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
 // Actualización del perfil, enviando id y datos
-const updateProfile = () => {
-  console.log("update - ", editedUserData.value.username);
+const updateProfile = (values) => {
 
   const updatedData = {
-    username: editedUserData.value.username,
-    email: editedUserData.value.email,
-    phone: editedUserData.value.phone,
-    password: editedUserData.value.password || "password123",
+    username: values.username,
+    email: values.email,
+    phone: values.phone,
+    password: values.password || "password123",
   };
 
   if (userDataComputed.value.role === "customer") {
@@ -159,39 +153,45 @@ const logout = () => {
         <h2 class="text-xl font-semibold">¡Bienvenido/a de nuevo, {{ userDataComputed?.username || 'Cargando...' }}!</h2>
         <div v-if="isLoadingUserData" class="mt-5 text-center text-gray-500">Cargando datos...</div>
         <div v-else class="mt-5 space-y-4">
-          <div class="flex flex-col">
-            <label class="font-medium">Nombre de Usuario:</label>
-            <input type="text" v-model="editedUserData.username" class="border p-2 rounded" />
-          </div>
-          <div class="flex flex-col">
-            <label class="font-medium">Correo electrónico:</label>
-            <input type="email" v-model="editedUserData.email" class="border p-2 rounded" />
-          </div>
-          <div class="flex flex-col">
-            <label class="font-medium">Contraseña:</label>
-            <div class="relative">
-              <input :type="showPassword ? 'text' : 'password'" v-model="editedUserData.password" class="border p-2 rounded w-full" />
-              <button @click="togglePasswordVisibility" class="absolute right-3 top-2 text-pawtel-black">
-                <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
-              </button>
 
+
+          <Form clas="form" @submit="updateProfile" :validation-schema="validationSchema" :initial-values="userDataComputed">
+
+            <div class="flex flex-col">
+              <label class="font-medium">Nombre de Usuario:</label>
+              <Field as="input" id="username" name="username" type="text" class="border p-2 rounded" />
+              <ErrorMessage name="username" class="text-red-500 text-sm" />
             </div>
-          </div>
-          <div class="flex flex-col">
-            <label class="font-medium">Móvil:</label>
-            <div class="flex gap-2">
-              <select v-model="editedUserData.phonePrefix" class="border p-2 rounded cursor-pointer">
-                <option value="+34">+34</option>
-                <option value="+1">+1</option>
-                <option value="+44">+44</option>
-              </select>
-              <input type="text" v-model="editedUserData.phone" class="border p-2 rounded flex-1" />
+            <div class="flex flex-col">
+              <label class="font-medium">Correo electrónico:</label>
+              <Field as="input" id="email" name="email" type="email" class="border p-2 rounded" />
+              <ErrorMessage name="email" class="text-red-500 text-sm" />
             </div>
-          </div>
+            <div class="flex flex-col">
+              <label class="font-medium">Contraseña:</label>
+              <div class="relative">
+                <Field as="input" id="password" :type="showPassword ? 'text' : 'password'" name="password" class="border p-2 rounded w-full" />
+                <button @click="togglePasswordVisibility" class="absolute right-3 top-2 text-pawtel-black">
+                  <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+                </button>
+                <ErrorMessage name="password" class="text-red-500 text-sm" />
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <label class="font-medium">Móvil:</label>
+              <div class="flex gap-2">
+                <Field as="input" id="phone" name="phone" type="text" class="border p-2 rounded flex-1" />
+                <ErrorMessage name="phone" class="text-red-500 text-sm" />
+              </div>
+            </div>
+            <div class="flex gap-4 mt-5">
+              <Button type="submit" @click="updateProfile" class="flex-1 bg-terracota text-white m-0!">Guardar cambios</Button>
+            </div>
+
+          </Form>
           <div class="flex gap-4 mt-5">
-            <Button type="add" class="flex-1 text-white m-0!" @click="updateProfile">Guardar cambios</Button>
-            <Button type="reject" class="flex-1 bg-terracota text-white m-0!" @click="deleteAccount">Eliminar Cuenta</Button>
-          </div>
+              <Button type="reject" class="flex-1 bg-terracota text-white m-0!" @click="deleteAccount">Eliminar Cuenta</Button>
+            </div>
         </div>
       </main>
     </div>
@@ -230,40 +230,44 @@ const logout = () => {
         <h2 class="text-xl font-semibold">¡Bienvenido/a de nuevo, {{ userDataComputed?.username || 'Cargando...' }}!</h2>
         <div v-if="isLoadingUserData" class="mt-5 text-center text-gray-500">Cargando datos...</div>
         <div v-else class="mt-5 space-y-4">
-          <div class="flex flex-col">
-            <label class="font-medium">Nombre de Usuario:</label>
-            <input type="text" v-model="editedUserData.username" class="border p-2 rounded" />
-          </div>
-          <div class="flex flex-col">
-            <label class="font-medium">Correo electrónico:</label>
-            <input type="email" v-model="editedUserData.email" class="border p-2 rounded" />
-          </div>
-          <div class="flex flex-col">
-            <label class="font-medium">Contraseña:</label>
-            <div class="relative">
-              <input :type="showPassword ? 'text' : 'password'" v-model="editedUserData.password" class="border p-2 rounded w-full" />
-              <button @click="togglePasswordVisibility" class="absolute right-3 top-2 text-pawtel-black">
-                <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
-              </button>
+          <Form clas="form" @submit="updateProfile" :validation-schema="validationSchema" :initial-values="userDataComputed">
 
+            <div class="flex flex-col">
+              <label class="font-medium">Nombre de Usuario:</label>
+              <Field as="input" id="username" name="username" type="text" class="border p-2 rounded" />
+              <ErrorMessage name="username" class="text-red-500 text-sm" />
+            </div>
+            <div class="flex flex-col">
+              <label class="font-medium">Correo electrónico:</label>
+              <Field as="input" id="email" name="email" type="email" class="border p-2 rounded" />
+              <ErrorMessage name="email" class="text-red-500 text-sm" />
+            </div>
+            <div class="flex flex-col">
+              <label class="font-medium">Contraseña:</label>
+              <div class="relative">
+                <Field as="input" id="password" :type="showPassword ? 'text' : 'password'" name="password" class="border p-2 rounded w-full" />
+                <button @click="togglePasswordVisibility" class="absolute right-3 top-2 text-pawtel-black">
+                  <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+                </button>
+                <ErrorMessage name="password" class="text-red-500 text-sm" />
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <label class="font-medium">Móvil:</label>
+              <div class="flex gap-2">
+                <Field as="input" id="phone" name="phone" type="text" class="border p-2 rounded flex-1" />
+                <ErrorMessage name="phone" class="text-red-500 text-sm" />
+              </div>
+            </div>
+            <div class="flex gap-4 mt-5">
+              <Button type="submit" @click="updateProfile" class="flex-1 bg-terracota text-white m-0!">Guardar cambios</Button>
+            </div>
+
+          </Form>
+          <div class="flex gap-4 mt-5">
+              <Button type="reject" class="flex-1 bg-terracota text-white m-0!" @click="deleteAccount">Eliminar Cuenta</Button>
             </div>
           </div>
-          <div class="flex flex-col">
-            <label class="font-medium">Móvil:</label>
-            <div class="flex flex-wrap gap-2">
-              <select v-model="editedUserData.phonePrefix" class="border p-2 rounded w-24">
-                <option value="+34">+34</option>
-                <option value="+1">+1</option>
-                <option value="+44">+44</option>
-              </select>
-              <input type="text" v-model="editedUserData.phone" class="border p-2 rounded flex-1 min-w-0" />
-            </div>
-          </div>
-          <div class="flex flex-col mt-5 gap-3">
-            <Button type="add" class="text-white m-0!" @click="updateProfile">Guardar cambios</Button>
-            <Button type="reject" class="bg-terracota text-white m-0!" @click="deleteAccount">Eliminar Cuenta</Button>
-          </div>
-        </div>
       </div>
     </div>
 </template>
