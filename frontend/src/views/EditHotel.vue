@@ -49,24 +49,34 @@ const handleImageUpload = (event) => {
 };
 
 const submitImages = (hotelId) => {
-  if (selectedFiles.value.length === 0) {
-    console.log('No hay archivos seleccionados.');
-    return;
-  }
+   if (selectedFiles.value.length === 0) {
+     console.log('No hay archivos seleccionados.');
+     return;
+   }
 
-  selectedFiles.value.forEach((file) => {
-    uploadImage(
-      { hotelId, image: file, isCover: false },
-      {
-        onSuccess: () => {
-          console.log('Imagen subida con éxito');
-          uploadedImages.value = [];
-          selectedFiles.value = [];
-        },
-      }
-    );
-  });
-};
+   selectedFiles.value.forEach((file) => {
+     console.log('Procesando archivo:', file);
+
+     if (!file) {
+       console.error('Archivo inválido:', file);
+       return;
+     }
+
+     uploadImage(
+       { hotelId, image: file, isCover: false }, // Aquí parece que falta la conversión de la imagen
+       {
+         onSuccess: () => {
+           console.log('Imagen subida con éxito');
+           uploadedImages.value = [];
+           selectedFiles.value = [];
+         },
+         onError: (error) => {
+           console.error('Error al subir imagen:', error);
+         },
+       }
+     );
+   });
+ };
 const removeImage = (index, source = 'uploaded') => {
   console.log('Eliminando imagen con index:', index, 'source:', source);  // Depuración
 
@@ -195,16 +205,18 @@ const saveNewRoomType = async () => {
   } catch (error) {
     console.error("Error al crear el nuevo tipo de habitación:", error);
   }
+
 };
+
 </script>
 
 <template>
   <div class="flex flex-col min-h-screen">
 
-    <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
-      <div class="flex flex-col lg:flex-row gap-6">
-        <!-- Contenedor lateral de imágenes -->
-        <div class="w-full lg:w-80 border border-gray-300 rounded-lg p-4 h-fit">
+          <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
+            <div class="flex flex-col lg:flex-row gap-6">
+              <!-- Contenedor lateral de imágenes -->
+              <div class="w-full lg:w-80 border border-gray-300 rounded-lg p-4 h-fit">
   <h2 class="text-lg font-bold text-gray-800 mb-4">Subir Imágenes</h2>
 
   <div class="flex flex-col items-center justify-center border border-dashed border-gray-400 rounded-md p-4">
@@ -217,49 +229,50 @@ const saveNewRoomType = async () => {
   </div>
 
   <div v-if="(uploadedImages.length || hotelImages.length)" class="mt-4 grid grid-cols-1 gap-4">
-    <!-- Imágenes cargadas del hotel -->
-    <div v-for="(img, index) in hotelImages" :key="'hotel-' + index" class="relative">
-      <img
-        :src="img.image"
-        :alt="'Imagen del hotel ' + (index + 1)"
-        class="w-full h-40 object-cover rounded shadow"
-        :class="{'border-4 border-blue-500': img.is_cover}"
-      />
-      <button @click="removeImage(index, 'hotel')"
-        class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700">
-        ✕
-      </button>
-      <div v-if="img.is_cover" class="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-br-lg text-xs">
-        Cover Image
+    <!-- Imágenes subidas -->
+    <div v-if="uploadedImages.length">
+      <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative">
+        <img
+          :src="img"
+          alt="'Imagen subida ' + (index + 1)"
+          class="w-full h-40 object-cover rounded shadow"
+        />
+        <button @click="removeImage(index, 'uploaded')"
+          class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700">
+          ✕
+        </button>
       </div>
     </div>
 
-    <!-- Imágenes subidas -->
-    <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative">
-      <img
-        :src="img.url"
-        :alt="'Imagen subida ' + (index + 1)"
-        class="w-full h-40 object-cover rounded shadow"
-        :class="{'border-4 border-blue-500': img.is_cover}"
-        @click="selectCoverImage(index)"
-      />
-      <button @click="removeImage(index)"
-        class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700">
-        ✕
-      </button>
-      <div v-if="img.is_cover" class="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-br-lg text-xs">
-        Cover Image
+    <!-- Imágenes del hotel -->
+    <div v-if="hotelImages.length">
+      <div v-for="(img, index) in hotelImages" :key="'hotel-' + index" class="relative">
+        <img
+          :src="img.image"
+          :alt="'Imagen del hotel ' + (index + 1)"
+          class="w-full h-40 object-cover rounded shadow"
+          :class="{'border-4 border-blue-500': img.is_cover}"
+        />
+        <button @click="removeImage(index, 'hotel')"
+          class="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700">
+          ✕
+        </button>
+        <div v-if="img.is_cover" class="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-br-lg text-xs">
+          Cover Image
+        </div>
       </div>
     </div>
   </div>
 
   <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotelId)"
-    class="mt-4 w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
     {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
   </Button>
 
   <p v-if="isError" class="text-red-600 text-sm mt-2">Error al subir las imágenes</p>
 </div>
+
+
 
 
         <!-- Contenido principal -->
