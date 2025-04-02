@@ -57,9 +57,11 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         action_name = currentframe().f_code.co_name
-        customer = CustomerService.authorize_action_customer(
+        role_user = CustomerService.authorize_action_customer(
             request, action_name, pk, True
         )
+        admin_allow = CustomerService.check_admin_permission(role_user)
+        customer = CustomerService.retrieve_customer(pk, admin_allow)
         delete = CustomerService.validate_customer_deletion(pk)
         if delete:
             AppUserService.general_delete_app_user(request, customer.user.id)

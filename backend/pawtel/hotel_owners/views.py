@@ -59,9 +59,11 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         action_name = currentframe().f_code.co_name
-        hotel_owner = HotelOwnerService.authorize_action_hotel_owner(
+        role_user = HotelOwnerService.authorize_action_hotel_owner(
             request, action_name, pk, True
         )
+        admin_allow = HotelOwnerService.check_admin_permission(role_user)
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk, admin_allow)
         delete = HotelOwnerService.validate_all_hotels_deletion(pk)
         if delete:
             AppUserService.general_delete_app_user(request, hotel_owner.user.id)
