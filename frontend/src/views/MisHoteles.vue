@@ -122,7 +122,7 @@ const closeCreateModal = () => {
             <h1 class="m-0! text-xl text-center font-semibold text-white">Gestión de Mis Hoteles</h1>
           </div>
 
-          <div class="hover:bg-terracota-dark flex items-center rounded-tr-xl min-h-[60px] border-l-white border-l-4">
+          <div class="hover:bg-terracota-dark flex items-center rounded-tr-xl min-h-[60px]">
             <button @click="isCreateModalOpen = true" class="text-white px-6 h-full w-full flex items-center justify-center lg:justify-start transform transition-transform duration-200 ease-in-out hover:scale-105">
               <i class="fas fa-plus-circle mr-2"></i> Añadir nuevo hotel
             </button>
