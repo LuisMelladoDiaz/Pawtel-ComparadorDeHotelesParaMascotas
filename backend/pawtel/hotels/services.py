@@ -298,6 +298,8 @@ class HotelService:
                 "name",
                 "price_max",
                 "price_min",
+                "max_price_filters",
+                "min_price_filters",
             ]
             assert (
                 sort_field.lstrip("-") in valid_sort_fields

@@ -28,8 +28,8 @@ const emit = defineEmits(['update:sortBy', 'toggle-direction']);
     >
       <option value="" disabled selected>Ordenar por...</option>
       <option value="name">Nombre</option>
-      <option value="price_max">Precio Máximo</option>
-      <option value="price_min">Precio Mínimo</option>
+      <option value="max_price_filters">Precio Máximo</option>
+      <option value="min_price_filters">Precio Mínimo</option>
     </select>
   </div>
 

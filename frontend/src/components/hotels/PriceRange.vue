@@ -34,7 +34,7 @@ const updateMaxValue = () => {
 
 <template>
   <div class="price-range-filter">
-    <label class="font-semibold mb-2 block">Rango de precios</label>
+    <label class="font-semibold mb-2 block">Precio por Noche</label>
     
     <div class="flex items-center gap-3">
       <!-- Input de Precio Mínimo -->
