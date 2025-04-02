@@ -271,7 +271,8 @@ const saveNewRoomType = () => {
 
           <!-- Botón -->
           <div class="hover:bg-terracota-dark flex items-center rounded-tr-xl">
-            <button @click="isCreateModalOpen = true" class="text-white px-6 h-full w-full flex items-center transform transition-transform duration-200 ease-in-out hover:scale-105">
+            <button @click="isCreateModalOpen = true"
+              class="text-white px-6 h-full w-full flex items-center transform transition-transform duration-200 ease-in-out hover:scale-105">
               <i class="fas fa-plus-circle mr-2"></i> Añadir nueva Habitación
             </button>
           </div>
@@ -297,8 +298,12 @@ const saveNewRoomType = () => {
               <div>
                 <div class="mt-4 space-y-2">
                   <p class="text-gray-700"><span class="font-medium">Capacidad:</span> {{ room.capacity }} huéspedes</p>
-                  <p class="text-gray-700"><span class="font-medium">Precio:</span> ${{ room.price_per_night }} por
-                    noche</p>
+                  <p class="text-gray-700"><span class="font-medium">Número de habitaciones:</span> {{ room.num_rooms }}</p>
+                  <p class="text-gray-700">
+                    <span class="font-medium">Precio: </span>
+                    <span class="text-terracota red-500 font-semibold">{{ room.price_per_night }}€</span>
+                    <span class="text-gray-700"> por noche</span>
+                  </p>
                   <p class="text-gray-700"><span class="font-medium">Tipo de Mascota:</span> {{
                     formatPetType(room.pet_type) }}</p>
                 </div>
@@ -404,6 +409,16 @@ const saveNewRoomType = () => {
                 <label class="block text-sm font-medium text-gray-700 mb-2">Precio por Noche:</label>
                 <input v-model="editingRoomType.price_per_night" type="number"
                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Mascota:</label>
+                <select v-model="editingRoomType.pet_type"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+                  <option value="DOG">🐶 Perros</option>
+                  <option value="CAT">🐱 Gatos</option>
+                  <option value="BIRD">🐦 Pájaros</option>
+                  <option value="MIXED">🐾 Mixto</option>
+                </select>
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Número de Habitaciones:</label>
