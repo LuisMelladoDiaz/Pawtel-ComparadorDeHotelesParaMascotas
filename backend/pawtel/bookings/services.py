@@ -8,6 +8,7 @@ from django.forms import ValidationError
 from django.http import HttpResponse, JsonResponse
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
+from pawtel.booking_holds.models import BookingHold
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService
@@ -214,8 +215,12 @@ class BookingService:
                 event.data.object.metadata.get("booking")
             )  # metadata contains the booking JSON in plain text
             booking = BookingService.serialize_input_booking_create(booking_json)
-            booking.is_valid()
-            booking.save()
-            # TODO remove the asociated booking_hold
 
+            if booking.is_valid():
+                booking_instance = booking.save()
+            else:
+                return HttpResponse(status=400)
+            BookingHold.objects.filter(
+                customer=booking_instance.customer, room_type=booking_instance.room_type
+            ).delete()
         return HttpResponse(status=200)

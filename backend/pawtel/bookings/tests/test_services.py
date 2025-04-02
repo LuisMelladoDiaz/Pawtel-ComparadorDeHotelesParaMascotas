@@ -1,7 +1,11 @@
+import json
 from datetime import date, timedelta
+from unittest.mock import patch
 
 from django.test import TestCase
+from django.utils.timezone import now
 from pawtel.app_users.models import AppUser
+from pawtel.booking_holds.models import BookingHold
 from pawtel.bookings.models import Booking
 from pawtel.bookings.services import BookingService
 from pawtel.customers.models import Customer
@@ -177,3 +181,51 @@ class BookingServiceTest(TestCase):
     def test_retrieve_booking_not_found(self):
         with self.assertRaises(NotFound):
             BookingService.retrieve_booking(999)  # It does not exist
+
+    def test_booking_hold_deleted_on_booking_complete(self):
+        booking_hold = BookingHold.objects.create(
+            customer=self.customer,
+            room_type=self.room_type,
+            hold_expires_at=now() + timedelta(minutes=15),
+            booking_start_date=date.today() + timedelta(days=2),
+            booking_end_date=date.today() + timedelta(days=5),
+        )
+
+        start_date = (date.today() + timedelta(days=2)).strftime("%Y-%m-%d")
+        end_date = (date.today() + timedelta(days=5)).strftime("%Y-%m-%d")
+        booking_data = {
+            "room_type": self.room_type.id,
+            "start_date": start_date,
+            "end_date": end_date,
+            "customer": self.customer.id,
+            "total_price": 600.00,
+        }
+
+        FakeObject = type(
+            "FakeObject", (), {"metadata": {"booking": json.dumps(booking_data)}}
+        )
+        FakeData = type("FakeData", (), {"object": FakeObject()})
+        FakeEvent = type("FakeEvent", (), {})()
+        FakeEvent.type = "checkout.session.completed"
+        FakeEvent.data = FakeData()
+
+        self.assertTrue(
+            BookingHold.objects.filter(
+                customer=self.customer, room_type=self.room_type
+            ).exists()
+        )
+
+        with patch(
+            "pawtel.bookings.services.stripe.Webhook.construct_event",
+            return_value=FakeEvent,
+        ):
+            response = BookingService.stripe_response_manager(
+                b"dummy_payload", "dummy_sig"
+            )
+            self.assertEqual(response.status_code, 200)
+
+        self.assertFalse(
+            BookingHold.objects.filter(
+                customer=self.customer, room_type=self.room_type
+            ).exists()
+        )
