@@ -177,41 +177,47 @@ const saveNewRoomType = () => {
   <div class="max-w-7xl p-0! mt-10 mx-auto px-5 w-full flex flex-col flex-grow">
     <div class="flex flex-col gap-6">
 
-      <h1 class="text-terracota text-4xl mb-0!">
+      <h1 class="text-terracota text-4xl mb-0! p-1">
         {{ hotel?.name || 'Cargando hotel...' }}
       </h1>
 
       <div class="flex lg:flex-row flex-col gap-6 min-h-136 items-stretch">
 
         <!-- Contenedor de imágenes -->
-        <div class="w-full lg:w-80 bg-white rounded-xl shadow-md p-6 border border-gray-200">
-          <h2 class="text-xl font-semibold text-terracota mb-5! border-b pb-2">Imágenes del Hotel</h2>
-          <div
-            class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
-            @click="fileInputRef.click()">
-            <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
-            <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
-            <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden"
-              @change="handleImageUpload" />
-            <Button type="add" class="w-full text-[15px]">
-              <i class="fas fa-upload mr-2"></i> Seleccionar archivos
-            </Button>
+        <div class="w-full lg:w-80 bg-white rounded-xl shadow-md border border-gray-200">
+          <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
+            <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Imágenes</h1>
           </div>
-          <div class="mt-4 grid grid-cols-2 gap-3">
-            <div v-for="(img, index) in uploadedImages" :key="index" class="relative group">
-              <img :src="img" alt="Imagen del hotel"
-                class="w-full h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105">
-              <button @click="removeImage(index)"
-                class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <i class="fas fa-times text-xs"></i>
-              </button>
+          <div class="p-6">
+            <div
+              class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
+              @click="fileInputRef.click()">
+              <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
+              <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
+              <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden"
+                @change="handleImageUpload" />
+              <Button type="add" class="w-full text-[15px]">
+                <i class="fas fa-upload mr-2"></i> Seleccionar archivos
+              </Button>
+            </div>
+            <div class="mt-4 grid grid-cols-2 gap-3">
+              <div v-for="(img, index) in uploadedImages" :key="index" class="relative group">
+                <img :src="img" alt="Imagen del hotel"
+                  class="w-full h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105">
+                <button @click="removeImage(index)"
+                  class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <i class="fas fa-times text-xs"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Información del hotel -->
-        <div class="bg-white rounded-xl flex-1 shadow-md p-6 border border-gray-200">
-          <h1 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Información del Hotel</h1>
+        <div class="bg-white rounded-xl flex-1 shadow-md border border-gray-200">
+          <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
+            <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Información</h1>
+          </div>
           <div v-if="isLoadingHotel" class="text-center py-10">
             <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
           </div>
@@ -221,7 +227,7 @@ const saveNewRoomType = () => {
             <p>Error al cargar la información del hotel</p>
           </div>
 
-          <div v-else class="flex flex-col justify-between space-y-10">
+          <div v-else class="flex flex-col justify-between space-y-10 p-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del hotel</label>
@@ -256,15 +262,21 @@ const saveNewRoomType = () => {
 
       <!-- SECCIÓN DE HABITACIONES -->
       <!-- HABITACIONES -->
-      <div class="bg-white rounded-xl shadow-md p-6 border border-gray-200">
-        <div class="lg:flex flex-row justify-between gap-8">
-          <h2 class="flex-1 text-xl font-semibold text-terracota mb-6! border-b pb-2">Habitaciones del hotel</h2>
-          <div class="text-right mb-6">
-            <Button type="add" @click="isCreateModalOpen = true" class="lg:w-fit m-0! w-full">
-              <i class="fas fa-plus-circle mr-2"></i> Añadir Nuevo Tipo de Habitación
-            </Button>
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 mb-10">
+        <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
+          <!-- Título -->
+          <div class="flex items-center py-4 px-6 flex-1">
+            <h1 class="m-0! text-xl font-semibold text-white">Habitaciones</h1>
+          </div>
+
+          <!-- Botón -->
+          <div class="hover:bg-terracota-dark flex items-center rounded-tr-xl">
+            <button @click="isCreateModalOpen = true" class="text-white px-6 h-full w-full flex items-center transform transition-transform duration-200 ease-in-out hover:scale-105">
+              <i class="fas fa-plus-circle mr-2"></i> Añadir nueva Habitación
+            </button>
           </div>
         </div>
+
         <div v-if="isLoadingRooms" class="text-center py-10">
           <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
         </div>
@@ -274,7 +286,7 @@ const saveNewRoomType = () => {
           <p>Error al cargar los tipos de habitación</p>
         </div>
 
-        <div v-else class="space-y-6">
+        <div v-else class="space-y-6 p-6">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div v-for="room in roomTypes" :key="room.id"
               class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
