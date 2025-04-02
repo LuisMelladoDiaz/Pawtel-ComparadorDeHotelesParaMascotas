@@ -6,7 +6,6 @@ import { Notyf } from 'notyf';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserQuery, useLogoutMutation } from "@/data-layer/auth";
 import { handleApiError } from '@/utils/errorHandler';
-import { Notyf } from 'notyf';
 import { useUpdateCustomer, useDeleteCustomer, useGetCurrentCustomer } from "@/data-layer/hooks/customers";
 import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } from "@/data-layer/hooks/hotelOwners";
 import { ErrorMessage, Field, Form } from "vee-validate";
