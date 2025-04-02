@@ -34,7 +34,6 @@ class RoomTypeService:
             )
             if check_ownership:
                 RoomTypeService.__check_ownership_room_type(role_user, room_type)
-
         return role_user
 
     def __perform_retrieve_room_type(role_user, room_type_id):
@@ -48,9 +47,9 @@ class RoomTypeService:
             return
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if room_type.hotel.hotel_owner.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
+                raise PermissionDenied("Permiso denegado.")
         else:
-            raise PermissionDenied("Permission denied.")
+            raise PermissionDenied("Permiso denegado.")
 
     def check_admin_permission(role_user):
         allow_admin = False
@@ -91,10 +90,12 @@ class RoomTypeService:
         hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
 
         if hotel.hotel_owner.id != hotel_owner.id:
-            raise ValidationError({"hotel": "Invalid hotel."})
+            raise ValidationError({"hotel": "Hotel inválido."})
 
         if name and RoomType.objects.filter(hotel_id=hotel.id, name=name).exists():
-            raise ValidationError({"name": "Name in use by same hotel."})
+            raise ValidationError(
+                {"name": "Nombre ya en uso para un tipo de habitación."}
+            )
 
     @staticmethod
     def validate_update_room_type(pk, input_serializer):
@@ -110,21 +111,25 @@ class RoomTypeService:
             .exclude(id=pk)
             .exists()
         ):
-            raise ValidationError({"name": "Name in use by same hotel."})
+            raise ValidationError(
+                {"name": "Nombre ya en uso para un tipo de habitación."}
+            )
 
     @staticmethod
     def validate_room_type_is_available(start_date, end_date):
         if not start_date or not end_date:
-            raise ValidationError({"detail": "Invalid date format. Use yyyy-mm-dd."})
+            raise ValidationError(
+                {"detail": "Formato de fecha inválido. Utilice yyyy-mm-dd."}
+            )
 
         if end_date < start_date:
             raise ValidationError(
-                {"end_date": "End date cannot be earlier than start date."}
+                {"end_date": "La fecha final no puede ser anterior a la inicial."}
             )
 
         if (end_date - start_date).days >= 186:
             raise ValidationError(
-                {"detail": "The booking duration cannot exceed 6 months (186 days)."}
+                {"detail": "La reserva no puede durar más de 6 meses (186 días)."}
             )
 
     # GET --------------------------------------------------------------------
@@ -144,7 +149,7 @@ class RoomTypeService:
             else:
                 return RoomType.objects.get(id=pk, is_archived=False)
         except RoomType.DoesNotExist:
-            raise NotFound(detail="Room type not found.")
+            raise NotFound(detail="Tipo de habitación no encontrado.")
 
     @staticmethod
     def get_hotel_of_room_type(pk):
@@ -185,7 +190,7 @@ class RoomTypeService:
         if future_bookings.exists():
             raise ValidationError(
                 {
-                    "detail": "Object cannot be deleted because there is an upcoming booking."
+                    "detail": "No se puede borrar el objeto porque existe una reserva asociada próximamente."
                 }
             )
 
@@ -206,7 +211,7 @@ class RoomTypeService:
 
         if not start_date_str or not end_date_str:
             raise ValidationError(
-                {"detail": "Both start_date and end_date are required."}
+                {"detail": "La fecha inicial y la fecha final son obligatorias."}
             )
 
         start_date = parse_date(start_date_str)
@@ -270,9 +275,9 @@ class RoomTypeService:
         if filters is None:
             return {}
 
-        assert all(
-            f in RoomTypeService.VALID_FILTERS for f in filters
-        ), f"Invalid filter: {filters}"
+        invalid_filters = [f for f in filters if f not in RoomTypeService.VALID_FILTERS]
+        if invalid_filters:
+            raise ValidationError(f"Invalid filters: {invalid_filters}")
 
         validated = {}
         for key, expected_type in RoomTypeService.VALID_FILTERS.items():
@@ -336,7 +341,7 @@ class RoomTypeService:
             valid_sort_fields = ["pet_type", "price_per_night"]
             assert (
                 sort_field.lstrip("-") in valid_sort_fields
-            ), f"Invalid sort field: {sort_field}"
+            ), f"Filtro por orden inválido: {sort_field}"
             room_types = room_types.order_by(sort_field)
 
         if "limit" in filters:

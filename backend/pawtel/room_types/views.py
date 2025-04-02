@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
@@ -31,7 +31,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         RoomTypeService.authorize_action_room_type(request, action_name)
         input_serializer = RoomTypeService.serialize_input_room_type_create(request)
         RoomTypeService.validate_create_room_type(request, input_serializer)
@@ -42,7 +42,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         RoomTypeService.authorize_action_room_type(
             request, action_name, room_type_id=pk, check_ownership=True
         )
@@ -59,7 +59,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         RoomTypeService.authorize_action_room_type(
             request, action_name, room_type_id=pk, check_ownership=True
         )
@@ -71,7 +71,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
             RoomTypeService.archive_room_type(pk)
             return Response(
                 {
-                    "detail": "Room type archived instead of deleted due to past bookings."
+                    "detail": "Tipo de habitación archivado en vez de eliminado por reservas pasadas."
                 },
                 status=status.HTTP_200_OK,
             )
@@ -83,7 +83,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         url_name="is_room_type_available",
     )
     def is_room_type_available(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         RoomTypeService.authorize_action_room_type(
             request, action_name, room_type_id=pk
         )
@@ -99,7 +99,7 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
         url_name="get_hotel_of_room_type",
     )
     def get_hotel_of_room_type(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         RoomTypeService.authorize_action_room_type(
             request, action_name, room_type_id=pk
         )

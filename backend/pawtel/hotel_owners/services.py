@@ -58,9 +58,9 @@ class HotelOwnerService:
             return
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if target_hotel_owner.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
+                raise PermissionDenied("Permiso denegado.")
         else:
-            raise PermissionDenied("Permission denied.")
+            raise PermissionDenied("Permiso denegado.")
 
     def check_admin_permission(role_user):
         allow_admin = False
@@ -84,14 +84,14 @@ class HotelOwnerService:
             else:
                 return HotelOwner.objects.get(id=pk, user__is_active=True)
         except HotelOwner.DoesNotExist:
-            raise NotFound(detail="Hotel owner not found.")
+            raise NotFound(detail="Dueño de hotel no encontrado.")
 
     @staticmethod
     def get_hotel_owner_by_user(app_user_id):
         try:
             return HotelOwner.objects.get(user_id=app_user_id)
         except HotelOwner.DoesNotExist:
-            raise NotFound("Hotel owner does not exist.")
+            raise NotFound("El dueño de hotel no existe.")
 
     @staticmethod
     def get_current_hotel_owner(request):
@@ -135,7 +135,7 @@ class HotelOwnerService:
                 if future_bookings.exists():
                     raise ValidationError(
                         {
-                            "detail": "Object cannot be deleted because there is an upcoming booking."
+                            "detail": "El objeto no se puede eliminar porque existe una reserva asociada próximamente."
                         }
                     )
 
@@ -157,7 +157,7 @@ class HotelOwnerService:
             hotel_owner_id=hotel_owner_id, is_archived=False
         )
         if not hotels_to_delete.exists():
-            raise PermissionDenied("No hotels to delete.")
+            raise PermissionDenied("No existen hoteles para borrar.")
 
         hotels_to_delete.delete()
 

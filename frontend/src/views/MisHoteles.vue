@@ -5,6 +5,7 @@ import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hoo
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
 import { useRouter } from 'vue-router';
+import { handleApiError } from '@/utils/errorHandler';
 import { useGetAllHotelsOfOwner, useGetCurrentHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
@@ -48,27 +49,44 @@ const openModal = () => {
 
 // Guardar hotel (Crear)
 const saveHotel = async () => {
-  try {
-    const newHotel = await createHotelMutation.mutateAsync(hotelData.value);
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Guardando hotel...',
+    dismissible: false
+  });
 
-    router.push(`/mis-hoteles`);
-    modalOpen.value = false;
-  } catch (error) {
-    notyf.error('Error al crear el hotel.');
-    console.error('Error al guardar el hotel', error);
-  }
+  createHotelMutation.mutate(hotelData.value, {
+    onSuccess: () => {
+      notyf.dismiss(loadingNotification);
+      notyf.success('Hotel creado exitosamente');
+      router.push('/mis-hoteles');
+      modalOpen.value = false;
+    },
+    onError: (error) => {
+      notyf.dismissAll();
+      handleApiError(error);
+    }
+  });
 };
 
 const deleteHotel = async (id) => {
-  if (confirm('¿Estás seguro de eliminar este hotel?')) {
-    try {
-      await deleteHotelMutation.mutateAsync(id);
-      notyf.success('Hotel eliminado exitosamente.');
-      window.location.href = '/mis-hoteles';
-    } catch (error) {
-      notyf.error('Error al eliminar hotel.');
-      console.error('Error al eliminar hotel', error);
-    }
+  const confirmed = confirm('¿Estás seguro de eliminar este hotel? Esta acción es irreversible');
+  if (!confirmed) return;
+
+  try {
+    const loadingNotification = notyf.open({
+      type: 'loading',
+      message: 'Eliminando hotel...',
+      dismissible: false
+    });
+
+    await deleteHotelMutation.mutateAsync(id);
+    notyf.dismiss(loadingNotification);
+    notyf.success('Hotel eliminado exitosamente');
+    router.push('/mis-hoteles');
+  } catch (error) {
+    notyf.dismissAll();
+    handleApiError(error);
   }
 };
 

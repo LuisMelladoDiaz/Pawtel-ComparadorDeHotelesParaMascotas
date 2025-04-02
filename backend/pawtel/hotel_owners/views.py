@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 
 from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
@@ -39,10 +39,10 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Esta operación no está permitida")
 
     def update(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         hotel_owner = HotelOwnerService.authorize_action_hotel_owner(
             request, action_name, pk, True
         )
@@ -58,7 +58,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         hotel_owner = HotelOwnerService.authorize_action_hotel_owner(
             request, action_name, pk, True
         )
@@ -70,7 +70,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
             AppUserService.general_deactivate_app_user(request, hotel_owner.user.id)
             return Response(
                 {
-                    "detail": "Hotel owner archived instead of deleted due to past bookings."
+                    "detail": "Dueño de hotel archivado en vez de eliminado por reservas pasadas."
                 },
                 status=status.HTTP_200_OK,
             )
@@ -85,7 +85,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     def list_hotels_of_hotel_owner_explicit(self, request, pk=None):
         # Explicitly recieving the PK in the route (for admin)
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         HotelOwnerService.authorize_action_hotel_owner(request, action_name, pk, True)
         return HotelOwnerViewSet.__list_hotels_of_hotel_owner_base(pk, request)
 
@@ -97,7 +97,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     def list_hotels_of_hotel_owner_implicit(self, request):
         # Implicitly recieving the PK via the authorized user (prefered)
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         hotel_owner = HotelOwnerService.authorize_action_hotel_owner(
             request, action_name
         )
@@ -122,7 +122,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     # Explicitly recieving the PK in the route (not for admin, just in case)
     def delete_all_hotels_of_hotel_owner_explicit(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         HotelOwnerService.authorize_action_hotel_owner(request, action_name, pk, True)
         return HotelOwnerViewSet.__delete_all_hotels_of_hotel_owner_base(pk)
 
@@ -134,7 +134,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     )
     def delete_all_hotels_of_hotel_owner_implicit(self, request, pk=None):
         # Implicitly recieving the PK via the authorized user (prefered)
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         hotel_owner = HotelOwnerService.authorize_action_hotel_owner(
             request, action_name
         )
@@ -155,7 +155,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_name="retrieve_current_hotel_owner",
     )
     def retrieve_current_hotel_owner(self, request):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         HotelOwnerService.authorize_action_hotel_owner(request, action_name)
         hotel_owner = HotelOwnerService.get_current_hotel_owner(request)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
@@ -170,7 +170,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_name="approve_hotel_owner_patch",
     )
     def approve_hotel_owner_patch(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         HotelOwnerService.authorize_action_hotel_owner(request, action_name, pk)
 
         hotel_owner = HotelOwnerService.approve_hotel_owner_patch(pk)

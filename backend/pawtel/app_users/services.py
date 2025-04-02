@@ -47,7 +47,7 @@ class AppUserService:
     @staticmethod
     def get_current_app_user(request):
         if (not request.user) or (not request.user.is_authenticated):
-            raise AuthenticationFailed("User is not authenticated.")
+            raise AuthenticationFailed("El usuario no se encuentra autenticado.")
 
         app_user = AppUserService.retrieve_app_user(request.user.id)
         return app_user
@@ -73,7 +73,7 @@ class AppUserService:
             else:
                 return AppUser.objects.get(id=pk, is_active=True)
         except AppUser.DoesNotExist:
-            raise NotFound(detail="User not found.")
+            raise NotFound(detail="Usuario no encontrado.")
 
     # POST -------------------------------------------------------------------
 
@@ -98,10 +98,13 @@ class AppUserService:
             )
 
         if AppUser.objects.filter(email=email).exists():
-            raise ValidationError({"email": "Email already in use."})
+            raise ValidationError({"email": "El email ya se encuentra en uso."})
 
         if AppUser.objects.filter(phone=phone).exists():
-            raise ValidationError({"phone": "Phone number already in use."})
+            raise ValidationError(
+                {"phone": "El número de teléfono ya se encuentra en uso."}
+            )
+
 
     @staticmethod
     def __create_app_user(input_serializer):
@@ -132,13 +135,17 @@ class AppUserService:
             username
             and AppUser.objects.filter(username=username).exclude(id=pk).exists()
         ):
-            raise ValidationError({"username": "Username in use."})
+            raise ValidationError(
+                {"username": "El nombre de usuario ya se encuentra en uso."}
+            )
 
         if email and AppUser.objects.filter(email=email).exclude(id=pk).exists():
-            raise ValidationError({"email": "Email in use."})
+            raise ValidationError({"email": "El email ya se encuentra en uso."})
 
         if phone and AppUser.objects.filter(phone=phone).exclude(id=pk).exists():
-            raise ValidationError({"phone": "Phone in use."})
+            raise ValidationError(
+                {"phone": "El número de teléfono ya se encuentra en uso."}
+            )
 
     @staticmethod
     def __update_app_user(pk, input_serializer):

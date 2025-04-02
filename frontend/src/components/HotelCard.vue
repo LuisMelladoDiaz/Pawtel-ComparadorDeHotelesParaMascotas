@@ -50,8 +50,23 @@
             <div class="price-disponibilidad flex flex-col items-end justify-between gap-3">
 
               <span class="price text-[1.55rem] text-[#C36C6C] font-bold flex flex-col">
-                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a> 
-                <a class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
+                <a 
+                  v-if="price_min !== price_max" 
+                  class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
+                >
+                  Precios por Noche
+                </a>
+                <a 
+                  v-else 
+                  class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
+                >
+                  Precio por Noche
+                </a>
+                <a 
+                  class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3"
+                >
+                  {{ price_min === price_max ? `${price_min}€` : `${price_min}€ - ${price_max}€` }}
+                </a>
               </span>
               <RouterLink :to="`/hotel/${id}`">
                 <Button class="!m-0" type="add">Ver disponibilidad</Button>

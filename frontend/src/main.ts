@@ -12,6 +12,7 @@ import * as a from './axios-setup';
 import { defineRule, configure } from 'vee-validate';
 import { required } from '@vee-validate/rules';
 import { customMessages } from './validation-messages';
+import { createPinia } from 'pinia';
 
 defineRule('required', required);
 
@@ -27,6 +28,8 @@ const notyf = new Notyf({
 });
 
 const app = createApp(App);
+
+app.use(createPinia());
 
 app.config.globalProperties.$notyf = notyf;
 
