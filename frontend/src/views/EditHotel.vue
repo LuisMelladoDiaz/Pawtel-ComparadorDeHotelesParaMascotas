@@ -264,15 +264,14 @@ const saveNewRoomType = () => {
       <!-- HABITACIONES -->
       <div class="bg-white rounded-xl shadow-md border border-gray-200 mb-10">
         <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
-          <!-- Título -->
-          <div class="flex items-center py-4 px-6 flex-1">
+
+          <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
             <h1 class="m-0! text-xl font-semibold text-white">Habitaciones</h1>
           </div>
 
-          <!-- Botón -->
-          <div class="hover:bg-terracota-dark flex items-center rounded-tr-xl">
+          <div class="hover:bg-terracota-dark flex items-center rounded-tr-xl min-h-[60px]">
             <button @click="isCreateModalOpen = true"
-              class="text-white px-6 h-full w-full flex items-center transform transition-transform duration-200 ease-in-out hover:scale-105">
+              class="text-white px-6 h-full w-full flex items-center justify-center lg:justify-start transform transition-transform duration-200 ease-in-out hover:scale-105">
               <i class="fas fa-plus-circle mr-2"></i> Añadir nueva Habitación
             </button>
           </div>
@@ -293,7 +292,7 @@ const saveNewRoomType = () => {
               class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
               <div>
                 <h3 class="text-lg font-bold text-gray-800">{{ room.name }}</h3>
-                <p class="text-gray-600 mt-2">{{ room.description }}</p>
+                <p class="text-gray-600 mt-2 text-justify line-clamp-4 min-h-20">{{ room.description }}</p>
               </div>
               <div>
                 <div class="mt-4 space-y-2">
@@ -307,12 +306,12 @@ const saveNewRoomType = () => {
                   <p class="text-gray-700"><span class="font-medium">Tipo de Mascota:</span> {{
                     formatPetType(room.pet_type) }}</p>
                 </div>
-                <div class="mt-6 flex flex-col sm:flex-row gap-3">
-                  <Button type="edit" @click="openEditForm(room)" class="flex-1">
+                <div class="mt-6 flex flex-col gap-3 lg:flex-row lg:justify-between lg:gap-8">
+                  <Button type="edit" @click="openEditForm(room)" class="flex-1 m-0! h-fit">
                     <i class="fas fa-edit mr-2"></i> Editar
                   </Button>
                   <Button type="reject" @click="handleDeleteRoomType(room.id)" :disabled="isDeletingRoom"
-                    class="flex-1">
+                    class="flex-1 m-0! h-fit">
                     <i class="fas fa-trash-alt mr-2"></i>
                     {{ isDeletingRoom ? "Eliminando..." : "Eliminar" }}
                   </Button>
@@ -330,7 +329,7 @@ const saveNewRoomType = () => {
             <button @click="closeCreateModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
               <i class="fas fa-times"></i>
             </button>
-            <h2 class="text-xl font-semibold text-terracota mb-4 border-b pb-2">Añadir Tipo de Habitación</h2>
+            <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Añadir Tipo de Habitación</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -387,7 +386,7 @@ const saveNewRoomType = () => {
             <button @click="closeEditModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
               <i class="fas fa-times"></i>
             </button>
-            <h2 class="text-xl font-semibold text-terracota mb-4 border-b pb-2">Editar Tipo de Habitación</h2>
+            <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Editar Tipo de Habitación</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>

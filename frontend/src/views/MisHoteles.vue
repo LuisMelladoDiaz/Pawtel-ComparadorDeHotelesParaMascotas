@@ -104,116 +104,112 @@ const editHotel = (id) => {
 // Paginación
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
+
+
+const isCreateModalOpen = ref(false);
+const closeCreateModal = () => {
+  isCreateModalOpen.value = false;
+};
 </script>
 
 <template>
   <div class="max-w-7xl mx-auto w-full flex flex-col items-center flex-grow mt-10 relative">
-    <!-- Cabecera -->
-    <div class="flex justify-between items-center bg-terracota text-white px-4 py-2 rounded-t-lg w-full mb-1">
-      <span class="font-semibold">Gestión de Hoteles</span>
-      <button @click="openModal" class="flex items-center text-white bg-terracota hover:bg-terracota-dark rounded-full px-4 py-2">
-        <i class="fas fa-plus mr-2"></i> Añadir Nuevo
-      </button>
-    </div>
 
-    <!-- Modal de confirmación para eliminar hotel -->
-    <div v-if="showDeleteModal" class="w-full mb-2 bg-white border border-terracota rounded-lg shadow-md">
-      <div class="p-3">
-        <h2 class="text-lg font-bold text-terracota">Confirmar eliminación</h2>
-        <p class="text-gray-700 my-2">¿Estás seguro de que deseas eliminar <span class="font-semibold">"{{ hotelToDeleteName }}"</span>?</p>
-        <p class="text-sm text-gray-500 mb-3">Esta acción no se puede deshacer.</p>
-        <div class="flex justify-end gap-2">
-          <Button type="reject" @click="showDeleteModal = false" class="px-3 py-1 text-sm">Cancelar</Button>
-          <Button type="accept" @click="deleteHotel" :loading="isDeleting" class="px-3 py-1 text-sm">
-            {{ isDeleting ? 'Eliminando...' : 'Eliminar' }}
-          </Button>
+    <div class="bg-white rounded-xl shadow-md border w-full border-gray-200 mb-5">
+        <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
+
+          <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
+            <h1 class="m-0! text-xl text-center font-semibold text-white">Gestión de Mis Hoteles</h1>
+          </div>
+
+          <div class="hover:bg-terracota-dark flex items-center rounded-tr-xl min-h-[60px]">
+            <button @click="isCreateModalOpen = true" class="text-white px-6 h-full w-full flex items-center justify-center lg:justify-start transform transition-transform duration-200 ease-in-out hover:scale-105">
+              <i class="fas fa-plus-circle mr-2"></i> Añadir nuevo hotel
+            </button>
+          </div>
+        </div>
+        <div v-if="isLoadingRooms" class="text-center py-10">
+          <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
+        </div>
+
+        <div v-else-if="isErrorRooms" class="text-center py-10 text-red-600">
+          <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+          <p>Error al cargar los hoteles</p>
+        </div>
+
+        <div v-else class="space-y-6 p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div v-for="(hotel) in paginatedHotels" :key="hotel.id"
+              class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
+              <div>
+                <h3 class="text-lg font-bold text-gray-800">{{ hotel.name }}</h3>
+                <p class="text-gray-600 mt-2 text-justify line-clamp-4 min-h-20">{{ hotel.description }}</p>
+              </div>
+              <div>
+                <div class="mt-4 space-y-2">
+                  <p class="text-gray-700"><span class="font-medium">Ciudad:</span> {{ hotel.city }}</p>
+                  <p class="text-gray-700"><span class="font-medium">Dirección:</span> {{ hotel.address }}</p>
+                </div>
+                <div class="mt-6 flex flex-col gap-3 lg:flex-row lg:justify-between lg:gap-8">
+                  <Button type="edit" @click="editHotel(hotel.id)" class="flex-1 m-0! h-fit">
+                    <i class="fas fa-edit mr-2"></i> Editar
+                  </Button>
+                  <Button type="reject" @click="deleteHotel(hotel.id)"
+                    class="flex-1 m-0! h-fit">
+                    <i class="fas fa-trash-alt mr-2"></i> Eliminar
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Modal para Añadir Hotel -->
-    <div v-if="modalOpen" class="w-full mb-4 bg-white border border-terracota rounded-lg shadow-lg">
-      <div class="p-6">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-bold text-terracota">Añadir Nuevo Hotel</h2>
-          <button @click="modalOpen = false" class="text-gray-500 hover:text-gray-700">
-            <i class="fas fa-times"></i>
-          </button>
+      <!-- Modal Añadir -->
+      <transition name="fade">
+        <div v-if="isCreateModalOpen" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
+          <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 relative">
+            <button @click="closeCreateModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
+              <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Añadir nuevo hotel</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre:</label>
+                <input v-model="hotelData.name"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Dirección:</label>
+                <input v-model="hotelData.address"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Ciudad:</label>
+                <input v-model="hotelData.city"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Descripción:</label>
+                <textarea v-model="hotelData.description"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+                </textarea>
+              </div>
+            </div>
+
+            <div class="mt-6 text-right">
+              <Button type="accept" @click="saveHotel(); closeCreateModal()" :disabled="isCreatingRoom"
+                class="lg:w-fit m-0! w-full">
+                <i class="fas fa-plus-circle mr-2"></i> {{ isCreatingRoom ? "Creando..." : "Añadir Habitación" }}
+              </Button>
+            </div>
+          </div>
         </div>
-
-        <div class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-            <input v-model="hotelData.name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Dirección</label>
-            <input v-model="hotelData.address" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
-            <input v-model="hotelData.city" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota">
-          </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Descripción</label>
-            <textarea v-model="hotelData.description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-terracota focus:border-terracota"></textarea>
-          </div>
-        </div>
-
-        <div class="mt-6 flex justify-end gap-3">
-          <Button type="reject" @click="modalOpen = false">Cancelar</Button>
-          <Button type="accept" @click="saveHotel">Crear Hotel</Button>
-        </div>
-      </div>
-    </div>
-
-    <div class="overflow-x-auto w-full">
-      <table class="w-full border-collapse shadow-md rounded-b-lg overflow-hidden mb-4">
-        <thead>
-          <tr class="bg-white text-left">
-            <th class="px-4 py-2">Nombre</th>
-            <th class="px-4 py-2">Dirección</th>
-            <th class="px-4 py-2">Ciudad</th>
-            <th class="px-4 py-2">Descripción</th>
-            <th class="px-4 py-2 text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody v-if="isLoading">
-          <tr>
-            <td colspan="5" class="text-center p-4">Cargando hoteles...</td>
-          </tr>
-        </tbody>
-        <tbody v-else-if="isError">
-          <tr>
-            <td colspan="5" class="text-center p-4 text-red-600">Error al cargar los hoteles.</td>
-          </tr>
-        </tbody>
-        <tbody v-else>
-          <tr v-for="(hotel, index) in paginatedHotels" :key="hotel.id" :class="index % 2 === 0 ? 'bg-gray-100' : 'bg-white'">
-            <td class="px-4 py-2">{{ hotel.name }}</td>
-            <td class="px-4 py-2">{{ hotel.address }}</td>
-            <td class="px-4 py-2">{{ hotel.city }}</td>
-            <td class="px-4 py-2">{{ hotel.description }}</td>
-            <td class="px-4 py-2 text-center flex justify-center gap-2">
-              <!-- Botón de editar -->
-              <button @click="editHotel(hotel.id)" class="text-oliva hover:text-oliva-dark text-[20px]">
-                <i class="fas fa-edit"></i>
-              </button>
-              <!-- Botón de eliminar -->
-              <button @click="confirmDelete(hotel.id)" class="text-terracota hover:text-terracota-dark text-[20px]">
-                <i class="fas fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      </transition>
 
     <!-- Paginación -->
-    <div class="flex justify-between w-full mt-4 flex-col md:flex-row">
+    <div class="flex justify-between w-full px-6 flex-col md:flex-row">
       <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels?.length || 0 }}</span>
       <div class="flex gap-2 mt-2 md:mt-0">
         <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">← Anterior</button>
@@ -226,3 +222,14 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
     </div>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+</style>
