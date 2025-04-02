@@ -29,7 +29,7 @@ class AdminViewSet(viewsets.ViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación prohibida.")
 
     def update(self, request, pk=None):
         action_name = inspect.currentframe().f_code.co_name
@@ -46,10 +46,8 @@ class AdminViewSet(viewsets.ViewSet):
         action_name = inspect.currentframe().f_code.co_name
         AdminService.authorize_action_admin(request, action_name, pk)
         admin = AdminService.retrieve_admin(pk)
-        delete = AdminService.validate_admin_deletion(pk)
-        if delete:
-            AppUserService.general_delete_app_user(request, admin.user.id)
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        AppUserService.general_delete_app_user(request, admin.user.id)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     @action(
         detail=False,
