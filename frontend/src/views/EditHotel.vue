@@ -68,17 +68,22 @@ const submitImages = (hotelId) => {
   });
 };
 const removeImage = (index, source = 'uploaded') => {
+  console.log('Eliminando imagen con index:', index, 'source:', source);  // Depuración
+
   if (source === 'uploaded') {
+    // Elimina de las imágenes subidas localmente
     uploadedImages.value.splice(index, 1);
   } else if (source === 'hotel') {
-
+    // Obtener el ID de la imagen del hotel
     const imageId = hotelImages.value[index].id;
+
+    // Llamar a la mutación para eliminar la imagen
     deleteHotelImage(
       { hotelId: hotel.value.id, imageId },
       {
         onSuccess: () => {
           console.log('Imagen eliminada del hotel');
-
+          // Actualizamos la lista de imágenes del hotel localmente
           hotelImages.value = hotelImages.value.filter((img, i) => i !== index);
         },
         onError: (error) => {
@@ -88,6 +93,7 @@ const removeImage = (index, source = 'uploaded') => {
     );
   }
 };
+
 
 
 

@@ -11,6 +11,7 @@ import {
   fetchCoverImage,
   fetchNonCoverImages,
 } from '@/data-layer/api/hotelImages';
+import { toValue } from 'vue';
 
 export const useGetHotelImage = (hotelId: number, imageId: number) => {
   return useQuery({
@@ -68,7 +69,8 @@ export const useDeleteHotelImage = () => {
       return await deleteHotelImage(hotelId, imageId);
     },
     onSuccess: (_, { hotelId }) => {
-      queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId] });
+      queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+      console.log(hotelId);
     },
     onError: (error) => {
       console.error('Error al eliminar imagen:', error);
