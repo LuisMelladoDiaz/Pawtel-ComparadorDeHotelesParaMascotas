@@ -3,86 +3,115 @@ import { ref, computed } from 'vue';
 import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
 import { useRoute } from 'vue-router';
-import { useGetRoomTypesByHotel, useGetHotelById } from '@/data-layer/hooks/hotels';
+import { useGetHotelById } from '@/data-layer/hooks/hotels';
+import { useGetRoomTypeById } from '@/data-layer/hooks/roomTypes';
 import { handleApiError } from '@/utils/errorHandler';
-import DatePicker from '@/components/DatePicker.vue';
 import Button from '@/components/Button.vue';
-import DatePickerMobile from '@/components/DatePickerMobile.vue';
+import { useFiltersStore } from '@/filters';
+import DatePicker from '@/components/DatePicker.vue';
 
 const route = useRoute();
-const hotelId = route.params.id;
+const filters = useFiltersStore();
 const notyf = new Notyf();
-const internalStartDate = ref('');
-const internalEndDate = ref('');
-const selectedRoomTypeId = ref(null);
+
+const hotelId = route.params.hotelId;
+const roomId = route.params.roomId;
+
+const startDate = ref(filters.startDate);
+const endDate = ref(filters.endDate);
 
 const { mutate: createBooking } = useCreateBooking();
-const { data: roomTypes, isLoading } = useGetRoomTypesByHotel(hotelId);
 const { data: hotel } = useGetHotelById(hotelId);
-const hotelName = computed(() => hotel.value?.name || 'Cargando hotel...');
-
-const submitBooking = async () => {
-    const startDate = new Date(`${internalStartDate.value}T00:00:00Z`);
-    const endDate = new Date(`${internalEndDate.value}T00:00:00Z`);
-
-    if (endDate > startDate) {
-      createBooking(
-        {
-          start_date: startDate.toISOString().split('T')[0],
-          end_date: endDate.toISOString().split('T')[0],
-          room_type: selectedRoomTypeId.value,
-        },
-        {
-          onSuccess: () => notyf.success('Reserva realizada con éxito.'),
-          onError: (error) => {
-        handleApiError(error);
-      }
-    });
-};
-}
+const { data: room } = useGetRoomTypeById(roomId);
 
 const totalPrice = computed(() => {
-  if (!internalStartDate.value || !internalEndDate.value) return 0;
-  const startDate = new Date(`${internalStartDate.value}T00:00:00Z`);
-  const endDate = new Date(`${internalEndDate.value}T00:00:00Z`);
-  if (endDate < startDate) return 0;
-  const days = (endDate - startDate) / (1000 * 60 * 60 * 24);
-  const selectedRoomType = roomTypes.value?.find(room => room.id === selectedRoomTypeId.value);
-  return selectedRoomType ? days * selectedRoomType.price_per_night : 0;
+  if (!startDate.value || !endDate.value || !room.value) return 0;
+  const start = new Date(`${startDate.value}T00:00:00Z`);
+  const end = new Date(`${endDate.value}T00:00:00Z`);
+  if (end < start) return 0;
+  const days = (end - start) / (1000 * 60 * 60 * 24);
+  return days * room.value.price_per_night;
 });
+
+const submitBooking = async () => {
+  createBooking(
+    {
+      start_date: startDate.value,
+      end_date: endDate.value,
+      room_type: roomId,
+    },
+    {
+      onSuccess: () => notyf.success('Reserva realizada con éxito.'),
+      onError: (error) => {
+        handleApiError(error);
+      }
+    }
+  );
+};
 </script>
 
 <template>
-  <div class="flex items-center justify-center py-10">
-    <div class="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
-      <h2 class="text-2xl font-semibold text-center mb-0!">Reserva tu habitación en</h2>
-      <h2 class="text-2xl font-semibold text-center mb-4">{{ hotelName }}</h2>
-      <form @submit.prevent="submitBooking">
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 mb-2">Fechas</label>
-          <DatePickerMobile class="border!"
-            :startDate="internalStartDate"
-            :endDate="internalEndDate"
-            @update:startDate="(val) => internalStartDate = val"
-            @update:endDate="(val) => internalEndDate = val"
-          />
-        </div>
-        <div class="mb-4">
-          <label for="room-type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de habitación</label>
-          <select id="room-type" v-model="selectedRoomTypeId" class="w-full p-2 border rounded-lg font-complementario text-[17px] text-gray-700 cursor-pointer">
-            <option value="null" disabled>Selecciona un tipo de habitación</option>
-            <option v-for="roomType in roomTypes" :key="roomType.id" :value="roomType.id">
-              {{ roomType.name }}
-            </option>
-          </select>
-        </div>
-        <div class="text-lg font-semibold text-gray-800 mb-4">
-          Precio total: {{ totalPrice }}€
-        </div>
-        <Button type="add" class="w-full m-0! text-white rounded-lg hover:bg-azul-suave-dark">
-          Pagar
+  <div class="flex items-center justify-center h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-xl border border-gray-300">
+      <h2 class="text-3xl font-bold text-center mb-6 text-gray-700">Confirmación de Reserva</h2>
+      
+      <table class="w-full text-base text-left border-collapse border border-gray-300">
+        <tbody>
+          <tr class="border-b">
+            <td class="p-3 font-semibold">Hotel:</td>
+            <td class="p-3">{{ hotel?.name }}</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3 font-semibold">Dirección:</td>
+            <td class="p-3">{{ hotel?.address }}, {{ hotel?.city }}</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3 font-semibold">Habitación:</td>
+            <td class="p-3">{{ room?.name }}</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3 font-semibold">Mascotas:</td>
+            <td class="p-3">{{ room?.pet_type === 'DOG' ? 'Perros' : room?.pet_type === 'CAT' ? 'Gatos' : room?.pet_type === 'BIRD' ? 'Aves' : 'Mixto' }}</td>
+          </tr>
+          <tr class="border-b">
+            <td class="p-3 font-semibold">Precio por noche:</td>
+            <td class="p-3">{{ room?.price_per_night }}€</td>
+          </tr>
+          <tr class="border-b bg-yellow-100">
+            <td class="p-3 font-semibold text-lg">Fechas:</td>
+            <td class="p-3">
+              <DatePicker 
+                class="text-lg font-medium"
+                :startDate="startDate" 
+                :endDate="endDate" 
+                @update:startDate="(value) => startDate = value" 
+                @update:endDate="(value) => endDate = value" 
+              />
+            </td>
+          </tr>
+          <tr>
+            <td class="p-3 font-bold text-xl">Total:</td>
+            <td class="p-3 font-bold text-xl text-green-600">{{ totalPrice }}€</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <div class="flex gap-4 mt-6">
+        <Button 
+          type="button" 
+          class="flex-1 bg-terracota text-white hover:bg-terracota-dark"
+          @click="$router.back()"
+        >
+          Cancelar
         </Button>
-      </form>
+        <Button 
+          type="button" 
+          class="flex-1 bg-oliva text-white hover:bg-oliva-dark"
+          @click="submitBooking"
+        >
+          Confirmar Reserva
+        </Button>
+      </div>
     </div>
   </div>
 </template>
