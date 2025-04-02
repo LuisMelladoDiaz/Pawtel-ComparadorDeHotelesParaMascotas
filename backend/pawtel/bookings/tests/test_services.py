@@ -183,7 +183,7 @@ class BookingServiceTest(TestCase):
             BookingService.retrieve_booking(999)  # It does not exist
 
     def test_booking_hold_deleted_on_booking_complete(self):
-        booking_hold = BookingHold.objects.create(
+        BookingHold.objects.create(
             customer=self.customer,
             room_type=self.room_type,
             hold_expires_at=now() + timedelta(minutes=15),
