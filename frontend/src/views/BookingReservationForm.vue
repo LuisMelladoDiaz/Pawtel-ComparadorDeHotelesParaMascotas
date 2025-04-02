@@ -109,7 +109,7 @@ const submitBooking = async () => {
           class="flex-1 bg-oliva text-white hover:bg-oliva-dark"
           @click="submitBooking"
         >
-          Confirmar Reserva
+          Ir al Pago
         </Button>
       </div>
     </div>
