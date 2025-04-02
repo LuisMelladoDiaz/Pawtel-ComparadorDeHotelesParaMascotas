@@ -16,7 +16,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
 
     def list(self, request):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         role_user = CustomerService.authorize_action_customer(request, action_name)
         admin_allow = CustomerService.check_admin_permission(role_user)
         customers = CustomerService.list_customers(admin_allow)
@@ -26,7 +26,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         role_user = CustomerService.authorize_action_customer(
             request, action_name, pk, True
         )

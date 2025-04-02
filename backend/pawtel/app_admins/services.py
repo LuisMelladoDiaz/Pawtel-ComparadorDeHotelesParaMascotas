@@ -14,7 +14,7 @@ class AdminService:
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_admin_service(role_user, action_name)
         if admin_id:
-            AdminService.retrieve_admin(role_user, admin_id)
+            AdminService.retrieve_admin(admin_id)
         return role_user
 
     # Serialization------------------------------------------------------

@@ -58,6 +58,8 @@ class CustomerService:
             )
             if check_ownership:
                 CustomerService.__check_ownership_customer(role_user, target_customer)
+            if action_name == "destroy":
+                role_user = target_customer
 
         return role_user
 

@@ -18,7 +18,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     # Default CRUD -----------------------------------------------------------
 
     def list(self, request):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
         admin_allow = HotelOwnerService.check_admin_permission(role_user)
         hotel_owners = HotelOwnerService.list_hotel_owners(admin_allow)
@@ -28,7 +28,7 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
         admin_allow = HotelOwnerService.check_admin_permission(role_user)
         hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk, admin_allow)

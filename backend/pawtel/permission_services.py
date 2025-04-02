@@ -23,7 +23,7 @@ class PermissionService:
         UserRole.HOTEL_OWNER.value: {
             "retrieve",
         },
-        UserRole.ADMIN.value: {"list", "retrieve", "destroy"},
+        UserRole.ADMIN.value: {"list", "retrieve"},
     }
 
     BOOKING_HOLD_SERVICE_PERMISSIONS = {

@@ -44,7 +44,8 @@ class HotelOwnerService:
                 HotelOwnerService.__check_ownership_hotel_owner(
                     role_user, target_hotel_owner
                 )
-
+            if action_name == "destroy":
+                role_user = target_hotel_owner
         return role_user
 
     def __perform_retrieve_hotel_owner(role_user, target_hotel_owner_id):

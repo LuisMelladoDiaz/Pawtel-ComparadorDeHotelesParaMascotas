@@ -23,7 +23,7 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         filters = request.query_params.dict()
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         role_user = HotelService.authorize_action_hotel(request, action_name)
         admin_allowed = HotelService.check_admin_permission(role_user)
         hotels = HotelService.list_filtered_hotels(filters, admin_allowed)
@@ -31,7 +31,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name
         role_user = HotelService.authorize_action_hotel(request, action_name)
         admin_allowed = HotelService.check_admin_permission(role_user)
         hotel = HotelService.retrieve_hotel(pk, admin_allowed)
