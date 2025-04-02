@@ -1,4 +1,4 @@
-import inspect
+from inspect import currentframe
 
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.serializers import BookingSerializer
@@ -16,8 +16,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
 
     def list(self, request):
-        action_name = inspect.currentframe().f_code.co_name
-        CustomerService.authorize_action_customer_level_1(request, action_name)
+        action_name = currentframe().f_code.co_name
+        CustomerService.authorize_action_customer(request, action_name)
         customers = CustomerService.list_customers()
         output_serializer_data = CustomerService.serialize_output_customer(
             customers, many=True
@@ -25,20 +25,20 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
-        CustomerService.authorize_action_customer_level_3(request, pk, action_name)
+        action_name = currentframe().f_code.co_name
+        CustomerService.authorize_action_customer(request, action_name, pk, True)
         customer = CustomerService.retrieve_customer(pk)
         output_serializer_data = CustomerService.serialize_output_customer(customer)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
         # It will be managed through the views of AuthApp
-        raise MethodNotAllowed("This operation is forbidden.")
+        raise MethodNotAllowed("Operación no permitida.")
 
     def update(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
-        customer = CustomerService.authorize_action_customer_level_3(
-            request, pk, action_name
+        action_name = currentframe().f_code.co_name
+        customer = CustomerService.authorize_action_customer(
+            request, action_name, pk, True
         )
         AppUserService.general_update_app_user(request, customer.user.id)
         customer_updated = CustomerService.retrieve_customer(pk)
@@ -52,9 +52,9 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return self.update(request, pk)
 
     def destroy(self, request, pk=None):
-        action_name = inspect.currentframe().f_code.co_name
-        customer = CustomerService.authorize_action_customer_level_3(
-            request, pk, action_name
+        action_name = currentframe().f_code.co_name
+        customer = CustomerService.authorize_action_customer(
+            request, action_name, pk, True
         )
         delete = CustomerService.validate_customer_deletion(pk)
         if delete:
@@ -64,7 +64,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
             AppUserService.general_deactivate_app_user(request, customer.user.id)
             return Response(
                 {
-                    "detail": "Customer archived instead of deleted due to past bookings."
+                    "detail": "Cliente archivado en vez de eliminado por reservas pasadas."
                 },
                 status=status.HTTP_200_OK,
             )
@@ -90,8 +90,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
     )
     def list_bookings_of_customer_explicit(self, request, pk=None):
         # Explicitly recieving the PK in the route (for admin)
-        action_name = inspect.currentframe().f_code.co_name
-        CustomerService.authorize_action_customer_level_3(request, pk, action_name)
+        action_name = currentframe().f_code.co_name
+        CustomerService.authorize_action_customer(request, action_name, pk, True)
         return CustomerViewSet.__list_bookings_of_customer_base(pk)
 
     @action(
@@ -102,10 +102,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
     )
     def list_bookings_of_customer_implicit(self, request):
         # Implicitly recieving the PK via the authorized user (prefered)
-        action_name = inspect.currentframe().f_code.co_name
-        customer = CustomerService.authorize_action_customer_level_1(
-            request, action_name
-        )
+        action_name = currentframe().f_code.co_name
+        customer = CustomerService.authorize_action_customer(request, action_name)
         return CustomerViewSet.__list_bookings_of_customer_base(customer.id)
 
     @staticmethod
@@ -124,8 +122,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
         url_name="retrieve_current_customer",
     )
     def retrieve_current_customer(self, request):
-        action_name = inspect.currentframe().f_code.co_name
-        CustomerService.authorize_action_customer_level_1(request, action_name)
+        action_name = currentframe().f_code.co_name
+        CustomerService.authorize_action_customer(request, action_name)
         hotel_owner = CustomerService.get_current_customer(request)
         output_serializer_data = CustomerService.serialize_output_customer(hotel_owner)
         return Response(output_serializer_data, status=status.HTTP_200_OK)

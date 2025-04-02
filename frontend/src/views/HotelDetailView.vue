@@ -21,8 +21,8 @@ const hotel = computed(() => ({
   name: apiHotel.value?.name ?? 'Nombre',
   address: apiHotel.value?.address ?? 'Dirección',
   city: apiHotel.value?.city ?? 'Ciudad',
-  price_max: apiHotel.value?.most_expensive_price ?? '0',
-  price_min: apiHotel.value?.cheapest_price ?? '0',
+  price_max: apiHotel.value?.highest_price_current_filters ?? '0',
+  price_min: apiHotel.value?.lowest_price_current_filters ?? '0',
   imageGallery: apiHotel.value?.imageGallery ?? [detalles3, detalles4, detalles1, detalles2],
   description: apiHotel.value?.description ?? 'Descripción predeterminada del hotel.',
   reviews: apiHotel.value?.reviews ?? [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]

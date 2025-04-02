@@ -4,22 +4,6 @@ import PriceRange from '@/components/hotels/PriceRange.vue';
 import DatePicker from '@/components/DatePicker.vue';
 
 const props = defineProps({
-  cities: {
-    type: Array,
-    required: true
-  },
-  petTypes: {
-    type: Array,
-    required: true
-  },
-  selectedCity: {
-    type: String,
-    required: true
-  },
-  selectedPetType: {
-    type: String,
-    required: true
-  },
   tempMinPrice: {
     type: Number,
     required: true
@@ -28,39 +12,14 @@ const props = defineProps({
     type: Number,
     required: true
   },
-  startDate: {
-    type: String,
-    required: true
-  },
-  endDate: {
-    type: String,
-    required: true
-  }
 });
 
 const emit = defineEmits([
-  'update:city',
-  'update:petType',
   'update:tempMinPrice',
   'update:tempMaxPrice',
-  'update:startDate',
-  'update:endDate',
   'commit-price',
   'close'
 ]);
-
-const petTypeMapping = {
-  DOG: 'Perro',
-  CAT: 'Gato',
-  BIRD: 'Pájaro',
-  MIXED: 'Mixto'
-};
-
-const petTypesInSpanish = computed(() => {
-  return Array.isArray(props.petTypes) 
-    ? props.petTypes.map(petType => petTypeMapping[petType] || petType) 
-    : [];
-});
 </script>
 
 <template>
@@ -73,45 +32,6 @@ const petTypesInSpanish = computed(() => {
     </div>
 
     <div class="p-5 py-7 flex flex-col gap-6 max-h-[70vh] overflow-y-auto">
-      <!-- Selectores de fecha -->
-      <div class="mt-0">
-        <label class="font-semibold">Rango de fechas:</label>
-        <DatePicker
-          class="bg-white border rounded mt-1 min-w-[200px]!"
-          :startDate="startDate"
-          :endDate="endDate"
-          @update:startDate="emit('update:startDate', $event)"
-          @update:endDate="emit('update:endDate', $event)"
-        />
-      </div>
-
-      <!-- Filtro ciudad -->
-      <div>
-        <label class="block font-semibold text-sm mb-1">Ciudad:</label>
-        <select 
-          :value="selectedCity" 
-          @change="emit('update:city', $event.target.value)"
-          class="border rounded p-2 w-full text-sm font-complementario text-[18px]"
-        >
-          <option value="">Todas</option>
-          <option v-for="city in cities" :key="city" :value="city">{{ city }}</option>
-        </select>
-      </div>
-
-      <!-- Filtro tipo de mascota -->
-      <div>
-        <label class="block font-semibold text-sm mb-1">Animal:</label>
-        <select 
-          :value="selectedPetType" 
-          @change="emit('update:petType', $event.target.value)"
-          class="border rounded p-2 w-full text-sm font-complementario text-[18px]"
-        >
-        <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">
-          {{ pet }}
-        </option>
-        </select>
-      </div>
-
       <!-- Componente PriceRange adaptado para móvil -->
       <PriceRange
         :min="0"

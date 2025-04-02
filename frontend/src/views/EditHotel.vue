@@ -1,12 +1,15 @@
 <script setup>
 import { ref, computed, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { handleApiError } from '@/utils/errorHandler';
+import { Notyf } from 'notyf';
 import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
 
 const route = useRoute();
 const router = useRouter();
+const notyf = new Notyf();
 
 const hotelId = computed(() => route.params.id);
 
@@ -54,13 +57,30 @@ watchEffect(() => {
 const { mutate: updateHotel, isLoading: isSaving } = useUpdateHotel();
 
 // Guardar cambios en el hotel
-const saveChanges = async () => {
-  try {
-    await updateHotel({ hotelId: hotel.value.id, hotelData: editableHotel.value });
-    window.location.href = "/mis-hoteles";
-  } catch (error) {
-    console.error("Error al guardar los cambios:", error);
-  }
+const saveChanges = () => {
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Guardando cambios...',
+    dismissible: false
+  });
+
+  updateHotel(
+    {
+      hotelId: hotel.value.id,
+      hotelData: editableHotel.value
+    },
+    {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
+        notyf.success('Cambios guardados correctamente');
+        router.push('/mis-hoteles');
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      }
+    }
+  );
 };
 
 // Formatear tipo de mascota
@@ -76,9 +96,9 @@ const formatPetType = (petType) => {
 };
 
 // Nuevos hooks para crear y eliminar tipos de habitación
-const { mutate: createRoomType, isLoading: isCreatingRoom } = useCreateRoomType();
-const { mutate: deleteRoomType, isLoading: isDeletingRoom } = useDeleteRoomType();
-const { mutate: updateRoomType, isLoading: isUpdatingRoom } = useUpdateRoomType();
+const { mutate: createRoomType } = useCreateRoomType();
+const { mutate: deleteRoomType } = useDeleteRoomType();
+const { mutate: updateRoomType } = useUpdateRoomType();
 
 // Estado para manejar la creación de un nuevo tipo de habitación
 const newRoomType = ref({
@@ -96,45 +116,53 @@ const editingRoomType = ref(null);
 
 // Abrir formulario de edición
 const openEditForm = (roomType) => {
-  editingRoomType.value = { ...roomType }; // Copiar los datos de la habitación a editar
+  editingRoomType.value = { ...roomType };
 };
 
 // Guardar cambios en un tipo de habitación
-const saveUpdatedRoomType = async () => {
-  try {
-    console.log("Guardando cambios para:", editingRoomType.value);
-    await updateRoomType({ roomTypeId: editingRoomType.value.id, roomTypeData: editingRoomType.value });
-    editingRoomType.value = null; // Cerrar el formulario de edición
-  } catch (error) {
-    console.error("Error al actualizar el tipo de habitación:", error);
-  }
+const saveUpdatedRoomType = () => {
+  updateRoomType(
+    {
+      roomTypeId: editingRoomType.value.id,
+      roomTypeData: editingRoomType.value
+    },
+    {
+      onSuccess: () => {
+        notyf.success('Tipo de habitación actualizado correctamente');
+        editingRoomType.value = null;
+      },
+      onError: handleApiError
+    }
+  );
 };
 
 // Eliminar un tipo de habitación
-const handleDeleteRoomType = async (roomTypeId) => {
-  try {
-    await deleteRoomType(roomTypeId);
-  } catch (error) {
-    console.error("Error al eliminar el tipo de habitación:", error);
-  }
+const handleDeleteRoomType = (roomTypeId) => {
+  deleteRoomType(roomTypeId, {
+    onSuccess: () => {
+      notyf.success('Tipo de habitación eliminado correctamente');
+    },
+    onError: handleApiError
+  });
 };
 
 // Guardar un nuevo tipo de habitación
-const saveNewRoomType = async () => {
-  try {
-    await createRoomType(newRoomType.value);
-    newRoomType.value = { // Resetear el estado de nuevo tipo de habitación
-      name: '',
-      description: '',
-      capacity: 1,
-      price_per_night: 1,
-      pet_type: 'DOG',
-      num_rooms: 1,
-      hotel: hotelId.value,
-    };
-  } catch (error) {
-    console.error("Error al crear el nuevo tipo de habitación:", error);
-  }
+const saveNewRoomType = () => {
+  createRoomType(newRoomType.value, {
+    onSuccess: () => {
+      notyf.success('Tipo de habitación creado correctamente');
+      newRoomType.value = {
+        name: '',
+        description: '',
+        capacity: 1,
+        price_per_night: 1,
+        pet_type: 'DOG',
+        num_rooms: 1,
+        hotel: hotelId.value,
+      };
+    },
+    onError: handleApiError
+  });
 };
 </script>
 

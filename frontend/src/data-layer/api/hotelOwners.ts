@@ -37,11 +37,10 @@ export const createHotelOwner = async (hotelOwnerData: Omit<HotelOwner, 'id'>) =
     } catch (error) {
         if (axios.isAxiosError(error)) {
             console.error("Error en la solicitud:", error.response?.data);
-            throw new Error(error.response?.data?.detail || 'Error desconocido');
-        } else {
-            console.error("Error desconocido:", error);
-            throw new Error('Error desconocido');
+            throw error;
         }
+        console.error("Error desconocido:", error);
+        throw error;
     }
 };
 
