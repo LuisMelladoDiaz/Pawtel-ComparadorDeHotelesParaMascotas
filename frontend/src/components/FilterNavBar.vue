@@ -1,91 +1,58 @@
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
-import InputText from './InputText.vue';
-import InputNumber from './InputNumber.vue';
-import DatePicker from '../components/DatePicker.vue';
-import DatePickerMobile from './DatePickerMobile.vue';
-import Button from '../components/Button.vue';
-import { useRouter } from 'vue-router';
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useFiltersStore } from '@/filters'
 
-const props = defineProps({
-  cities: {
-    type: Array,
-    required: true
-  },
-  petTypes: {
-    type: Array,
-    required: true
-  },
-  selectedCity: {
-    type: String,
-    required: true
-  },
-  selectedPetType: {
-    type: String,
-    required: true
-  },
-  startDate: {
-    type: String,
-    required: true
-  },
-  endDate: {
-    type: String,
-    required: true
-  }
-});
+import DatePicker from '../components/DatePicker.vue'
+import DatePickerMobile from './DatePickerMobile.vue'
+import Button from '../components/Button.vue'
 
-const emit = defineEmits([
-  'update:city',
-  'update:petType',
-  'update:startDate',
-  'update:endDate',
-]);
+const router = useRouter()
+const filters = useFiltersStore()
 
-// Mapeo de tipos de mascotas en inglés a español
+const cities = ref([
+  "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
+  "Palma de Mallorca", "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
+  "Valladolid", "Vigo", "Gijón"
+].sort())
+
+const petTypes = ["DOG", "CAT", "BIRD", "MIXED"].sort()
+
 const petTypeMapping = {
   DOG: 'Perro',
   CAT: 'Gato',
   BIRD: 'Pájaro',
   MIXED: 'Mixto'
-};
+}
 
-// Crear una propiedad computada solo después de que petTypes esté disponible
-const petTypesInSpanish = computed(() => {
-  // Verifica si petTypes está definido y es un array
-  return Array.isArray(props.petTypes) 
-    ? props.petTypes.map(petType => petTypeMapping[petType] || petType) 
-    : [];
-});
+const petTypesInSpanish = petTypes.map((petType) => petTypeMapping[petType])
 
-// Verificar si petTypes ha cambiado o si la propiedad está vacía y emitir un mensaje de depuración
-watch(() => props.petTypes, (newPetTypes) => {
-  if (!Array.isArray(newPetTypes)) {
-    console.error("petTypes no está definido correctamente", newPetTypes);
-  }
-});
+// Temporary local state
+const selectedCity = ref(filters.selectedCity || "")
+const selectedPetType = ref(filters.selectedPetType || "")
+const startDate = ref(filters.startDate || null)
+const endDate = ref(filters.endDate || null)
 
-// Llamar alguna lógica cuando el componente se haya montado, por ejemplo, verificar que las propiedades estén presentes
-onMounted(() => {
-  if (!Array.isArray(props.petTypes)) {
-    console.error('petTypes no está disponible o no es un array');
-  }
-});
-
-const router = useRouter();
 const onSearch = () => {
-  router.push('/hotels');
-};
-
+  filters.updateAndSearch({
+    selectedCity: selectedCity.value,
+    selectedPetType: selectedPetType.value,
+    startDate: startDate.value,
+    endDate: endDate.value
+  })
+}
 </script>
 
 <template>
   <div class="filter-navbar bg-terracota h-[100px]">
     <div class="filter-content max-w-7xl mx-auto px-5 h-full flex items-center justify-between">
+
+      <!-- City Dropdown -->
       <div class="relative inline-block text-pawtel-black">
         <i class="fas fa-map-marker-alt absolute left-2 bottom-1 transform -translate-y-1/2 text-[18px]"></i>
         <select
           :value="selectedCity"
-          @change="emit('update:city', $event.target.value)"
+          @change="selectedCity = $event.target.value"
           class="bg-white min-h-[42px] pl-8 text-[18px] shadow-sm font-complementario rounded-lg min-w-[300px] cursor-pointer"
         >
           <option disabled value="">Selecciona una ciudad</option>
@@ -94,37 +61,40 @@ const onSearch = () => {
         </select>
       </div>
 
+      <!-- DatePicker (Desktop) -->
       <DatePicker
         class="bg-white hidden md:flex"
         :startDate="startDate"
         :endDate="endDate"
-        @update:startDate="emit('update:startDate', $event)"
-        @update:endDate="emit('update:endDate', $event)"
+        @update:startDate="startDate = $event"
+        @update:endDate="endDate = $event"
       />
 
+      <!-- DatePicker (Mobile) -->
       <DatePicker
         class="bg-white md:hidden"
         :startDate="startDate"
         :endDate="endDate"
-        @update:startDate="emit('update:startDate', $event)"
-        @update:endDate="emit('update:endDate', $event)"
+        @update:startDate="startDate = $event"
+        @update:endDate="endDate = $event"
       />
 
-      
+      <!-- Pet Type Dropdown -->
       <div class="relative inline-block">
         <i class="fa-solid fa-paw absolute left-2 bottom-1 transform -translate-y-1/2 text-pawtel-black text-[18px]"></i>
-        <select 
-          :value="selectedPetType" 
-          @change="emit('update:petType', $event.target.value)"
+        <select
+          :value="selectedPetType"
+          @change="selectedPetType = $event.target.value"
           class="bg-white min-h-[42px] pl-8 text-[18px] text-pawtel-black shadow-sm font-complementario rounded-lg p-2 min-w-[300px] cursor-pointer"
         >
           <option disabled value="">Elige un tipo de mascota</option>
-          <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="props.petTypes[index]">
+          <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="petTypes[index]">
             {{ pet }}
           </option>
         </select>
       </div>
 
+      <!-- Search Button -->
       <Button
         @click="onSearch"
         class="bg-white m-0! rounded-lg cursor-pointer h-[42px]! max-w-[150px]! w-full! shadow-sm flex items-center justify-between text-xl gap-1 font-bold text-pawtel-black"
@@ -141,7 +111,6 @@ const onSearch = () => {
   opacity: 0.6;
 }
 
-/* Estilos responsivos */
 @media (max-width: 1100px) {
   .filter-navbar {
     height: 260px;

@@ -4,6 +4,7 @@ import { useCreateBooking } from '@/data-layer/hooks/bookings';
 import { Notyf } from 'notyf';
 import { useRoute } from 'vue-router';
 import { useGetRoomTypesByHotel, useGetHotelById } from '@/data-layer/hooks/hotels';
+import { handleApiError } from '@/utils/errorHandler';
 import DatePicker from '@/components/DatePicker.vue';
 import Button from '@/components/Button.vue';
 import DatePickerMobile from '@/components/DatePickerMobile.vue';
@@ -21,7 +22,6 @@ const { data: hotel } = useGetHotelById(hotelId);
 const hotelName = computed(() => hotel.value?.name || 'Cargando hotel...');
 
 const submitBooking = async () => {
-  try {
     const startDate = new Date(`${internalStartDate.value}T00:00:00Z`);
     const endDate = new Date(`${internalEndDate.value}T00:00:00Z`);
 
@@ -34,16 +34,12 @@ const submitBooking = async () => {
         },
         {
           onSuccess: () => notyf.success('Reserva realizada con éxito.'),
-          onError: () => notyf.error('Hubo un error al reservar. Inténtalo de nuevo.'),
-        }
-      );
-    } else {
-      notyf.error('Fecha de fin debe ser posterior a la de inicio.');
-    }
-  } catch (error) {
-    notyf.error('Ocurrió un error inesperado.');
-  }
+          onError: (error) => {
+        handleApiError(error);
+      }
+    });
 };
+}
 
 const totalPrice = computed(() => {
   if (!internalStartDate.value || !internalEndDate.value) return 0;
