@@ -213,3 +213,11 @@ class BookingHoldViewSet(TestCase):
         self.assertFalse(
             BookingHold.objects.filter(id=self.active_booking_hold.id).exists()
         )
+
+    def test_delete_booking_hold_as_admin(self):
+        url = reverse("booking-hold-detail", kwargs={"pk": self.active_booking_hold.id})
+        response = self.client2.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            BookingHold.objects.filter(id=self.active_booking_hold.id).exists()
+        )

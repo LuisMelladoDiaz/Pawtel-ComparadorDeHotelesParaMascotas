@@ -129,3 +129,11 @@ class CustomerViewSetTest(TestCase):
         url = reverse("customer-detail", kwargs={"pk": self.inactive_customer.id})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_customer_as_admin(self):
+        url = reverse("customer-detail", kwargs={"pk": self.authenticated_customer.id})
+        response = self.client2.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            Customer.objects.filter(id=self.authenticated_customer.id).exists()
+        )

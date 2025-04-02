@@ -208,3 +208,13 @@ class HotelOwnerViewSetTest(TestCase):
         response = self.client2.patch(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["is_approved"], True)
+
+    def test_delete_hotel_owner_as_admin(self):
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
+        response = self.client2.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            HotelOwner.objects.filter(id=self.authenticated_hotel_owner.id).exists()
+        )
