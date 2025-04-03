@@ -209,6 +209,7 @@ const selectCoverImage = (index) => {
 const removeImage = (index, source = 'uploaded') => {
   if (source === 'uploaded') {
     uploadedImages.value.splice(index, 1);
+    selectedFiles.value.splice(index, 1);
   } else if (source === 'hotel') {
     const imageId = mutableHotelImages.value[index]?.id;
     if (!imageId) return;
