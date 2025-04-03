@@ -69,8 +69,12 @@ const imageOptionsIndex = ref(null);
 const imageOptionsSource = ref(null);
 
 const openImageOptions = (index, source) => {
-  imageOptionsIndex.value = index;
-  imageOptionsSource.value = source;
+  if (imageOptionsIndex.value === index && imageOptionsSource.value === source) {
+    closeImageOptions();
+  } else {
+    imageOptionsIndex.value = index;
+    imageOptionsSource.value = source;
+  }
 };
 
 const closeImageOptions = () => {
@@ -353,94 +357,102 @@ const saveNewRoomType = () => {
       <div class="flex lg:flex-row flex-col gap-6 min-h-136 items-stretch">
 
         <!-- Contenedor de imágenes -->
-        <div class="w-full lg:w-80 bg-white rounded-xl shadow-md border border-gray-200">
-  <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
-    <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Imágenes</h1>
-  </div>
-  <div class="p-6">
-    <!-- Zona de subida de imágenes -->
-    <div class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
-      @click="fileInputRef.click()">
-      <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
-      <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
-      <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden" @change="handleImageUpload" />
-      <Button type="add" class="w-full text-[15px]">
-        <i class="fas fa-upload mr-2"></i> Seleccionar archivos
-      </Button>
-    </div>
-
-    <!-- Galería de imágenes subidas -->
-    <div v-if="(uploadedImages.length || mutableHotelImages.length)" class="mt-4">
-      <div class="flex flex-col">
-        <!-- Imágenes del hotel -->
-        <h3 class="text-md font-semibold text-gray-700 py-1">Imágenes subidas</h3>
-        <h3 v-if="!mutableHotelImages.length" class="text-sm font-semibold text-terracota py-1">El hotel no tiene imágenes</h3>
-        <div v-if="mutableHotelImages.length" class="gap-3 grid grid-cols-2">
-          <div v-for="(img, index) in mutableHotelImages" :key="'hotel-' + index" class="relative group">
-            <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
-              class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
-              :class="{'border-b-4 border-blue-500': img.is_cover}">
-            <button @click="removeImage(index, 'hotel')"
-              class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              ✕
-            </button>
-            <!-- Botón de opciones -->
-            <div class="absolute bottom-2 right-2">
-              <button @click="openImageOptions(index, 'hotel')"
-                class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-                ⋮
-              </button>
-              <div v-if="imageOptionsIndex === index && imageOptionsSource === 'hotel'"
-                class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
-                <button @click="selectCoverImage(index)"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
-              </div>
-            </div>
-            <div v-if="img.is_cover" class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
-              Portada
-            </div>
+        <div class="lg:min-w-110 lg:w-80 bg-white rounded-xl shadow-md border border-gray-200">
+          <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
+            <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Imágenes</h1>
           </div>
-        </div>
-            <!-- Imágenes subidas -->
-            <h3 v-if="uploadedImages.length" class="text-md font-semibold text-gray-700 mt-4 py-1">Imágenes para subir</h3>
-            <div v-if="uploadedImages.length" class="gap-3 grid grid-cols-2">
-              <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group">
-                <img :src="img.src" alt="'Imagen subida ' + (index + 1)"
-                  class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
-                  :class="{'border-b-4 border-blue-500': img.is_cover}">
-                <button @click="removeImage(index, 'uploaded')"
-                  class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  ✕
-                </button>
-                <!-- Botón de opciones -->
-                <div class="absolute bottom-2 right-2">
-                  <button @click="openImageOptions(index, 'uploaded')"
-                    class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-                    ⋮
-                  </button>
-                  <div v-if="imageOptionsIndex === index && imageOptionsSource === 'uploaded'"
-                    class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
-                    <button @click="selectCoverImage(index)"
-                      class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
+          <div class="p-6">
+            <!-- Zona de subida de imágenes -->
+            <div
+              class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
+              @click="fileInputRef.click()">
+              <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
+              <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
+              <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden"
+                @change="handleImageUpload" />
+              <Button type="add" class="w-full text-[15px]">
+                <i class="fas fa-upload mr-2"></i> Seleccionar archivos
+              </Button>
+            </div>
+
+            <!-- Galería de imágenes subidas -->
+            <div v-if="(uploadedImages.length || mutableHotelImages.length)" class="mt-4">
+              <div class="flex flex-col">
+                <!-- Imágenes del hotel -->
+                <h3 class="text-md font-semibold text-gray-700 py-1">Imágenes subidas</h3>
+                <h3 v-if="!mutableHotelImages.length" class="text-sm font-semibold text-terracota py-1">El hotel no
+                  tiene imágenes</h3>
+                <div v-if="mutableHotelImages.length" class="gap-3 grid grid-cols-2 lg:grid-cols-3">
+                  <div v-for="(img, index) in mutableHotelImages" :key="'hotel-' + index" class="relative group">
+                    <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
+                      class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
+                      :class="{ 'border-b-4 border-azul-suave': img.is_cover }">
+                    <button @click="removeImage(index, 'hotel')"
+                      class="absolute top-2 right-2 bg-terracota text-white rounded-full w-6 h-6 flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      ✕
+                    </button>
+                    <!-- Botón de opciones -->
+                    <div class="absolute bottom-2 right-2">
+                      <button @click="openImageOptions(index, 'hotel')"
+                        class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                        ⋮
+                      </button>
+                      <div v-if="imageOptionsIndex === index && imageOptionsSource === 'hotel'"
+                        class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
+                        <button @click="selectCoverImage(index)"
+                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
+                      </div>
+                    </div>
+                    <div v-if="img.is_cover"
+                      class="absolute bottom-0 left-0 bg-azul-suave text-white px-2 py-1 rounded-tr-lg text-xs">
+                      Portada
+                    </div>
                   </div>
                 </div>
-                <div v-if="img.is_cover" class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
-                  Portada
+                <!-- Imágenes subidas -->
+                <h3 v-if="uploadedImages.length" class="text-md font-semibold text-gray-700 mt-4 py-1">Imágenes para
+                  subir</h3>
+                <div v-if="uploadedImages.length" class="gap-3 grid grid-cols-2 lg:grid-cols-3">
+                  <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group">
+                    <img :src="img.src" alt="'Imagen subida ' + (index + 1)"
+                      class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
+                      :class="{ 'border-b-4 border-blue-500': img.is_cover }">
+                    <button @click="removeImage(index, 'uploaded')"
+                      class="absolute top-2 right-2 bg-terracota text-white rounded-full w-6 h-6 flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      ✕
+                    </button>
+                    <!-- Botón de opciones -->
+                    <div class="absolute bottom-2 right-2">
+                      <button @click="openImageOptions(index, 'uploaded')"
+                        class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                        ⋮
+                      </button>
+                      <div v-if="imageOptionsIndex === index && imageOptionsSource === 'uploaded'"
+                        class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
+                        <button @click="selectCoverImage(index)"
+                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
+                      </div>
+                    </div>
+                    <div v-if="img.is_cover"
+                      class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
+                      Portada
+                    </div>
+                  </div>
                 </div>
+
+
               </div>
             </div>
 
-        
-      </div>
-    </div>
-
-    <!-- Botón para confirmar subida -->
-    <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotelId)"
-      class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-      {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
-    </Button>
-  </div>
-</div>
+            <!-- Botón para confirmar subida -->
+             <div class="flex items-end justify-end">
+            <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotelId)"
+              class="mr-0! mt-4 bg-oliva text-white px-4 py-2 rounded hover:bg-oliva-dark">
+              {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
+            </Button>
+          </div>
+          </div>
+        </div>
 
 
 
@@ -501,7 +513,8 @@ const saveNewRoomType = () => {
             <h1 class="m-0! text-xl font-semibold text-white">Habitaciones</h1>
           </div>
 
-          <div class="flex items-center rounded-tr-xl min-h-[60px] hover:bg-gray-100 bg-white rounded-t-xl rounded-bl-xl border-5 border-terracota">
+          <div
+            class="flex items-center rounded-tr-xl min-h-[60px] hover:bg-gray-100 bg-white rounded-t-xl rounded-bl-xl border-5 border-terracota">
             <button @click="isCreateModalOpen = true"
               class="text-terracota font-bold px-6 h-full w-full flex items-center justify-center lg:justify-start transform transition-transform duration-200 ease-in-out hover:scale-105">
               <i class="fas fa-plus-circle mr-2"></i> Añadir nueva habitación
@@ -529,7 +542,8 @@ const saveNewRoomType = () => {
               <div>
                 <div class="mt-4 space-y-2">
                   <p class="text-gray-700"><span class="font-medium">Capacidad:</span> {{ room.capacity }} huéspedes</p>
-                  <p class="text-gray-700"><span class="font-medium">Número de habitaciones:</span> {{ room.num_rooms }}</p>
+                  <p class="text-gray-700"><span class="font-medium">Número de habitaciones:</span> {{ room.num_rooms }}
+                  </p>
                   <p class="text-gray-700">
                     <span class="font-medium">Precio: </span>
                     <span class="text-terracota red-500 font-semibold">{{ room.price_per_night }}€</span>
