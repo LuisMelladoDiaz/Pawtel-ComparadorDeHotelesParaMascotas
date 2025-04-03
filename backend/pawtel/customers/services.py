@@ -28,24 +28,6 @@ class CustomerService:
 
     # Authorization ----------------------------------------------------------
 
-    def authorize_action_customer_level_1(request, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_customer_service(role_user, action_name)
-        return role_user
-
-    def authorize_action_customer_level_2(request, target_customer_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_customer_service(role_user, action_name)
-        CustomerService.retrieve_customer(target_customer_id)
-        return role_user
-
-    def authorize_action_customer_level_3(request, target_customer_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_customer_service(role_user, action_name)
-        target_customer = CustomerService.retrieve_customer(target_customer_id)
-        CustomerService.__check_ownership_customer(role_user, target_customer)
-        return role_user
-
     def authorize_action_customer(
         request, action_name, target_customer_id=None, check_ownership=False
     ):
@@ -77,12 +59,6 @@ class CustomerService:
                 raise PermissionDenied("Permiso denegado.")
         else:
             raise PermissionDenied("Permiso denegado.")
-
-    def check_admin_permission(role_user):
-        allow_admin = False
-        if role_user.user.role == UserRole.ADMIN:
-            allow_admin = True
-        return allow_admin
 
     # Serialization -----------------------------------------------------------------
 

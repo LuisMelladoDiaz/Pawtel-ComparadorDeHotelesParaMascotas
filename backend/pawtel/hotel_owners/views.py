@@ -1,5 +1,6 @@
 from inspect import currentframe
 
+from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotel_owners.serializers import HotelOwnerSerializer
@@ -20,8 +21,8 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     def list(self, request):
         action_name = currentframe().f_code.co_name
         role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
-        admin_allow = HotelOwnerService.check_admin_permission(role_user)
-        hotel_owners = HotelOwnerService.list_hotel_owners(admin_allow)
+        is_admin = role_user.user.role == UserRole.ADMIN
+        hotel_owners = HotelOwnerService.list_hotel_owners(allow_inactive=is_admin)
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owners, many=True
         )
@@ -30,8 +31,10 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
         action_name = currentframe().f_code.co_name
         role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
-        admin_allow = HotelOwnerService.check_admin_permission(role_user)
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk, admin_allow)
+        is_admin = role_user.user.role == UserRole.ADMIN
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(
+            pk, allow_inactive=is_admin
+        )
         output_serializer_data = HotelOwnerService.serialize_output_hotel_owner(
             hotel_owner
         )
@@ -62,8 +65,10 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         role_user = HotelOwnerService.authorize_action_hotel_owner(
             request, action_name, pk, True
         )
-        admin_allow = HotelOwnerService.check_admin_permission(role_user)
-        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk, admin_allow)
+        is_admin = role_user.user.role == UserRole.ADMIN
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(
+            pk, allow_inactive=is_admin
+        )
         delete = HotelOwnerService.validate_all_hotels_deletion(pk)
         if delete:
             AppUserService.general_delete_app_user(request, hotel_owner.user.id)
