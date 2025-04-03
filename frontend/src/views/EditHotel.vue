@@ -371,11 +371,39 @@ const saveNewRoomType = () => {
 
     <!-- Galería de imágenes subidas -->
     <div v-if="(uploadedImages.length || mutableHotelImages.length)" class="mt-4">
-      <h3 class="text-md font-semibold text-gray-700 mb-2">Imágenes subidas</h3>
-
-      <div class="flex gap-3 overflow-x-auto p-1">
+      <div class="flex flex-col">
+        <!-- Imágenes del hotel -->
+        <h3 class="text-md font-semibold text-gray-700 py-1">Imágenes subidas</h3>
+        <h3 v-if="!mutableHotelImages.length" class="text-sm font-semibold text-terracota py-1">El hotel no tiene imágenes</h3>
+        <div v-if="mutableHotelImages.length" class="gap-3 grid grid-cols-2">
+          <div v-for="(img, index) in mutableHotelImages" :key="'hotel-' + index" class="relative group">
+            <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
+              class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
+              :class="{'border-b-4 border-blue-500': img.is_cover}">
+            <button @click="removeImage(index, 'hotel')"
+              class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              ✕
+            </button>
+            <!-- Botón de opciones -->
+            <div class="absolute bottom-2 right-2">
+              <button @click="openImageOptions(index, 'hotel')"
+                class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                ⋮
+              </button>
+              <div v-if="imageOptionsIndex === index && imageOptionsSource === 'hotel'"
+                class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
+                <button @click="selectCoverImage(index)"
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
+              </div>
+            </div>
+            <div v-if="img.is_cover" class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
+              Portada
+            </div>
+          </div>
+        </div>
             <!-- Imágenes subidas -->
-            <div v-if="uploadedImages.length">
+            <h3 v-if="uploadedImages.length" class="text-md font-semibold text-gray-700 mt-4 py-1">Imágenes para subir</h3>
+            <div v-if="uploadedImages.length" class="gap-3 grid grid-cols-2">
               <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group">
                 <img :src="img.src" alt="'Imagen subida ' + (index + 1)"
                   class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
@@ -402,33 +430,7 @@ const saveNewRoomType = () => {
               </div>
             </div>
 
-        <!-- Imágenes del hotel -->
-        <div v-if="mutableHotelImages.length">
-          <div v-for="(img, index) in mutableHotelImages" :key="'hotel-' + index" class="relative group">
-            <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
-              class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
-              :class="{'border-b-4 border-blue-500': img.is_cover}">
-            <button @click="removeImage(index, 'hotel')"
-              class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              ✕
-            </button>
-            <!-- Botón de opciones -->
-            <div class="absolute bottom-2 right-2">
-              <button @click="openImageOptions(index, 'hotel')"
-                class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-                ⋮
-              </button>
-              <div v-if="imageOptionsIndex === index && imageOptionsSource === 'hotel'"
-                class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
-                <button @click="selectCoverImage(index)"
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
-              </div>
-            </div>
-            <div v-if="img.is_cover" class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
-              Portada
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
 
