@@ -5,6 +5,14 @@ import { useGetRoomTypeById } from '@/data-layer/hooks/roomTypes';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import { computed } from 'vue';
+import hotel1 from '../assets/hoteles/hotel1.jpg';
+import hotel2 from '../assets/hoteles/hotel2.jpg';
+import hotel3 from '../assets/hoteles/hotel3.jpg';
+import hotel4 from '../assets/hoteles/hotel4.jpg';
+import hotel5 from '../assets/hoteles/hotel5.jpg';
+import hotel6 from '../assets/hoteles/hotel6.jpg';
+
+const defaultImages = [hotel1, hotel2, hotel3, hotel4, hotel5, hotel6];
 
 const { data: customer, isLoading: isLoadingCustomer } = useGetCurrentCustomer();
 const { data: bookings, isLoading: isLoadingBookings } = useGetMyBookings();
@@ -85,7 +93,7 @@ const formatPetType = (petType) => {
               <!-- Imagen del hotel -->
               <div>
                 <img
-                  src="frontend/src/assets/hoteles/hotel1.jpg"
+                  :src="hotelDictById[booking.hotel_id]?.value?.cover_image?.image || defaultImages[hotel.id % defaultImages.length]"
                   alt="Hotel Placeholder"
                   class="w-full lg:w-40 h-40 object-cover rounded-md self-stretch"
                 />
