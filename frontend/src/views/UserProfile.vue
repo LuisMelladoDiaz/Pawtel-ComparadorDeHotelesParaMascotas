@@ -22,9 +22,8 @@ const { data: currentCustomer } = useGetCurrentCustomer();
 const { data: currentHotelOwner } = useGetCurrentHotelOwner();
 const validationSchema = yup.object({
   username: yup.string().required('El nombre de usuario es obligatorio'),
-  password: yup.string().required('La contraseña es obligatoria'),
-  email: yup.string().required('La dirección de correo es obligatoria'),
-  phone: yup.string().required('El teléfono es obligatorio')
+  email: yup.string().email('El correo electrónico no es válido').required('El correo electrónico es obligatorio'),
+  phone: yup.string().matches(/^\+34\d{9}$/, 'El teléfono debe ser válido').required('El teléfono es obligatorio')
 });
 
 // Computed para acceder a los datos del usuario de forma segura
@@ -32,13 +31,6 @@ const userDataComputed = computed(() => userData?.value || {});
 const currentCustomerId = computed(() => currentCustomer?.value?.id || null);
 const currentHotelOwnerId = computed(() => currentHotelOwner?.value?.id || null);
 
-// Crear un objeto reactivo para almacenar los datos modificados
-const editedUserData = ref({
-  username: userDataComputed.value.username || '',
-  email: userDataComputed.value.email || '',
-  password: '',
-  phone: userDataComputed.value.phone || '',
-});
 
 // Hooks para actualizar y eliminar
 const { mutate: updateCustomer } = useUpdateCustomer();
@@ -58,8 +50,7 @@ const updateProfile = (values) => {
   const updatedData = {
     username: values.username,
     email: values.email,
-    phone: values.phone,
-    password: values.password || "password123",
+    phone: values.phone
   };
 
   const handleSuccess = () => {
@@ -81,7 +72,7 @@ const updateProfile = (values) => {
         notyf.success("Perfil actualizado con éxito.");
         router.push('/');
       },
-      onError: () => notyf.error("Error al actualizar el perfil.")
+      onError: (error) => handleError(error)
     });
   } else if (userDataComputed.value.role === "hotel_owner") {
     const hotelOwnerId = currentHotelOwnerId.value;
@@ -93,13 +84,18 @@ const updateProfile = (values) => {
         notyf.success("Perfil actualizado con éxito.");
         router.push('/');
       },
-      onError: () => notyf.error("Error al actualizar el perfil.")
+      onError: (error) => handleError(error)
     });
   }
 };
 
 // Eliminación de cuenta, enviando id
 const deleteAccount = () => {
+
+  const handleError = (error) => {
+    handleApiError(error);
+  };
+
   if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.")) {
     if (userDataComputed.value.role === "customer") {
       const customerId = currentCustomerId.value;
@@ -108,7 +104,7 @@ const deleteAccount = () => {
           notyf.success("Cuenta eliminada.");
           router.push('/register');
         },
-        onError: () => notyf.error("Error al eliminar la cuenta.")
+        onError: (error) => handleError(error)
       });
     } else if (userDataComputed.value.role === "hotel_owner") {
       const hotelOwnerId = currentHotelOwnerId.value;
@@ -117,7 +113,7 @@ const deleteAccount = () => {
           notyf.success("Cuenta eliminada.");
           router.push('/register');
         },
-        onError: () => notyf.error("Error al eliminar la cuenta.")
+        onError: (error) => handleError(error)
       });
     }
   }
@@ -165,7 +161,7 @@ const logout = () => {
         <div v-else class="mt-5 space-y-4">
 
 
-          <Form clas="form" @submit="updateProfile" :validation-schema="validationSchema" :initial-values="userDataComputed">
+          <Form class="form" @submit="updateProfile" :validation-schema="validationSchema" :initial-values="userDataComputed">
 
             <div class="flex flex-col">
               <label class="font-medium">Nombre de Usuario:</label>
@@ -177,16 +173,7 @@ const logout = () => {
               <Field as="input" id="email" name="email" type="email" class="border p-2 rounded" />
               <ErrorMessage name="email" class="text-red-500 text-sm" />
             </div>
-            <div class="flex flex-col">
-              <label class="font-medium">Contraseña:</label>
-              <div class="relative">
-                <Field as="input" id="password" :type="showPassword ? 'text' : 'password'" name="password" class="border p-2 rounded w-full" />
-                <button @click="togglePasswordVisibility" class="absolute right-3 top-2 text-pawtel-black">
-                  <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
-                </button>
-                <ErrorMessage name="password" class="text-red-500 text-sm" />
-              </div>
-            </div>
+
             <div class="flex flex-col">
               <label class="font-medium">Móvil:</label>
               <div class="flex gap-2">
@@ -240,7 +227,7 @@ const logout = () => {
         <h2 class="text-xl font-semibold">¡Bienvenido/a de nuevo, {{ userDataComputed?.username || 'Cargando...' }}!</h2>
         <div v-if="isLoadingUserData" class="mt-5 text-center text-gray-500">Cargando datos...</div>
         <div v-else class="mt-5 space-y-4">
-          <Form clas="form" @submit="updateProfile" :validation-schema="validationSchema" :initial-values="userDataComputed">
+          <Form class="form" @submit="updateProfile" :validation-schema="validationSchema" :initial-values="userDataComputed">
 
             <div class="flex flex-col">
               <label class="font-medium">Nombre de Usuario:</label>
@@ -251,16 +238,6 @@ const logout = () => {
               <label class="font-medium">Correo electrónico:</label>
               <Field as="input" id="email" name="email" type="email" class="border p-2 rounded" />
               <ErrorMessage name="email" class="text-red-500 text-sm" />
-            </div>
-            <div class="flex flex-col">
-              <label class="font-medium">Contraseña:</label>
-              <div class="relative">
-                <Field as="input" id="password" :type="showPassword ? 'text' : 'password'" name="password" class="border p-2 rounded w-full" />
-                <button @click="togglePasswordVisibility" class="absolute right-3 top-2 text-pawtel-black">
-                  <i :class="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
-                </button>
-                <ErrorMessage name="password" class="text-red-500 text-sm" />
-              </div>
             </div>
             <div class="flex flex-col">
               <label class="font-medium">Móvil:</label>
