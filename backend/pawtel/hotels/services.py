@@ -1,7 +1,7 @@
 from datetime import date, datetime, timedelta
 
+from django.core.exceptions import ValidationError
 from django.db.models import Max, Min, Q
-from django.forms import ValidationError
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.models import Booking
@@ -28,34 +28,33 @@ class HotelService:
 
     # Authorization ----------------------------------------------------------
 
-    def authorize_action_hotel_level_1(request, action_name):
+    def authorize_action_hotel(
+        request, action_name, hotel_id=None, check_ownership=False
+    ):
         role_user = AppUserService.get_current_role_user(request)
         PermissionService.check_permission_hotel_service(role_user, action_name)
+
+        if hotel_id:
+            hotel = HotelService.__perform_retrieve_hotel(role_user, hotel_id)
+            if check_ownership:
+                HotelService.__check_ownership_hotel(role_user, hotel)
+
         return role_user
 
-    def authorize_action_hotel_level_2(request, hotel_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_service(role_user, action_name)
-        HotelService.retrieve_hotel(hotel_id)
-        return role_user
+    def __perform_retrieve_hotel(role_user, hotel_id):
+        if role_user.user.role == UserRole.ADMIN:
+            return HotelService.retrieve_hotel(hotel_id, allow_archived=True)
+        else:
+            return HotelService.retrieve_hotel(hotel_id)
 
-    def authorize_action_hotel_level_3(request, hotel_id, action_name):
-        role_user = AppUserService.get_current_role_user(request)
-        PermissionService.check_permission_hotel_service(role_user, action_name)
-        hotel = HotelService.retrieve_hotel(hotel_id)
-        HotelService.check_ownership_hotel(role_user, hotel)
-        return role_user
-
-    def check_ownership_hotel(role_user, hotel):
+    def __check_ownership_hotel(role_user, hotel):
         if role_user.user.role == UserRole.ADMIN:
             return
-
         elif role_user.user.role == UserRole.HOTEL_OWNER:
             if hotel.hotel_owner.id != role_user.id:
-                raise PermissionDenied("Permission denied.")
-
+                raise PermissionDenied("Permiso denegado.")
         else:
-            raise PermissionDenied("Permission denied.")
+            raise PermissionDenied("Permiso denegado.")
 
     # Serialization ----------------------------------------------------------
 
@@ -89,7 +88,7 @@ class HotelService:
             else:
                 return Hotel.objects.get(pk=pk, is_archived=False)
         except Hotel.DoesNotExist:
-            raise NotFound(detail="Hotel not found.")
+            raise NotFound(detail="Hotel no encontrado.")
 
     @staticmethod
     def list_bookings_of_hotel(hotel_id):
@@ -104,7 +103,7 @@ class HotelService:
 
         name = input_serializer.validated_data.get("name")
         if name and Hotel.objects.filter(name=name).exists():
-            raise ValidationError({"name": "Name in use."})
+            raise ValidationError({"name": "Nombre en uso."})
 
     @staticmethod
     def create_hotel(input_serializer):
@@ -121,7 +120,7 @@ class HotelService:
         name = input_serializer.validated_data.get("name")
 
         if name and Hotel.objects.filter(name=name).exclude(id=pk).exists():
-            raise ValidationError({"name": "Name in use."})
+            raise ValidationError({"name": "Nombre en uso."})
 
     @staticmethod
     def update_hotel(pk, input_serializer):
@@ -155,7 +154,7 @@ class HotelService:
             if future_bookings.exists():
                 raise ValidationError(
                     {
-                        "detail": "Object cannot be deleted because there is an upcoming booking."
+                        "detail": "No se puede borrar el objeto porque existe una reserva asociada próximamente."
                     }
                 )
 
@@ -191,9 +190,9 @@ class HotelService:
         if filters is None:
             return {}
 
-        assert all(
-            f in HotelService.VALID_FILTERS for f in filters
-        ), f"Invalid filter: {filters}"
+        invalid_filters = [f for f in filters if f not in HotelService.VALID_FILTERS]
+        if invalid_filters:
+            raise ValidationError(f"Invalid filters: {invalid_filters}")
 
         validated = {}
         for key, expected_type in HotelService.VALID_FILTERS.items():
@@ -276,8 +275,8 @@ class HotelService:
             ).distinct()
 
         return filtered_hotels.annotate(
-            price_max=Max("roomtype__price_per_night"),
-            price_min=Min("roomtype__price_per_night"),
+            min_price_filters=Min("roomtype__price_per_night"),
+            max_price_filters=Max("roomtype__price_per_night"),
         )
 
     @staticmethod
@@ -299,10 +298,12 @@ class HotelService:
                 "name",
                 "price_max",
                 "price_min",
+                "max_price_filters",
+                "min_price_filters",
             ]
             assert (
                 sort_field.lstrip("-") in valid_sort_fields
-            ), f"Invalid sort field: {sort_field}"
+            ), f"Filtro de orden inválido: {sort_field}"
             hotels = hotels.order_by(sort_field)
 
         if "limit" in filters:
@@ -356,7 +357,9 @@ class HotelService:
 
         hotel = HotelService.retrieve_hotel(hotel_id)
         if hotel.images.count() >= 5:
-            raise ValidationError({"hotel": "A hotel cannot have more than 5 images."})
+            raise ValidationError(
+                {"hotel": "Un hotel no puede tener más de 5 imágenes."}
+            )
 
     @staticmethod
     def validate_update_image(input_serializer, hotel_id, image_id):
@@ -382,7 +385,7 @@ class HotelService:
         try:
             return HotelImage.objects.get(id=image_id, hotel_id=hotel_id)
         except HotelImage.DoesNotExist:
-            raise NotFound(detail="Hotel Image not found.")
+            raise NotFound(detail="Imagen de hotel no encontrada.")
 
     @staticmethod
     def retrieve_current_cover_image_or_404(hotel_id):
@@ -390,7 +393,7 @@ class HotelService:
             cover_image = HotelImage.objects.get(hotel__id=hotel_id, is_cover=True)
             return cover_image
         except HotelImage.DoesNotExist:
-            raise NotFound(detail="No cover image found for the hotel.")
+            raise NotFound(detail="Imagen de portada de hotel no encontrada.")
 
     @staticmethod
     def retrieve_current_cover_image(hotel_id):

@@ -60,8 +60,8 @@ class Command(BaseCommand):
                 name=nombre,
                 description=descripcion,
                 capacity=fake.random_int(min=1, max=50),
-                num_rooms=fake.random_int(min=0, max=50),
-                price_per_night=Decimal(fake.random_int(min=50, max=500)),
+                num_rooms=fake.random_int(min=1, max=50),
+                price_per_night=Decimal(fake.random_int(min=10, max=100)),
                 pet_type=random.choice(pet_types),
                 hotel=hotel,
             )

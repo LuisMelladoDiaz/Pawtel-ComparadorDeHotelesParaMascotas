@@ -3,10 +3,15 @@ import { ref, computed, watch } from 'vue';
 import Button from '../components/Button.vue';
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { useUserQuery, useLogoutMutation } from "@/data-layer/auth";
+import { handleApiError } from '@/utils/errorHandler';
+import { Notyf } from 'notyf';
 import { useUpdateCustomer, useDeleteCustomer, useGetCurrentCustomer } from "@/data-layer/hooks/customers";
 import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } from "@/data-layer/hooks/hotelOwners";
+import { useRoleQuery } from "@/data-layer/auth";
 
+const {data: roleQuery} = useRoleQuery();
 // Otros imports y referencias
+const notyf = new Notyf();
 const fileInput = ref(null);
 const showPassword = ref(false);
 const defaultProfilePicture = 'https://upload.wikimedia.org/wikipedia/commons/0/03/Twitter_default_profile_400x400.png';
@@ -52,7 +57,6 @@ const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
-// Actualización del perfil, enviando id y datos
 const updateProfile = () => {
   console.log("update - ", editedUserData.value.username);
 
@@ -63,56 +67,68 @@ const updateProfile = () => {
     password: editedUserData.value.password || "password123",
   };
 
+  const handleSuccess = () => {
+    notyf.success("Perfil actualizado con éxito");
+    router.push('/');
+  };
+
+  const handleError = (error) => {
+    handleApiError(error);
+  };
+
   if (userDataComputed.value.role === "customer") {
     const customerId = currentCustomerId.value;
-    updateCustomer({ 
-      customerId, 
+    updateCustomer({
+      customerId,
       ownerData: updatedData
     }, {
-      onSuccess: () => { 
-        alert("Perfil actualizado con éxito.");
-        window.location.href = "/";
-      },
-      onError: () => alert("Error al actualizar el perfil.")
+      onSuccess: handleSuccess,
+      onError: handleError
     });
   } else if (userDataComputed.value.role === "hotel_owner") {
     const hotelOwnerId = currentHotelOwnerId.value;
-    updateHotelOwner({ 
-      hotelOwnerId, 
+    updateHotelOwner({
+      hotelOwnerId,
       partialData: updatedData
     }, {
-      onSuccess: () => { 
-        alert("Perfil actualizado con éxito.");
-        window.location.href = "/";
-      },
-      onError: () => alert("Error al actualizar el perfil.")
+      onSuccess: handleSuccess,
+      onError: handleError
     });
   }
 };
 
 // Eliminación de cuenta, enviando id
 const deleteAccount = () => {
-  if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.")) {
-    if (userDataComputed.value.role === "customer") {
-      const customerId = currentCustomerId.value;
-      deleteCustomer(customerId, {
-        onSuccess: () => {
-          alert("Cuenta eliminada.");
-          window.location.href = "/register";
-        },
-        onError: () => alert("Error al eliminar la cuenta.")
-      });
-    } else if (userDataComputed.value.role === "hotel_owner") {
-      const hotelOwnerId = currentHotelOwnerId.value;
-      deleteHotelOwner(hotelOwnerId, {
-        onSuccess: () => {
-          alert("Cuenta eliminada.");
-          window.location.href = "/login";
-        },
-        onError: () => alert("Error al eliminar la cuenta.")
-      });
-    }
-  }
+  notyf.open({
+    type: 'confirm',
+    message: '¿Estás seguro de eliminar tu cuenta? Esta acción es irreversible',
+    dismissible: true,
+    actions: [
+      {
+        text: 'Cancelar',
+        class: 'cancel-button',
+        onClick: () => {}
+      },
+      {
+        text: 'Eliminar',
+        class: 'delete-button',
+        onClick: () => {
+          const onSuccess = () => {
+            notyf.success("Cuenta eliminada correctamente");
+            router.push(userDataComputed.value.role === "customer" ? '/register' : '/login');
+          };
+
+          const onError = (error) => handleApiError(error);
+
+          if (userDataComputed.value.role === "customer") {
+            deleteCustomer(currentCustomerId.value, { onSuccess, onError });
+          } else {
+            deleteHotelOwner(currentHotelOwnerId.value, { onSuccess, onError });
+          }
+        }
+      }
+    ]
+  });
 };
 
 const {mutate: mutateLogout} = useLogoutMutation();
@@ -124,7 +140,7 @@ const logout = () => {
 
 <template>
     <!-- Desktop version -->
-    <div class="justify-center items-start gap-10 p-5 hidden md:flex">
+    <div class="justify-center items-start gap-10 mt-10 p-5 hidden md:flex">
       <!-- Sidebar -->
       <aside class="w-64 flex flex-col items-center bg-white p-4 shadow-lg">
         <div class="relative">
@@ -148,8 +164,11 @@ const logout = () => {
               </router-link>
             </li>
             <li>
-              <router-link to="/mis-reservas" class="text-azul-suave hover:text-azul-suave-dark hover:underline">
+              <router-link v-if="roleQuery == 'customer'" to="/mis-reservas" class="text-azul-suave hover:text-azul-suave-dark hover:underline">
                 Mis Reservas
+              </router-link>
+              <router-link v-if="roleQuery == 'hotel_owner'" to="/mis-hoteles" class="text-azul-suave hover:text-azul-suave-dark hover:underline">
+                Mis Hoteles
               </router-link>
             </li>
             <li>

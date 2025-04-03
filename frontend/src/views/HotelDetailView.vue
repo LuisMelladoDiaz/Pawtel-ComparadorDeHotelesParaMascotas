@@ -25,9 +25,10 @@ const hotel = computed(() => ({
   price_min: apiHotel.value?.cheapest_price ?? '0',
   imageGallery: apiHotel.value?.images?.length > 0
     ? apiHotel.value.images
-        .filter(img => !img.is_cover)  // Filtramos las imágenes donde is_cover es false
-        .map(img => img.image)        // Extraemos solo las URLs de las imágenes
+        .filter(img => !img.is_cover)
+        .map(img => img.image)
     : [detalles3, detalles4, detalles1, detalles2], // Imágenes por defecto si no hay ninguna
+
   description: apiHotel.value?.description ?? 'Descripción predeterminada del hotel.',
   reviews: apiHotel.value?.reviews?.length
     ? apiHotel.value.reviews

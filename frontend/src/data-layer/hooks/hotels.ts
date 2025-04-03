@@ -18,13 +18,16 @@ export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
   return useQuery({
     queryKey: ['hotels', filters],
     queryFn: () => fetchAllHotels({
-      ...Object.fromEntries(Object.entries(filters || {}).map(([key, value]) => [key, toValue(value)])),
+      ...Object.fromEntries(
+        Object.entries(filters ?? {})
+          .map(([key, value]) => [key, toValue(value)])
+          .filter((keyval) => Boolean(keyval[1]))
+      ),
     }),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
 };
-
 
 export const useGetHotelById = (hotelId: MaybeRef<number>) => {
   return useQuery({

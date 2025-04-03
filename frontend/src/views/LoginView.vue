@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router';
 import { useLoginMutation } from '@/data-layer/auth';
 import { Notyf } from 'notyf';
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import { handleApiError } from '@/utils/errorHandler';
 import * as yup from 'yup';
 
 const notyf = new Notyf();
@@ -16,18 +17,30 @@ const validationSchema = yup.object({
   password: yup.string().required('La contraseña es obligatoria')
 });
 
-const login = async (values) => {
-  try {
-    await loginMutation.mutateAsync({
+const login = (values) => {
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Iniciando sesión...',
+    dismissible: false
+  });
+
+  loginMutation.mutate(
+    {
       username: values.username,
       password: values.password
-    });
-    notyf.success('Inicio de sesión exitoso');
-    router.push('/');
-  } catch (error) {
-    console.error('Error al iniciar sesión:', error);
-    notyf.error('Usuario o contraseña incorrectos');
-  }
+    },
+    {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
+        notyf.success('Inicio de sesión exitoso');
+        router.push('/');
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      }
+    }
+  );
 };
 </script>
 
@@ -39,7 +52,7 @@ const login = async (values) => {
       <Form @submit="login" :validation-schema="validationSchema">
         <div class="mt-4">
           <label for="username" class="block text-sm font-medium text-gray-700">Nombre de Usuario</label>
-          <Field name="username" as="input" id="username" 
+          <Field name="username" as="input" id="username"
             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-azul-suave focus:border-blue-500" />
           <ErrorMessage name="username" class="text-red-500 text-sm" />
         </div>
@@ -73,7 +86,6 @@ const login = async (values) => {
     </div>
   </div>
 </template>
-
 
 <style scoped>
 @media (max-width: 900px) {

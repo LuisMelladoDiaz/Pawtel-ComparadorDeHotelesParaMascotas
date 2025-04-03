@@ -4,7 +4,8 @@ import { useRouter } from 'vue-router';
 import { useCreateCustomer } from '@/data-layer/hooks/customers';
 import { useCreateHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { Notyf } from 'notyf';
-import { Form, Field, ErrorMessage, useForm } from 'vee-validate';
+import { handleApiError } from '@/utils/errorHandler';
+import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 
 const notyf = new Notyf();
@@ -14,10 +15,8 @@ const { mutate: createHotelOwner } = useCreateHotelOwner();
 
 const showPassword = ref(false);
 const showConfirmPassword = ref(false);
-const acceptTerms = ref(false);
 
-
-// Esquema de validación usando Yup
+// Esquema de validación
 const validationSchema = yup.object({
   username: yup.string().required('El nombre de usuario es obligatorio'),
   email: yup.string().email('El correo electrónico no es válido').required('El correo electrónico es obligatorio'),
@@ -28,62 +27,51 @@ const validationSchema = yup.object({
   accept_terms: yup.boolean().oneOf([true], 'Debes aceptar los términos y condiciones').default(false),
 });
 
-const { handleSubmit, values } = useForm({
-  initialValues: {
-    accept_terms: false,
-  },
-  validationSchema,
-});
-
 const register = async (values) => {
-  const currentDate = new Date().toISOString().split('T')[0];
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Registrando usuario...',
+    dismissible: false
+  });
+
+  const registrationData = {
+    username: values.username,
+    email: values.email,
+    phone: values.phone,
+    password: values.password,
+    role: values.role,
+    accept_terms: values.accept_terms,
+  };
 
   try {
     if (values.role === 'hotel_owner') {
-      await createHotelOwner(
-        {
-          username: values.username,
-          email: values.email,
-          phone: values.phone,
-          password: values.password,
-          role: values.role,
-          accept_terms: values.accept_terms,
+      await createHotelOwner(registrationData, {
+        onSuccess: () => {
+          notyf.dismiss(loadingNotification);
+          notyf.success("Registro exitoso");
+          router.push('/login');
         },
-        {
-          onSuccess: () => {
-            notyf.success("Registro exitoso");
-            router.push('/login');
-          },
-          onError: (error) => {
-            console.error('Error al registrarse:', error);
-            notyf.error("Error en el registro");
-          },
+        onError: (error) => {
+          notyf.dismiss(loadingNotification);
+          handleApiError(error);
         }
-      );
+      });
     } else {
-      await createCustomer(
-        {
-          username: values.username,
-          email: values.email,
-          phone: values.phone,
-          password: values.password,
-          role: values.role,
-          accept_terms: values.accept_terms,
+      await createCustomer(registrationData, {
+        onSuccess: () => {
+          notyf.dismiss(loadingNotification);
+          notyf.success("Registro exitoso");
+          router.push('/login');
         },
-        {
-          onSuccess: () => {
-            notyf.success("Registro exitoso");
-            router.push('/login');
-          },
-          onError: (error) => {
-            console.error('Error al registrarse:', error);
-            notyf.error("Error en el registro");
-          },
+        onError: (error) => {
+          notyf.dismiss(loadingNotification);
+          handleApiError(error);
         }
-      );
+      });
     }
   } catch (error) {
-    notyf.error('Hubo un error al registrarse. Inténtalo de nuevo.');
+    notyf.dismiss(loadingNotification);
+    handleApiError(error);
   }
 };
 </script>
@@ -147,8 +135,6 @@ const register = async (values) => {
             <a href="/terminos-y-condiciones" target="_blank" class="text-azul-suave hover:underline">términos y condiciones</a>
           </label>
         </div>
-
-        <!-- Mostrar el mensaje de error solo si el valor de accept_terms es incorrecto -->
         <ErrorMessage name="accept_terms" class="text-red-500 text-sm" />
 
 

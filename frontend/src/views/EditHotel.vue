@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { handleApiError } from '@/utils/errorHandler';
+import { Notyf } from 'notyf';
 import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
 import { useUploadHotelImage, useDeleteHotelImage } from '@/data-layer/hooks/hotelImages';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
@@ -10,8 +12,27 @@ import { integer } from '@vee-validate/rules';
 
 const route = useRoute();
 const router = useRouter();
+const notyf = new Notyf();
 
 const hotelId = computed(() => route.params.id);
+
+
+//Modals
+const isCreateModalOpen = ref(false);
+const closeCreateModal = () => {
+  isCreateModalOpen.value = false;
+};
+
+const editingRoomType = ref(null);
+const isEditModalOpen = computed(() => !!editingRoomType.value);
+const openEditForm = (roomType) => {
+  editingRoomType.value = { ...roomType };
+};
+const closeEditModal = () => {
+  editingRoomType.value = null;
+};
+
+// Obtener detalles del hotel
 
 const { data: hotel, isLoading: isLoadingHotel, isError: isErrorHotel } = useGetHotelById(hotelId);
 
@@ -110,13 +131,31 @@ watchEffect(() => {
 
 const { mutate: updateHotel, isLoading: isSaving } = useUpdateHotel();
 
-const saveChanges = async () => {
-  try {
-    await updateHotel({ hotelId: hotel.value.id, hotelData: editableHotel.value });
-    window.location.href = "/mis-hoteles";
-  } catch (error) {
-    console.error("Error al guardar los cambios:", error);
-  }
+// Guardar cambios en el hotel
+const saveChanges = () => {
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Guardando cambios...',
+    dismissible: false
+  });
+
+  updateHotel(
+    {
+      hotelId: hotel.value.id,
+      hotelData: editableHotel.value
+    },
+    {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
+        notyf.success('Cambios guardados correctamente');
+        router.push('/mis-hoteles');
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      }
+    }
+  );
 };
 
 const formatPetType = (petType) => {
@@ -130,8 +169,12 @@ const formatPetType = (petType) => {
   return petMap[petType] || 'Otro';
 };
 
-const { mutate: createRoomType, isLoading: isCreatingRoom } = useCreateRoomType();
-const { mutate: updateRoomType, isLoading: isUpdatingRoom } = useUpdateRoomType();
+
+// Nuevos hooks para crear y eliminar tipos de habitación
+const { mutate: createRoomType } = useCreateRoomType();
+const { mutate: deleteRoomType } = useDeleteRoomType();
+const { mutate: updateRoomType } = useUpdateRoomType();
+
 
 const newRoomType = ref({
   name: '',
@@ -143,45 +186,50 @@ const newRoomType = ref({
   hotel: hotelId.value,
 });
 
-const editingRoomType = ref(null);
-
-const openEditForm = (roomType) => {
-  editingRoomType.value = { ...roomType };
+// Guardar cambios en un tipo de habitación
+const saveUpdatedRoomType = () => {
+  updateRoomType(
+    {
+      roomTypeId: editingRoomType.value.id,
+      roomTypeData: editingRoomType.value
+    },
+    {
+      onSuccess: () => {
+        notyf.success('Tipo de habitación actualizado correctamente');
+        editingRoomType.value = null;
+      },
+      onError: handleApiError
+    }
+  );
 };
 
-const saveUpdatedRoomType = async () => {
-  try {
-    console.log("Guardando cambios para:", editingRoomType.value);
-    await updateRoomType({ roomTypeId: editingRoomType.value.id, roomTypeData: editingRoomType.value });
-    editingRoomType.value = null;
-  } catch (error) {
-    console.error("Error al actualizar el tipo de habitación:", error);
-  }
+// Eliminar un tipo de habitación
+const handleDeleteRoomType = (roomTypeId) => {
+  deleteRoomType(roomTypeId, {
+    onSuccess: () => {
+      notyf.success('Tipo de habitación eliminado correctamente');
+    },
+    onError: handleApiError
+  });
 };
 
-const handleDeleteRoomType = async (roomTypeId) => {
-  try {
-    await deleteRoomType(roomTypeId);
-  } catch (error) {
-    console.error("Error al eliminar el tipo de habitación:", error);
-  }
-};
-
-const saveNewRoomType = async () => {
-  try {
-    await createRoomType(newRoomType.value);
-    newRoomType.value = {
-      name: '',
-      description: '',
-      capacity: 1,
-      price_per_night: 1,
-      pet_type: 'DOG',
-      num_rooms: 1,
-      hotel: hotelId.value,
-    };
-  } catch (error) {
-    console.error("Error al crear el nuevo tipo de habitación:", error);
-  }
+// Guardar un nuevo tipo de habitación
+const saveNewRoomType = () => {
+  createRoomType(newRoomType.value, {
+    onSuccess: () => {
+      notyf.success('Tipo de habitación creado correctamente');
+      newRoomType.value = {
+        name: '',
+        description: '',
+        capacity: 1,
+        price_per_night: 1,
+        pet_type: 'DOG',
+        num_rooms: 1,
+        hotel: hotelId.value,
+      };
+    },
+    onError: handleApiError
+  });
 };
 
 </script>
@@ -232,6 +280,7 @@ const saveNewRoomType = async () => {
                 <div v-if="img.is_cover" class="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-br-lg text-xs">
                   Cover Image
                 </div>
+
               </div>
             </div>
           </div>
@@ -247,57 +296,150 @@ const saveNewRoomType = async () => {
         <div class="flex-1 border rounded-lg p-6 border-gray-300 space-y-8">
           <div v-if="isLoadingHotel" class="text-center py-10">Cargando detalles del hotel...</div>
           <div v-else-if="isErrorHotel" class="text-center py-10 text-red-600">Error al cargar los detalles del hotel.
+        <!-- Información del hotel -->
+        <div class="bg-white rounded-xl flex-1 shadow-md border border-gray-200">
+          <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
+            <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Información</h1>
+          </div>
+          <div v-if="isLoadingHotel" class="text-center py-10">
+            <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
           </div>
 
-          <div v-else>
-            <h1 class="text-2xl font-bold text-gray-800 mb-4">Gestionar Hotel</h1>
-            <div class="grid grid-cols-2 gap-4">
+          <div v-else-if="isErrorHotel" class="text-center py-10 text-red-600">
+            <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+            <p>Error al cargar la información del hotel</p>
+
+          </div>
+
+          <div v-else class="flex flex-col justify-between space-y-10 p-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <label class="text-sm font-semibold text-gray-700">Nombre:</label>
-                <input v-model="editableHotel.name" type="text" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del hotel</label>
+                <input v-model="editableHotel.name"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Dirección:</label>
-                <input v-model="editableHotel.address" type="text" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
+                <input v-model="editableHotel.address"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Ciudad:</label>
-                <input v-model="editableHotel.city" type="text" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Ciudad</label>
+                <input v-model="editableHotel.city"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
               </div>
-              <div class="col-span-2">
-                <label class="text-sm font-semibold text-gray-700">Descripción:</label>
-                <textarea v-model="editableHotel.description" rows="3" class="w-full p-1 border rounded"></textarea>
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Descripción</label>
+                <textarea v-model="editableHotel.description" rows="4"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"></textarea>
               </div>
             </div>
-            <div class="mt-4 text-right">
-              <Button type="add" @click="saveChanges" :disabled="isSaving" class="w-48 mb-3">
-                {{ isSaving ? "Actualizando..." : "Actualizar Hotel" }}
+            <div class="text-right">
+              <Button type="accept" @click="saveChanges" :loading="isSaving" class="lg:w-fit m-0! w-full">
+                <i class="fas fa-save mr-2"></i> {{ isSaving ? "Guardando..." : "Guardar cambios" }}
               </Button>
             </div>
           </div>
+        </div>
 
-          <div>
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Añadir Nuevo Tipo de Habitación</h2>
-            <div class="grid grid-cols-2 gap-4">
+      </div>
+
+      <!-- SECCIÓN DE HABITACIONES -->
+      <!-- HABITACIONES -->
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 mb-10">
+        <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
+
+          <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
+            <h1 class="m-0! text-xl font-semibold text-white">Habitaciones</h1>
+          </div>
+
+          <div class="flex items-center rounded-tr-xl min-h-[60px] hover:bg-gray-100 bg-white rounded-t-xl rounded-bl-xl border-5 border-terracota">
+            <button @click="isCreateModalOpen = true"
+              class="text-terracota font-bold px-6 h-full w-full flex items-center justify-center lg:justify-start transform transition-transform duration-200 ease-in-out hover:scale-105">
+              <i class="fas fa-plus-circle mr-2"></i> Añadir nueva habitación
+            </button>
+          </div>
+        </div>
+
+        <div v-if="isLoadingRooms" class="text-center py-10">
+          <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
+        </div>
+
+        <div v-else-if="isErrorRooms" class="text-center py-10 text-red-600">
+          <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+          <p>Error al cargar los tipos de habitación</p>
+        </div>
+
+        <div v-else class="space-y-6 p-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div v-for="room in roomTypes" :key="room.id"
+              class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
               <div>
-                <label class="text-sm font-semibold text-gray-700">Nombre:</label>
-                <input v-model="newRoomType.name" type="text" class="w-full p-1 border rounded">
+                <h3 class="text-lg font-bold text-gray-800">{{ room.name }}</h3>
+                <p class="text-gray-600 mt-2 text-justify line-clamp-4 min-h-20">{{ room.description }}</p>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Descripción:</label>
-                <input v-model="newRoomType.description" type="text" class="w-full p-1 border rounded">
+                <div class="mt-4 space-y-2">
+                  <p class="text-gray-700"><span class="font-medium">Capacidad:</span> {{ room.capacity }} huéspedes</p>
+                  <p class="text-gray-700"><span class="font-medium">Número de habitaciones:</span> {{ room.num_rooms }}</p>
+                  <p class="text-gray-700">
+                    <span class="font-medium">Precio: </span>
+                    <span class="text-terracota red-500 font-semibold">{{ room.price_per_night }}€</span>
+                    <span class="text-gray-700"> por noche</span>
+                  </p>
+                  <p class="text-gray-700"><span class="font-medium">Tipo de mascota:</span> {{
+                    formatPetType(room.pet_type) }}</p>
+                </div>
+                <div class="mt-6 flex flex-col gap-3 lg:flex-row lg:justify-between lg:gap-8">
+                  <Button type="edit" @click="openEditForm(room)" class="flex-1 m-0! h-fit">
+                    <i class="fas fa-edit mr-2"></i> Editar
+                  </Button>
+                  <Button type="reject" @click="handleDeleteRoomType(room.id)" :disabled="isDeletingRoom"
+                    class="flex-1 m-0! h-fit">
+                    <i class="fas fa-trash-alt mr-2"></i>
+                    {{ isDeletingRoom ? "Eliminando..." : "Eliminar" }}
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Añadir -->
+      <transition name="fade">
+        <div v-if="isCreateModalOpen" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
+          <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 relative">
+            <button @click="closeCreateModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
+              <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Añadir nueva habitación</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre:</label>
+                <input v-model="newRoomType.name" type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Capacidad:</label>
-                <input v-model="newRoomType.capacity" type="number" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Descripción:</label>
+                <input v-model="newRoomType.description" type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Precio por Noche:</label>
-                <input v-model="newRoomType.price_per_night" type="number" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Capacidad:</label>
+                <input v-model="newRoomType.capacity" type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Tipo de Mascota:</label>
-                <select v-model="newRoomType.pet_type" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Precio por noche:</label>
+                <input v-model="newRoomType.price_per_night" type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de mascota:</label>
+                <select v-model="newRoomType.pet_type"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
                   <option value="DOG">🐶 Perros</option>
                   <option value="CAT">🐱 Gatos</option>
                   <option value="BIRD">🐦 Pájaros</option>
@@ -305,74 +447,84 @@ const saveNewRoomType = async () => {
                 </select>
               </div>
               <div>
-                <label class="text-sm font-semibold text-gray-700">Número de Habitaciones:</label>
-                <input v-model="newRoomType.num_rooms" type="number" class="w-full p-1 border rounded">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Número de habitaciones:</label>
+                <input v-model="newRoomType.num_rooms" type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
               </div>
             </div>
-            <div class="mt-4 text-right">
-              <Button type="accept" @click="saveNewRoomType" :disabled="isCreatingRoom" class="w-48 mb-3">
-                {{ isCreatingRoom ? "Creando..." : "Añadir Tipo de Habitación" }}
+
+            <div class="mt-6 text-right">
+              <Button type="accept" @click="saveNewRoomType(); closeCreateModal()" :disabled="isCreatingRoom"
+                class="lg:w-fit m-0! w-full">
+                <i class="fas fa-plus-circle mr-2"></i> {{ isCreatingRoom ? "Creando..." : "Añadir Habitación" }}
               </Button>
-            </div>
-          </div>
-
-          <div v-if="editingRoomType">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">Editar Tipo de Habitación</h2>
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="text-sm font-semibold text-gray-700">Nombre:</label>
-                <input v-model="editingRoomType.name" type="text" class="w-full p-1 border rounded">
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-700">Descripción:</label>
-                <input v-model="editingRoomType.description" type="text" class="w-full p-1 border rounded">
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-700">Capacidad:</label>
-                <input v-model="editingRoomType.capacity" type="number" class="w-full p-1 border rounded">
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-700">Precio por Noche:</label>
-                <input v-model="editingRoomType.price_per_night" type="number" class="w-full p-1 border rounded">
-              </div>
-              <div>
-                <label class="text-sm font-semibold text-gray-700">Número de Habitaciones:</label>
-                <input v-model="editingRoomType.num_rooms" type="number" class="w-full p-1 border rounded">
-              </div>
-            </div>
-            <div class="mt-4 text-right">
-              <Button type="accept" @click="saveUpdatedRoomType" :disabled="isUpdatingRoom" class="w-48 mb-3">
-                {{ isUpdatingRoom ? "Actualizando..." : "Guardar Cambios" }}
-              </Button>
-            </div>
-          </div>
-
-          <div v-if="isLoadingRooms" class="text-center py-10">Cargando tipos de habitación...</div>
-          <div v-else-if="isErrorRooms" class="text-center py-10 text-red-600">Error al cargar los tipos de habitación.
-          </div>
-
-          <div class="border border-gray-200 rounded-lg max-h-96 overflow-y-auto p-4 space-y-4 bg-gray-50">
-            <h2 class="text-xl font-bold text-gray-800 mb-2">Habitaciones existentes</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div v-for="room in roomTypes" :key="room.id" class="border p-4 rounded-lg shadow-sm bg-white">
-                <h3 class="text-xl font-bold text-gray-700">{{ room.name }}</h3>
-                <p class="text-gray-600 mt-1">{{ room.description }}</p>
-                <p class="mt-2 text-gray-700"><strong>Capacidad:</strong> {{ room.capacity }} huéspedes</p>
-                <p class="mt-2 text-gray-700"><strong>Precio:</strong> ${{ room.price_per_night }} por noche</p>
-                <p class="mt-2 text-gray-700"><strong>Tipo de Mascota:</strong> {{ formatPetType(room.pet_type) }}</p>
-                <Button type="edit" @click="openEditForm(room)"
-                  class="mt-4 px-6 py-2 bg-yellow-600 text-white font-bold rounded-md hover:bg-yellow-700 transition">
-                  Editar
-                </Button>
-                <Button type="reject" @click="handleDeleteRoomType(room.id)" :disabled="isDeletingRoom"
-                  class="mt-4 px-6 py-2 bg-red-600 text-white font-bold rounded-md hover:bg-red-700 transition">
-                  {{ isDeletingRoom ? "Eliminando..." : "Eliminar" }}
-                </Button>
-              </div>
             </div>
           </div>
         </div>
-      </div>
+      </transition>
+
+      <!-- Modal Editar -->
+      <transition name="fade">
+        <div v-if="editingRoomType" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
+          <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 relative">
+            <button @click="closeEditModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
+              <i class="fas fa-times"></i>
+            </button>
+            <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Editar habitación</h2>
+
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre:</label>
+                <input v-model="editingRoomType.name" type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Descripción:</label>
+                <input v-model="editingRoomType.description" type="text"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Capacidad:</label>
+                <input v-model="editingRoomType.capacity" type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Precio por noche:</label>
+                <input v-model="editingRoomType.price_per_night" type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Número de habitaciones:</label>
+                <input v-model="editingRoomType.num_rooms" type="number"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+              </div>
+            </div>
+
+            <div class="mt-6 text-right">
+              <Button type="accept" @click="saveUpdatedRoomType(); closeEditModal()" class="lg:w-fit m-0! w-full">
+                <i class="fas fa-save mr-2"></i> Guardar cambios
+              </Button>
+            </div>
+          </div>
+        </div>
+
+      </transition>
+
+    </div>
     </div>
   </div>
+</div>
 </template>
+
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+</style>
