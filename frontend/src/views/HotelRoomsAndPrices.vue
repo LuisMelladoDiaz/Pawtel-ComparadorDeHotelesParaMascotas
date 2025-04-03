@@ -26,7 +26,7 @@ const hotel = computed(() => ({
 
 const handleReservation = (roomId) => {
   router.push({
-    path: `/hotel/${hotelId.value}/reservation-form`,
+    path: `/hotel/${hotelId.value}/${roomId}/confirmar-reserva`,
     query: { room: roomId }
   });
 };
