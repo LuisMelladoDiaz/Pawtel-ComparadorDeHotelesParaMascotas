@@ -1,5 +1,6 @@
 from inspect import currentframe
 
+from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.models import Customer
@@ -18,8 +19,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
     def list(self, request):
         action_name = currentframe().f_code.co_name
         role_user = CustomerService.authorize_action_customer(request, action_name)
-        admin_allow = CustomerService.check_admin_permission(role_user)
-        customers = CustomerService.list_customers(admin_allow)
+        is_admin = role_user.user.role == UserRole.ADMIN
+        customers = CustomerService.list_customers(allow_inactive=is_admin)
         output_serializer_data = CustomerService.serialize_output_customer(
             customers, many=True
         )
@@ -30,8 +31,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
         role_user = CustomerService.authorize_action_customer(
             request, action_name, pk, True
         )
-        admin_allow = CustomerService.check_admin_permission(role_user)
-        customer = CustomerService.retrieve_customer(pk, admin_allow)
+        is_admin = role_user.user.role == UserRole.ADMIN
+        customer = CustomerService.retrieve_customer(pk, allow_inactive=is_admin)
         output_serializer_data = CustomerService.serialize_output_customer(customer)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
@@ -60,8 +61,8 @@ class CustomerViewSet(viewsets.ModelViewSet):
         role_user = CustomerService.authorize_action_customer(
             request, action_name, pk, True
         )
-        admin_allow = CustomerService.check_admin_permission(role_user)
-        customer = CustomerService.retrieve_customer(pk, admin_allow)
+        is_admin = role_user.user.role == UserRole.ADMIN
+        customer = CustomerService.retrieve_customer(pk, allow_inactive=is_admin)
         delete = CustomerService.validate_customer_deletion(pk)
         if delete:
             AppUserService.general_delete_app_user(request, customer.user.id)

@@ -78,12 +78,6 @@ class HotelService:
     def serialize_output_hotel(hotel, many=False, context=None):
         return HotelSerializer(hotel, many=many, context=context).data
 
-    def check_admin_permission(role_user):
-        allow_admin = False
-        if role_user.user.role == UserRole.ADMIN:
-            allow_admin = True
-        return allow_admin
-
     # GET --------------------------------------------------------------------
 
     @staticmethod

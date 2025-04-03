@@ -1,6 +1,7 @@
 from inspect import currentframe
 
 from drf_spectacular.utils import extend_schema
+from pawtel.app_admins.services import AdminService
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.hotels.models import Hotel, HotelImage
 from pawtel.hotels.serializers import HotelImageSerializer, HotelSerializer
@@ -23,18 +24,14 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         filters = request.query_params.dict()
-        action_name = currentframe().f_code.co_name
-        role_user = HotelService.authorize_action_hotel(request, action_name)
-        admin_allowed = HotelService.check_admin_permission(role_user)
-        hotels = HotelService.list_filtered_hotels(filters, admin_allowed)
+        is_admin = AdminService.is_current_user_admin(request)
+        hotels = HotelService.list_filtered_hotels(filters, allow_archived=is_admin)
         serializer = HotelSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        action_name = currentframe().f_code.co_name
-        role_user = HotelService.authorize_action_hotel(request, action_name)
-        admin_allowed = HotelService.check_admin_permission(role_user)
-        hotel = HotelService.retrieve_hotel(pk, admin_allowed)
+        is_admin = AdminService.is_current_user_admin(request)
+        hotel = HotelService.retrieve_hotel(pk, allow_archived=is_admin)
         output_serializer_data = HotelService.serialize_output_hotel(
             hotel, context={"request": request}
         )
