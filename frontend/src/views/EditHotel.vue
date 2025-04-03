@@ -86,6 +86,7 @@ const handleImageUpload = (event) => {
     reader.onload = (e) => {
       uploadedImages.value.push({ src: e.target.result, is_cover: false });
     };
+    event.target.value = '';
     reader.readAsDataURL(file);
     selectedFiles.value.push(file);
   }
