@@ -97,8 +97,8 @@ defineProps({
           <router-link to="/login" v-if="!isLoggedIn" class="w-full mt-4">
             <Button type="add" class="w-full m-0!">Inicia sesión para reservar</Button>
           </router-link>
-          <router-link :to="`${hotelId}/reservation-form`" v-if="isLoggedIn" class="w-full mt-4">
-            <Button type="add" class="w-full m-0!">Reservar</Button>
+          <router-link :to="`${hotelId}/rooms`" v-if="isLoggedIn" class="w-full mt-4">
+            <Button type="add" class="w-full m-0!">Elige una Habitación</Button>
           </router-link>
       </div>
     </div>

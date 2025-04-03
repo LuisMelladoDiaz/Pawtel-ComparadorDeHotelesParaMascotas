@@ -179,7 +179,7 @@ const routes = [
     },
   },
   {
-    path: '/hotel/:id/reservation-form',
+    path: '/hotel/:hotelId/:roomId/confirmar-reserva',
     name: 'BookingReservation',
     component: createComponent({ layout: LayoutDefault, component: BookingReservationForm }),
     meta: {
