@@ -127,7 +127,7 @@ const selectCoverImage = (index) => {
 
     if (uploadedIndex >= 0 && uploadedIndex < uploadedImages.value.length) {
       // Encontrar el archivo correspondiente
-      const file = selectedFiles.value[uploadedIndex];
+      const file = selectedFiles.value.find((_, i) => i === uploadedIndex);
 
       if (file) {
         // Subir la imagen con is_cover=true
