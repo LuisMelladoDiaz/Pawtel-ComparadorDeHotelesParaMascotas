@@ -26,7 +26,7 @@ defineProps({
 
 <template>
   <!-- Versión Escritorio -->
-  <div class="hotel-detail-container max-w-7xl mx-auto flex-col hidden md:flex mt-4">
+  <div class="hotel-detail-container w-full mx-auto flex-col hidden md:flex mt-4">
     <div class="bg-terracota text-white text-center py-4 rounded-b-lg max-w-full! w-full!">
       <h2 class="text-3xl font-bold">{{ name }}</h2>
       <p class="text-lg flex items-center justify-center underline">
