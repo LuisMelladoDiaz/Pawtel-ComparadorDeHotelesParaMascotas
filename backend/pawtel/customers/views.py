@@ -17,8 +17,9 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         action_name = currentframe().f_code.co_name
-        CustomerService.authorize_action_customer(request, action_name)
-        customers = CustomerService.list_customers()
+        role_user = CustomerService.authorize_action_customer(request, action_name)
+        admin_allow = CustomerService.check_admin_permission(role_user)
+        customers = CustomerService.list_customers(admin_allow)
         output_serializer_data = CustomerService.serialize_output_customer(
             customers, many=True
         )
@@ -26,8 +27,11 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         action_name = currentframe().f_code.co_name
-        CustomerService.authorize_action_customer(request, action_name, pk, True)
-        customer = CustomerService.retrieve_customer(pk)
+        role_user = CustomerService.authorize_action_customer(
+            request, action_name, pk, True
+        )
+        admin_allow = CustomerService.check_admin_permission(role_user)
+        customer = CustomerService.retrieve_customer(pk, admin_allow)
         output_serializer_data = CustomerService.serialize_output_customer(customer)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
@@ -53,9 +57,11 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None):
         action_name = currentframe().f_code.co_name
-        customer = CustomerService.authorize_action_customer(
+        role_user = CustomerService.authorize_action_customer(
             request, action_name, pk, True
         )
+        admin_allow = CustomerService.check_admin_permission(role_user)
+        customer = CustomerService.retrieve_customer(pk, admin_allow)
         delete = CustomerService.validate_customer_deletion(pk)
         if delete:
             AppUserService.general_delete_app_user(request, customer.user.id)

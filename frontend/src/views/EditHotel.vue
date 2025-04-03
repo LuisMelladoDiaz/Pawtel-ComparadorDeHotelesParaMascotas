@@ -4,8 +4,11 @@ import { useRoute, useRouter } from 'vue-router';
 import { handleApiError } from '@/utils/errorHandler';
 import { Notyf } from 'notyf';
 import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
+import { useUploadHotelImage, useDeleteHotelImage } from '@/data-layer/hooks/hotelImages';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
+import { boolean, number, string } from 'yup';
+import { integer } from '@vee-validate/rules';
 
 const route = useRoute();
 const router = useRouter();
@@ -13,7 +16,7 @@ const notyf = new Notyf();
 
 const hotelId = computed(() => route.params.id);
 
-//Modals
+// Modals
 const isCreateModalOpen = ref(false);
 const closeCreateModal = () => {
   isCreateModalOpen.value = false;
@@ -31,10 +34,9 @@ const closeEditModal = () => {
 // Obtener detalles del hotel
 const { data: hotel, isLoading: isLoadingHotel, isError: isErrorHotel } = useGetHotelById(hotelId);
 
-// Obtener room types del hotel
 const { data: roomTypes, isLoading: isLoadingRooms, isError: isErrorRooms } = useGetRoomTypesByHotel(hotelId);
+const { mutate: deleteHotelImage, isLoading: isDeleting, isError: isErrorDeleting } = useDeleteHotelImage();
 
-// Estado editable del hotel
 const editableHotel = ref({
   name: '',
   address: '',
@@ -42,63 +44,118 @@ const editableHotel = ref({
   description: ''
 });
 
-// Subir y eliminar fotos de los hoteles
 const uploadedImages = ref([]);
 const fileInputRef = ref(null);
+const selectedFiles = ref([]);
 
+const hotelImages = computed(() => hotel.value?.images || []);
+
+const { mutate: uploadImage, isPending, isError } = useUploadHotelImage();
+
+// Corrección en el manejo de imágenes
 const handleImageUpload = (event) => {
-  const files = Array.from(event.target.files);
-  files.forEach((file) => {
+  const files = event.target.files;
+  for (const file of files) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      uploadedImages.value.push(e.target.result);
+      uploadedImages.value.push({ src: e.target.result, is_cover: false });
     };
     reader.readAsDataURL(file);
+    selectedFiles.value.push(file);
+  }
+};
+
+const submitImages = () => {
+  if (selectedFiles.value.length === 0) {
+    notyf.error('No hay archivos seleccionados.');
+    return;
+  }
+
+  selectedFiles.value.forEach((file) => {
+    uploadImage(
+      { hotelId: hotelId.value, image: file, isCover: false },
+      {
+        onSuccess: () => {
+          notyf.success('Imagen subida con éxito');
+          uploadedImages.value = [];
+          selectedFiles.value = [];
+        },
+        onError: (error) => {
+          handleApiError(error);
+        },
+      }
+    );
   });
 };
 
-const removeImage = (index) => {
-  uploadedImages.value.splice(index, 1);
+// Corrección en el método para seleccionar imagen de portada
+const selectCoverImage = (index) => {
+  uploadedImages.value.forEach((img, i) => {
+    img.is_cover = i === index;
+  });
+  notyf.success('Imagen de portada seleccionada.');
 };
 
-// Llenar los valores del formulario de manera reactiva
+// Corrección en el método para eliminar imágenes
+const removeImage = (index, source = 'uploaded') => {
+  if (source === 'uploaded') {
+    uploadedImages.value.splice(index, 1);
+  } else if (source === 'hotel') {
+    const imageId = hotelImages.value[index]?.id;
+    if (!imageId) return;
+
+    deleteHotelImage(
+      { hotelId: hotel.value.id, imageId },
+      {
+        onSuccess: () => {
+          notyf.success('Imagen eliminada del hotel.');
+        },
+        onError: handleApiError,
+      }
+    );
+  }
+};
+
 watchEffect(() => {
   if (hotel.value) {
     editableHotel.value = { ...hotel.value };
   }
 });
 
-// Hook para actualizar el hotel
 const { mutate: updateHotel, isLoading: isSaving } = useUpdateHotel();
 
-// Guardar cambios en el hotel
+// Corrección en el guardado de cambios del hotel
 const saveChanges = () => {
+  if (!editableHotel.value.name || !editableHotel.value.address || !editableHotel.value.city) {
+    notyf.error('Por favor, completa todos los campos obligatorios.');
+    return;
+  }
+
   const loadingNotification = notyf.open({
     type: 'loading',
     message: 'Guardando cambios...',
-    dismissible: false
+    dismissible: false,
   });
 
   updateHotel(
     {
       hotelId: hotel.value.id,
-      hotelData: editableHotel.value
+      hotelData: editableHotel.value,
     },
     {
       onSuccess: () => {
         notyf.dismiss(loadingNotification);
-        notyf.success('Cambios guardados correctamente');
+        notyf.success('Cambios guardados correctamente.');
         router.push('/mis-hoteles');
       },
       onError: (error) => {
         notyf.dismiss(loadingNotification);
         handleApiError(error);
-      }
+      },
     }
   );
 };
 
-// Formatear tipo de mascota
 const formatPetType = (petType) => {
   const petMap = {
     DOG: '🐶 Perros',
@@ -115,7 +172,6 @@ const { mutate: createRoomType } = useCreateRoomType();
 const { mutate: deleteRoomType } = useDeleteRoomType();
 const { mutate: updateRoomType } = useUpdateRoomType();
 
-// Estado para manejar la creación de un nuevo tipo de habitación
 const newRoomType = ref({
   name: '',
   description: '',
@@ -171,6 +227,7 @@ const saveNewRoomType = () => {
     onError: handleApiError
   });
 };
+
 </script>
 
 <template>
@@ -185,33 +242,66 @@ const saveNewRoomType = () => {
 
         <!-- Contenedor de imágenes -->
         <div class="w-full lg:w-80 bg-white rounded-xl shadow-md border border-gray-200">
-          <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
-            <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Imágenes</h1>
-          </div>
-          <div class="p-6">
-            <div
-              class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
-              @click="fileInputRef.click()">
-              <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
-              <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
-              <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden"
-                @change="handleImageUpload" />
-              <Button type="add" class="w-full text-[15px]">
-                <i class="fas fa-upload mr-2"></i> Seleccionar archivos
-              </Button>
-            </div>
-            <div class="mt-4 grid grid-cols-2 gap-3">
-              <div v-for="(img, index) in uploadedImages" :key="index" class="relative group">
-                <img :src="img" alt="Imagen del hotel"
-                  class="w-full h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105">
-                <button @click="removeImage(index)"
-                  class="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <i class="fas fa-times text-xs"></i>
+  <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
+    <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Imágenes</h1>
+  </div>
+  <div class="p-6">
+    <!-- Zona de subida de imágenes -->
+    <div class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
+      @click="fileInputRef.click()">
+      <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
+      <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
+      <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden" @change="handleImageUpload" />
+      <Button type="add" class="w-full text-[15px]">
+        <i class="fas fa-upload mr-2"></i> Seleccionar archivos
+      </Button>
+    </div>
+
+    <!-- Galería de imágenes subidas -->
+    <div v-if="(uploadedImages.length || hotelImages.length)" class="mt-4">
+      <h3 class="text-md font-semibold text-gray-700 mb-2">Imágenes subidas</h3>
+
+      <div class="flex gap-3 overflow-x-auto p-1">
+            <!-- Imágenes subidas -->
+            <div v-if="uploadedImages.length">
+              <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group">
+                <img :src="img.src" alt="'Imagen subida ' + (index + 1)"
+                  class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105">
+                <button @click="removeImage(index, 'uploaded')"
+                  class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  ✕
                 </button>
               </div>
             </div>
+
+        <!-- Imágenes del hotel -->
+        <div v-if="hotelImages.length">
+          <div v-for="(img, index) in hotelImages" :key="'hotel-' + index" class="relative group">
+            <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
+              class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
+              :class="{'border-4 border-blue-500': img.is_cover}">
+            <button @click="removeImage(index, 'hotel')"
+              class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              ✕
+            </button>
+            <div v-if="img.is_cover" class="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-br-lg text-xs">
+              Cover Image
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Botón para confirmar subida -->
+    <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotelId)"
+      class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+      {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
+    </Button>
+  </div>
+</div>
+
+
+
 
         <!-- Información del hotel -->
         <div class="bg-white rounded-xl flex-1 shadow-md border border-gray-200">
@@ -425,7 +515,7 @@ const saveNewRoomType = () => {
         </div>
       </transition>
 
-      
+
     </div>
   </div>
 </template>

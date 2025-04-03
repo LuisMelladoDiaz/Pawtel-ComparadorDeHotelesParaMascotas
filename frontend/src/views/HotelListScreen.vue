@@ -121,7 +121,7 @@ const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAl
 // Computed
 const hotels = computed(() => apiHotels.value?.map((hotel) => ({
   id: hotel.id,
-  image: hotel.image || defaultImages[hotel.id % defaultImages.length],
+  image: hotel.cover_image?.image || defaultImages[hotel.id % defaultImages.length], // Usamos cover_image si está disponible
   name: hotel.name ?? 'Nombre',
   address: hotel.address ?? 'Dirección',
   city: hotel.city ?? 'Ciudad',
@@ -129,7 +129,9 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
   price_max: hotel.highest_price_current_filters ?? '0',
   price_min: hotel.lowest_price_current_filters ?? '0',
   reviews: hotel.reviews?.length ? hotel.reviews : [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
+
 })) || []);
+
 </script>
 
 <template>

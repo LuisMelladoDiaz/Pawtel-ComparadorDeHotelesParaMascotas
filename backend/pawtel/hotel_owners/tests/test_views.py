@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 from django.urls import reverse
+from pawtel.app_admins.models import App_Admin
 from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
@@ -11,6 +12,18 @@ from rest_framework.test import APIClient
 class HotelOwnerViewSetTest(TestCase):
     def setUp(self):
         self.client = APIClient()
+        self.client2 = APIClient()
+        self.admin_user = AppUser.objects.create_user(
+            username="admin1",
+            first_name="Admin",
+            last_name="User",
+            email="admin@example.com",
+            phone="+34987654221",
+            password="securepassword123",
+        )
+        self.admin = App_Admin.objects.create(user=self.admin_user)
+        self.client2.force_authenticate(user=self.admin_user)
+
         self.authenticated_user = AppUser.objects.create_user(
             username="authenticated_user",
             email="authenticated_user@example.com",
@@ -54,7 +67,7 @@ class HotelOwnerViewSetTest(TestCase):
 
     def test_list_all_hotel_owners(self):
         url = reverse("hotel-owner-list")
-        response = self.client.get(url)
+        response = self.client2.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
 
@@ -188,11 +201,20 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_approve_hotel_owner_patch_view(self):
-        self.client.force_authenticate(user=self.authenticated_user)
         url = reverse(
             "hotel-owner-approve_hotel_owner_patch",
             kwargs={"pk": self.authenticated_hotel_owner.id},
         )
-        response = self.client.patch(url)
+        response = self.client2.patch(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["is_approved"], True)
+
+    def test_delete_hotel_owner_as_admin(self):
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
+        response = self.client2.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            HotelOwner.objects.filter(id=self.authenticated_hotel_owner.id).exists()
+        )

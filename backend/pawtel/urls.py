@@ -32,6 +32,7 @@ urlpatterns = [
     path("", include("pawtel.room_types.urls")),
     path("", include("pawtel.bookings.urls")),
     path("", include("pawtel.booking_holds.urls")),
+    path("", include("pawtel.app_admins.urls")),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     # DRF Spectacular
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
