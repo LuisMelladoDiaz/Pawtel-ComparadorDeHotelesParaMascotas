@@ -4,9 +4,9 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type HotelImage = {
   id?: number;
-  image: string;
+  image: File;
   is_cover: boolean;
-  hotel: number;
+  hotel_id: number;
 };
 
 export const fetchHotelImage = async (hotelId: number, imageId: number) => {

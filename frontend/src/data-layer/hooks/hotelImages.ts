@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@tanstack/vue-query';
+import { useQuery, useMutation, useQueryClient  } from '@tanstack/vue-query';
 import {
   fetchHotelImage,
   fetchAllHotelImages,
@@ -11,6 +11,7 @@ import {
   fetchCoverImage,
   fetchNonCoverImages,
 } from '@/data-layer/api/hotelImages';
+import { toValue } from 'vue';
 
 export const useGetHotelImage = (hotelId: number, imageId: number) => {
   return useQuery({
@@ -30,9 +31,19 @@ export const useGetAllHotelImages = (hotelId: number) => {
   });
 };
 export const useUploadHotelImage = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (data: { hotelId: number; image: File; isCover: boolean }) =>
-      uploadHotelImage(data.hotelId, data.image, data.isCover),
+    mutationFn: async ({ hotelId, image, isCover }: { hotelId: number; image: File; isCover: boolean }) => {
+      return await uploadHotelImage(hotelId, image, isCover);
+    },
+    onSuccess: (_, { hotelId }) => {
+
+      queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId] });
+    },
+    onError: (error) => {
+      console.error('Error al subir imagen:', error);
+    },
   });
 };
 
@@ -51,10 +62,22 @@ export const usePartialUpdateHotelImage = () => {
 };
 
 export const useDeleteHotelImage = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (data: { hotelId: number; imageId: number }) => deleteHotelImage(data.hotelId, data.imageId),
+    mutationFn: async ({ hotelId, imageId }: { hotelId: number; imageId: number }) => {
+      return await deleteHotelImage(hotelId, imageId);
+    },
+    onSuccess: (_, { hotelId }) => {
+      queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+      console.log(hotelId);
+    },
+    onError: (error) => {
+      console.error('Error al eliminar imagen:', error);
+    },
   });
 };
+
 
 export const useSetCoverImage = () => {
   return useMutation({
