@@ -4,15 +4,18 @@ import { useRoute, useRouter } from 'vue-router';
 import { handleApiError } from '@/utils/errorHandler';
 import { Notyf } from 'notyf';
 import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
-import { useUploadHotelImage, useDeleteHotelImage } from '@/data-layer/hooks/hotelImages';
+import { useUploadHotelImage, useDeleteHotelImage, useUpdateHotelImage, useSetCoverImage } from '@/data-layer/hooks/hotelImages';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
 import { boolean, number, string } from 'yup';
 import { integer } from '@vee-validate/rules';
+import { useQueryClient } from '@tanstack/vue-query';
+import axios from 'axios';
 
 const route = useRoute();
 const router = useRouter();
 const notyf = new Notyf();
+const queryClient = useQueryClient();
 
 const hotelId = computed(() => route.params.id);
 
@@ -50,7 +53,34 @@ const selectedFiles = ref([]);
 
 const hotelImages = computed(() => hotel.value?.images || []);
 
+// Estado mutable para las imágenes del hotel
+const mutableHotelImages = ref([]);
+
+watchEffect(() => {
+  if (hotelImages.value) {
+    mutableHotelImages.value = hotelImages.value.map((img) => ({ ...img }));
+  }
+});
+
 const { mutate: uploadImage, isPending, isError } = useUploadHotelImage();
+
+// Estado para manejar el menú emergente de opciones de imagen
+const imageOptionsIndex = ref(null);
+const imageOptionsSource = ref(null);
+
+const openImageOptions = (index, source) => {
+  if (imageOptionsIndex.value === index && imageOptionsSource.value === source) {
+    closeImageOptions();
+  } else {
+    imageOptionsIndex.value = index;
+    imageOptionsSource.value = source;
+  }
+};
+
+const closeImageOptions = () => {
+  imageOptionsIndex.value = null;
+  imageOptionsSource.value = null;
+};
 
 // Corrección en el manejo de imágenes
 const handleImageUpload = (event) => {
@@ -60,6 +90,7 @@ const handleImageUpload = (event) => {
     reader.onload = (e) => {
       uploadedImages.value.push({ src: e.target.result, is_cover: false });
     };
+    event.target.value = '';
     reader.readAsDataURL(file);
     selectedFiles.value.push(file);
   }
@@ -88,20 +119,104 @@ const submitImages = () => {
   });
 };
 
+// Hook para actualizar la imagen de portada
+const { mutate: updateHotelImage } = useUpdateHotelImage();
+// Añadimos el hook para establecer imagen de portada
+const { mutate: setCoverImage } = useSetCoverImage();
+
 // Corrección en el método para seleccionar imagen de portada
 const selectCoverImage = (index) => {
-  uploadedImages.value.forEach((img, i) => {
-    img.is_cover = i === index;
-  });
-  notyf.success('Imagen de portada seleccionada.');
+  if (imageOptionsSource.value === 'uploaded') {
+    // Para imágenes recién subidas, debemos incluir el archivo en la solicitud
+    const uploadedIndex = index;
+
+    if (uploadedIndex >= 0 && uploadedIndex < uploadedImages.value.length) {
+      // Encontrar el archivo correspondiente
+      const file = selectedFiles.value.find((_, i) => i === uploadedIndex);
+
+      if (file) {
+        // Subir la imagen con is_cover=true
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('is_cover', 'true');
+
+        const loadingNotification = notyf.open({
+          type: 'loading',
+          message: 'Estableciendo imagen como portada...',
+          dismissible: false
+        });
+
+        // Realizar la solicitud directamente usando axios
+        axios.post(
+          `${import.meta.env.VITE_API_BASE_URL}/hotels/${hotelId.value}/hotel-images/upload/`,
+          formData,
+          { headers: { 'Content-Type': 'multipart/form-data' } }
+        )
+        .then(() => {
+          notyf.dismiss(loadingNotification);
+          notyf.success('Imagen establecida como portada.');
+          // Actualizar UI
+          uploadedImages.value.forEach((img, i) => {
+            img.is_cover = i === uploadedIndex;
+          });
+          // Recargar datos del hotel para reflejar los cambios
+          queryClient.invalidateQueries({ queryKey: ['hotel', hotelId.value] });
+        })
+        .catch((error) => {
+          notyf.dismiss(loadingNotification);
+          handleApiError(error);
+        });
+      } else {
+        notyf.error('No se encontró el archivo de imagen.');
+      }
+    }
+  } else if (imageOptionsSource.value === 'hotel') {
+    // Para imágenes ya existentes en el hotel
+    const selectedImage = mutableHotelImages.value[index];
+
+    if (selectedImage && selectedImage.id) {
+      const loadingNotification = notyf.open({
+        type: 'loading',
+        message: 'Estableciendo imagen como portada...',
+        dismissible: false
+      });
+
+      // Usar setCoverImage para imágenes existentes
+      setCoverImage(
+        {
+          hotelId: hotel.value.id,
+          imageId: selectedImage.id
+        },
+        {
+          onSuccess: () => {
+            notyf.dismiss(loadingNotification);
+            notyf.success('Imagen de portada actualizada correctamente.');
+            // Actualizar UI
+            mutableHotelImages.value.forEach((img, i) => {
+              img.is_cover = i === index;
+            });
+            // Recargar datos del hotel para reflejar los cambios
+            queryClient.invalidateQueries({ queryKey: ['hotel', hotelId.value] });
+          },
+          onError: (error) => {
+            notyf.dismiss(loadingNotification);
+            handleApiError(error);
+          }
+        }
+      );
+    }
+  }
+
+  closeImageOptions();
 };
 
 // Corrección en el método para eliminar imágenes
 const removeImage = (index, source = 'uploaded') => {
   if (source === 'uploaded') {
     uploadedImages.value.splice(index, 1);
+    selectedFiles.value.splice(index, 1);
   } else if (source === 'hotel') {
-    const imageId = hotelImages.value[index]?.id;
+    const imageId = mutableHotelImages.value[index]?.id;
     if (!imageId) return;
 
     deleteHotelImage(
@@ -109,6 +224,7 @@ const removeImage = (index, source = 'uploaded') => {
       {
         onSuccess: () => {
           notyf.success('Imagen eliminada del hotel.');
+          mutableHotelImages.value.splice(index, 1);
         },
         onError: handleApiError,
       }
@@ -241,64 +357,102 @@ const saveNewRoomType = () => {
       <div class="flex lg:flex-row flex-col gap-6 min-h-136 items-stretch">
 
         <!-- Contenedor de imágenes -->
-        <div class="w-full lg:w-80 bg-white rounded-xl shadow-md border border-gray-200">
-  <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
-    <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Imágenes</h1>
-  </div>
-  <div class="p-6">
-    <!-- Zona de subida de imágenes -->
-    <div class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
-      @click="fileInputRef.click()">
-      <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
-      <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
-      <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden" @change="handleImageUpload" />
-      <Button type="add" class="w-full text-[15px]">
-        <i class="fas fa-upload mr-2"></i> Seleccionar archivos
-      </Button>
-    </div>
+        <div class="lg:min-w-110 lg:w-80 bg-white rounded-xl shadow-md border border-gray-200">
+          <div class="lg:flex flex-row justify-between items-center bg-terracota rounded-t-xl">
+            <h1 class="m-0! text-xl font-semibold text-white py-4 px-6">Imágenes</h1>
+          </div>
+          <div class="p-6">
+            <!-- Zona de subida de imágenes -->
+            <div
+              class="flex flex-col items-center h-fit justify-center border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-terracota transition-colors cursor-pointer"
+              @click="fileInputRef.click()">
+              <i class="fas fa-camera text-4xl text-gray-300 mb-1"></i>
+              <p class="text-sm text-gray-500 mb-0 text-center">Haz clic para subir imágenes</p>
+              <input ref="fileInputRef" type="file" multiple accept="image/*" class="hidden"
+                @change="handleImageUpload" />
+              <Button type="add" class="w-full text-[15px]">
+                <i class="fas fa-upload mr-2"></i> Seleccionar archivos
+              </Button>
+            </div>
 
-    <!-- Galería de imágenes subidas -->
-    <div v-if="(uploadedImages.length || hotelImages.length)" class="mt-4">
-      <h3 class="text-md font-semibold text-gray-700 mb-2">Imágenes subidas</h3>
+            <!-- Galería de imágenes subidas -->
+            <div v-if="(uploadedImages.length || mutableHotelImages.length)" class="mt-4">
+              <div class="flex flex-col">
+                <!-- Imágenes del hotel -->
+                <h3 class="text-md font-semibold text-gray-700 py-1">Imágenes subidas</h3>
+                <h3 v-if="!mutableHotelImages.length" class="text-sm font-semibold text-terracota py-1">El hotel no
+                  tiene imágenes</h3>
+                <div v-if="mutableHotelImages.length" class="gap-3 grid grid-cols-2 lg:grid-cols-3">
+                  <div v-for="(img, index) in mutableHotelImages" :key="'hotel-' + index" class="relative group">
+                    <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
+                      class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
+                      :class="{ 'border-b-4 border-azul-suave': img.is_cover }">
+                    <button @click="removeImage(index, 'hotel')"
+                      class="absolute top-2 right-2 bg-terracota text-white rounded-full w-6 h-6 flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      ✕
+                    </button>
+                    <!-- Botón de opciones -->
+                    <div class="absolute bottom-2 right-2">
+                      <button @click="openImageOptions(index, 'hotel')"
+                        class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                        ⋮
+                      </button>
+                      <div v-if="imageOptionsIndex === index && imageOptionsSource === 'hotel'"
+                        class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
+                        <button @click="selectCoverImage(index)"
+                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
+                      </div>
+                    </div>
+                    <div v-if="img.is_cover"
+                      class="absolute bottom-0 left-0 bg-azul-suave text-white px-2 py-1 rounded-tr-lg text-xs">
+                      Portada
+                    </div>
+                  </div>
+                </div>
+                <!-- Imágenes subidas -->
+                <h3 v-if="uploadedImages.length" class="text-md font-semibold text-gray-700 mt-4 py-1">Imágenes para
+                  subir</h3>
+                <div v-if="uploadedImages.length" class="gap-3 grid grid-cols-2 lg:grid-cols-3">
+                  <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group">
+                    <img :src="img.src" alt="'Imagen subida ' + (index + 1)"
+                      class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
+                      :class="{ 'border-b-4 border-blue-500': img.is_cover }">
+                    <button @click="removeImage(index, 'uploaded')"
+                      class="absolute top-2 right-2 bg-terracota text-white rounded-full w-6 h-6 flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
+                      ✕
+                    </button>
+                    <!-- Botón de opciones -->
+                    <div class="absolute bottom-2 right-2">
+                      <button @click="openImageOptions(index, 'uploaded')"
+                        class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+                        ⋮
+                      </button>
+                      <div v-if="imageOptionsIndex === index && imageOptionsSource === 'uploaded'"
+                        class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
+                        <button @click="selectCoverImage(index)"
+                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
+                      </div>
+                    </div>
+                    <div v-if="img.is_cover"
+                      class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
+                      Portada
+                    </div>
+                  </div>
+                </div>
 
-      <div class="flex gap-3 overflow-x-auto p-1">
-            <!-- Imágenes subidas -->
-            <div v-if="uploadedImages.length">
-              <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group">
-                <img :src="img.src" alt="'Imagen subida ' + (index + 1)"
-                  class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105">
-                <button @click="removeImage(index, 'uploaded')"
-                  class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  ✕
-                </button>
+
               </div>
             </div>
 
-        <!-- Imágenes del hotel -->
-        <div v-if="hotelImages.length">
-          <div v-for="(img, index) in hotelImages" :key="'hotel-' + index" class="relative group">
-            <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
-              class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
-              :class="{'border-4 border-blue-500': img.is_cover}">
-            <button @click="removeImage(index, 'hotel')"
-              class="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-              ✕
-            </button>
-            <div v-if="img.is_cover" class="absolute top-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-br-lg text-xs">
-              Cover Image
-            </div>
+            <!-- Botón para confirmar subida -->
+             <div class="flex items-end justify-end">
+            <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotelId)"
+              class="mr-0! mt-4 bg-oliva text-white px-4 py-2 rounded hover:bg-oliva-dark">
+              {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
+            </Button>
+          </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Botón para confirmar subida -->
-    <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotelId)"
-      class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
-      {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
-    </Button>
-  </div>
-</div>
 
 
 
@@ -359,7 +513,8 @@ const saveNewRoomType = () => {
             <h1 class="m-0! text-xl font-semibold text-white">Habitaciones</h1>
           </div>
 
-          <div class="flex items-center rounded-tr-xl min-h-[60px] hover:bg-gray-100 bg-white rounded-t-xl rounded-bl-xl border-5 border-terracota">
+          <div
+            class="flex items-center rounded-tr-xl min-h-[60px] hover:bg-gray-100 bg-white rounded-t-xl rounded-bl-xl border-5 border-terracota">
             <button @click="isCreateModalOpen = true"
               class="text-terracota font-bold px-6 h-full w-full flex items-center justify-center lg:justify-start transform transition-transform duration-200 ease-in-out hover:scale-105">
               <i class="fas fa-plus-circle mr-2"></i> Añadir nueva habitación
@@ -387,7 +542,8 @@ const saveNewRoomType = () => {
               <div>
                 <div class="mt-4 space-y-2">
                   <p class="text-gray-700"><span class="font-medium">Capacidad:</span> {{ room.capacity }} huéspedes</p>
-                  <p class="text-gray-700"><span class="font-medium">Número de habitaciones:</span> {{ room.num_rooms }}</p>
+                  <p class="text-gray-700"><span class="font-medium">Número de habitaciones:</span> {{ room.num_rooms }}
+                  </p>
                   <p class="text-gray-700">
                     <span class="font-medium">Precio: </span>
                     <span class="text-terracota red-500 font-semibold">{{ room.price_per_night }}€</span>
