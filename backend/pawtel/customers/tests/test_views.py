@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import check_password
 from django.test import TestCase
 from django.urls import reverse
+from pawtel.app_admins.models import App_Admin
 from pawtel.app_users.models import AppUser
 from pawtel.customers.models import Customer
 from rest_framework import status
@@ -10,6 +11,18 @@ from rest_framework.test import APIClient
 class CustomerViewSetTest(TestCase):
     def setUp(self):
         self.client = APIClient()
+        self.client2 = APIClient()
+        self.admin_user = AppUser.objects.create_user(
+            username="admin1",
+            first_name="Admin",
+            last_name="User",
+            email="admin@example.com",
+            phone="+34987654221",
+            password="securepassword123",
+        )
+        self.admin = App_Admin.objects.create(user=self.admin_user)
+        self.client2.force_authenticate(user=self.admin_user)
+
         self.authenticated_user = AppUser.objects.create_user(
             username="authenticated_user",
             email="authenticated_user@example.com",
@@ -44,7 +57,7 @@ class CustomerViewSetTest(TestCase):
 
     def test_list_all_customers(self):
         url = reverse("customer-list")
-        response = self.client.get(url)
+        response = self.client2.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertGreaterEqual(len(response.data), 1)
 
@@ -116,3 +129,11 @@ class CustomerViewSetTest(TestCase):
         url = reverse("customer-detail", kwargs={"pk": self.inactive_customer.id})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_customer_as_admin(self):
+        url = reverse("customer-detail", kwargs={"pk": self.authenticated_customer.id})
+        response = self.client2.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(
+            Customer.objects.filter(id=self.authenticated_customer.id).exists()
+        )

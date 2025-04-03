@@ -3,6 +3,7 @@ from io import BytesIO
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
+from pawtel.app_admins.models import App_Admin
 from pawtel.app_users.models import AppUser
 from pawtel.hotel_owners.models import HotelOwner
 from pawtel.hotels.models import Hotel
@@ -20,6 +21,18 @@ from rest_framework.test import APIClient
 class HotelViewSetTestCase(TestCase):
     def setUp(self):
         self.client = APIClient()
+        self.client2 = APIClient()
+        self.admin_user = AppUser.objects.create_user(
+            username="admin1",
+            first_name="Admin",
+            last_name="User",
+            email="admin@example.com",
+            phone="+34987654221",
+            password="securepassword123",
+        )
+        self.admin = App_Admin.objects.create(user=self.admin_user)
+        self.client2.force_authenticate(user=self.admin_user)
+
         self.app_user = AppUser.objects.create_user(
             username="hotelowner1",
             first_name="John",
@@ -84,6 +97,12 @@ class HotelViewSetTestCase(TestCase):
     def test_delete_hotel(self):
         url = reverse("hotel-detail", kwargs={"pk": self.hotel.id})
         response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Hotel.objects.filter(id=self.hotel.id).exists())
+
+    def test_delete_hotel_as_admin(self):
+        url = reverse("hotel-detail", kwargs={"pk": self.hotel.id})
+        response = self.client2.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Hotel.objects.filter(id=self.hotel.id).exists())
 

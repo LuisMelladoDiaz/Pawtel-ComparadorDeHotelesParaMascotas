@@ -23,13 +23,18 @@ class HotelViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         filters = request.query_params.dict()
-        hotels = HotelService.list_filtered_hotels(filters)
+        action_name = currentframe().f_code.co_name
+        role_user = HotelService.authorize_action_hotel(request, action_name)
+        admin_allowed = HotelService.check_admin_permission(role_user)
+        hotels = HotelService.list_filtered_hotels(filters, admin_allowed)
         serializer = HotelSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        ##! TODO: Fix this maybe with a better auth system to check object
-        hotel = HotelService.retrieve_hotel(pk)
+        action_name = currentframe().f_code.co_name
+        role_user = HotelService.authorize_action_hotel(request, action_name)
+        admin_allowed = HotelService.check_admin_permission(role_user)
+        hotel = HotelService.retrieve_hotel(pk, admin_allowed)
         output_serializer_data = HotelService.serialize_output_hotel(
             hotel, context={"request": request}
         )
