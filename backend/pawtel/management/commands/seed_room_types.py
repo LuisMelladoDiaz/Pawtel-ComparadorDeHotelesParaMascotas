@@ -51,7 +51,7 @@ class Command(BaseCommand):
             "Habitación con servicio personalizado, asegurando que tu mascota tenga una estancia inolvidable.",
         ]
 
-        for _ in range(10):  # Crear 10 tipos de habitaciones
+        for _ in range(150):  # Crear 10 tipos de habitaciones
             hotel = random.choice(hotels)
             nombre = random.choice(nombres_tipos_habitacion)
             descripcion = random.choice(descripciones_genericas)

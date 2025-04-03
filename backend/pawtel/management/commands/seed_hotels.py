@@ -79,21 +79,14 @@ class Command(BaseCommand):
 
         # Lista de ciudades españolas
         ciudades_espanolas = [
-            "Madrid",
-            "Barcelona",
-            "Valencia",
             "Sevilla",
-            "Zaragoza",
             "Málaga",
-            "Murcia",
-            "Palma de Mallorca",
-            "Las Palmas de Gran Canaria",
-            "Bilbao",
-            "Alicante",
+            "Cádiz",
             "Córdoba",
-            "Valladolid",
-            "Vigo",
-            "Gijón",
+            "Jaén",
+            "Almería",
+            "Granada",
+            "Huelva",
         ]
 
         # Lista ampliada de nombres de hoteles para mascotas
@@ -150,7 +143,7 @@ class Command(BaseCommand):
             "Un espacio diseñado para el máximo confort y diversión de tu mascota. En nuestro alojamiento, cada huésped recibe un trato especial, con rutinas adaptadas a su personalidad y necesidades. Contamos con un jardín para juegos, habitaciones climatizadas y una zona de descanso con música relajante para garantizar su bienestar durante toda su estancia.",
         ]
 
-        for _ in range(5):
+        for _ in range(30):
             owner = random.choice(owners)
             ciudad = random.choice(ciudades_espanolas)
             descripcion = random.choice(descripciones_hoteles_mascotas)
