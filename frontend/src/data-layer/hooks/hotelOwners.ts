@@ -45,7 +45,9 @@ export const useUpdateHotelOwner = () => {
         mutationFn: ({ hotelOwnerId, ownerData }: { hotelOwnerId: number; ownerData: HotelOwner }) =>
             updateHotelOwner(hotelOwnerId, ownerData),
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['hotelOwner', data.id] });
+            queryClient.invalidateQueries({ queryKey: ['hotelOwnerId', data.id] });
+            queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner', data.id] });
+            queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
         },
     });
 };
@@ -58,6 +60,8 @@ export const usePartialUpdateHotelOwner = () => {
             partialUpdateHotelOwner(hotelOwnerId, partialData),
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ['hotelOwner', data.id] });
+            queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner', data.id] });
+            queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
         },
     });
 };

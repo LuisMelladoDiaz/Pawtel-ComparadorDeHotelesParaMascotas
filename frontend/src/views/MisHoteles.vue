@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onActivated, defineComponent } from 'vue';
 import Button from '../components/Button.vue';
 import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
 import { Notyf } from 'notyf';
@@ -9,15 +9,32 @@ import { handleApiError } from '@/utils/errorHandler';
 import { useGetAllHotelsOfOwner, useGetCurrentHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
+import { useQueryClient } from '@tanstack/vue-query';
+
+// Definir el nombre del componente para que KeepAlive pueda identificarlo
+defineComponent({
+  name: 'MisHoteles'
+});
 
 const router = useRouter();
 const notyf = new Notyf();
+const queryClient = useQueryClient();
+
 const { data: hotelOwner } = useGetCurrentHotelOwner();
 const hotelOwnerId = computed(() => hotelOwner.value?.id ?? null);
-const { data: hotels, isLoading, isError, refetch: refetchHotels } = useGetAllHotelsOfOwner(
+const { data: hotels, isLoading, isError, refetch } = useGetAllHotelsOfOwner(
   computed(() => hotelOwnerId.value),
   computed(() => !!hotelOwnerId.value)
 );
+
+// Refrescar datos cuando se regresa a la página
+onActivated(() => {
+  // Invalidar todas las consultas relacionadas con hoteles para forzar su recarga
+  queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner'] });
+  queryClient.invalidateQueries({ queryKey: ['hotels'] });
+  // También podemos refrescar explícitamente
+  refetch();
+});
 
 const createHotelMutation = useCreateHotel();
 const deleteHotelMutation = useDeleteHotel();
@@ -65,8 +82,9 @@ const saveHotel = async () => {
     onSuccess: () => {
       notyf.dismiss(loadingNotification);
       notyf.success('Hotel creado exitosamente');
-      router.push('/mis-hoteles');
       modalOpen.value = false;
+      closeCreateModal();
+      // Las queries serán invalidadas automáticamente por la mutación
     },
     onError: (error) => {
       notyf.dismissAll();
@@ -89,7 +107,7 @@ const deleteHotel = async (id) => {
     await deleteHotelMutation.mutateAsync(id);
     notyf.dismiss(loadingNotification);
     notyf.success('Hotel eliminado exitosamente');
-    router.push('/mis-hoteles');
+    // Las queries serán invalidadas automáticamente por la mutación
   } catch (error) {
     notyf.dismissAll();
     handleApiError(error);
@@ -104,7 +122,6 @@ const editHotel = (id) => {
 // Paginación
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
-
 
 const isCreateModalOpen = ref(false);
 const closeCreateModal = () => {
@@ -128,11 +145,11 @@ const closeCreateModal = () => {
             </button>
           </div>
         </div>
-        <div v-if="isLoadingRooms" class="text-center py-10">
+        <div v-if="isLoading" class="text-center py-10">
           <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
         </div>
 
-        <div v-else-if="isErrorRooms" class="text-center py-10 text-red-600">
+        <div v-else-if="isError" class="text-center py-10 text-red-600">
           <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
           <p>Error al cargar los hoteles</p>
         </div>
@@ -210,7 +227,9 @@ const closeCreateModal = () => {
 
     <!-- Paginación -->
     <div class="flex justify-between w-full px-6 flex-col md:flex-row">
-      <span class="text-gray-600">Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels?.length || 0 }}</span>
+      <span class="text-gray-600">
+        Mostrando {{ paginatedHotels.length }} hoteles de {{ hotels?.length || 0 }}
+      </span>
       <div class="flex gap-2 mt-2 md:mt-0">
         <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 rounded disabled:opacity-50">← Anterior</button>
         <button v-for="page in totalPages" :key="page" @click="currentPage = page"
@@ -231,5 +250,4 @@ const closeCreateModal = () => {
     opacity: 0;
     transform: translateY(-10px);
   }
-
 </style>

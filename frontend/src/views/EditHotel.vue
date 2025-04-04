@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed, watchEffect, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { handleApiError } from '@/utils/errorHandler';
 import { Notyf } from 'notyf';
@@ -40,7 +40,8 @@ const { data: hotel, isLoading: isLoadingHotel, isError: isErrorHotel } = useGet
 const { data: roomTypes, isLoading: isLoadingRooms, isError: isErrorRooms } = useGetRoomTypesByHotel(hotelId);
 const { mutate: deleteHotelImage, isLoading: isDeleting, isError: isErrorDeleting } = useDeleteHotelImage();
 
-const editableHotel = ref({
+// Crear un objeto reactivo para manejar la edición
+const editableHotel = reactive({
   name: '',
   address: '',
   city: '',
@@ -56,15 +57,22 @@ const hotelImages = computed(() => hotel.value?.images || []);
 // Estado mutable para las imágenes del hotel
 const mutableHotelImages = ref([]);
 
+// Agregar un estado para mostrar feedback de éxito
+const saveSuccess = ref(false);
+
 watchEffect(() => {
-  if (hotelImages.value) {
+  if (hotel.value) {
+    // Actualizar el objeto editable cuando se carguen los datos del hotel
+    editableHotel.name = hotel.value.name;
+    editableHotel.address = hotel.value.address;
+    editableHotel.city = hotel.value.city;
+    editableHotel.description = hotel.value.description;
+
     mutableHotelImages.value = hotelImages.value.map((img) => ({ ...img }));
   }
 });
 
 const { mutate: uploadImage, isPending, isError } = useUploadHotelImage();
-
-// Estado para manejar el menú emergente de opciones de imagen
 const imageOptionsIndex = ref(null);
 const imageOptionsSource = ref(null);
 
@@ -123,7 +131,6 @@ const { mutate: setCoverImage } = useSetCoverImage();
 // Corrección en el método para seleccionar imagen de portada
 const selectCoverImage = (index) => {
   if (imageOptionsSource.value === 'uploaded') {
-    // Para imágenes recién subidas, debemos incluir el archivo en la solicitud
     const uploadedIndex = index;
 
     if (uploadedIndex >= 0 && uploadedIndex < uploadedImages.value.length) {
@@ -131,7 +138,6 @@ const selectCoverImage = (index) => {
       const file = selectedFiles.value.find((_, i) => i === uploadedIndex);
 
       if (file) {
-        // Subir la imagen con is_cover=true
         const formData = new FormData();
         formData.append('image', file);
         formData.append('is_cover', 'true');
@@ -142,7 +148,6 @@ const selectCoverImage = (index) => {
           dismissible: false
         });
 
-        // Realizar la solicitud directamente usando axios
         axios.post(
           `${import.meta.env.VITE_API_BASE_URL}/hotels/${hotelId.value}/hotel-images/upload/`,
           formData,
@@ -151,12 +156,10 @@ const selectCoverImage = (index) => {
         .then(() => {
           notyf.dismiss(loadingNotification);
           notyf.success('Imagen establecida como portada.');
-          // Actualizar UI
           uploadedImages.value.forEach((img, i) => {
             img.is_cover = i === uploadedIndex;
           });
-          // Recargar datos del hotel para reflejar los cambios
-          queryClient.invalidateQueries({ queryKey: ['hotel', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
         })
         .catch((error) => {
           notyf.dismiss(loadingNotification);
@@ -167,7 +170,6 @@ const selectCoverImage = (index) => {
       }
     }
   } else if (imageOptionsSource.value === 'hotel') {
-    // Para imágenes ya existentes en el hotel
     const selectedImage = mutableHotelImages.value[index];
 
     if (selectedImage && selectedImage.id) {
@@ -177,7 +179,6 @@ const selectCoverImage = (index) => {
         dismissible: false
       });
 
-      // Usar setCoverImage para imágenes existentes
       setCoverImage(
         {
           hotelId: hotel.value.id,
@@ -187,12 +188,10 @@ const selectCoverImage = (index) => {
           onSuccess: () => {
             notyf.dismiss(loadingNotification);
             notyf.success('Imagen de portada actualizada correctamente.');
-            // Actualizar UI
             mutableHotelImages.value.forEach((img, i) => {
               img.is_cover = i === index;
             });
-            // Recargar datos del hotel para reflejar los cambios
-            queryClient.invalidateQueries({ queryKey: ['hotel', hotelId.value] });
+            queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
           },
           onError: (error) => {
             notyf.dismiss(loadingNotification);
@@ -228,17 +227,24 @@ const removeImage = (index, source = 'uploaded') => {
   }
 };
 
-watchEffect(() => {
-  if (hotel.value) {
-    editableHotel.value = { ...hotel.value };
-  }
-});
-
 const { mutate: updateHotel, isLoading: isSaving } = useUpdateHotel();
 
 // Corrección en el guardado de cambios del hotel
 const saveChanges = () => {
-  if (!editableHotel.value.name || !editableHotel.value.address || !editableHotel.value.city) {
+  if (!hotel.value) {
+    notyf.error('No se ha podido cargar la información del hotel.');
+    return;
+  }
+
+  // Usamos el objeto editable que contiene los cambios realizados
+  const hotelData = {
+    name: editableHotel.name,
+    address: editableHotel.address,
+    city: editableHotel.city,
+    description: editableHotel.description
+  };
+
+  if (!hotelData.name || !hotelData.address || !hotelData.city) {
     notyf.error('Por favor, completa todos los campos obligatorios.');
     return;
   }
@@ -252,13 +258,21 @@ const saveChanges = () => {
   updateHotel(
     {
       hotelId: hotel.value.id,
-      hotelData: editableHotel.value,
+      hotelData: hotelData,
     },
     {
       onSuccess: () => {
         notyf.dismiss(loadingNotification);
         notyf.success('Cambios guardados correctamente.');
-        router.push('/mis-hoteles');
+
+        // Invalidar y refrescar las consultas relevantes
+        queryClient.invalidateQueries({ queryKey: ['hotelId', hotel.value.id] });
+
+        // Mostrar efecto visual de éxito
+        saveSuccess.value = true;
+        setTimeout(() => {
+          saveSuccess.value = false;
+        }, 3000);
       },
       onError: (error) => {
         notyf.dismiss(loadingNotification);
@@ -296,6 +310,12 @@ const newRoomType = ref({
 
 // Guardar cambios en un tipo de habitación
 const saveUpdatedRoomType = () => {
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Actualizando tipo de habitación...',
+    dismissible: false,
+  });
+
   updateRoomType(
     {
       roomTypeId: editingRoomType.value.id,
@@ -303,29 +323,67 @@ const saveUpdatedRoomType = () => {
     },
     {
       onSuccess: () => {
+        notyf.dismiss(loadingNotification);
         notyf.success('Tipo de habitación actualizado correctamente');
         editingRoomType.value = null;
+
+        // Mostrar efecto visual de éxito
+        saveSuccess.value = true;
+        setTimeout(() => {
+          saveSuccess.value = false;
+        }, 3000);
       },
-      onError: handleApiError
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      }
     }
   );
 };
 
 // Eliminar un tipo de habitación
 const handleDeleteRoomType = (roomTypeId) => {
-  deleteRoomType(roomTypeId, {
-    onSuccess: () => {
-      notyf.success('Tipo de habitación eliminado correctamente');
-    },
-    onError: handleApiError
-  });
+  if (confirm('¿Estás seguro de que deseas eliminar este tipo de habitación? Esta acción no se puede deshacer.')) {
+    const loadingNotification = notyf.open({
+      type: 'loading',
+      message: 'Eliminando tipo de habitación...',
+      dismissible: false,
+    });
+
+    deleteRoomType(roomTypeId, {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
+        notyf.success('Tipo de habitación eliminado correctamente');
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      }
+    });
+  }
 };
 
 // Guardar un nuevo tipo de habitación
 const saveNewRoomType = () => {
+  // Validar campos antes de enviar
+  if (!newRoomType.value.name || !newRoomType.value.description) {
+    notyf.error('Por favor, completa los campos obligatorios');
+    return;
+  }
+
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Creando tipo de habitación...',
+    dismissible: false,
+  });
+
   createRoomType(newRoomType.value, {
     onSuccess: () => {
+      notyf.dismiss(loadingNotification);
       notyf.success('Tipo de habitación creado correctamente');
+      closeCreateModal();
+
+      // Resetear formulario
       newRoomType.value = {
         name: '',
         description: '',
@@ -335,8 +393,17 @@ const saveNewRoomType = () => {
         num_rooms: 1,
         hotel: hotelId.value,
       };
+
+      // Mostrar efecto visual de éxito
+      saveSuccess.value = true;
+      setTimeout(() => {
+        saveSuccess.value = false;
+      }, 3000);
     },
-    onError: handleApiError
+    onError: (error) => {
+      notyf.dismiss(loadingNotification);
+      handleApiError(error);
+    }
   });
 };
 
@@ -462,28 +529,34 @@ const saveNewRoomType = () => {
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Nombre del hotel</label>
                 <input v-model="editableHotel.name"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                  :class="{'border-green-500 ring-1 ring-green-500': saveSuccess}">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
                 <input v-model="editableHotel.address"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                  :class="{'border-green-500 ring-1 ring-green-500': saveSuccess}">
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">Ciudad</label>
                 <input v-model="editableHotel.city"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition">
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                  :class="{'border-green-500 ring-1 ring-green-500': saveSuccess}">
               </div>
               <div class="md:col-span-2">
                 <label class="block text-sm font-medium text-gray-700 mb-2">Descripción</label>
                 <textarea v-model="editableHotel.description" rows="4"
-                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"></textarea>
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-terracota focus:border-terracota transition"
+                  :class="{'border-green-500 ring-1 ring-green-500': saveSuccess}"></textarea>
               </div>
             </div>
-            <div class="text-right">
-              <Button type="accept" @click="saveChanges" :loading="isSaving" class="lg:w-fit m-0! w-full">
-                <i class="fas fa-save mr-2"></i> {{ isSaving ? "Guardando..." : "Guardar cambios" }}
-              </Button>
+            <div class="flex justify-between items-center">
+              <div class="text-right">
+                <Button type="accept" @click="saveChanges" :loading="isSaving" class="lg:w-fit m-0! w-full">
+                  <i class="fas fa-save mr-2"></i> {{ isSaving ? "Guardando..." : "Guardar cambios" }}
+                </Button>
+              </div>
             </div>
           </div>
         </div>
