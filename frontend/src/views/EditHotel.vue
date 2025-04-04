@@ -247,7 +247,7 @@ const saveChanges = () => {
     description: editableHotel.description
   };
 
-  if (!hotelData.name || !hotelData.address || !hotelData.city) {
+  if (!hotelData.name.trim() || !hotelData.address.trim() || !hotelData.city.trim()) {
     notyf.error('Por favor, completa todos los campos obligatorios.');
     return;
   }
