@@ -5,11 +5,24 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { useIsLoggedIn } from '@/data-layer/auth';
 import { useRouter } from 'vue-router';
 import { useRoute } from 'vue-router';
+import { useGetAllRoomTypes } from '@/data-layer/hooks/roomTypes';
 
 const { data: isLoggedIn } = useIsLoggedIn();
 const router = useRouter();
 const route = useRoute();
   const hotelId = route.params.id
+
+const { data: roomTypes } = useGetAllRoomTypes(hotelId);
+
+const formatPetType = (petType) => {
+  const petMap = {
+    DOG: 'Perro',
+    CAT: 'Gato',
+    BIRD: 'Pájaro',
+    MIXED: 'Mixto',
+  };
+  return petMap[petType] || 'Otro';
+};
 
 defineProps({
   id: { type: String, required: true },
@@ -18,6 +31,7 @@ defineProps({
   address: { type: String, required: true },
   city: { type: String, required: true },
   imageGallery: { type: Array, required: true },
+  cover_image: { type: String, required: true },
   description: { type: String, required: true },
   price_min: { type: String, required: true },
   price_max: { type: String, required: true },
@@ -25,137 +39,110 @@ defineProps({
 </script>
 
 <template>
-  <!-- Versión Escritorio -->
-  <div class="hotel-detail-container w-full mx-auto flex-col hidden md:flex mt-4">
-    <div class="bg-terracota text-white text-center py-4 rounded-b-lg max-w-full! w-full!">
+  <div class="hotel-detail-container w-full mx-auto flex-col flex mt-4">
+    <!-- Header -->
+    <div class="bg-terracota text-white text-center py-4 rounded-b-lg">
       <h2 class="text-3xl font-bold">{{ name }}</h2>
       <p class="text-lg flex items-center justify-center underline">
-        <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
+        <div class="hidden lg:flex">
+          <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
+        </div>
+        <div class="lg:hidden relative left-2">
+          <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
+        </div>
         {{ address }}, {{ city }}
       </p>
     </div>
 
-    <!-- Enlaces para "Vista General" y "Habitaciones y Precios" -->
-    <div class="bg-white shadow-md py-3 flex justify-between w-full px-6 text-black text-lg border-b">
-      <div class="flex flex-row w-full justify-center space-x-2">
-        <router-link
-          :to="$route.path"
-          class="w-1/2 text-center py-2 px-4 bg-gray-200 rounded-tl-md rounded-bl-md cursor-default"
-        >
-          Vista General
-        </router-link>
-
-        <router-link
-          :to="`${$route.path}/rooms`"
-          class="w-1/2 text-center py-2 px-4 bg-gray-100 rounded-tr-md rounded-br-md hover:bg-azul-suave hover:text-white transition duration-200 ease-in-out"
-          :class="{ 'bg-blue-500 text-white': $route.path === `/hotel/${$route.params.id}/rooms` }"
-        >
-          Habitaciones y Precios
-        </router-link>
-      </div>
-    </div>
-
-    <div class="flex gap-6 mt-6">
-      <!-- Columna 2: Galería de imágenes -->
-      <div class="flex-1">
-        <div class="image-gallery grid grid-cols-2 gap-2">
-          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-45 object-cover rounded-lg" />
+    <!-- Galery + Details -->
+    <div class="flex flex-col gap-6 mt-6">
+      <!-- Galery -->
+      <div class="flex flex-col lg:flex-row flex-1 gap-2">
+        <div class="flex w-full lg:w-1/2">
+          <img :src="cover_image" alt="Hotel" class="w-full h-47 lg:h-92 object-cover rounded-lg" />
+        </div>
+        <div class="grid grid-cols-2 gap-2 flex-1">
+          <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-25 lg:h-45 object-cover rounded-lg" />
         </div>
       </div>
 
-      <!-- Columna 3: Precio y Detalles -->
-      <div class="flex-1 flex flex-col items-center text-center justify-between">
+      <!-- Description and price range -->
+      <div class="flex-1 flex flex-col text-center justify-between">
         <div class="border border-terracota p-5 rounded-lg w-full h-full flex flex-col justify-between">
           <div>
-            <p class="text-sm text-justify text-[1rem] text-gray-700 font-bold p-1">Descripción</p>
-            <p class="text-sm text-justify text-gray-700 p-1">
-              {{ description }}
+            <p class="text-lg text-left text-terracota font-bold mb-1">Descripción</p>
+            <p class="text-sm text-justify text-gray-700">{{ description }}</p>
+          </div>
+
+          <div class="price mt-6 text-right">
+            <p class="text-[15px] text-terracota font-bold">{{ price_min !== price_max ? 'Precios por Noche' : 'Precio por Noche' }}</p>
+            <p class="text-terracota text-2xl font-bold rounded-lg shadow-sm border border-gray-200 px-3 inline-block">
+              {{ price_min === price_max ? `${price_min}€` : `${price_min}€ - ${price_max}€` }}
             </p>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col mt-4">
-            <a
-              v-if="price_min !== price_max"
-              class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
-            >
-              Precios por Noche
-            </a>
-            <a
-              v-else
-              class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
-            >
-              Precio por Noche
-            </a>
-            <a
-              class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3"
-            >
-              {{ price_min === price_max ? `${price_min}€` : `${price_min}€ - ${price_max}€` }}
-            </a>
+    <!-- Rooms -->
+    <div v-if="roomTypes?.length" class="bg-white rounded-xl shadow-md border w-full border-gray-200 mb-5 mt-6">
+      <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
+        <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
+          <h1 class="m-0! text-xl text-center font-semibold text-white">Habitaciones disponibles</h1>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
+        <div
+          v-for="room in roomTypes"
+          :key="room.id"
+          class="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col justify-between"
+        >
+          <div class="mb-3 flex flex-row justify-between">
+            <div>
+              <h3 class="text-xl font-bold text-terracota">{{ room.name }}</h3>
+              <p class="text-gray-600 text-sm mt-1 text-justify">{{ room.description || 'Sin descripción disponible.' }}</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 text-sm text-gray-700 mt-2">
+            <div>
+              <p class="text-gray-500">Tipo de mascota:</p>
+              <p>{{ formatPetType(room.pet_type) }}</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Capacidad:</p>
+              <p>{{ room.capacity }}</p>
+            </div>
+            <div>
+              <p class="text-gray-500">Habitaciones disponibles:</p>
+              <p>{{ room.num_rooms ?? '—' }}</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between mt-4 w-full">
+            <div class="min-w-40 text-left mb-3 lg:mb-0">
+              <p class="text-gray-500">Precio por noche:</p>
+              <p class="text-2xl font-bold text-terracota leading-tight">{{ room.price_per_night }}€</p>
+            </div>
+            <div class="flex h-full justify-end">
+              <Button
+                v-if="isLoggedIn"
+                type="add"
+                class="!m-0 !py-2 !px-4 text-sm self-end"
+                @click="$router.push(`/hotel/${hotelId}/${room.id}/confirmar-reserva`)"
+              >
+                Reservar
+              </Button>
+              <router-link v-else to="/login" class="flex items-end justify-end">
+                <Button type="add" class="!m-0 !py-2 !px-4 text-sm self-end ">
+                  Inicia sesión para reservar
+                </Button>
+              </router-link>
+            </div>
           </div>
         </div>
-
-          <router-link to="/login" v-if="!isLoggedIn" class="w-full mt-4">
-            <Button type="add" class="w-full m-0!">Inicia sesión para reservar</Button>
-          </router-link>
-          <router-link :to="`${hotelId}/rooms`" v-if="isLoggedIn" class="w-full mt-4">
-            <Button type="add" class="w-full m-0!">Elige una Habitación</Button>
-          </router-link>
       </div>
     </div>
-  </div>
-
-  <!-- Versión Móvil -->
-  <div class="hotel-detail-container p-4 md:hidden flex flex-col items-center">
-    <div class="text-center py-3 bg-terracota text-white rounded-t-lg w-full">
-      <h2 class="text-2xl font-bold">{{ name }}</h2>
-      <p class="text-[0.7rem] flex items-center justify-center underline">
-        <font-awesome-icon :icon="['fas', 'location-dot']" class="mr-2" />
-        {{ address}}, {{ city }}
-      </p>
-    </div>
-
-    <!-- Enlaces para "Vista General" y "Habitaciones y Precios" -->
-    <div class="bg-white shadow-md py-3 flex flex-col w-full px-6 text-black text-lg border-t mt-4">
-      <div class="flex flex-col items-center w-full justify-center space-y-2">
-        <router-link
-          :to="$route.path"
-          class="w-full text-center py-2 px-4 bg-gray-200 rounded-md cursor-default"
-        >
-          Vista General
-        </router-link>
-
-        <router-link
-          :to="`${$route.path}/rooms`"
-          class="w-full text-center py-2 px-4 bg-gray-100 rounded-md hover:bg-azul-suave hover:text-white transition duration-200 ease-in-out"
-          :class="{ 'bg-blue-500 text-white': $route.path === `/hotel/${$route.params.id}/rooms` }"
-        >
-          Habitaciones y Precios
-        </router-link>
-      </div>
-    </div>
-
-    <div class="image-gallery grid grid-cols-2 gap-2 mt-4 w-full">
-      <img v-for="(img, index) in imageGallery" :key="index" :src="img" alt="Hotel" class="w-full h-40 object-cover rounded-lg" />
-    </div>
-
-    <div class="border border-terracota p-4 rounded-lg w-full mt-4 flex flex-col">
-      <!-- Descripción primero -->
-      <p class="text-sm text-justify text-[1rem] text-gray-700 font-bold p-1">Descripción</p>
-      <p class="text-sm text-justify p-1 text-gray-700 mt-2">{{ description }}</p>
-
-      <!-- Rango de Precios abajo -->
-      <div class="price px-1 text-[1.55rem] self-end text-[#C36C6C] font-bold flex flex-col mt-4">
-        <a class="text-[15px] relative bottom-[2px] self-end px-2 text-terracota">Rango de Precios</a>
-        <a class="bg-white rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
-      </div>
-    </div>
-
-    <router-link to="/login" v-if="!isLoggedIn" class="w-full !mt-4 mb-4">
-      <Button type="add" class="w-full !m-0 mb-4">Inicia sesión para reservar</Button>
-    </router-link>
-    <router-link :to="`${hotelId}/reservation-form`" v-if="isLoggedIn" class="w-full !mt-4 mb-4">
-      <Button type="add" class="w-full !m-0 mb-4">Reservar</Button>
-    </router-link>
   </div>
 </template>
 
