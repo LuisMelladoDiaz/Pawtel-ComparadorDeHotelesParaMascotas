@@ -179,7 +179,7 @@ const routes = [
     },
   },
   {
-    path: '/hotel/:id/reservation-form',
+    path: '/hotel/:hotelId/:roomId/confirmar-reserva',
     name: 'BookingReservation',
     component: createComponent({ layout: LayoutDefault, component: BookingReservationForm }),
     meta: {
@@ -190,14 +190,6 @@ const routes = [
       room: route.query.room,
       quantity: route.query.quantity
     }),
-  },
-  {
-    path: '/hotel/:id/rooms',
-    name: 'HotelRooms',
-    component: createComponent({ layout: LayoutWithFilter, component: HotelRoomsAndPrices }),
-    meta: {
-      allowedAuthStates: ALLOW_ALL,
-    },
   },
   {
     path: '/terminos-y-condiciones',

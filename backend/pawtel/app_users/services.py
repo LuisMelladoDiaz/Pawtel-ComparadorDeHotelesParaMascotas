@@ -60,6 +60,8 @@ class AppUserService:
             return app_user.customer
         if app_user.role == UserRole.HOTEL_OWNER.value:
             return app_user.hotel_owner
+        if app_user.role == UserRole.ADMIN.value:
+            return app_user.admin
 
     # GET --------------------------------------------------------------------
 
@@ -102,6 +104,7 @@ class AppUserService:
             raise ValidationError(
                 {"phone": "El número de teléfono ya se encuentra en uso."}
             )
+
 
     @staticmethod
     def __create_app_user(input_serializer):

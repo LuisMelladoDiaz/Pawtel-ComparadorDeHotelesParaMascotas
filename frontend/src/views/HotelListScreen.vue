@@ -121,7 +121,7 @@ const { data: apiHotels, isLoading, isError, refetch: refetchHotels } = useGetAl
 // Computed
 const hotels = computed(() => apiHotels.value?.map((hotel) => ({
   id: hotel.id,
-  image: hotel.image || defaultImages[hotel.id % defaultImages.length],
+  image: hotel.cover_image?.image || defaultImages[hotel.id % defaultImages.length], // Usamos cover_image si está disponible
   name: hotel.name ?? 'Nombre',
   address: hotel.address ?? 'Dirección',
   city: hotel.city ?? 'Ciudad',
@@ -129,7 +129,9 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
   price_max: hotel.highest_price_current_filters ?? '0',
   price_min: hotel.lowest_price_current_filters ?? '0',
   reviews: hotel.reviews?.length ? hotel.reviews : [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
+
 })) || []);
+
 </script>
 
 <template>
@@ -163,8 +165,8 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
   </div>
 
   <!-- Mobile Version -->
-  <div class="container flex flex-col items-start mt-5 md:hidden">
-    <div class="flex flex-row items-center self-center gap-10 pb-4">
+  <div class="flex flex-col items-start mt-5 md:hidden -mx-3">
+    <div class="flex flex-row items-center self-center gap-10">
       <div class="flex flex-col items-center justify-between h-15">
         <button @click="toggleSortBy">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-[35px] h-[35px]" fill="#C36C6C">
@@ -183,14 +185,14 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
 
     <!-- Menú de ordenamiento móvil -->
     <transition name="fade">
-    <HotelMobileSorting
-      v-if="isSortByOpen"
-      :sortBy="sortBy"
-      :direction="direction"
-      @update:sortBy="sortBy = $event"
-      @toggle-direction="direction = direction === 'asc' ? 'desc' : 'asc'"
-      @close="isSortByOpen = false"
-    />
+      <HotelMobileSorting
+        v-if="isSortByOpen"
+        :sortBy="sortBy"
+        :direction="direction"
+        @update:sortBy="sortBy = $event"
+        @toggle-direction="direction = direction === 'asc' ? 'desc' : 'asc'"
+        @close="isSortByOpen = false"
+      />
     </transition>
 
     <!-- Menú de filtros móvil -->
@@ -235,10 +237,6 @@ const hotels = computed(() => apiHotels.value?.map((hotel) => ({
     background: #f8f8f8;
     border-radius: 0.5rem;
     margin: 0.5rem 0;
-  }
-
-  .hotel-list-container {
-    padding: 0 0.5rem;
   }
 }
 

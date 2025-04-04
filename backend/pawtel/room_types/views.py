@@ -1,5 +1,6 @@
 from inspect import currentframe
 
+from pawtel.app_admins.services import AdminService
 from pawtel.hotels.services import HotelService
 from pawtel.room_types.models import RoomType
 from pawtel.room_types.serializers import RoomTypeSerializer
@@ -15,12 +16,16 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         filters = request.query_params.dict()
-        hotels = RoomTypeService.list_filtered_room_types(filters)
+        is_admin = AdminService.is_current_user_admin(request)
+        hotels = RoomTypeService.list_filtered_room_types(
+            filters, allow_archived=is_admin
+        )
         serializer = RoomTypeSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        room_type = RoomTypeService.retrieve_room_type(pk)
+        is_admin = AdminService.is_current_user_admin(request)
+        room_type = RoomTypeService.retrieve_room_type(pk, allow_archived=is_admin)
         output_serializer_data = RoomTypeService.serialize_output_room_type(room_type)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 

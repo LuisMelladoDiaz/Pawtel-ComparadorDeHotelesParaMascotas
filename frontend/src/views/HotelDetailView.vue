@@ -17,16 +17,22 @@ const { data: apiHotel, isLoading, error } = useGetHotelById(hotelId);
 
 const hotel = computed(() => ({
   id: apiHotel.value?.id ?? null,
-  image: apiHotel.value?.image ?? hotelpic,
+  image: apiHotel.value?.cover_image?.image ?? hotelpic,
   name: apiHotel.value?.name ?? 'Nombre',
   address: apiHotel.value?.address ?? 'Dirección',
   city: apiHotel.value?.city ?? 'Ciudad',
   price_max: apiHotel.value?.highest_price_current_filters ?? '0',
   price_min: apiHotel.value?.lowest_price_current_filters ?? '0',
-  imageGallery: apiHotel.value?.imageGallery ?? [detalles3, detalles4, detalles1, detalles2],
+  imageGallery: apiHotel.value?.images?.length > 0
+    ? apiHotel.value.images
+        .filter(img => !img.is_cover)
+        .map(img => img.image)
+    : [detalles3, detalles4, detalles1, detalles2],
+  cover_image: apiHotel.value?.cover_image?.image ?? hotelpic,
   description: apiHotel.value?.description ?? 'Descripción predeterminada del hotel.',
   reviews: apiHotel.value?.reviews ?? [{ user: 'Usuario1', comment: 'Un lugar increíble, el servicio es excelente y las instalaciones son de primera calidad.' }]
 }));
+
 </script>
 
 <template>

@@ -11,9 +11,9 @@ import { useUpdateHotelOwner, useDeleteHotelOwner, useGetCurrentHotelOwner } fro
 import { ErrorMessage, Field, Form } from "vee-validate";
 import * as yup from 'yup';
 
+const {data: roleQuery} = useRoleQuery();
 // Otros imports y referencias
 const notyf = new Notyf();
-const showPassword = ref(false);
 const router = useRouter();
 
 
@@ -39,10 +39,6 @@ const { mutate: updateHotelOwner } = useUpdateHotelOwner();
 const { mutate: deleteHotelOwner } = useDeleteHotelOwner();
 
 
-
-const togglePasswordVisibility = () => {
-  showPassword.value = !showPassword.value;
-};
 
 // Actualización del perfil, enviando id y datos
 const updateProfile = (values) => {
@@ -128,7 +124,7 @@ const logout = () => {
 
 <template>
     <!-- Desktop version -->
-    <div class="justify-center items-start gap-10 p-5 hidden md:flex">
+    <div class="justify-center items-start gap-10 mt-10 p-5 hidden md:flex">
       <!-- Sidebar -->
       <aside class="w-64 flex flex-col items-center bg-white p-4 shadow-lg">
         <nav class="mt-5 w-full">
@@ -140,8 +136,11 @@ const logout = () => {
               </router-link>
             </li>
             <li>
-              <router-link to="/mis-reservas" class="text-azul-suave hover:text-azul-suave-dark hover:underline">
+              <router-link v-if="roleQuery == 'customer'" to="/mis-reservas" class="text-azul-suave hover:text-azul-suave-dark hover:underline">
                 Mis Reservas
+              </router-link>
+              <router-link v-if="roleQuery == 'hotel_owner'" to="/mis-hoteles" class="text-azul-suave hover:text-azul-suave-dark hover:underline">
+                Mis Hoteles
               </router-link>
             </li>
             <li>

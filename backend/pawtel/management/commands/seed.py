@@ -1,5 +1,6 @@
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
+from pawtel.app_admins.models import App_Admin
 from pawtel.app_users.models import AppUser
 from pawtel.booking_holds.models import BookingHold
 from pawtel.customers.models import Customer
@@ -40,6 +41,7 @@ class Command(BaseCommand):
                 AppUser.objects.all().delete()
                 HotelImage.objects.all().delete()
                 BookingHold.objects.all().delete()
+                App_Admin.objects.all().delete()
                 self.stdout.write(self.style.SUCCESS("All relevant data deleted."))
             else:
                 self.stdout.write(self.style.WARNING("Skipping data deletion."))
@@ -54,6 +56,7 @@ class Command(BaseCommand):
             call_command("seed_hotel_images")
             call_command("seed_booking_holds")
             call_command("seed_bookings")
+            call_command("seed_admins")
 
         except CommandError as e:
             self.stdout.write(self.style.ERROR(f"Error while seeding: {e}"))

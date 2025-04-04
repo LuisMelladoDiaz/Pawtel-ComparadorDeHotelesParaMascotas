@@ -49,6 +49,10 @@ class UserInfoView(APIView):
             user_serializer_data["customer_id"] = customer_id
             user_serializer_data["role"] = "customer"
 
+        elif hasattr(user, "admin"):
+            user_serializer_data["role"] = "admin"
+            user_serializer_data["admin_id"] = user.admin.id
+
         return Response(user_serializer_data)
 
 
@@ -63,6 +67,7 @@ class RegisterView(APIView):
             object = HotelOwnerService.general_create_hotel_owner(request)
         elif role == "customer":
             object = CustomerService.general_create_customer(request)
+
         else:
             return Response(
                 {"error": "Invalid role. Only hotel owners and customers are allowed."},
