@@ -163,6 +163,7 @@ const selectCoverImage = (index) => {
           uploadedImages.value.forEach((img, i) => {
             img.is_cover = i === uploadedIndex;
           });
+          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
         })
         .catch((error) => {
           notyf.dismiss(loadingNotification);
@@ -223,6 +224,7 @@ const removeImage = (index, source = 'uploaded') => {
         onSuccess: () => {
           notyf.success('Imagen eliminada del hotel.');
           mutableHotelImages.value.splice(index, 1);
+          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
         },
         onError: handleApiError,
       }
