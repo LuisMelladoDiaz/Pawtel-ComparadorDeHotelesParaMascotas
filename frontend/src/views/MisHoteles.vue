@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onActivated, defineComponent } from 'vue';
+import { ref, computed, onActivated } from 'vue';
 import Button from '../components/Button.vue';
 import { useCreateHotel, useUpdateHotel, useDeleteHotel } from '@/data-layer/hooks/hotels';
 import { Notyf } from 'notyf';
@@ -11,10 +11,7 @@ import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 import { useQueryClient } from '@tanstack/vue-query';
 
-// Definir el nombre del componente para que KeepAlive pueda identificarlo
-defineComponent({
-  name: 'MisHoteles'
-});
+
 
 const router = useRouter();
 const notyf = new Notyf();
