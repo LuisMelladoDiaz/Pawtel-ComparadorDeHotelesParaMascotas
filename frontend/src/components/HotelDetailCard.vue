@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref, computed } from 'vue';
 import Button from '../components/Button.vue';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { useIsLoggedIn } from '@/data-layer/auth';
@@ -36,10 +36,22 @@ defineProps({
   price_min: { type: String, required: true },
   price_max: { type: String, required: true },
 });
+
+// Pagination
+const prevPage = () => currentPage.value > 1 && currentPage.value--;
+const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
+const currentPage = ref(1);
+const itemsPerPage = 6;
+const totalPages = computed(() => Math.ceil((roomTypes.value?.length || 0) / itemsPerPage));
+const paginatedRooms = computed(() => {
+  if (!roomTypes.value) return [];
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return roomTypes.value.slice(start, start + itemsPerPage);
+});
 </script>
 
 <template>
-  <div class="hotel-detail-container w-full mx-auto flex-col flex mt-4">
+  <div class="hotel-detail-container w-full mx-auto flex-col flex mt-6">
     <!-- Header -->
     <div class="bg-terracota text-white text-center py-4 rounded-b-lg">
       <h2 class="text-3xl font-bold">{{ name }}</h2>
@@ -93,7 +105,7 @@ defineProps({
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
         <div
-          v-for="room in roomTypes"
+          v-for="(room) in paginatedRooms"
           :key="room.id"
           class="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col justify-between"
         >
@@ -141,6 +153,17 @@ defineProps({
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="flex justify-between w-full px-6 flex-col md:flex-row mb-10">
+      <span class="text-gray-600">Mostrando {{ paginatedRooms.length }} habitaciones de {{ roomTypes?.length || 0 }}</span>
+      <div class="flex gap-2 mt-2 md:mt-0">
+        <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">← Anterior</button>
+        <button v-for="page in totalPages" :key="page" @click="currentPage = page"
+                class="px-3 py-1 hover:bg-gray-300" :class="{'bg-gray-300': currentPage === page, 'bg-gray-200': currentPage !== page}">
+          {{ page }}
+        </button>
+        <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">Siguiente →</button>
       </div>
     </div>
   </div>

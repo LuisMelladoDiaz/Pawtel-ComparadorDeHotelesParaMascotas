@@ -344,6 +344,18 @@ const saveNewRoomType = () => {
   });
 };
 
+// Pagination
+const prevPage = () => currentPage.value > 1 && currentPage.value--;
+const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
+const currentPage = ref(1);
+const itemsPerPage = 6;
+const totalPages = computed(() => Math.ceil((roomTypes.value?.length || 0) / itemsPerPage));
+const paginatedRooms = computed(() => {
+  if (!roomTypes.value) return [];
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return roomTypes.value.slice(start, start + itemsPerPage);
+});
+
 </script>
 
 <template>
@@ -506,7 +518,7 @@ const saveNewRoomType = () => {
 
       <!-- SECCIÓN DE HABITACIONES -->
       <!-- HABITACIONES -->
-      <div class="bg-white rounded-xl shadow-md border border-gray-200 mb-10">
+      <div class="bg-white rounded-xl shadow-md border border-gray-200">
         <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
 
           <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
@@ -533,7 +545,7 @@ const saveNewRoomType = () => {
 
         <div v-else class="space-y-6 p-6">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div v-for="room in roomTypes" :key="room.id"
+            <div v-for="(room) in paginatedRooms" :key="room.id"
               class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
               <div>
                 <h3 class="text-lg font-bold text-gray-800">{{ room.name }}</h3>
@@ -565,6 +577,18 @@ const saveNewRoomType = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between w-full px-6 flex-col md:flex-row mb-10">
+        <span class="text-gray-600">Mostrando {{ paginatedRooms.length }} habitaciones de {{ roomTypes?.length || 0 }}</span>
+        <div class="flex gap-2 mt-2 md:mt-0">
+          <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">← Anterior</button>
+          <button v-for="page in totalPages" :key="page" @click="currentPage = page"
+                  class="px-3 py-1 hover:bg-gray-300" :class="{'bg-gray-300': currentPage === page, 'bg-gray-200': currentPage !== page}">
+            {{ page }}
+          </button>
+          <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">Siguiente →</button>
         </div>
       </div>
 
