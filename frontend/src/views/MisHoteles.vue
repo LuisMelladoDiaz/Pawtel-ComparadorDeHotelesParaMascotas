@@ -138,7 +138,7 @@ const closeCreateModal = () => {
         </div>
 
         <div v-else class="space-y-6 p-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div v-if="hotels?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div v-for="(hotel) in paginatedHotels" :key="hotel.id"
               class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
               <div>
@@ -162,6 +162,7 @@ const closeCreateModal = () => {
               </div>
             </div>
           </div>
+          <p v-else class="text-center font-bold text-xl text-terracota">No tienes hoteles registrados.</p>
         </div>
       </div>
 
