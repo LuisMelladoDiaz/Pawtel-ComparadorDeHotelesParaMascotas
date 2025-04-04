@@ -62,12 +62,6 @@ class HotelOwnerService:
         else:
             raise PermissionDenied("Permiso denegado.")
 
-    def check_admin_permission(role_user):
-        allow_admin = False
-        if role_user.user.role == UserRole.ADMIN:
-            allow_admin = True
-        return allow_admin
-
     # Serialization -----------------------------------------------------------------
 
     @staticmethod

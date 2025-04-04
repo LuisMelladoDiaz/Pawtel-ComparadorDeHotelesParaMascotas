@@ -2,7 +2,7 @@ from pawtel.app_admins.models import App_Admin
 from pawtel.app_admins.serializers import AdminSerializer
 from pawtel.app_users.services import AppUserService
 from pawtel.permission_services import PermissionService
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import AuthenticationFailed, NotFound
 
 
 class AdminService:
@@ -41,6 +41,14 @@ class AdminService:
         app_user = AppUserService.get_current_app_user(request)
         admin = AdminService.retrieve_admin_by_user(app_user.id)
         return admin
+
+    @staticmethod
+    def is_current_user_admin(request):
+        try:
+            AppUserService.get_current_role_user(request)
+            return True
+        except (AuthenticationFailed, NotFound):
+            return False
 
     @staticmethod
     def retrieve_admin_by_user(app_user_id):

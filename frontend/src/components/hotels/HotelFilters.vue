@@ -23,8 +23,8 @@ const emit = defineEmits([
 </script>
 
 <template>
-  <div class="list-filters-container flex-col  h-fit w-fit max-w-[355px] border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5 text-pawtel-black font-complementario">
-    <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60 py-2">Filtrar por:</h2>
+  <div class="list-filters-container flex-col h-fit w-fit max-w-[355px] border rounded-lg border-terracota px-6 py-4 space-y-6 sticky top-5 text-pawtel-black font-complementario">
+    <h2 class="text-lg font-bold border-b-[#ccc] border-b border-solid w-60 mb-5! py-2">Filtrar por:</h2>
 
     <PriceRange
       :min="0"

@@ -47,7 +47,7 @@ const updateMaxValue = () => {
           :max="tempMaxValue - 1"
           @blur="updateMinValue"
           @keydown.enter="updateMinValue"
-          class="w-full pl-8 pr-3 py-2 border rounded-md focus:ring-2 focus:ring-terracota"
+          class="w-full pl-8 pr-3 py-2 text-[18px] border rounded-md focus:ring-2 focus:ring-terracota"
         >
       </div>
 
@@ -63,7 +63,7 @@ const updateMaxValue = () => {
           :max="max"
           @blur="updateMaxValue"
           @keydown.enter="updateMaxValue"
-          class="w-full pl-8 pr-3 py-2 border rounded-md focus:ring-2 focus:ring-terracota"
+          class="w-full pl-8 pr-3 py-2 text-[18px] border rounded-md focus:ring-2 focus:ring-terracota"
         >
       </div>
     </div>
