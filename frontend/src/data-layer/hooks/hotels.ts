@@ -60,7 +60,7 @@ export const useUpdateHotel = () => {
 
     onSuccess: (data: Hotel) => {
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
-      queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
+      queryClient.invalidateQueries({ queryKey: ['hotelId'] });
       queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner'] });
       queryClient.invalidateQueries({ queryKey: ['currentHotelOwner'] });
     },

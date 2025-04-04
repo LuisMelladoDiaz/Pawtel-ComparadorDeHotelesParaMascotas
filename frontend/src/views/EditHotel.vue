@@ -268,11 +268,6 @@ const saveChanges = () => {
       onSuccess: () => {
         notyf.dismiss(loadingNotification);
         notyf.success('Cambios guardados correctamente.');
-
-        // Invalidar y refrescar las consultas relevantes
-        queryClient.invalidateQueries({ queryKey: ['hotelId', hotel.value.id] });
-
-        // Mostrar efecto visual de éxito
         saveSuccess.value = true;
         setTimeout(() => {
           saveSuccess.value = false;
