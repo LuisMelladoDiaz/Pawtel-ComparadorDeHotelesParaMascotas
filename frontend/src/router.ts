@@ -192,14 +192,6 @@ const routes = [
     }),
   },
   {
-    path: '/hotel/:id/rooms',
-    name: 'HotelRooms',
-    component: createComponent({ layout: LayoutWithFilter, component: HotelRoomsAndPrices }),
-    meta: {
-      allowedAuthStates: ALLOW_ALL,
-    },
-  },
-  {
     path: '/terminos-y-condiciones',
     name: 'TermsAndConditions',
     component: createComponent({ layout: LayoutDefault, component: TermsAndConditions }),

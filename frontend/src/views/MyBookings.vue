@@ -93,7 +93,7 @@ const formatPetType = (petType) => {
               <!-- Imagen del hotel -->
               <div>
                 <img
-                  :src="hotelDictById[booking.hotel_id]?.value?.cover_image?.image || defaultImages[hotel.id % defaultImages.length]"
+                  :src="hotelDictById[booking.hotel_id]?.value?.cover_image?.image || defaultImages[booking.hotel_id % defaultImages.length]"
                   alt="Hotel Placeholder"
                   class="w-full lg:w-40 h-40 object-cover rounded-md self-stretch"
                 />
