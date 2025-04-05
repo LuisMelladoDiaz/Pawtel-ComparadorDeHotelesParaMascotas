@@ -54,3 +54,18 @@ class HotelOwnerServiceTest(TestCase):
     def test_approve_hotel_owner_patch(self):
         updated_owner = HotelOwnerService.approve_hotel_owner_patch(self.hotel_owner.id)
         self.assertTrue(updated_owner.is_approved)
+
+    def test_delete_unapproved_hotel_owner(self):
+        unapproved_user = AppUser.objects.create(
+            username="to_delete",
+            email="to_delete@example.com",
+            phone="+34911112222",
+            password="123456",
+            is_active=True,
+        )
+        hotel_owner = HotelOwner.objects.create(user=unapproved_user, is_approved=False)
+
+        HotelOwnerService.delete_unapproved_hotel_owner(hotel_owner.id)
+
+        self.assertFalse(AppUser.objects.filter(id=unapproved_user.id).exists())
+        self.assertFalse(HotelOwner.objects.filter(id=hotel_owner.id).exists())

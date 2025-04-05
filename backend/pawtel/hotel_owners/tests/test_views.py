@@ -209,6 +209,25 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.data["is_approved"], True)
 
+    def test_delete_unapproved_hotel_owner_view_as_admin(self):
+        unapproved_user = AppUser.objects.create_user(
+            username="to_delete_view",
+            email="delete_view@example.com",
+            phone="+34666555444",
+            password="123456",
+        )
+        hotel_owner = HotelOwner.objects.create(user=unapproved_user, is_approved=False)
+
+        url = reverse(
+            "hotel-owner-delete_unapproved_hotel_owner",
+            kwargs={"pk": hotel_owner.id},
+        )
+        response = self.client2.delete(url)
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(AppUser.objects.filter(id=unapproved_user.id).exists())
+        self.assertFalse(HotelOwner.objects.filter(id=hotel_owner.id).exists())
+
     def test_delete_hotel_owner_as_admin(self):
         url = reverse(
             "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}

@@ -185,3 +185,16 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
             hotel_owner
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["delete"],
+        url_path="delete-unapproved",
+        url_name="delete_unapproved_hotel_owner",
+    )
+    def delete_unapproved_hotel_owner(self, request, pk=None):
+        action_name = currentframe().f_code.co_name
+        HotelOwnerService.authorize_action_hotel_owner(request, action_name, pk)
+
+        HotelOwnerService.delete_unapproved_hotel_owner(pk)
+        return Response(status=status.HTTP_204_NO_CONTENT)
