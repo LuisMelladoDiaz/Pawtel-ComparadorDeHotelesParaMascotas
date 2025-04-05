@@ -32,7 +32,7 @@ class HotelOwnerViewSetTest(TestCase):
             is_active=True,
         )
         self.authenticated_hotel_owner = HotelOwner.objects.create(
-            user_id=self.authenticated_user.id
+            user_id=self.authenticated_user.id, is_approved=True
         )
         self.client.force_authenticate(user=self.authenticated_user)
 
@@ -218,3 +218,12 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertFalse(
             HotelOwner.objects.filter(id=self.authenticated_hotel_owner.id).exists()
         )
+
+    def test_delete_hotel_owner_as_not_approved(self):
+        self.authenticated_hotel_owner.is_approved = False
+        self.authenticated_hotel_owner.save()
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
