@@ -277,3 +277,4 @@ class HotelOwnerViewSetTest(TestCase):
         response_ids = {ho["id"] for ho in response.data}
         expected_ids = {h1.id, h2.id}
         self.assertTrue(expected_ids.issubset(response_ids))
+        self.assertNotIn(approved.id, response_ids)
