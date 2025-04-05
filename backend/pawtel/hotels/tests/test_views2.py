@@ -25,7 +25,9 @@ class HotelViewSetTestCase2(TestCase):
             password="password456",
         )
         self.client.force_authenticate(user=self.app_user3)
-        self.hotel_owner4 = HotelOwner.objects.create(user_id=self.app_user3.id)
+        self.hotel_owner4 = HotelOwner.objects.create(
+            user_id=self.app_user3.id, is_approved=True
+        )
 
         self.hotel = Hotel.objects.create(
             name="Hotel Test",

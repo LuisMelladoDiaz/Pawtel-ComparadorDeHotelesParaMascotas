@@ -30,7 +30,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         action_name = currentframe().f_code.co_name
-        role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
+        role_user = HotelOwnerService.authorize_action_hotel_owner(
+            request, action_name, pk, True
+        )
         is_admin = role_user.user.role == UserRole.ADMIN
         hotel_owner = HotelOwnerService.retrieve_hotel_owner(
             pk, allow_inactive=is_admin

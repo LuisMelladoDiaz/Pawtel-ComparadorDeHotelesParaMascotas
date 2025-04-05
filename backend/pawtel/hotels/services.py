@@ -32,6 +32,7 @@ class HotelService:
         request, action_name, hotel_id=None, check_ownership=False
     ):
         role_user = AppUserService.get_current_role_user(request)
+        HotelOwnerService.check_approval_hotel_owner(role_user)
         PermissionService.check_permission_hotel_service(role_user, action_name)
 
         if hotel_id:

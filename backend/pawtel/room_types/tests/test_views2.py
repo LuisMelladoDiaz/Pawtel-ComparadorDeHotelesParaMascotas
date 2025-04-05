@@ -22,7 +22,9 @@ class TestRoomTypeViewSet(TestCase):
             phone="+34123456789",
             password="securepass",
         )
-        self.hotel_owner = HotelOwner.objects.create(user=self.app_user_owner)
+        self.hotel_owner = HotelOwner.objects.create(
+            user=self.app_user_owner, is_approved=True
+        )
         self.hotel = Hotel.objects.create(
             name="Hotel Test",
             address="123 Street",

@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 phone=phone1,
                 password="password123",
             )
-            HotelOwner.objects.create(user=user1)
+            HotelOwner.objects.create(user=user1, is_approved=True)
             self.stdout.write(self.style.SUCCESS(f"Created HotelOwner: {username1}"))
 
         username2 = "hotelowner2"
@@ -45,7 +45,7 @@ class Command(BaseCommand):
                 phone=phone2,
                 password="password123",
             )
-            HotelOwner.objects.create(user=user2)
+            HotelOwner.objects.create(user=user2, is_approved=True)
             self.stdout.write(self.style.SUCCESS(f"Created HotelOwner: {username2}"))
 
     def create_random_hotel_owners(self, num_random):
@@ -58,7 +58,7 @@ class Command(BaseCommand):
                 username=username, email=email, phone=phone, password="password123"
             )
 
-            HotelOwner.objects.create(user=user)
+            HotelOwner.objects.create(user=user, is_approved=True)
 
             self.stdout.write(
                 self.style.SUCCESS(f"Created HotelOwner: {username} ({email})")

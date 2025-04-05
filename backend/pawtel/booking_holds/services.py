@@ -4,6 +4,7 @@ from pawtel.app_users.services import AppUserService
 from pawtel.booking_holds.models import BookingHold
 from pawtel.booking_holds.serializers import BookingHoldSerializer
 from pawtel.customers.services import CustomerService
+from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
 from pawtel.room_types.services import RoomTypeService
 from rest_framework.exceptions import (NotFound, PermissionDenied,
@@ -26,6 +27,7 @@ class BookingHoldService:
         request, action_name, booking_hold_id=None, check_ownership=False
     ):
         role_user = AppUserService.get_current_role_user(request)
+        HotelOwnerService.check_approval_hotel_owner(role_user)
         PermissionService.check_permission_booking_hold_service(role_user, action_name)
 
         if booking_hold_id:
