@@ -119,6 +119,20 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         serializer = HotelSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="list-unapproved",
+        url_name="list_unapproved_hotel_owners",
+    )
+    def list_unapproved_hotel_owners(self, request):
+        action_name = currentframe().f_code.co_name
+        HotelOwnerService.authorize_action_hotel_owner(request, action_name)
+
+        queryset = HotelOwnerService.list_unapproved_hotel_owners()
+        serializer = HotelOwnerSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     # Delete all hotels of hotel owner ---------------------------------------
 
     @action(

@@ -237,3 +237,42 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertFalse(
             HotelOwner.objects.filter(id=self.authenticated_hotel_owner.id).exists()
         )
+
+    def test_list_unapproved_hotel_owners_view_as_admin(self):
+
+        h1 = HotelOwner.objects.create(
+            user=AppUser.objects.create_user(
+                username="unap1",
+                email="u1@example.com",
+                phone="+34000111222",
+                password="123456",
+            ),
+            is_approved=False,
+        )
+        h2 = HotelOwner.objects.create(
+            user=AppUser.objects.create_user(
+                username="unap2",
+                email="u2@example.com",
+                phone="+34000111223",
+                password="123456",
+            ),
+            is_approved=False,
+        )
+        approved = HotelOwner.objects.create(
+            user=AppUser.objects.create_user(
+                username="appr",
+                email="a@example.com",
+                phone="+34000111224",
+                password="123456",
+            ),
+            is_approved=True,
+        )
+
+        url = reverse("hotel-owner-list_unapproved_hotel_owners")
+        response = self.client2.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(all(not ho["is_approved"] for ho in response.data))
+
+        response_ids = {ho["id"] for ho in response.data}
+        expected_ids = {h1.id, h2.id}
+        self.assertTrue(expected_ids.issubset(response_ids))

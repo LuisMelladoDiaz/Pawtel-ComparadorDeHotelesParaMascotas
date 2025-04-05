@@ -100,6 +100,10 @@ class HotelOwnerService:
         else:
             return HotelOwner.objects.filter(user__is_active=True)
 
+    @staticmethod
+    def list_unapproved_hotel_owners():
+        return HotelOwner.objects.filter(is_approved=False)
+
     # POST -------------------------------------------------------------------
 
     @staticmethod

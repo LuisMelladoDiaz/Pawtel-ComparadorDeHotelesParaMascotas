@@ -69,3 +69,38 @@ class HotelOwnerServiceTest(TestCase):
 
         self.assertFalse(AppUser.objects.filter(id=unapproved_user.id).exists())
         self.assertFalse(HotelOwner.objects.filter(id=hotel_owner.id).exists())
+
+    def test_list_unapproved_hotel_owners(self):
+
+        unapproved1 = HotelOwner.objects.create(
+            user=AppUser.objects.create(
+                username="h1",
+                email="h1@example.com",
+                phone="+34111111111",
+                password="123456",
+            ),
+            is_approved=False,
+        )
+        unapproved2 = HotelOwner.objects.create(
+            user=AppUser.objects.create(
+                username="h2",
+                email="h2@example.com",
+                phone="+34111111112",
+                password="123456",
+            ),
+            is_approved=False,
+        )
+        approved = HotelOwner.objects.create(
+            user=AppUser.objects.create(
+                username="h3",
+                email="h3@example.com",
+                phone="+34111111113",
+                password="123456",
+            ),
+            is_approved=True,
+        )
+
+        result = HotelOwnerService.list_unapproved_hotel_owners()
+        self.assertIn(unapproved1, result)
+        self.assertIn(unapproved2, result)
+        self.assertNotIn(approved, result)

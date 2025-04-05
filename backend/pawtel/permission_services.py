@@ -75,6 +75,7 @@ class PermissionService:
             "approve_hotel_owner_patch",
             "destroy",
             "delete_unapproved_hotel_owner",
+            "list_unapproved_hotel_owners",
         },
     }
 
