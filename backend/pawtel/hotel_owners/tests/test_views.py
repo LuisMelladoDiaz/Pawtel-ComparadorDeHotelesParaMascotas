@@ -265,6 +265,7 @@ class HotelOwnerViewSetTest(TestCase):
                 phone="+34000111224",
                 password="123456",
             ),
+            is_approved=True,
             
         )
 
