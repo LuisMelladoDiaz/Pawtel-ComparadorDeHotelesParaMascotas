@@ -12,7 +12,9 @@ import {
   filterAvailableRoomTypes,
   type Hotel,
   fetchRoomTypesByHotel,
+  fetchBookingsByHotel,
 } from '@/data-layer/api/hotels';
+import type { Booking } from '../api/bookings';
 
 export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
   return useQuery({
@@ -135,5 +137,15 @@ export const useFilterAvailableRoomTypes = (hotelId: number, filters: Record<str
     queryFn: () => filterAvailableRoomTypes(hotelId, filters),
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
+  });
+};
+
+export const useGetBookingsByHotel = (hotelId: MaybeRef<number>) => {
+  return useQuery<Booking[]>({
+    queryKey: ['bookings', hotelId],
+    queryFn: () => fetchBookingsByHotel(toValue(hotelId)),
+    staleTime: 1000 * 60,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
   });
 };
