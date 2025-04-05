@@ -265,8 +265,7 @@ class HotelOwnerViewSetTest(TestCase):
                 phone="+34000111224",
                 password="123456",
             ),
-            is_approved=True,
-            
+            is_approved=True,     
         )
 
         url = reverse("hotel-owner-list_unapproved_hotel_owners")
