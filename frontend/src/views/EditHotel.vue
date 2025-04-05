@@ -3,7 +3,7 @@ import { ref, computed, watchEffect, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { handleApiError } from '@/utils/errorHandler';
 import { Notyf } from 'notyf';
-import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
+import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel, useGetBookingsByHotel } from '@/data-layer/hooks/hotels';
 import { useUploadHotelImage, useDeleteHotelImage, useUpdateHotelImage, useSetCoverImage } from '@/data-layer/hooks/hotelImages';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
@@ -36,8 +36,9 @@ const closeEditModal = () => {
 
 // Obtener detalles del hotel
 const { data: hotel, isLoading: isLoadingHotel, isError: isErrorHotel } = useGetHotelById(hotelId);
-
 const { data: roomTypes, isLoading: isLoadingRooms, isError: isErrorRooms } = useGetRoomTypesByHotel(hotelId);
+const { data: bookingsData, isLoading: isLoadingBookings, isError: isErrorBookings } = useGetBookingsByHotel(hotelId);
+
 const { mutate: deleteHotelImage, isLoading: isDeleting, isError: isErrorDeleting } = useDeleteHotelImage();
 
 // Crear un objeto reactivo para manejar la edición
@@ -53,6 +54,7 @@ const fileInputRef = ref(null);
 const selectedFiles = ref([]);
 
 const hotelImages = computed(() => hotel.value?.images || []);
+const bookings = computed(() => bookingsData?.value);
 
 // Estado mutable para las imágenes del hotel
 const mutableHotelImages = ref([]);
@@ -583,6 +585,65 @@ const paginatedRooms = computed(() => {
           </div>
         </div>
 
+      </div>
+
+      <div class="bg-white rounded-xl shadow-md border border-gray-200 mt-6">
+        <div class="lg:flex flex-row items-center bg-terracota rounded-t-xl">
+          <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
+            <h1 class="m-0! text-xl font-semibold text-white">Reservas</h1>
+          </div>
+        </div>
+
+        <div v-if="isLoadingBookings" class="text-center py-10">
+          <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
+        </div>
+
+        <div v-else-if="isErrorBookings" class="text-center py-10 text-red-600">
+          <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+          <p>Error al cargar las reservas</p>
+        </div>
+
+        <div v-else class="p-6">
+          <div v-if="bookings?.length" class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha creación</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-in</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-out</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio total</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo habitación</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white divide-y divide-gray-200">
+                <tr v-for="booking in bookings" :key="booking.id" class="hover:bg-gray-50">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ booking.id }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ new Date(booking.creation_date).toLocaleDateString() }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ new Date(booking.start_date).toLocaleDateString() }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ new Date(booking.end_date).toLocaleDateString() }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-terracota">
+                    {{ booking.total_price }}€
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ booking.customer_id || booking.customer }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {{ booking.room_type_id || booking.room_type }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p v-else class="text-center font-bold text-xl text-terracota py-10">No hay reservas para este hotel.</p>
+        </div>
       </div>
 
       <!-- SECCIÓN DE HABITACIONES -->
