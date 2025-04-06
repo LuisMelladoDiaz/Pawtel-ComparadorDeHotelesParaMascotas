@@ -107,6 +107,10 @@ class HotelOwnerService:
         else:
             return HotelOwner.objects.filter(user__is_active=True)
 
+    @staticmethod
+    def list_unapproved_hotel_owners():
+        return HotelOwner.objects.filter(is_approved=False)
+
     # POST -------------------------------------------------------------------
 
     @staticmethod
@@ -168,3 +172,12 @@ class HotelOwnerService:
         hotel_owner.is_approved = True
         hotel_owner.save()
         return hotel_owner
+
+    @staticmethod
+    def validate_unapproved_hotel_owner_delete(hotel_owner_id):
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(hotel_owner_id)
+
+        if hotel_owner.is_approved:
+            raise PermissionDenied(
+                "Solo se pueden eliminar dueños de hotel no aprobados."
+            )
