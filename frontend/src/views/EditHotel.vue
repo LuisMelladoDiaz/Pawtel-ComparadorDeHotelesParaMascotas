@@ -92,18 +92,19 @@ const closeImageOptions = () => {
   imageOptionsSource.value = null;
 };
 
-// Corrección en el manejo de imágenes
 const handleImageUpload = (event) => {
   const files = event.target.files;
+  
   for (const file of files) {
     const reader = new FileReader();
     reader.onload = (e) => {
       uploadedImages.value.push({ src: e.target.result, is_cover: false });
     };
-    event.target.value = '';
     reader.readAsDataURL(file);
     selectedFiles.value.push(file);
   }
+
+  event.target.value = '';
 };
 
 const submitImages = () => {
