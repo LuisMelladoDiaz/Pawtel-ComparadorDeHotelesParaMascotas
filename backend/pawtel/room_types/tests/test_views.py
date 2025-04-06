@@ -31,7 +31,9 @@ class RoomTypeViewSetTests(APITestCase):
             phone="+34987654321",
             password="securepassword123",
         )
-        self.owner = HotelOwner.objects.create(user_id=self.app_user.id)
+        self.owner = HotelOwner.objects.create(
+            user_id=self.app_user.id, is_approved=True
+        )
 
         self.hotel = Hotel.objects.create(name="Hotel Pawtel", hotel_owner=self.owner)
 
@@ -125,3 +127,10 @@ class RoomTypeViewSetTests(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["id"], self.hotel.id)
+
+    def test_delete_room_type_as_hotel_owner_not_approved(self):
+        self.owner.is_approved = False
+        self.owner.save()
+        url = reverse("room-type-detail", args=[self.room_type_1.id])
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

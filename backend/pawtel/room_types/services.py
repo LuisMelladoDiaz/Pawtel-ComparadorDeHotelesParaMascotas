@@ -26,6 +26,7 @@ class RoomTypeService:
         request, action_name, room_type_id=None, check_ownership=False
     ):
         role_user = AppUserService.get_current_role_user(request)
+        HotelOwnerService.check_approval_hotel_owner(role_user)
         PermissionService.check_permission_room_type_service(role_user, action_name)
 
         if room_type_id:
