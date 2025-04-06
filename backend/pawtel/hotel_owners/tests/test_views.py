@@ -32,7 +32,7 @@ class HotelOwnerViewSetTest(TestCase):
             is_active=True,
         )
         self.authenticated_hotel_owner = HotelOwner.objects.create(
-            user_id=self.authenticated_user.id
+            user_id=self.authenticated_user.id, is_approved=True
         )
         self.client.force_authenticate(user=self.authenticated_user)
 
@@ -211,10 +211,10 @@ class HotelOwnerViewSetTest(TestCase):
 
     def test_delete_unapproved_hotel_owner_view_as_admin(self):
         unapproved_user = AppUser.objects.create_user(
-        username="to_delete_view",
-        email="delete_view@example.com",
-        phone="+34666555444",
-        password="123456",
+            username="to_delete_view",
+            email="delete_view@example.com",
+            phone="+34666555444",
+            password="123456",
         )
         hotel_owner = HotelOwner.objects.create(user=unapproved_user, is_approved=False)
 
@@ -226,8 +226,6 @@ class HotelOwnerViewSetTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(AppUser.objects.filter(id=unapproved_user.id).exists())
         self.assertFalse(HotelOwner.objects.filter(id=hotel_owner.id).exists())
-
-
 
     def test_delete_hotel_owner_as_admin(self):
         url = reverse(
@@ -278,3 +276,12 @@ class HotelOwnerViewSetTest(TestCase):
         expected_ids = {h1.id, h2.id}
         self.assertTrue(expected_ids.issubset(response_ids))
         self.assertNotIn(approved.id, response_ids)
+
+    def test_delete_hotel_owner_as_not_approved(self):
+        self.authenticated_hotel_owner.is_approved = False
+        self.authenticated_hotel_owner.save()
+        url = reverse(
+            "hotel-owner-detail", kwargs={"pk": self.authenticated_hotel_owner.id}
+        )
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
