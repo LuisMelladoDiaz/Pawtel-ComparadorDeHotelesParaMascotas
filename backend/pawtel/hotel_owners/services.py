@@ -166,13 +166,13 @@ class HotelOwnerService:
         hotel_owner.save()
         return hotel_owner
 
+    
+
     @staticmethod
-    def delete_unapproved_hotel_owner(hotel_owner_id):
+    def validate_unapproved_hotel_owner_delete(hotel_owner_id):
         hotel_owner = HotelOwnerService.retrieve_hotel_owner(hotel_owner_id)
 
         if hotel_owner.is_approved:
             raise PermissionDenied(
                 "Solo se pueden eliminar dueños de hotel no aprobados."
             )
-
-        hotel_owner.user.delete()

@@ -207,8 +207,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         url_name="delete_unapproved_hotel_owner",
     )
     def delete_unapproved_hotel_owner(self, request, pk=None):
-        action_name = currentframe().f_code.co_name
+        action_name = currentframe().f_code.co_name   
         HotelOwnerService.authorize_action_hotel_owner(request, action_name, pk)
-
-        HotelOwnerService.delete_unapproved_hotel_owner(pk)
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk, allow_inactive=True)
+        HotelOwnerService.validate_unapproved_hotel_owner_delete(pk)
+        AppUserService.general_delete_app_user(request, hotel_owner.user.id)
         return Response(status=status.HTTP_204_NO_CONTENT)
