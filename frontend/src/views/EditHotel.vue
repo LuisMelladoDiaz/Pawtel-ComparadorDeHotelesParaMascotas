@@ -440,7 +440,7 @@ const paginatedRooms = computed(() => {
   <div class="max-w-7xl p-0! mt-10 mx-auto px-5 w-full flex flex-col flex-grow">
     <div class="flex flex-col gap-6">
 
-      <h1 class="text-terracota text-4xl mb-0! p-1">
+      <h1 class="text-terracota text-3xl mb-0! p-1">
         {{ hotel?.name || 'Cargando hotel...' }}
       </h1>
 

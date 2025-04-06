@@ -146,7 +146,7 @@ const closeCreateModal = () => {
           <i class="fas fa-spinner fa-spin text-3xl text-terracota"></i>
         </div>
 
-        <div v-else-if="isError" class="text-center py-10 text-red-600">
+        <div v-else-if="isError" class="text-center py-10 text-terracota">
           <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
           <p>Error al cargar los hoteles</p>
         </div>
