@@ -174,6 +174,34 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+CELERY_BROKER_URL = (
+    "redis://localhost:6379/0"  # Asegúrate de tener Redis corriendo localmente
+)
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+
+
+CELERY_BEAT_SCHEDULE = {
+    "delete-inactive-bookingholds-daily": {
+        "task": "pawtel.booking_holds.tasks.delete_inactive_bookingholds",
+        "schedule": 60.0,
+    },
+    "cleanup-archived-roomtypes-daily": {
+        "task": "pawtel.room_types.tasks.delete_archived_room_types_without_recent_bookings",
+        "schedule": 60.0,
+    },
+    "cleanup-archived-hotels-daily": {
+        "task": "pawtel.hotels.tasks.delete_archived_hotels_without_recent_bookings",
+        "schedule": 60.0,
+    },
+    "cleanup-old-bookings-daily": {
+        "task": "pawtel.bookings.tasks.delete_old_bookings",
+        "schedule": 60.0,
+    },
+}
+
 
 def bool_env(env_var: str) -> bool:
     return os.getenv(env_var, "False").lower() == "true"
