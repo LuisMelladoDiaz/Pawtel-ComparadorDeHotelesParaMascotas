@@ -14,6 +14,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from celery.schedules import crontab
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -182,29 +183,29 @@ CELERY_RESULT_SERIALIZER = "json"
 
 
 CELERY_BEAT_SCHEDULE = {
-    "delete-inactive-bookingholds-daily": {
+    "delete-inactive-bookingholds": {
         "task": "pawtel.booking_holds.tasks.delete_inactive_bookingholds",
-        "schedule": 60.0,
+        "schedule": crontab(hour=3, minute=0, day_of_week=1),
     },
-    "cleanup-archived-roomtypes-daily": {
+    "cleanup-archived-roomtypes": {
         "task": "pawtel.room_types.tasks.delete_archived_room_types_without_recent_bookings",
-        "schedule": 60.0,
+        "schedule": crontab(hour=3, minute=0, day_of_week=1),
     },
-    "cleanup-archived-hotels-daily": {
+    "cleanup-archived-hotels": {
         "task": "pawtel.hotels.tasks.delete_archived_hotels_without_recent_bookings",
-        "schedule": 60.0,
+        "schedule": crontab(hour=3, minute=0, day_of_week=1),
     },
-    "cleanup-old-bookings-daily": {
+    "cleanup-old-bookings": {
         "task": "pawtel.bookings.tasks.delete_old_bookings",
-        "schedule": 60.0,
+        "schedule": crontab(hour=3, minute=0, day_of_week=1),
     },
     "cleanup-inactive-customers": {
         "task": "pawtel.customers.tasks.delete_inactive_customers_without_recent_bookings",
-        "schedule": 60.0,
+        "schedule": crontab(hour=3, minute=0, day_of_week=1),
     },
     "cleanup-inactive-hotelowners": {
         "task": "pawtel.hotel_owners.tasks.delete_inactive_hotel_owners_without_recent_bookings",
-        "schedule": 60.0,
+        "schedule": crontab(hour=3, minute=0, day_of_week=1),
     },
 }
 

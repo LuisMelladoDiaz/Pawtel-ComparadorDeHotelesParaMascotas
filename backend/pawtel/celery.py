@@ -2,13 +2,13 @@ import os
 
 from celery import Celery
 
-# Establece la variable de entorno para que Django use el archivo de settings correcto
+# Set the environment variable so Django uses the correct settings file
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pawtel.settings")
 
 app = Celery("pawtel")
 
-# Carga la configuración de Celery desde el settings.py usando el namespace CELERY
+# Load Celery configuration from settings.py using the CELERY namespace
 app.config_from_object("django.conf:settings", namespace="CELERY")
 
-# Descubre automáticamente las tareas en las apps instaladas
+# Automatically discover tasks in installed apps
 app.autodiscover_tasks()
