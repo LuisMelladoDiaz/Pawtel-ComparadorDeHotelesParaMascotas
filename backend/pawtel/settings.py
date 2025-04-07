@@ -174,9 +174,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CELERY_BROKER_URL = (
-    "redis://localhost:6379/0"  # Asegúrate de tener Redis corriendo localmente
-)
+CELERY_BROKER_URL = "redis://localhost:6379/0"
 CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
@@ -198,6 +196,14 @@ CELERY_BEAT_SCHEDULE = {
     },
     "cleanup-old-bookings-daily": {
         "task": "pawtel.bookings.tasks.delete_old_bookings",
+        "schedule": 60.0,
+    },
+    "cleanup-inactive-customers": {
+        "task": "pawtel.customers.tasks.delete_inactive_customers_without_recent_bookings",
+        "schedule": 60.0,
+    },
+    "cleanup-inactive-hotelowners": {
+        "task": "pawtel.hotel_owners.tasks.delete_inactive_hotel_owners_without_recent_bookings",
         "schedule": 60.0,
     },
 }
