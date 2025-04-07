@@ -46,7 +46,9 @@ class PermissionService:
             "list_bookings_of_customer_explicit",
             "list_bookings_of_customer_implicit",
         },
-        UserRole.HOTEL_OWNER.value: {},
+        UserRole.HOTEL_OWNER.value: {
+            "retrieve",
+        },
         UserRole.ADMIN.value: {
             "list",
             "retrieve",
