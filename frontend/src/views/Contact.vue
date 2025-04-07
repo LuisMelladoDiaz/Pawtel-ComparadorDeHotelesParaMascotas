@@ -55,12 +55,12 @@ const sendMessage = async () => {
   <section class="bg-[#f7f7f7] py-10 px-6 max-w-7xl mx-auto rounded-lg mb-10">
     <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-4">
       <div class="space-y-3 text-left">
-        <h1 class="text-4xl font-bold mb-4 font-titleHome text-[#595959] leading-relaxed text-center">Contáctanos<br />
+        <h1 class="text-4xl font-bold mb-4 font-titleHome text-[#595959] leading-relaxed text-center">CONTÁCTANOS<br />
           <span class="text-2xl italic">No ladramos, pero respondemos rápido.</span>
         </h1>  
-        <div class="mt-10 bg-white p-4 rounded-xl shadow text-center text-sm text-gray-600 italic max-w-md mx-auto">
+        <div class="mt-10 bg-white p-4 rounded-xl shadow text-center text-sm text-gray-800 italic max-w-md mx-auto">
           “Nos encanta ayudarte a encontrar lo mejor para tu mascota. No dudes en escribirnos.”<br />
-          — Equipo de soporte Pawtel 🐶 — 
+          — 🐾Equipo de soporte Pawtel 🐶 — 
         </div>
       </div>
       <div>
@@ -71,30 +71,34 @@ const sendMessage = async () => {
 
   <section class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-7xl mx-auto px-6 pb-16">
     <div class="bg-[#FAF8F8] p-8 rounded-xl shadow-lg">
-      <h3 class="text-xl font-bold text-[#6C8CC3] mb-4 text-center">Nuestro equipo responderá lo antes posible dentro de nuestro horario:</h3>
+      <h3 class="text-xl font-bold text-[#595959] mb-4 text-center">Nuestro equipo responderá lo antes posible dentro de nuestro horario:</h3>
+      <div class="w-full h-px bg-gray-300 mb-4"></div>
       <div class="space-y-6 text-lg">
-        <div class="flex items-center gap-3 justify-start">
-          <img src="../assets/calendar_icon.png" alt="Calendario" class="w-18 h-18 object-contain" />
+        <div class="flex items-center gap-3">
+          <img src="../assets/calendar_icon.png" alt="Calendario" class="w-15 h-15 object-contain" />
           <span class="text-gray-700 font-semibold" >Lunes a Jueves, 9:00 a 17:00</span>
         </div>
-        <div class="flex items-center gap-3 justify-end">
-          <span class="text-gray-700 font-semibold">Viernes, 9:00 a 14:00</span>
-          <img src="../assets/warning_icon.png" alt="Aviso viernes" class="w-18 h-18 object-contain" />
+        <div class="flex items-center gap-3">
+          <img src="../assets/warning_icon.png" alt="Aviso viernes" class="w-15 h-15 object-contain" />
+          <span class="text-gray-700 font-semibold">Viernes, 9:00 a 14:00</span> 
+  
         </div>
-        <div class="flex items-center gap-3 justify-start">
-          <img src="../assets/email_icon.png" alt="Correo" class="w-18 h-18 object-contain" />
-          <span class="text-gray-700 font-semibold">hello@pawtel.es</span>
-        </div> 
+        <div class="flex items-center gap-3">
+          <img src="../assets/email_icon.png" alt="Correo" class="w-15 h-15 object-contain" />
+          <a href="mailto:hello@pawtel.es" class="text-blue-600 font-semibold underline hover:text-blue-800 transition">hello@pawtel.es</a>
+        </div>
+        <p class="text-sm text-[#595959] italic mt-6 text-center">No ofrecemos atención los fines de semana ni festivos.</p> 
       </div>
       <div class="mt-8 text-center">
         <div class="w-full h-px bg-gray-300 mb-4"></div>
-        <span class="block text-gray-700 font-semibold mb-2">También puedes escribirnos por redes:</span>
+        <h3 class="text-xl font-bold text-[#595959] mb-4 text-center">También puedes escribirnos por redes:</h3>
+        <span class="block text-gray-700 font-semibold mb-7 text-xl"></span>
         <div class="flex justify-center gap-4">
-          <a href="https://www.instagram.com/pawtel_es/" target="_blank" rel="noopener noreferrer">
-            <img src="../assets/insta_icon.png" alt="Instagram" class="w-10 h-10 hover:scale-110 transition-transform" />
-          </a>
           <a href="https://x.com/Pawtel_es" target="_blank" rel="noopener noreferrer">
             <img src="../assets/x_icon.png" alt="X" class="w-10 h-10 hover:scale-110 transition-transform" />
+          </a>
+          <a href="https://www.instagram.com/pawtel_es/" target="_blank" rel="noopener noreferrer">
+            <img src="../assets/insta_icon.png" alt="Instagram" class="w-10 h-10 hover:scale-110 transition-transform" />
           </a>
           <a href="https://www.tiktok.com/@tu_usuario" target="_blank" rel="noopener noreferrer">
             <img src="../assets/tiktok_icon.png" alt="TikTok" class="w-10 h-10 hover:scale-110 transition-transform" />

@@ -37,27 +37,16 @@ function handleInstall() {
      <section class="banner-section relative mx-auto py-4 max-w-7xl px-5">
       <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
         <div class="lg:w-1/2 text-left p-6">
-          <h1 class="text-4xl font-bold mb-4 font-titleHome text-azul-suave">
+          <h1 class="text-4xl font-bold mb-8 font-titleHome text-azul-suave">
             Viaja sin preocupaciones, nosotros encontramos el mejor alojamiento para tu
             <span class="italic text-terracota">mascota.</span>
           </h1>
-          <p class="text-lg text-gray-600 mb-6">
-            ¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.
-          </p>
-          <router-link to="/register" v-if="!isLoggedIn">
-            <Button type="reject" class="m-0!">Crear cuenta</Button>
+          <p class="text-lg text-gray-600 mb-2">¡Compara y elige el mejor! Regístrate ahora y obtén 20% de descuento en tu primera reserva.</p>
+          <router-link to="/register" class="inline-block bg-[#C36C6C] hover:bg-[#a85a5a] text-white font-semibold text-sm sm:text-base px-6 py-2 rounded-md mt-4 shadow-md transition-all">
+            Obtener 20% de descuento →
           </router-link>
-          <p class="text-sm text-gray-600 mt-4" v-if="!isLoggedIn">
-            ¿Ya tienes una cuenta?
-            <router-link to="/login" class="text-azul-suave hover:underline">Inicia sesión aquí</router-link>
-          </p>
-          <!-- Enlace para dueños de alojamientos -->
-          <p class="text-sm text-gray-600 mt-6">
-            ¿Eres dueño de un alojamiento para mascotas?
-            <router-link to="/dueños-alojamientos" class="text-azul-suave hover:underline ml-1">
-              Únete a Pawtel →
-            </router-link>
-          </p>
+          <p class="text-xs text-gray-500 mt-2">*Oferta válida solo para nuevos usuarios. Aplican 
+            <RouterLink to="/terminos-y-condiciones" class="font-semibold underline transition-all"> términos y condiciones </RouterLink> </p>
         </div>
         <div class="lg:w-1/2">
           <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">
