@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from celery import shared_task
 from django.utils import timezone
+from pawtel.bookings.models import Booking
 from pawtel.room_types.models import RoomType
 
 THREE_YEARS = timedelta(days=3 * 365)
