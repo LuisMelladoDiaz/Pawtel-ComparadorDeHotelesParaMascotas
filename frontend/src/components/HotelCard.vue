@@ -80,9 +80,9 @@
   </div>
 
   <!-- Mobile Version -->
-  <div class="card-container flex justify-between w-full box-border border mb-4 p-[15px] rounded-lg border-[#cc6a4e] lg:hidden ">
+  <div class="card-container flex justify-between w-full box-border border mb-4 gap-2 p-[10px] rounded-lg border-[#cc6a4e] lg:hidden ">
 
-    <div class="image-container self-center max-w-[80px] h-[300px] overflow-hidden">
+    <div class="image-container self-center max-w-[110px] h-[290px] overflow-hidden">
       <img :src="image" alt="Hotel" class="w-full h-full object-cover object-center shadow-lg rounded-lg" />
     </div>
 
@@ -109,8 +109,23 @@
 
         <div class="flex flex-col items-center justify-between">
           <span class="price text-[1.35rem] text-[#C36C6C] font-bold flex flex-col self-end">
-                <a class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota">Rango de Precios</a> 
-                <a class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3">{{ price_min }}€ - {{ price_max }}€</a>
+            <a 
+                  v-if="price_min !== price_max" 
+                  class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
+                >
+                  Precios por Noche
+                </a>
+                <a 
+                  v-else 
+                  class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
+                >
+                  Precio por Noche
+                </a>
+                <a 
+                  class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3"
+                >
+                  {{ price_min === price_max ? `${price_min}€` : `${price_min}€ - ${price_max}€` }}
+                </a>
               </span>
           <div class="flex items-center !w-full mt-2">
             <RouterLink :to="`/hotel/${id}`" class="!w-full !m-0 text-[15px]">

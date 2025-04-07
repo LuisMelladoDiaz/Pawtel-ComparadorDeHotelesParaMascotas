@@ -33,8 +33,9 @@ export const useGetHotelById = (hotelId: MaybeRef<number>) => {
   return useQuery({
     queryKey: ['hotelId', hotelId],
     queryFn: () => fetchHotelById(toValue(hotelId)),
-    staleTime: 1000 * 60,
-    refetchOnWindowFocus: false,
+    staleTime: 30 * 1000,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
   });
 };
 
@@ -44,11 +45,9 @@ export const useCreateHotel = () => {
   return useMutation({
     mutationFn: createHotel,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        predicate: (query) => true,
-      });
+      queryClient.invalidateQueries({ queryKey: ['hotels'] });
+      queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner'] });
     },
-
   });
 };
 
@@ -61,7 +60,9 @@ export const useUpdateHotel = () => {
 
     onSuccess: (data: Hotel) => {
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
-      queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
+      queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+      queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner'] });
+      queryClient.invalidateQueries({ queryKey: ['currentHotelOwner'] });
     },
   });
 };
@@ -74,7 +75,7 @@ export const usePartialUpdateHotel = () => {
       partialUpdateHotel(hotelId, partialData),
 
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
+      queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
     },
   });
@@ -88,6 +89,8 @@ export const useDeleteHotel = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
+      queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+      queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner'] });
     },
   });
 };
@@ -96,8 +99,9 @@ export const useGetRoomTypesByHotel = (hotelId: MaybeRef<number>) => {
   return useQuery({
     queryKey: ['roomTypes', hotelId],
     queryFn: () => fetchRoomTypesByHotel(toValue(hotelId)),
-    staleTime: 1000 * 60,
-    refetchOnWindowFocus: false,
+    staleTime: 30 * 1000,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
   });
 };
 
@@ -111,7 +115,7 @@ export const useUploadImageToHotel = () => {
     },
 
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['hotel', data.id] });
+      queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
     },
   });
 };

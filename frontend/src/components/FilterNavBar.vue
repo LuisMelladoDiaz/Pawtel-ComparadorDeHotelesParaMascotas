@@ -10,10 +10,7 @@ import Button from '../components/Button.vue'
 const router = useRouter()
 const filters = useFiltersStore()
 
-const cities = ref([
-  "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
-  "Palma de Mallorca", "Las Palmas de Gran Canaria", "Bilbao", "Alicante", "Córdoba",
-  "Valladolid", "Vigo", "Gijón"
+const cities = ref(["Sevilla","Málaga","Cádiz","Córdoba","Jaén","Almería","Granada","Huelva"
 ].sort())
 
 const petTypes = ["DOG", "CAT", "BIRD", "MIXED"].sort()
@@ -88,6 +85,7 @@ const onSearch = () => {
           class="bg-white min-h-[42px] pl-8 text-[18px] text-pawtel-black shadow-sm font-complementario rounded-lg p-2 min-w-[300px] cursor-pointer"
         >
           <option disabled value="">Elige un tipo de mascota</option>
+          <option value="">Cualquiera</option>
           <option v-for="(pet, index) in petTypesInSpanish" :key="index" :value="petTypes[index]">
             {{ pet }}
           </option>

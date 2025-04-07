@@ -44,14 +44,20 @@ onMounted(() => {
 
       const [startDate, endDate] = selectedDates;
 
+      // Evitar rangos del mismo día
+      if (
+        startDate &&
+        endDate &&
+        startDate.toDateString() === endDate.toDateString()
+      ) {
+        instance.clear();
+        emit('update:startDate', '');
+        emit('update:endDate', '');
+        return;
+      }
+
       if (startDate) emit('update:startDate', formatForInput(startDate));
       if (endDate) emit('update:endDate', formatForInput(endDate));
-
-      if (startDate && endDate) {
-        formattedDate.value = `${formatDisplay(startDate)} - ${formatDisplay(endDate)}`;
-      } else {
-        formattedDate.value = '';
-      }
 
       if (startDate) {
         const maxRangeDate = new Date(startDate);

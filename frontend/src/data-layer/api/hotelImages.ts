@@ -4,9 +4,9 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type HotelImage = {
   id?: number;
-  image: string;
+  image: File;
   is_cover: boolean;
-  hotel: number;
+  hotel_id: number;
 };
 
 export const fetchHotelImage = async (hotelId: number, imageId: number) => {
@@ -53,14 +53,14 @@ export const deleteHotelImage = async (hotelId: number, imageId: number) => {
 };
 
 export const setCoverImage = async (hotelId: number, imageId: number) => {
-  const url = `${API_BASE_URL}/hotels/${hotelId}/hotel-images/${imageId}/set-cover/`;
-  const response = await axios.put(url);
+  const url = `${API_BASE_URL}/hotels/${hotelId}/hotel-images/${imageId}/set-is-cover/`;
+  const response = await axios.put(url, { is_cover: true });
   return response.data as HotelImage;
 };
 
 export const unsetCoverImage = async (hotelId: number, imageId: number) => {
-  const url = `${API_BASE_URL}/hotels/${hotelId}/hotel-images/${imageId}/set-non-cover/`;
-  const response = await axios.put(url);
+  const url = `${API_BASE_URL}/hotels/${hotelId}/hotel-images/${imageId}/set-is-cover/`;
+  const response = await axios.put(url, { is_cover: false });
   return response.data as HotelImage;
 };
 

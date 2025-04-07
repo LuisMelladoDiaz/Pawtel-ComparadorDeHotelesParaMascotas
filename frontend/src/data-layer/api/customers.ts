@@ -7,7 +7,7 @@ export type Customer = {
     username: string;
     email: string;
     phone: string;
-    password: string;
+    password?: string;
     date_joined?: string;
     last_login?: string;
     is_active?: boolean;
@@ -53,7 +53,7 @@ export const createCustomer = async (CustomerData: Omit<Customer, 'id'>) => {
 
 export const updateCustomer = async (CustomerId: number, ownerData: Customer) => {
     const url = `${API_BASE_URL}/customers/${CustomerId}/`;
-    const response = await axios.put(url, ownerData);
+    const response = await axios.patch(url, ownerData);
     return response.data as Customer;
 };
 
