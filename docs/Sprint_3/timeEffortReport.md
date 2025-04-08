@@ -158,14 +158,14 @@
 
 | Descripción | Duración |
 |-------------|---------|
-| QA | 10:21:00 |
-| Refactorizar autenticación en backend  | 06:48:00 |
-| Arreglando problemas varios | 02:06:00  |
+| QA | 08:55:00 |
+| Preparar entrega  | 01:03:00 |
+| Revisar frontend | 03:00:00  |
 | Booking Hold  | 03:42:00 |
 | Clases | 4:00:00 |
-| Diseñar backend sprint 2 | 07:00:00 |
-| Reunión | 00:45:00 |
-| Planificar sprint 2 backend | 04:00:00 |
+| Tareas alta prioridad sprint 3 | 02:49:00 |
+| Reunión | 01:00:00 |
+| Hotfix | 02:46:00 |
 
 ![grafico-de-tiempos](graficas/rafael.png)
 ---
