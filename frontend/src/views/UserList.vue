@@ -34,13 +34,16 @@ const extractUserData = (userWithRelation, type) => {
 
   const user = userWithRelation.user;
 
+  // Imagen por defecto (silueta de usuario neutra)
+  const defaultAvatar = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
+
   return {
     id: user.id,
     name: `${user.first_name || ''} ${user.last_name || ''}`.trim() || user.username,
     username: user.username,
     email: user.email,
     phone: user.phone,
-    image: user.profile_image || `https://i.pravatar.cc/150?u=${user.id}`,
+    image: user.profile_image || defaultAvatar,
     role: type === 'owner' ? 'owner' : 'customer',
     is_admin: type === 'owner',
     is_verified: type === 'owner' ? userWithRelation.is_approved : true
