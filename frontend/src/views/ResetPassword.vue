@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
+import { handleApiError } from '@/utils/errorHandler';
 import { usePasswordResetConfirmMutation } from '@/data-layer/auth';
 import { Notyf } from 'notyf';
 import NavbarTerracotaLogoOnly from '../components/NavBarTerracotaLogoOnly.vue';
@@ -13,9 +14,10 @@ const router = useRouter();
 const route = useRoute();
 const passwordResetConfirmMutation = usePasswordResetConfirmMutation();
 
-const resetPassword = async () => {
+const resetPassword = () => {
     const uidb64 = route.params.uidb64;
     const token = route.params.token;
+
     if (!uidb64 || !token) {
         notyf.error('Enlace inválido. Intenta de nuevo.');
         return;
@@ -28,22 +30,34 @@ const resetPassword = async () => {
         notyf.error('Las contraseñas no coinciden');
         return;
     }
-    try {
-        await passwordResetConfirmMutation.mutateAsync({ uidb64, token, password: password.value });
-        notyf.success('Contraseña restablecida correctamente');
-        router.push('/login');
-    } catch (error) {
-        console.error('Error al restablecer la contraseña:', error);
-        const errorMessage = error.response?.data?.error || 'Error al restablecer la contraseña';
-        notyf.error(errorMessage);
-    }
+
+    const loadingNotification = notyf.open({
+        type: 'loading',
+        message: 'Restableciendo contraseña...',
+        dismissible: false,
+    });
+
+    passwordResetConfirmMutation.mutate(
+        { uidb64, token, password: password.value },
+        {
+            onSuccess: () => {
+                notyf.dismiss(loadingNotification);
+                notyf.success('Contraseña restablecida correctamente');
+                router.push('/login');
+            },
+            onError: (error) => {
+                notyf.dismiss(loadingNotification);
+                handleApiError(error);
+            },
+        }
+    );
 };
 </script>
 
 
 <template>
     <div class="flex flex-col min-h-screen">
-        <div class="flex flex-col flex-grow justify-center items-center">
+        <div class="flex flex-col items-center mt-10"> <!-- Cambiado justify-center por mt-10 -->
             <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
                 <h2 class="text-2xl font-semibold text-gray-800 text-center">Restablecer Contraseña</h2>
                 <form @submit.prevent="resetPassword">
@@ -70,11 +84,3 @@ const resetPassword = async () => {
         </div>
     </div>
 </template>
-
-<style scoped>
-@media (max-width: 900px) {
-    .container {
-        padding: 1rem;
-    }
-}
-</style>

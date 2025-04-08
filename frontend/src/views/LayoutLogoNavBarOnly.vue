@@ -9,9 +9,10 @@ const slots = useSlots();
 <template>
   <div class="flex flex-col min-h-screen">
     <NavbarTerracotaLogoOnly />
-    <div class="flex-grow">
-      <slot />
-    </div>
+
+      <div class="max-w-7xl mx-auto px-5 w-full flex flex-col flex-grow">
+        <slot/>
+      </div>
 
     <Footer />
   </div>

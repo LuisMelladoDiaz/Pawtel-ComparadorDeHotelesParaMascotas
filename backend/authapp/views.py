@@ -25,12 +25,13 @@ class LoginView(APIView):
         user = authenticate(request, username=username, password=password)
         if user is None:
             return Response(
-                {"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED
+                {"error": "Credenciales incorrectas"},
+                status=status.HTTP_401_UNAUTHORIZED,
             )
 
         refresh = RefreshToken.for_user(user)
         response_data = {
-            "detail": "Login successful",
+            "detail": "Inicio de sesión exitoso",
             "access": str(refresh.access_token),
             "refresh": str(refresh),
         }
@@ -76,7 +77,7 @@ class RegisterView(APIView):
 
         else:
             return Response(
-                {"error": "Invalid role. Only hotel owners and customers are allowed."},
+                {"error": "Rol inválido. Sólo se permiten dueños de hotel y clientes"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
@@ -90,7 +91,7 @@ class PasswordResetView(APIView):
         email = request.data.get("email")
         if not email:
             return Response(
-                {"error": "Email is required"}, status=status.HTTP_400_BAD_REQUEST
+                {"error": "El email es necesario"}, status=status.HTTP_400_BAD_REQUEST
             )
         try:
             user = AppUser.objects.get(email=email)
@@ -113,11 +114,12 @@ class PasswordResetView(APIView):
                 fail_silently=False,
             )
             return Response(
-                {"message": "Password reset email sent"}, status=status.HTTP_200_OK
+                {"message": "Email para restablecer contraseña enviado"},
+                status=status.HTTP_200_OK,
             )
         except AppUser.DoesNotExist:
             return Response(
-                {"error": "User with this email does not exist"},
+                {"error": "No existe un usuario con este email"},
                 status=status.HTTP_404_NOT_FOUND,
             )
 

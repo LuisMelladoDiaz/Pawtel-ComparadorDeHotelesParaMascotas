@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { handleApiError } from '@/utils/errorHandler';
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
 import { usePasswordResetMutation } from '@/data-layer/auth';
@@ -12,27 +13,40 @@ const email = ref('');
 const router = useRouter();
 const passwordResetMutation = usePasswordResetMutation();
 
-const resetPassword = async () => {
+const resetPassword = () => {
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Enviando correo de restablecimiento...',
+    dismissible: false,
+  });
 
-    if (!email.value) {
-        notyf.error('Por favor, introduce tu correo electrónico');
-        return;
-    }
+  if (!email.value) {
+    notyf.dismiss(loadingNotification);
+    notyf.error('Por favor, introduce tu correo electrónico');
+    return;
+  }
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email.value)) {
-        notyf.error('El correo electrónico no es válido');
-        return;
-    }
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email.value)) {
+    notyf.dismiss(loadingNotification);
+    notyf.error('El correo electrónico no es válido');
+    return;
+  }
 
-    try {
-        await passwordResetMutation.mutateAsync({ email: email.value });
+  passwordResetMutation.mutate(
+    { email: email.value },
+    {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
         notyf.success('Correo de restablecimiento enviado');
         router.push('/login');
-    } catch (error) {
-        console.error('Error al enviar el correo de restablecimiento:', error);
-        notyf.error('Error al enviar el correo de restablecimiento');
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      },
     }
+  );
 };
 </script>
 
