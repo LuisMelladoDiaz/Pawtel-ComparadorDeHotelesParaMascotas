@@ -314,7 +314,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 6. Problemas Encontrados y Limitaciones
 
 - **Errores o respuestas incorrectas de la IA:** A la hora de responder sobre un error se inventaba código; el cual casi siempre era incoherente
-- **Limitaciones detectadas en la IA:** Es incapaz de programar algo útil para el proyecto; es mejor usarla puntualmente para dudas y consejos 
+- **Limitaciones detectadas en la IA:** Es incapaz de programar algo útil para el proyecto; es mejor usarla puntualmente para dudas y consejos
 - **Propuestas de mejora en el uso de IA:** Ninguno
 
 #### 7. Evaluación General
@@ -472,58 +472,60 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 ---
 
 ### 👨‍💻 Manuel Castillejo Vela
- 
+
 #### 1. Información General
- 
+
 - **Nombre del programador:** Manuel Castillejo Vela
-- **Sprint:** Sprint 2
+- **Sprint:** Sprint 3
 - **Rol en el proyecto:** Desarrollador Fullstack
- 
+
 #### 2. Tipo de Tareas en las que se Utilizó IA
- 
+
 - [x] Generación de código
 - [x] Refactorización de código
-- [x] Generación de documentación
+- [] Generación de documentación
 - [x] Asesoramiento técnico
 - [x] Eliminación de comentarios en código (GitHub Copilot)
 
 #### 3. Uso de IA en las Tareas
- 
+
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Implementación de CRUD en Vue.js | ChatGPT | Generación de hooks para llamadas a la API y validaciones con Vee-Validate |
 | Refactorización de actualización de hoteles | ChatGPT | Corrección de errores en el flujo de actualización para mantener datos previos |
-| Documentación del API para gestión de hoteles | ChatGPT | Generación de documentación estructurada en Markdown |
 | Eliminación de comentarios innecesarios en código | GitHub Copilot | Automatización de la limpieza del código eliminando comentarios redundantes |
+| Invalidate queries tras reservas o updates | ChatGPT | Automatización de invalidación de caché para sincronización de reservas y datos de hoteles |
+| Implementación  de imágenes de hoteles | ChatGPT | Automatización del flujo de subida, previsualización y eliminación de imágenes desde el backend para mostrarse en el frontend |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 6-8 horas
-- **Comparación con trabajo sin IA:** Más eficiente, permitió detectar errores rápidamente y mejorar rendimiento en menos tiempo
- 
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 8-10 horas
+- **Comparación con trabajo sin IA:** Más eficiente, al igual que en sprints anteriores, permitió detectar errores rápidamente y mejorar rendimiento en menos tiempo. Hizo el aprendizaje más rápido y ayudó en la toma de decisiones, esto permitió sacar el máximo valor del tiempo disponible.
+
 #### 5. Prompts Utilizados
- 
+
 #### Prompt para mejorar el flujo de actualización en Vue.js
 
 ```plaintext
-En Vue.js, quiero que al actualizar un hotel, se mantengan los datos previos y solo se modifiquen los campos editados. ¿Cómo puedo hacerlo?
+¿Cómo puedo invalidar queries en TanStack Query después de crear una reserva?
 
-Usando GitHub Copilot, quiero limpiar mi código eliminando comentarios redundantes y manteniendo solo los esenciales. ¿Cómo hacerlo de forma eficiente?
+¿Cuándo debo usar invalidateQueries y cuándo setQueryData en React Query?
 
-Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso `computed` para calcular los elementos por página, pero quiero optimizar la lógica y mejorar el rendimiento. ¿Cómo puedo hacerlo de manera eficiente?
+¿Cómo puedo permitir subir varias imágenes y mostrar una previsualización en Vue 3?
+
+Refactoriza este hook de actualización de hotel para que conserve los datos previos si el usuario no los modifica.
 ```
 
 #### 6. Problemas Encontrados y Limitaciones
- 
-- **Errores o respuestas incorrectas de la IA:** En algunos casos, ChatGPT sugirió soluciones con hooks de Vue obsoletos.
-- **Limitaciones detectadas en la IA:** Limitaciones relacionadas con últimas versiones de algunos componentes.
-- **Propuestas de mejora en el uso de IA:**  Ajustar los prompts y validar siempre las respuestas generadas.
- 
+
+- **Errores o respuestas incorrectas de la IA:** En algunas ocasiones hemos encontrado "alucinaciones" de la IA en la que nos proporcionaba respuestas incorrectas o no acordes al contexto proporcionado
+- **Limitaciones detectadas en la IA:** Limitaciones en la comprensión completa del proyecto y de la conexión entre componentes para su correcto funcionamiento.
+- **Propuestas de mejora en el uso de IA:**  Dividir la consulta a la IA por bloques destinados en una funcionalidad para evitar errores cuando intenta modificar varias funcionalidades.
+
 #### 7. Evaluación General
- 
+
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad del código.
- 
+- **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad y rendimiento del código.
+
 ---
 
 ### 👨‍💻 Javier Ruiz Garrido
@@ -743,7 +745,7 @@ Algunos de los prompts más efectivos utilizados:
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?**
   - Depende del caso. Es útil para generar ideas y optimizar tiempos, pero es necesario validar la información obtenida.
 - **Comentarios adicionales sobre la experiencia con IA:**
-  - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios. La intervención humana para asegurar la coherencia narrativa, emocional y estética del resultado final. Encontre elementos narrativos sueltos que puedo usar para representar segun mi conveniencia. 
+  - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios. La intervención humana para asegurar la coherencia narrativa, emocional y estética del resultado final. Encontre elementos narrativos sueltos que puedo usar para representar segun mi conveniencia.
 ---
 ### 👨‍💻 Manuel Castillejo Vela
 
@@ -848,4 +850,3 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 - **Comentarios adicionales sobre la experiencia con IA:** -
 
 ---
-
