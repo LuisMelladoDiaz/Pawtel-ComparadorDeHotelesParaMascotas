@@ -41,17 +41,20 @@ enum AuthRequirement {
   LOGGED_IN_CUSTOMER = 'logged_in_customer',
   LOGGED_IN_HOTEL_OWNER = 'logged_in_hotel_owner',
   LOGGED_OUT = 'logged_out',
+  LOGGED_IN_ADMIN = 'logged_in_admin',
 }
 
 const ALLOW_ALL = [
   AuthRequirement.LOGGED_IN_CUSTOMER,
   AuthRequirement.LOGGED_IN_HOTEL_OWNER,
   AuthRequirement.LOGGED_OUT,
+  AuthRequirement.LOGGED_IN_ADMIN,
 ];
 
 const ALLOW_LOGGED_IN = [
   AuthRequirement.LOGGED_IN_CUSTOMER,
   AuthRequirement.LOGGED_IN_HOTEL_OWNER,
+  AuthRequirement.LOGGED_IN_ADMIN,
 ];
 
 function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
