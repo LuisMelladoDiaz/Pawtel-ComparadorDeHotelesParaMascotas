@@ -27,13 +27,11 @@ class CustomerViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
-        
-        #action_name = currentframe().f_code.co_name
-        #role_user = CustomerService.authorize_action_customer(
-        #    request, action_name, pk, True
-        #)
-        #is_admin = role_user.user.role == UserRole.ADMIN
-        is_admin = False
+        action_name = currentframe().f_code.co_name
+        role_user = CustomerService.authorize_action_customer(
+            request, action_name, pk, True
+        )
+        is_admin = role_user.user.role == UserRole.ADMIN
         customer = CustomerService.retrieve_customer(pk, allow_inactive=is_admin)
         output_serializer_data = CustomerService.serialize_output_customer(customer)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
