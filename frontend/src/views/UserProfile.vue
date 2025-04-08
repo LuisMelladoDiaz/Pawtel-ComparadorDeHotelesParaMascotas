@@ -42,7 +42,6 @@ const { mutate: deleteHotelOwner } = useDeleteHotelOwner();
 
 // Actualización del perfil, enviando id y datos
 const updateProfile = (values) => {
-
   const updatedData = {
     username: values.username,
     email: values.email,
@@ -57,7 +56,6 @@ const updateProfile = (values) => {
   const handleError = (error) => {
     handleApiError(error);
   };
-
   if (userDataComputed.value.role === "customer") {
     const customerId = currentCustomerId.value;
     updateCustomer({
@@ -74,7 +72,7 @@ const updateProfile = (values) => {
     const hotelOwnerId = currentHotelOwnerId.value;
     updateHotelOwner({
       hotelOwnerId,
-      partialData: updatedData
+      ownerData: updatedData
     }, {
       onSuccess: () => {
         notyf.success("Perfil actualizado con éxito.");

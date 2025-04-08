@@ -45,9 +45,11 @@ export const useUpdateHotelOwner = () => {
         mutationFn: ({ hotelOwnerId, ownerData }: { hotelOwnerId: number; ownerData: HotelOwner }) =>
             updateHotelOwner(hotelOwnerId, ownerData),
         onSuccess: (data) => {
+            queryClient.invalidateQueries({ queryKey: ['currentHotelOwner'] });
             queryClient.invalidateQueries({ queryKey: ['hotelOwnerId', data.id] });
             queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner', data.id] });
             queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
+            queryClient.invalidateQueries({ queryKey: ['hotelOwners'] });
         },
     });
 };
@@ -103,7 +105,7 @@ export const useDeleteAllHotelsOfOwner = () => {
 
 export const useGetCurrentHotelOwner = () => {
     return useQuery({
-        queryKey: ['currentHotelOwner'],
+        queryKey: ['hotelOwners'],
         queryFn: () => getCurrentHotelOwner(),
         staleTime: 1000 * 60,
         refetchOnWindowFocus: false,
