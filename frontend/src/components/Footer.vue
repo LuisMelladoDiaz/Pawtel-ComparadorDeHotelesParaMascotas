@@ -41,7 +41,7 @@
               <path d="M20.01 3H17.5l-4.32 5.84L8.85 3H3.99l6.42 9L4 21h2.49l4.64-6.27L15.15 21h4.86l-6.6-9L20.01 3z"/>
             </svg>
           </a>
-          <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok" class="hover:scale-110 transition">
+          <a href="#" target="_blank" aria-label="TikTok" class="hover:scale-110 transition">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M9.75 3v12.172a2.25 2.25 0 1 1-2.25-2.25V9.75a6.75 6.75 0 1 0 6.75 6.75v-9.3a6.476 6.476 0 0 0 3 0 6.41 6.41 0 0 1-1.5-3.9A6.4 6.4 0 0 1 18 3a6.751 6.751 0 0 0-6.75-6.75A6.75 6.75 0 0 0 9.75 3z"/>
             </svg>

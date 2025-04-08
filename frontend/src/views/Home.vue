@@ -61,18 +61,15 @@ function handleInstall() {
     <section class="bg-white py-16 px-4 max-w-7xl mx-auto">
       <h2 class="text-3xl font-bold text-center mb-12 font-playfair text-[#222]">¿Cómo funciona?</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
-        <!-- Paso 1 -->
         <div data-aos="fade-up" class="flex flex-col items-center space-y-4">
           <img src="../assets/paso1.avif" alt="Paso 1" class="w-52 h-auto" />
           <h3 class="text-lg font-semibold">1. Ingresa destino y fechas</h3>
           <p class="text-gray-600 max-w-xs mx-auto">Elige a dónde va tu mascota y cuándo necesitas alojamiento. ¡Es rápido y fácil!</p></div>
-        <!-- Paso 2 -->
          <div data-aos="fade-up" data-aos-delay="100" class="flex flex-col items-center space-y-4">
           <img src="../assets/paso2.jpg" alt="Paso 2" class="w-52 h-auto" />
           <h3 class="text-lg font-semibold">2. Selecciona el hotel que prefieras</h3>
           <p class="text-gray-600 max-w-xs mx-auto">Compara alojamientos por precio, ubicación, reseñas y servicios especiales para mascotas.</p>
         </div>
-        <!-- Paso 3 -->
         <div data-aos="fade-up" data-aos-delay="200" class="flex flex-col items-center space-y-4">
           <img src="../assets/paso3.avif" alt="Paso 3" class="w-52 h-auto" />
           <h3 class="text-lg font-semibold">3. Reserva y disfruta</h3>
@@ -109,7 +106,7 @@ function handleInstall() {
                   <path d="M20.01 3H17.5l-4.32 5.84L8.85 3H3.99l6.42 9L4 21h2.49l4.64-6.27L15.15 21h4.86l-6.6-9L20.01 3z"/>
                 </svg>
               </a>
-              <a href="https://www.tiktok.com" target="_blank" aria-label="TikTok" class="hover:scale-110 transition">
+              <a href="#" target="_blank" aria-label="TikTok" class="hover:scale-110 transition">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M9.75 3v12.172a2.25 2.25 0 1 1-2.25-2.25V9.75a6.75 6.75 0 1 0 6.75 6.75v-9.3a6.476 6.476 0 0 0 3 0 6.41 6.41 0 0 1-1.5-3.9A6.4 6.4 0 0 1 18 3a6.751 6.751 0 0 0-6.75-6.75A6.75 6.75 0 0 0 9.75 3z"/>
                 </svg>
@@ -118,7 +115,6 @@ function handleInstall() {
           </div>
         </div>
         <div class="lg:w-1/2 flex justify-center">
-          <!-- Puedes mantener la imagen de la app o reemplazarla por otra -->
           <img src="../assets/app.png" alt="App Pawtel" class="w-80 h-auto rounded-none shadow-lg object-cover">
         </div>
       </div>
@@ -128,19 +124,16 @@ function handleInstall() {
     <section class="relative mx-auto py-12 max-w-7xl px-5">
       <h2 class="text-3xl font-bold py-7 mb-8 text-center text-[#6C8CC3] font-playfair">Beneficios de Pawtel</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Tarjeta 1 -->
         <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center space-y-4">
           <img src="../assets/comparator.png" alt="Ubicación" class="w-20 h-20 mx-auto" />
           <h3 class="text-xl font-semibold text-[#C36C6C]">Ubicación y precios comparados</h3>
           <p class="text-gray-700">Encuentra y compara alojamientos para tu mascota según ubicación, servicios y precio.</p>
         </div>
-        <!-- Tarjeta 2 -->
         <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center space-y-4">
           <img src="../assets/reservation.png" alt="Reservas" class="w-20 h-20 mx-auto" />
           <h3 class="text-xl font-semibold text-[#C36C6C]">Reservas Seguras y Rápidas</h3>
           <p class="text-gray-700">Realiza reservas con facilidad y confianza, asegurando disponibilidad y rapidez en el proceso.</p>
         </div>
-        <!-- Tarjeta 3 -->
         <div class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 hover:shadow-xl transition transform hover:scale-105 duration-300 flex flex-col items-center text-center space-y-4">
           <img src="../assets/alert.png" alt="Promociones" class="w-20 h-20 mx-auto" />
           <h3 class="text-xl font-semibold text-[#C36C6C]">Alertas de Promociones</h3>
@@ -171,6 +164,7 @@ function handleInstall() {
     </section>
 
     <Footer />
+
   </div>
 </template>
 

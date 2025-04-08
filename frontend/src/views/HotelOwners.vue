@@ -12,7 +12,9 @@ import FaqAccordion from '@/components/FaqAccordion.vue'
     <div class="relative z-10 flex flex-col justify-center items-center h-full px-6 text-center">
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 max-w-3xl">Conecta tu alojamiento con miles de dueños de mascotas</h1>
       <p class="text-base sm:text-lg md:text-xl text-white mb-6 max-w-2xl">Gestiona reservas, gana visibilidad y ofrece confianza, todo desde un solo lugar.</p>
-      <button class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-6 rounded-xl shadow-md transition">Publica tu alojamiento gratis</button>
+      <router-link to="/register">
+        <Button class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-6 rounded-xl shadow-md transition" type="add">Publica tu alojamiento gratis</Button>
+      </router-link>
     </div>
   </section>
   
@@ -145,6 +147,5 @@ import FaqAccordion from '@/components/FaqAccordion.vue'
     </div>
   </section>
 </template>
-
 <style scoped>
 </style>
