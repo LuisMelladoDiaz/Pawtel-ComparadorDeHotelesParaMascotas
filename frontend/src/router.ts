@@ -41,17 +41,21 @@ enum AuthRequirement {
   LOGGED_IN_CUSTOMER = 'logged_in_customer',
   LOGGED_IN_HOTEL_OWNER = 'logged_in_hotel_owner',
   LOGGED_OUT = 'logged_out',
+  LOGGED_IN_ADMIN = 'logged_in_admin',
+  
 }
 
 const ALLOW_ALL = [
   AuthRequirement.LOGGED_IN_CUSTOMER,
   AuthRequirement.LOGGED_IN_HOTEL_OWNER,
+  AuthRequirement.LOGGED_IN_ADMIN,
   AuthRequirement.LOGGED_OUT,
 ];
 
 const ALLOW_LOGGED_IN = [
   AuthRequirement.LOGGED_IN_CUSTOMER,
   AuthRequirement.LOGGED_IN_HOTEL_OWNER,
+  AuthRequirement.LOGGED_IN_ADMIN,
 ];
 
 function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
@@ -73,7 +77,7 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
         try {
         const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/user-info/`);
         const role = response.data.role;
-        const state = role == 'customer' ? AuthRequirement.LOGGED_IN_CUSTOMER : role == 'hotel_owner' ? AuthRequirement.LOGGED_IN_HOTEL_OWNER : AuthRequirement.LOGGED_OUT;
+        const state = role == 'customer' ? AuthRequirement.LOGGED_IN_CUSTOMER : role == 'admin' ? AuthRequirement.LOGGED_IN_ADMIN : role == 'hotel_owner' ? AuthRequirement.LOGGED_IN_HOTEL_OWNER : AuthRequirement.LOGGED_OUT;
         if (!allowedStates.includes(state)) {
            return '/';
         }
@@ -109,10 +113,10 @@ const routes = [
     },
   },
   {
-    path: '/admin/userList',
+    path: '/admin/user-list',
     component: createComponent({ layout: LayoutDefault, component: UserList }),
     meta: {
-      allowedAuthStates: ALLOW_ALL,
+      allowedAuthStates: [AuthRequirement.LOGGED_IN_ADMIN],
     }
   },
   {
