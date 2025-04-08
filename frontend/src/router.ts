@@ -12,6 +12,7 @@ import EditHotel from './views/EditHotel.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
+import HotelOwners from './views/HotelOwners.vue';
 import { h, type Component} from 'vue';
 import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
@@ -98,7 +99,6 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
 import BookingReservationForm from './views/BookingReservationForm.vue';
 import TermsAndConditions from './views/TermsAndConditions.vue';
 
-
 const routes = [
   {
     path: '/',
@@ -117,6 +117,13 @@ const routes = [
   {
     path: '/contacto',
     component: createComponent({ layout: LayoutDefault, component: Contact }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
+    },
+  },
+  {
+    path: '/dueños-alojamientos',
+    component: createComponent({ layout: LayoutDefault, component: HotelOwners }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },

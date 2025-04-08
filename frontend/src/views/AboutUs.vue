@@ -41,14 +41,14 @@ function formatNumber(num) {
           Es normal sentir preocupación o dudas al separarte de alguien que consideras parte de tu <span class="text-terracota font-semibold">familia</span>.
         </p>
       </div>
-      <div>
-        <img src="../assets/imgdc.webp" alt="Perro y gato juntos" class="w-full max-w-md mx-auto lg:mx-0 rounded-2xl shadow-md border border-gray-200 object-cover"/>
-      </div>
+      <div class="flex justify-center lg:justify-start">
+  <img src="../assets/imgdc.webp" alt="Perro y gato juntos" class="w-full max-w-md rounded-2xl shadow-md border border-gray-200 object-cover"/>
+</div>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center text-center lg:text-left mt-10">
-      <div>
-        <img src="../assets/pawtel_img.png" alt="Perro disfrutando comida" class="w-full rounded-lg shadow-lg object-cover" />
-      </div>
+      <div class="flex justify-center lg:justify-start">
+  <img src="../assets/pawtel_img.png" alt="Perro disfrutando comida" class="w-full max-w-md rounded-lg shadow-lg object-cover" />
+</div>
       <div>
         <p class="text-lg lg:text-xl font-medium leading-relaxed tracking-wide text-gray-700 max-w-xl mx-auto lg:mx-0">
           Por eso nace <span class="text-terracota font-semibold">Pawtel</span>: Una plataforma diseñada para <span class="text-azul-suave font-semibold">
@@ -60,8 +60,10 @@ function formatNumber(num) {
     </div>
   </section>
 
-  <section class="bg-white py-8 px-4 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
+  <section class="bg-white py-16 px-4 max-w-7xl mx-auto text-center">
+  <h2 class="text-3xl font-bold text-[#6C8CC3] mb-12">¿Por qué nace Pawtel?</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
       <div data-aos="fade-up" class="bg-white shadow-lg p-6 rounded-xl border border-gray-200 flex flex-col items-center space-y-4 min-h-[400px]">
         <img src="../assets/hotel_icon.png" alt="Ubicación" class="w-20 h-20 mx-auto" />
         <h3 class="text-4xl font-bold text-azul-suave">+ {{ formatNumber(countAlojamientos) }}</h3>
@@ -115,6 +117,9 @@ function formatNumber(num) {
     </div>
   </section>
 
+  <hr class="border-t border-gray-200 my-20" />
+
+
   <section class="bg-[#f7f7f7] py-14 px-6 max-w-7xl mx-auto rounded-lg" data-aos="fade-up">
      <!-- Título principal -->
   <h2 class="text-4xl font-bold text-center text-gray-800 font-titleHome mb-4">
@@ -129,21 +134,27 @@ function formatNumber(num) {
     <table class="w-full table-fixed border-separate border-spacing-y-6 text-center">
       <tbody>
         <tr class="bg-white rounded-xl shadow-md">
-          <td colspan="3" class="py-6">
-            <div class="flex flex-col items-center space-y-3">
-              <div class="w-16 h-16 bg-[#A0A8B8] rounded-full shadow-sm"></div>
-              <div>
-                <p class="text-xl font-semibold text-gray-800">Luis y Daniel</p>
-                <p class="text-base text-gray-600">PM's del Proyecto</p>
-              </div>
-            </div>
-          </td>
-        </tr>
+  <td colspan="3" class="py-6">
+    <div class="flex flex-col items-center space-y-4">
+      <!-- Imágenes lado a lado -->
+      <div class="flex items-center justify-center gap-4">
+        <img src="../assets/pmOne.jpg" alt="Luis" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
+        <img src="../assets/pmTwo.jpg" alt="Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
+      </div>
+      
+      <!-- Texto conjunto -->
+      <div class="text-center">
+        <p class="text-xl font-semibold text-gray-800">Luis y Daniel</p>
+        <p class="text-base text-gray-600">PM's del Proyecto</p>
+      </div>
+    </div>
+  </td>
+</tr>
         <!-- Fila 1: equipo principal -->
         <tr class="bg-white rounded-xl shadow-md">
           <td class="p-6 align-top">
             <div class="flex flex-col items-center space-y-3">
-              <div class="w-16 h-16 bg-[#A0A8B8] rounded-full shadow-sm"></div>
+              <img src="../assets/pmFullstack.jpg" alt="Luis y Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
               <div>
                 <p class="text-xl font-semibold text-gray-800">David</p>
                 <p class="text-base text-gray-600">Jefe de Equipo Fullstack</p>
@@ -152,7 +163,7 @@ function formatNumber(num) {
           </td>
           <td class="p-6 align-top">
             <div class="flex flex-col items-center space-y-3">
-              <div class="w-16 h-16 bg-[#A0A8B8] rounded-full shadow-sm"></div>
+              <img src="../assets/pmFrontend.jpg" alt="Luis y Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
               <div>
                 <p class="text-xl font-semibold text-gray-800">Sergio</p>
                 <p class="text-base text-gray-600">Jefe de Equipo Frontend</p>
@@ -161,7 +172,7 @@ function formatNumber(num) {
           </td>
           <td class="p-6 align-top">
             <div class="flex flex-col items-center space-y-3">
-              <div class="w-16 h-16 bg-[#A0A8B8] rounded-full shadow-sm"></div>
+              <img src="../assets/pmBackend.jpg" alt="Luis y Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
               <div>
                 <p class="text-xl font-semibold text-gray-800">Rafael</p>
                 <p class="text-base text-gray-600">Jefe de Equipo Backend</p>
