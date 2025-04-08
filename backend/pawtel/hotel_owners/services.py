@@ -34,6 +34,7 @@ class HotelOwnerService:
         request, action_name, target_hotel_owner_id=None, check_ownership=False
     ):
         role_user = AppUserService.get_current_role_user(request)
+        HotelOwnerService.check_approval_hotel_owner(role_user)
         PermissionService.check_permission_hotel_owner_service(role_user, action_name)
 
         if target_hotel_owner_id:
@@ -61,6 +62,12 @@ class HotelOwnerService:
                 raise PermissionDenied("Permiso denegado.")
         else:
             raise PermissionDenied("Permiso denegado.")
+
+    def check_approval_hotel_owner(role_user):
+        if role_user.user.role == UserRole.HOTEL_OWNER:
+            if not role_user.is_approved:
+                raise PermissionDenied("El dueño de hotel no está aprobado.")
+        return
 
     # Serialization -----------------------------------------------------------------
 
@@ -99,6 +106,10 @@ class HotelOwnerService:
             return HotelOwner.objects.all()
         else:
             return HotelOwner.objects.filter(user__is_active=True)
+
+    @staticmethod
+    def list_unapproved_hotel_owners():
+        return HotelOwner.objects.filter(is_approved=False)
 
     # POST -------------------------------------------------------------------
 
@@ -161,3 +172,12 @@ class HotelOwnerService:
         hotel_owner.is_approved = True
         hotel_owner.save()
         return hotel_owner
+
+    @staticmethod
+    def validate_unapproved_hotel_owner_delete(hotel_owner_id):
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(hotel_owner_id)
+
+        if hotel_owner.is_approved:
+            raise PermissionDenied(
+                "Solo se pueden eliminar dueños de hotel no aprobados."
+            )

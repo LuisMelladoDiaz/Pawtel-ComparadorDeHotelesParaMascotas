@@ -41,7 +41,9 @@ class HotelViewSetTestCase(TestCase):
             phone="+34987654321",
             password="securepassword123",
         )
-        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
+        self.hotel_owner = HotelOwner.objects.create(
+            user_id=self.app_user.id, is_approved=True
+        )
 
         self.client.force_authenticate(user=self.app_user)
 
@@ -111,6 +113,13 @@ class HotelViewSetTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_delete_hotel_as_not_approved_owner(self):
+        self.hotel_owner.is_approved = False
+        self.hotel_owner.save()
+        url = reverse("hotel-detail", kwargs={"pk": self.hotel.id})
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
 
 # -
 # -------------------------------------------------------------------------
@@ -130,7 +139,9 @@ class HotelImageViewSetTestCase(TestCase):
             phone="+34987654321",
             password="securepassword123",
         )
-        self.hotel_owner = HotelOwner.objects.create(user_id=self.app_user.id)
+        self.hotel_owner = HotelOwner.objects.create(
+            user_id=self.app_user.id, is_approved=True
+        )
 
         self.client.force_authenticate(user=self.app_user)
 

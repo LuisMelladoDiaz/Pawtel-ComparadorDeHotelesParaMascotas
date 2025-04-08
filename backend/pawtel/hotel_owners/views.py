@@ -30,7 +30,9 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
 
     def retrieve(self, request, pk=None):
         action_name = currentframe().f_code.co_name
-        role_user = HotelOwnerService.authorize_action_hotel_owner(request, action_name)
+        role_user = HotelOwnerService.authorize_action_hotel_owner(
+            request, action_name, pk, True
+        )
         is_admin = role_user.user.role == UserRole.ADMIN
         hotel_owner = HotelOwnerService.retrieve_hotel_owner(
             pk, allow_inactive=is_admin
@@ -119,6 +121,20 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
         serializer = HotelSerializer(hotels, many=True, context={"request": request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="list-unapproved",
+        url_name="list_unapproved_hotel_owners",
+    )
+    def list_unapproved_hotel_owners(self, request):
+        action_name = currentframe().f_code.co_name
+        HotelOwnerService.authorize_action_hotel_owner(request, action_name)
+
+        queryset = HotelOwnerService.list_unapproved_hotel_owners()
+        serializer = HotelOwnerSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     # Delete all hotels of hotel owner ---------------------------------------
 
     @action(
@@ -185,3 +201,17 @@ class HotelOwnerViewSet(viewsets.ModelViewSet):
             hotel_owner
         )
         return Response(output_serializer_data, status=status.HTTP_200_OK)
+
+    @action(
+        detail=True,
+        methods=["delete"],
+        url_path="delete-unapproved",
+        url_name="delete_unapproved_hotel_owner",
+    )
+    def delete_unapproved_hotel_owner(self, request, pk=None):
+        action_name = currentframe().f_code.co_name
+        HotelOwnerService.authorize_action_hotel_owner(request, action_name, pk)
+        hotel_owner = HotelOwnerService.retrieve_hotel_owner(pk, allow_inactive=True)
+        HotelOwnerService.validate_unapproved_hotel_owner_delete(pk)
+        AppUserService.general_delete_app_user(request, hotel_owner.user.id)
+        return Response(status=status.HTTP_204_NO_CONTENT)
