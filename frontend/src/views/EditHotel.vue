@@ -168,6 +168,7 @@ const selectCoverImage = (index) => {
             img.is_cover = i === uploadedIndex;
           });
           queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         })
         .catch((error) => {
           notyf.dismiss(loadingNotification);
@@ -200,6 +201,7 @@ const selectCoverImage = (index) => {
               img.is_cover = i === index;
             });
             queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+            queryClient.invalidateQueries({ queryKey: ['hotels'] });
           },
           onError: (error) => {
             notyf.dismiss(loadingNotification);
