@@ -78,69 +78,102 @@ import { ref, onMounted } from 'vue'
     </p>
     <!-- Versión Escritorio -->
     <div class="overflow-x-auto hidden lg:block">
-      <table class="w-full table-fixed border-separate border-spacing-y-6 text-center">
-        <tbody>
-          <tr class="bg-white rounded-xl shadow-md">
-            <td colspan="3" class="py-6">
-              <div class="flex flex-col items-center space-y-4">
-                <div class="flex items-center justify-center gap-4">
-                  <img src="../assets/pmOne.jpg" alt="Luis" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
-                  <img src="../assets/pmTwo.jpg" alt="Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
-                </div>
-                <div class="text-center">
-                  <p class="text-xl font-semibold text-gray-800">Luis y Daniel</p>
-                  <p class="text-base text-gray-600">PM's del Proyecto</p>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr class="bg-white rounded-xl shadow-md">
-            <td class="p-6 align-top">
-              <div class="flex flex-col items-center space-y-3">
-                <img src="../assets/pmFullstack.jpg" alt="Luis y Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
-                <div>
-                  <p class="text-xl font-semibold text-gray-800">David</p>
-                  <p class="text-base text-gray-600">Jefe de Equipo Fullstack</p>
-                </div>
-              </div>
-            </td>
-            <td class="p-6 align-top">
-              <div class="flex flex-col items-center space-y-3">
-                <img src="../assets/pmFrontend.jpg" alt="Luis y Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
-                <div>
-                  <p class="text-xl font-semibold text-gray-800">Sergio</p>
-                  <p class="text-base text-gray-600">Jefe de Equipo Frontend</p>
-                </div>
-              </div>
-            </td>
-            <td class="p-6 align-top">
-              <div class="flex flex-col items-center space-y-3">
-                <img src="../assets/pmBackend.jpg" alt="Luis y Daniel" class="w-16 h-16 rounded-full object-cover shadow-sm border border-gray-300" />
-                <div>
-                  <p class="text-xl font-semibold text-gray-800">Rafael</p>
-                  <p class="text-base text-gray-600">Jefe de Equipo Backend</p>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr class="bg-white rounded-xl shadow-md">
-            <td class="py-6 text-xl font-medium text-gray-800">Claudio C. <p class="text-base text-gray-600">Equipo Backend y Doc.</p> </td>
-            <td class="py-6 text-xl font-medium text-gray-800">Jorge G. <p class="text-base text-gray-600"> Equipo Backend</p></td>
-            <td class="py-6 text-xl font-medium text-gray-800">Javier R. <p class="text-base text-gray-600">Equipo Backend</p></td>
-          </tr>
-          <tr class="bg-white rounded-xl shadow-md">
-            <td class="py-6 text-xl font-medium text-gray-800">Curro J. <p class="text-base text-gray-600">Equipo Fullstack y Analista</p></td>
-            <td class="py-6 text-xl font-medium text-gray-800">Andres M.<p class="text-base text-gray-600">Equipo Fullstack</p></td>
-            <td class="py-6 text-xl font-medium text-gray-800">Manuel C.<p class="text-base text-gray-600">Equipo Fullstack</p></td>
-          </tr>
-          <tr class="bg-white rounded-xl shadow-md">
-            <td class="py-6 text-xl font-medium text-gray-800">Javier G.<p class="text-base text-gray-600">Equipo Frontend y Publ. & Mkting</p></td>
-            <td class="py-6 text-xl font-medium text-gray-800">Fernando C.<p class="text-base text-gray-600">Equipo Frontend</p></td>
-            <td class="py-6 text-xl font-medium text-gray-800">Yesica G.<p class="text-base text-gray-600">Equipo Frontend y Publ. & Mkting</p></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <table class="w-full table-fixed border-separate border-spacing-y-4 text-center text-sm">
+    <tbody>
+      <!-- PMs -->
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td colspan="3" class="py-4">
+          <div class="flex flex-col items-center space-y-3">
+            <div class="flex items-center justify-center gap-3">
+              <img src="../assets/pmOne.jpg" alt="Luis" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+              <img src="../assets/pmTwo.jpg" alt="Daniel" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            </div>
+            <div class="text-center">
+              <p class="text-base font-semibold text-gray-800">Luis y Daniel</p>
+              <p class="text-sm text-gray-500">PM's del Proyecto</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Jefes de equipo -->
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 align-top">
+          <div class="flex flex-col items-center space-y-2">
+            <img src="../assets/pmFullstack.jpg" alt="David" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            <div>
+              <p class="font-semibold text-gray-800">David</p>
+              <p class="text-sm text-gray-500">Fullstack Lead</p>
+            </div>
+          </div>
+        </td>
+        <td class="py-4 align-top">
+          <div class="flex flex-col items-center space-y-2">
+            <img src="../assets/pmFrontend.jpg" alt="Sergio" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            <div>
+              <p class="font-semibold text-gray-800">Sergio</p>
+              <p class="text-sm text-gray-500">Frontend Lead</p>
+            </div>
+          </div>
+        </td>
+        <td class="py-4 align-top">
+          <div class="flex flex-col items-center space-y-2">
+            <img src="../assets/pmBackend.jpg" alt="Rafael" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            <div>
+              <p class="font-semibold text-gray-800">Rafael</p>
+              <p class="text-sm text-gray-500">Backend Lead</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Miembros por bloques -->
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 font-medium text-gray-800">
+          Claudio C.<br />
+          <span class="text-sm text-gray-500">Backend & Docs</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Jorge G.<br />
+          <span class="text-sm text-gray-500">Backend</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Javier R.<br />
+          <span class="text-sm text-gray-500">Backend</span>
+        </td>
+      </tr>
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 font-medium text-gray-800">
+          Curro J.<br />
+          <span class="text-sm text-gray-500">Fullstack & Analista</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Andrés M.<br />
+          <span class="text-sm text-gray-500">Fullstack</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Manuel C.<br />
+          <span class="text-sm text-gray-500">Fullstack</span>
+        </td>
+      </tr>
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 font-medium text-gray-800">
+          Javier G.<br />
+          <span class="text-sm text-gray-500">Frontend & Mkting</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Fernando C.<br />
+          <span class="text-sm text-gray-500">Frontend</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Yesica G.<br />
+          <span class="text-sm text-gray-500">Frontend & Mkting</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
     <!-- Versión móvil simplificada: visible solo en móvil -->
     <div class="lg:hidden mt-10 space-y-6">
