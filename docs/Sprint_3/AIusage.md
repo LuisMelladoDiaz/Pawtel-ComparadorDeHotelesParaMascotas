@@ -58,6 +58,8 @@
 | 📅 Fecha       | 🔢 N° de Versión | 📄 Descripción                   | ✍️ Elaborado por           |
 |-------------|---------------|-------------------------------|-------------------------|
 | 07/04/2025  | v 1.0         | Versión inicial del documento | Daniel Flores de Francisco |
+| 08/04/2025  | v 1.1         | Informe de Luis | Luis Mellado Díaz |
+
 
 ---
 
@@ -69,8 +71,6 @@
 ---
 
 ### 3. Informes
-
-
 
 ### 👨‍💻 Andrés Martínez Reviriego
 
@@ -580,7 +580,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Luis Mellado Díaz
-- **Sprint:** Sprint2
+- **Sprint:** Sprint3
 - **Rol en el proyecto:** PM, programador frontend, documentación
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -588,7 +588,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 - Generación de código (x)
 - Refactorización de código (x)
 - Generación de documentación ()
-- Asesoramiento técnico ()
+- Asesoramiento técnico (x)
 
 #### 3. Uso de IA en las Tareas
 
@@ -596,36 +596,31 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Refactorización del frontend | ChatGPT | Usada como apoyo para limpiar el código de diferentes pantallas siguiendo instrucciones concretas |
-| Gestión de Residencias | ChatGPT | Apoyo completo en la creación de la feature |
-| Listado de mis reservas | ChatGPT | Recibiendo el código de la pantalla se realizaron mejoras mínimas de caracter estético |
-
-
+| Añadir las reservas de un hotel a la pantalla de gestión | ChatGPT | Usada para solucionar errores en el código |
+| Pantalla de confirmación de reserva | ChatGPT | Apoyo con el estilo |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo de trabajo  de "fuerza bruta" y me he podido dedicar a gestionar los errores de gestión y organización del grupo.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 3
+- **Comparación con trabajo sin IA:** Creo que en este sprint es en el que menos impacto ha tenido el uso de la IA. Ya estoy muy familiarizado con las tecnologías y los patrones de diseño que estamos usando. Ha sido más efectivo hacer mis features totalmente por mi cuenta y luego usar IA para solucionar algun error o mejorar el estilo visual.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Te voy a pasar una pantalla que funciona, ayudame a limpiar y refactorizar el codigo. ¿Recomiendas que la divida en distintos componentes ?
-2. Vamos a llevar a cabo una feat que me permite gestionar las habitaciones en la pantalla de editar un hotel, aquí tienes el código... Te paso los hooks y llamadas a la api que vamos a necesitar.
-3. Dada esta pantalla de listado de reservas, haz que las tarjetas tengan un borde color terracota y se encuentren dentro de un contenedor padre con un scroll vertical...
+1. hay alguna comilla o parentesis sin cerrar en esta pantalla? se me colorea el codigo de naranja como si fuese todo un string en el vscode. (Recibe el código de la pantalla)
+2. ira esta tarjeta de confirmacion de reserva. Me ocupa mucho espacio y tengo que hacer scroll hacia abajo para verlo todo. quiero que entre en una sola pantalla sin scroll. como reorganizarias la info? Puedes darle un toque de estilo para que parezca como una factura? (recibe el componente de la factura de confirmación de reserva)
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** A la hora de hacer algunas correcciones de estilo es bastante imprecisa, esta claro que "no tiene ojos" y si no recibe instrucciones muy concretas no diseña lo que tienes en mente.
-- **Errores encontrados:** no es especialmente buena a la hora de generar scripts para frontend, tiende a complicar la estructura de la pantalla usando watch o useEffects a diestro y siniestro. Es mejor aclarar el patrón que estas usando, en nuestro caso computed, y proveerle el codigo de los hooks y mutatations.
+- **Limitaciones detectadas en la IA:** Definitivamente ChatGPT no es la mejor herramienta de apoyo para un frontend vue y vite. Tiene muchísimos problemas a la hora de comprender y gestionar la asincronía. Es mejor idea limitarla a preguntas sobre el estilo o errores. No recomiendo usarla para desarrollar la funcionalidad de la feat.
+- **Errores encontrados:** no es especialmente buena a la hora de generar scripts para frontend, tiende a complicar la estructura de la pantalla usando watch o useEffects. Es mejor aclarar el patrón que estas usando, en nuestro caso computed, y proveerle el codigo de los hooks y mutatations.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** He empezado a juguetear con deepseek, el servidor da problemas bastante a menudo pero no tiene algunas de las limitaciones de pago de chatgpt, sería muy útil tener todo lo relacionado con el proyecto en un solo chat.
-
+- **Comentarios adicionales sobre la experiencia con IA:** He estado probando la IA vercel V0 en otro proyecto. Es muy buena, especialmente con las tecnoogías del entorno vercel. Sin embargo, no le he dado una oportunidad en Pawtel debido a que el límite de mensajes diarios es muy escueto y tendría que pagar para sacarle un verdader provecho.
 ---
 
 ### 👨‍💻 Rafael Castillo Cebolla
