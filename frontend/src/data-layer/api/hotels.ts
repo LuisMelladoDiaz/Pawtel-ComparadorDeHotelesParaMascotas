@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 import { type RoomType } from '@/data-layer/api/roomTypes';
+import type { Booking } from './bookings';
 
 export type Hotel = {
   id?: number;
@@ -12,6 +13,7 @@ export type Hotel = {
   description: string;
   hotel_owner?: string;
 };
+
 
 export const fetchAllHotels = async (filters?: Record<string, any>) => {
   const queryParams = new URLSearchParams(filters).toString();
@@ -81,4 +83,10 @@ export const filterAvailableRoomTypes = async (hotelId: number, filters: Record<
   Object.keys(filters).forEach(key => url.searchParams.append(key, filters[key]));
   const response = await axios.get(url.toString());
   return response.data as RoomType[];
+};
+
+export const fetchBookingsByHotel = async (hotelId: number) => {
+  const url = `${API_BASE_URL}/hotels/${hotelId}/bookings`;
+  const response = await axios.get(url);
+  return response.data as Booking[];
 };

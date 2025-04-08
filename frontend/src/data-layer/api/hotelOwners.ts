@@ -47,7 +47,7 @@ export const createHotelOwner = async (hotelOwnerData: Omit<HotelOwner, 'id'>) =
 
 export const updateHotelOwner = async (hotelOwnerId: number, ownerData: HotelOwner) => {
     const url = `${API_BASE_URL}/hotel-owners/${hotelOwnerId}/`;
-    const response = await axios.put(url, ownerData);
+    const response = await axios.patch(url, ownerData);
     return response.data as HotelOwner;
 };
 

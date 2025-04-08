@@ -52,7 +52,9 @@ class CustomerService:
             return CustomerService.retrieve_customer(target_customer_id)
 
     def __check_ownership_customer(role_user, target_customer):
-        if role_user.user.role == UserRole.ADMIN:
+        if (role_user.user.role == UserRole.ADMIN) or (
+            role_user.user.role == UserRole.HOTEL_OWNER
+        ):
             return
         elif role_user.user.role == UserRole.CUSTOMER:
             if target_customer.id != role_user.id:

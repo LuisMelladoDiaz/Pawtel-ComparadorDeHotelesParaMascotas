@@ -36,6 +36,8 @@
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
 | 08/04/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
+| 08/04/2025  | v 1.1         | Informe de Luis| Luis Mellado Díaz |
+
 
 
 ---
@@ -156,14 +158,14 @@
 
 | Descripción | Duración |
 |-------------|---------|
-| QA | 10:21:00 |
-| Refactorizar autenticación en backend  | 06:48:00 |
-| Arreglando problemas varios | 02:06:00  |
+| QA | 08:55:00 |
+| Preparar entrega  | 01:03:00 |
+| Revisar frontend | 03:00:00  |
 | Booking Hold  | 03:42:00 |
 | Clases | 4:00:00 |
-| Diseñar backend sprint 2 | 07:00:00 |
-| Reunión | 00:45:00 |
-| Planificar sprint 2 backend | 04:00:00 |
+| Tareas alta prioridad sprint 3 | 02:49:00 |
+| Reunión | 01:00:00 |
+| Hotfix | 02:46:00 |
 
 ![grafico-de-tiempos](graficas/rafael.png)
 ---
@@ -195,33 +197,31 @@
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 12/03/2025 - 25/03/2025
-**Total de tiempo trabajado:** 33:15:40
+**Periodo:** 25/03/2025 - 18/03/2025
+**Total de tiempo trabajado:** 20:45:57
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                         | Duración  |
-|-------------------------------------|----------|
-| Seeders                             | 02:30:00 |
-| Gestión de Hoteles                  | 05:20:03 |
-| CRUD de Hoteles                     | 01:30:00 |
-| QA frontend - mis reservas          | 01:27:04 |
-| QA frontend - user profile          | 02:12:52 |
-| Metricas equipo de dirección        | 00:22:08 |
-| Clase 15/3                          | 04:00:00 |
-| Refactor hotel list                 | 03:24:14 |
-| Individual Performance              | 00:59:24 |
-| Inicio Sprint 2                     | 02:16:38 |
-| Refactoring Login and Register      | 02:54:42 |
-| Reunión 23/03                       | 01:00:38 |
-| Reunión 16/03                       | 01:20:00 |
-| Reporte IA                          | 00:47:00 |
-| Reporte Tiempo                      | 00:30:57 |
-| Revisión PRs                        | 02:00:00 |
+|-------------------------------------|-----------|
+| Reportes Tiempo Sprint 2            | 00:27:13  |
+| QA-Entrega Sprint2                  | 02:48:00  |
+| Individual Performance Sprint 2     | 01:42:01  |
+| Reunión: Inicio Sprint 3            | 01:14:34  |
+| Feat: Confirmación de Reserva       | 02:24:21  |
+| Feat: Reservas de Hotel             | 00:39:27  |
+| Fix: Lógica Rangos de Precio        | 00:55:49  |
+| Refactor:  Pantalla busqueda hotel  | 04:48:54  |
+| Presentación 4/4                    | 02:39:38  |
+| Clase 4/4                           | 02:00:00  |
+| Informe de IA Sprint 3              | 00:35:00  |
+| Informe de Tiempo Sprint 3          | 00:31:00  |
 
 
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/bb402c05-8be5-4672-8374-9e90bd0c796c" />
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/a01645ea-7bfb-4e03-af98-2c0f9e57079c" />
+
 
 ---
 

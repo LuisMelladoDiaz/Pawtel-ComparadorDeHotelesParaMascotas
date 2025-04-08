@@ -11,6 +11,7 @@ import {
   fetchHotelOfRoomType,
   fetchTotalVacancyForRoomType,
   fetchVacancyForEachRoomInRoomType,
+  fetchRoomTypesByIds,
   type RoomType,
 } from '@/data-layer/api/roomTypes';
 
@@ -21,6 +22,17 @@ export const useGetRoomTypeById = (roomTypeId: MaybeRef<number>) => {
     staleTime: 30 * 1000,
     refetchOnWindowFocus: true,
     refetchOnMount: true,
+  });
+};
+
+export const useGetRoomTypesByIds = (roomTypeIds: MaybeRef<number[]>, opts) => {
+  return useQuery({
+    queryKey: ['roomTypeIds', roomTypeIds],
+    queryFn: () => fetchRoomTypesByIds(toValue(roomTypeIds)),
+    staleTime: 30 * 1000,
+    refetchOnWindowFocus: true,
+    refetchOnMount: true,
+    enabled: opts?.enabled,
   });
 };
 
