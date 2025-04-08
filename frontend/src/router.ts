@@ -122,7 +122,7 @@ const routes = [
     },
   },
   {
-    path: '/dueños-alojamientos',
+    path: '/duenos-alojamientos',
     component: createComponent({ layout: LayoutDefault, component: HotelOwners }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
