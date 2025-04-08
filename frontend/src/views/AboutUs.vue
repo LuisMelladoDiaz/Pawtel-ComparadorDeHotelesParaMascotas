@@ -1,37 +1,225 @@
 <script setup>
 import NavbarTerracota from '../components/NavBarTerracota.vue';
 import Footer from '../components/Footer.vue';
+import AnimatedCounters from '@/components/AnimatedCounters.vue';
+import { ref, onMounted } from 'vue'
 </script>
 
 <template>
-    <section class="relative mx-auto py-16 max-w-7xl px-6 text-center w-full flex flex-col flex-grow">
-      <h1 class="text-5xl font-extrabold text-[#6C8CC3] font-titleHome drop-shadow-lg">Sobre Nosotros</h1>
-      <div class="mt-12 bg-white shadow-lg p-8 rounded-xl border-t-4 border-[#C36C6C] shadow-md transition-all">
-        <h2 class="text-3xl font-semibold text-[#C36C6C]">¿Por qué Pawtel?</h2>
-        <p class="text-gray-700 mt-4 text-lg">
-          Sabemos lo difícil que es encontrar el lugar perfecto para dejar a tu mascota cuando lo necesitas.
-          Con Pawtel, eliminamos la incertidumbre: comparamos alojamientos, garantizamos confianza y
-          facilitamos la reserva en solo unos clics. Olvídate de las preocupaciones y encuentra el mejor
-          hospedaje para tu mascota con facilidad.
+  <section class="banner-section bg-[#f7f7f7] py-16 px-6 max-w-7xl mx-auto rounded-lg">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center text-center lg:text-left">
+      <div>
+        <h2 class="text-3xl lg:text-4xl font-extrabold text-[#595959] mb-6 font-titleHome">Sobre Nosotros</h2><br />
+        <p class="text-lg lg:text-xl font-medium leading-relaxed tracking-wide text-gray-700 max-w-xl mx-auto lg:mx-0">
+          Sabemos lo difícil que es <span class="text-azul-suave font-semibold">encontrar el lugar perfecto</span> para dejar a tu <span class="text-azul-suave font-semibold">mascota</span> cuando lo necesitas.
+          Es normal sentir preocupación o dudas al separarte de alguien que consideras parte de tu <span class="text-terracota font-semibold">familia</span>.
         </p>
       </div>
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div class="bg-white shadow-2xl p-8 rounded-xl border-t-4 border-[#C36C6C] transform hover:scale-105 transition-all">
-          <h2 class="text-3xl font-semibold text-[#C36C6C]">Nuestro Objetivo</h2>
-          <p class="text-gray-700 mt-4 text-lg">
-            Ser la plataforma líder en reservas de alojamiento para mascotas, garantizando bienestar y calidad.
-          </p>
-        </div>
-        <div class="bg-white shadow-2xl p-8 rounded-xl border-t-4 border-[#6C8CC3] transform hover:scale-105 transition-all">
-          <h2 class="text-3xl font-semibold text-[#6C8CC3]">Nuestros Valores</h2>
-          <ul class="list-disc list-inside text-gray-700 mt-4 text-lg text-left mx-auto max-w-sm">
-            <li class="mb-2">Compromiso con el bienestar animal</li>
-            <li class="mb-2">Transparencia y confianza</li>
-            <li class="mb-2">Facilidad y rapidez en las reservas</li>
-            <li class="mb-2">Atención personalizada</li>
-            <li>Seguridad y calidad garantizadas</li>
-          </ul>
-        </div>
+      <div class="flex justify-center lg:justify-start">
+        <img src="../assets/imgdc.webp" alt="Perro y gato juntos" class="w-full max-w-md rounded-2xl shadow-md border border-gray-200 object-cover"/>
       </div>
-    </section>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center text-center lg:text-left mt-10">
+      <div class="flex justify-center lg:justify-start">
+        <img src="../assets/pawtel_img.png" alt="Perro disfrutando comida" class="w-full max-w-md rounded-lg shadow-lg object-cover" />
+      </div>
+      <div>
+        <p class="text-lg lg:text-xl font-medium leading-relaxed tracking-wide text-gray-700 max-w-xl mx-auto lg:mx-0">
+          Por eso nace <span class="text-terracota font-semibold">Pawtel</span>: Una plataforma diseñada para <span class="text-azul-suave font-semibold">
+          facilitar la búsqueda y reserva de alojamientos exclusivos para mascotas</span>, garantizando confianza, bienestar y tranquilidad en cada paso. 
+          <span class="text-azul-suave font-semibold">Conectamos</span> a personas que aman a los animales con <span class="text-azul-suave font-semibold">espacios seguros</span>, certificados y preparados 
+          para ofrecer una experiencia de cuidado de <span class="text-azul-suave font-semibold">primer nivel</span>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <AnimatedCounters />
+
+  <section class="banner-section bg-terracota text-white py-16 px-6 max-w-7xl mx-auto rounded-lg">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center text-center lg:text-left">
+      <h3 class="text-3xl font-bold">Nuestro Objetivo</h3>
+      <h3 class="text-2xl font-bold font-titleHome">
+        Ser la plataforma <span class="italic font-semibold">LÍDER</span> en reservas de alojamiento para mascotas, garantizando <span class="underline underline-offset-4">bienestar</span> y <span class="underline underline-offset-4">calidad</span>.
+      </h3>
+    </div>
+  </section>
+
+  <section class="bg-white py-20 px-6 max-w-7xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-14 text-[#C36C6C]">Nuestros Valores</h2><br/>
+    <div class="flex flex-wrap justify-center gap-8">
+      <div class="w-56 h-56 rounded-full bg-[#FAF8F8] shadow-md flex flex-col items-center justify-center p-6 text-center" data-aos="fade-up">
+        <img src="../assets/bienestar_icon.png" alt="Ubicación" class="w-15 h-15 mx-auto" />
+        <h3 class="font-semibold text-lg">Bienestar animal</h3>
+        <p class="text-sm text-gray-600 mt-1">Alojamientos pensados para su comodidad y felicidad.</p>
+      </div>
+      <div class="w-56 h-56 rounded-full bg-[#FAF8F8] shadow-md flex flex-col items-center justify-center p-6 text-center" data-aos="fade-up" data-aos-delay="100">
+        <img src="../assets/reservas_icon.png" alt="Ubicación" class="w-15 h-15 mx-auto" />
+        <h3 class="font-semibold text-lg">Reservas ágiles</h3>
+        <p class="text-sm text-gray-600 mt-1">Sin complicaciones, rápido y claro.</p>
+      </div>
+      <div class="w-56 h-56 rounded-full bg-[#FAF8F8] shadow-md flex flex-col items-center justify-center p-6 text-center" data-aos="fade-up" data-aos-delay="200">
+        <img src="../assets/security_icon.png" alt="Ubicación" class="w-15 h-15 mx-auto" />
+        <h3 class="font-semibold text-lg">100% seguro</h3>
+        <p class="text-sm text-gray-600 mt-1">Solo alojamientos verificados y certificados.</p>
+      </div>
+      <div class="w-56 h-56 rounded-full bg-[#FAF8F8] shadow-md flex flex-col items-center justify-center p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+        <img src="../assets/confort_icon.png" alt="Ubicación" class="w-15 h-15 mx-auto" />
+        <h3 class="font-semibold text-lg">Confort y variedad</h3>
+        <p class="text-sm text-gray-600 mt-1">Opciones para todo tipo de mascotas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#f7f7f7] py-10 px-6 max-w-7xl mx-auto rounded-lg" data-aos="fade-up">
+    <h2 class="text-4xl font-bold text-center text-gray-800 font-titleHome mb-4">Nuestro Equipo</h2>
+    <p class="text-xl text-center text-gray-600 font-medium mb-2 max-w-3xl mx-auto">
+      Contamos con los <span class="text-terracota font-bold italic">mejores paw</span> para hacer realidad esta aventura 🐾
+    </p>
+    <!-- Versión Escritorio -->
+    <div class="overflow-x-auto hidden lg:block">
+  <table class="w-full table-fixed border-separate border-spacing-y-4 text-center text-sm">
+    <tbody>
+      <!-- PMs -->
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td colspan="3" class="py-4">
+          <div class="flex flex-col items-center space-y-3">
+            <div class="flex items-center justify-center gap-3">
+              <img src="../assets/pmOne.jpg" alt="Luis" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+              <img src="../assets/pmTwo.jpg" alt="Daniel" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            </div>
+            <div class="text-center">
+              <p class="text-base font-semibold text-gray-800">Luis y Daniel</p>
+              <p class="text-sm text-gray-500">PM's del Proyecto</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Jefes de equipo -->
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 align-top">
+          <div class="flex flex-col items-center space-y-2">
+            <img src="../assets/pmFullstack.jpg" alt="David" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            <div>
+              <p class="font-semibold text-gray-800">David</p>
+              <p class="text-sm text-gray-500">Fullstack Lead</p>
+            </div>
+          </div>
+        </td>
+        <td class="py-4 align-top">
+          <div class="flex flex-col items-center space-y-2">
+            <img src="../assets/pmFrontend.jpg" alt="Sergio" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            <div>
+              <p class="font-semibold text-gray-800">Sergio</p>
+              <p class="text-sm text-gray-500">Frontend Lead</p>
+            </div>
+          </div>
+        </td>
+        <td class="py-4 align-top">
+          <div class="flex flex-col items-center space-y-2">
+            <img src="../assets/pmBackend.jpg" alt="Rafael" class="w-12 h-12 rounded-full object-cover border border-gray-300" />
+            <div>
+              <p class="font-semibold text-gray-800">Rafael</p>
+              <p class="text-sm text-gray-500">Backend Lead</p>
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Miembros por bloques -->
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 font-medium text-gray-800">
+          Claudio C.<br />
+          <span class="text-sm text-gray-500">Backend & Docs</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Jorge G.<br />
+          <span class="text-sm text-gray-500">Backend</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Javier R.<br />
+          <span class="text-sm text-gray-500">Backend</span>
+        </td>
+      </tr>
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 font-medium text-gray-800">
+          Curro J.<br />
+          <span class="text-sm text-gray-500">Fullstack & Analista</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Andrés M.<br />
+          <span class="text-sm text-gray-500">Fullstack</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Manuel C.<br />
+          <span class="text-sm text-gray-500">Fullstack</span>
+        </td>
+      </tr>
+      <tr class="bg-white rounded-lg shadow-sm">
+        <td class="py-4 font-medium text-gray-800">
+          Javier G.<br />
+          <span class="text-sm text-gray-500">Frontend & Mkting</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Fernando C.<br />
+          <span class="text-sm text-gray-500">Frontend</span>
+        </td>
+        <td class="py-4 font-medium text-gray-800">
+          Yesica G.<br />
+          <span class="text-sm text-gray-500">Frontend & Mkting</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+    <!-- Versión móvil simplificada: visible solo en móvil -->
+    <div class="lg:hidden mt-10 space-y-6">
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">PMs del Proyecto</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Luis M.</li>
+          <li>• Daniel F.</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">Equipo Backend</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Rafael  C. (Jefe de Equipo)</li>
+          <li>• Claudio C. (también documentación)</li>
+          <li>• Jorge G.</li>
+          <li>• Javier R.</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">Equipo Fullstack</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• David G. (Jefe de Equipo)</li>
+          <li>• Curro J. (también analista)</li>
+          <li>• Andrés M.</li>
+          <li>• Manuel C.</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">Equipo Frontend</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Sergio T. (Jefe de Equipo)</li>
+          <li>• Javier G. (también Publ. & Mkting)</li>
+          <li>• Fernando C.</li>
+          <li>• Yesica G. (también Publ. & Mkting)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </template>
+
+<style scoped>
+  svg {
+    transform: rotate(0deg);
+  }
+</style>
