@@ -76,7 +76,8 @@ import { ref, onMounted } from 'vue'
     <p class="text-xl text-center text-gray-600 font-medium mb-2 max-w-3xl mx-auto">
       Contamos con los <span class="text-terracota font-bold italic">mejores paw</span> para hacer realidad esta aventura 🐾
     </p>
-    <div class="overflow-x-auto">
+    <!-- Versión Escritorio -->
+    <div class="overflow-x-auto hidden lg:block">
       <table class="w-full table-fixed border-separate border-spacing-y-6 text-center">
         <tbody>
           <tr class="bg-white rounded-xl shadow-md">
@@ -139,6 +140,47 @@ import { ref, onMounted } from 'vue'
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- Versión móvil simplificada: visible solo en móvil -->
+    <div class="lg:hidden mt-10 space-y-6">
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">PMs del Proyecto</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Luis M.</li>
+          <li>• Daniel F.</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">Equipo Backend</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Rafael  C. (Jefe de Equipo)</li>
+          <li>• Claudio C. (también documentación)</li>
+          <li>• Jorge G.</li>
+          <li>• Javier R.</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">Equipo Fullstack</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• David G. (Jefe de Equipo)</li>
+          <li>• Curro J. (también analista)</li>
+          <li>• Andrés M.</li>
+          <li>• Manuel C.</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-lg shadow p-4">
+        <h4 class="text-lg font-semibold text-terracota mb-2">Equipo Frontend</h4>
+        <ul class="text-gray-700 space-y-1">
+          <li>• Sergio T. (Jefe de Equipo)</li>
+          <li>• Javier G. (también Publ. & Mkting)</li>
+          <li>• Fernando C.</li>
+          <li>• Yesica G. (también Publ. & Mkting)</li>
+        </ul>
+      </div>
     </div>
   </section>
 </template>
