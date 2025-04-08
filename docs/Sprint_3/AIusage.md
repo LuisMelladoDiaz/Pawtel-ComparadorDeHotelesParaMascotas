@@ -630,13 +630,13 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Rafael Castillo Cebolla
-- **Sprint:** 2
+- **Sprint:** 3
 - **Rol en el proyecto:** Jefe de backend, ayudante de documentación y analista y supervisor de calidad.
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
 - Generación de código (X)
-- Refactorización de código (X)
+- Refactorización de código ()
 - Generación de documentación ( )
 - Asesoramiento técnico (X)
 - Otro (especificar): --
@@ -648,13 +648,13 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 | Tarea                                | Herramienta utilizada | Descripción del uso de IA                                                               |
 |--------------------------------------|-----------------------|-----------------------------------------------------------------------------------------|
 | Diseñar y revisar backend en general | ChatGPT               | Encontrar directrices e inspiración para resolver problemas de diseño e implementación. |
-| Refactorizar autorización en backend | ChatGPT               | Encontrar directrices e inspiración para resolver problemas de diseño e implementación. |
+| Automatizar tareas con Celery | ChatGPT               | Encontrar directrices e inspiración para resolver problemas de diseño e implementación. |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 10
-- **Comparación con trabajo sin IA:** Mucho más eficiente.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
+- **Comparación con trabajo sin IA:** Más eficiente y seguro.
 
 #### 5. Prompts Utilizados
 
@@ -664,7 +664,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** cofundía los tipos enums en Django. Cambio en nombres de variables.
+- **Errores o respuestas incorrectas de la IA:** esta vez nada.
 - **Limitaciones detectadas en la IA:** algún despiste de vez en cuando. Se olvida o de lo que le he dicho antes.
 - **Propuestas de mejora en el uso de IA:** nada especial.
 
