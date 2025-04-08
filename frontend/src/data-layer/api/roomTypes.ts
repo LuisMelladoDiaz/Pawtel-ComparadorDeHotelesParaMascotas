@@ -20,6 +20,18 @@ export const fetchRoomTypeById = async (roomTypeId: number) => {
   return response.data as RoomType;
 };
 
+
+export const fetchRoomTypesByIds = async (roomTypeIds: number[]) => {
+  const getUrl = (id: number) => `${API_BASE_URL}/room-types/${id}/`;
+  const requests = roomTypeIds.map((id) => axios.get(getUrl(id)));
+  const responses = await Promise.all(requests);
+  const roomTypes = responses.map((response) => response.data) as RoomType[];
+  return roomTypes.reduce((acc, roomType) => {
+    acc[roomType.id] = roomType;
+    return acc;
+  }, {} as Record<number, RoomType>);
+}
+
 export const fetchAllRoomTypes = async (hotelId?: number) => {
   const url = hotelId ? `${API_BASE_URL}/hotels/${hotelId}/room-types/` : `${API_BASE_URL}/room-types/`;
   const response = await axios.get(url);

@@ -3,6 +3,7 @@ import { type MaybeRef, toValue } from 'vue';
 import {
     fetchAllOwners,
     fetchCustomerById,
+    fetchCustomersByIds,
     createCustomer,
     updateCustomer,
     partialUpdateCustomer,
@@ -30,6 +31,16 @@ export const useGetCustomerById = (customerId: MaybeRef<number>) => {
         refetchOnWindowFocus: false,
     });
 };
+
+export const useGetCustomersByIds = (customerIds: MaybeRef<number[]>, opts) => {
+    return useQuery({
+        queryKey: ['customerIds', customerIds],
+        queryFn: () => fetchCustomersByIds(toValue(customerIds)),
+        staleTime: 1000 * 60,
+        refetchOnWindowFocus: false,
+        enabled: opts?.enabled,
+    });
+}
 
 export const useCreateCustomer = () => {
     return useMutation({

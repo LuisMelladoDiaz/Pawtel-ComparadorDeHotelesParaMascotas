@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watchEffect, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { handleApiError } from '@/utils/errorHandler';
@@ -95,7 +95,7 @@ const closeImageOptions = () => {
 
 const handleImageUpload = (event) => {
   const files = event.target.files;
-  
+
   for (const file of files) {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -273,10 +273,6 @@ const saveChanges = () => {
       onSuccess: () => {
         notyf.dismiss(loadingNotification);
         notyf.success('Cambios guardados correctamente.');
-        saveSuccess.value = true;
-        setTimeout(() => {
-          saveSuccess.value = false;
-        }, 3000);
       },
       onError: (error) => {
         notyf.dismiss(loadingNotification);
@@ -299,7 +295,7 @@ const formatPetType = (petType) => {
 
 // Nuevos hooks para crear y eliminar tipos de habitación
 const { mutate: createRoomType } = useCreateRoomType();
-const { mutate: deleteRoomType } = useDeleteRoomType();
+const { mutate: deleteRoomType, isPending: isDeletingRoom } = useDeleteRoomType();
 const { mutate: updateRoomType } = useUpdateRoomType();
 
 const newRoomType = ref({
@@ -600,10 +596,10 @@ const paginatedRooms = computed(() => {
         </div>
 
       </div>
-      
-        <HotelBookings 
-        :bookings="bookings" 
-        :isLoading="isLoadingBookings" 
+
+        <HotelBookings
+        :bookings="bookings"
+        :isLoading="isLoadingBookings"
         :isError="isErrorBookings"/>
 
       <div class="flex justify-between w-full px-6 flex-col md:flex-row mb-6">

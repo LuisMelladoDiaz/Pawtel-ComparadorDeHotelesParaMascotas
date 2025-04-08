@@ -1,7 +1,8 @@
 <script setup>
 import { computed } from 'vue';
-import { useGetCustomerById } from '@/data-layer/hooks/customers';
-import { useGetRoomTypeById } from '@/data-layer/hooks/roomTypes';
+import { useGetCustomersByIds } from '@/data-layer/hooks/customers';
+import { useGetRoomTypesByIds } from '@/data-layer/hooks/roomTypes';
+import { watch } from 'vue';
 
 
 const props = defineProps({
@@ -27,33 +28,27 @@ const formattedBookings = computed(() => {
     end_date_formatted: new Date(booking.end_date).toLocaleDateString()
   }));
 });
-
-const customerCache = new Map();
-const customerDictById = computed(() => {
-  if (!props.bookings) return {};
-
-  return props.bookings?.reduce((acc, booking) => {
-    if (!customerCache.has(booking.customer)) {
-      customerCache.set(booking.customer, useGetCustomerById(booking.customer).data);
-    }
-    acc[booking.customer] = customerCache.get(booking.customer);
-    return acc;
-  }, {});
+const customers = computed(() => {
+  if (!props.bookings) return [];
+  return props.bookings.map(booking => booking.customer);
 });
 
-const roomCache = new Map();
-const roomDictById = computed(() => {
-  if (!props.bookings) return {};
+const customerDictById = useGetCustomersByIds(customers);
 
-  return props.bookings?.reduce((acc, booking) => {
-    if (!roomCache.has(booking.room_type)) {
-      roomCache.set(booking.room_type, useGetRoomTypeById(booking.room_type).data);
-    }
-    acc[booking.room_type] = roomCache.get(booking.room_type);
-    return acc;
-  }, {});
+watch(customerDictById.data, (newData) => {
+  console.log('Customer data updated:', newData);
 });
 
+const roomTypes = computed(() => {
+  if (!props.bookings) return [];
+  return props.bookings.map(booking => booking.room_type);
+});
+
+const roomDictById = useGetRoomTypesByIds(roomTypes);
+
+watch(roomDictById.data, (newData) => {
+  console.log('Room type data updated:', newData);
+});
 
 </script>
 
@@ -89,9 +84,9 @@ const roomDictById = computed(() => {
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <tr v-for="booking in formattedBookings" :key="booking.id" class="hover:bg-gray-50">
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ customerDictById[booking.customer]?.value.user.username }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ customerDictById?.data?.value?.[booking.customer]?.user.username }}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                {{ roomDictById[booking.room_type]?.value.name }}
+                {{ roomDictById?.data?.value?.[booking.room_type]?.name }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 {{ booking.creation_date_formatted }}
