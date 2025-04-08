@@ -36,6 +36,18 @@ export const fetchCustomerById = async (CustomerId: number) => {
     return response.data as Customer;
 };
 
+
+export const fetchCustomersByIds = async (CustomerIds: number[]) => {
+    const getUrl = (id: number) => `${API_BASE_URL}/customers/${id}`;
+    const requests = CustomerIds.map((id) => axios.get(getUrl(id)));
+    const responses = await Promise.all(requests);
+    const customers = responses.map((response) => response.data) as Customer[];
+    return customers.reduce((acc, customer) => {
+        acc[customer.id] = customer;
+        return acc;
+    }, {} as Record<string, Customer>);
+}
+
 export const createCustomer = async (CustomerData: Omit<Customer, 'id'>) => {
     const url = `${API_BASE_URL}/auth/register/`;
     try {

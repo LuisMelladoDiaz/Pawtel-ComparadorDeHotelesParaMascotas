@@ -1,12 +1,12 @@
 <script setup>
   defineProps({
-    id: { type: String, required: true },
+    id: { type: Number, required: true },
     image: { type: String, required: true },
     name: { type: String, required: true },
     city: { type: String, required: true },
     description: { type: Array, required: true },
-    price_min: { type: String, required: true },
-    price_max: { type: String, required: true },
+    price_min: { type: Number, required: true },
+    price_max: { type: Number, required: true },
   });
   import Button from '../components/Button.vue';
 </script>
@@ -50,19 +50,19 @@
             <div class="price-disponibilidad flex flex-col items-end justify-between gap-3">
 
               <span class="price text-[1.55rem] text-[#C36C6C] font-bold flex flex-col">
-                <a 
-                  v-if="price_min !== price_max" 
+                <a
+                  v-if="price_min !== price_max"
                   class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
                 >
                   Precios por Noche
                 </a>
-                <a 
-                  v-else 
+                <a
+                  v-else
                   class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
                 >
                   Precio por Noche
                 </a>
-                <a 
+                <a
                   class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3"
                 >
                   {{ price_min === price_max ? `${price_min}€` : `${price_min}€ - ${price_max}€` }}
@@ -109,19 +109,19 @@
 
         <div class="flex flex-col items-center justify-between">
           <span class="price text-[1.35rem] text-[#C36C6C] font-bold flex flex-col self-end">
-            <a 
-                  v-if="price_min !== price_max" 
+            <a
+                  v-if="price_min !== price_max"
                   class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
                 >
                   Precios por Noche
                 </a>
-                <a 
-                  v-else 
+                <a
+                  v-else
                   class="text-[15px] relative bottom-[2px] self-end px-1 text-terracota"
                 >
                   Precio por Noche
                 </a>
-                <a 
+                <a
                   class="bg-white text-right rounded-lg shadow-sm border border-gray-200 text-terracota px-3"
                 >
                   {{ price_min === price_max ? `${price_min}€` : `${price_min}€ - ${price_max}€` }}
