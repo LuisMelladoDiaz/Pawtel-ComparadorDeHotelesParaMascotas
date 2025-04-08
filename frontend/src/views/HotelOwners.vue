@@ -7,7 +7,7 @@ import hotelOwnersPortada from '../assets/hotelOwners_portada.jpg'
 import FaqAccordion from '@/components/FaqAccordion.vue'
 </script>
 <template>
-  <section class="bg-white text-gray-800 relative h-[500px] md:h-[600px] bg-cover bg-center" :style="{ backgroundImage: `url(${hotelOwnersPortada})` }">
+  <section id="inicio" class="bg-white text-gray-800 relative h-[500px] md:h-[600px] bg-cover bg-center" :style="{ backgroundImage: `url(${hotelOwnersPortada})` }">
     <div class="absolute inset-0 bg-black/50"></div>
     <div class="relative z-10 flex flex-col justify-center items-center h-full px-6 text-center">
       <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 max-w-3xl">Conecta tu alojamiento con miles de dueños de mascotas</h1>

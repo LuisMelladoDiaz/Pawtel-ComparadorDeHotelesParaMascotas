@@ -13,7 +13,7 @@
               @click="toggle(index)"
               class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none"
             >
-              <h3 class="font-semibold text-lg text-[#C56C6C]">{{ faq.question }}</h3>
+              <h3 class="font-semibold text-lg text-azul-suave">{{ faq.question }}</h3>
               <svg
                 :class="openIndex === index ? 'rotate-180' : ''"
                 class="w-5 h-5 transform transition-transform duration-200 text-gray-500"
@@ -52,10 +52,6 @@
       answer: 'No, publicar tu alojamiento en Pawtel es completamente gratuito. Solo cobramos una pequeña comisión por reserva confirmada.'
     },
     {
-      question: '¿Qué pasa si quiero rechazar una reserva?',
-      answer: 'Tú tienes el control. Puedes aceptar o rechazar reservas desde tu panel, priorizando siempre una buena experiencia para tus clientes.'
-    },
-    {
       question: '¿Cómo funcionan los pagos?',
       answer: 'El cliente paga online. Una vez finalizada la estancia, la plataforma realiza la transferencia de forma segura a tu cuenta.'
     },
@@ -63,10 +59,6 @@
       question: '¿Puedo dar de baja mi alojamiento en cualquier momento?',
       answer: 'Sí, puedes pausar o eliminar tu alojamiento cuando lo necesites, sin penalizaciones.'
     },
-    {
-      question: '¿Puedo comunicarme con los clientes antes de confirmar la reserva?',
-      answer: 'Sí, puedes responder consultas y coordinar detalles antes de aceptar cualquier reserva.'
-    }
   ]
   </script>
   

@@ -212,7 +212,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes: transformRoutes(routes),
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+    return { top: 0 };
+  }
 });
+
 
 router.beforeEach((to, from, next) => {
   // Keys of filters we want to preserve

@@ -63,30 +63,28 @@ function handleInstall() {
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center">
         <!-- Paso 1 -->
         <div data-aos="fade-up" class="flex flex-col items-center space-y-4">
-          <img src="../assets/paso1.jpg" alt="Paso 1" class="w-52 h-auto" />
+          <img src="../assets/paso1.avif" alt="Paso 1" class="w-52 h-auto" />
           <h3 class="text-lg font-semibold">1. Ingresa destino y fechas</h3>
           <p class="text-gray-600 max-w-xs mx-auto">Elige a dónde va tu mascota y cuándo necesitas alojamiento. ¡Es rápido y fácil!</p></div>
         <!-- Paso 2 -->
          <div data-aos="fade-up" data-aos-delay="100" class="flex flex-col items-center space-y-4">
-          <img src="../assets/paso2M.jpg" alt="Paso 2" class="w-52 h-auto" />
+          <img src="../assets/paso2.jpg" alt="Paso 2" class="w-52 h-auto" />
           <h3 class="text-lg font-semibold">2. Selecciona el hotel que prefieras</h3>
           <p class="text-gray-600 max-w-xs mx-auto">Compara alojamientos por precio, ubicación, reseñas y servicios especiales para mascotas.</p>
         </div>
         <!-- Paso 3 -->
         <div data-aos="fade-up" data-aos-delay="200" class="flex flex-col items-center space-y-4">
-          <img src="../assets/paso3.jpg" alt="Paso 3" class="w-52 h-auto" />
+          <img src="../assets/paso3.avif" alt="Paso 3" class="w-52 h-auto" />
           <h3 class="text-lg font-semibold">3. Reserva y disfruta</h3>
           <p class="text-gray-600 max-w-xs mx-auto">Finaliza la reserva y relájate. Tu mascota estará bien cuidada mientras tú disfrutas.</p>
         </div>
       </div>
     </section>
     
-    <!-- Instala la App -->
-    <section class="bg-gradient-to-r from-terracota to-[#c36c6c] text-white py-16 px-6 max-w-7xl mx-auto rounded-xl shadow-md overflow-hidden">
-      <div class="flex flex-col lg:flex-row items-center justify-between gap-10">
-        <!-- Texto y CTA -->
-        <div class="lg:w-1/2 space-y-6 text-center lg:text-left">
-          <h2 class="text-3xl font-bold font-nunito">¡Lleva Pawtel contigo, donde vayas!</h2>
+    <section class="bg-[#C36C6C] relative mx-auto py-2 max-w-7xl px-5 rounded-lg overflow-hidden">
+      <div class="container mx-auto flex flex-col lg:flex-row items-center w-full">
+        <div class="lg:w-1/2 text-left p-6 text-white">
+          <h2 class="text-3xl font-bold mb-4 font-nunito">¡Lleva Pawtel contigo, donde vayas!</h2>
           <div v-if="canInstall">
             <p class="text-lg leading-relaxed">Instálala desde tu navegador y accede rápidamente a todas las funciones de forma más cómoda.</p>
             <p class="text-sm text-white/80 italic">No necesitas Play Store ni App Store.</p>
@@ -98,9 +96,8 @@ function handleInstall() {
               Instalar app
             </button>
           </div>
-          <!-- Redes sociales -->
           <div class="mt-6 space-y-3 text-center lg:text-left">
-            <p class="text-sm text-white/90">📲 ¿Quieres enterarte de novedades, promociones y tips para tu alojamiento o mascota?<br><strong>Síguenos en nuestras redes sociales:</strong></p>
+            <p class="text-sm text-white/90">¿Quieres enterarte de novedades, promociones y tips para tu alojamiento o mascota?<br><strong>Síguenos en nuestras redes sociales:</strong></p>
             <div class="flex justify-center lg:justify-start gap-4">
               <a href="https://www.instagram.com/pawtel_es/" target="_blank" aria-label="Instagram" class="hover:scale-110 transition">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -120,9 +117,9 @@ function handleInstall() {
             </div>
           </div>
         </div>
-        <!-- GIF o Imagen -->
         <div class="lg:w-1/2 flex justify-center">
-          <img src="../assets/app-promo.gif" alt="App Pawtel Demo" class="w-64 lg:w-80 h-auto rounded-lg shadow-lg hover:scale-105 transition-transform duration-300">
+          <!-- Puedes mantener la imagen de la app o reemplazarla por otra -->
+          <img src="../assets/app.png" alt="App Pawtel" class="w-80 h-auto rounded-none shadow-lg object-cover">
         </div>
       </div>
     </section>

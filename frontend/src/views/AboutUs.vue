@@ -117,17 +117,14 @@ function formatNumber(num) {
     </div>
   </section>
 
-  <hr class="border-t border-gray-200 my-20" />
-
-
-  <section class="bg-[#f7f7f7] py-14 px-6 max-w-7xl mx-auto rounded-lg" data-aos="fade-up">
+  <section class="bg-[#f7f7f7] py-10 px-6 max-w-7xl mx-auto rounded-lg" data-aos="fade-up">
      <!-- Título principal -->
   <h2 class="text-4xl font-bold text-center text-gray-800 font-titleHome mb-4">
     Nuestro Equipo
   </h2>
 
   <!-- Frase introductoria -->
-  <p class="text-xl text-center text-gray-600 font-medium mb-12 max-w-3xl mx-auto">
+  <p class="text-xl text-center text-gray-600 font-medium mb-2 max-w-3xl mx-auto">
     Contamos con los <span class="text-terracota font-bold italic">mejores paw</span> para hacer realidad esta aventura 🐾
   </p>
   <div class="overflow-x-auto">
