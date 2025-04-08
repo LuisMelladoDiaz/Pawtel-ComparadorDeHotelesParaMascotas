@@ -57,7 +57,7 @@ const resetPassword = () => {
 
 <template>
     <div class="flex flex-col min-h-screen">
-        <div class="flex flex-col items-center mt-10"> <!-- Cambiado justify-center por mt-10 -->
+        <div class="flex flex-col items-center mt-10">
             <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
                 <h2 class="text-2xl font-semibold text-gray-800 text-center">Restablecer Contraseña</h2>
                 <form @submit.prevent="resetPassword">
