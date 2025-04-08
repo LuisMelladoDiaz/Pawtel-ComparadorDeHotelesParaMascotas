@@ -12,6 +12,7 @@ import EditHotel from './views/EditHotel.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
+import HotelOwners from './views/HotelOwners.vue';
 import { h, type Component} from 'vue';
 import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
@@ -98,7 +99,6 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
 import BookingReservationForm from './views/BookingReservationForm.vue';
 import TermsAndConditions from './views/TermsAndConditions.vue';
 
-
 const routes = [
   {
     path: '/',
@@ -117,6 +117,13 @@ const routes = [
   {
     path: '/contacto',
     component: createComponent({ layout: LayoutDefault, component: Contact }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
+    },
+  },
+  {
+    path: '/duenos-alojamientos',
+    component: createComponent({ layout: LayoutDefault, component: HotelOwners }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
@@ -205,7 +212,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes: transformRoutes(routes),
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+    return { top: 0 };
+  }
 });
+
 
 router.beforeEach((to, from, next) => {
   // Keys of filters we want to preserve
