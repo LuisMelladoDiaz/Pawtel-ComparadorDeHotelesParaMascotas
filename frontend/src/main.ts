@@ -13,6 +13,10 @@ import { defineRule, configure } from 'vee-validate';
 import { required } from '@vee-validate/rules';
 import { customMessages } from './validation-messages';
 import { createPinia } from 'pinia';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+
+AOS.init();
 
 defineRule('required', required);
 
