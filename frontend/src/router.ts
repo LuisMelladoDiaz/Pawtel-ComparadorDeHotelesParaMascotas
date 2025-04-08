@@ -50,6 +50,7 @@ const ALLOW_ALL = [
   AuthRequirement.LOGGED_IN_HOTEL_OWNER,
   AuthRequirement.LOGGED_IN_ADMIN,
   AuthRequirement.LOGGED_OUT,
+  AuthRequirement.LOGGED_IN_ADMIN,
 ];
 
 const ALLOW_LOGGED_IN = [

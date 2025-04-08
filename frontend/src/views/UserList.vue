@@ -2,8 +2,9 @@
 import { ref, computed, onMounted, watchEffect } from 'vue';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-import { useGetAllCustomers } from '@/data-layer/hooks/customers';
-import { useGetAllHotelOwners } from '@/data-layer/hooks/hotelOwners';
+import { useGetAllCustomers, useDeleteCustomer } from '@/data-layer/hooks/customers';
+import { useGetAllHotelOwners, useDeleteHotelOwner, useApproveHotelOwner } from '@/data-layer/hooks/hotelOwners';
+import { handleApiError } from '@/utils/errorHandler';
 
 const notyf = new Notyf();
 
@@ -24,6 +25,11 @@ const {
   refetch: refetchOwners
 } = useGetAllHotelOwners();
 
+// Hooks para acciones
+const { mutateAsync: deleteCustomer } = useDeleteCustomer();
+const { mutateAsync: deleteOwner } = useDeleteHotelOwner();
+const { mutateAsync: approveOwner } = useApproveHotelOwner();
+
 const customersRaw = ref([]);
 const ownersRaw = ref([]);
 const ownersLoadAttempted = ref(false);
@@ -33,12 +39,11 @@ const extractUserData = (userWithRelation, type) => {
   if (!userWithRelation || !userWithRelation.user) return null;
 
   const user = userWithRelation.user;
-
-  // Imagen por defecto (silueta de usuario neutra)
   const defaultAvatar = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
 
   return {
     id: user.id,
+    relationId: userWithRelation.id,
     name: `${user.first_name || ''} ${user.last_name || ''}`.trim() || user.username,
     username: user.username,
     email: user.email,
@@ -53,21 +58,18 @@ const extractUserData = (userWithRelation, type) => {
 // Observar cambios en los datos
 watchEffect(() => {
   if (customerData.value) {
-    console.log('Datos crudos de clientes:', customerData.value);
     customersRaw.value = customerData.value
       .map(customer => extractUserData(customer, 'customer'))
       .filter(Boolean);
   }
 
   if (ownerData.value) {
-    console.log('Datos crudos de dueños:', ownerData.value);
     ownersRaw.value = ownerData.value
       .map(owner => extractUserData(owner, 'owner'))
       .filter(Boolean);
   }
 });
 
-// Resto del código se mantiene igual...
 const users = computed(() => [...customersRaw.value, ...ownersRaw.value]);
 
 // Estados del componente
@@ -79,8 +81,12 @@ const errorMessage = computed(() => {
   return '';
 });
 
-// Resto del código (paginación, filtros, etc.)...
-const isVerifying = ref(false);
+const showOwnersError = computed(() =>
+  isErrorOwners.value && ownersLoadAttempted.value && userFilter.value !== 'customers'
+);
+
+// UI States
+const isApproving = ref(false);
 const isDeleting = ref(false);
 const searchQuery = ref('');
 const userFilter = ref('all');
@@ -129,22 +135,32 @@ const filteredUsers = computed(() => {
 const prevPage = () => currentPage.value > 1 && currentPage.value--;
 const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 
-// Verificar usuario (solo para dueños)
-const verifyUser = async (userId) => {
-  const index = ownersRaw.value.findIndex(u => u.id === userId);
-  if (index === -1) return;
+// Aprobar dueño de hotel
+const approveUser = (userId) => {
+  const owner = ownersRaw.value.find(u => u.id === userId);
+  if (!owner) return;
 
-  isVerifying.value = true;
-  try {
-    await new Promise(resolve => setTimeout(resolve, 800)); // Simulación
-    ownersRaw.value[index].is_verified = true;
-    notyf.success('Dueño verificado correctamente');
-  } catch (error) {
-    notyf.error('Error al verificar el usuario');
-    console.error(error);
-  } finally {
-    isVerifying.value = false;
-  }
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Aprobando dueño...',
+    dismissible: false,
+  });
+
+  approveOwner(
+    owner.relationId,
+    {
+      onSuccess: async () => {
+        notyf.dismiss(loadingNotification);
+        owner.is_verified = true;
+        notyf.success('Dueño aprobado correctamente');
+        await refetchOwners();
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      },
+    }
+  );
 };
 
 // Confirmar eliminación
@@ -160,31 +176,65 @@ const closeDeleteModal = () => {
 };
 
 // Eliminar usuario
-const deleteUser = async () => {
-  isDeleting.value = true;
-  try {
-    await new Promise(resolve => setTimeout(resolve, 800));
-    const id = userToDelete.value.id;
-    customersRaw.value = customersRaw.value.filter(u => u.id !== id);
-    ownersRaw.value = ownersRaw.value.filter(u => u.id !== id);
+const deleteUser = () => {
+  if (!userToDelete.value) return;
 
-    notyf.success('Usuario eliminado correctamente');
-    currentPage.value = 1;
-  } catch (error) {
-    notyf.error('Error al eliminar el usuario');
-    console.error(error);
-  } finally {
-    isDeleting.value = false;
-    closeDeleteModal();
-  }
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Eliminando usuario...',
+    dismissible: false,
+  });
+
+  const id = userToDelete.value.relationId;
+
+  const mutation = userToDelete.value.role === 'owner' ? deleteOwner : deleteCustomer;
+
+  mutation(
+    id,
+    {
+      onSuccess: () => {
+        notyf.dismiss(loadingNotification);
+        customersRaw.value = customersRaw.value.filter(u => u.relationId !== id);
+        ownersRaw.value = ownersRaw.value.filter(u => u.relationId !== id);
+        notyf.success('Usuario eliminado correctamente');
+        currentPage.value = 1;
+        closeDeleteModal();
+      },
+      onError: (error) => {
+        notyf.dismiss(loadingNotification);
+        handleApiError(error);
+      },
+    }
+  );
 };
 
 // Intentar recargar los datos
 const retryLoadData = () => {
-  if (isErrorCustomers.value) refetchCustomers();
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Reintentando cargar datos...',
+    dismissible: false,
+  });
+
+  if (isErrorCustomers.value) {
+    refetchCustomers().then(() => {
+      notyf.dismiss(loadingNotification);
+      notyf.success('Clientes cargados correctamente');
+    }).catch((error) => {
+      notyf.dismiss(loadingNotification);
+      handleApiError(error);
+    });
+  }
+
   if (isErrorOwners.value) {
     ownersLoadAttempted.value = true;
-    refetchOwners();
+    refetchOwners().then(() => {
+      notyf.dismiss(loadingNotification);
+      notyf.success('Dueños cargados correctamente');
+    }).catch((error) => {
+      notyf.dismiss(loadingNotification);
+      handleApiError(error);
+    });
   }
 };
 
@@ -310,9 +360,9 @@ onMounted(() => {
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center space-x-2">
                     <button
                       v-if="!user.is_verified && user.role === 'owner'"
-                      @click="verifyUser(user.id)"
+                      @click="approveUser(user.id)"
                       class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-oliva hover:bg-oliva-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-oliva"
-                      :disabled="isVerifying"
+                      :disabled="isApproving"
                     >
                       <i class="fas fa-check-circle mr-1"></i> Verificar
                     </button>

@@ -12,6 +12,7 @@ export type HotelOwner = {
     date_joined?: string;
     last_login?: string;
     is_active?: boolean;
+    is_approved?: boolean;
 };
 
 
@@ -78,4 +79,10 @@ export const getCurrentHotelOwner = async () => {
     const url = `${API_BASE_URL}/hotel-owners/me`;
     const response = await axios.get(url);
     return response.data as HotelOwner;
+}
+
+export const approveHotelOwner = async (hotelOwnerId: number) => {
+    const url = `${API_BASE_URL}/hotel-owners/${hotelOwnerId}/approve/`;
+    const response = await axios.patch(url);
+    return response.data;
 }
