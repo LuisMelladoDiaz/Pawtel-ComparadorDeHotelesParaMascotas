@@ -56,7 +56,7 @@ export const useLoginMutation = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries();
     },
   });
 };
@@ -71,7 +71,7 @@ export const useLogoutMutation = () => {
       router.push("/")
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["isLoggedIn", "user"] }); // Refresh user state
+      queryClient.invalidateQueries();
     },
   });
 };

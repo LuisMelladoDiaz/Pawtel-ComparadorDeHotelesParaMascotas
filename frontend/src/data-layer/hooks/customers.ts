@@ -55,7 +55,7 @@ export const useUpdateCustomer = () => {
         mutationFn: ({ customerId, ownerData }: { customerId: number; ownerData: Customer }) =>
             updateCustomer(customerId, ownerData),
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['customer', data.id] });
+            queryClient.invalidateQueries();
         },
     });
 };
