@@ -22,7 +22,7 @@
       <div>
         <h3 class="text-base font-semibold mb-3 uppercase">¿Tienes un alojamiento?</h3>
         <ul class="space-y-2">
-          <li><RouterLink to="/duenos-alojamientos#inicio" class="hover:underline">Únete como anfitrión</RouterLink></li>
+          <li><RouterLink to="/duenos-alojamientos" class="hover:underline">Únete como anfitrión</RouterLink></li>
           <li><RouterLink to="/duenos-alojamientos#faq" class="hover:underline">Preguntas frecuentes</RouterLink></li>
         </ul>
       </div>
