@@ -18,7 +18,7 @@ export type HotelOwner = {
 
 
 export const fetchAllOwners = async () => {
-    const url = `${API_BASE_URL}/api/hotel-owners/`;
+    const url = `${API_BASE_URL}/hotel-owners/`;
     const response = await axios.get(url);
     return response.data as HotelOwner[];
 };

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HotelDetailsView from './views/HotelDetailView.vue';
 import HotelRoomsAndPrices from './views/HotelRoomsAndPrices.vue';
 import UserProfile from './views/UserProfile.vue'
+import UserList from './views/UserList.vue';
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
@@ -106,6 +107,13 @@ const routes = [
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
+  },
+  {
+    path: '/admin/userList',
+    component: createComponent({ layout: LayoutDefault, component: UserList }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
+    }
   },
   {
     path: '/sobre-nosotros',

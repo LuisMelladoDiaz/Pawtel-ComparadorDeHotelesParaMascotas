@@ -1,71 +1,82 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watchEffect } from 'vue';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
+import { useGetAllCustomers } from '@/data-layer/hooks/customers';
+import { useGetAllHotelOwners } from '@/data-layer/hooks/hotelOwners';
 
 const notyf = new Notyf();
 
-// Datos de usuarios (simulados) - Clientes siempre verificados
-const users = ref([
-  {
-    id: 1,
-    username: 'maria_garcia',
-    email: 'maria.garcia@example.com',
-    phone: '612345678',
-    role: 'owner',
-    is_verified: false,
-    hotels_owned: 2
-  },
-  {
-    id: 2,
-    username: 'juan_perez',
-    email: 'juan.perez@example.com',
-    phone: '623456789',
-    role: 'customer',
-    is_verified: true,
-    bookings: 5
-  },
-  {
-    id: 3,
-    username: 'hotel_paws',
-    email: 'contacto@hotelpaws.com',
-    phone: '934567890',
-    role: 'owner',
-    is_verified: true,
-    hotels_owned: 1
-  },
-  {
-    id: 4,
-    username: 'ana_lopez',
-    email: 'ana.lopez@example.com',
-    phone: '',
-    role: 'customer',
-    is_verified: true,
-    bookings: 0
-  },
-  {
-    id: 5,
-    username: 'petparadise',
-    email: 'info@petparadise.com',
-    phone: '915678901',
-    role: 'owner',
-    is_verified: true,
-    hotels_owned: 3
-  },
-  {
-    id: 6,
-    username: 'carlos_ruiz',
-    email: 'carlos.ruiz@example.com',
-    phone: '678901234',
-    role: 'customer',
-    is_verified: true,
-    bookings: 2
-  }
-]);
+// Datos de usuarios
+const {
+  data: customerData,
+  isLoading: isLoadingCustomers,
+  isError: isErrorCustomers,
+  error: customerError,
+  refetch: refetchCustomers
+} = useGetAllCustomers();
 
-// Estado del componente
-const isLoading = ref(true);
-const isError = ref(false);
+const {
+  data: ownerData,
+  isLoading: isLoadingOwners,
+  isError: isErrorOwners,
+  error: ownerError,
+  refetch: refetchOwners
+} = useGetAllHotelOwners();
+
+const customersRaw = ref([]);
+const ownersRaw = ref([]);
+const ownersLoadAttempted = ref(false);
+
+// Función para extraer datos de usuario
+const extractUserData = (userWithRelation, type) => {
+  if (!userWithRelation || !userWithRelation.user) return null;
+
+  const user = userWithRelation.user;
+
+  return {
+    id: user.id,
+    name: `${user.first_name || ''} ${user.last_name || ''}`.trim() || user.username,
+    username: user.username,
+    email: user.email,
+    phone: user.phone,
+    image: user.profile_image || `https://i.pravatar.cc/150?u=${user.id}`,
+    role: type === 'owner' ? 'owner' : 'customer',
+    is_admin: type === 'owner',
+    is_verified: type === 'owner' ? userWithRelation.is_approved : true
+  };
+};
+
+// Observar cambios en los datos
+watchEffect(() => {
+  if (customerData.value) {
+    console.log('Datos crudos de clientes:', customerData.value);
+    customersRaw.value = customerData.value
+      .map(customer => extractUserData(customer, 'customer'))
+      .filter(Boolean);
+  }
+
+  if (ownerData.value) {
+    console.log('Datos crudos de dueños:', ownerData.value);
+    ownersRaw.value = ownerData.value
+      .map(owner => extractUserData(owner, 'owner'))
+      .filter(Boolean);
+  }
+});
+
+// Resto del código se mantiene igual...
+const users = computed(() => [...customersRaw.value, ...ownersRaw.value]);
+
+// Estados del componente
+const isLoading = computed(() => isLoadingCustomers.value || isLoadingOwners.value);
+const isError = computed(() => isErrorCustomers.value || isErrorOwners.value);
+const errorMessage = computed(() => {
+  if (isErrorCustomers.value) return 'Error al cargar clientes: ' + (customerError.value?.message || 'Datos incorrectos');
+  if (isErrorOwners.value) return 'Error al cargar dueños: ' + (ownerError.value?.message || 'Endpoint no disponible');
+  return '';
+});
+
+// Resto del código (paginación, filtros, etc.)...
 const isVerifying = ref(false);
 const isDeleting = ref(false);
 const searchQuery = ref('');
@@ -76,7 +87,9 @@ const userToDelete = ref(null);
 // Paginación
 const currentPage = ref(1);
 const itemsPerPage = 6;
-const totalPages = computed(() => Math.max(1, Math.ceil(filteredUsers.value.length / itemsPerPage)));
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(filteredUsers.value.length / itemsPerPage))
+);
 const paginatedUsers = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage;
   return filteredUsers.value.slice(start, start + itemsPerPage);
@@ -86,22 +99,20 @@ const paginatedUsers = computed(() => {
 const filteredUsers = computed(() => {
   let result = users.value;
 
-  // Filtrar por búsqueda
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase();
     result = result.filter(user =>
-      user.username.toLowerCase().includes(query) ||
-      user.email.toLowerCase().includes(query) ||
-      (user.phone && user.phone.includes(query))
+      (user.name && user.name.toLowerCase().includes(query)) ||
+      (user.email && user.email.toLowerCase().includes(query)) ||
+      (user.username && user.username.toLowerCase().includes(query))
     );
   }
 
-  // Filtrar por tipo
   switch (userFilter.value) {
     case 'verified':
       return result.filter(user => user.is_verified);
     case 'unverified':
-      return result.filter(user => !user.is_verified && user.role === 'owner'); // Solo dueños no verificados
+      return result.filter(user => !user.is_verified && user.role === 'owner');
     case 'owners':
       return result.filter(user => user.role === 'owner');
     case 'customers':
@@ -117,13 +128,13 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
 
 // Verificar usuario (solo para dueños)
 const verifyUser = async (userId) => {
-  const user = users.value.find(u => u.id === userId);
-  if (!user || user.role !== 'owner') return;
+  const index = ownersRaw.value.findIndex(u => u.id === userId);
+  if (index === -1) return;
 
   isVerifying.value = true;
   try {
-    await new Promise(resolve => setTimeout(resolve, 800));
-    user.is_verified = true;
+    await new Promise(resolve => setTimeout(resolve, 800)); // Simulación
+    ownersRaw.value[index].is_verified = true;
     notyf.success('Dueño verificado correctamente');
   } catch (error) {
     notyf.error('Error al verificar el usuario');
@@ -139,12 +150,21 @@ const confirmDelete = (user) => {
   showDeleteModal.value = true;
 };
 
+// Cerrar modal
+const closeDeleteModal = () => {
+  showDeleteModal.value = false;
+  userToDelete.value = null;
+};
+
 // Eliminar usuario
 const deleteUser = async () => {
   isDeleting.value = true;
   try {
     await new Promise(resolve => setTimeout(resolve, 800));
-    users.value = users.value.filter(u => u.id !== userToDelete.value.id);
+    const id = userToDelete.value.id;
+    customersRaw.value = customersRaw.value.filter(u => u.id !== id);
+    ownersRaw.value = ownersRaw.value.filter(u => u.id !== id);
+
     notyf.success('Usuario eliminado correctamente');
     currentPage.value = 1;
   } catch (error) {
@@ -152,24 +172,22 @@ const deleteUser = async () => {
     console.error(error);
   } finally {
     isDeleting.value = false;
-    showDeleteModal.value = false;
-    userToDelete.value = null;
+    closeDeleteModal();
   }
 };
 
-// Simular carga inicial y asegurar clientes verificados
-onMounted(() => {
-  // Garantizar que todos los clientes estén verificados
-  users.value = users.value.map(user => {
-    if (user.role === 'customer' && !user.is_verified) {
-      return {...user, is_verified: true};
-    }
-    return user;
-  });
+// Intentar recargar los datos
+const retryLoadData = () => {
+  if (isErrorCustomers.value) refetchCustomers();
+  if (isErrorOwners.value) {
+    ownersLoadAttempted.value = true;
+    refetchOwners();
+  }
+};
 
-  setTimeout(() => {
-    isLoading.value = false;
-  }, 800);
+// Cargar datos iniciales
+onMounted(() => {
+  ownersLoadAttempted.value = true;
 });
 </script>
 
@@ -201,6 +219,26 @@ onMounted(() => {
 
       <!-- Contenido principal -->
       <div class="bg-white shadow rounded-lg overflow-hidden">
+        <!-- Mensaje de error para dueños -->
+        <div v-if="showOwnersError" class="bg-red-50 border-l-4 border-red-400 p-4">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <i class="fas fa-exclamation-circle text-red-400"></i>
+            </div>
+            <div class="ml-3">
+              <p class="text-sm text-red-700">
+                {{ errorMessage }}
+                <button
+                  @click="retryLoadData"
+                  class="ml-2 underline text-red-800 font-medium"
+                >
+                  Reintentar
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+
         <!-- Tabla de usuarios -->
         <div class="overflow-x-auto">
           <table class="min-w-full divide-y divide-gray-200">
@@ -225,21 +263,28 @@ onMounted(() => {
                   </td>
                 </tr>
               </template>
-              <template v-else-if="isError">
+              <template v-else-if="filteredUsers.length === 0">
                 <tr>
-                  <td colspan="6" class="px-6 py-4 text-center text-red-600">
-                    <div class="flex flex-col items-center">
-                      <i class="fas fa-exclamation-triangle text-xl mb-2"></i>
-                      <p>Error al cargar los usuarios</p>
-                    </div>
+                  <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                    No se encontraron usuarios que coincidan con los criterios
                   </td>
                 </tr>
               </template>
               <template v-else>
                 <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-gray-50">
-                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ user.username }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="flex items-center">
+                      <div class="flex-shrink-0 h-10 w-10">
+                        <img class="h-10 w-10 rounded-full" :src="user.image" :alt="user.name">
+                      </div>
+                      <div class="ml-4">
+                        <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
+                        <div class="text-sm text-gray-500">{{ user.username }}</div>
+                      </div>
+                    </div>
+                  </td>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.email }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.phone || 'No proporcionado' }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.phone }}</td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <span
                       :class="{
@@ -285,7 +330,7 @@ onMounted(() => {
         </div>
 
         <!-- Paginación -->
-        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+        <div v-if="filteredUsers.length > 0" class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
           <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
               <p class="text-sm text-gray-700">
@@ -343,15 +388,14 @@ onMounted(() => {
       <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="sm:flex sm:items-start">
-            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-              <i class="fas fa-exclamation-triangle text-red-600"></i>
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-red-600 sm:mx-0 sm:h-10 sm:w-10">
+              <i class="fas fa-trash-alt text-xl"></i>
             </div>
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 class="text-lg leading-6 font-medium text-gray-900">Eliminar usuario</h3>
               <div class="mt-2">
                 <p class="text-sm text-gray-500">
-                  ¿Estás seguro de que deseas eliminar al usuario <span class="font-semibold">{{ userToDelete?.username }}</span>?
-                  Esta acción no se puede deshacer.
+                  ¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede deshacer.
                 </p>
               </div>
             </div>
@@ -362,15 +406,13 @@ onMounted(() => {
             type="button"
             @click="deleteUser"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-            :disabled="isDeleting"
           >
-            <i v-if="isDeleting" class="fas fa-spinner fa-spin mr-2"></i>
-            {{ isDeleting ? 'Eliminando...' : 'Eliminar' }}
+            Eliminar
           </button>
           <button
             type="button"
-            @click="showDeleteModal = false"
-            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-terracota sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            @click="closeDeleteModal"
+            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm"
           >
             Cancelar
           </button>
