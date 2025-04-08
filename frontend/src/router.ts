@@ -9,6 +9,8 @@ import RegisterView from './views/RegisterView.vue'
 import MisHoteles from './views/MisHoteles.vue'
 import MyBookings from './views/MyBookings.vue'
 import EditHotel from './views/EditHotel.vue'
+import EmailPasswordReset from './views/EmailPasswordReset.vue'
+import PasswordResetConfirm from './views/ResetPassword.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
@@ -97,6 +99,7 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
 }
 import BookingReservationForm from './views/BookingReservationForm.vue';
 import TermsAndConditions from './views/TermsAndConditions.vue';
+import LayoutLogoNavBarOnly from './views/LayoutLogoNavBarOnly.vue';
 
 
 const routes = [
@@ -169,6 +172,20 @@ const routes = [
     component: createComponent({ layout: LayoutDefault, component: MisHoteles }),
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+    },
+  },
+  {
+    path: '/email-password-reset',
+    component: createComponent({ layout: LayoutDefault, component: EmailPasswordReset }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
+    },
+  },
+  {
+    path: '/auth/password-reset-confirm/:uidb64/:token',
+    component: createComponent({ layout: LayoutLogoNavBarOnly, component: PasswordResetConfirm }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
     },
   },
   {

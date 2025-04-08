@@ -227,3 +227,21 @@ FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 if not FRONTEND_URL:
     raise ValueError("FRONTEND_URL must be set")
+
+# Email configuration
+EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", 587))
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True").lower() == "true"
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+
+# Assert that required environment variables are set
+assert EMAIL_BACKEND, "EMAIL_BACKEND is not set in the environment variables"
+assert EMAIL_HOST, "EMAIL_HOST is not set in the environment variables"
+assert EMAIL_HOST_USER, "EMAIL_HOST_USER is not set in the environment variables"
+assert (
+    EMAIL_HOST_PASSWORD
+), "EMAIL_HOST_PASSWORD is not set in the environment variables"
+assert DEFAULT_FROM_EMAIL, "DEFAULT_FROM_EMAIL is not set in the environment variables"
