@@ -39,7 +39,7 @@
 | 08/04/2025  | v 1.1         | Informe de Luis| Luis Mellado Díaz |
 | 09/04/2025  | v 1.2         | Informe de Sergio| Sergio Trenado González|
 | 09/04/2025  | v 1.3         | Informe de Yesica| Yesica Garate Fuentes|
-| 09/04/2025  | v 1.4         | Informe de Yesica| Francisco Miguel Jiménez Morales |
+| 09/04/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
 
 
 

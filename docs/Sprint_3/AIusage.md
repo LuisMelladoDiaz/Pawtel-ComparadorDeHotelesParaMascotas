@@ -61,6 +61,7 @@
 | 08/04/2025  | v 1.1         | Informe de Luis | Luis Mellado Díaz |
 | 08/04/2025  | v 1.2         | Informe de Dani | Daniel Flores de Francisco |
 | 08/04/2025  | v 1.3         | Informe de Yesica | Yesica Garate Fuentes |
+| 09/05/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
 
 ---
 
@@ -272,14 +273,14 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Francisco Miguel Jiménez Morales
-- **Sprint:** 2
+- **Sprint:** 3
 - **Rol en el proyecto:** Analista, programador Full-Stack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (X)
+- Generación de código ()
 - Refactorización de código ( )
-- Generación de documentación ( )
+- Generación de documentación (X)
 - Asesoramiento técnico (X)
 - Otro (especificar): [Especificar si aplica]
 
@@ -289,21 +290,22 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Implementar pasarela de pago | ChatGPT | Ayuda en problemas con vue, resolución de errores, entendimiento de la documentación de stripe y en la búsqueda de documentación dentro de la página de stripe |
+| Conexión Backend-frontend pantalla de usuario | ChatGPT | Ayuda en problemas con vue, resolución de errores |
+| Preparar presentación | ChatGPT | Ayuda con problemas en la edición de tablas en excel |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
-- **Comparación con trabajo sin IA:** Más largo y frustrante, probablemente no se entregase a tiempo
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 1
+- **Comparación con trabajo sin IA:** Más largo
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Pasame un enlace a la documentación de stripe en el que explique X (ejemplo: en el que explique las propiedades del objeto session).
+1. main.ts:37 [Vue Router warn]: No match found for location with path "/UserProfile" Me salta este aviso en la consola, el caso es que esta correctamente importada la vista y su ruta en main.ts y en router.ts.
 2. Qué significa este error.
-3. Cómo obtengo en vue un parámetro de la URL.
+3. la interrogacion indica que el campo es opcional? export type Customer = {  id?: number username: string; etc};.
 
 #### 6. Problemas Encontrados y Limitaciones
 
@@ -314,7 +316,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Si
-- **Comentarios adicionales sobre la experiencia con IA:** Darle el mismo uso y no confiar mucho en ella
+- **Comentarios adicionales sobre la experiencia con IA:** Darle el mismo uso (solo para errores y entendimiento del código) y no confiar mucho en ella.
 
 ---
 
