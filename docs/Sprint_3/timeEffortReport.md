@@ -388,28 +388,25 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 30:42:28
+**Periodo:** 27/03/2025 - 10/04/2025
+**Total de tiempo trabajado:** 24:58:22 
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Delirvery Sprint 1 (No se conto en el anterior sprint)                                      | 06:00:00   |
-| Workflow for testing django                              | 01:41:00   |
-| EditHotelScreen fix. Double Requests fix.               | 02:47:00   |
-| Preparar presentación                                    | 01:30:00   |
-| Presentation. Arreglar petición back. Arreglar y mergear CI. Arreglar Queries. Aumento Calidad de Código. | 02:13:37   |
-| Presentacio. Slides                                      | 02:00:35   |
-| Integración con Codacy y Workflow                       | 01:30:00   |
-| Terminos y Condiciones. Back                            | 01:47:32   |
-| Clase ISPP                                              | 04:00:00   |
-| Delivery Sprint 2  Preparación de docs                                     | 00:34:00   |
-| Reunion Sprint 2                                        | 01:00:00   |
-| Metrics with SonarQube                                  | 01:00:00   |
-| Terminando documentación delivery                       | 01:46:11   |
-| Customer Agreement, Presentation and Feedback. Arreglando CI | 01:54:00   |
-| QA de las PR. Fixing Codacy Issues | 00:58:33   |
+| Tarea                                             | Tiempo    |
+|---------------------------------------------------|-----------|
+| Test EndToEnd Playwright                          | 01:59:00  |
+| Ayudando Sergio Bug Finding                       | 00:36:00  |
+| Delyvery and testing Pawtel                       | 03:30:00  |
+| Playwright testing                                | 02:14:00  |
+| USAGEmd for Playwright (PR review) and Customize Codacy | 01:11:00  |
+| Playwright workflow configuration                 | 00:41:00  |
+| Sprint 3 Documents Organization. Fixing minor issues | 02:09:22  |
+| Clase ISPP                                        | 04:00:00  |
+| Reunión Inicial Sprint 3                          | 01:15:00  |
+| Playwright testing more screens                   | 02:00:00  |
+| Usuarios piloto encuesta                          | 02:00:00  |
+| Fixing frontend and deploy of Sprint 2            | 03:23:00  |
 
 ![grafico-de-tiempos](graficas/dani.png)
 ---
