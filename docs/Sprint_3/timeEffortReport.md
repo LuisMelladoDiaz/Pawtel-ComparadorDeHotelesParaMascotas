@@ -38,6 +38,7 @@
 | 08/04/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
 | 08/04/2025  | v 1.1         | Informe de Luis| Luis Mellado Díaz |
 | 09/04/2025  | v 1.2         | Informe de Sergio| Sergio Trenado González|
+| 09/04/2025  | v 1.3         | Informe de Yesica| Yesica Garate Fuentes|
 
 
 
@@ -76,47 +77,26 @@
 
 ## Reporte de tiempo de Yesica Leydi Garate Fuentes
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 40:54:19
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 32:11:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Desarrollo de Presentación: Introduccion, Business Model, StoryBoard y Uso de la IA (SPRINT 02) | 04:42:00|
-| Ajuste y Finalización de StoryBoards para capturar audiencia II | 02:35:00 |
-| Ajuste y Finalización de StoryBoards para capturar audiencia I | 04:22:00 |
-| Desarrollo de Presentación: Impacto legal del Proyecto | 03:10:00 |
-| Desarrollo de StoryBoards para capturar audiencia I | 04:30:00 |
-| Ajuste y Finalización de Mockups según el Backend II | 03:56:00|
-| Ajuste y Finalización de Mockups según el Backend I | 03:23:28|
-| Clases - Presentación de Avance del Proyecto SPRINT1| 04:00:00 |
-| Tareas varias para la entrega del proyecto (SPRINT 01) | 06:30:00 |
-| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto  FINAL (SPRINT 01) | 03:45:00 |
-| Reunión Imprevista de emergencia | 00:38:43 |
-| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto III (SPRINT 01) | 03:00:26 |
-| Creacion del Documento de IA Usage | 00:18:10 |
-| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto II (SPRINT 01) | 03:30:33 |
-| Desarrollo de Presentación: Introduccion, Business Model y Analisis del Proyecto (SPRINT 01) | 04:00:00 |
-| Creación de Mock-Ups en Balsamiq (Perfil de Usuario final, Home Page y Sobre Nosotros) | 03:44:58 |
-| Creación de Mock-Ups en Balsamiq (Perfil de Usuario) | 04:54:00 |
-| Ajustes del desarrollo de la Presentación según el feedback recibido II | 03:40:00 |
-| Ajustes en Home Page según feedback recibido | 00:29:00 |
-| Ajustes del desarrollo de la Presentación según el feedback recibido | 04:36:00 |
-| Desarrollo de Presentación: Introducción, Business Model y Análisis del Proyecto | 07:07:00 |
-| Creación de Mock-Ups en Balsamiq (Perfil de Usuario final, Home Page y Sobre Nosotros) | 03:44:58 |
-| Creación de Mock-Ups en Balsamiq (Perfil de Usuario) | 04:54:00 |
-| Desarrollo de Presentación: Introducción, Business Model y Análisis del Proyecto (SPRINT 01) | 00:37:10 |
-| Revisión y refinamiento de presentación (slides) | 02:52:00 |
-| Autoformación en tecnologías y frameworks del proyecto I | 01:33:00 |
-| Finalización versión 1.0 de Home Page | 03:25:00 |
-| Maquetación de la pantalla Home Page (2 propuestas de prototipo) | 01:41:00 |
-| Desarrollo de Presentación: Introducción, Business Model y Análisis del Proyecto II (SPRINT 01) | 03:30:33 |
-| Ajustes del desarrollo de la Presentación según el feedback recibido II | 03:40:00 |
-| Rehacer Home Page por error de comprensión | 03:14:00 |
-| Creación del Documento de IA Usage | 00:18:10 |
-| Autoformación en tecnologías y frameworks del proyecto II | 02:55:00 |
-| Investigación y Estructura del Proyecto | 02:32:00 |
+| Mejoras del Storyboard de Inversores | 01:22:00|
+| Desarrollo de Presentación: Planificacíon de Marketing II (SPRINT 03) | 01:55:00|
+| Desarrollo de Presentación: Planificacíon de Marketing - Roles de Equipo (SPRINT 03)  | 00:50:00 |
+| Modificaciones finales y Añadido Pantalla dirigido a Dueños de Alojamientos | 02:48:00|
+| Modificación segun feedback de pantallas Home, Sobre Nosotros y Contact II | 06:12:00 |
+| Modificación segun feedback de pantallas Home, Sobre Nosotros y Contact I | 03:50:00|
+| Desarrollo de Presentación: Modificaciones a video de Anuncio, Planificación de Marketing | 01:57:00 |
+| Clase 28 marzo                                                                                                   | 04:00:00  |
+| Mejoras del Video de Anuncio dirigido a Dueños de Mascotas | 02:10:00|
+| Desarrollo de Presentación: Planificación de Marketing | 01:25:00 |
+| Desarrollo de Presentación: Rendimiento, Planificación de Marketing | 01:22:00|
+| Planificación y Marketing: Investigación y desarrollo de Video de anuncio dirigido a Dueños de Mascotas | 04:20:00 |
+
 
 ![grafico-de-tiempos](graficas/yesica.png)
 ---

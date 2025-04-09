@@ -59,7 +59,7 @@
 |-------------|---------------|-------------------------------|-------------------------|
 | 07/04/2025  | v 1.0         | Versión inicial del documento | Daniel Flores de Francisco |
 | 08/04/2025  | v 1.1         | Informe de Luis | Luis Mellado Díaz |
-
+| 08/04/2025  | v 1.2         | Informe de Yesica | Yesica Garate Fuentes |
 
 ---
 
@@ -680,7 +680,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Yesica Leydi Garate Fuentes
-- **Sprint:** 02
+- **Sprint:** 03
 - **Rol en el proyecto:** Frontend, Publicidad y Marketing
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -688,8 +688,8 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 - Generación de código (**X**)
 - Refactorización de código ( )
 - Generación de documentación (**X**)
-- Asesoramiento técnico ( )
-- Otro (especificar): Diseño y resolución de dudas sobre implementación, Creación de StoryBoard
+- Asesoramiento técnico (**X**)
+- Otro (especificar): Marketing, Diseño visual, Storytelling (X)
 
 #### 3. Uso de IA en las Tareas
 
@@ -697,30 +697,30 @@ Para cada tarea en la que se usó IA, se completa la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-----------|--------------------------|------------------------------|
-| SCREEN: Home Page | ChatGPT | Me ayudó con la programación en Tailwind CSS, resolviendo dudas sobre estilos y cómo aplicarlos correctamente. Me proporcionó fragmentos de código de ejemplo, algunos muy generales que podía reutilizar. |
-| Mock-Ups Extra | ChatGPT | Me ayudó a comprender cómo generar los mockups para dar al usuario la alternativa correcta. Sugerencias sobre maquetación basadas en casos anteriores y demandas teóricas, especialmente en secciones como el Perfil de Usuario y las Operaciones CRUD de hoteles. |
-| Presentación (Slides) del Proyecto | ChatGPT | Utilicé IA para estructurar las diapositivas, obtener ideas de contenido y mejorar la claridad del mensaje, asegurando que la información clave estuviera bien organizada y explicada. |
-| Creación de StoryBoard | Midjourney y ChatGPT | Utilicé IA para estructurar las diapositivas, obtener ideas de contenido y mejorar la claridad del mensaje, asegurando que la información clave estuviera bien organizada y explicada. |
+| SCREEN: Home, Sobre Nosotros, Contacto y Dueños de Alojamientos | ChatGPT | Apoyo en la programación con Tailwind CSS, aplicando estilos, estructura responsive y limpieza del código siguiendo buenas prácticas. |
+| Presentación del Proyecto | ChatGPT | Estructuración de diapositivas, organización del discurso, mejora del enfoque visual y narrativa. |
+| Storyboard del Video Promocional | ChatGPT, Midjourney, ElevenLabs, Filmora | Apoyo en la creación del guion visual, generación de escenas con prompts específicos para cada fotograma, generación de voz sintética, y edición del video |
+| Investigación de Mercado | ChatGPT | Solicitud de análisis sobre el mercado de mascotas en Europa y América, fuentes de estadísticas, e instituciones clave. |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** Aproximadamente 40 horas o más.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** Aproximadamente 30 horas o más.
 - **Comparación con trabajo sin IA:**
   - Sin IA, la búsqueda de información me habría tomado más tiempo.
   - Aunque la IA me ayudó a resolver dudas rápidamente, en algunos casos tuve inseguridad sobre si las respuestas eran realmente correctas.
   - Intervención humana para asegurar la coherencia narrativa, emocional y estética del resultado final.
+  - Nos faltaria un enfoque alternativo lo cual nos sirve como punto de partida para nuevas ideas.
+  - Encontrar recursos humanos para los anuncios seria de un esfuerzo y gasto extra.
 
 #### 5. Prompts Utilizados
 
 Algunos de los prompts más efectivos utilizados:
 
-1. "¿Cómo puedo mejorar el diseño de una pantalla en Tailwind CSS para que sea más atractiva y responsiva, que etiquetas me ayudan a mejorar el diseño segun el código que te he proporcionado?"
-2. "¿Cuáles son las mejores prácticas para crear mockups de interfaces de usuario, revisa info sobre UI/UX?"
-3. "Ayúdame a estructurar una presentación para explicar de manera dinamica mi app revisa las buenas practicas que deben aplicarse"
-4. "Podrias hacer una revision acerca de todos los negocios relacionados a mascotas a nivel europeo."
-5. "Que instituciones me pueden ofrecer estadisticas reales acerca de las mascotas? Dame una lista a nivel europeo y americano"
-6. "A well-preserved dog hotel building in the middle of an abandoned town, comic book style. The hotel looks charming but lonely, with colorful signage, a paw-shaped logo, and clean architecture. The surroundings are desolate: dusty streets, broken-down houses, dry vegetation, and a soft wind lifting sand. The atmosphere feels like an old Western movie, dramatic lighting, expressive lines, cinematic angle, dramatic shadows, clear contrast between the lively building and the abandoned neighborhood --ar 16:9"
-7. "A film storyboard frame. A man in his 30s stands in the busy lobby of a modern pet hotel. He has a relieved and proud expression and is clearly the owner. He wears slightly wrinkled business casual clothes. The hotel is full of activity: pet owners chatting, dogs wagging their tails, cats in carriers, and pets playing or being groomed. Around him are elements of a high-end pet hotel: designer dog beds, scratching posts, toys, food bowls, colorful leashes hanging from hooks, grooming supplies, framed photos of happy dogs and cats on the walls, shelves with pet treats, and a stylish reception desk with a visible paw logo. Include the name "Hotel Pets" subtly in the environment. The scene is bathed in soft natural light from urban windows."
+1. "Recuerdas Pawtel, necesito que me ayudes a valorar la empresa con 15% de comision por reserva, 700 reservas con 7875 ingresos mensuales. A nuestros inversores que porcentaje es lo mas sensato de pedir. Dame propuestas "
+2. "Que podria causar el problema con la ruta /dueños-alojamientos que se rompe al recargar o abrir en incógnito aunque esté en local"
+3. "Hola! porfavor, ayudame ... dame una pagina dirigida a dueños de alojamiento y socios. A ver, puedo crear una pagina para ambos o me recominedas crear paginas diferentes?... Dame una propuesta de maquetación, contenido, etc"
+4. "¿Qué instituciones me pueden ofrecer estadísticas reales acerca de las mascotas? Dame una lista a nivel europeo y americano."
+5. "¿Qué estrategias puedo usar para presentar la tracción inicial en una incubadora si aún no tengo usuarios reales?"
 
 #### 6. Problemas Encontrados y Limitaciones
 
@@ -728,24 +728,28 @@ Algunos de los prompts más efectivos utilizados:
   - En programación, la IA no siempre deduce correctamente lo que necesito; suele ser mecánica en sus respuestas.
   - Algunos ejemplos de código generados no eran aplicables directamente y requerían modificaciones.
   - Falta de coherencia visual entre imágenes generadas.
+  - las emociones que transmiten en el texto del dialogo no tienen sentido.
+  - Dificil encontrar un generador de voces que transmitan emociones que entendamos.
 
 - **Limitaciones detectadas en la IA:**
   - No siempre relaciona bien el contexto de preguntas anteriores con nuevas solicitudes.
   - Para obtener respuestas más precisas, a veces es necesario proporcionar mucha información detallada.
   - Pequeños cambios en el prompt para las imagenes, resultados muy diferentes y se demasiado tiempo em prueba y error.
   - Aunque use chatgpt para ayudar a estructurar los prompts demasiada precisión no era entendida.
+  - Planes de pago para usar IA muy caros.
 
 - **Propuestas de mejora en el uso de IA:**
-  - Ser más específica en los prompts y proporcionar contexto adicional para obtener respuestas más relevantes.
-  - Complementar el uso de IA con la búsqueda de información en videos o foros con experiencia de otros programadores.
-  - Usar ChatGPT para ayudar a estructurar la narrativa y elementos visuales clave.
+  - Ser más específica y estructurada en los prompts.
+  - Combinar el uso de IA con otras fuentes como foros, videos o documentación oficial.
+  - Usar la IA como apoyo estructural en narrativa, diseño y storytelling, pero siempre validar con criterio propio.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?**
-  - Depende del caso. Es útil para generar ideas y optimizar tiempos, pero es necesario validar la información obtenida.
+  - Sí, pero con matices. Es útil para acelerar el trabajo y aportar ideas, pero debe complementarse con análisis crítico y validación humana.
 - **Comentarios adicionales sobre la experiencia con IA:**
-  - En este sprint, me costó más aprovechar la IA de manera efectiva, ya que en algunos casos tuve que buscar información adicional por otros medios. La intervención humana para asegurar la coherencia narrativa, emocional y estética del resultado final. Encontre elementos narrativos sueltos que puedo usar para representar segun mi conveniencia.
+  - En este sprint, la IA fue una herramienta importante para avanzar en diseño, contenido visual y preparación de materiales publicitarios. Sin embargo, me encontré con la necesidad de pulir mucho los resultados. Aun así, me permitió encontrar elementos narrativos sueltos que luego pude reinterpretar según el tono y estética deseados para Pawtel.
+
 ---
 ### 👨‍💻 Manuel Castillejo Vela
 
