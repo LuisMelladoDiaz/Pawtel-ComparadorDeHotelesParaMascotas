@@ -524,7 +524,7 @@ Refactoriza este hook de actualización de hotel para que conserve los datos pre
 #### 1. Información General
 
 - **Nombre del programador:** Javier Ruiz Garrido
-- **Sprint:** Sprint 2
+- **Sprint:** Sprint 3
 - **Rol en el proyecto:** Desarrollador backend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -538,33 +538,33 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Generacion de tests | ChatGPT | Se ha usado la IA para que genere una primera version de tests que prueben los nuevos filtros implementados además de para la logica de archivado y borrado |
-| Pequeñas correcciones | ChatGPT | Se ha usado la IA para correcciones como sacar funciones auxiliares para reducir la complejidad |
-| Asesoramiento tecnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de las tareas de filtros y logica de archivado y borrado |
+| Generacion de codigo | ChatGPT | Se ha usado la IA para generar codigo simple y repetitivo |
+| Asesoramiento tecnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de las tareas de desarrollo |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 2 horas
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 1 hora
 - **Comparación con trabajo sin IA:** El resultado fue mas eficiente manteniendo la calidad
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Pasarle ciertas partes del codigo para pedirle los tests tanto para pobrar los filtros como para la logica de borrado.
-2. Pasarle la funcion setUp de los tests y pedirle que reduzca el numero de lineas sacando alguna parte a una funcion auxiliar.
+1. Pasarle un codigo que yo habia hecho y pedirle que lo repita para otra entidad
+2. Pedirle que me explique las distintas opciones que tenia para automatizar tareas en el backend
+3. Pasarle mensajes de errores para que me diga como puedo solucionarlos
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** La version que me paso de los tests contenia tests que carecian de sentido probar ademas de no tener en cuenta todas las relaciones de las entidades necesarias para la funcion de set up.
-- **Limitaciones detectadas en la IA:** Falta de razonamiento para cubrir casos de prueba.
+- **Errores o respuestas incorrectas de la IA:** Algunas de las ideas para automatizar procesos en el backend eran erroneas ya que necesitaba mas contexto del proyecto.
+- **Limitaciones detectadas en la IA:** La IA no es del todo útil cuando le pides cosas específicas, y aún más si el contexto que debe tener es demasiado grande.
 - **Propuestas de mejora en el uso de IA:** Seguir con el uso moderado de la IA y tener siempre en cuenta las limitaciones de la misma.
 
 ## 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Si
-- **Comentarios adicionales sobre la experiencia con IA:** La seguria recomendando para esta tarea y para todas las que carezcan de complejidad y sea mas repetitiva como los tests, además de para solucionar errores o consultas concretas.
+- **Comentarios adicionales sobre la experiencia con IA:** La seguria recomendando para esta tarea y para todas las que carezcan de complejidad y sea mas repetitiva, además de para solucionar errores o consultas concretas.
 
 ---
 
