@@ -12,6 +12,7 @@ export type Hotel = {
   city: string;
   description: string;
   hotel_owner?: string;
+  images?: any[];
 };
 
 

@@ -18,7 +18,8 @@ const router = useRouter();
 const notyf = new Notyf();
 const queryClient = useQueryClient();
 
-const hotelId = computed(() => route.params.id);
+// Convertir hotelId a número
+const hotelId = computed(() => Number(route.params.id));
 
 // Modals
 const isCreateModalOpen = ref(false);
@@ -40,14 +41,15 @@ const { data: hotel, isLoading: isLoadingHotel, isError: isErrorHotel } = useGet
 const { data: roomTypes, isLoading: isLoadingRooms, isError: isErrorRooms } = useGetRoomTypesByHotel(hotelId);
 const { data: bookingsData, isLoading: isLoadingBookings, isError: isErrorBookings } = useGetBookingsByHotel(hotelId);
 
-const { mutate: deleteHotelImage, isLoading: isDeleting, isError: isErrorDeleting } = useDeleteHotelImage();
+const { mutate: deleteHotelImage, isPending: isDeleting, isError: isErrorDeleting } = useDeleteHotelImage();
 
 // Crear un objeto reactivo para manejar la edición
 const editableHotel = reactive({
   name: '',
   address: '',
   city: '',
-  description: ''
+  description: '',
+  is_archived: false
 });
 
 const uploadedImages = ref([]);
@@ -241,7 +243,7 @@ const removeImage = (index, source = 'uploaded') => {
   }
 };
 
-const { mutate: updateHotel, isLoading: isSaving } = useUpdateHotel();
+const { mutate: updateHotel, isPending: isSaving } = useUpdateHotel();
 
 // Corrección en el guardado de cambios del hotel
 const saveChanges = () => {
@@ -255,7 +257,8 @@ const saveChanges = () => {
     name: editableHotel.name,
     address: editableHotel.address,
     city: editableHotel.city,
-    description: editableHotel.description
+    description: editableHotel.description,
+    is_archived: editableHotel.is_archived
   };
 
   if (!hotelData.name.trim() || !hotelData.address.trim() || !hotelData.city.trim()) {
@@ -311,6 +314,7 @@ const newRoomType = ref({
   pet_type: 'DOG',
   num_rooms: 1,
   hotel: hotelId.value,
+  is_archived: false
 });
 
 // Guardar cambios en un tipo de habitación
@@ -324,7 +328,10 @@ const saveUpdatedRoomType = () => {
   updateRoomType(
     {
       roomTypeId: editingRoomType.value.id,
-      roomTypeData: editingRoomType.value
+      roomTypeData: {
+        ...editingRoomType.value,
+        is_archived: false // Añadir propiedad requerida
+      }
     },
     {
       onSuccess: () => {
@@ -382,7 +389,11 @@ const saveNewRoomType = () => {
     dismissible: false,
   });
 
-  createRoomType(newRoomType.value, {
+  createRoomType({
+    ...newRoomType.value,
+    hotel: Number(hotelId.value),
+    is_archived: false
+  }, {
     onSuccess: () => {
       notyf.dismiss(loadingNotification);
       notyf.success('Tipo de habitación creado correctamente');
@@ -396,7 +407,8 @@ const saveNewRoomType = () => {
         price_per_night: 1,
         pet_type: 'DOG',
         num_rooms: 1,
-        hotel: hotelId.value,
+        hotel: Number(hotelId.value),
+        is_archived: false
       };
 
       // Mostrar efecto visual de éxito
@@ -526,7 +538,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
 
             <!-- Botón para confirmar subida -->
              <div class="flex items-end justify-end">
-            <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages(hotelId)"
+            <Button v-if="uploadedImages.length" :disabled="isPending" @click="submitImages"
               class="mr-0! mt-4 bg-oliva text-white px-4 py-2 rounded hover:bg-oliva-dark">
               {{ isPending ? 'Subiendo...' : 'Confirmar subida' }}
             </Button>
@@ -697,7 +709,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         </div>
       </div>
 
-      
+
 
       <!-- Modal Añadir -->
       <transition name="fade">
@@ -747,9 +759,9 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
             </div>
 
             <div class="mt-6 text-right">
-              <Button type="accept" @click="saveNewRoomType(); closeCreateModal()" :disabled="isCreatingRoom"
-                class="lg:w-fit m-0! w-full">
-                <i class="fas fa-plus-circle mr-2"></i> {{ isCreatingRoom ? "Creando..." : "Añadir Habitación" }}
+              <Button type="accept" @click="saveNewRoomType(); closeCreateModal()" :disabled="isPending"
+              class="lg:w-fit m-0! w-full">
+                <i class="fas fa-plus-circle mr-2"></i> {{ isPending ? "Creando..." : "Añadir Habitación" }}
               </Button>
             </div>
           </div>
