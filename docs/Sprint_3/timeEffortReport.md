@@ -207,26 +207,18 @@
 
 ## Reporte de tiempo de Jorge Gomez de Tovar
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 29:52:00
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 20:20:00
 
-### Proyecto Pawtel - Distribución del tiempo
-
-| Descripción | Duración |
-|-------------|---------|
-| Revisión frontend | 00:45:00 |
-| Mensajes error login y register | 01:30:00 |
-| Actualizar covers de HotelImage | 02:50:00 |
-| Revisión PR autorización | 00:30:00 |
-| Restricciones hotel image test y seeders | 05:55:00 |
-| Revisión Pull-request Image handling | 00:52:00 |
-| Clase | 08:00:00 |
-| Revisión PR refactorizar | 00:30:00 |
-| Arreglar error en seeder | 00:30:00 |
-| Autorización y permiso controladores y servicios | 06:30:00 |
-| Informe IA | 00:30:00 |
-| Revisión PR filtros room type | 01:00:00 |
-| Añadir endpoints a documento rutas API | 00:30:00 |
+| Descripción                           | Duración  |
+|--------------------------------------|-----------|
+| Clase                                | 08:00:00  |
+| Informes de tiempo e IA              | 00:30:00  |
+| Autenticar hotel owner aprobado      | 02:00:00  |
+| Añadir imágenes reales al seeder     | 02:10:00  |
+| Revisión PR mejorar autorización     | 00:40:00  |
+| Investigar coverage                  | 01:00:00  |
+| Añadir admin a backend               | 06:00:00  |
 
 ![grafico-de-tiempos](graficas/jorge.png)
 ---

@@ -372,7 +372,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Jorge Gómez de Tovar
-- **Sprint:** Sprint 2
+- **Sprint:** Sprint 3
 - **Rol en el proyecto:** Desarrollador backend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -386,7 +386,7 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Generación de tests para servicios y controladores | ChatGPT | Se ha usado la IA para que genere una primera versión de tests que prueben los servicios y controladores desarrollados durante el sprint. |
+| Generación de tests para controladores y servicios| ChatGPT | Se ha usado la IA para que genere una primera versión de tests que prueben los servicios y controladores desarrollados durante el sprint. |
 | Asesoramiento técnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de los servicios, controladores y sus tests correspondientes. |
 
 #### 4. Impacto en Productividad
@@ -399,12 +399,10 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 Listar los prompts que fueron más efectivos para completar las tareas:
 
 1.
-   - Dado los controladores y los servicios, crea un test para cada uno teniendo en cuenta su modelo y su serializador.
+   - Dado los servicios y los controladores, crea un test para cada uno teniendo en cuenta su serializador y su modelo.
 2.
-   - Dado el controlador, ¿cómo debería hacer las llamadas desde Postman para probar cada una de las URLs que hay en el controlador?
+   - Dado el controlador de administrador, ¿cómo debería hacer las llamadas desde Postman para probar cada una de las URLs que hay en el controlador?
 
-3.
-  - Dado este modelo, ¿cómo deberia hacer un seeder para que cada hotel tenga imagenes ficticias y una de ellas se portada?
 
 #### 6. Problemas Encontrados y Limitaciones
 
