@@ -68,10 +68,11 @@ export const useLogoutMutation = () => {
     mutationFn: async () => {
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
-      router.push("/")
+      router.push("/login")
     },
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.clear();
+      router.push("/login")
     },
   });
 };

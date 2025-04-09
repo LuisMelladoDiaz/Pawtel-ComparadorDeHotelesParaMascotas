@@ -10,6 +10,7 @@ import {
     fetchAllHotelsOfOwner,
     deleteAllHotelsOfOwner,
     getCurrentHotelOwner,
+    approveHotelOwner,
     type HotelOwner,
 } from '@/data-layer/api/hotelOwners';
 
@@ -107,3 +108,14 @@ export const useGetCurrentHotelOwner = () => {
         refetchOnWindowFocus: false,
     });
 }
+
+export const useApproveHotelOwner = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: approveHotelOwner,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['hotelOwners'] });
+        },
+    });
+};

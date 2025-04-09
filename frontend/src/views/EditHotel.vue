@@ -122,6 +122,8 @@ const submitImages = () => {
           notyf.success('Imagen subida con éxito');
           uploadedImages.value = [];
           selectedFiles.value = [];
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         },
         onError: (error) => {
           handleApiError(error);
@@ -167,7 +169,7 @@ const selectCoverImage = (index) => {
           uploadedImages.value.forEach((img, i) => {
             img.is_cover = i === uploadedIndex;
           });
-          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
           queryClient.invalidateQueries({ queryKey: ['hotels'] });
         })
         .catch((error) => {
@@ -200,7 +202,7 @@ const selectCoverImage = (index) => {
             mutableHotelImages.value.forEach((img, i) => {
               img.is_cover = i === index;
             });
-            queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+            queryClient.invalidateQueries({ queryKey: ['hotelId'] });
             queryClient.invalidateQueries({ queryKey: ['hotels'] });
           },
           onError: (error) => {
@@ -230,7 +232,8 @@ const removeImage = (index, source = 'uploaded') => {
         onSuccess: () => {
           notyf.success('Imagen eliminada del hotel.');
           mutableHotelImages.value.splice(index, 1);
-          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         },
         onError: handleApiError,
       }
@@ -409,34 +412,22 @@ const saveNewRoomType = () => {
   });
 };
 
-// Pagination Bookings
-const prevPageB = () => currentPageB.value > 1 && currentPageB.value--;
-const nextPageB = () => currentPageB.value < totalPagesB.value && currentPageB.value++;
-const currentPageB = ref(1);
-const itemsPerPageB = 6;
-const totalPagesB = computed(() => Math.ceil((bookings.value?.length || 0) / itemsPerPageB));
-const paginatedBookings = computed(() => {
-  if (!bookings.value) return [];
-  const start = (currentPageB.value - 1) * itemsPerPageB;
-  return bookings.value.slice(start, start + itemsPerPageB);
-});
-
 // Pagination Rooms
-const prevPage = () => currentPage.value > 1 && currentPage.value--;
-const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 const currentPage = ref(1);
 const itemsPerPage = 6;
-const totalPages = computed(() => Math.ceil((roomTypes.value?.length || 0) / itemsPerPage));
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(roomTypes?.value?.length / itemsPerPage))
+);
 const paginatedRooms = computed(() => {
-  if (!roomTypes.value) return [];
   const start = (currentPage.value - 1) * itemsPerPage;
   return roomTypes.value.slice(start, start + itemsPerPage);
 });
-
+const prevPage = () => currentPage.value > 1 && currentPage.value--;
+const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
 
 <template>
-  <div class="max-w-7xl p-0! mt-10 mx-auto px-5 w-full flex flex-col flex-grow">
+  <div class="max-w-7xl p-0! mt-10 mb-10 mx-auto px-5 w-full flex flex-col flex-grow">
     <div class="flex flex-col gap-6">
 
       <h1 class="text-terracota text-3xl mb-0! p-1">
@@ -604,18 +595,6 @@ const paginatedRooms = computed(() => {
         :isLoading="isLoadingBookings"
         :isError="isErrorBookings"/>
 
-      <div class="flex justify-between w-full px-6 flex-col md:flex-row mb-6">
-        <span class="text-gray-600">Mostrando {{ paginatedBookings.length }} reservas de {{ bookings?.length || 0 }}</span>
-        <div class="flex gap-2 mt-2 md:mt-0">
-          <button @click="prevPageB" :disabled="currentPageB === 1" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">← Anterior</button>
-          <button v-for="page in totalPagesB" :key="page" @click="currentPageB = page"
-                  class="px-3 py-1 hover:bg-gray-300" :class="{'bg-gray-300': currentPageB === page, 'bg-gray-200': currentPageB !== page}">
-            {{ page }}
-          </button>
-          <button @click="nextPageB" :disabled="currentPageB === totalPagesB" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">Siguiente →</button>
-        </div>
-      </div>
-
       <!-- SECCIÓN DE HABITACIONES -->
       <!-- HABITACIONES -->
       <div class="bg-white rounded-xl shadow-md border border-gray-200">
@@ -679,19 +658,46 @@ const paginatedRooms = computed(() => {
           </div>
           <p v-else class="text-center font-bold text-xl text-terracota">No tienes habitaciones registradas.</p>
         </div>
-      </div>
 
-      <div class="flex justify-between w-full px-6 flex-col md:flex-row mb-10">
-        <span class="text-gray-600">Mostrando {{ paginatedRooms.length }} habitaciones de {{ roomTypes?.length || 0 }}</span>
-        <div class="flex gap-2 mt-2 md:mt-0">
-          <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">← Anterior</button>
-          <button v-for="page in totalPages" :key="page" @click="currentPage = page"
-                  class="px-3 py-1 hover:bg-gray-300" :class="{'bg-gray-300': currentPage === page, 'bg-gray-200': currentPage !== page}">
-            {{ page }}
-          </button>
-          <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">Siguiente →</button>
+        <!-- Paginación -->
+        <div v-if="roomTypes?.length > 0"
+          class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+          <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p class="text-[13px] mb-3 text-gray-700 sm:text-sm sm:mb-0">
+                Mostrando de la
+                <span class="font-bold">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+                a la
+                <span class="font-bold">{{ Math.min(currentPage * itemsPerPage, roomTypes?.length) }}</span>
+                de un total de
+                <span class="font-bold">{{ roomTypes.length }}</span>
+                habitaciones
+              </p>
+            </div>
+            <div>
+              <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <button @click="prevPage" :disabled="currentPage === 1"
+                  class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span class="sr-only">Anterior</span>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button v-for="page in totalPages" :key="page" @click="currentPage = page"
+                  :class="{ 'bg-terracota text-white': currentPage === page, 'bg-white text-gray-500 hover:bg-gray-50': currentPage !== page }"
+                  class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium">
+                  {{ page }}
+                </button>
+                <button @click="nextPage" :disabled="currentPage === totalPages"
+                  class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span class="sr-only">Siguiente</span>
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
+
+      
 
       <!-- Modal Añadir -->
       <transition name="fade">

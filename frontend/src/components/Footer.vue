@@ -1,15 +1,15 @@
 <template>
   <footer class="bg-terracota text-white text-sm pt-12 px-6">
     <!-- Sección principal en columnas -->
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-left">
+    <div class="max-w-7xl mx-auto flex flex-col gap-10 md:flex-row justify-between items-center md:items-start md:grid-cols-4 text-center">
 
       <!-- Columna 1 -->
-      <div>
+      <div class="md:ml-10">
         <img src="../assets/pawtel-logo-white.png" alt="Logo Pawtel" class="h-15">
       </div>
 
       <!-- Columna 2 -->
-      <div>
+      <div class="text-left hidden md:flex md:flex-col">
         <h3 class="text-base font-semibold mb-3 uppercase">¿Quienes Somos?</h3>
         <ul class="space-y-2">
           <li><RouterLink to="/sobre-nosotros" class="hover:underline">Sobre nosotros</RouterLink></li>
@@ -19,7 +19,7 @@
       </div>
 
       <!-- Columna 3 -->
-      <div>
+      <div class="text-left hidden md:flex md:flex-col">
         <h3 class="text-base font-semibold mb-3 uppercase">¿Tienes un alojamiento?</h3>
         <ul class="space-y-2">
           <li><RouterLink to="/duenos-alojamientos" class="hover:underline">Únete como anfitrión</RouterLink></li>
@@ -27,10 +27,29 @@
         </ul>
       </div>
 
+      <!-- Columnas 2 y 3 en móvil -->
+      <div class="md:hidden text-center flex flex-row justify-between sm:justify-around w-full gap-5">
+        <div class="text-left w-65 md:w-auto">
+          <h3 class="text-base font-semibold mb-3 uppercase">¿Quienes Somos?</h3>
+          <ul class="space-y-2">
+            <li><RouterLink to="/sobre-nosotros" class="hover:underline">Sobre nosotros</RouterLink></li>
+            <li><RouterLink to="/contacto" class="hover:underline">Contacto</RouterLink></li>
+            <li><RouterLink to="/terminos-y-condiciones" class="hover:underline">Términos y condiciones</RouterLink></li>
+          </ul>
+        </div>
+        <div class="text-left">
+          <h3 class="text-base font-semibold mb-3 uppercase">¿Tienes un alojamiento?</h3>
+          <ul class="space-y-2">
+            <li><RouterLink to="/duenos-alojamientos" class="hover:underline">Únete como anfitrión</RouterLink></li>
+            <li><RouterLink to="/duenos-alojamientos#faq" class="hover:underline">Preguntas frecuentes</RouterLink></li>
+          </ul>
+        </div>
+      </div>
+
       <!-- Columna 4 -->
-      <div>
+      <div class="md:text-right md:mr-10">
         <h3 class="text-base font-semibold mb-3 uppercase">Síguenos</h3>
-        <div class="flex space-x-4 mb-4">
+        <div class="flex justify-end space-x-4 mb-4">
           <a href="https://www.instagram.com/pawtel_es/" target="_blank" aria-label="Instagram" class="hover:scale-110 transition">
             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
               <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3zm4.5-3a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>

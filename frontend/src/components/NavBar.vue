@@ -18,6 +18,10 @@
             Mis Hoteles
           </router-link>
 
+          <router-link v-if="isLoggedIn && roleQuery == 'admin'" to="/admin/user-list" class="hover:underline">
+            Usuarios
+          </router-link>
+
           <router-link to="/sobre-nosotros" class="hover:underline">
             Sobre Nosotros
           </router-link>
@@ -67,6 +71,9 @@
 
           <router-link v-if="isLoggedIn && roleQuery == 'hotel_owner'" to="/mis-hoteles" class="hover:underline">
             Mis Hoteles
+          </router-link>
+          <router-link v-if="isLoggedIn && roleQuery == 'admin'" to="/admin/user-list" class="hover:underline">
+            Usuarios
           </router-link>
         <router-link to="/sobre-nosotros" class="hover:underline p-2">Sobre Nosotros</router-link>
         <router-link to="/contacto" class="hover:underline p-2">Contacto</router-link>
