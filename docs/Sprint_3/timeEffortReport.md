@@ -174,6 +174,7 @@
 ## Reporte de tiempo de Manuel Castillejo Vela
 
 **Periodo:** 27/03/2025 - 09/04/2025
+
 **Total de tiempo trabajado:** 19:15:05
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -194,6 +195,7 @@
 ## Reporte de tiempo de Luis Mellado Diaz
 
 **Periodo:** 27/03/2025 - 09/04/2025
+
 **Total de tiempo trabajado:** 20:45:57
 
 ### Proyecto Pawtel - Distribución del tiempo
