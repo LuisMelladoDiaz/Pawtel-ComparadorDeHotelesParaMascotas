@@ -39,6 +39,7 @@
 | 08/04/2025  | v 1.1         | Informe de Luis| Luis Mellado Díaz |
 | 09/04/2025  | v 1.2         | Informe de Sergio| Sergio Trenado González|
 | 09/04/2025  | v 1.3         | Informe de Yesica| Yesica Garate Fuentes|
+| 09/04/2025  | v 1.4         | Informe de Yesica| Francisco Miguel Jiménez Morales |
 
 
 
@@ -266,49 +267,33 @@
 
 ## Reporte de tiempo de Francisco Miguel Jiménez Morales
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 42:12:03
+**Periodo:** 27/03/2025 - 10/04/2025
+**Total de tiempo trabajado:** 18:18:22
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Preparar presentación | 01:00:00 |
-| Feedback revisión | 02:29:26 |
-| Feedback revisión | 00:59:32 |
-| Solucionar conflictos | 00:21:49 |
-| Solucionar conflictos | 00:53:08 |
-| Implementar pasarela de pago | 02:20:45 |
-| Implementar pasarela de pago | 00:58:04 |
-| Implementar pasarela de pago | 00:42:02 |
-| Implementar pasarela de pago | 01:08:38 |
-| Implementar pasarela de pago | 00:33:00 |
-| Clase | 04:00:00 |
-| Implementar pasarela de pago | 00:56:15 |
-| Implementar pasarela de pago | 01:26:22 |
-| Preparar presentación | 02:28:56 |
-| Implementar pasarela de pago | 00:54:04 |
-| Implementar pasarela de pago | 03:14:39 |
-| Preparar presentación | 00:17:40 |
-| Implementar pasarela de pago | 00:44:44 |
-| Organización y planificación usuarios piloto | 00:03:03 |
-| Implementar pasarela de pago | 00:53:35 |
-| Implementar pasarela de pago | 00:24:48 |
-| Implementar pasarela de pago | 01:09:54 |
-| Organización y planificación usuarios piloto | 00:34:16 |
-| Implementar pasarela de pago | 00:41:10 |
-| Implementar pasarela de pago | 02:05:56 |
-| Implementar pasarela de pago | 02:12:42 |
-| Organización y planificación usuarios piloto | 00:22:54 |
-| Implementar pasarela de pago | 01:59:44 |
-| Misc | 00:33:56 |
-| Clase | 04:00:00 |
-| Gestión de usuarios pilotos - Redactar informe | 01:36:03 |
-| Preparar presentación | 00:04:58 |
+| Descripción                                  | Duración   |
+|----------------------------------------------|------------|
+| Documentación Sprint                         | 00:20:00   |
+| Preparar presentación                        | 00:45:29   |
+| Clase                                        | 04:00:00   |
+| Preparar presentación                        | 01:12:24   |
+| Preparar presentación                        | 00:51:53   |
+| Conexión Backend-frontend pantalla de usuario| 00:37:34   |
+| Conexión Backend-frontend pantalla de usuario| 01:37:33   |
+| Conexión Backend-frontend pantalla de usuario| 01:00:00   |
+| Gestión de usuarios pilotos                  | 00:08:11   |
+| Conexión Backend-frontend pantalla de usuario| 00:32:43   |
+| Conexión Backend-frontend pantalla de usuario| 01:54:55   |
+| Conexión Backend-frontend pantalla de usuario| 00:12:21   |
+| Conexión Backend-frontend pantalla de usuario| 00:30:20   |
+| Gestión de usuarios pilotos                  | 00:34:59   |
+| Clase                                        | 04:00:00   |
 
 
 
-![grafico-de-tiempos](graficas/francisco2.png)
+
+![grafico-de-tiempos](graficas/francisco3.png)
 ---
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
@@ -389,7 +374,7 @@
 ## Reporte de tiempo de Daniel Flores de Francisco
 
 **Periodo:** 27/03/2025 - 10/04/2025
-**Total de tiempo trabajado:** 24:58:22 
+**Total de tiempo trabajado:** 24:58:22
 
 ### Proyecto Pawtel - Distribución del tiempo
 
