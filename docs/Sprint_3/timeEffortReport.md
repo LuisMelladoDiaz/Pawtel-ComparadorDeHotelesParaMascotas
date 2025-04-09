@@ -173,26 +173,21 @@
 
 ## Reporte de tiempo de Manuel Castillejo Vela
 
-**Periodo:** 12/03/2025 - 25/03/2025
-**Total de tiempo trabajado:** 27:44:33
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 19:15:05
 
 ### Proyecto Pawtel - Distribución del tiempo
-
-| Description                                                   | Time (h)  |
-|---------------------------------------------------------------|-----------|
-| #181 Feature: Hotel owner queries Tan Stack                 | 00:22:00  |
-| Mensajes CRUD creación hoteles                              | 00:54:36  |
-| KBReport                                                    | 00:51:33  |
-| #158 Feature: Validación de formularios con librerías.     | 07:07:27  |
-| Clase                                                       | 08:00:00  |
-| #205 Feature: Actualizar queries de Tan Stack con nuevas URLs | 03:29:51  |
-| #225 Feature: Mejorar funcionalidad Hotel Details          | 00:54:08  |
-| Añadir mensajes de error al frontend y botones de login y register | 03:17:15  |
-| Informe de IA                                              | 00:26:50  |
-| Adición de feedback a la base de datos común               | 02:06:45  |
-| Calendario de usuarios pilotos sprint 2                    | 00:14:08  |
-
-
+| Description                                           | Time (h) |
+|-------------------------------------------------------|----------|
+| KBReport                                              | 00:51:49 |
+| Reunion semanal                                       | 00:41:14 |
+| Clase                                                 | 04:00:00 |
+| #271 Feature: Cover imagenes                          | 02:16:02 |
+| SLA agreement y pricing                               | 01:08:13 |
+| Informe de IA                                         | 00:25:58 |
+| #276 Actualización cambios en tiempo real edit hotel | 00:35:00 |
+| Adicion de feedback a la base de datos comun         | 00:47:30 |
+| #237 Feature: Funcionamiento imagenes Frontend       | 08:29:19 |
 ![grafico-de-tiempos](graficas/manuel.png)
 ---
 
