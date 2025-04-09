@@ -42,7 +42,7 @@
 | 09/04/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
 | 09/04/2025  | v 1.5         | Informe de Andrés| Andrés Martínez Reviriego |
 | 09/04/2025  | v 1.6         | Informe de Fernando | Fernando Castelló Sánchez |
-
+| 10/04/2025  | v 1.7         | Informe de David | David González Martínez |
 
 
 
@@ -303,48 +303,31 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 42:16:15
+**Periodo:** 27/03/2025 - 10/04/2025
+**Total de tiempo trabajado:** 19:40:23
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción                                 | Duración   |
-|---------------------------------------------|------------|
-| Clase                                       | 04:00:00   |
-| Reunion                                     | 01:00:00   |
-| Fix bug                                     | 00:42:21   |
-| Autenticacion                               | 02:34:52   |
-| Conexion frontend backend                   | 02:36:26   |
-| Performance                                 | 00:17:19   |
-| Review                                      | 00:43:57   |
-| Reunión de urgencia                         | 00:47:00   |
-| Review/Trabajo en Reservas                  | 00:31:43   |
-| Planificar                                  | 00:10:58   |
-| Ayudar                                      | 01:10:18   |
-| Workflow                                    | 00:10:00   |
-| Review pagos/reservas                       | 00:20:13   |
-| Actualizarme, aclarar dudas, cosas varias   | 00:50:00   |
-| Fix double login bug                        | 00:02:00   |
-| Review/Fix bugs in frontend permissions     | 00:26:17   |
-| Review PR Andres                            | 00:08:46   |
-| Documentos                                  | 00:14:55   |
-| Review/Misc                                 | 00:30:03   |
-| Pulir reservas                              | 01:48:27   |
-| Mirar bug autenticacion                     | 00:10:12   |
-| Reviews, aclarar dudas, misc                | 00:47:00   |
-| Refactorizacion frontend                    | 01:25:18   |
-| Bug                                         | 00:16:49   |
-| Ver problema compañero                      | 00:32:00   |
-| Images                                      | 03:49:39   |
-| Reunion y organizacion                      | 01:42:00   |
-| Misc                                        | 05:42:04   |
-| Documento guidelines frontend/feedback pantallas | 01:23:49   |
-| Deployment                                  | 02:20:12   |
-| Permissions in frontend                     | 00:53:26   |
-| Class                                       | 04:00:00   |
-| Review a lo de Andrés                       | 00:08:11   |
+| Descripción | Duración |
+|-------------|---------|
+| Tarea filtros globales | 01:38:22 |
+| Miscelaneo/Review/Ayuda | 00:57:55 |
+| Fix lots of bugs | 02:49:00 |
+| Clase | 04:00:00 |
+| Organización/Misc | 00:29:19 |
+| Ver PR de Playwright, ver PR de validación | 00:14:19 |
+| Tarea filtros globales / misc / review | 00:18:53 |
+| Tarea filtros globales / misc | 01:26:11 |
+| Misc | 02:32:07 |
+| Gestionar contraseñas | 00:17:10 |
+| Despliegue y retoques varios | 00:07:34 |
+| Despliegue y retoques | 02:59:09 |
+| Review | 00:26:24 |
+| Reunión | 00:50:00 |
+| Rendimiento y misc | 00:34:00 |
 
-![{4DC49BB5-393E-469D-B7AA-F179388E8F28}](https://github.com/user-attachments/assets/4d868b92-8c81-4273-aa18-ea3ca6154765)
+![{D30BD78A-757B-438C-B6AF-1D02F2F99B59}](https://github.com/user-attachments/assets/d2b7b58b-9903-4760-a780-72f55a5166ad)
+
 
 ---
 
