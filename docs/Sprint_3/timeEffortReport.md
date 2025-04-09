@@ -41,6 +41,8 @@
 | 09/04/2025  | v 1.3         | Informe de Yesica| Yesica Garate Fuentes|
 | 09/04/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
 | 09/04/2025  | v 1.5         | Informe de Andrés| Andrés Martínez Reviriego |
+| 09/04/2025  | v 1.6         | Informe de Fernando | Fernando Castelló Sánchez |
+
 
 
 
@@ -291,28 +293,25 @@
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 28:14:33
+**Periodo:** 27/03/2025 - 10/04/2025
+**Total de tiempo trabajado:** 23:02:13
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Documentación (Feedback), Reporte IA | 01:22:29 |
-| Frontend | 02:40:09 |
-| revision.md | 01:38:19 |
-| Reunión | 00:44:27 |
+| revision.md | 01:43:27 |
 | Clase | 04:00:00 |
-| Documentación (Feedback) | 01:24:51 |
-| Frontend | 02:02:02 |
-| Frontend | 02:10:12 |
-| Frontend | 00:20:50 |
-| Clase | 04:00:00 |
-| Documentación (Feedback) | 01:01:27 |
-| Frontend | 01:17:17 |
-| Frontend | 00:17:59 |
-| Frontend | 02:23:00 |
-| Frontend, Informe IA | 02:51:31 |
+| Feedback | 00:44:09 |
+| Frontend | 00:42:45 |
+| Pantalla CRUD | 04:57:19 |
+| Pantalla CRUD | 00:12:39 |
+| Pantalla admin | 02:16:58 |
+| Pantalla admin | 03:05:40 |
+| Pantalla admin | 04:20:34 |
+| revision.md | 00:50:31 |
+| Informe IA | 00:08:11 |
+
 
 ![grafico-de-tiempos](graficas/fernando.png)
 ---
