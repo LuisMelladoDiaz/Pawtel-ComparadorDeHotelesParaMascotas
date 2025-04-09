@@ -5,6 +5,7 @@ import 'notyf/notyf.min.css';
 import { useGetAllCustomers, useDeleteCustomer } from '@/data-layer/hooks/customers';
 import { useGetAllHotelOwners, useDeleteHotelOwner, useApproveHotelOwner } from '@/data-layer/hooks/hotelOwners';
 import { handleApiError } from '@/utils/errorHandler';
+import Button from '@/components/Button.vue';
 
 const notyf = new Notyf();
 
@@ -245,22 +246,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex-grow bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <!-- Cabecera -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-        <h1 class="text-2xl font-bold text-gray-900">Gestión de Usuarios</h1>
-        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-          <input
-            v-model="searchQuery"
-            type="text"
-            placeholder="Buscar usuarios..."
-            class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-terracota focus:border-terracota"
-          >
-          <select
-            v-model="userFilter"
-            class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-terracota focus:border-terracota"
-          >
+  <div class="max-w-7xl mx-auto w-full mt-10 mb-10">
+    <!-- Cabecera -->
+      <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
+        <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
+          <h1 class="m-0! text-xl text-center font-semibold text-white">Gestión de Usuarios</h1>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto p-4">
+          <input v-model="searchQuery" type="text" placeholder="Buscar usuarios..." @input="currentPage = 1"
+            class="px-4 py-2 rounded-md shadow-sm bg-white focus:ring-terracota focus:border-terracota">
+          <select v-model="userFilter" @change="currentPage = 1"
+            class="px-4 py-2  rounded-md shadow-sm bg-white focus:ring-terracota focus:border-terracota">
             <option value="all">Todos los usuarios</option>
             <option value="verified">Verificados</option>
             <option value="unverified">Dueños no verificados</option>
@@ -270,161 +266,146 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Contenido principal -->
-      <div class="bg-white shadow rounded-lg overflow-hidden">
-        <!-- Mensaje de error para dueños -->
-        <div v-if="showOwnersError" class="bg-red-50 border-l-4 border-red-400 p-4">
-          <div class="flex">
-            <div class="flex-shrink-0">
-              <i class="fas fa-exclamation-circle text-red-400"></i>
-            </div>
-            <div class="ml-3">
-              <p class="text-sm text-red-700">
-                {{ errorMessage }}
-                <button
-                  @click="retryLoadData"
-                  class="ml-2 underline text-red-800 font-medium"
-                >
-                  Reintentar
-                </button>
-              </p>
-            </div>
+    <!-- Contenido principal -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+      <!-- Mensaje de error para dueños -->
+      <div v-if="showOwnersError" class="bg-red-50 border-l-4 border-terracota p-4">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <i class="fas fa-exclamation-circle text-terracota"></i>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-terracota">
+              {{ errorMessage }}
+              <button @click="retryLoadData" class="ml-2 underline text-terracota font-medium">
+                Reintentar
+              </button>
+            </p>
           </div>
         </div>
+      </div>
 
-        <!-- Tabla de usuarios -->
-        <div class="overflow-x-auto">
-          <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+      <!-- Tabla de usuarios -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full table-fixed border-collapse divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="w-65 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Usuario</th>
+              <th scope="col" class="w-65 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Correo</th>
+              <th scope="col" class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Teléfono</th>
+              <th scope="col" class="w-35 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Tipo</th>
+              <th scope="col" class="w-30 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Verificado</th>
+              <th scope="col" class="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <template v-if="isLoading">
               <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuario</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Teléfono</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Verificado</th>
-                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                <td colspan="6" class="px-6 py-4 text-center">
+                  <div class="flex justify-center items-center space-x-2">
+                    <i class="fas fa-spinner fa-spin text-terracota text-xl"></i>
+                    <span class="text-gray-500">Cargando usuarios...</span>
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <template v-if="isLoading">
-                <tr>
-                  <td colspan="6" class="px-6 py-4 text-center">
-                    <div class="flex justify-center items-center space-x-2">
-                      <i class="fas fa-spinner fa-spin text-terracota text-xl"></i>
-                      <span class="text-gray-500">Cargando usuarios...</span>
+            </template>
+            <template v-else-if="filteredUsers.length === 0">
+              <tr>
+                <td colspan="6" class="px-6 py-4 text-center text-gray-500">
+                  No se encontraron usuarios que coincidan con los criterios
+                </td>
+              </tr>
+            </template>
+            <template v-else>
+              <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-gray-50">
+                <td class="px-6 py-4">
+                  <div class="flex items-center">
+                    <div class="flex-shrink-0 h-10 w-10">
+                      <img class="h-10 w-10 rounded-full" :src="user.image" :alt="user.name">
                     </div>
-                  </td>
-                </tr>
-              </template>
-              <template v-else-if="filteredUsers.length === 0">
-                <tr>
-                  <td colspan="6" class="px-6 py-4 text-center text-gray-500">
-                    No se encontraron usuarios que coincidan con los criterios
-                  </td>
-                </tr>
-              </template>
-              <template v-else>
-                <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-gray-50">
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <div class="flex items-center">
-                      <div class="flex-shrink-0 h-10 w-10">
-                        <img class="h-10 w-10 rounded-full" :src="user.image" :alt="user.name">
-                      </div>
-                      <div class="ml-4">
-                        <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
-                        <div class="text-sm text-gray-500">{{ user.username }}</div>
-                      </div>
+                    <div class="ml-4">
+                      <div class="text-sm font-medium text-gray-900">{{ user.name }}</div>
                     </div>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.email }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ user.phone }}</td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <span
-                      :class="{
-                        'bg-azul-suave text-white': user.role === 'customer',
-                        'bg-oliva text-white': user.role === 'owner'
-                      }"
-                      class="px-3 py-1 rounded-full text-xs font-medium"
-                    >
-                      {{ user.role === 'owner' ? 'Dueño de hotel' : 'Cliente' }}
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap">
-                    <span
-                      :class="user.is_verified ? 'bg-green-500' : 'bg-yellow-500'"
-                      class="px-3 py-1 rounded-full text-xs font-medium text-white"
-                    >
-                      {{ user.is_verified ? 'Verificado' : 'Pendiente' }}
-                    </span>
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center space-x-2">
-                    <button
-                      v-if="!user.is_verified && user.role === 'owner'"
-                      @click="approveUser(user.id)"
-                      class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-oliva hover:bg-oliva-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-oliva"
-                      :disabled="isApproving"
-                    >
-                      <i class="fas fa-check-circle mr-1"></i> Verificar
-                    </button>
-                    <span v-else-if="user.role === 'owner'" class="text-xs text-gray-400">Verificado</span>
-                    <span v-else class="text-xs text-gray-400">Cliente verificado</span>
-                    <button
-                      @click="confirmDelete(user)"
-                      class="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-terracota hover:bg-terracota-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-terracota"
-                      :disabled="isDeleting"
-                    >
-                      <i class="fas fa-trash-alt mr-1"></i> Eliminar
-                    </button>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
+                  </div>
+                </td>
+                <td class="py-4 text-sm text-gray-500">{{ user.email }}</td>
+                <td class="py-4 text-sm text-gray-500">{{ user.phone }}</td>
+                <td class="py-4 text-center">
+                  <span :class="{
+                    'bg-azul-suave text-white': user.role === 'customer',
+                    'bg-oliva text-white': user.role === 'owner'
+                  }" class="px-3 py-1 rounded-full text-xs font-medium">
+                    {{ user.role === 'owner' ? 'Dueño de hotel' : 'Cliente' }}
+                  </span>
+                </td>
+                <td class="py-4 text-center">
+                  <span :class="user.is_verified ? 'bg-[#8A9A5B]' : 'bg-beige'"
+                    class="px-3 py-1 rounded-full text-xs font-medium text-white">
+                    {{ user.is_verified ? 'Verificado' : 'Pendiente' }}
+                  </span>
+                </td>
+                <td class="py-4 text-sm text-gray-500 text-center w-fit space-x-2">
+                  <Button v-if="!user.is_verified && user.role === 'owner'" @click="approveUser(user.id)"
+                    class="inline-flex items-center w-30 justify-center py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-oliva! hover:bg-oliva-dark! focus:outline-none! focus:ring-2! focus:ring-offset-2! focus:ring-oliva!"
+                    :disabled="isApproving">
+                    <i class="fas fa-check-circle mr-1"></i> Verificar
+                  </Button>
+                  <Button v-else
+                    class="inline-flex items-center w-30 justify-center py-1 pointer-events-none border border-transparent text-xs font-medium rounded shadow-sm text-white bg-oliva! disabled:opacity-60 hover:bg-oliva-dark! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-oliva"
+                    disabled>
+                    <i class="fas fa-check-circle mr-1"></i> Verificado
+                  </Button>
+                  <Button @click="confirmDelete(user)"
+                    class="inline-flex items-center w-30 justify-center py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-terracota hover:bg-terracota-dark! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-terracota"
+                    :disabled="isDeleting">
+                    <i class="fas fa-trash-alt mr-1"></i> Eliminar
+                  </Button>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
 
-        <!-- Paginación -->
-        <div v-if="filteredUsers.length > 0" class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-          <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-            <div>
-              <p class="text-sm text-gray-700">
-                Mostrando
-                <span class="font-medium">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
-                a
-                <span class="font-medium">{{ Math.min(currentPage * itemsPerPage, filteredUsers.length) }}</span>
-                de
-                <span class="font-medium">{{ filteredUsers.length }}</span>
-                resultados
-              </p>
-            </div>
-            <div>
-              <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                <button
-                  @click="prevPage"
-                  :disabled="currentPage === 1"
-                  class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span class="sr-only">Anterior</span>
-                  <i class="fas fa-chevron-left"></i>
-                </button>
-                <button
-                  v-for="page in totalPages"
-                  :key="page"
-                  @click="currentPage = page"
-                  :class="{'bg-terracota text-white': currentPage === page, 'bg-white text-gray-500 hover:bg-gray-50': currentPage !== page}"
-                  class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium"
-                >
-                  {{ page }}
-                </button>
-                <button
-                  @click="nextPage"
-                  :disabled="currentPage === totalPages"
-                  class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span class="sr-only">Siguiente</span>
-                  <i class="fas fa-chevron-right"></i>
-                </button>
-              </nav>
-            </div>
+      <!-- Paginación -->
+      <div v-if="filteredUsers.length > 0"
+        class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+        <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <div>
+            <p class="text-[13px] mb-3 text-gray-700 sm:text-sm sm:mb-0">
+              Mostrando del
+              <span class="font-bold">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+              al
+              <span class="font-bold">{{ Math.min(currentPage * itemsPerPage, filteredUsers.length) }}</span>
+              de un total de
+              <span class="font-bold">{{ filteredUsers.length }}</span>
+              usuarios
+            </p>
+          </div>
+          <div>
+            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+              <button @click="prevPage" :disabled="currentPage === 1"
+                class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span class="sr-only">Anterior</span>
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button v-for="page in totalPages" :key="page" @click="currentPage = page"
+                :class="{ 'bg-terracota text-white': currentPage === page, 'bg-white text-gray-500 hover:bg-gray-50': currentPage !== page }"
+                class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium">
+                {{ page }}
+              </button>
+              <button @click="nextPage" :disabled="currentPage === totalPages"
+                class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                <span class="sr-only">Siguiente</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </nav>
           </div>
         </div>
       </div>
@@ -432,50 +413,56 @@ onMounted(() => {
   </div>
 
   <!-- Modal de confirmación -->
-  <div v-if="showDeleteModal" class="fixed z-10 inset-0 overflow-y-auto">
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-      </div>
-      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <div class="sm:flex sm:items-start">
-            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-red-600 sm:mx-0 sm:h-10 sm:w-10">
-              <i class="fas fa-trash-alt text-xl"></i>
-            </div>
-            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">Eliminar usuario</h3>
-              <div class="mt-2">
-                <p class="text-sm text-gray-500">
-                  ¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede deshacer.
-                </p>
+  <transition name="fade">
+    <div v-if="showDeleteModal" class="fixed z-10 inset-0 overflow-y-auto">
+      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div
+                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-terracota sm:mx-0 sm:h-10 sm:w-10">
+                <i class="fas fa-trash-alt text-xl"></i>
+              </div>
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">Eliminar usuario</h3>
+                <div class="mt-2">
+                  <p class="text-sm text-gray-500">
+                    ¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede deshacer.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button
-            type="button"
-            @click="deleteUser"
-            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Eliminar
-          </button>
-          <button
-            type="button"
-            @click="closeDeleteModal"
-            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm"
-          >
-            Cancelar
-          </button>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <Button type="button" @click="deleteUser"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-terracota text-base font-medium text-white hover:bg-terracota-dark! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+              Eliminar
+            </Button>
+            <Button type="button" @click="closeDeleteModal"
+              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-pawtel-black hover:bg-gray-50! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm">
+              Cancelar
+            </Button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
 /* Estilos específicos */
 .bg-terracota {
   background-color: #C36C6C;

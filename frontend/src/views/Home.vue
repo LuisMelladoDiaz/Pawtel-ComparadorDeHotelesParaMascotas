@@ -46,7 +46,7 @@ function handleInstall() {
             Obtener 20% de descuento →
           </router-link>
           <p class="text-xs text-gray-500 mt-2">*Oferta válida solo para nuevos usuarios. Aplican 
-            <RouterLink to="/terminos-y-condiciones" class="font-semibold underline transition-all"> términos y condiciones </RouterLink> </p>
+            <RouterLink to="/terminos-y-condiciones" class="font-semibold underline transition-all hover:text-azul-suave"> términos y condiciones </RouterLink> </p>
         </div>
         <div class="lg:w-1/2">
           <img src="../assets/HomePage_2.webp" alt="Perro disfrutando comida" class="w-full object-cover rounded-lg shadow-lg">

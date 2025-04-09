@@ -69,7 +69,7 @@ watch(roomDictById.data, (newData) => {
       <p>Error al cargar las reservas</p>
     </div>
 
-    <div v-else class="p-6">
+    <div v-else class="mb-6">
       <div v-if="formattedBookings?.length" class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
