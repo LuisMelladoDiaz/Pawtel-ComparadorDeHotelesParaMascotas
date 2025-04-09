@@ -37,6 +37,7 @@
 |-------------|---------------|---------------------------|-------------------------|
 | 08/04/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
 | 08/04/2025  | v 1.1         | Informe de Luis| Luis Mellado Díaz |
+| 09/04/2025  | v 1.2         | Informe de Sergio| Sergio Trenado González|
 
 
 
@@ -122,29 +123,29 @@
 
 ## Reporte de tiempo de Sergio Trenado Gonzalez
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 37:44:38
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 33:46:59
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción                                      | Duración    |
-|-------------------------------------------------|------------|
-| Feature: Conectar Backend y Frontend            | 05:33:48   |
-| Revisión + Mejora de PR + Feature: Pulir detalles de las pantallas | 05:06:36   |
-| Feature: Pulir detalles de las pantallas        | 04:31:22   |
-| Clase 14 marzo                                  | 04:00:00   |
-| Clase 21 marzo                                  | 04:00:00   |
-| Feature: Adaptar componentes y pantallas + Cosas extras | 03:27:02   |
-| Feature: Adaptar componentes y pantallas        | 02:55:57   |
-| Juntando Docs de Mejoras Frontend + Revisando PRs | 01:29:13   |
-| Puliendo pantallas + nuevos filtros de ordenamiento + imágenes nuevas | 01:27:56   |
-| Reunión Inicio Sprint 2                         | 01:14:51   |
-| Frontend Organización Sprint 2                  | 01:04:01   |
-| Reunión Mitad Sprint 2                          | 01:00:00   |
-| Feature: Pulir detalles de las pantallas + Revisando PRs | 00:35:37   |
-| Revisando PRs                                   | 00:27:49   |
-| Documento de metodología para Frontend          | 00:27:23   |
-| Frontend Organización                           | 00:23:03   |
+| Descripción                                                                                                      | Duración  |
+|------------------------------------------------------------------------------------------------------------------|-----------|
+| Clase 28 marzo                                                                                                   | 04:00:00  |
+| Clase 4 abril                                                                                                    | 04:00:00  |
+| Mejorar estilo de imágenes + Feature: Mejorar pantalla de "Detalles de hotel"                                     | 03:57:04  |
+| PRs + Informe de horas + Feature: Pulir detalles de las pantallas                                                | 03:41:39  |
+| Mejorando PR (CRUD Hoteles) + Feature: Mejorar pantalla de "Mis reservas" + Feature: Mejorar pantalla de "Detalles de hotel" | 03:01:00  |
+| Mejorando PR (CRUD Hoteles)                                                                                      | 02:46:10  |
+| Revisando + Mejorando PR (CRUD Hoteles)                                                                          | 02:01:01  |
+| Terminos y condiciones + Fixeos + Iconos PWA                                                                     | 02:00:11  |
+| Puliendo ultimos detalles y mejorando pantalla de admin                                                          | 01:46:41  |
+| Arreglando diversas cosas del proyecto                                                                           | 01:44:14  |
+| Mejorando el estilo y añadiendo paginaciones                                                                      | 01:39:42  |
+| Reunión Inicio Sprint 3                                                                                          | 00:51:39  |
+| Frontend Organización Sprint 3                                                                                   | 00:51:28  |
+| Feature: Mejorar pantalla de "Mis reservas" + Feature: Mejorar pantalla de "Detalles de hotel"                     | 00:48:08  |
+| Revisando PRs                                                                                                    | 00:38:02  |
+
 
 ![grafico-de-tiempos](graficas/sergio.png)
 ---
