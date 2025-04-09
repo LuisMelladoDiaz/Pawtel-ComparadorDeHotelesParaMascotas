@@ -40,6 +40,7 @@
 | 09/04/2025  | v 1.2         | Informe de Sergio| Sergio Trenado González|
 | 09/04/2025  | v 1.3         | Informe de Yesica| Yesica Garate Fuentes|
 | 09/04/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
+| 09/04/2025  | v 1.5         | Informe de Andrés| Andrés Martínez Reviriego |
 
 
 
@@ -420,30 +421,21 @@
 ![grafico-de-tiempos](graficas/claudio.png)
 ---
 
-## Reporte de tiempo de Andres Martinez Revriego
+## Reporte de tiempo de Andrés Martínez Reviriego
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 37:38:54
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 17:49:57
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Informe IA y tiempo | 00:04:55 |
-| Evidencias términos y condiciones | 01:54:40 |
-| Presentación | 04:11:09 |
-| Informe de IA | 00:14:00 |
+| Mensajes de validación | 06:19:53 |
+| Error getIp | 01:00:33 |
+| Pantalla admin | 01:55:00 |
 | Asistencia a clase | 04:00:00 |
-| Reestablecimiento de contraseña | 05:20:55 |
-| Customer | 04:36:19 |
-| Asistencia a clase | 04:00:00 |
-| Revisión código filtros | 01:06:48 |
-| Ayuda con revisión.md | 00:24:29 |
-| Filtros | 04:11:56 |
-| Editar hoteles | 02:17:56 |
-| Reunión de emergencia | 00:47:27 |
-| Editar hoteles | 01:50:34 |
-| Filtro de búsqueda | 02:20:46 |
-| Informe de IA actualizado | 00:17:00 |
+| Informe de IA | 00:06:45 |
+| Reestablecimiento de contraseña | 01:18:27 |
+| Presentación | 03:09:19 |
 
-![grafico-de-tiempos](graficas/andres2.png)
+![grafico-de-tiempos](graficas/andres3.png)
