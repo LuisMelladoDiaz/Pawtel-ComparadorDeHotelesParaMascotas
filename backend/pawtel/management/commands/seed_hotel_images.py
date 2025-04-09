@@ -1,69 +1,67 @@
-import io
+import os
 import random
 
-from django.core.files.uploadedfile import InMemoryUploadedFile
+from django.conf import settings
+from django.core.files import File
 from django.core.management.base import BaseCommand
-from faker import Faker
 from pawtel.hotels.models import Hotel, HotelImage
-from PIL import Image
-
-fake = Faker("es_ES")
 
 
 class Command(BaseCommand):
     help = "Seed hotel images"
 
     def handle(self, *args, **kwargs):
-        self.stdout.write(self.style.SUCCESS("Seeding hotel images..."))
-        hotels = Hotel.objects.all()
+        self.stdout.write(self.style.SUCCESS("Seeding Hotel Images..."))
 
-        if not hotels:
+        image_dir = os.path.join(settings.BASE_DIR, "pawtel", "images_hotel")
+
+        if not os.path.exists(image_dir):
             self.stdout.write(
-                self.style.ERROR(
-                    "No hotels found. Please run the seed for hotels first."
-                )
+                self.style.ERROR(f"No se encontró la carpeta {image_dir}")
             )
             return
 
-        self.create_hotel_images(hotels, 5)
-        self.stdout.write(self.style.SUCCESS("Hotel images seeding complete!"))
+        image_files = os.listdir(image_dir)
 
-    def create_hotel_images(self, hotels, num_images_per_hotel):
-        for hotel in hotels:
-            # Primero crea la imagen de portada (cover image)
-            cover_image = self.generate_image(is_cover=True)
-            HotelImage.objects.create(hotel=hotel, image=cover_image, is_cover=True)
+        if not image_files:
+            self.stdout.write(self.style.WARNING("No hay imágenes para cargar."))
+            return
+
+        hotels = Hotel.objects.all()
+        if not hotels.exists():
             self.stdout.write(
-                self.style.SUCCESS(f"Created cover image for Hotel: {hotel.name}")
+                self.style.ERROR("No hay hoteles registrados en la base de datos.")
             )
+            return
 
-            # Luego crea las imágenes adicionales (no cover)
-            for _ in range(num_images_per_hotel - 1):
-                image = self.generate_image(is_cover=False)
-                HotelImage.objects.create(hotel=hotel, image=image, is_cover=False)
-                self.stdout.write(
-                    self.style.SUCCESS(f"Created image for Hotel: {hotel.name}")
-                )
+        image_files_copy = image_files.copy()
 
-    def generate_image(self, is_cover=False):
-        img = Image.new(
-            "RGB",
-            (200, 200),
-            color=(
-                random.randint(0, 255),
-                random.randint(0, 255),
-                random.randint(0, 255),
-            ),
-        )
-        img_byte_arr = io.BytesIO()
-        img.save(img_byte_arr, format="JPEG")
-        img_byte_arr.seek(0)
-        image_file = InMemoryUploadedFile(
-            img_byte_arr,
-            None,
-            "hotel_image.jpg",
-            "image/jpeg",
-            img_byte_arr.tell(),
-            None,
-        )
-        return image_file
+        for hotel in hotels:
+            if image_files_copy:
+                cover_image_file = random.choice(image_files_copy)
+                image_files_copy.remove(cover_image_file)
+            else:
+                cover_image_file = random.choice(image_files)
+
+            self.create_hotel_image(hotel, cover_image_file, is_cover=True)
+
+            remaining_images = list(set(image_files) - {cover_image_file})
+            random.shuffle(remaining_images)
+
+            for image_file in remaining_images[:4]:
+                self.create_hotel_image(hotel, image_file, is_cover=False)
+
+        self.stdout.write(self.style.SUCCESS("Hotel Images seeding complete!"))
+
+    def create_hotel_image(self, hotel, image_file, is_cover):
+        image_dir = os.path.join(settings.BASE_DIR, "pawtel", "images_hotel")
+        image_path = os.path.join(image_dir, image_file)
+
+        with open(image_path, "rb") as f:
+            hotel_image = HotelImage(
+                hotel=hotel, image=File(f, name=image_file), is_cover=is_cover
+            )
+            hotel_image.save()
+
+        label = "cover image" if is_cover else "image"
+        self.stdout.write(self.style.SUCCESS(f"Created {label} for {hotel.name}"))
