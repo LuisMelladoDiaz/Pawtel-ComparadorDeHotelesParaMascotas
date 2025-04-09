@@ -59,6 +59,7 @@
 |-------------|---------------|-------------------------------|-------------------------|
 | 07/04/2025  | v 1.0         | Versión inicial del documento | Daniel Flores de Francisco |
 | 08/04/2025  | v 1.1         | Informe de Luis | Luis Mellado Díaz |
+| 08/04/2025  | v 1.2         | Informe de Dani | Daniel Flores de Francisco |
 
 
 ---
@@ -178,13 +179,12 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Daniel Flores de Francisco
-- **Sprint:** Sprint 2
+- **Sprint:** Sprint 3
 - **Rol en el proyecto:** PM, programador backend, documentación y devops
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
 - Generación de código (x)
-- Generación de documentación (x)
 
 #### 3. Uso de IA en las Tareas
 
@@ -193,28 +193,22 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
 | Asesoramiento de cómo escribir el Workflow. | ChatGPT | Usada para ver los workflows usados, sintaxis y corrección de errores |
-| Conversión a markdown | ChatGPT | Recibiendo el documento en word o pdf se le pide pasarlo a markdown |
-| Plantilla y modificaciones del Customer Agreement | DeepSeek | Usada para hacer más largo el Customer Agreement e identificar unfair clauses |
-| Búsqueda de Plataformas de Análisis de Código | ChatGPT | Usada como asesoría de las distintas plataformas de análisis de código estático y sus integración usando GitHub Actions. Apoyado en videos de Youtube |
-
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 5 - 7
-- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo a la hora de ponerme a configurar el CI. Con la documentación tambien me ha ayudado ha pasar documentos a formato Markdown y a perfeccionarlos
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 2 - 3
+- **Comparación con trabajo sin IA:** El uso de la IA en este sprint me ha ahorrado mucho tiempo a la hora de ponerme a configurar el CI. Si que es verdad que este Sprint 3 lo he usado super poco, pues no he tenido tanta necesidad
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. ¿Cómo iniciarias un servidor en Sonarqube?
-2. Hazme los cambios necesarios para que sea compatible con la versión de (paqiete) (fichero)
-3. Giving this template of customer agreement, and this document about my business, fullfil this agreement using this template and the information of my business doc
+1. ¿Qué error me esta dando este fichero y cómo lo soluciono? (fichero)
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Le falta mucho contexto. Muchas veces patina y en el CI te da mal la sintaxis, paquetes y versiones incompatibles y más cosas.
+- **Limitaciones detectadas en la IA:** En el CI te da mal la sintaxis, paquetes y versiones incompatibles y más cosas.
 
 #### 7. Evaluación General
 
