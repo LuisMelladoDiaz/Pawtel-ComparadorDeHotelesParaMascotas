@@ -63,7 +63,7 @@
 | 08/04/2025  | v 1.3         | Informe de Yesica | Yesica Garate Fuentes |
 | 09/05/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
 | 09/05/2025  | v 1.5         | Informe de Fernando | Fernando Castelló Sánchez |
-
+| 10/04/2025  | v 1.6         | Informe de David | David González Martínez |
 
 ---
 
@@ -324,7 +324,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** David González Martínez
-- **Sprint:** Sprint 2
+- **Sprint:** Sprint 3
 - **Rol en el proyecto:** Programador full-stack, Jefe de equipo full-stack, Devops
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -346,19 +346,19 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
 - **Comparación con trabajo sin IA:** Pilló un par de bugs difíciles. Rápida para prototipar en relación a hacerlo manualmente.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. <código> \n Ocurre <bug>. Dime que puede ser.
-2. Mejora la interfaz de esta pantalla.
+1. <código> \n Ocurre <este bug>. Dime que puede ser.
+2. Como hacer <cosa> en <tecnología>? Adapta este código.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Se pega patinadas a veces.
+- **Limitaciones detectadas en la IA:** Es prácticamente inútil a la hora de utilizar de forma canónica Vue. Cuando se sale de lo común, programa código excesivamente complicado y, por lo general, incorrecto.
 
 
 #### 7. Evaluación General
