@@ -443,18 +443,17 @@
 
 | Descripción | Duración |
 |-------------|---------|
-| Clases | 06:00:00 |
-| Feature: Creación bookings | 05:02:39 |
-| Fix: arreglar bookings | 00:23:00 |
-| fix: arreglar tests bookings | 00:49:00 |
-| feat: crear metodos de getAllBokings por customer y hotel mas sus tests | 03:15:00 |
-| feat: crear room_type_is_available method and tests | 02:29:00 |
-| feat: crear metodos para obtener bookings por hotel y por customer. | 04:17:00 |
-| task: revisar documentación Api automática | 02:23:00 |
-| revisar frontend | 01:02:00 |
-| feat: añadir atributo is_approved a hotel_owner | 01:49:11 |
-| presentación diapositivas | 00:41:00 |
-| Reporte de IA y de tiempo| 00:35:00 |
+| Clases | 08:00:00 |
+| Presentación Diapositivas | 01:22:00 |
+| Video anuncio y diapositivas y guión | 01:25:00 |
+| Presentación | 02:05:00 |
+| Hacer documento feedback ispp | 00:16:00 |
+| Añadir ruta de listado de hotel owner no validados y otra ruta para borrar hotel owner no validados | 02:09:06 |
+| cambiar metodo de borrar hotel owner no validados por consistencia| 01:09:00 |
+| graficas rendimiento y correciones varias | 01:45:09 |
+| planificación marketing | 01:26:42 |
+| presentación diapositivas y cambio storyboards| 01:22:23 |
+|
 
 ![grafico-de-tiempos](graficas/claudio.png)
 ---

@@ -127,12 +127,12 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Claudio Cortés Carrasco
-- **Sprint:** Sprint2
+- **Sprint:** Sprint3
 - **Rol en el proyecto:** Programador backend, documentación
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (x)
+- Generación de código ()
 - Refactorización de código ( )
 - Generación de documentación ( )
 - Asesoramiento técnico (x)
@@ -143,27 +143,27 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Mejora de tests |    ChatGPT | Recibiendo el código de las distintas entidades y los respectivos test básicos se pidío que se mejorasen para que abarcasen todas las posibilidades. |
-| Ayuda para generar gráficos |                ChatGPT | Se usó para saber como generar unos gráficos de barras desde el powerpoint para añadirlo a la presentación semanal. |
-| Ayuda para solucionar un error en los tests |                ChatGPT | Se usó para saber como solucionar un error que no asignaba correctamente el hotelOwner al usuario que se registraba. |
+| Ayuda para uso excel para grafos |    ChatGPT | Se utilizo para ayudarnos al tema de generar lineas entre 2 puntos para ver la evolucion de horas y rendimiento de una semana a otra. |
+| Ayuda para pensar en merchandising y temas de inversores |                ChatGPT | Se usó para dar ideas en temas de posibles merchandising de pawtel y para explicarnos temas relacionados con la inversión para cambiar el storyboard de los inversores|
+
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
-- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para mejorar y ampliar los tests me ahorró mucho tiempo, asi como solucionar el error que me daba de asignación de hotelOwner al AppUser ya que me lleve un rato intentando solucionarlo y no lo conseguía.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 2.5 horas
+- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para generarme ideas para el tema de marketing y para ayudarme con el tema de las graficas para la presentación fue vital ya que sin esa ayuda me hubiese llevado bastante mas tiempo el poder llevar a cabo dichas tareas.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Dados los siguientes archivos de tests y sus entidades asociadas, mejoralos para que abarquen el 100% de los casos posibles tanto en casos positivos como negativos.
-2. Podrias ayudarme a generar un gráfico de barras desde una presentación de powerpoint.
-3. Dado el problema que te paso por captura, podrías ayudarme a identificar cual es el problema en la asignación del hotelOwner al AppUser?
+1. Quiero hacer que la grafica de rendimiento y horas, en cada uno de los 2 puntos pertenecientes a cada estudiante, que haya una linea que los una para saber que esos 2 puntos son la evolucion horas/rendimiento de cada uno de los estudiantes, dime como hacer esto.
+2. Podrias darme ideas para merchandising para mi negocio de reserva de alojamiento para mascotas.
+3. Como funciona el tema de la inversión y el porcentaje que se le da al inversor y como se calcula el beneficio que se le da a este inversor con lo generado en mi empresa. ¿Podrías guiarme un poco?.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos y a veces te genera test con datos repetidos.
+- **Limitaciones detectadas en la IA:** Solo te deja insertar una cantidad limitada de archivos.
 
 
 #### 7. Evaluación General
