@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.stdout.write(self.style.SUCCESS("Seeding Hotel Images..."))
 
-        image_dir = os.path.join(settings.BASE_DIR, "pawtel", "images_hotel")
+        image_dir = os.path.join(settings.BASE_DIR, "pawtel", "assets", "images_hotel")
 
         if not os.path.exists(image_dir):
             self.stdout.write(
@@ -54,7 +54,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Hotel Images seeding complete!"))
 
     def create_hotel_image(self, hotel, image_file, is_cover):
-        image_dir = os.path.join(settings.BASE_DIR, "pawtel", "images_hotel")
+        image_dir = os.path.join(settings.BASE_DIR, "pawtel", "assets", "images_hotel")
         image_path = os.path.join(image_dir, image_file)
 
         with open(image_path, "rb") as f:
