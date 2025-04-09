@@ -424,7 +424,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Sergio Trenado González
-- **Sprint:** Sprint 2
+- **Sprint:** Sprint 3
 - **Rol en el proyecto:** Líder de Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -438,21 +438,19 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Pulir y mejorar detalles de pantallas en general | ChatGPT | Ayuda sobre cómo realizar ciertas cosas para que algunos elementos se vean mejor |
-| Mejorar filtros de la Navbar | ChatGPT | Ayuda para intentar que los filtros funcionen y se vean mejor |
+| Pulir y mejorar detalles de pantallas en general | ChatGPT | Ayuda sobre cómo realizar ciertas cosas para que algunos elementos se vean o funcionen mejor |
 
 #### 4. Impacto en Productividad
 
 - **Horas estimadas ahorradas en comparación con trabajo manual:** 5
-- **Comparación con trabajo sin IA:** Me ha ahorrado algo de tiempo de general, ya que si no tendría que haber estado mucho tiempo probando ciertas cosas hasta que funcionara.
+- **Comparación con trabajo sin IA:** Me ha ahorrado algo de tiempo de general, aunque en este sprint la he usado bastante menos debido a que he realizado más tareas de revisión y mejoras de estilos para las cuales no era necesario el uso de herramientas IA.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. ¿Cómo puedo editar un componente de selección de rango de fechas en Vue con Flatpickr para que limite el rango a 6 meses desde la fecha de inicio y resetee correctamente esa restricción al limpiar la selección?
-2. ¿Cómo puedo sincronizar correctamente la selección de ciudad, tipo de mascota y rango de fechas desde una navbar en Vue, asegurando que al borrar uno de los campos no se reseteen los demás?
-3. ¿Cómo puedo posicionar correctamente un ícono dentro de un elemento select en Vue sin que afecte el alineamiento del texto y sin consumir espacio del contenido?
+1. Ayudame a adaptar este componente de paginación para el listado de reservas.
+2. ¿Cómo puedo hacer que se puedan subir multiples imágenes al mismo tiempo y que solo se seleccione una como portada?
 
 #### 6. Problemas Encontrados y Limitaciones
 
