@@ -62,6 +62,8 @@
 | 08/04/2025  | v 1.2         | Informe de Dani | Daniel Flores de Francisco |
 | 08/04/2025  | v 1.3         | Informe de Yesica | Yesica Garate Fuentes |
 | 09/05/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
+| 09/05/2025  | v 1.5         | Informe de Fernando | Fernando Castelló Sánchez |
+
 
 ---
 
@@ -221,15 +223,15 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Fernando Castelló Sánchez
-- **Sprint:** Sprint2
+- **Sprint:** Sprint3
 - **Rol en el proyecto:** Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
 - Generación de código (x)
 - Refactorización de código (x)
-- Generación de documentación (x)
-- Asesoramiento técnico (x)
+- Generación de documentación ( )
+- Asesoramiento técnico ( )
 
 #### 3. Uso de IA en las Tareas
 
@@ -237,23 +239,22 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Pantalla habitaciones y precios de hoteles | DeepSeek | Corrigiendo el posicionamiento de algunos elementos. |
-| Feedback | DeepSeek | Dada la plantilla del archivo de feedback, pedir que añada la información recabada en clase. |
+| Pantalla admin | DeepSeek | Cambia esta función de manera que use el id de dueño en vez del de usuario. |
+| Pantalla admin | DeepSeek | Haz que las funciones usen HandleApiError en vez de try-catch. |
 
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 6
-- **Comparación con trabajo sin IA:** El uso de la IA me ha facilitado completar mi código de la mejor manera y ahorrar tiempo con la documentación.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 8
+- **Comparación con trabajo sin IA:** El uso de la IA me ha facilitado completar mi código de la mejor manera y con la mayor calidad posible.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. dada esta plantilla y esta información, añádela al documento.
-2. haz que estos botones se centren dentro de su columna.
-3. haz que el espacio entre estos componentes sea el mismo que en esta otra pantalla.
+1. Cambia esta función de manera que use el id de dueño en vez del de usuario.
+2. Haz que las funciones usen HandleApiError en vez de try-catch.
 
 #### 6. Problemas Encontrados y Limitaciones
 
