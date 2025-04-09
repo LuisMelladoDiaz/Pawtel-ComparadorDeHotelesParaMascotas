@@ -248,23 +248,23 @@ onMounted(() => {
 <template>
   <div class="max-w-7xl mx-auto w-full mt-10 mb-10">
     <!-- Cabecera -->
-      <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
-        <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
-          <h1 class="m-0! text-xl text-center font-semibold text-white">Gestión de Usuarios</h1>
-        </div>
-        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto p-4">
-          <input v-model="searchQuery" type="text" placeholder="Buscar usuarios..." @input="currentPage = 1"
-            class="px-4 py-2 rounded-md shadow-sm bg-white focus:ring-terracota focus:border-terracota">
-          <select v-model="userFilter" @change="currentPage = 1"
-            class="px-4 py-2  rounded-md shadow-sm bg-white focus:ring-terracota focus:border-terracota">
-            <option value="all">Todos los usuarios</option>
-            <option value="verified">Verificados</option>
-            <option value="unverified">Dueños no verificados</option>
-            <option value="owners">Dueños de hoteles</option>
-            <option value="customers">Clientes</option>
-          </select>
-        </div>
+    <div class="lg:flex flex-row items-stretch bg-terracota rounded-t-xl">
+      <div class="flex items-center justify-center lg:justify-start py-4 px-6 flex-1">
+        <h1 class="m-0! text-xl text-center font-semibold text-white">Gestión de Usuarios</h1>
       </div>
+      <div class="flex flex-col sm:flex-row justify-end gap-3 w-full md:w-auto p-4">
+        <input v-model="searchQuery" type="text" placeholder="Buscar usuarios..." @input="currentPage = 1"
+          class="px-4 py-2 rounded-md shadow-sm bg-white focus:ring-terracota focus:border-terracota">
+        <select v-model="userFilter" @change="currentPage = 1"
+          class="px-4 py-2  rounded-md shadow-sm bg-white focus:ring-terracota focus:border-terracota">
+          <option value="all">Todos los usuarios</option>
+          <option value="verified">Verificados</option>
+          <option value="unverified">Dueños no verificados</option>
+          <option value="owners">Dueños de hoteles</option>
+          <option value="customers">Clientes</option>
+        </select>
+      </div>
+    </div>
 
     <!-- Contenido principal -->
     <div class="bg-white shadow rounded-lg overflow-hidden">
@@ -287,20 +287,26 @@ onMounted(() => {
 
       <!-- Tabla de usuarios -->
       <div class="overflow-x-auto">
-        <table class="min-w-full table-fixed border-collapse divide-y divide-gray-200">
+        <table class="min-w-full lg:table-fixed lg:border-collapse divide-y divide-gray-200">
           <thead class="bg-gray-50">
             <tr>
-              <th scope="col" class="w-65 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col"
+                class="lg:w-65 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Usuario</th>
-              <th scope="col" class="w-65 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col"
+                class="lg:w-65 lg:px-0 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Correo</th>
-              <th scope="col" class="py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col"
+                class="lg:py-3 lg:px-0 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Teléfono</th>
-              <th scope="col" class="w-35 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col"
+                class="lg:w-35 lg:px-0 px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Tipo</th>
-              <th scope="col" class="w-30 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col"
+                class="lg:w-30 lg:px-0 px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Verificado</th>
-              <th scope="col" class="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col"
+                class="py-3 lg:px-0 px-6 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Acciones</th>
             </tr>
           </thead>
@@ -324,7 +330,7 @@ onMounted(() => {
             </template>
             <template v-else>
               <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-gray-50">
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 whitespace-nowrap">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
                       <img class="h-10 w-10 rounded-full" :src="user.image" :alt="user.name">
@@ -334,9 +340,9 @@ onMounted(() => {
                     </div>
                   </div>
                 </td>
-                <td class="py-4 text-sm text-gray-500">{{ user.email }}</td>
-                <td class="py-4 text-sm text-gray-500">{{ user.phone }}</td>
-                <td class="py-4 text-center">
+                <td class="py-4 text-sm text-gray-500 whitespace-nowrap">{{ user.email }}</td>
+                <td class="py-4 text-sm text-gray-500 whitespace-nowrap">{{ user.phone }}</td>
+                <td class="py-4 text-center whitespace-nowrap">
                   <span :class="{
                     'bg-azul-suave text-white': user.role === 'customer',
                     'bg-oliva text-white': user.role === 'owner'
@@ -344,13 +350,13 @@ onMounted(() => {
                     {{ user.role === 'owner' ? 'Dueño de hotel' : 'Cliente' }}
                   </span>
                 </td>
-                <td class="py-4 text-center">
+                <td class="py-4 text-center whitespace-nowrap">
                   <span :class="user.is_verified ? 'bg-[#8A9A5B]' : 'bg-beige'"
                     class="px-3 py-1 rounded-full text-xs font-medium text-white">
                     {{ user.is_verified ? 'Verificado' : 'Pendiente' }}
                   </span>
                 </td>
-                <td class="py-4 text-sm text-gray-500 text-center w-fit space-x-2">
+                <td class="py-4 text-sm text-gray-500 text-center w-fit space-x-2 whitespace-nowrap">
                   <Button v-if="!user.is_verified && user.role === 'owner'" @click="approveUser(user.id)"
                     class="inline-flex items-center w-30 justify-center py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-oliva! hover:bg-oliva-dark! focus:outline-none! focus:ring-2! focus:ring-offset-2! focus:ring-oliva!"
                     :disabled="isApproving">
@@ -414,44 +420,37 @@ onMounted(() => {
 
   <!-- Modal de confirmación -->
   <transition name="fade">
-    <div v-if="showDeleteModal" class="fixed z-10 inset-0 overflow-y-auto">
-      <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-        </div>
-        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-        <div
-          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div class="sm:flex sm:items-start">
-              <div
-                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-terracota sm:mx-0 sm:h-10 sm:w-10">
-                <i class="fas fa-trash-alt text-xl"></i>
-              </div>
-              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">Eliminar usuario</h3>
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">
-                    ¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede deshacer.
-                  </p>
-                </div>
-              </div>
+    <div v-if="showDeleteModal" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
+      <div
+        class="flex flex-col bg-white border-2 max-w-md w-[90%] border-terracota shadow-xl rounded-lg p-4 sm:p-6 gap-8 overflow-hidden text-pawtel-black font-complementario">
+        <div class="sm:flex sm:items-start">
+          <div
+            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-terracota sm:mx-0 sm:h-10 sm:w-10">
+            <i class="fas fa-trash-alt text-xl"></i>
+          </div>
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Eliminar usuario</h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                ¿Estás seguro de que deseas eliminar a este usuario? Esta acción no se puede deshacer.
+              </p>
             </div>
           </div>
-          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <Button type="button" @click="deleteUser"
-              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-terracota text-base font-medium text-white hover:bg-terracota-dark! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-              Eliminar
-            </Button>
-            <Button type="button" @click="closeDeleteModal"
-              class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-pawtel-black hover:bg-gray-50! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm">
-              Cancelar
-            </Button>
-          </div>
+        </div>
+        <div class="mb-3 flex flex-row w-full gap-4! justify-end items-end">
+          <Button type="button" @click="deleteUser"
+            class="m-0! w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-terracota text-base font-medium text-white hover:bg-terracota-dark! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+            Eliminar
+          </Button>
+          <Button type="button" @click="closeDeleteModal"
+            class="m-0! mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-pawtel-black hover:bg-gray-50! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm">
+            Cancelar
+          </Button>
         </div>
       </div>
     </div>
   </transition>
+
 </template>
 
 <style scoped>
