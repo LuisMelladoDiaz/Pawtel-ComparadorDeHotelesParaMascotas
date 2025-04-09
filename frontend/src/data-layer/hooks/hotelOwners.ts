@@ -10,6 +10,7 @@ import {
     fetchAllHotelsOfOwner,
     deleteAllHotelsOfOwner,
     getCurrentHotelOwner,
+    approveHotelOwner,
     type HotelOwner,
 } from '@/data-layer/api/hotelOwners';
 
@@ -45,9 +46,7 @@ export const useUpdateHotelOwner = () => {
         mutationFn: ({ hotelOwnerId, ownerData }: { hotelOwnerId: number; ownerData: HotelOwner }) =>
             updateHotelOwner(hotelOwnerId, ownerData),
         onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['hotelOwnerId', data.id] });
-            queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner', data.id] });
-            queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
+            queryClient.invalidateQueries();
         },
     });
 };
@@ -103,9 +102,20 @@ export const useDeleteAllHotelsOfOwner = () => {
 
 export const useGetCurrentHotelOwner = () => {
     return useQuery({
-        queryKey: ['currentHotelOwner'],
+        queryKey: ['hotelOwners'],
         queryFn: () => getCurrentHotelOwner(),
         staleTime: 1000 * 60,
         refetchOnWindowFocus: false,
     });
 }
+
+export const useApproveHotelOwner = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: approveHotelOwner,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['hotelOwners'] });
+        },
+    });
+};

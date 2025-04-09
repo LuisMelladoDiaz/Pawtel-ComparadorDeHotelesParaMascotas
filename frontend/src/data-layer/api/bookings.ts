@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useRouter } from 'vue-router';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const router = useRouter();
 
 export type Booking = {
   id?: number;

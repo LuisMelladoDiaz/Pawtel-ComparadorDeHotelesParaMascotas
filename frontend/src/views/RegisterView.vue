@@ -77,7 +77,7 @@ const register = async (values) => {
 </script>
 
 <template>
-  <div class="container flex justify-center items-center mt-10">
+  <div class="container flex justify-center items-center mt-10 mb-10">
     <div class="w-full sm:w-1/3 bg-white shadow-lg rounded-lg p-6">
       <h2 class="text-2xl font-semibold text-gray-800 text-center">Registrarse</h2>
 

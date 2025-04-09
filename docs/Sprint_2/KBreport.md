@@ -67,7 +67,7 @@
 
 Link a la base de conocimiento grupal: [https://bcc2425.vercel.app/](https://bcc2425.vercel.app/)
 
-Link al repositorio con el feedback recogido por el grupo 11 para el Sprint 1: [https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/tree/main/docs/Sprint_2/feedback_semanal](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/tree/main/docs/Sprint_1/feedback_semanal)
+Link al repositorio con el feedback recogido por el grupo 11 para el Sprint 2: [https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/tree/main/docs/Sprint_2/feedback_semanal](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/tree/main/docs/Sprint_2/feedback_semanal)
 
 
 **Contenido específico del grupo**

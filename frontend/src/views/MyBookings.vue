@@ -80,8 +80,12 @@ const formatPetType = (petType) => {
           </div>
         </div>
 
-        <div v-if="isLoadingCustomer" class="text-center">Cargando información del usuario...</div>
-        <div v-if="isLoadingBookings" class="text-center">Cargando reservas...</div>
+        <div v-if="isLoadingCustomer" class="text-center py-10 text-terracota">Cargando información del usuario...</div>
+        <div v-if="isLoadingBookings" class="text-center text-terracota">Cargando reservas...</div>
+        <div v-else-if="isError" class="text-center py-10 text-terracota">
+          <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+          <p>Error al cargar las reservas</p>
+        </div>
         
         <div v-else class="p-8">
           <div v-if="bookings?.length">

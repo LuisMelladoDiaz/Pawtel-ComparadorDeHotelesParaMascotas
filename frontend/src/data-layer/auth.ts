@@ -56,7 +56,7 @@ export const useLoginMutation = () => {
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries();
     },
   });
 };
@@ -68,10 +68,11 @@ export const useLogoutMutation = () => {
     mutationFn: async () => {
       localStorage.removeItem("access_token");
       localStorage.removeItem("refresh_token");
-      router.push("/")
+      router.push("/login")
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["isLoggedIn", "user"] }); // Refresh user state
+      queryClient.clear();
+      router.push("/login")
     },
   });
 };

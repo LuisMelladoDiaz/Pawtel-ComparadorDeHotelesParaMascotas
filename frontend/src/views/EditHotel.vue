@@ -1,9 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watchEffect, reactive } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { handleApiError } from '@/utils/errorHandler';
 import { Notyf } from 'notyf';
-import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel } from '@/data-layer/hooks/hotels';
+import { useGetHotelById, useGetRoomTypesByHotel, useUpdateHotel, useGetBookingsByHotel } from '@/data-layer/hooks/hotels';
 import { useUploadHotelImage, useDeleteHotelImage, useUpdateHotelImage, useSetCoverImage } from '@/data-layer/hooks/hotelImages';
 import { useCreateRoomType, useDeleteRoomType, useUpdateRoomType } from '@/data-layer/hooks/roomTypes';
 import Button from '../components/Button.vue';
@@ -11,6 +11,7 @@ import { boolean, number, string } from 'yup';
 import { integer } from '@vee-validate/rules';
 import { useQueryClient } from '@tanstack/vue-query';
 import axios from 'axios';
+import HotelBookings from '../components/HotelBookings.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -36,8 +37,9 @@ const closeEditModal = () => {
 
 // Obtener detalles del hotel
 const { data: hotel, isLoading: isLoadingHotel, isError: isErrorHotel } = useGetHotelById(hotelId);
-
 const { data: roomTypes, isLoading: isLoadingRooms, isError: isErrorRooms } = useGetRoomTypesByHotel(hotelId);
+const { data: bookingsData, isLoading: isLoadingBookings, isError: isErrorBookings } = useGetBookingsByHotel(hotelId);
+
 const { mutate: deleteHotelImage, isLoading: isDeleting, isError: isErrorDeleting } = useDeleteHotelImage();
 
 // Crear un objeto reactivo para manejar la edición
@@ -53,6 +55,7 @@ const fileInputRef = ref(null);
 const selectedFiles = ref([]);
 
 const hotelImages = computed(() => hotel.value?.images || []);
+const bookings = computed(() => bookingsData?.value);
 
 // Estado mutable para las imágenes del hotel
 const mutableHotelImages = ref([]);
@@ -90,18 +93,19 @@ const closeImageOptions = () => {
   imageOptionsSource.value = null;
 };
 
-// Corrección en el manejo de imágenes
 const handleImageUpload = (event) => {
   const files = event.target.files;
+
   for (const file of files) {
     const reader = new FileReader();
     reader.onload = (e) => {
       uploadedImages.value.push({ src: e.target.result, is_cover: false });
     };
-    event.target.value = '';
     reader.readAsDataURL(file);
     selectedFiles.value.push(file);
   }
+
+  event.target.value = '';
 };
 
 const submitImages = () => {
@@ -118,6 +122,8 @@ const submitImages = () => {
           notyf.success('Imagen subida con éxito');
           uploadedImages.value = [];
           selectedFiles.value = [];
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         },
         onError: (error) => {
           handleApiError(error);
@@ -163,7 +169,8 @@ const selectCoverImage = (index) => {
           uploadedImages.value.forEach((img, i) => {
             img.is_cover = i === uploadedIndex;
           });
-          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         })
         .catch((error) => {
           notyf.dismiss(loadingNotification);
@@ -195,7 +202,8 @@ const selectCoverImage = (index) => {
             mutableHotelImages.value.forEach((img, i) => {
               img.is_cover = i === index;
             });
-            queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+            queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+            queryClient.invalidateQueries({ queryKey: ['hotels'] });
           },
           onError: (error) => {
             notyf.dismiss(loadingNotification);
@@ -224,7 +232,8 @@ const removeImage = (index, source = 'uploaded') => {
         onSuccess: () => {
           notyf.success('Imagen eliminada del hotel.');
           mutableHotelImages.value.splice(index, 1);
-          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         },
         onError: handleApiError,
       }
@@ -269,10 +278,6 @@ const saveChanges = () => {
       onSuccess: () => {
         notyf.dismiss(loadingNotification);
         notyf.success('Cambios guardados correctamente.');
-        saveSuccess.value = true;
-        setTimeout(() => {
-          saveSuccess.value = false;
-        }, 3000);
       },
       onError: (error) => {
         notyf.dismiss(loadingNotification);
@@ -295,7 +300,7 @@ const formatPetType = (petType) => {
 
 // Nuevos hooks para crear y eliminar tipos de habitación
 const { mutate: createRoomType } = useCreateRoomType();
-const { mutate: deleteRoomType } = useDeleteRoomType();
+const { mutate: deleteRoomType, isPending: isDeletingRoom } = useDeleteRoomType();
 const { mutate: updateRoomType } = useUpdateRoomType();
 
 const newRoomType = ref({
@@ -407,25 +412,25 @@ const saveNewRoomType = () => {
   });
 };
 
-// Pagination
-const prevPage = () => currentPage.value > 1 && currentPage.value--;
-const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
+// Pagination Rooms
 const currentPage = ref(1);
 const itemsPerPage = 6;
-const totalPages = computed(() => Math.ceil((roomTypes.value?.length || 0) / itemsPerPage));
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(roomTypes?.value?.length / itemsPerPage))
+);
 const paginatedRooms = computed(() => {
-  if (!roomTypes.value) return [];
   const start = (currentPage.value - 1) * itemsPerPage;
   return roomTypes.value.slice(start, start + itemsPerPage);
 });
-
+const prevPage = () => currentPage.value > 1 && currentPage.value--;
+const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
 
 <template>
-  <div class="max-w-7xl p-0! mt-10 mx-auto px-5 w-full flex flex-col flex-grow">
+  <div class="max-w-7xl p-0! mt-10 mb-10 mx-auto px-5 w-full flex flex-col flex-grow">
     <div class="flex flex-col gap-6">
 
-      <h1 class="text-terracota text-4xl mb-0! p-1">
+      <h1 class="text-terracota text-3xl mb-0! p-1">
         {{ hotel?.name || 'Cargando hotel...' }}
       </h1>
 
@@ -453,12 +458,12 @@ const paginatedRooms = computed(() => {
             <!-- Galería de imágenes subidas -->
             <div v-if="(uploadedImages.length || mutableHotelImages.length)" class="mt-4">
               <div class="flex flex-col">
-                <!-- Imágenes del hotel -->
+                <!-- Imágenes del hotel subidas -->
                 <h3 class="text-md font-semibold text-gray-700 py-1">Imágenes subidas</h3>
                 <h3 v-if="!mutableHotelImages.length" class="text-sm font-semibold text-terracota py-1">El hotel no
                   tiene imágenes</h3>
-                <div v-if="mutableHotelImages.length" class="gap-3 grid grid-cols-2 lg:grid-cols-3">
-                  <div v-for="(img, index) in mutableHotelImages" :key="'hotel-' + index" class="relative group">
+                <div v-if="mutableHotelImages.length" class="gap-3 grid grid-cols-2 sm:grid-cols-3">
+                  <div v-for="(img, index) in mutableHotelImages" :key="'hotel-' + index" class="relative group w-fit mx-auto">
                     <img :src="img.image" :alt="'Imagen del hotel ' + (index + 1)"
                       class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
                       :class="{ 'border-b-4 border-azul-suave': img.is_cover }">
@@ -484,11 +489,11 @@ const paginatedRooms = computed(() => {
                     </div>
                   </div>
                 </div>
-                <!-- Imágenes subidas -->
+                <!-- Imágenes para subir -->
                 <h3 v-if="uploadedImages.length" class="text-md font-semibold text-gray-700 mt-4 py-1">Imágenes para
                   subir</h3>
-                <div v-if="uploadedImages.length" class="gap-3 grid grid-cols-2 lg:grid-cols-3">
-                  <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group">
+                <div v-if="uploadedImages.length" class="gap-3 grid grid-cols-2 sm:grid-cols-3">
+                  <div v-for="(img, index) in uploadedImages" :key="'uploaded-' + index" class="relative group w-fit mx-auto">
                     <img :src="img.src" alt="'Imagen subida ' + (index + 1)"
                       class="w-32 h-32 object-cover rounded-lg shadow-sm transition-transform group-hover:scale-105"
                       :class="{ 'border-b-4 border-blue-500': img.is_cover }">
@@ -573,7 +578,7 @@ const paginatedRooms = computed(() => {
                   :class="{'border-green-500 ring-1 ring-green-500': saveSuccess}"></textarea>
               </div>
             </div>
-            <div class="flex justify-between items-center">
+            <div class="flex flex-row justify-end items-center">
               <div class="text-right">
                 <Button type="accept" @click="saveChanges" :loading="isSaving" class="lg:w-fit m-0! w-full">
                   <i class="fas fa-save mr-2"></i> {{ isSaving ? "Guardando..." : "Guardar cambios" }}
@@ -584,6 +589,11 @@ const paginatedRooms = computed(() => {
         </div>
 
       </div>
+
+        <HotelBookings
+        :bookings="bookings"
+        :isLoading="isLoadingBookings"
+        :isError="isErrorBookings"/>
 
       <!-- SECCIÓN DE HABITACIONES -->
       <!-- HABITACIONES -->
@@ -648,19 +658,46 @@ const paginatedRooms = computed(() => {
           </div>
           <p v-else class="text-center font-bold text-xl text-terracota">No tienes habitaciones registradas.</p>
         </div>
-      </div>
 
-      <div class="flex justify-between w-full px-6 flex-col md:flex-row mb-10">
-        <span class="text-gray-600">Mostrando {{ paginatedRooms.length }} habitaciones de {{ roomTypes?.length || 0 }}</span>
-        <div class="flex gap-2 mt-2 md:mt-0">
-          <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">← Anterior</button>
-          <button v-for="page in totalPages" :key="page" @click="currentPage = page"
-                  class="px-3 py-1 hover:bg-gray-300" :class="{'bg-gray-300': currentPage === page, 'bg-gray-200': currentPage !== page}">
-            {{ page }}
-          </button>
-          <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">Siguiente →</button>
+        <!-- Paginación -->
+        <div v-if="roomTypes?.length > 0"
+          class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+          <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p class="text-[13px] mb-3 text-gray-700 sm:text-sm sm:mb-0">
+                Mostrando de la
+                <span class="font-bold">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+                a la
+                <span class="font-bold">{{ Math.min(currentPage * itemsPerPage, roomTypes?.length) }}</span>
+                de un total de
+                <span class="font-bold">{{ roomTypes.length }}</span>
+                habitaciones
+              </p>
+            </div>
+            <div>
+              <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <button @click="prevPage" :disabled="currentPage === 1"
+                  class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span class="sr-only">Anterior</span>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button v-for="page in totalPages" :key="page" @click="currentPage = page"
+                  :class="{ 'bg-terracota text-white': currentPage === page, 'bg-white text-gray-500 hover:bg-gray-50': currentPage !== page }"
+                  class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium">
+                  {{ page }}
+                </button>
+                <button @click="nextPage" :disabled="currentPage === totalPages"
+                  class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span class="sr-only">Siguiente</span>
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </nav>
+            </div>
+          </div>
         </div>
       </div>
+
+      
 
       <!-- Modal Añadir -->
       <transition name="fade">

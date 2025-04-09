@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HotelDetailsView from './views/HotelDetailView.vue';
 import HotelRoomsAndPrices from './views/HotelRoomsAndPrices.vue';
 import UserProfile from './views/UserProfile.vue'
+import UserList from './views/UserList.vue';
 import HotelListScreen from './views/HotelListScreen.vue'
 import LoginView from './views/LoginView.vue'
 import RegisterView from './views/RegisterView.vue'
@@ -14,6 +15,7 @@ import PasswordResetConfirm from './views/ResetPassword.vue'
 import Home from './views/Home.vue'
 import AboutUs from './views/AboutUs.vue';
 import Contact from './views/Contact.vue';
+import HotelOwners from './views/HotelOwners.vue';
 import { h, type Component} from 'vue';
 import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
@@ -42,17 +44,22 @@ enum AuthRequirement {
   LOGGED_IN_CUSTOMER = 'logged_in_customer',
   LOGGED_IN_HOTEL_OWNER = 'logged_in_hotel_owner',
   LOGGED_OUT = 'logged_out',
+  LOGGED_IN_ADMIN = 'logged_in_admin',
+  
 }
 
 const ALLOW_ALL = [
   AuthRequirement.LOGGED_IN_CUSTOMER,
   AuthRequirement.LOGGED_IN_HOTEL_OWNER,
+  AuthRequirement.LOGGED_IN_ADMIN,
   AuthRequirement.LOGGED_OUT,
+  AuthRequirement.LOGGED_IN_ADMIN,
 ];
 
 const ALLOW_LOGGED_IN = [
   AuthRequirement.LOGGED_IN_CUSTOMER,
   AuthRequirement.LOGGED_IN_HOTEL_OWNER,
+  AuthRequirement.LOGGED_IN_ADMIN,
 ];
 
 function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
@@ -74,7 +81,7 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
         try {
         const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/user-info/`);
         const role = response.data.role;
-        const state = role == 'customer' ? AuthRequirement.LOGGED_IN_CUSTOMER : role == 'hotel_owner' ? AuthRequirement.LOGGED_IN_HOTEL_OWNER : AuthRequirement.LOGGED_OUT;
+        const state = role == 'customer' ? AuthRequirement.LOGGED_IN_CUSTOMER : role == 'admin' ? AuthRequirement.LOGGED_IN_ADMIN : role == 'hotel_owner' ? AuthRequirement.LOGGED_IN_HOTEL_OWNER : AuthRequirement.LOGGED_OUT;
         if (!allowedStates.includes(state)) {
            return '/';
         }
@@ -101,7 +108,6 @@ import BookingReservationForm from './views/BookingReservationForm.vue';
 import TermsAndConditions from './views/TermsAndConditions.vue';
 import LayoutLogoNavBarOnly from './views/LayoutLogoNavBarOnly.vue';
 
-
 const routes = [
   {
     path: '/',
@@ -109,6 +115,13 @@ const routes = [
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
+  },
+  {
+    path: '/admin/user-list',
+    component: createComponent({ layout: LayoutDefault, component: UserList }),
+    meta: {
+      allowedAuthStates: [AuthRequirement.LOGGED_IN_ADMIN],
+    }
   },
   {
     path: '/sobre-nosotros',
@@ -120,6 +133,13 @@ const routes = [
   {
     path: '/contacto',
     component: createComponent({ layout: LayoutDefault, component: Contact }),
+    meta: {
+      allowedAuthStates: ALLOW_ALL,
+    },
+  },
+  {
+    path: '/duenos-alojamientos',
+    component: createComponent({ layout: LayoutDefault, component: HotelOwners }),
     meta: {
       allowedAuthStates: ALLOW_ALL,
     },
@@ -222,7 +242,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes: transformRoutes(routes),
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    }
+    return { top: 0 };
+  }
 });
+
 
 router.beforeEach((to, from, next) => {
   // Keys of filters we want to preserve

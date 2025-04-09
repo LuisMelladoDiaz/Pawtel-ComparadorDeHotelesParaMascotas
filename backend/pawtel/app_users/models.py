@@ -16,7 +16,7 @@ class AppUser(AbstractUser):
 
     phone_regex = RegexValidator(
         regex=r"^\+34\d{9}$",
-        message="El número de teleéfono debe ser del formato: +34XXXXXXXXX",
+        message="El número de teléfono debe ser del formato: +34XXXXXXXXX",
     )
 
     # Attributes -------------------------------------------------------------

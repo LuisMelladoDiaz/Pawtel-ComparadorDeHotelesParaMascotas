@@ -16,13 +16,13 @@ defineProps({
 
 <template>
   <div class="hotel-list-container flex flex-col pt-4">
-    <LoadingSpinner 
-      v-if="isLoading" 
+    <LoadingSpinner
+      v-if="isLoading"
       class="text-center py-10 text-xl font-bold text-gray-700 flex-col flex-grow"
     >
       Cargando detalles del hotel...
     </LoadingSpinner>
-    
+
     <PetHotelCard
       v-for="hotel in hotels"
       :key="hotel.id"
@@ -31,7 +31,6 @@ defineProps({
       :name="hotel.name"
       :city="hotel.city"
       :description="hotel.description"
-      :rating="hotel.rating"
       :price_max="hotel.price_max"
       :price_min="hotel.price_min"
     />

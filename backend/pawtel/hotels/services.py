@@ -1,6 +1,7 @@
 from datetime import date, datetime, timedelta
 
 from django.core.exceptions import ValidationError
+from django.db import transaction
 from django.db.models import Max, Min, Q
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
@@ -411,19 +412,17 @@ class HotelService:
     # POST -------------------------------------------------------------------
 
     @staticmethod
+    @transaction.atomic
     def upload_image_to_hotel(input_serializer):
-        hotel = input_serializer.validated_data["hotel"]
+        hotel = Hotel.objects.select_for_update().get(pk=input_serializer.validated_data["hotel"].id)
         current_image_count = hotel.images.count()
-
         if current_image_count == 0:
             input_serializer.validated_data["is_cover"] = True
-
         if input_serializer.validated_data.get("is_cover", False):
             current_cover_image = HotelService.retrieve_current_cover_image(hotel.id)
             if current_cover_image:
                 current_cover_image.is_cover = False
                 current_cover_image.save()
-
         hotel_image_created = input_serializer.save()
         return hotel_image_created
 
