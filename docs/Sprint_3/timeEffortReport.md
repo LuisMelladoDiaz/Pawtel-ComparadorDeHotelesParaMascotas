@@ -193,7 +193,7 @@
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 25/03/2025 - 18/03/2025
+**Periodo:** 27/03/2025 - 09/04/2025
 **Total de tiempo trabajado:** 20:45:57
 
 ### Proyecto Pawtel - Distribución del tiempo
