@@ -11,6 +11,8 @@ class Command(BaseCommand):
     help = "Seed hotel images"
 
     def handle(self, *args, **kwargs):
+        self.stdout.write(self.style.SUCCESS("Seeding Hotel Images..."))
+
         image_dir = os.path.join(settings.BASE_DIR, "pawtel", "images_hotel")
 
         if not os.path.exists(image_dir):
@@ -49,8 +51,9 @@ class Command(BaseCommand):
             for image_file in remaining_images[:4]:
                 self.create_hotel_image(hotel, image_file, is_cover=False)
 
+        self.stdout.write(self.style.SUCCESS("Hotel Images seeding complete!"))
+
     def create_hotel_image(self, hotel, image_file, is_cover):
-        """Crear la imagen asociada al hotel."""
         image_dir = os.path.join(settings.BASE_DIR, "pawtel", "images_hotel")
         image_path = os.path.join(image_dir, image_file)
 
@@ -59,8 +62,6 @@ class Command(BaseCommand):
                 hotel=hotel, image=File(f, name=image_file), is_cover=is_cover
             )
             hotel_image.save()
-            self.stdout.write(
-                self.style.SUCCESS(
-                    f"Imagen '{image_file}' añadida a '{hotel.name}'{' como portada' if is_cover else ''}."
-                )
-            )
+
+        label = "cover image" if is_cover else "image"
+        self.stdout.write(self.style.SUCCESS(f"Created {label} for {hotel.name}"))
