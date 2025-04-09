@@ -79,7 +79,7 @@
 #### 1. Información General
 
 - **Nombre del programador:** Andrés Martínez Reviriego
-- **Sprint:** Sprint2
+- **Sprint:** Sprint3
 - **Rol en el proyecto:** Full-Stack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -95,23 +95,21 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Consejo tecnológico	| ChatGPT	| Ofrecimiento de ideas para crear un mecanismo de restablecimiento de contraseña|
-| Solución error de commit	| ChatGPT	| Explicación de motivo por el que un commit no sigue las reglas del conventional commit|
-| Eliminar rama git	|ChatGPT	| Explicación de cómo eliminar ramas locales y remotas en git|
+| Ayuda autenticación postman	| ChatGPT	| Explicación de cómo autenticarme con postman en mi aplicación|
+| Cambio de función | ChatGPT	| Ayuda reformateando funciones para usar OnSucess y OnFailure en vez de usar try and catch|
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 7
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 6
 - **Comparación con trabajo sin IA:** Mejora en eficiencia y explicación de conceptos
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. ¿Cuál es la mejor forma de implementar un "¿olvidaste tu contraseña?"" en mi página web?
-2. Explícame el error con este commit: feat(user role): added customer seed Conventional Commits 🚫 According to the conventional-commits specification, some of the commit messages are not valid.
-3. ¿Cómo puedo eliminar una rama en github tanto remota como local?
+1. ¿Cómo puedo autenticarme para usar postman en mi aplicación? Utilizamos una autorización de jwt.
+2. ¿Qué pasos debo seguir para reformatear una función hecha con try and catch utilizando OnSucces y OnFailure en su defecto?
 
 #### 6. Problemas Encontrados y Limitaciones
 
