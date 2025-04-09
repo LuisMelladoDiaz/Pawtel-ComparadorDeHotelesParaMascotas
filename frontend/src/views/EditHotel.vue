@@ -122,6 +122,8 @@ const submitImages = () => {
           notyf.success('Imagen subida con éxito');
           uploadedImages.value = [];
           selectedFiles.value = [];
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         },
         onError: (error) => {
           handleApiError(error);
@@ -167,7 +169,7 @@ const selectCoverImage = (index) => {
           uploadedImages.value.forEach((img, i) => {
             img.is_cover = i === uploadedIndex;
           });
-          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
           queryClient.invalidateQueries({ queryKey: ['hotels'] });
         })
         .catch((error) => {
@@ -200,7 +202,7 @@ const selectCoverImage = (index) => {
             mutableHotelImages.value.forEach((img, i) => {
               img.is_cover = i === index;
             });
-            queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+            queryClient.invalidateQueries({ queryKey: ['hotelId'] });
             queryClient.invalidateQueries({ queryKey: ['hotels'] });
           },
           onError: (error) => {
@@ -230,7 +232,8 @@ const removeImage = (index, source = 'uploaded') => {
         onSuccess: () => {
           notyf.success('Imagen eliminada del hotel.');
           mutableHotelImages.value.splice(index, 1);
-          queryClient.invalidateQueries({ queryKey: ['hotelId', hotelId.value] });
+          queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+          queryClient.invalidateQueries({ queryKey: ['hotels'] });
         },
         onError: handleApiError,
       }
