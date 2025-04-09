@@ -227,35 +227,20 @@
 
 ## Reporte de tiempo de Javier Ruiz Garrido
 
-**Periodo:** 12/03/2025 - 25/03/2025
-**Total de tiempo trabajado:** 29:52:11
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 18:42:52
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Logica de archivado y borrado | 00:35:40 |
-| Logica de archivado y borrado | 02:37:18 |
-| Rehacer filtros de hoteles y rooms | 00:31:44 |
-| Logica de archivado y borrado | 01:40:52 |
-| Rehacer filtros de hoteles y rooms | 01:12:49 |
-| Rehacer filtros de hoteles y rooms | 00:45:51 |
-| Rehacer filtros de hoteles y rooms | 01:17:04 |
-| Rehacer filtros de hoteles y rooms | 00:54:30 |
-| clase | 04:00:00 |
-| Rehacer filtros de hoteles y rooms | 01:53:22 |
-| Rehacer filtros de hoteles y rooms | 00:47:26 |
-| Rehacer filtros de hoteles y rooms | 00:23:27 |
-| clase | 04:00:00 |
-| review pr | 00:28:29 |
-| fix migrations | 00:36:10 |
-| BookingHold seeder | 01:16:21 |
-| Refactorizacion variada backend | 01:17:16 |
-| Refactorizacion variada backend | 02:07:58 |
-| Refactorizacion variada backend | 03:02:39 |
-| Revision Pull Request | 00:17:34 |
-| clase | 04:00:00 |
-
+| clase | 08:00:00 |
+| Trabajos automatizados backend | 04:46:148 |
+| Presentacion | 02:52:27 |
+| Borrar booking hold activo al crear booking | 01:23:58 |
+| Pequeños arreglos backend | 01:03:45 |
+| Informes | 00:19:49 |
+| Revision pr | 00:16:39 |
 
 ![grafico-de-tiempos](graficas/javier_ruiz.png)
 ---
