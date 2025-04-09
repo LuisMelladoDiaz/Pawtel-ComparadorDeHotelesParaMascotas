@@ -17,7 +17,7 @@
 # **Performance Evaluation**
 
 **📅 Entregable:** Sprint 3
-**📆 Fecha:** 20/02/2025
+**📆 Fecha:** 09/04/2025
 **👥 Equipo:** G11
 
 
@@ -57,22 +57,22 @@
 
 | Student                     | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
 |-----------------------------|------|------|------|------|------|------|-------|
-| Flores de Francisco, Daniel | 10   | 10   | 10   |      |      |      | 30    |
-| Mellado Díaz, Luis          | 10   | 10   | 10   |      |      |      | 30    |
-| González Martínez, David    | 10   | 10   | 10   |      |      |      | 30    |
-| Martínez Reviriego, Andrés  | 10   | 10   | 10   |      |      |      | 30    |
-| Cortés Carrasco, Claudio    | 10   | 9    | 8    |      |      |      | 27    |
-| Trenado González, Sergio    | 10   | 10   | 10   |      |      |      | 30    |
-| Jiménez Morales, Francisco Miguel | 10 | 9   | 10    |      |      |      | 28    |
-| Gómez de Tovar, Jorge       | 10   | 8    | 10   |      |      |      | 28    |
-| Ruiz Garrido, Javier        | 10   | 8    | 10   |      |      |      | 28    |
-| Castillo Cebolla, Rafael    | 10   | 10   | 10   |      |      |      | 30    |
-| Castelló Sánchez, Fernando  | 10   | 10   | 10   |      |      |      | 30    |
-| García Sebastián, Javier    | 10   | 8    | 9    |      |      |      | 27    |
-| Garate Fuentes, Yesica      | 10   | 9    | 7    |      |      |      | 26    |
-| Castillejo Vela, Manuel     | 10   | 10   | 10   |      |      |      | 30    |
+| Flores de Francisco, Daniel | 10   | 10   | 10   |10      |      |      | 40    |
+| Mellado Díaz, Luis          | 10   | 10   | 10   |10      |      |      | 40    |
+| González Martínez, David    | 10   | 10   | 10   |10      |      |      | 40    |
+| Martínez Reviriego, Andrés  | 10   | 10   | 10   |10    |      |      | 40    |
+| Cortés Carrasco, Claudio    | 10   | 9    | 8    |7     |      |      | 34    |
+| Trenado González, Sergio    | 10   | 10   | 10   |10      |      |      | 40    |
+| Jiménez Morales, Francisco Miguel | 10 | 9   | 10    |9      |      |      | 38    |
+| Gómez de Tovar, Jorge       | 10   | 8    | 10   |10     |      |      | 38    |
+| Ruiz Garrido, Javier        | 10   | 8    | 10   |10      |      |      | 38    |
+| Castillo Cebolla, Rafael    | 10   | 10   | 10   |10      |      |      | 40    |
+| Castelló Sánchez, Fernando  | 10   | 10   | 10   |9     |      |      | 39    |
+| García Sebastián, Javier    | 10   | 8    | 9    |7     |      |      | 34    |
+| Garate Fuentes, Yesica      | 10   | 9    | 7    |9     |      |      | 35    |
+| Castillejo Vela, Manuel     | 10   | 10   | 10   |10    |      |      | 40    |
 
-**Total:** 405  
+**Total:** 536 / 560
 
 ---
 
