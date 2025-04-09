@@ -71,7 +71,7 @@ export const useLogoutMutation = () => {
       router.push("/")
     },
     onSuccess: () => {
-      queryClient.invalidateQueries();
+      queryClient.clear();
     },
   });
 };
