@@ -14,10 +14,10 @@
 
 <br><br>
 
-# 📑 **KBReport - Sprint 2** 🚀
+# 📑 **KBReport - Sprint 3** 🚀
 
-**📅 Entregable:** Sprint 2
-**📆 Fecha:** 24/03/2025
+**📅 Entregable:** Sprint 3
+**📆 Fecha:** 09/04/2025
 **👥 Equipo:** G11
 
 |  |   |

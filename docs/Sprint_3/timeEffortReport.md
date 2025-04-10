@@ -50,7 +50,7 @@
 
 ## Gráfica que muestra el tiempo empleado por el grupo al completo
 
-![grafico-de-tiempos](graficas/grafico_total.png)
+![grafico-de-tiempos](graficas/grupo2.png)
 
 
 ## Reporte de tiempo de Javier García Sebastián
