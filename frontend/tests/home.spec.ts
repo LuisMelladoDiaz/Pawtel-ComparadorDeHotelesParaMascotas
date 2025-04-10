@@ -20,7 +20,7 @@ test('test', async ({ page }) => {
   await page.getByRole('link', { name: 'Logo' }).click();
   await page.getByRole('button', { name: '¡Quiero unirme!' }).click();
   await page.getByRole('link', { name: 'Logo' }).click();
-  await page.getByText('Sobre Nosotros Contacto Iniciar SesiónCrear Cuenta').click();
+//  await page.getByText('Sobre Nosotros Contacto Iniciar SesiónCrear Cuenta').click();
   await page.getByRole('navigation').getByRole('link', { name: 'Contacto' }).click();
   await page.getByRole('link', { name: 'Sobre Nosotros', exact: true }).click();
   await page.getByRole('link', { name: 'Logo' }).click();

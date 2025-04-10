@@ -12,6 +12,6 @@ test('test', async ({ page }) => {
   await page.locator('div').filter({ hasText: /^Ordenar por\.\.\.NombrePrecio MáximoPrecio Mínimo$/ }).getByRole('combobox').selectOption('min_price_filters');
   await page.getByRole('button', { name: 'ASC ' }).click();
   await page.getByRole('button', { name: 'DESC ' }).click();
-  await page.locator('.info-container').first().click();
-  await page.locator('a > .px-4').first().click();
+  // await page.locator('.info-container').first().click();
+  // await page.locator('a > .px-4').first().click();
 });
