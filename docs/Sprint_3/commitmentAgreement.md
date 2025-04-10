@@ -1,9 +1,7 @@
 # 🐾🐕 Pawtel - 🏨 - Comparador de Hoteles para Mascotas 🐱🐾
 **🎯Nuestra misión** es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
-<p align="center">
-  <img src="https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/task/personalizar_md/frontend/src/assets/pawtel.jpg?raw=true" alt="Logo de PAWTEL" width="400">
-</p>
+![Logo de PAWTEL](https://github.com/user-attachments/assets/f3a1b73a-1301-4b0d-aa3a-f40bdb735b32)
 
 🌍 **Visítanos en nuestra Página web y Redes sociales proximamente.**
 
