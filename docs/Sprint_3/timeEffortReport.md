@@ -43,7 +43,7 @@
 | 09/04/2025  | v 1.5         | Informe de Andrés| Andrés Martínez Reviriego |
 | 09/04/2025  | v 1.6         | Informe de Fernando | Fernando Castelló Sánchez |
 | 10/04/2025  | v 1.7         | Informe de David | David González Martínez |
-
+| 10/04/2025  | v 1.8         | Informe de Javi | Javier García Sebastián |
 
 
 ---
@@ -55,24 +55,21 @@
 
 ## Reporte de tiempo de Javier García Sebastián
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 28:20:57
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 11:34:06
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|----------|
-| GUIÓN: dividir trabajo de presentación para el 21 | 00:28:29 |
-| clase 14/03/2025 | 04:00:00 |
-| FRONTEND: perfil de usuario (versión 3.0) | 02:13:45 |
-| FRONTEND: perfil de usuario (versión 2.0) | 02:34:43 |
-| FRONTEND: corregir errores perfil de usuario | 00:20:42 |
-| clase 21/03/2025 | 04:00:00 |
-| preparar presentación 21/03/2025 | 04:57:21 |
-| DOCUMENTACIÓN: organizar reporte del tiempo del equipo | 00:51:11 |
-| PRESENTACION: diapositivas presentacion dia 14/3/2025 | 01:50:38 |
-| conectar pantalla de UserProfile con backend | 01:45:58 |
-| GUIÓN: dividir trabajo de presentación para el 28 | 00:29:00 |
+| informe de feedback de usuarios piloto | 00:44:33 |
+| preparar presentación 28/03/2025 | 02:47:47 |
+| clase 28/03/2025 | 04:00:00 |
+| discusión sobre marketing via discord + creación de RRSS | 00:52:18 |
+| GUIÓN: dividir trabajo de presentación para el 04 | 00:38:00 |
+| GUIÓN: dividir trabajo de presentacion para el 11 | 00:48:19 |
+| PRESENTACIÓN: diapositivas presentación 11/04/2025 | 00:51:11 |
+| MARKETING: contenido redes sociales | 01:03:00 |
 
 ![grafico-de-tiempos](graficas/javi_garcia.png)
 
