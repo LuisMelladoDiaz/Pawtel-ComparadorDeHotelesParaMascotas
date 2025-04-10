@@ -45,7 +45,7 @@ enum AuthRequirement {
   LOGGED_IN_HOTEL_OWNER = 'logged_in_hotel_owner',
   LOGGED_OUT = 'logged_out',
   LOGGED_IN_ADMIN = 'logged_in_admin',
-  
+
 }
 
 const ALLOW_ALL = [
@@ -85,6 +85,16 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
         if (!allowedStates.includes(state)) {
            return '/';
         }
+        if (route.meta.allowNotApproved === false && state === AuthRequirement.LOGGED_IN_HOTEL_OWNER /* && allowedStates.includes(AuthRequirement.LOGGED_IN_HOTEL_OWNER) */) {
+          if (response.data.is_approved === false) {
+            return '/esperando-aprobacion';
+          }
+        }
+        if (route.meta.allowApproved === false && state === AuthRequirement.LOGGED_IN_HOTEL_OWNER /* && allowedStates.includes(AuthRequirement.LOGGED_IN_HOTEL_OWNER) */) {
+          if (response.data.is_approved === true) {
+            return '/mis-hoteles';
+          }
+        }
         return true;
         } catch (e) {
           if (allowedStates.includes(AuthRequirement.LOGGED_OUT)) {
@@ -107,6 +117,9 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
 import BookingReservationForm from './views/BookingReservationForm.vue';
 import TermsAndConditions from './views/TermsAndConditions.vue';
 import LayoutLogoNavBarOnly from './views/LayoutLogoNavBarOnly.vue';
+import PendingApprovalVue from './views/PendingApproval.vue';
+
+
 
 const routes = [
   {
@@ -177,7 +190,8 @@ const routes = [
     path: '/user-profile',
     component: createComponent({ layout: LayoutDefault, component: UserProfile }),
     meta: {
-      allowedAuthStates: ALLOW_LOGGED_IN, // TODO
+      allowedAuthStates: ALLOW_LOGGED_IN,
+      allowNotApproved: false,
     },
   },
   {
@@ -192,6 +206,7 @@ const routes = [
     component: createComponent({ layout: LayoutDefault, component: MisHoteles }),
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+      allowNotApproved: false,
     },
   },
   {
@@ -213,6 +228,7 @@ const routes = [
     component: createComponent({ layout: LayoutDefault, component: EditHotel }),
     meta: {
       allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+      allowNotApproved: false,
     },
   },
   {
@@ -236,6 +252,15 @@ const routes = [
       allowedAuthStates: ALLOW_ALL,
     },
   },
+  {
+    path: '/esperando-aprobacion',
+    name: 'EsperandoAprobacion',
+    component: createComponent({ layout: LayoutDefaultWhite, component: PendingApprovalVue }),
+    meta: {
+      allowedAuthStates: [AuthRequirement.LOGGED_IN_HOTEL_OWNER],
+      allowApproved: false,
+    },
+  }
 ];
 
 
