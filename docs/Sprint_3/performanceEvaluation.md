@@ -47,7 +47,7 @@
 | 📆 13/03/2025  | 🔹 v 1.1         | 🏁 #S1| ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 24/03/2025  | 🔹 v 1.2         | 🏁 #S2 | ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 24/03/2025  | 🔹 v 1.2.1        | 🏁 #S2 Evaluación Individual y trabajo S2 | ✍️ Luis Mellado Diaz |
-| 📆 09/04/2025  | 🔹 v 1.3        | 🏁 #S3 Evaluación Individual y trabajo S3 | ✍️ Luis Mellado Diaz |
+| 📆 10/04/2025  | 🔹 v 1.3        | 🏁 #S3 Evaluación Individual y trabajo S3 | ✍️ Luis Mellado Diaz |
 
 
 
@@ -360,7 +360,85 @@
 
 ## Sprint 3 (#S3)
 
-*(Por completar con las contribuciones de cada miembro.)*
+### Flores de Francisco, Daniel  
+- Pruebas End-to-End con Playwright  
+- Configuración de workflows y revisión de PRs  
+- Organización de documentos del Sprint 3  
+- Gestión de usuarios piloto y encuestas  
+- Corrección de issues en el frontend y despliegue  
+
+### González Martínez, David  
+- Implementación de filtros globales  
+- Revisión y corrección de bugs  
+- Gestión de contraseñas y despliegue  
+- Organización y reuniones  
+
+### García Sebastián, Javier  
+- Informe de feedback de usuarios piloto  
+- Preparación de presentaciones  
+- Creación de contenido para redes sociales  
+- Discusión y planificación de marketing  
+
+### Garate Fuentes, Yesica  
+- Desarrollo y ajuste de storyboards y mockups  
+- Mejoras en pantallas (Home, Sobre Nosotros, Contacto)  
+- Creación y refinamiento de videos de anuncio  
+- Planificación de marketing y presentaciones  
+
+### Trenado González, Sergio  
+- Mejoras en pantallas (Detalles de hotel, Mis reservas)  
+- Revisión y mejora de PRs (CRUD Hoteles)  
+- Implementación de términos y condiciones  
+- Fixes generales y optimización de estilos  
+
+### Castillo Cebolla, Rafael  
+- QA y revisión de frontend  
+- Implementación de lógica para reservas (Booking Hold)  
+- Hotfixes y tareas de alta prioridad  
+
+### Castillejo Vela, Manuel  
+- Gestión de imágenes (frontend y backend)  
+- Implementación de cambios en tiempo real para hoteles  
+- SLA agreement y pricing  
+- Informe de IA y gestión de usuarios piloto  
+
+### Mellado Díaz, Luis  
+- Refactorización de pantalla de búsqueda de hoteles  
+- Implementación de lógica para los rangos de precio
+- Confirmación de reserva
+- Componente para ver las reservas de un hotel
+- Presentaciones y gestión de entregables  
+- QA y dirección del equipo  
+
+### Gómez de Tovar, Jorge  
+- Autenticación y gestión de administradores  
+- Implementación de seeders para imágenes  
+- Revisión de PRs y cobertura de código  
+
+### Ruiz Garrido, Javier  
+- Automatización de tareas en backend  
+- Implementación de lógica para reservas (borrado de Booking Hold)  
+- Presentaciones y fixes menores  
+
+### Jiménez Morales, Francisco Miguel  
+- Conexión backend-frontend (pantalla de usuario)  
+- Gestión de usuarios piloto  
+- Preparación de presentaciones  
+
+### Castelló Sánchez, Fernando  
+- Desarrollo de pantallas CRUD y administrador  
+- Documentación y revisión de frontend  
+- Informe de IA  
+
+### Cortés Carrasco, Claudio  
+- Desarrollo de rutas para hotel owners no validados  
+- Planificación de marketing y presentaciones  
+- Creación de gráficas de rendimiento  
+
+### Martínez Reviriego, Andrés  
+- Implementación de mensajes de validación  
+- Reestablecimiento de contraseña  
+- Pantalla de administración y presentaciones  
 
 ## Preparing Project Launch (#PPL)
 
