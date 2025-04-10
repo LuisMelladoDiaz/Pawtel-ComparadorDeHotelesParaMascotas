@@ -9,6 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@capacitor/android": "^7.2.0",
+    "@capacitor/cli": "^7.2.0",
+    "@capacitor/core": "^7.2.0",
+    "@capacitor/ios": "^7.2.0",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/vue-fontawesome": "^3.0.8",
