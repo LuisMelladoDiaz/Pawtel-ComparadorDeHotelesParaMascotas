@@ -1,5 +1,5 @@
+import random
 from datetime import date, timedelta
-from random import choice, randint
 
 from django.core.management.base import BaseCommand
 from faker import Faker
@@ -8,7 +8,8 @@ from pawtel.customers.models import Customer
 from pawtel.room_types.models import RoomType
 
 fake = Faker("es_ES")
-
+Faker.seed(7)
+random.seed(7)  # Seed para random.choice y random.randint
 
 class Command(BaseCommand):
     help = "Seed database with bookings"
@@ -27,7 +28,7 @@ class Command(BaseCommand):
 
         if customer and room_type:
             start_date = date.today() + timedelta(days=5)
-            end_date = start_date + timedelta(days=randint(1, 7))
+            end_date = start_date + timedelta(days=random.randint(1, 7))
             total_price = room_type.price_per_night * (end_date - start_date).days
 
             Booking.objects.create(
@@ -54,11 +55,11 @@ class Command(BaseCommand):
             return
 
         for _ in range(num_random):
-            customer = choice(customers)
-            room_type = choice(room_types)
+            customer = random.choice(customers)
+            room_type = random.choice(room_types)
 
-            start_date = date.today() + timedelta(days=randint(1, 30))
-            end_date = start_date + timedelta(days=randint(1, 7))
+            start_date = date.today() + timedelta(days=random.randint(1, 30))
+            end_date = start_date + timedelta(days=random.randint(1, 7))
             total_price = room_type.price_per_night * (end_date - start_date).days
 
             Booking.objects.create(

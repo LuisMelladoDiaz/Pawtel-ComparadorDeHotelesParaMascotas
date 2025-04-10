@@ -5,6 +5,9 @@ from faker import Faker
 from pawtel.hotels.models import Hotel, HotelOwner
 
 fake = Faker("es_ES")
+Faker.seed(5)
+random.seed(5)
+
 
 
 class Command(BaseCommand):

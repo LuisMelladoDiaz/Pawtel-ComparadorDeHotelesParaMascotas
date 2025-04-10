@@ -4,6 +4,8 @@ from pawtel.app_admins.models import App_Admin
 from pawtel.app_users.models import AppUser
 
 fake = Faker("es_ES")
+Faker.seed(1)
+
 
 
 class Command(BaseCommand):

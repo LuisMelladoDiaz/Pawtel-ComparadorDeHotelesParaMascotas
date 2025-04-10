@@ -9,6 +9,9 @@ from pawtel.customers.models import Customer
 from pawtel.room_types.models import RoomType
 
 fake = Faker("es_ES")
+Faker.seed(4)
+random.seed(4)
+
 
 
 class Command(BaseCommand):

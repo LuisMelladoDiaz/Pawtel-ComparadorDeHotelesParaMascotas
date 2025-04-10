@@ -7,6 +7,8 @@ from pawtel.hotels.models import Hotel
 from pawtel.room_types.models import PetType, RoomType
 
 fake = Faker("es_ES")
+Faker.seed(6)
+random.seed(6)
 
 
 class Command(BaseCommand):

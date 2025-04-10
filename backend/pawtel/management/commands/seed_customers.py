@@ -4,6 +4,8 @@ from pawtel.app_users.models import AppUser
 from pawtel.customers.models import Customer
 
 fake = Faker("es_ES")
+Faker.seed(2)
+
 
 
 class Command(BaseCommand):

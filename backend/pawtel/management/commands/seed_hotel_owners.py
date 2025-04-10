@@ -4,6 +4,8 @@ from pawtel.app_users.models import AppUser
 from pawtel.hotels.models import HotelOwner
 
 fake = Faker("es_ES")
+Faker.seed(3)
+
 
 
 class Command(BaseCommand):

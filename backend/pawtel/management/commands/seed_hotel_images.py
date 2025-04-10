@@ -6,6 +6,8 @@ from django.core.files import File
 from django.core.management.base import BaseCommand
 from pawtel.hotels.models import Hotel, HotelImage
 
+random.seed(8)
+
 
 class Command(BaseCommand):
     help = "Seed hotel images"
