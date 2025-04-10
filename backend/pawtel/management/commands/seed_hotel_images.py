@@ -58,10 +58,8 @@ class Command(BaseCommand):
         image_path = os.path.join(image_dir, image_file)
 
         with open(image_path, "rb") as f:
-            hotel_image = HotelImage(
-                hotel=hotel, image=File(f, name=image_file), is_cover=is_cover
-            )
-            hotel_image.save()
+            hotel_image = HotelImage(hotel=hotel, is_cover=is_cover)
+            hotel_image.image.save(image_file, File(f), save=True)
 
         label = "cover image" if is_cover else "image"
         self.stdout.write(self.style.SUCCESS(f"Created {label} for {hotel.name}"))

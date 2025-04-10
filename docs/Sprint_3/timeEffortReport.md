@@ -42,8 +42,8 @@
 | 09/04/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
 | 09/04/2025  | v 1.5         | Informe de Andrés| Andrés Martínez Reviriego |
 | 09/04/2025  | v 1.6         | Informe de Fernando | Fernando Castelló Sánchez |
-
-
+| 10/04/2025  | v 1.7         | Informe de David | David González Martínez |
+| 10/04/2025  | v 1.8         | Informe de Javi | Javier García Sebastián |
 
 
 ---
@@ -55,24 +55,21 @@
 
 ## Reporte de tiempo de Javier García Sebastián
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 28:20:57
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 11:34:06
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|----------|
-| GUIÓN: dividir trabajo de presentación para el 21 | 00:28:29 |
-| clase 14/03/2025 | 04:00:00 |
-| FRONTEND: perfil de usuario (versión 3.0) | 02:13:45 |
-| FRONTEND: perfil de usuario (versión 2.0) | 02:34:43 |
-| FRONTEND: corregir errores perfil de usuario | 00:20:42 |
-| clase 21/03/2025 | 04:00:00 |
-| preparar presentación 21/03/2025 | 04:57:21 |
-| DOCUMENTACIÓN: organizar reporte del tiempo del equipo | 00:51:11 |
-| PRESENTACION: diapositivas presentacion dia 14/3/2025 | 01:50:38 |
-| conectar pantalla de UserProfile con backend | 01:45:58 |
-| GUIÓN: dividir trabajo de presentación para el 28 | 00:29:00 |
+| informe de feedback de usuarios piloto | 00:44:33 |
+| preparar presentación 28/03/2025 | 02:47:47 |
+| clase 28/03/2025 | 04:00:00 |
+| discusión sobre marketing via discord + creación de RRSS | 00:52:18 |
+| GUIÓN: dividir trabajo de presentación para el 04 | 00:38:00 |
+| GUIÓN: dividir trabajo de presentacion para el 11 | 00:48:19 |
+| PRESENTACIÓN: diapositivas presentación 11/04/2025 | 00:51:11 |
+| MARKETING: contenido redes sociales | 01:03:00 |
 
 ![grafico-de-tiempos](graficas/javi_garcia.png)
 
@@ -227,35 +224,20 @@
 
 ## Reporte de tiempo de Javier Ruiz Garrido
 
-**Periodo:** 12/03/2025 - 25/03/2025
-**Total de tiempo trabajado:** 29:52:11
+**Periodo:** 27/03/2025 - 09/04/2025
+**Total de tiempo trabajado:** 18:42:52
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Logica de archivado y borrado | 00:35:40 |
-| Logica de archivado y borrado | 02:37:18 |
-| Rehacer filtros de hoteles y rooms | 00:31:44 |
-| Logica de archivado y borrado | 01:40:52 |
-| Rehacer filtros de hoteles y rooms | 01:12:49 |
-| Rehacer filtros de hoteles y rooms | 00:45:51 |
-| Rehacer filtros de hoteles y rooms | 01:17:04 |
-| Rehacer filtros de hoteles y rooms | 00:54:30 |
-| clase | 04:00:00 |
-| Rehacer filtros de hoteles y rooms | 01:53:22 |
-| Rehacer filtros de hoteles y rooms | 00:47:26 |
-| Rehacer filtros de hoteles y rooms | 00:23:27 |
-| clase | 04:00:00 |
-| review pr | 00:28:29 |
-| fix migrations | 00:36:10 |
-| BookingHold seeder | 01:16:21 |
-| Refactorizacion variada backend | 01:17:16 |
-| Refactorizacion variada backend | 02:07:58 |
-| Refactorizacion variada backend | 03:02:39 |
-| Revision Pull Request | 00:17:34 |
-| clase | 04:00:00 |
-
+| clase | 08:00:00 |
+| Trabajos automatizados backend | 04:46:148 |
+| Presentacion | 02:52:27 |
+| Borrar booking hold activo al crear booking | 01:23:58 |
+| Pequeños arreglos backend | 01:03:45 |
+| Informes | 00:19:49 |
+| Revision pr | 00:16:39 |
 
 ![grafico-de-tiempos](graficas/javier_ruiz.png)
 ---
@@ -318,48 +300,31 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 12/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 42:16:15
+**Periodo:** 27/03/2025 - 10/04/2025
+**Total de tiempo trabajado:** 19:40:23
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción                                 | Duración   |
-|---------------------------------------------|------------|
-| Clase                                       | 04:00:00   |
-| Reunion                                     | 01:00:00   |
-| Fix bug                                     | 00:42:21   |
-| Autenticacion                               | 02:34:52   |
-| Conexion frontend backend                   | 02:36:26   |
-| Performance                                 | 00:17:19   |
-| Review                                      | 00:43:57   |
-| Reunión de urgencia                         | 00:47:00   |
-| Review/Trabajo en Reservas                  | 00:31:43   |
-| Planificar                                  | 00:10:58   |
-| Ayudar                                      | 01:10:18   |
-| Workflow                                    | 00:10:00   |
-| Review pagos/reservas                       | 00:20:13   |
-| Actualizarme, aclarar dudas, cosas varias   | 00:50:00   |
-| Fix double login bug                        | 00:02:00   |
-| Review/Fix bugs in frontend permissions     | 00:26:17   |
-| Review PR Andres                            | 00:08:46   |
-| Documentos                                  | 00:14:55   |
-| Review/Misc                                 | 00:30:03   |
-| Pulir reservas                              | 01:48:27   |
-| Mirar bug autenticacion                     | 00:10:12   |
-| Reviews, aclarar dudas, misc                | 00:47:00   |
-| Refactorizacion frontend                    | 01:25:18   |
-| Bug                                         | 00:16:49   |
-| Ver problema compañero                      | 00:32:00   |
-| Images                                      | 03:49:39   |
-| Reunion y organizacion                      | 01:42:00   |
-| Misc                                        | 05:42:04   |
-| Documento guidelines frontend/feedback pantallas | 01:23:49   |
-| Deployment                                  | 02:20:12   |
-| Permissions in frontend                     | 00:53:26   |
-| Class                                       | 04:00:00   |
-| Review a lo de Andrés                       | 00:08:11   |
+| Descripción | Duración |
+|-------------|---------|
+| Tarea filtros globales | 01:38:22 |
+| Miscelaneo/Review/Ayuda | 00:57:55 |
+| Fix lots of bugs | 02:49:00 |
+| Clase | 04:00:00 |
+| Organización/Misc | 00:29:19 |
+| Ver PR de Playwright, ver PR de validación | 00:14:19 |
+| Tarea filtros globales / misc / review | 00:18:53 |
+| Tarea filtros globales / misc | 01:26:11 |
+| Misc | 02:32:07 |
+| Gestionar contraseñas | 00:17:10 |
+| Despliegue y retoques varios | 00:07:34 |
+| Despliegue y retoques | 02:59:09 |
+| Review | 00:26:24 |
+| Reunión | 00:50:00 |
+| Rendimiento y misc | 00:34:00 |
 
-![{4DC49BB5-393E-469D-B7AA-F179388E8F28}](https://github.com/user-attachments/assets/4d868b92-8c81-4273-aa18-ea3ca6154765)
+![{D30BD78A-757B-438C-B6AF-1D02F2F99B59}](https://github.com/user-attachments/assets/d2b7b58b-9903-4760-a780-72f55a5166ad)
+
 
 ---
 
