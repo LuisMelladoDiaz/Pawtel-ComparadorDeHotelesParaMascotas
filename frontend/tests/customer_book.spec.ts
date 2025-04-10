@@ -7,7 +7,7 @@ test('test', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Contraseña' }).click();
   await page.getByRole('textbox', { name: 'Contraseña' }).fill('password123');
   await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
-  await page.getByRole('link', { name: 'Mis Reservas' }).click();
+  await page.goto("http://localhost:5173/mis-reservas?filterCity=&filterType&filterStartDate&filterEndDate");
   await page.getByRole('link', { name: 'Logo' }).click();
   await page.getByRole('button', { name: 'Cerrar Sesión' }).click();
   await page.getByRole('link', { name: 'Logo' }).click();

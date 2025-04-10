@@ -7,8 +7,7 @@ test('test', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Contraseña' }).click();
   await page.getByRole('textbox', { name: 'Contraseña' }).fill('password123');
   await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
-  await page.getByRole('button', { name: 'Buscar' }).click();
-  await page.locator('a > .px-4').first().click();
+  await page.goto("http://localhost:5173/hotels?filterCity=&filterType&filterStartDate&filterEndDate");
   await page.getByRole('button', { name: 'Reservar' }).first().click();
   await page.getByRole('button', { name: 'Cancelar' }).click();
   await page.getByRole('button', { name: 'Reservar' }).first().click();

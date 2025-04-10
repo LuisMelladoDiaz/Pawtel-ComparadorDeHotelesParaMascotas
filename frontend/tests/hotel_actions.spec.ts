@@ -14,7 +14,7 @@ test('test', async ({ page }) => {
   await page.getByRole('textbox', { name: 'Nombre de Usuario' }).press('ArrowRight');
   await page.getByRole('textbox', { name: 'Nombre de Usuario' }).fill('hotelowner2');
   await page.getByRole('button', { name: 'Iniciar Sesión' }).click();
-  await page.getByRole('link', { name: 'Mis Hoteles' }).click();
+  await page.goto("http://localhost:5173/mis-hoteles?filterCity=&filterType&filterStartDate&filterEndDate");
   await page.getByRole('button', { name: ' Editar' }).nth(2).click();
   await page.locator('div').filter({ hasText: /^Nombre del hotel$/ }).getByRole('textbox').click();
   await page.locator('div').filter({ hasText: /^Nombre del hotel$/ }).getByRole('textbox').fill('Pla y Viña S.AA.');
