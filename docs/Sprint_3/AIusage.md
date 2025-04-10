@@ -64,6 +64,7 @@
 | 09/05/2025  | v 1.4         | Informe de Francisco| Francisco Miguel Jiménez Morales |
 | 09/05/2025  | v 1.5         | Informe de Fernando | Fernando Castelló Sánchez |
 | 10/04/2025  | v 1.6         | Informe de David | David González Martínez |
+| 10/04/2025  | v 1.7         | Informe de Javi | Javier García Sebastián |
 
 ---
 
@@ -807,10 +808,11 @@ Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (x)
-- Refactorización de código (x)
+- Generación de código ()
+- Refactorización de código ()
 - Generación de documentación (x)
 - Asesoramiento técnico ()
+- otro -- especificar (x)
 
 #### 3. Uso de IA en las Tareas
 
@@ -818,22 +820,21 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| solución error en mi código	| ChatGPT	| Explicaxión detallada sobre porque mi código no funcionaba como debería|
-| Solución error de la bd	| ChatGPT	| Explicación de como solucionar un error con mi mariadb|
 | plantilla para documento general de tiempo	|ChatGPT	| generarme una plantilla para los informes de tiempo|
+| ideas para futuro contenido de las redes socuiales	|ChatGPT	| ideas para posibles usos de las redes que generen engagement|
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
-- **Comparación con trabajo sin IA:** Mejora en eficiencia y explicación de conceptos
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 2
+- **Comparación con trabajo sin IA:** Mejora en eficiencia
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Explica que hacer cuando me ocurre este error: Can't connect to local server through socket '/tmp/mysql.sock' (61).
-2. Basandote en este informe de tiempo de clockify, genera una plantilla en formato md que comprenda las horas utilizadas
+1. Basandote en este informe de tiempo de clockify, genera una plantilla en formato md que comprenda las horas utilizadas
+2. Tengo una aplicación de buscador de hoteles para mascotas. que contenido puedo subir a mis redes que genere engagement y nos de mas usuarios?
 
 #### 6. Problemas Encontrados y Limitaciones
 
