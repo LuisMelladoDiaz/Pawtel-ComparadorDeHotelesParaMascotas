@@ -50,6 +50,7 @@ class UserInfoView(APIView):
             hotel_owner_id = user.hotel_owner.id
             user_serializer_data["hotel_owner_id"] = hotel_owner_id
             user_serializer_data["role"] = "hotel_owner"
+            user_serializer_data["is_approved"] = user.hotel_owner.is_approved
 
         elif hasattr(user, "customer"):
             customer_id = user.customer.id
