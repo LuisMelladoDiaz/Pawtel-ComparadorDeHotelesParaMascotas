@@ -208,13 +208,10 @@ Tipo de habitación: Habitación Deluxe
 
 Como usuario administrador: admin1, con contraseña password123. 
 
-Igualmente, adjuntamos el super usuario de django por si fuese necesario:
-Usuario: pawtel_admin 
-Contraseña: 4dm1n
 
 - La URL de nuestra landing page es: [landing.pawtel.es](https://landing.pawtel.es/)
-- La URL de nuestro despliegue del Sprint1 es: [pawtel-v1.com](pawtel-frontend-sprint1.onrender.com)
-- La URL de nuestro despliegue del Sprint2 es: [pawtel-v2.com](https://pawtel-frontend-sprint2.onrender.com/)
+- La URL de nuestro despliegue del Sprint1 es: [pawtel-s1.com](https://pawtel-frontend-sprint1.onrender.com/)
+- La URL de nuestro despliegue del Sprint2 es: [pawtel-s2.com](https://pawtel-frontend-sprint2.onrender.com/)
 - La URL de nuestro despliegue del Sprint3 es: [pawtel.com](https://pawtel-frontend-sprint3.onrender.com/)
 - La URL de nuestro repositorio de GitHub es: [github.com/Pawtel](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas)
 - La URL a nuestro sistema de seguimiento de tiempo es: [Clockify.me/Pawtel](https://app.clockify.me/projects/67bb0478254a3a5bd06e2d53/)
