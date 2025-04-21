@@ -82,7 +82,7 @@ SIMPLE_JWT = {
 
 ROOT_URLCONF = "pawtel.urls"
 
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS").split(",")
+CORS_ALLOW_ALL_ORIGINS = True  # temporalmente para pruebas
 
 
 CORS_ALLOW_CREDENTIALS = True
