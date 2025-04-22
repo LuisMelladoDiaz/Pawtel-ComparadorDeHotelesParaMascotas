@@ -31,7 +31,7 @@ export const useIsLoggedIn = () => {
   const q = _useIsLoggedIn();
   const d = computed(() => q.isError.value ? false: q.isLoading.value ? false : q.data.value || false);
   watchEffect(() => {
-    console.log("useIsLoggedIn", d.value);
+    console.log("useIsLoggedIn", d.value, import.meta.env.VITE_API_BASE_URL);
     console.log("isLoading", q.isLoading.value);
     console.log("data", q.data.value);
     console.log("error", q.error.value);

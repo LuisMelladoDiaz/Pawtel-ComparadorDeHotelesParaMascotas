@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   server: {
     androidScheme: 'http',
     cleartext: true,
-    hostname: '10.0.2.2'
+    hostname: '10.0.2.2',
   },
   android: {
     allowMixedContent: true,
