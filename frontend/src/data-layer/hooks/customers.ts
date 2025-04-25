@@ -66,7 +66,7 @@ export const usePartialUpdateCustomer = () => {
     return useMutation({
         mutationFn: ({ customerId, partialData }: { customerId: number; partialData: Partial<Customer> }) =>
             partialUpdateCustomer(customerId, partialData),
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
             queryClient.invalidateQueries({ queryKey: ['customer', data.id] });
         },
     });

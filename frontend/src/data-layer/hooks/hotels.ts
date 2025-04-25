@@ -76,7 +76,7 @@ export const usePartialUpdateHotel = () => {
     mutationFn: ({ hotelId, partialData }: { hotelId: number; partialData: Partial<Hotel> }) =>
       partialUpdateHotel(hotelId, partialData),
 
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
     },
@@ -116,7 +116,7 @@ export const useUploadImageToHotel = () => {
       return uploadImageToHotel(toValue(hotelId), toValue(image), toValue(isCover));
     },
 
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
     },
   });

@@ -1,7 +1,5 @@
-import axios from 'axios';
-import { useRouter } from 'vue-router';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import api from "@/api";
+import { useRouter } from "vue-router";
 
 export type Booking = {
   id?: number;
@@ -16,34 +14,30 @@ export type Booking = {
   hotel_id?: number;
 };
 
-export const createBooking = async (BookingData: Omit<Booking, 'id'>) => {
-  const url = `${API_BASE_URL}/bookings/`;
+export const createBooking = async (BookingData: Omit<Booking, "id">) => {
+  const url = `bookings/`;
   try {
-    const response = await axios.post(url, { ...BookingData, role: "customer" });
+    const response = await api.post(url, { json: { ...BookingData, role: "customer" } }).json<{ url?: string }>();
 
-    if (response.data?.url) {
-      window.location.href = response.data.url; // Redirect to Stripe
+    if (response?.url) {
+      window.location.href = response.url;
     }
 
-    return response.data as string;
+    return response.url as string;
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-        console.error("Error en la solicitud:", error.response?.data);
-        throw error;
-    }
-    console.error("Error desconocido:", error);
+    console.error(error);
     throw error;
-}
+  }
 };
 
 export const fetchAllBookings = async () => {
-  const url = `${API_BASE_URL}/bookings/`;
-  const response = await axios.get(url);
-  return response.data as Booking[];
+  const url = `bookings/`;
+  const response = await api.get(url);
+  return await response.json<Booking[]>();
 };
 
 export const fetchBookingById = async (bookingId: number) => {
-  const url = `${API_BASE_URL}/bookings/${bookingId}/`;
-  const response = await axios.get(url);
-  return response.data as Booking;
+  const url = `bookings/${bookingId}/`;
+  const response = await api.get(url);
+  return await response.json<Booking>();
 };

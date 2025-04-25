@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import api from "@/api";
 
 export type BookingHold = {
     id?: number;
@@ -13,24 +11,24 @@ export type BookingHold = {
 };
 
 export const fetchBookingHoldById = async (id: number): Promise<BookingHold> => {
-    const url = `${API_BASE_URL}/booking-holds/${id}/`;
-    const response = await axios.get(url);
-    return response.data as BookingHold;
+    const url = `booking-holds/${id}/`;
+    const response = await api.get(url);
+    return await response.json<BookingHold>();
 };
 
 export const fetchAllBookingHolds = async (): Promise<BookingHold[]> => {
-    const url = `${API_BASE_URL}/booking-holds/`;
-    const response = await axios.get(url);
-    return response.data as BookingHold[];
+    const url = `booking-holds/`;
+    const response = await api.get(url);
+    return await response.json<BookingHold[]>();
 };
 
-export const createBookingHold = async (data: Omit<BookingHold, 'id' | 'is_expired'>): Promise<BookingHold> => {
-    const url = `${API_BASE_URL}/booking-holds/`;
-    const response = await axios.post(url, data);
-    return response.data as BookingHold;
+export const createBookingHold = async (data: Omit<BookingHold, "id" | "is_expired">): Promise<BookingHold> => {
+    const url = `booking-holds/`;
+    const response = await api.post(url, { json: data });
+    return await response.json<BookingHold>();
 };
 
 export const deleteBookingHold = async (id: number): Promise<void> => {
-    const url = `${API_BASE_URL}/booking-holds/${id}/`;
-    await axios.delete(url);
-};
+    const url = `booking-holds/${id}/`;
+    await api.delete(url);
+}

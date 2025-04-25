@@ -8,7 +8,7 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { Notyf } from 'notyf';
 import 'notyf/notyf.min.css';
-import * as a from './axios-setup';
+import * as a from './api';
 import { defineRule, configure } from 'vee-validate';
 import { required } from '@vee-validate/rules';
 import { customMessages } from './validation-messages';
