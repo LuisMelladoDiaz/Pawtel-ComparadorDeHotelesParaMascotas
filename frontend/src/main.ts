@@ -32,7 +32,7 @@ const notyf = new Notyf({
 });
 
 const app = createApp(App);
-
+console.log('App created');
 app.use(createPinia());
 
 app.config.globalProperties.$notyf = notyf;

@@ -16,7 +16,6 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Seeding Hotel Images..."))
 
         image_dir = os.path.join(settings.BASE_DIR, "pawtel", "assets", "images_hotel")
-
         if not os.path.exists(image_dir):
             self.stdout.write(
                 self.style.ERROR(f"No se encontró la carpeta {image_dir}")
@@ -24,7 +23,6 @@ class Command(BaseCommand):
             return
 
         image_files = os.listdir(image_dir)
-
         if not image_files:
             self.stdout.write(self.style.WARNING("No hay imágenes para cargar."))
             return
@@ -39,19 +37,16 @@ class Command(BaseCommand):
         image_files_copy = image_files.copy()
 
         for hotel in hotels:
-            if image_files_copy:
-                cover_image_file = random.choice(image_files_copy)
-                image_files_copy.remove(cover_image_file)
-            else:
-                cover_image_file = random.choice(image_files)
+            image_files_copy = image_files.copy()
 
+            cover_image_file = random.choice(image_files_copy)
+            image_files_copy.remove(cover_image_file)
             self.create_hotel_image(hotel, cover_image_file, is_cover=True)
 
-            remaining_images = list(set(image_files) - {cover_image_file})
-            random.shuffle(remaining_images)
-
-            for image_file in remaining_images[:4]:
-                self.create_hotel_image(hotel, image_file, is_cover=False)
+            for i in range(0, 4):
+                image = random.choice(image_files_copy)
+                image_files_copy.remove(image)
+                self.create_hotel_image(hotel, image, is_cover=False)
 
         self.stdout.write(self.style.SUCCESS("Hotel Images seeding complete!"))
 
