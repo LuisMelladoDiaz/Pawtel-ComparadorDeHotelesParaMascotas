@@ -4,7 +4,6 @@ from datetime import datetime
 import stripe
 from django.conf import settings
 from django.db import transaction
-from django.forms import ValidationError
 from django.http import HttpResponse, JsonResponse
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
@@ -14,9 +13,9 @@ from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
-from pawtel.room_types.models import RoomType
 from rest_framework import status
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 from rest_framework.response import Response
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -62,6 +61,65 @@ class BookingService:
     def serialize_output_booking(booking, many=False):
         return BookingSerializer(booking, many=many).data
 
+    @staticmethod
+    def serialize_input_booking_create(request):
+        context = {"request": request}
+        current_customer_id = CustomerService.get_current_customer(request).id
+        data = request.data.copy()
+        data["customer"] = current_customer_id
+
+        room_type = request.data.get("room_type")
+        end_date = request.data.get("end_date")
+        start_date = request.data.get("start_date")
+
+        if room_type and end_date and start_date:
+            from pawtel.room_types.services import RoomTypeService
+
+            room_type_price = RoomTypeService.retrieve_room_type(
+                room_type
+            ).price_per_night
+            num_days_booking = (
+                datetime.strptime(end_date, "%Y-%m-%d").date()
+                - datetime.strptime(start_date, "%Y-%m-%d").date()
+            ).days
+            total_price = room_type_price * num_days_booking
+            data["total_price"] = total_price
+        else:
+            pass  # Let the validate method raise the error
+
+        serializer = BookingSerializer(data=data, context=context)
+        return serializer
+
+    # Validations ------------------------------------------------------------
+
+    @staticmethod
+    def validate_create_booking(request, input_serializer):
+        if not input_serializer.is_valid():
+            raise ValidationError(input_serializer.errors)
+
+        customer = CustomerService.get_current_customer(request)
+        room_type_id = input_serializer.validated_data.get("room_type").id
+        from pawtel.room_types.services import RoomTypeService
+
+        room_type = RoomTypeService.retrieve_room_type(room_type_id)
+        start_date = input_serializer.validated_data.get("start_date")
+        end_date = input_serializer.validated_data.get("end_date")
+
+        # Validate that the client does not have previous reservations for the same room in the same period
+        overlapping_bookings = Booking.objects.filter(
+            customer=customer,
+            room_type=room_type,
+            start_date__lt=end_date,
+            end_date__gt=start_date,
+        ).exists()
+
+        if overlapping_bookings:
+            raise ValidationError(
+                "Un cliente puede tener diferentes reservas de la misma habitación pero que no coincidan."
+            )
+
+        # TODO: Implement validation for booking_holds
+
     # Authorization -----------------------------------------------------
 
     # TODO This auth with the news auth_action_levels
@@ -93,62 +151,6 @@ class BookingService:
         ).count()
 
     #  POST Methods -------------------------------------------------------
-
-    @staticmethod
-    def serialize_input_booking_create(request):
-        from pawtel.room_types.services import RoomTypeService
-
-        # Hack to get the current customer id
-        if hasattr(request, "user"):
-            current_customer_id = CustomerService.get_current_customer(request).id
-            data = request.data.copy()
-            data["customer"] = current_customer_id
-        else:
-            data = request
-        room_type_price = RoomTypeService.retrieve_room_type(
-            data["room_type"]
-        ).price_per_night
-        total_price = (
-            room_type_price
-            * (
-                datetime.strptime(data["end_date"], "%Y-%m-%d").date()
-                - datetime.strptime(data["start_date"], "%Y-%m-%d").date()
-            ).days
-        )
-        data["total_price"] = total_price
-        return BookingSerializer(data=data)
-
-    @staticmethod
-    def validate_create_booking(request, input_serializer):
-        if not input_serializer.is_valid():
-            raise ValidationError(input_serializer.errors)
-
-        customer = CustomerService.get_current_customer(request)
-
-        room_id = input_serializer.validated_data.get("room_type").id
-
-        try:
-            room_type = RoomType.objects.get(id=room_id)
-        except RoomType.DoesNotExist:
-            raise NotFound("El tipo de habitación no existe.")
-
-        start_date = input_serializer.validated_data.get("start_date")
-        end_date = input_serializer.validated_data.get("end_date")
-
-        # Validate that the client does not have previous reservations for the same room in the same period
-        overlapping_bookings = Booking.objects.filter(
-            customer=customer,
-            room_type=room_type,
-            start_date__lt=end_date,
-            end_date__gt=start_date,
-        ).exists()
-
-        if overlapping_bookings:
-            raise ValidationError(
-                "Un cliente puede tener diferentes reservas de la misma habitación pero que no coincidan."
-            )
-
-        # TODO: Implement validation for booking_holds
 
     @staticmethod
     def create_booking(input_serializer):
@@ -194,7 +196,9 @@ class BookingService:
             )
 
             return JsonResponse({"url": session.url})
-        except Exception:
+        except Exception as e:
+            print("got hereeee!!!")
+            print(e)
             return Response(
                 {"error": "Algo salió mal."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,

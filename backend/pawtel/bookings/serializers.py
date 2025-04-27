@@ -9,7 +9,7 @@ class BookingSerializer(BaseSerializer):
     fields_required_for_post = [
         "start_date",
         "end_date",
-        "total_price",
+        "total_price",  # derived
         "customer",
         "room_type",
     ]
