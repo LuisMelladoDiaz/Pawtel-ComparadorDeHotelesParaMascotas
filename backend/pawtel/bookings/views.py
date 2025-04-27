@@ -32,7 +32,8 @@ class BookingViewSet(viewsets.ModelViewSet):
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        BookingService.authorize_create_booking(request)
+        action_name = currentframe().f_code.co_name
+        BookingService.authorize_action_booking(request, action_name)
         input_serializer = BookingService.serialize_input_booking_create(request)
         BookingService.validate_create_booking(request, input_serializer)
         response = BookingService.create_booking(input_serializer)

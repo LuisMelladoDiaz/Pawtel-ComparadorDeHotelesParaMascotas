@@ -120,15 +120,6 @@ class BookingService:
 
         # TODO: Implement validation for booking_holds
 
-    # Authorization -----------------------------------------------------
-
-    # TODO This auth with the news auth_action_levels
-    @staticmethod
-    def authorize_create_booking(request):
-        return AppUserService._AppUserService__authorize_action_app_user(
-            request, request.user.id
-        )
-
     #  GET Methods --------------------------------------------------------
 
     @staticmethod
@@ -197,8 +188,6 @@ class BookingService:
 
             return JsonResponse({"url": session.url})
         except Exception as e:
-            print("got hereeee!!!")
-            print(e)
             return Response(
                 {"error": "Algo salió mal."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
