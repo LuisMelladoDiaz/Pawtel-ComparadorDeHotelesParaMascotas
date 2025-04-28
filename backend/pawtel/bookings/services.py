@@ -7,7 +7,7 @@ from django.db import transaction
 from django.http import HttpResponse, JsonResponse
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
-from pawtel.booking_holds.models import BookingHold
+from pawtel.booking_holds.services import BookingHoldService
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService
@@ -97,15 +97,15 @@ class BookingService:
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
-        customer = CustomerService.get_current_customer(request)
-        room_type_id = input_serializer.validated_data.get("room_type").id
         from pawtel.room_types.services import RoomTypeService
 
+        customer = CustomerService.get_current_customer(request)
+        room_type_id = input_serializer.validated_data.get("room_type").id
         room_type = RoomTypeService.retrieve_room_type(room_type_id)
         start_date = input_serializer.validated_data.get("start_date")
         end_date = input_serializer.validated_data.get("end_date")
 
-        # Validate that the client does not have previous reservations for the same room in the same period
+        # Validate that the client does not already have bookings for the same room in the same period
         overlapping_bookings = Booking.objects.filter(
             customer=customer,
             room_type=room_type,
@@ -115,10 +115,15 @@ class BookingService:
 
         if overlapping_bookings:
             raise ValidationError(
-                "Un cliente puede tener diferentes reservas de la misma habitación pero que no coincidan."
+                "Un cliente puede tener diferentes reservas de la misma habitación pero no pueden coincidir en fecha."
             )
 
-        # TODO: Implement validation for booking_holds
+        if not BookingHoldService.has_customer_active_booking_hold_of_room_type(
+            customer.id, room_type_id
+        ):
+            raise ValidationError(
+                "Para poder reservar, el cliente debe tener una Booking hold activa en esa habitación."
+            )
 
     #  GET Methods --------------------------------------------------------
 
@@ -201,7 +206,7 @@ class BookingService:
             event = stripe.Webhook.construct_event(payload, sig_header, secret_endpoint)
         except ValueError as e:
             # Invalid payload
-            print(e)
+            # print(e)
             return HttpResponse(status=400)
 
         if event.type == "checkout.session.completed":
@@ -215,7 +220,9 @@ class BookingService:
                 booking_instance = booking.save()
             else:
                 return HttpResponse(status=400)
-            BookingHold.objects.filter(
-                customer=booking_instance.customer, room_type=booking_instance.room_type
-            ).delete()
+
+            BookingHoldService.delete_booking_holds_of_customer(
+                booking_instance.customer
+            )
+
         return HttpResponse(status=200)
