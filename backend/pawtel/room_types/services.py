@@ -237,7 +237,7 @@ class RoomTypeService:
                 room_type_id, day
             )
 
-            # Cannot call function due to circular dependency
+            # Cannot call function in BookingHoldService due to circular dependency
             active_booking_holds_count = BookingHold.objects.filter(
                 room_type_id=room_type_id,
                 hold_expires_at__gt=now(),
