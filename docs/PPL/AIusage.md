@@ -59,6 +59,7 @@
 | 29/04/2025  | v 1.1         | Añadida descripción de Andrés | Andrés Martínez Reviriego |
 | 29/04/2025  | v 1.2        | Añadida descripción de Fernando | Fernando Castelló Sánchez |
 | 29/04/2025  | v 1.3        | Añadida descripción de Luis | Luis Mellado Díaz |
+| 29/04/2025  | v 1.4        | Añadida descripción de Francisco | Francisco Miguel Jiménez Morales |
 
 
 ---
@@ -271,8 +272,8 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 - Generación de código ()
 - Refactorización de código ( )
-- Generación de documentación (X)
-- Asesoramiento técnico (X)
+- Generación de documentación ()
+- Asesoramiento técnico ()
 - Otro (especificar): [Especificar si aplica]
 
 #### 3. Uso de IA en las Tareas
@@ -281,33 +282,29 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Conexión Backend-frontend pantalla de usuario | ChatGPT | Ayuda en problemas con vue, resolución de errores |
-| Preparar presentación | ChatGPT | Ayuda con problemas en la edición de tablas en excel |
+
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 1
-- **Comparación con trabajo sin IA:** Más largo
-
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 0
+- **Comparación con trabajo sin IA:** Igual
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. main.ts:37 [Vue Router warn]: No match found for location with path "/UserProfile" Me salta este aviso en la consola, el caso es que esta correctamente importada la vista y su ruta en main.ts y en router.ts.
-2. Qué significa este error.
-3. la interrogacion indica que el campo es opcional? export type Customer = {  id?: number username: string; etc};.
+  - No se ha usado
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** A la hora de responder sobre un error se inventaba código; el cual casi siempre era incoherente
-- **Limitaciones detectadas en la IA:** Es incapaz de programar algo útil para el proyecto; es mejor usarla puntualmente para dudas y consejos
+- **Errores o respuestas incorrectas de la IA:** Nada
+- **Limitaciones detectadas en la IA:** Nada
 - **Propuestas de mejora en el uso de IA:** Ninguno
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Si
-- **Comentarios adicionales sobre la experiencia con IA:** Darle el mismo uso (solo para errores y entendimiento del código) y no confiar mucho en ella.
+- **Comentarios adicionales sobre la experiencia con IA:** Es una herramienta útil cuando hace falta que ahorra mucho tiempo.
 
 ---
 

@@ -38,6 +38,7 @@
 | 29/04/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
 | 29/04/2025  | v 1.1         | Parte de Andrés | Andrés Martínez Reviriego |
 | 29/04/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
+| 29/04/2025  | v 1.3         | Parte de Francisco | Francisco Miguel Jiménez Morales |
 
 
 ---
@@ -238,33 +239,32 @@
 
 ## Reporte de tiempo de Francisco Miguel Jiménez Morales
 
-**Periodo:** 27/03/2025 - 10/04/2025
-**Total de tiempo trabajado:** 18:18:22
+**Periodo:** 11/04/2025 - 02/05/2025
+**Total de tiempo trabajado:** 19:17:31
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                                  | Duración   |
 |----------------------------------------------|------------|
-| Documentación Sprint                         | 00:20:00   |
-| Preparar presentación                        | 00:45:29   |
 | Clase                                        | 04:00:00   |
-| Preparar presentación                        | 01:12:24   |
-| Preparar presentación                        | 00:51:53   |
-| Conexión Backend-frontend pantalla de usuario| 00:37:34   |
-| Conexión Backend-frontend pantalla de usuario| 01:37:33   |
-| Conexión Backend-frontend pantalla de usuario| 01:00:00   |
-| Gestión de usuarios pilotos                  | 00:08:11   |
-| Conexión Backend-frontend pantalla de usuario| 00:32:43   |
-| Conexión Backend-frontend pantalla de usuario| 01:54:55   |
-| Conexión Backend-frontend pantalla de usuario| 00:12:21   |
-| Conexión Backend-frontend pantalla de usuario| 00:30:20   |
-| Gestión de usuarios pilotos                  | 00:34:59   |
+| Gestión de usuarios pilotos                  | 01:49:41   |
+| Preparar presentación                        | 00:21:27   |
+| Gestión de usuarios pilotos                  | 00:06:12   |
+| Preparar presentación                        | 00:37:40   |
+| Preparar presentación                        | 00:38:34   |
+| Preparar Killer Opener                       | 00:29:45   |
+| Preparar presentación                        | 00:44:59   |
+| Preparar presentación                        | 00:24:38   |
+| Preparar presentación                        | 00:16:05   |
+| Clase                                        | 04:00:00   |
+| Aplicar feedback a la presentación           | 00:55:53   |
+| Misc (Revisión de feedback + redacción de docs) | 00:16:47   |
+| Misc (Revisión de feedback + redacción de docs) | 00:35:50   |
 | Clase                                        | 04:00:00   |
 
 
 
-
-![grafico-de-tiempos](graficas/francisco3.png)
+![grafico-de-tiempos](graficas/francisco4.png)
 ---
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
