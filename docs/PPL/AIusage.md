@@ -58,6 +58,8 @@
 | 29/04/2025  | v 1.0         | Versión inicial del documento | Daniel Flores de Francisco |
 | 29/04/2025  | v 1.1         | Añadida descripción de Andrés | Andrés Martínez Reviriego |
 | 29/04/2025  | v 1.2        | Añadida descripción de Fernando | Fernando Castelló Sánchez |
+| 29/04/2025  | v 1.3        | Añadida descripción de Luis | Luis Mellado Díaz |
+
 
 ---
 
@@ -563,15 +565,15 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Luis Mellado Díaz
-- **Sprint:** Sprint3
+- **Sprint:** PPL
 - **Rol en el proyecto:** PM, programador frontend, documentación
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (x)
-- Refactorización de código (x)
-- Generación de documentación ()
-- Asesoramiento técnico (x)
+- Generación de código ()
+- Refactorización de código ()
+- Generación de documentación (X)
+- Asesoramiento técnico ()
 
 #### 3. Uso de IA en las Tareas
 
@@ -579,31 +581,31 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Añadir las reservas de un hotel a la pantalla de gestión | ChatGPT | Usada para solucionar errores en el código |
-| Pantalla de confirmación de reserva | ChatGPT | Apoyo con el estilo |
+| Guión WPL | ChatGPT | Se ha usado para mejorar las transiciones entre temas y convertir el guión a diálogo |
+| Presentación PPL | ChatGPT | Apoyo con el estilo de la presentación |
 
 
 #### 4. Impacto en Productividad
 
 - **Horas estimadas ahorradas en comparación con trabajo manual:** 3
-- **Comparación con trabajo sin IA:** Creo que en este sprint es en el que menos impacto ha tenido el uso de la IA. Ya estoy muy familiarizado con las tecnologías y los patrones de diseño que estamos usando. Ha sido más efectivo hacer mis features totalmente por mi cuenta y luego usar IA para solucionar algun error o mejorar el estilo visual.
+- **Comparación con trabajo sin IA:** Ha ahorrado carga de trabajo manual, como sería transcribir un guión a diálogo.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. hay alguna comilla o parentesis sin cerrar en esta pantalla? se me colorea el codigo de naranja como si fuese todo un string en el vscode. (Recibe el código de la pantalla)
-2. ira esta tarjeta de confirmacion de reserva. Me ocupa mucho espacio y tengo que hacer scroll hacia abajo para verlo todo. quiero que entre en una sola pantalla sin scroll. como reorganizarias la info? Puedes darle un toque de estilo para que parezca como una factura? (recibe el componente de la factura de confirmación de reserva)
+1. (Con el guión actual como contexto) ayudame a escribir bien este guión, coomo ves hay muchas notas sueltas. Escribelo bien para que se sepa que dice cada personaje. Si ves que algun cambio de tema es brusco dimelo y vemos como hacer una transicion amena.
+2. (Con la presentación como contexto) tengo esta slide cuyo proposito es hablar sobre que mi app es una pwa y app nativa de android. Me das sugerencias para mejorar el estilo? esta un poco sosa
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Definitivamente ChatGPT no es la mejor herramienta de apoyo para un frontend vue y vite. Tiene muchísimos problemas a la hora de comprender y gestionar la asincronía. Es mejor idea limitarla a preguntas sobre el estilo o errores. No recomiendo usarla para desarrollar la funcionalidad de la feat.
-- **Errores encontrados:** no es especialmente buena a la hora de generar scripts para frontend, tiende a complicar la estructura de la pantalla usando watch o useEffects. Es mejor aclarar el patrón que estas usando, en nuestro caso computed, y proveerle el codigo de los hooks y mutatations.
+- **Limitaciones detectadas en la IA:** No se han encontrado limitaciones.
+- **Errores encontrados:** A veces puede cambiar de castellano a latino.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** He estado probando la IA vercel V0 en otro proyecto. Es muy buena, especialmente con las tecnoogías del entorno vercel. Sin embargo, no le he dado una oportunidad en Pawtel debido a que el límite de mensajes diarios es muy escueto y tendría que pagar para sacarle un verdader provecho.
+- **Comentarios adicionales sobre la experiencia con IA:** Altamente recomendada como compañera de coumentación.
 ---
 
 ### 👨‍💻 Rafael Castillo Cebolla
