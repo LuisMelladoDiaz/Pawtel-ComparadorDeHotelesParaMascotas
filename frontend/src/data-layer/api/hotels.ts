@@ -17,8 +17,7 @@ export const fetchAllHotels = async (filters?: Record<string, any>) => {
   const queryParams = new URLSearchParams(filters).toString();
   const url = `hotels?${queryParams}`;
   const response = await api.get(url);
-  console.log("api - ", await response.json<Hotel[]>());
-  return await response.json<Hotel[]>();
+  return response.json<Hotel[]>();
 };
 
 export const fetchHotelById = async (hotelId: number) => {
@@ -47,8 +46,7 @@ export const partialUpdateHotel = async (hotelId: number, partialData: Partial<H
 
 export const deleteHotel = async (hotelId: number) => {
   const url = `hotels/${hotelId}/`;
-  const response = await api.delete(url);
-  return await response.json();
+  await api.delete(url);
 };
 
 export const fetchRoomTypesByHotel = async (hotelId: number) => {

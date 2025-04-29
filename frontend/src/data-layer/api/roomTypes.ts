@@ -56,8 +56,7 @@ export const partialUpdateRoomType = async (roomTypeId: number, partialData: Par
 
 export const deleteRoomType = async (roomTypeId: number) => {
   const url = `room-types/${roomTypeId}/`;
-  const response = await api.delete(url);
-  return await response.json();
+  await api.delete(url);
 };
 
 export const checkRoomTypeAvailability = async (roomTypeId: number, startDate: string, endDate: string) => {

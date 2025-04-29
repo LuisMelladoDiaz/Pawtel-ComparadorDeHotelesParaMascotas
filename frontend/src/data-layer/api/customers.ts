@@ -70,8 +70,7 @@ export const partialUpdateCustomer = async (CustomerId: number, partialData: Par
 
 export const deleteCustomer = async (CustomerId: number) => {
     const url = `customers/${CustomerId}/`;
-    const response = await api.delete(url);
-    return await response.json();
+    await api.delete(url);
 };
 
 export const getCurrentCustomer = async () => {

@@ -19,8 +19,12 @@ const api = ky.create({
     ],
     afterResponse: [
       async (request, _options, response) => {
-        if (response.status !== 401) return response;
+        // If not 401, handle empty body
+        if (response.status !== 401) {
+          return response;
+        }
 
+        // 401 handling (token refresh logic)
         if (request.headers.get("x-auth-retry") === "true" || request.url.includes("token/refresh")) {
           localStorage.removeItem("access_token");
           localStorage.removeItem("refresh_token");

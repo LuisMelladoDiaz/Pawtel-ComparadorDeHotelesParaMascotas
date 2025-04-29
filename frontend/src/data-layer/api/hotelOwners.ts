@@ -50,8 +50,7 @@ export const partialUpdateHotelOwner = async (hotelOwnerId: number, partialData:
 
 export const deleteHotelOwner = async (hotelOwnerId: number) => {
     const url = `hotel-owners/${hotelOwnerId}/`;
-    const response = await api.delete(url);
-    return await response.json();
+    await api.delete(url);
 };
 
 export const fetchAllHotelsOfOwner = async (hotelOwnerId: number) => {
@@ -62,8 +61,7 @@ export const fetchAllHotelsOfOwner = async (hotelOwnerId: number) => {
 
 export const deleteAllHotelsOfOwner = async (hotelOwnerId: number) => {
     const url = `hotel-owners/${hotelOwnerId}/hotels/delete/`;
-    const response = await api.delete(url);
-    return await response.json();
+    await api.delete(url);
 };
 
 export const getCurrentHotelOwner = async () => {

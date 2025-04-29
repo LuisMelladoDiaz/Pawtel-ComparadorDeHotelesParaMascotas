@@ -43,8 +43,7 @@ export const partialUpdateHotelImage = async (hotelId: number, imageId: number, 
 
 export const deleteHotelImage = async (hotelId: number, imageId: number) => {
   const url = `hotels/${hotelId}/hotel-images/${imageId}/delete/`;
-  const response = await api.delete(url);
-  return await response.json();
+  await api.delete(url);
 };
 
 export const setCoverImage = async (hotelId: number, imageId: number) => {
