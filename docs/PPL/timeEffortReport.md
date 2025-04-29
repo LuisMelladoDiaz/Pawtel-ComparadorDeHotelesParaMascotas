@@ -36,6 +36,7 @@
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
 | 29/04/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
+| 29/04/2025  | v 1.1         | Parte de Andrés | Andrés Martínez Reviriego |
 
 ---
 
@@ -370,19 +371,14 @@
 
 ## Reporte de tiempo de Andrés Martínez Reviriego
 
-**Periodo:** 27/03/2025 - 09/04/2025
-**Total de tiempo trabajado:** 17:49:57
+**Periodo:** 10/04/2025 - 29/04/2025
+**Total de tiempo trabajado:** 14:47:53
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Mensajes de validación | 06:19:53 |
-| Error getIp | 01:00:33 |
-| Pantalla admin | 01:55:00 |
-| Asistencia a clase | 04:00:00 |
-| Informe de IA | 00:06:45 |
-| Reestablecimiento de contraseña | 01:18:27 |
-| Presentación | 03:09:19 |
+| Asistencia a clase | 08:00:00 |
+| Presentación | 06:47:53 |
 
-![grafico-de-tiempos](graficas/andres3.png)
+![grafico-de-tiempos](graficas/andres4.png)
