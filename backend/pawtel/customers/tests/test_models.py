@@ -26,3 +26,4 @@ class CustomerModelTest(TestCase):
         self.assertTrue(customer.user.is_active)
         self.assertFalse(customer.user.is_staff)
         self.assertFalse(customer.user.is_superuser)
+        self.assertEqual(customer.paw_points, 0)
