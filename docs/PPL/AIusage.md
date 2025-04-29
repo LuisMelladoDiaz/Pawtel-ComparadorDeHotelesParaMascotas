@@ -56,7 +56,7 @@
 | 📅 Fecha       | 🔢 N° de Versión | 📄 Descripción                   | ✍️ Elaborado por           |
 |-------------|---------------|-------------------------------|-------------------------|
 | 29/04/2025  | v 1.0         | Versión inicial del documento | Daniel Flores de Francisco |
-| 29/04/2025  | v 1.1         | Versión inicial del documento | Andrés Martínez Reviriego |
+| 29/04/2025  | v 1.1         | Añadida descripción de Andrés | Andrés Martínez Reviriego |
 ---
 
 ### 🏆 2. Resumen ejecutivo
