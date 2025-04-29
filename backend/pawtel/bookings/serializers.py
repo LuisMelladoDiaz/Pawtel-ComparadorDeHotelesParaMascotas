@@ -57,6 +57,9 @@ class BookingSerializer(BaseSerializer):
         today = date.today()
         errors = {}
 
+        if not creation_date:
+            creation_date = today
+
         if creation_date > today:
             errors.setdefault("creation_date", []).append(
                 "La fecha de comienzo de la reserva debe ser futura."

@@ -224,8 +224,7 @@ class BookingServiceTest(TestCase):
             )
             self.assertEqual(response.status_code, 200)
 
-        self.assertFalse(
-            BookingHold.objects.filter(
-                customer=self.customer, room_type=self.room_type
-            ).exists()
-        )
+        has_booking_holds = BookingHold.objects.filter(
+            customer=self.customer, room_type=self.room_type
+        ).exists()
+        self.assertFalse(has_booking_holds)

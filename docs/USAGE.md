@@ -194,11 +194,11 @@ Gracias a esta variable de entorno, podrás darle a pagar y te enviará a stripe
 
 Primero tenemos que **configurar la variable de entorno STRIPE_SECRET_ENDPOINT** para que pueda procesar el evento de respuesta enviado por stripe al servidor.
 
-Tendrás que **acceder a nuestra cuenta de stripe** con las credenciales de pawtel (pongase en contacto con nosotros para obtener el correo y contraseña)
+Tendrás que **acceder a nuestra cuenta de stripe** con las credenciales de pawtel (póngase en contacto con nosotros para obtener el correo y contraseña).
 
-Ahí accede a la url https://dashboard.stripe.com/test/workbench/webhooks/
+Ahí accede a la url https://dashboard.stripe.com/test/workbench/webhooks/ .
 
-Una vez dentro, en "destinos de eventos", pulsa "Añade un destino" para añadir tu endpoint de escucha. Te obligará a seleccionar que eventos quieres que escuche; selecciona todos los eventos de **checkout**.
+Una vez dentro, en "destinos de eventos", pulsa "Añade un destino" para añadir tu endpoint de escucha. Luego se comentará cómo abrir el endpoint. Te obligará a seleccionar que eventos quieres que escuche; selecciona todos los eventos de **checkout**.
 
 Selecciona "Punto de conexión de webhook".
 
@@ -206,11 +206,11 @@ Finalmente te pedirá una dirección URL para el endpoint y una descripción. Un
 
 Para ello, deberemos **exponer el puerto 8000** (el backend) para que podamos recibir el evento de stripe. Puedes usar la herramienta ngrok; al instalarla te puede saltar el antivirus pero es porque al ser un programa que te abre puertos y los expone a internet.
 
-Una vez descargado ngrok en https://ngrok.com/downloads/windows
+Una vez descargado ngrok en https://ngrok.com/downloads/windows .
 
-Deberás regitrarte y obtener tu tokken personal de autorización.
+Deberás regitrarte y obtener tu token personal de autorización.
 
-Ejecutar los siguientes comandos
+Ejecutar los siguientes comandos:
 
 ```bash
 ngrok config add-authtoken TU_AUTHTOKEN
@@ -222,11 +222,11 @@ ngrok http 8000
 
 **Esto te proporcionará una URL temporal que cambiará cada vez que vuelvas a abrir el puerto; por lo que si quiere volver a testear que funciona la pasarela deberás modificar el webhook en la página de stripe.**
 
-Ya con la URL creada deberás añadir como endpint **URL/bookings/stripe/**
+Ya con la URL creada deberás añadir como endpoint: **URL/bookings/stripe/** .
 
 Es importante que acabe en / o te saltará un error al probarlo.
 
-Una vez creada, pulsas en el destino para ver sus datos y a tu derecha deberás ver el campo "Secreto de firma"; ese será el valor de STRIPE_SECRET_ENDPOINT.
+Una vez creada, pulsas en el destino para ver sus datos y a tu derecha deberás ver el campo "Secreto de firma"; ese será el valor de STRIPE_SECRET_ENDPOINT en el `.env`.
 
 ### Cómo pagar con stripe
 

@@ -65,9 +65,14 @@ class BookingService:
     @staticmethod
     def serialize_input_booking_create(request):
         context = {"request": request}
-        current_customer_id = CustomerService.get_current_customer(request).id
         data = request.data.copy()
-        data["customer"] = current_customer_id
+
+        # If this method is called from the endpoint 'create', the request will have an user.
+        # If this method is called from the endpoint 'stripe_response', the request will not have an user.
+        # In second case, the correct customer will already be included in the JSON.
+        if hasattr(request, "user"):
+            current_customer_id = CustomerService.get_current_customer(request).id
+            data["customer"] = current_customer_id
 
         room_type = request.data.get("room_type")
         end_date = request.data.get("end_date")
@@ -115,12 +120,14 @@ class BookingService:
                 "Un cliente puede tener diferentes reservas de la misma habitación pero no pueden coincidir en fecha."
             )
 
+        """
         if not BookingHoldService.has_customer_active_booking_hold_of_room_type(
             customer.id, room_type_id
         ):
             raise ValidationError(
                 "Para poder reservar, el cliente debe tener una Booking hold activa en esa habitación."
             )
+        """
 
     #  GET Methods --------------------------------------------------------
 
@@ -201,7 +208,7 @@ class BookingService:
         event = None
         try:
             event = stripe.Webhook.construct_event(payload, sig_header, secret_endpoint)
-        except ValueError as e:
+        except ValueError:  # as e
             # Invalid payload
             # print(e)
             return HttpResponse(status=400)
