@@ -130,21 +130,17 @@
 
 ## Reporte de tiempo de Rafael Castillo Cebolla
 
-**Periodo:** 14/03/2025 - 26/03/2025
-**Total de tiempo trabajado:** 38:42:00
+**Periodo:** 10/04/2025 - 30/04/2025
+**Total de tiempo trabajado:** 22:43:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| QA | 08:55:00 |
-| Preparar entrega  | 01:03:00 |
-| Revisar frontend | 03:00:00  |
-| Booking Hold  | 03:42:00 |
-| Clases | 4:00:00 |
-| Tareas alta prioridad sprint 3 | 02:49:00 |
-| Reunión | 01:00:00 |
-| Hotfix | 02:46:00 |
+| QA | 05:50:00 |
+| Arreglar error backen  | 06:36:00 |
+| Pawtel points | 04:17:00  |
+| Clases  | 06:00:00 |
 
 ![grafico-de-tiempos](graficas/rafael.png)
 ---

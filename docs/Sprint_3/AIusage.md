@@ -620,7 +620,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Rafael Castillo Cebolla
-- **Sprint:** PPL
+- **Sprint:** 3
 - **Rol en el proyecto:** Jefe de backend, ayudante de documentación y analista y supervisor de calidad.
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -628,7 +628,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 - Generación de código (X)
 - Refactorización de código ()
 - Generación de documentación ( )
-- Asesoramiento técnico ()
+- Asesoramiento técnico (X)
 - Otro (especificar): --
 
 #### 3. Uso de IA en las Tareas
@@ -637,12 +637,13 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea                                | Herramienta utilizada | Descripción del uso de IA                                                               |
 |--------------------------------------|-----------------------|-----------------------------------------------------------------------------------------|
-| Arreglar bug bookings | ChatGPT               | Encontrar directrices e inspiración para resolver problemas de diseño e implementación. |
+| Diseñar y revisar backend en general | ChatGPT               | Encontrar directrices e inspiración para resolver problemas de diseño e implementación. |
+| Automatizar tareas con Celery | ChatGPT               | Encontrar directrices e inspiración para resolver problemas de diseño e implementación. |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 1
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4
 - **Comparación con trabajo sin IA:** Más eficiente y seguro.
 
 #### 5. Prompts Utilizados
