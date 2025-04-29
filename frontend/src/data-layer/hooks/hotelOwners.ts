@@ -57,7 +57,7 @@ export const usePartialUpdateHotelOwner = () => {
     return useMutation({
         mutationFn: ({ hotelOwnerId, partialData }: { hotelOwnerId: number; partialData: Partial<HotelOwner> }) =>
             partialUpdateHotelOwner(hotelOwnerId, partialData),
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
             queryClient.invalidateQueries({ queryKey: ['hotelOwner', data.id] });
             queryClient.invalidateQueries({ queryKey: ['hotelsOfOwner', data.id] });
             queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });

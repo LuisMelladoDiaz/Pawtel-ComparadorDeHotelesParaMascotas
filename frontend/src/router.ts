@@ -21,7 +21,7 @@ import LayoutDefault from './views/LayoutDefault.vue';
 import LayoutWithFilter from './views/LayoutWithFilter.vue';
 import LayoutDefaultWhite from './views/LayoutDefaultWhite.vue';
 import { type RouteRecordRaw } from 'vue-router';
-import axios from 'axios';
+import api from '@/api';
 
 type ComponentLike = Component | (() => Promise<Component>);
 
@@ -73,29 +73,27 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
       }
       const allowedStates = (newRoute.meta as any).allowedAuthStates as AuthRequirement[];
       newRoute.beforeEnter = async (to, from) => {
-        // if ALLOW_ALL is present, we don't need to check anything
         if (new Set(allowedStates).size === new Set(ALLOW_ALL).size && [...new Set(allowedStates)].every(value => new Set(ALLOW_ALL).has(value))) {
           return true;
         }
-
         try {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/user-info/`);
-        const role = response.data.role;
-        const state = role == 'customer' ? AuthRequirement.LOGGED_IN_CUSTOMER : role == 'admin' ? AuthRequirement.LOGGED_IN_ADMIN : role == 'hotel_owner' ? AuthRequirement.LOGGED_IN_HOTEL_OWNER : AuthRequirement.LOGGED_OUT;
-        if (!allowedStates.includes(state)) {
-           return '/';
-        }
-        if (route.meta.allowNotApproved === false && state === AuthRequirement.LOGGED_IN_HOTEL_OWNER /* && allowedStates.includes(AuthRequirement.LOGGED_IN_HOTEL_OWNER) */) {
-          if (response.data.is_approved === false) {
-            return '/esperando-aprobacion';
+          const response = await api.get("auth/user-info/").json<any>();
+          const role = response.role;
+          const state = role == 'customer' ? AuthRequirement.LOGGED_IN_CUSTOMER : role == 'admin' ? AuthRequirement.LOGGED_IN_ADMIN : role == 'hotel_owner' ? AuthRequirement.LOGGED_IN_HOTEL_OWNER : AuthRequirement.LOGGED_OUT;
+          if (!allowedStates.includes(state)) {
+            return '/';
           }
-        }
-        if (route.meta.allowApproved === false && state === AuthRequirement.LOGGED_IN_HOTEL_OWNER /* && allowedStates.includes(AuthRequirement.LOGGED_IN_HOTEL_OWNER) */) {
-          if (response.data.is_approved === true) {
-            return '/mis-hoteles';
+          if (route.meta.allowNotApproved === false && state === AuthRequirement.LOGGED_IN_HOTEL_OWNER) {
+            if (response.is_approved === false) {
+              return '/esperando-aprobacion';
+            }
           }
-        }
-        return true;
+          if (route.meta.allowApproved === false && state === AuthRequirement.LOGGED_IN_HOTEL_OWNER) {
+            if (response.is_approved === true) {
+              return '/mis-hoteles';
+            }
+          }
+          return true;
         } catch (e) {
           if (allowedStates.includes(AuthRequirement.LOGGED_OUT)) {
             return true;
@@ -105,12 +103,9 @@ function transformRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
         }
       };
     }
-
-    // 3) Recursively handle any children
     if (route.children && route.children.length > 0) {
       newRoute.children = transformRoutes(route.children);
     }
-
     return newRoute;
   });
 }

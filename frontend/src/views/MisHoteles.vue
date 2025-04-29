@@ -82,25 +82,27 @@ const saveHotel = async () => {
   });
 };
 
-const deleteHotel = async (id) => {
+const deleteHotel = (id) => {
   const confirmed = confirm('¿Estás seguro de eliminar este hotel? Esta acción es irreversible');
   if (!confirmed) return;
 
-  try {
-    const loadingNotification = notyf.open({
-      type: 'loading',
-      message: 'Eliminando hotel...',
-      dismissible: false
-    });
+  const loadingNotification = notyf.open({
+    type: 'loading',
+    message: 'Eliminando hotel...',
+    dismissible: false
+  });
 
-    await deleteHotelMutation.mutateAsync(id);
-    notyf.dismiss(loadingNotification);
-    notyf.success('Hotel eliminado exitosamente');
-    // Las queries serán invalidadas automáticamente por la mutación
-  } catch (error) {
-    notyf.dismissAll();
-    handleApiError(error);
-  }
+  deleteHotelMutation.mutate(id, {
+    onSuccess: () => {
+      notyf.dismiss(loadingNotification);
+      notyf.success('Hotel eliminado exitosamente');
+      // Las queries serán invalidadas automáticamente por la mutación
+    },
+    onError: (error) => {
+      notyf.dismissAll();
+      handleApiError(error);
+    }
+  });
 };
 
 // Redirigir a la pantalla de edición
@@ -256,7 +258,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
       </div>
     </transition>
 
-    
+
   </div>
 </template>
 

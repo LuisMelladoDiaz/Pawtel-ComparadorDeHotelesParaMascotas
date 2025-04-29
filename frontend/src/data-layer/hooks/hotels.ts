@@ -19,13 +19,16 @@ import type { Booking } from '../api/bookings';
 export const useGetAllHotels = (filters?: Record<string, MaybeRef<any>>) => {
   return useQuery({
     queryKey: ['hotels', filters],
-    queryFn: () => fetchAllHotels({
-      ...Object.fromEntries(
-        Object.entries(filters ?? {})
-          .map(([key, value]) => [key, toValue(value)])
-          .filter((keyval) => Boolean(keyval[1]))
-      ),
-    }),
+    queryFn: async () => {
+      const hotels = await fetchAllHotels({
+        ...Object.fromEntries(
+          Object.entries(filters ?? {})
+            .map(([key, value]) => [key, toValue(value)])
+            .filter((keyval) => Boolean(keyval[1]))
+        ),
+      });
+      return hotels;
+    },
     staleTime: 1000 * 60,
     refetchOnWindowFocus: false,
   });
@@ -76,7 +79,7 @@ export const usePartialUpdateHotel = () => {
     mutationFn: ({ hotelId, partialData }: { hotelId: number; partialData: Partial<Hotel> }) =>
       partialUpdateHotel(hotelId, partialData),
 
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
       queryClient.invalidateQueries({ queryKey: ['hotels'] });
     },
@@ -116,7 +119,7 @@ export const useUploadImageToHotel = () => {
       return uploadImageToHotel(toValue(hotelId), toValue(image), toValue(isCover));
     },
 
-    onSuccess: (data) => {
+    onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ['hotelId', data.id] });
     },
   });

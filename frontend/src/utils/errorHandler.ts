@@ -1,39 +1,34 @@
-import { Notyf } from 'notyf';
-import axios from 'axios';
+import { Notyf } from "notyf";
+import { HTTPError } from "ky";
 
 const notyf = new Notyf();
 
 export const handleApiError = (error: unknown) => {
-  if (axios.isAxiosError(error) && error.response) {
-    const errorData = error.response.data;
+  if (error instanceof HTTPError) {
+    const response = error.response;
 
-    if ([400, 401, 403, 404].includes(error.response.status) && errorData) {
-      if (typeof errorData === 'object') {
-        // Usando Object.values() en lugar de Object.entries()
-        for (const messages of Object.values(errorData)) {
-          const errorList = Array.isArray(messages) ? messages : [messages];
-          errorList.forEach(msg => notyf.error(`${msg}`));
+    return response.json().then((errorData) => {
+      if ([400, 401, 403, 404].includes(response.status) && errorData) {
+        if (typeof errorData === "object") {
+          for (const messages of Object.values(errorData)) {
+            const errorList = Array.isArray(messages) ? messages : [messages];
+            errorList.forEach(msg => notyf.error(`${msg}`));
+          }
+          return;
         }
-        return;
       }
-    }
 
-    switch (error.response.status) {
-      case 500:
-        notyf.error('Error interno del servidor, inténtelo de nuevo más tarde.');
-        break;
-      default:
-        notyf.error(errorData?.message || 'Error en la solicitud');
-    }
-    return;
+      switch (response.status) {
+        case 500:
+          notyf.error("Error interno del servidor, inténtelo de nuevo más tarde.");
+          break;
+        default:
+          notyf.error((errorData?.message as string) || "Error en la solicitud");
+      }
+    }).catch(() => {
+      notyf.error("Error al procesar la respuesta del servidor.");
+    });
   }
 
-  // Error de red (sin respuesta)
-  if (axios.isAxiosError(error) && !error.response) {
-    notyf.error('Error de conexión. Verifique su internet');
-    return;
-  }
-
-  // Error genérico
-  notyf.error('Error inesperado');
+  notyf.error("Error inesperado");
 };

@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import api from "@/api";
 
 export type Customer = {
     id?: number;
@@ -21,74 +19,68 @@ export type Booking = {
     start_date: string;
     end_date: string;
     total_price: number;
-  };
-
+};
 
 export const fetchAllOwners = async () => {
-    const url = `${API_BASE_URL}/customers/`;
-    const response = await axios.get(url);
-    return response.data as Customer[];
+    const url = `customers/`;
+    const response = await api.get(url);
+    return await response.json<Customer[]>();
 };
 
 export const fetchCustomerById = async (CustomerId: number) => {
-    const url = `${API_BASE_URL}/customers/${CustomerId}`;
-    const response = await axios.get(url);
-    return response.data as Customer;
+    const url = `customers/${CustomerId}`;
+    const response = await api.get(url);
+    return await response.json<Customer>();
 };
 
-
 export const fetchCustomersByIds = async (CustomerIds: number[]) => {
-    const getUrl = (id: number) => `${API_BASE_URL}/customers/${id}`;
-    const requests = CustomerIds.map((id) => axios.get(getUrl(id)));
+    const getUrl = (id: number) => `customers/${id}`;
+    const requests = CustomerIds.map((id) => api.get(getUrl(id)).json<Customer>());
     const responses = await Promise.all(requests);
-    const customers = responses.map((response) => response.data) as Customer[];
-    return customers.reduce((acc, customer) => {
-        acc[customer.id] = customer;
+    return responses.reduce((acc, customer) => {
+        if (customer.id !== undefined) {
+            acc[customer.id.toString()] = customer;
+        }
         return acc;
     }, {} as Record<string, Customer>);
-}
+};
 
-export const createCustomer = async (CustomerData: Omit<Customer, 'id'>) => {
-    const url = `${API_BASE_URL}/auth/register/`;
+export const createCustomer = async (CustomerData: Omit<Customer, "id">) => {
+    const url = `auth/register/`;
     try {
-        const response = await axios.post(url, {...CustomerData, role: "customer"});
-        return response.data as Customer;
+        const response = await api.post(url, { json: { ...CustomerData, role: "customer" } });
+        return await response.json<Customer>();
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error("Error en la solicitud:", error.response?.data);
-            throw error;
-        }
-        console.error("Error desconocido:", error);
+        console.error(error);
         throw error;
     }
 };
 
 export const updateCustomer = async (CustomerId: number, ownerData: Customer) => {
-    const url = `${API_BASE_URL}/customers/${CustomerId}/`;
-    const response = await axios.patch(url, ownerData);
-    return response.data as Customer;
+    const url = `customers/${CustomerId}/`;
+    const response = await api.patch(url, { json: ownerData });
+    return await response.json<Customer>();
 };
 
 export const partialUpdateCustomer = async (CustomerId: number, partialData: Partial<Customer>) => {
-    const url = `${API_BASE_URL}/customers/${CustomerId}/`;
-    const response = await axios.patch(url, partialData);
-    return response.data;
+    const url = `customers/${CustomerId}/`;
+    const response = await api.patch(url, { json: partialData });
+    return await response.json();
 };
 
 export const deleteCustomer = async (CustomerId: number) => {
-    const url = `${API_BASE_URL}/customers/${CustomerId}/`;
-    const response = await axios.delete(url);
-    return response.data;
+    const url = `customers/${CustomerId}/`;
+    await api.delete(url);
 };
 
 export const getCurrentCustomer = async () => {
-    const url = `${API_BASE_URL}/customers/me`;
-    const response = await axios.get(url);
-    return response.data as Customer;
-}
+    const url = `customers/me`;
+    const response = await api.get(url);
+    return await response.json<Customer>();
+};
 
 export const fetchMyBookings = async () => {
-    const url = `${API_BASE_URL}/customers/my-bookings`;
-    const response = await axios.get(url);
-    return response.data as Booking[];
-  };
+    const url = `customers/my-bookings`;
+    const response = await api.get(url);
+    return await response.json<Booking[]>();
+};

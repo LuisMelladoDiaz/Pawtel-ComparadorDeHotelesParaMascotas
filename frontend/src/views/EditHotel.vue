@@ -10,8 +10,8 @@ import Button from '../components/Button.vue';
 import { boolean, number, string } from 'yup';
 import { integer } from '@vee-validate/rules';
 import { useQueryClient } from '@tanstack/vue-query';
-import axios from 'axios';
 import HotelBookings from '../components/HotelBookings.vue';
+import api from '@/api';
 
 const route = useRoute();
 const router = useRouter();
@@ -140,13 +140,11 @@ const { mutate: updateHotelImage } = useUpdateHotelImage();
 // Añadimos el hook para establecer imagen de portada
 const { mutate: setCoverImage } = useSetCoverImage();
 
-// Corrección en el método para seleccionar imagen de portada
 const selectCoverImage = (index) => {
   if (imageOptionsSource.value === 'uploaded') {
     const uploadedIndex = index;
 
     if (uploadedIndex >= 0 && uploadedIndex < uploadedImages.value.length) {
-      // Encontrar el archivo correspondiente
       const file = selectedFiles.value.find((_, i) => i === uploadedIndex);
 
       if (file) {
@@ -160,10 +158,9 @@ const selectCoverImage = (index) => {
           dismissible: false
         });
 
-        axios.post(
-          `${import.meta.env.VITE_API_BASE_URL}/hotels/${hotelId.value}/hotel-images/upload/`,
-          formData,
-          { headers: { 'Content-Type': 'multipart/form-data' } }
+        api.post(
+          `hotels/${hotelId.value}/hotel-images/upload/`,
+          { body: formData }
         )
         .then(() => {
           notyf.dismiss(loadingNotification);
@@ -218,7 +215,6 @@ const selectCoverImage = (index) => {
 
   closeImageOptions();
 };
-
 // Corrección en el método para eliminar imágenes
 const removeImage = (index, source = 'uploaded') => {
   if (source === 'uploaded') {
