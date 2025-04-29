@@ -13,6 +13,7 @@ from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
+from pawtel.room_types.services import RoomTypeService
 from rest_framework import status
 from rest_framework.exceptions import (NotFound, PermissionDenied,
                                        ValidationError)
@@ -73,8 +74,6 @@ class BookingService:
         start_date = request.data.get("start_date")
 
         if room_type and end_date and start_date:
-            from pawtel.room_types.services import RoomTypeService
-
             room_type_price = RoomTypeService.retrieve_room_type(
                 room_type
             ).price_per_night
@@ -96,8 +95,6 @@ class BookingService:
     def validate_create_booking(request, input_serializer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
-
-        from pawtel.room_types.services import RoomTypeService
 
         customer = CustomerService.get_current_customer(request)
         room_type_id = input_serializer.validated_data.get("room_type").id
