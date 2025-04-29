@@ -8,13 +8,30 @@ from pawtel.room_types.models import RoomType
 
 
 class Booking(models.Model):
+
+    # Attributes -------------------------------------------------------------
+
     creation_date = models.DateField(null=False, auto_now_add=True)
+
     start_date = models.DateField(null=False, blank=False)
+
     end_date = models.DateField(null=False, blank=False)
+
     total_price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
         validators=[MinValueValidator(1)],
+        null=False,
+        blank=False,
+    )
+
+    use_paw_points = models.BooleanField(default=False, blank=False, null=False)
+
+    discount = models.DecimalField(
+        default=0.00,
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
         null=False,
         blank=False,
     )

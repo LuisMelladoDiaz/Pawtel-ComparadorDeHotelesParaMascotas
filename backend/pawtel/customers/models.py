@@ -11,6 +11,7 @@ class Customer(models.Model):
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(100000)],
         null=False,
+        blank=False,
     )
 
     # Relations --------------------------------------------------------------
