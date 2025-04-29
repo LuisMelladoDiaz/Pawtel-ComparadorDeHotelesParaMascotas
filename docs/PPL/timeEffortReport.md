@@ -322,27 +322,27 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 27/03/2025 - 10/04/2025
-**Total de tiempo trabajado:** 24:58:22
+**Periodo:** 11/04/2025 - 2/05/2025
+**Total de tiempo trabajado:** 19:23:22
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Tarea                                             | Tiempo    |
-|---------------------------------------------------|-----------|
-| Test EndToEnd Playwright                          | 01:59:00  |
-| Ayudando Sergio Bug Finding                       | 00:36:00  |
-| Delyvery and testing Pawtel                       | 03:30:00  |
-| Playwright testing                                | 02:14:00  |
-| USAGEmd for Playwright (PR review) and Customize Codacy | 01:11:00  |
-| Playwright workflow configuration                 | 00:41:00  |
-| Sprint 3 Documents Organization. Fixing minor issues | 02:09:22  |
-| Clase ISPP                                        | 04:00:00  |
-| Reunión Inicial Sprint 3                          | 01:15:00  |
-| Playwright testing more screens                   | 02:00:00  |
-| Usuarios piloto encuesta                          | 02:00:00  |
-| Fixing frontend and deploy of Sprint 2            | 03:23:00  |
+| Tarea                                      | Tiempo   |
+|--------------------------------------------|----------|
+| Reunion Marketing                          | 01:00:00 |
+| Preparando PPL                             | 00:36:00 |
+| Prsentacion PPL Semana 1.                  | 00:52:00 |
+| Organización PPL y presentaciones          | 01:09:00 |
+| ISPP                                       | 04:00:00 |
+| Indexación de web por keyword              | 01:46:00 |
+| Presentacion y delyvery PPL                | 02:00:00 |
+| Clase ISPP                                 | 08:00:00 |
+| Arreglar Test 1                            | 03:10:00 |
+| SemRush Segmentacion Mercado               | 01:50:00 |
+| Googlw Trends, Slides y QA                 | 04:00:00 |
 
-![grafico-de-tiempos](graficas/dani.png)
+
+![grafico-de-tiempos](graficas/dani2.png)
 ---
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
