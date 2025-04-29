@@ -56,6 +56,7 @@
 | 📅 Fecha       | 🔢 N° de Versión | 📄 Descripción                   | ✍️ Elaborado por           |
 |-------------|---------------|-------------------------------|-------------------------|
 | 29/04/2025  | v 1.0         | Versión inicial del documento | Daniel Flores de Francisco |
+| 29/04/2025  | v 1.1         | Versión inicial del documento | Andrés Martínez Reviriego |
 ---
 
 ### 🏆 2. Resumen ejecutivo
@@ -72,13 +73,13 @@
 #### 1. Información General
 
 - **Nombre del programador:** Andrés Martínez Reviriego
-- **Sprint:** Sprint3
+- **Sprint:** PPL
 - **Rol en el proyecto:** Full-Stack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (x)
-- Refactorización de código (x)
+- Generación de código ( )
+- Refactorización de código ( )
 - Generación de documentación ( )
 - Asesoramiento técnico (x)
 
@@ -88,21 +89,19 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Ayuda autenticación postman	| ChatGPT	| Explicación de cómo autenticarme con postman en mi aplicación|
-| Cambio de función | ChatGPT	| Ayuda reformateando funciones para usar OnSucess y OnFailure en vez de usar try and catch|
+| Ayuda demo técnica	| ChatGPT	| Ayuda con la estructuración de la demo |
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 6
-- **Comparación con trabajo sin IA:** Mejora en eficiencia y explicación de conceptos
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 1
+- **Comparación con trabajo sin IA:** Mejora en estructuración
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. ¿Cómo puedo autenticarme para usar postman en mi aplicación? Utilizamos una autorización de jwt.
-2. ¿Qué pasos debo seguir para reformatear una función hecha con try and catch utilizando OnSucces y OnFailure en su defecto?
+1. Explícame cómo podría ser el guion de una demo técnica de mi producto que enseñe el proceso completo de reserva y dime como estructurarlo
 
 #### 6. Problemas Encontrados y Limitaciones
 
