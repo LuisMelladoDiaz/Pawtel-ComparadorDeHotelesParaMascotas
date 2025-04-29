@@ -57,6 +57,8 @@
 |-------------|---------------|-------------------------------|-------------------------|
 | 29/04/2025  | v 1.0         | Versión inicial del documento | Daniel Flores de Francisco |
 | 29/04/2025  | v 1.1         | Añadida descripción de Andrés | Andrés Martínez Reviriego |
+| 29/04/2025  | v 1.2        | Añadida descripción de Fernando | Fernando Castelló Sánchez |
+
 ---
 
 ### 🏆 2. Resumen ejecutivo
@@ -213,14 +215,14 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Fernando Castelló Sánchez
-- **Sprint:** Sprint3
+- **Sprint:** PPL
 - **Rol en el proyecto:** Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (x)
-- Refactorización de código (x)
-- Generación de documentación ( )
+- Generación de código ( )
+- Refactorización de código ( )
+- Generación de documentación (x)
 - Asesoramiento técnico ( )
 
 #### 3. Uso de IA en las Tareas
@@ -229,26 +231,24 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Pantalla admin | DeepSeek | Cambia esta función de manera que use el id de dueño en vez del de usuario. |
-| Pantalla admin | DeepSeek | Haz que las funciones usen HandleApiError en vez de try-catch. |
+| Hacer el documento de feedback | ChatGPT | Dada esta estructura, añade el feedback recogido de cada grupo. |
 
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 8
-- **Comparación con trabajo sin IA:** El uso de la IA me ha facilitado completar mi código de la mejor manera y con la mayor calidad posible.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 3
+- **Comparación con trabajo sin IA:** El uso de la IA me ha facilitado completar el documento de manera más rápida y sin errores.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Cambia esta función de manera que use el id de dueño en vez del de usuario.
-2. Haz que las funciones usen HandleApiError en vez de try-catch.
+1. Dada esta estructura, añade el feedback recogido de cada grupo siguiendo este ejemplo de semanas anteriores.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Hay veces que te ayude a solucionar un pequeño error o hacer un cambio concreto y además de eso cambia el orden del contenido o el contenido en sí del archivo.
+- **Limitaciones detectadas en la IA:** -
 
 #### 7. Evaluación General
 
