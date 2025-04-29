@@ -39,6 +39,8 @@
 | 29/04/2025  | v 1.1         | Parte de Andrés | Andrés Martínez Reviriego |
 | 29/04/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
 | 29/04/2025  | v 1.3         | Parte de Francisco | Francisco Miguel Jiménez Morales |
+| 29/04/2025  | v 1.4         | Parte de Luis | Luis Mellado Díaz |
+
 
 
 ---
@@ -170,31 +172,33 @@
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 27/03/2025 - 09/04/2025
+**Periodo:** 09/04/2025 - 29/04/2025
 
-**Total de tiempo trabajado:** 20:45:57
+**Total de tiempo trabajado:** 18:23:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                         | Duración  |
 |-------------------------------------|-----------|
-| Reportes Tiempo Sprint 2            | 00:27:13  |
-| QA-Entrega Sprint2                  | 02:48:00  |
-| Individual Performance Sprint 2     | 01:42:01  |
-| Reunión: Inicio Sprint 3            | 01:14:34  |
-| Feat: Confirmación de Reserva       | 02:24:21  |
-| Feat: Reservas de Hotel             | 00:39:27  |
-| Fix: Lógica Rangos de Precio        | 00:55:49  |
-| Refactor:  Pantalla busqueda hotel  | 04:48:54  |
-| Presentación 4/4                    | 02:39:38  |
-| Clase 4/4                           | 02:00:00  |
-| Informe de IA Sprint 3              | 00:35:00  |
-| Informe de Tiempo Sprint 3          | 00:31:00  |
+| QA presentación                     | 01:00:00  |
+| Clase 11/4                          | 04:00:00  |
+| Guión WPL                           | 02:03:23  |
+| PawPoints                           | 02:00:00  |
+| Revision WPL                        | 00:26:44  |
+| Reunión y Organización PPL          | 00:51:45  |
+| Equipo WPL                          | 01:25:36  |
+| QA-WPL                              | 00:35:45  |
+| Time Report                         | 00:27:00  |
+| Supervisión WPL                     | 00:46:54  |
+| IA report                           | 00:35:00  |
+| Clase 25/4                          | 03:00:00  |
+| Actualizar Landing                  | 01:11:04  |
 
 
 
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/a01645ea-7bfb-4e03-af98-2c0f9e57079c" />
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/b4bf2901-634c-4078-844f-1c15b0b17565" />
+
 
 
 ---
