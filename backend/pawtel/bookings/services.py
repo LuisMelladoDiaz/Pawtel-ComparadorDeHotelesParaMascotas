@@ -67,12 +67,8 @@ class BookingService:
         context = {"request": request}
         data = request.data.copy()
 
-        # If this method is called from the endpoint 'create', the request will have an user.
-        # If this method is called from the endpoint 'stripe_response', the request will not have an user.
-        # In second case, the correct customer will already be included in the JSON.
-        if hasattr(request, "user"):
-            current_customer_id = CustomerService.get_current_customer(request).id
-            data["customer"] = current_customer_id
+        current_customer_id = CustomerService.get_current_customer(request).id
+        data["customer"] = current_customer_id
 
         room_type = request.data.get("room_type")
         end_date = request.data.get("end_date")
@@ -218,7 +214,7 @@ class BookingService:
             booking_json = json.loads(
                 event.data.object.metadata.get("booking")
             )  # metadata contains the booking JSON in plain text
-            booking = BookingService.serialize_input_booking_create(booking_json)
+            booking = BookingSerializer(data=booking_json)
 
             if booking.is_valid():
                 booking_instance = booking.save()
