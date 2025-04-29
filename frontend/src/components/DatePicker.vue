@@ -32,7 +32,7 @@ onMounted(() => {
   const instance = flatpickr(flatpickrRef.value, {
     mode: "range",
     dateFormat: "d-m-Y",
-    minDate: "today",
+    minDate: new Date(Date.now() + 24 * 60 * 60 * 1000),
     locale: { firstDayOfWeek: 1 },
     defaultDate: [props.startDate, props.endDate].filter(Boolean),
     onChange: (selectedDates) => {
