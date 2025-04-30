@@ -61,6 +61,7 @@
 | 29/04/2025  | v 1.3        | Añadida descripción de Luis | Luis Mellado Díaz |
 | 29/04/2025  | v 1.4        | Añadida descripción de Francisco | Francisco Miguel Jiménez Morales |
 | 30/04/2025  | v 1.5        | Añadida descripción de Sergio | Sergio Trenado González |
+| 30/04/2025  | v 1.6        | Añadida descripción de David | David González Martínez |
 
 
 
@@ -330,8 +331,8 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Generación de código nuevo o mejora |    ChatGPT | Se ha utilizado para crear primeras versiones de componentes lógicos del sistema; por ejemplo, la creación de componentes de UI. También para mejorar lo existente.|
-| Autocompletado de código|    Copilot | Autocompletado de código. |
+| Generación de código nuevo o mejora |    ChatGPT | En general, se ha utilizado para generar código. |
+| Autocompletado de código|    Copilot | Autocompletado de código (no es mediante prompt directo) |
 | Asesoramiento sobre bugs |    ChatGPT  | Se ha utilizado para guiar al programador en la resolución de bugs. |
 
 #### 4. Impacto en Productividad
@@ -343,8 +344,8 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. <código> \n Ocurre <este bug>. Dime que puede ser.
-2. Como hacer <cosa> en <tecnología>? Adapta este código.
+1. Esto no funciona. Arréglalo.
+2. Como se puede ver los requests en el debugger de capacitor?
 
 #### 6. Problemas Encontrados y Limitaciones
 
