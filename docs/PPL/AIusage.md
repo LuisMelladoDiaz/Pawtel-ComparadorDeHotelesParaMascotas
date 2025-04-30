@@ -412,7 +412,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Sergio Trenado González
-- **Sprint:** Sprint 3
+- **Sprint:** PPL
 - **Rol en el proyecto:** Líder de Frontend
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
@@ -426,28 +426,27 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Pulir y mejorar detalles de pantallas en general | ChatGPT | Ayuda sobre cómo realizar ciertas cosas para que algunos elementos se vean o funcionen mejor |
+| Mejorar lógica de imágenes como portada | ChatGPT | Ayuda sobre cómo hacer para que al borrar una imagen portada, se auto-asigne otra automáticamente |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 5
-- **Comparación con trabajo sin IA:** Me ha ahorrado algo de tiempo de general, aunque en este sprint la he usado bastante menos debido a que he realizado más tareas de revisión y mejoras de estilos para las cuales no era necesario el uso de herramientas IA.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 2
+- **Comparación con trabajo sin IA:** Me ha ahorrado algo de tiempo, ya que no tenía muy claro cómo hacerlo correctamente.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Ayudame a adaptar este componente de paginación para el listado de reservas.
-2. ¿Cómo puedo hacer que se puedan subir multiples imágenes al mismo tiempo y que solo se seleccione una como portada?
+1. Ayúdame a hacer que cuando elimine una imagen que es portada, inmediantamente después se auto-asigne otra sin tener que hacerlo yo manualmente.
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Limitaciones detectadas en la IA:** Principalmente el problema de que el plan gratuito es muy limitado y hace que las conversaciones con archivos o imágenes no puedan continuarse. También el modelo gratuito se olvida de cosas que se han ido mencionando durante la conversación.
+- **Limitaciones detectadas en la IA:** Ninguno.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** Simplemente que se use con mucha cabeza y sabiendo lo que se hace porque muchas veces te hace las cosas demasiado enrevesadas, cuando pensando un poco las puedes sacar tú de manera mucho más simple y rápida (me ha pasado varias veces ya).
+- **Comentarios adicionales sobre la experiencia con IA:** Ninguno.
 
 ---
 
