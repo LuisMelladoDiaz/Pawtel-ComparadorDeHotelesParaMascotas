@@ -96,15 +96,4 @@ const login = (values) => {
 </template>
 
 <style scoped>
-@media (max-width: 900px) {
-    .container {
-        padding: 1rem;
-    }
-    .w-full {
-        width: 100%;
-    }
-    .sm\:w-1\/3 {
-        width: 100%;
-    }
-}
 </style>
