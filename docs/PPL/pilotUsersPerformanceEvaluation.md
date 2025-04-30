@@ -13,8 +13,8 @@
 
 # **Evaluación de los Usuarios Piloto**
 
-**Entregable:** Sprint 3
-**Fecha:** 10/04/2025
+**Entregable:** PPL
+**Fecha:** 29/04/2025
 **Equipo:** G11
 
 |  |   |
