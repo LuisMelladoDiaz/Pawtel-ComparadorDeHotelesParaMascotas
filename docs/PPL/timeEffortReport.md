@@ -43,7 +43,7 @@
 | 30/04/2025  | v 1.5         | Parte de Sergio | Sergio Trenado González |
 | 30/04/2025  | v 1.6         | Actualizar parte de Francisco | Francisco Miguel Jiménez Morales |
 | 30/04/2025  | v 1.7         | Actualizar parte de David | David González Martínez |
-
+| 30/04/2025  | v 1.8         | Actualizar parte de Javier García | Javier García Sebastián |
 
 ---
 
@@ -54,21 +54,25 @@
 
 ## Reporte de tiempo de Javier García Sebastián
 
-**Periodo:** 27/03/2025 - 09/04/2025
-**Total de tiempo trabajado:** 11:34:06
+**Periodo:** 09/04/2025 - 30/04/2025
+**Total de tiempo trabajado:** 16:06:05
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|----------|
-| informe de feedback de usuarios piloto | 00:44:33 |
-| preparar presentación 28/03/2025 | 02:47:47 |
-| clase 28/03/2025 | 04:00:00 |
-| discusión sobre marketing via discord + creación de RRSS | 00:52:18 |
-| GUIÓN: dividir trabajo de presentación para el 04 | 00:38:00 |
-| GUIÓN: dividir trabajo de presentacion para el 11 | 00:48:19 |
-| PRESENTACIÓN: diapositivas presentación 11/04/2025 | 00:51:11 |
-| MARKETING: contenido redes sociales | 01:03:00 |
+| Descripción                                                    | Duración   |
+|----------------------------------------------------------------|------------|
+| creación de protopersonas siguiendo feedback                   | 00:25:00   |
+| creación imágenes posts Instagram                              | 00:52:17   |
+| doblar anuncio Javi y Coco                                     | 02:25:42   |
+| reunión marketing y RRSS                                       | 00:16:00   |
+| creación cartel publicitario Pawtel                            | 01:46:56   |
+| preparar y subir 2do post + presentación                       | 00:46:56   |
+| clase 25/04/2025                                               | 04:00:00   |
+| PRESENTACIÓN: diapositivas presentación 11/04/2025             | 00:40:09   |
+| preparar presentación 25/04                                    | 02:04:42   |
+| últimos informes sprint → IA, horas y feedback usuarios piloto | 00:44:45   |
+| documento de costes de marketing a nivel RRSS                  | 00:35:38   |
+| horario de hoy a mayo RRSS                                     | 01:28:00   |
 
 ![grafico-de-tiempos](graficas/javi_garcia.png)
 
