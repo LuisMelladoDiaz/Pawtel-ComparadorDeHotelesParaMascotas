@@ -710,8 +710,8 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
       <!-- Modal Añadir -->
       <transition name="fade">
         <div v-if="isCreateModalOpen" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
-          <div class="bg-white rounded-xl shadow-lg w-[90%] max-w-2xl p-6 relative">
-            <button @click="closeCreateModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
+          <div class="bg-white rounded-xl shadow-lg w-[90%] border-2 border-terracota max-w-2xl p-6 relative">
+            <button @click="closeCreateModal" class="absolute top-6 right-8 text-gray-500 hover:text-terracota text-lg transform transition-transform duration-200 hover:scale-125">
               <i class="fas fa-times"></i>
             </button>
             <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Añadir nueva habitación</h2>
@@ -767,8 +767,8 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
       <!-- Modal Editar -->
       <transition name="fade">
         <div v-if="editingRoomType" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
-          <div class="bg-white rounded-xl shadow-lg w-[90%] max-w-2xl p-6 relative">
-            <button @click="closeEditModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
+          <div class="bg-white rounded-xl shadow-lg w-[90%] border-2 border-terracota max-w-2xl p-6 relative">
+            <button @click="closeEditModal" class="absolute top-6 right-8 text-gray-500 hover:text-terracota text-lg transform transition-transform duration-200 hover:scale-125">
               <i class="fas fa-times"></i>
             </button>
             <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Editar habitación</h2>
