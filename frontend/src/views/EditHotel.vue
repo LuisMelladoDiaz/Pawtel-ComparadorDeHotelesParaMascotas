@@ -215,23 +215,39 @@ const selectCoverImage = (index) => {
 
   closeImageOptions();
 };
-// Corrección en el método para eliminar imágenes
+
 const removeImage = (index, source = 'uploaded') => {
   if (source === 'uploaded') {
     uploadedImages.value.splice(index, 1);
     selectedFiles.value.splice(index, 1);
   } else if (source === 'hotel') {
-    const imageId = mutableHotelImages.value[index]?.id;
-    if (!imageId) return;
+    const removed = mutableHotelImages.value.splice(index, 1)[0];
+    if (!removed) return;
 
     deleteHotelImage(
-      { hotelId: hotel.value.id, imageId },
+      { hotelId: hotel.value.id, imageId: removed.id },
       {
         onSuccess: () => {
           notyf.success('Imagen eliminada del hotel.');
-          mutableHotelImages.value.splice(index, 1);
           queryClient.invalidateQueries({ queryKey: ['hotelId'] });
           queryClient.invalidateQueries({ queryKey: ['hotels'] });
+
+          // if we just removed the cover, auto-assign a new one
+          if (removed.is_cover && mutableHotelImages.value.length > 0) {
+            const newCover = mutableHotelImages.value[0];
+            setCoverImage(
+              { hotelId: hotel.value.id, imageId: newCover.id },
+              {
+                onSuccess: () => {
+                  notyf.success('Se ha asignado automáticamente una nueva imagen de portada.');
+                  mutableHotelImages.value.forEach(img => img.is_cover = img.id === newCover.id);
+                  queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+                  queryClient.invalidateQueries({ queryKey: ['hotels'] });
+                },
+                onError: handleApiError
+              }
+            );
+          }
         },
         onError: handleApiError,
       }
@@ -509,22 +525,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
                       class="absolute top-2 right-2 bg-terracota text-white rounded-full w-6 h-6 flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
                       ✕
                     </button>
-                    <!-- Botón de opciones -->
-                    <div class="absolute bottom-2 right-2">
-                      <button @click="openImageOptions(index, 'uploaded')"
-                        class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-                        ⋮
-                      </button>
-                      <div v-if="imageOptionsIndex === index && imageOptionsSource === 'uploaded'"
-                        class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
-                        <button @click="selectCoverImage(index)"
-                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
-                      </div>
-                    </div>
-                    <div v-if="img.is_cover"
-                      class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
-                      Portada
-                    </div>
                   </div>
                 </div>
 
