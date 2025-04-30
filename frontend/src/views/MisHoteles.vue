@@ -151,8 +151,8 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
         <p>Error al cargar los hoteles</p>
       </div>
 
-      <div v-else class="space-y-6 p-6">
-        <div v-if="hotels?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div v-else class="space-y-6">
+        <div v-if="hotels?.length" class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div v-for="(hotel) in paginatedHotels" :key="hotel.id"
             class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
             <div>
@@ -175,7 +175,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
             </div>
           </div>
         </div>
-        <p v-else class="text-center font-bold text-xl text-terracota">No tienes hoteles registrados.</p>
+        <p v-else class="text-center font-bold text-xl text-terracota py-10">No tienes hoteles registrados.</p>
       </div>
       <!-- Paginación -->
       <div v-if="hotels?.length > 0"
@@ -219,7 +219,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
     <transition name="fade">
       <div v-if="isCreateModalOpen" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
         <div class="bg-white rounded-xl shadow-lg w-[90%] border-2 border-terracota max-w-2xl p-6 relative">
-          <button @click="closeCreateModal" class="absolute top-6 right-8 text-gray-500 hover:text-terracota text-lg transform transition-transform duration-200 hover:scale-125">
+          <button @click="closeCreateModal" class="absolute top-[22px] right-8 text-gray-500 hover:text-terracota text-lg transform transition-transform duration-200 hover:scale-125">
             <i class="fas fa-times"></i>
           </button>
           <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Añadir nuevo hotel</h2>
