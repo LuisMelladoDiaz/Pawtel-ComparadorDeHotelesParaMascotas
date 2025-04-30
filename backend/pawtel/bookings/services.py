@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import ROUND_HALF_DOWN, ROUND_HALF_UP, Decimal
 
 import stripe
 from django.conf import settings
@@ -27,6 +27,7 @@ secret_endpoint = settings.STRIPE_SECRET_ENDPOINT
 class BookingService:
 
     DISCOUNT_PER_PAW_POINT = Decimal("0.05")
+    PAW_POINTS_PER_EURO_SPENT = Decimal("1.00")
 
     # Authorization ----------------------------------------------------------
 
@@ -126,11 +127,11 @@ class BookingService:
 
         discount = 0.00
         if data.get("use_paw_points") is True:
-            all_paw_points = current_customer.paw_points
+            all_paw_points = Decimal(current_customer.paw_points)
             max_discount = all_paw_points * BookingService.DISCOUNT_PER_PAW_POINT
             max_discount_2_decimals = max_discount.quantize(
                 Decimal("0.01"), rounding=ROUND_HALF_UP
-            )
+            )  # 2 decimals only
             discount = min(max_discount_2_decimals, total_price)
         data["discount"] = discount
 
@@ -235,13 +236,41 @@ class BookingService:
             booking_json = json.loads(
                 event.data.object.metadata.get("booking")
             )  # metadata contains the booking JSON in plain text
-            booking = BookingSerializer(data=booking_json)
+            booking_serializer = BookingSerializer(data=booking_json)
 
-            if booking.is_valid():
-                booking_instance = booking.save()
+            if booking_serializer.is_valid():
+                booking = booking_serializer.save()
             else:
                 return HttpResponse(status=400)
+
             BookingHold.objects.filter(
-                customer=booking_instance.customer, room_type=booking_instance.room_type
+                customer=booking.customer, room_type=booking.room_type
             ).delete()
+
+            BookingService.__recalculate_paw_points(booking_serializer)
+
         return HttpResponse(status=200)
+
+    @staticmethod
+    def __recalculate_paw_points(booking_serializer):
+        if not booking_serializer.is_valid():
+            return HttpResponse(status=400)
+
+        customer = booking_serializer.validated_data.get("customer")
+        total_price = Decimal(booking_serializer.validated_data.get("total_price"))
+        discount = Decimal(booking_serializer.validated_data.get("discount"))
+
+        paw_points_spent = discount / BookingService.DISCOUNT_PER_PAW_POINT
+        paw_points_spent = paw_points_spent.quantize(
+            Decimal("1."), rounding=ROUND_HALF_DOWN
+        )  # no decimals
+        customer.paw_points -= paw_points_spent
+
+        new_price = total_price - discount
+        paw_points_earned = new_price * BookingService.PAW_POINTS_PER_EURO_SPENT
+        paw_points_earned = paw_points_earned.quantize(
+            Decimal("1."), rounding=ROUND_HALF_UP
+        )  # no decimals
+        customer.paw_points += paw_points_earned
+
+        customer.save()
