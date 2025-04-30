@@ -194,6 +194,16 @@ const logout = () => {
               </div>
             </div>
 
+            <div v-if="userDataComputed.role === 'customer'" class="flex flex-col">
+              <label class="block text-sm font-medium text-gray-700 mb-2">paw_points</label>
+              <input
+                type="text"
+                :value="userDataComputed.paw_points"
+                disabled
+                class="border border-gray-300 rounded-lg p-2 bg-gray-100 cursor-not-allowed text-gray-500"
+              />
+            </div>
+
             <div class="flex flex-col sm:flex-row gap-5 items-center justify-between">
               <div class="flex gap-4 mt-5">
                 <Button type="accept" @click="updateProfile" class="flex-1 text-white m-0!">Guardar cambios</Button>
