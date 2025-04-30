@@ -42,7 +42,7 @@
 | 29/04/2025  | v 1.4         | Parte de Luis | Luis Mellado Díaz |
 | 30/04/2025  | v 1.5         | Parte de Sergio | Sergio Trenado González |
 | 30/04/2025  | v 1.6         | Actualizar parte de Francisco | Francisco Miguel Jiménez Morales |
-
+| 30/04/2025  | v 1.7         | Actualizar parte de David | David González Martínez |
 
 
 ---
@@ -285,30 +285,28 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 27/03/2025 - 10/04/2025
-**Total de tiempo trabajado:** 19:40:23
+**Periodo:** 10/04/2025 - 29/04/2025
+**Total de tiempo trabajado:** 16:14:34
 
 ### Proyecto Pawtel - Distribución del tiempo
 
-| Descripción | Duración |
-|-------------|---------|
-| Tarea filtros globales | 01:38:22 |
-| Miscelaneo/Review/Ayuda | 00:57:55 |
-| Fix lots of bugs | 02:49:00 |
-| Clase | 04:00:00 |
-| Organización/Misc | 00:29:19 |
-| Ver PR de Playwright, ver PR de validación | 00:14:19 |
-| Tarea filtros globales / misc / review | 00:18:53 |
-| Tarea filtros globales / misc | 01:26:11 |
-| Misc | 02:32:07 |
-| Gestionar contraseñas | 00:17:10 |
-| Despliegue y retoques varios | 00:07:34 |
-| Despliegue y retoques | 02:59:09 |
-| Review | 00:26:24 |
-| Reunión | 00:50:00 |
-| Rendimiento y misc | 00:34:00 |
+| Descripción                   | Duración  |
+|------------------------------|-----------|
+| Fix bugs                     | 00:02:37  |
+| Class                        | 04:00:00  |
+| Android acc                  | 01:03:00  |
+| Reunion                      | 00:30:00  |
+| Misc + informe IA            | 00:08:50  |
+| Misc                         | 00:14:00  |
+| Android                      | 01:05:00  |
+| Deploy, handlear not approved| 01:05:25  |
+| Checking delivery            | 01:32:28  |
+| Clases                       | 04:00:00  |
+| Fix                          | 01:05:00  |
+| Dont use axios               | 00:57:02  |
+| Arreglar bug                 | 00:24:08  |
 
-![{D30BD78A-757B-438C-B6AF-1D02F2F99B59}](https://github.com/user-attachments/assets/d2b7b58b-9903-4760-a780-72f55a5166ad)
+![{634564C3-B806-4ED8-8F25-CBD49A874F3E}](https://github.com/user-attachments/assets/7f5a45ac-a507-464c-9d13-4f58b91161ca)
 
 
 ---
