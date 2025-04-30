@@ -40,6 +40,7 @@
 | 29/04/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
 | 29/04/2025  | v 1.3         | Parte de Francisco | Francisco Miguel Jiménez Morales |
 | 29/04/2025  | v 1.4         | Parte de Luis | Luis Mellado Díaz |
+| 30/04/2025  | v 1.5         | Parte de Sergio | Sergio Trenado González |
 
 
 
@@ -101,28 +102,18 @@
 
 ## Reporte de tiempo de Sergio Trenado Gonzalez
 
-**Periodo:** 27/03/2025 - 09/04/2025
-**Total de tiempo trabajado:** 33:46:59
+**Periodo:** 09/04/2025 - 30/04/2025
+**Total de tiempo trabajado:** 11:44:37
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                                                                                                      | Duración  |
 |------------------------------------------------------------------------------------------------------------------|-----------|
-| Clase 28 marzo                                                                                                   | 04:00:00  |
-| Clase 4 abril                                                                                                    | 04:00:00  |
-| Mejorar estilo de imágenes + Feature: Mejorar pantalla de "Detalles de hotel"                                     | 03:57:04  |
-| PRs + Informe de horas + Feature: Pulir detalles de las pantallas                                                | 03:41:39  |
-| Mejorando PR (CRUD Hoteles) + Feature: Mejorar pantalla de "Mis reservas" + Feature: Mejorar pantalla de "Detalles de hotel" | 03:01:00  |
-| Mejorando PR (CRUD Hoteles)                                                                                      | 02:46:10  |
-| Revisando + Mejorando PR (CRUD Hoteles)                                                                          | 02:01:01  |
-| Terminos y condiciones + Fixeos + Iconos PWA                                                                     | 02:00:11  |
+| Clase 25 abril                                                                                                   | 04:00:00  |
+| Clase 11 abril                                                                                                   | 04:00:00  |
 | Puliendo ultimos detalles y mejorando pantalla de admin                                                          | 01:46:41  |
-| Arreglando diversas cosas del proyecto                                                                           | 01:44:14  |
-| Mejorando el estilo y añadiendo paginaciones                                                                      | 01:39:42  |
-| Reunión Inicio Sprint 3                                                                                          | 00:51:39  |
-| Frontend Organización Sprint 3                                                                                   | 00:51:28  |
-| Feature: Mejorar pantalla de "Mis reservas" + Feature: Mejorar pantalla de "Detalles de hotel"                     | 00:48:08  |
-| Revisando PRs                                                                                                    | 00:38:02  |
+| Mejorando detalles y arreglando bugs  + IA Report                                                                | 01:24:23  |
+| Mejorando detalles y arreglando bugs                                                                             | 00:33:33  |
 
 
 ![grafico-de-tiempos](graficas/sergio.png)
