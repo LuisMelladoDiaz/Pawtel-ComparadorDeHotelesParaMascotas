@@ -120,7 +120,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           </tbody>
         </table>
       </div>
-      <p v-else class="text-center font-bold text-xl text-terracota py-10">No hay reservas para este hotel.</p>
+      <p v-else class="text-center font-bold text-xl text-terracota px-5 py-10">No hay reservas para este hotel.</p>
     </div>
 
     <!-- Paginación -->

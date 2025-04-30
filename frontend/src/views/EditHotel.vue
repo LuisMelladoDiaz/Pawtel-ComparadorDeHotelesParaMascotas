@@ -215,23 +215,39 @@ const selectCoverImage = (index) => {
 
   closeImageOptions();
 };
-// Corrección en el método para eliminar imágenes
+
 const removeImage = (index, source = 'uploaded') => {
   if (source === 'uploaded') {
     uploadedImages.value.splice(index, 1);
     selectedFiles.value.splice(index, 1);
   } else if (source === 'hotel') {
-    const imageId = mutableHotelImages.value[index]?.id;
-    if (!imageId) return;
+    const removed = mutableHotelImages.value.splice(index, 1)[0];
+    if (!removed) return;
 
     deleteHotelImage(
-      { hotelId: hotel.value.id, imageId },
+      { hotelId: hotel.value.id, imageId: removed.id },
       {
         onSuccess: () => {
           notyf.success('Imagen eliminada del hotel.');
-          mutableHotelImages.value.splice(index, 1);
           queryClient.invalidateQueries({ queryKey: ['hotelId'] });
           queryClient.invalidateQueries({ queryKey: ['hotels'] });
+
+          // if we just removed the cover, auto-assign a new one
+          if (removed.is_cover && mutableHotelImages.value.length > 0) {
+            const newCover = mutableHotelImages.value[0];
+            setCoverImage(
+              { hotelId: hotel.value.id, imageId: newCover.id },
+              {
+                onSuccess: () => {
+                  notyf.success('Se ha asignado automáticamente una nueva imagen de portada.');
+                  mutableHotelImages.value.forEach(img => img.is_cover = img.id === newCover.id);
+                  queryClient.invalidateQueries({ queryKey: ['hotelId'] });
+                  queryClient.invalidateQueries({ queryKey: ['hotels'] });
+                },
+                onError: handleApiError
+              }
+            );
+          }
         },
         onError: handleApiError,
       }
@@ -509,22 +525,6 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
                       class="absolute top-2 right-2 bg-terracota text-white rounded-full w-6 h-6 flex items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity">
                       ✕
                     </button>
-                    <!-- Botón de opciones -->
-                    <div class="absolute bottom-2 right-2">
-                      <button @click="openImageOptions(index, 'uploaded')"
-                        class="bg-gray-800 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
-                        ⋮
-                      </button>
-                      <div v-if="imageOptionsIndex === index && imageOptionsSource === 'uploaded'"
-                        class="absolute bg-white border border-gray-300 rounded shadow-lg mt-2 z-10">
-                        <button @click="selectCoverImage(index)"
-                          class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Portada</button>
-                      </div>
-                    </div>
-                    <div v-if="img.is_cover"
-                      class="absolute bottom-0 left-0 bg-blue-500 text-white px-2 py-1 rounded-tr-lg text-xs">
-                      Portada
-                    </div>
                   </div>
                 </div>
 
@@ -630,8 +630,8 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
           <p>Error al cargar los tipos de habitación</p>
         </div>
 
-        <div v-else class="space-y-6 p-6">
-          <div v-if="roomTypes?.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-else class="space-y-6">
+          <div v-if="roomTypes?.length" class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div v-for="(room) in paginatedRooms" :key="room.id"
               class="flex flex-col justify-between border border-gray-200 p-6 rounded-lg shadow-sm bg-white hover:shadow-md transition-shadow">
               <div>
@@ -664,7 +664,7 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
               </div>
             </div>
           </div>
-          <p v-else class="text-center font-bold text-xl text-terracota">No tienes habitaciones registradas.</p>
+          <p v-else class="text-center font-bold text-xl text-terracota py-10">No tienes habitaciones registradas.</p>
         </div>
 
         <!-- Paginación -->
@@ -710,8 +710,8 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
       <!-- Modal Añadir -->
       <transition name="fade">
         <div v-if="isCreateModalOpen" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
-          <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 relative">
-            <button @click="closeCreateModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
+          <div class="bg-white rounded-xl shadow-lg w-[90%] border-2 border-terracota max-w-2xl p-6 relative">
+            <button @click="closeCreateModal" class="absolute top-[22px] right-8 text-gray-500 hover:text-terracota text-lg transform transition-transform duration-200 hover:scale-125">
               <i class="fas fa-times"></i>
             </button>
             <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Añadir nueva habitación</h2>
@@ -767,8 +767,8 @@ const nextPage = () => currentPage.value < totalPages.value && currentPage.value
       <!-- Modal Editar -->
       <transition name="fade">
         <div v-if="editingRoomType" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
-          <div class="bg-white rounded-xl shadow-lg w-full max-w-2xl p-6 relative">
-            <button @click="closeEditModal" class="absolute top-3 right-3 text-gray-500 hover:text-red-500 text-lg">
+          <div class="bg-white rounded-xl shadow-lg w-[90%] border-2 border-terracota max-w-2xl p-6 relative">
+            <button @click="closeEditModal" class="absolute top-[22px] right-8 text-gray-500 hover:text-terracota text-lg transform transition-transform duration-200 hover:scale-125">
               <i class="fas fa-times"></i>
             </button>
             <h2 class="text-xl font-semibold text-terracota mb-6! border-b pb-2">Editar habitación</h2>

@@ -71,7 +71,7 @@ const login = (values) => {
           <div class="mt-4 text-center">
             <p class="text-sm text-gray-600">
                 ¿Has olvidado tu contraseña? <br>
-                <router-link to="/email-password-reset" class="text-blue-600 hover:underline">Restablecer contraseña</router-link>
+                <router-link to="/email-password-reset" class="text-azul-suave hover:underline">Restablecer contraseña</router-link>
             </p>
           </div>
 
@@ -96,15 +96,4 @@ const login = (values) => {
 </template>
 
 <style scoped>
-@media (max-width: 900px) {
-    .container {
-        padding: 1rem;
-    }
-    .w-full {
-        width: 100%;
-    }
-    .sm\:w-1\/3 {
-        width: 100%;
-    }
-}
 </style>

@@ -38,16 +38,17 @@ defineProps({
 });
 
 // Pagination
-const prevPage = () => currentPage.value > 1 && currentPage.value--;
-const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 const currentPage = ref(1);
-const itemsPerPage = 6;
-const totalPages = computed(() => Math.ceil((roomTypes.value?.length || 0) / itemsPerPage));
+const itemsPerPage = 4;
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(roomTypes?.value?.length / itemsPerPage))
+);
 const paginatedRooms = computed(() => {
-  if (!roomTypes.value) return [];
   const start = (currentPage.value - 1) * itemsPerPage;
   return roomTypes.value.slice(start, start + itemsPerPage);
 });
+const prevPage = () => currentPage.value > 1 && currentPage.value--;
+const nextPage = () => currentPage.value < totalPages.value && currentPage.value++;
 </script>
 
 <template>
@@ -154,19 +155,46 @@ const paginatedRooms = computed(() => {
           </div>
         </div>
       </div>
+      <div v-if="roomTypes?.length > 0"
+          class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+          <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
+            <div>
+              <p class="text-[13px] mb-3 text-gray-700 sm:text-sm sm:mb-0">
+                Mostrando de la
+                <span class="font-bold">{{ (currentPage - 1) * itemsPerPage + 1 }}</span>
+                a la
+                <span class="font-bold">{{ Math.min(currentPage * itemsPerPage, roomTypes?.length) }}</span>
+                de un total de
+                <span class="font-bold">{{ roomTypes.length }}</span>
+                habitaciones
+              </p>
+            </div>
+            <div>
+              <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                <button @click="prevPage" :disabled="currentPage === 1"
+                  class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span class="sr-only">Anterior</span>
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button v-for="page in totalPages" :key="page" @click="currentPage = page"
+                  :class="{ 'bg-terracota text-white': currentPage === page, 'bg-white text-gray-500 hover:bg-gray-50': currentPage !== page }"
+                  class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium">
+                  {{ page }}
+                </button>
+                <button @click="nextPage" :disabled="currentPage === totalPages"
+                  class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                  <span class="sr-only">Siguiente</span>
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
     </div>
-    <div class="flex justify-between w-full px-6 flex-col md:flex-row mb-10">
-      <span class="text-gray-600">Mostrando {{ paginatedRooms.length }} habitaciones de {{ roomTypes?.length || 0 }}</span>
-      <div class="flex gap-2 mt-2 md:mt-0">
-        <button @click="prevPage" :disabled="currentPage === 1" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">← Anterior</button>
-        <button v-for="page in totalPages" :key="page" @click="currentPage = page"
-                class="px-3 py-1 hover:bg-gray-300" :class="{'bg-gray-300': currentPage === page, 'bg-gray-200': currentPage !== page}">
-          {{ page }}
-        </button>
-        <button @click="nextPage" :disabled="currentPage === totalPages" class="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded disabled:opacity-50 disabled:hover:bg-gray-200">Siguiente →</button>
-      </div>
-    </div>
-  </div>
+
+
+    
+</div>
 </template>
 
 <style scoped>

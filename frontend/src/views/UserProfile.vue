@@ -84,33 +84,41 @@ const updateProfile = (values) => {
 };
 
 // Eliminación de cuenta, enviando id
+const isDeleteModalVisible = ref(false);
+
+const showDeleteModal = () => {
+  isDeleteModalVisible.value = true;
+};
+
+const closeDeleteModal = () => {
+  isDeleteModalVisible.value = false;
+};
+
 const deleteAccount = () => {
 
   const handleError = (error) => {
     handleApiError(error);
   };
-
-  if (confirm("¿Estás seguro de que quieres eliminar tu cuenta? Esta acción es irreversible.")) {
-    if (userDataComputed.value.role === "customer") {
-      const customerId = currentCustomerId.value;
-      deleteCustomer(customerId, {
-        onSuccess: () => {
-          notyf.success("Cuenta eliminada.");
-          router.push('/register');
-        },
-        onError: (error) => handleError(error)
-      });
-    } else if (userDataComputed.value.role === "hotel_owner") {
-      const hotelOwnerId = currentHotelOwnerId.value;
-      deleteHotelOwner(hotelOwnerId, {
-        onSuccess: () => {
-          notyf.success("Cuenta eliminada.");
-          router.push('/register');
-        },
-        onError: (error) => handleError(error)
-      });
-    }
+  if (userDataComputed.value.role === "customer") {
+    const customerId = currentCustomerId.value;
+    deleteCustomer(customerId, {
+      onSuccess: () => {
+        notyf.success("Cuenta eliminada.");
+        router.push('/register');
+      },
+      onError: (error) => handleError(error)
+    });
+  } else if (userDataComputed.value.role === "hotel_owner") {
+    const hotelOwnerId = currentHotelOwnerId.value;
+    deleteHotelOwner(hotelOwnerId, {
+      onSuccess: () => {
+        notyf.success("Cuenta eliminada.");
+        router.push('/register');
+      },
+      onError: (error) => handleError(error)
+    });
   }
+
 };
 
 const {mutate: mutateLogout} = useLogoutMutation();
@@ -200,7 +208,7 @@ const logout = () => {
               </div>
 
               <div class="flex gap-4 mt-5">
-                <p type="reject" class="flex-1 cursor-pointer text-terracota hover:underline hover:text-terracota-dark" @click="deleteAccount">Eliminar Cuenta</p>
+                <p type="reject" class="flex-1 cursor-pointer text-terracota hover:underline hover:text-terracota-dark" @click="showDeleteModal()">Eliminar Cuenta</p>
               </div>
             </div>
 
@@ -210,4 +218,46 @@ const logout = () => {
       </div>
     </div>
   </div>
+  <transition name="fade">
+    <div v-if="isDeleteModalVisible" class="fixed inset-0 bg-[rgba(0,0,0,0.4)] z-50 flex items-center justify-center">
+      <div
+        class="flex flex-col bg-white border-2 max-w-md w-[90%] border-terracota shadow-xl rounded-lg p-4 sm:p-6 gap-8 overflow-hidden text-pawtel-black font-complementario">
+        <div class="sm:flex sm:items-start">
+          <div
+            class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 text-terracota sm:mx-0 sm:h-10 sm:w-10">
+            <i class="fas fa-trash-alt text-xl"></i>
+          </div>
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Eliminar cuenta de usuario</h3>
+            <div class="mt-2">
+              <p class="text-sm text-gray-500">
+                ¿Estás seguro de que deseas eliminar tu cuenta de usuario? Esta acción no se puede deshacer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 flex flex-row w-full gap-4! justify-end items-end">
+          <Button type="button" @click="deleteAccount"
+            class="m-0! w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-terracota text-base font-medium text-white hover:bg-terracota-dark! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+            Eliminar
+          </Button>
+          <Button type="button" @click="closeDeleteModal"
+            class="m-0! mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-pawtel-black hover:bg-gray-50! focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm">
+            Cancelar
+          </Button>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
+
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+</style>
