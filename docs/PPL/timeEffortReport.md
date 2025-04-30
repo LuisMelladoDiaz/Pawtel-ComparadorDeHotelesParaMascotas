@@ -44,6 +44,8 @@
 | 30/04/2025  | v 1.6         | Actualizar parte de Francisco | Francisco Miguel Jiménez Morales |
 | 30/04/2025  | v 1.7         | Actualizar parte de David | David González Martínez |
 | 30/04/2025  | v 1.8         | Actualizar parte de Javier García | Javier García Sebastián |
+| 30/04/2025  | v 1.9         | Actualizar parte de Javier Ruiz | Javier Ruiz Garrido |
+
 
 ---
 
@@ -209,22 +211,21 @@
 
 ## Reporte de tiempo de Javier Ruiz Garrido
 
-**Periodo:** 27/03/2025 - 09/04/2025
-**Total de tiempo trabajado:** 18:42:52
+**Periodo:** 09/04/2025 - 30/04/2025
+**Total de tiempo trabajado:** 17:58:58
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
 | clase | 08:00:00 |
-| Trabajos automatizados backend | 04:46:148 |
-| Presentacion | 02:52:27 |
-| Borrar booking hold activo al crear booking | 01:23:58 |
-| Pequeños arreglos backend | 01:03:45 |
-| Informes | 00:19:49 |
-| Revision pr | 00:16:39 |
+| Presentacion WPL | 05:19:46 |
+| presentacion | 02:52:27 |
+| informes | 00:53:49 |
+| arreglos presentacion | 00:35:56 |
+| Informe tiempo | 00:17:00 |
 
-![grafico-de-tiempos](graficas/javier_ruiz.png)
+![grafico-de-tiempos](graficas/javi_ruiz.png)
 ---
 
 ## Reporte de tiempo de Francisco Miguel Jiménez Morales
