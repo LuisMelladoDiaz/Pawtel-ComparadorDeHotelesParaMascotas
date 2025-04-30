@@ -62,6 +62,7 @@
 | 29/04/2025  | v 1.4        | Añadida descripción de Francisco | Francisco Miguel Jiménez Morales |
 | 30/04/2025  | v 1.5        | Añadida descripción de Sergio | Sergio Trenado González |
 | 30/04/2025  | v 1.6        | Añadida descripción de David | David González Martínez |
+| 30/04/2025  | v 1.7        | Añadida descripción de Javier García | Javier García Sebastián |
 
 
 
@@ -730,8 +731,8 @@ Algunos de los prompts más efectivos utilizados:
 #### 1. Información General
 
 - **Nombre del programador:** Javier García Sebastián
-- **Sprint:** Sprint2
-- **Rol en el proyecto:** Backend
+- **Sprint:** PPL
+- **Rol en el proyecto:** Frontend, Marketing
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
@@ -747,21 +748,21 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| plantilla para documento general de tiempo	|ChatGPT	| generarme una plantilla para los informes de tiempo|
-| ideas para futuro contenido de las redes socuiales	|ChatGPT	| ideas para posibles usos de las redes que generen engagement|
+| Ideas para contenido en redes y diseño del calendairo de publicaciones	|ChatGPT	| generar un calendario de publicaciones en instagram|
+| ideas para realizar un cartel promocional de la empresa	|ChatGPT	| elementos vistosos y realistas para un cartel|
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 2
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 3
 - **Comparación con trabajo sin IA:** Mejora en eficiencia
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Basandote en este informe de tiempo de clockify, genera una plantilla en formato md que comprenda las horas utilizadas
-2. Tengo una aplicación de buscador de hoteles para mascotas. que contenido puedo subir a mis redes que genere engagement y nos de mas usuarios?
+1. Soy el comunity manager de una empresa estilo Trivago pero para hoteles de mascotas. que publicaciones podria subir a instagram, twitter y tiktok para generar audiencia y descargas de mi app? 
+2. necesito un cartel promocional para pawtel. algo sencillo, que publicite mi empresa. como lo harías? no tienes que generarlo pero si darme una pequeña guia en como hacerlo
 
 #### 6. Problemas Encontrados y Limitaciones
 
