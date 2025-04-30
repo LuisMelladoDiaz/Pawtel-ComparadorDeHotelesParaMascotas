@@ -41,6 +41,7 @@
 | 29/04/2025  | v 1.3         | Parte de Francisco | Francisco Miguel Jiménez Morales |
 | 29/04/2025  | v 1.4         | Parte de Luis | Luis Mellado Díaz |
 | 30/04/2025  | v 1.5         | Parte de Sergio | Sergio Trenado González |
+| 30/04/2025  | v 1.6         | Actualizar parte de Francisco | Francisco Miguel Jiménez Morales |
 
 
 
@@ -228,7 +229,7 @@
 ## Reporte de tiempo de Francisco Miguel Jiménez Morales
 
 **Periodo:** 11/04/2025 - 02/05/2025
-**Total de tiempo trabajado:** 19:17:31
+**Total de tiempo trabajado:** 20:28:09
 
 ### Proyecto Pawtel - Distribución del tiempo
 
@@ -248,6 +249,8 @@
 | Aplicar feedback a la presentación           | 00:55:53   |
 | Misc (Revisión de feedback + redacción de docs) | 00:16:47   |
 | Misc (Revisión de feedback + redacción de docs) | 00:35:50   |
+| Preparar presentacion                        | 00:18:53   |
+| Preparar presentacion                        | 00:51:45   |
 | Clase                                        | 04:00:00   |
 
 
