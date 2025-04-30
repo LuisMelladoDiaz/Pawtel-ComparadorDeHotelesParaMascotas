@@ -18,6 +18,17 @@ class CustomerSerializerTest(TestCase):
 
         self.valid_data = {"user": self.app_user.id}
 
+    # POST tests --------------------------------------------------------------
+
+    def test_valid_post(self):
+        data = {"paw_points": 99}
+        context = {"request": type("Request", (), {"method": "POST"})}
+
+        serializer = CustomerSerializer(data=data, context=context)
+
+        self.assertTrue(serializer.is_valid())
+        self.assertIn("paw_points", serializer.validated_data)
+
     # PUT tests --------------------------------------------------------------
 
     def test_ignore_all_fields_for_put(self):
@@ -30,6 +41,7 @@ class CustomerSerializerTest(TestCase):
             "date_joined": "2025-03-02T12:00:00Z",
             "is_active": True,
             "user": "invalid...",
+            "paw_points": 0,
         }
         context = {"request": type("Request", (), {"method": "PUT"})}
 
@@ -39,6 +51,7 @@ class CustomerSerializerTest(TestCase):
         self.assertNotIn("user", serializer.validated_data)
         self.assertNotIn("date_joined", serializer.validated_data)
         self.assertNotIn("is_active", serializer.validated_data)
+        self.assertIn("paw_points", serializer.validated_data)
 
     # PATCH tests ------------------------------------------------------------
 
@@ -52,6 +65,7 @@ class CustomerSerializerTest(TestCase):
             "date_joined": "2025-03-02T12:00:00Z",
             "is_active": True,
             "user": "invalid...",
+            "paw_points": 0,
         }
         context = {"request": type("Request", (), {"method": "PATCH"})}
 
@@ -61,6 +75,7 @@ class CustomerSerializerTest(TestCase):
         self.assertNotIn("user", serializer.validated_data)
         self.assertNotIn("date_joined", serializer.validated_data)
         self.assertNotIn("is_active", serializer.validated_data)
+        self.assertIn("paw_points", serializer.validated_data)
 
     # GET tests --------------------------------------------------------------
 
@@ -83,3 +98,4 @@ class CustomerSerializerTest(TestCase):
         serializer = CustomerSerializer(customer)
 
         self.assertEqual(serializer.data["user"]["username"], customer.user.username)
+        self.assertEqual(serializer.data.get("paw_points"), 0)

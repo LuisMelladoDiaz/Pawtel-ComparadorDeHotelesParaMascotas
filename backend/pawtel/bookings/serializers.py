@@ -12,6 +12,8 @@ class BookingSerializer(BaseSerializer):
         "total_price",
         "customer",
         "room_type",
+        "use_paw_points",
+        "discount",
     ]
     fields_editable = []
     fields_not_readable = []
@@ -29,6 +31,8 @@ class BookingSerializer(BaseSerializer):
             "start_date",
             "end_date",
             "total_price",
+            "use_paw_points",
+            "discount",
             "customer",
             "room_type",
             "hotel_id",
@@ -39,7 +43,15 @@ class BookingSerializer(BaseSerializer):
             "start_date": {"allow_null": False},
             "end_date": {"allow_null": False},
             "total_price": {
+                "allow_null": False,
                 "min_value": Decimal("1.00"),
+                "max_digits": 10,
+                "decimal_places": 2,
+            },
+            "use_paw_points": {"allow_null": False},
+            "discount": {
+                "allow_null": False,
+                "min_value": Decimal("0.00"),
                 "max_digits": 10,
                 "decimal_places": 2,
             },
