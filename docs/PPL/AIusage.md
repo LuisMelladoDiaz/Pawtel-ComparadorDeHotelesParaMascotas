@@ -396,7 +396,7 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 
 - **Errores o respuestas incorrectas de la IA:** Ideas de presentación poco graficas
 - **Limitaciones detectadas en la IA:** La IA no muestra toda la información
-- **Propuestas de mejora en el uso de IA:** 
+- **Propuestas de mejora en el uso de IA:**
 
 #### 7. Evaluación General
 
@@ -453,55 +453,50 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Manuel Castillejo Vela
-- **Sprint:** Sprint 3
+- **Sprint:** PPL
 - **Rol en el proyecto:** Desarrollador Fullstack
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- [x] Generación de código
-- [x] Refactorización de código
+- [] Generación de código
+- [] Refactorización de código
 - [] Generación de documentación
 - [x] Asesoramiento técnico
-- [x] Eliminación de comentarios en código (GitHub Copilot)
 
 #### 3. Uso de IA en las Tareas
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Refactorización de actualización de hoteles | ChatGPT | Corrección de errores en el flujo de actualización para mantener datos previos |
-| Eliminación de comentarios innecesarios en código | GitHub Copilot | Automatización de la limpieza del código eliminando comentarios redundantes |
-| Invalidate queries tras reservas o updates | ChatGPT | Automatización de invalidación de caché para sincronización de reservas y datos de hoteles |
-| Implementación  de imágenes de hoteles | ChatGPT | Automatización del flujo de subida, previsualización y eliminación de imágenes desde el backend para mostrarse en el frontend |
+| Resolución de errores de conexión en Capacitor Android | ChatGPT | Identificación y solución de errores de red en entorno Android, incluyendo problemas con IPs locales, CORS y configuración de dominios permitidos |
+| Configuración de entorno Android con Capacitor | ChatGPT | Asistencia detallada para compilar y emular una app web como aplicación nativa usando Capacitor, incluyendo la instalación de Android Studio, sincronización de plugins y ajustes en `capacitor.config.ts` |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 8-10 horas
-- **Comparación con trabajo sin IA:** Más eficiente, al igual que en sprints anteriores, permitió detectar errores rápidamente y mejorar rendimiento en menos tiempo. Hizo el aprendizaje más rápido y ayudó en la toma de decisiones, esto permitió sacar el máximo valor del tiempo disponible.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 4-6 horas
+- **Comparación con trabajo sin IA:** La IA permitió avanzar rápidamente en la preparación del entorno Android y resolver bloqueos técnicos que de otra forma habrían requerido mucha investigación y pruebas. Agilizó el diagnóstico y solución de problemas clave en el despliegue móvil.
 
 #### 5. Prompts Utilizados
 
-#### Prompt para mejorar el flujo de actualización en Vue.js
-
 ```plaintext
-¿Cómo puedo invalidar queries en TanStack Query después de crear una reserva?
+¿Por qué no conecta mi app de Capacitor con el backend local desde Android?
 
-¿Cuándo debo usar invalidateQueries y cuándo setQueryData en React Query?
+¿Cómo puedo emular una PWA en Android usando Capacitor y Android Studio?
 
-¿Cómo puedo permitir subir varias imágenes y mostrar una previsualización en Vue 3?
+¿Qué configuraciones debo revisar para evitar errores de conexión en Capacitor al usar IP local?
 
-Refactoriza este hook de actualización de hotel para que conserve los datos previos si el usuario no los modifica.
+¿Dónde configuro los dominios permitidos en Capacitor para acceso a la API?
 ```
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** En algunas ocasiones hemos encontrado "alucinaciones" de la IA en la que nos proporcionaba respuestas incorrectas o no acordes al contexto proporcionado
-- **Limitaciones detectadas en la IA:** Limitaciones en la comprensión completa del proyecto y de la conexión entre componentes para su correcto funcionamiento.
-- **Propuestas de mejora en el uso de IA:**  Dividir la consulta a la IA por bloques destinados en una funcionalidad para evitar errores cuando intenta modificar varias funcionalidades.
+- **Errores o respuestas incorrectas de la IA:** En algunos casos recomendó soluciones pensadas para frontend web que no aplicaban a entorno Android nativo.
+- **Limitaciones detectadas en la IA:** Dificultad para identificar diferencias entre entorno de desarrollo local (web) y entorno emulado Android.
+- **Propuestas de mejora en el uso de IA:**  Especificar claramente el entorno de ejecución en el prompt para evitar confusiones y obtener respuestas más precisas.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad y rendimiento del código.
+- **Comentarios adicionales sobre la experiencia con IA:**: Fue especialmente útil durante los primeros pasos con Capacitor, permitiendo que la app web funcionara en entorno Android de forma más rápida y guiada.
 
 ---
 
@@ -727,60 +722,8 @@ Algunos de los prompts más efectivos utilizados:
   - En este sprint, la IA fue una herramienta importante para avanzar en diseño, contenido visual y preparación de materiales publicitarios. Sin embargo, me encontré con la necesidad de pulir mucho los resultados. Aun así, me permitió encontrar elementos narrativos sueltos que luego pude reinterpretar según el tono y estética deseados para Pawtel.
 
 ---
-### 👨‍💻 Manuel Castillejo Vela
 
-## 1. Información General
 
-- **Nombre del programador:** Manuel Castillejo Vela
-- **Sprint:** Sprint 2
-- **Rol en el proyecto:** Desarrollador Fullstack
-
-## 2. Tipo de Tareas en las que se Utilizó IA
-
-- [x] Generación de código
-- [x] Refactorización de código
-- [x] Generación de documentación
-- [x] Asesoramiento técnico
-- [x] Eliminación de comentarios en código (GitHub Copilot)
-
-## 3. Uso de IA en las Tareas
-
-| Tarea | Herramienta utilizada | Descripción del uso de IA |
-|-------|-----------------------|---------------------------|
-| Implementación de CRUD en Vue.js | ChatGPT | Generación de hooks para llamadas a la API y validaciones con Vee-Validate |
-| Refactorización de actualización de hoteles | ChatGPT | Corrección de errores en el flujo de actualización para mantener datos previos |
-| Documentación del API para gestión de hoteles | ChatGPT | Generación de documentación estructurada en Markdown |
-| Eliminación de comentarios innecesarios en código | GitHub Copilot | Automatización de la limpieza del código eliminando comentarios redundantes |
-
-## 4. Impacto en Productividad
-
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 6-8 horas
-- **Comparación con trabajo sin IA:** Más eficiente, permitió detectar errores rápidamente y mejorar rendimiento en menos tiempo
-
-## 5. Prompts Utilizados
-
-### Prompt para mejorar el flujo de actualización en Vue.js
-```plaintext
-En Vue.js, quiero que al actualizar un hotel, se mantengan los datos previos y solo se modifiquen los campos editados. ¿Cómo puedo hacerlo?
-
-Usando GitHub Copilot, quiero limpiar mi código eliminando comentarios redundantes y manteniendo solo los esenciales. ¿Cómo hacerlo de forma eficiente?
-
-Estoy implementando paginación en Vue.js para mostrar una lista de hoteles. Uso `computed` para calcular los elementos por página, pero quiero optimizar la lógica y mejorar el rendimiento. ¿Cómo puedo hacerlo de manera eficiente?
-
-```
-
-## 6. Problemas Encontrados y Limitaciones
-
-- **Errores o respuestas incorrectas de la IA:** En algunos casos, ChatGPT sugirió soluciones con hooks de Vue obsoletos.
-- **Limitaciones detectadas en la IA:** Limitaciones relacionadas con últimas versiones de algunos componentes.
-- **Propuestas de mejora en el uso de IA:**  Ajustar los prompts y validar siempre las respuestas generadas.
-
-## 7. Evaluación General
-
-- **¿Recomendarías la IA para estas tareas en futuras iteraciones?** Sí
-- **Comentarios adicionales sobre la experiencia con IA:** La combinación de ChatGPT y Copilot optimizó el tiempo de desarrollo y mejoró la calidad del código.
-
----
 
 ### 👨‍💻 Javier García Sebastián
 
