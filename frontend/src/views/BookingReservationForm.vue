@@ -11,13 +11,18 @@ import { useFiltersStore } from "@/filters";
 import DatePicker from "@/components/DatePicker.vue";
 import DatePickerMobile from "@/components/DatePickerMobile.vue";
 import { useUserQuery } from "@/data-layer/auth";
+import { useGetCurrentCustomer } from "@/data-layer/hooks/customers"
 
 const { data: userData } = useUserQuery();
+console.log("user", userData)
+const { data: customerData } = useGetCurrentCustomer();
+console.log("customer", customerData);
+
 const usePawPoints = ref(false);
 
 const paw_points = computed(() => {
   if (userData?.value?.role === "customer") {
-    return userData.value.paw_points || 0;
+    return customerData.value.paw_points || 0;
   }
   return 0;
 });
