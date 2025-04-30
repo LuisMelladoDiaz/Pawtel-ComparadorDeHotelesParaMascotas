@@ -139,22 +139,19 @@
 
 ## Reporte de tiempo de Manuel Castillejo Vela
 
-**Periodo:** 27/03/2025 - 09/04/2025
+**Periodo:** 10/04/2025 - 30/04/2025
 
-**Total de tiempo trabajado:** 19:15:05
+**Total de tiempo trabajado:** 15:54:32
 
 ### Proyecto Pawtel - Distribución del tiempo
-| Description                                           | Time (h) |
-|-------------------------------------------------------|----------|
-| KBReport                                              | 00:51:49 |
-| Reunion semanal                                       | 00:41:14 |
-| Clase                                                 | 04:00:00 |
-| #271 Feature: Cover imagenes                          | 02:16:02 |
-| SLA agreement y pricing                               | 01:08:13 |
-| Informe de IA                                         | 00:25:58 |
-| #276 Actualización cambios en tiempo real edit hotel | 00:35:00 |
-| Adicion de feedback a la base de datos comun         | 00:47:30 |
-| #237 Feature: Funcionamiento imagenes Frontend       | 08:29:19 |
+| Descripción                        | Tiempo     |
+|-----------------------------------|------------|
+| KBReport                           | 00:29:12   |
+| #291 Feature: Desarrollo Android  | 06:18:10   |
+| Clase                              | 08:00:00   |
+| Informe de IA                      | 00:21:24   |
+| Entrega final sprint 3            | 00:45:46   |
+
 ![grafico-de-tiempos](graficas/manuel.png)
 ---
 
