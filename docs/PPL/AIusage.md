@@ -363,12 +363,11 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Jorge Gómez de Tovar
-- **Sprint:** Sprint 3
-- **Rol en el proyecto:** Desarrollador backend
+- **Sprint:** PPL
+- **Rol en el proyecto:** Desarrollador backend, Presentación
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (X)
 - Asesoramiento técnico (X)
 
 #### 3. Uso de IA en las Tareas
@@ -377,12 +376,12 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Generación de tests para controladores y servicios| ChatGPT | Se ha usado la IA para que genere una primera versión de tests que prueben los servicios y controladores desarrollados durante el sprint. |
-| Asesoramiento técnico | ChatGPT | Se ha usado la IA para preguntas puntuales y consulta de errores durante el desarrollo de los servicios, controladores y sus tests correspondientes. |
+| Generación ideas presentacion protopersonas e ias | ChatGPT | Se ha usado la IA para que genere ideas sobre como presentar las protopersonas de la presentaciçon |
+
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 3 horas
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 1 horas
 - **Comparación con trabajo sin IA:** Trabajo más eficaz que sin el uso de la IA.
 
 #### 5. Prompts Utilizados
@@ -390,16 +389,13 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 Listar los prompts que fueron más efectivos para completar las tareas:
 
 1.
-   - Dado los servicios y los controladores, crea un test para cada uno teniendo en cuenta su serializador y su modelo.
-2.
-   - Dado el controlador de administrador, ¿cómo debería hacer las llamadas desde Postman para probar cada una de las URLs que hay en el controlador?
-
+   - Dado los datos de las siguientes protopersonas como deberia estructurarlo en una presentación
 
 #### 6. Problemas Encontrados y Limitaciones
 
-- **Errores o respuestas incorrectas de la IA:** Los tests generados por la IA tenían fallos debido a que el setup que creó no era el correcto para probar los métodos del controlador y, además, incluían algunos casos de prueba incorrectos. Tambíen algunas llamadas a Postman no se correspondian con el controlador.
-- **Limitaciones detectadas en la IA:** La IA no tiene en cuenta todos los casos de prueba.
-- **Propuestas de mejora en el uso de IA:** Seguir moderando su uso y probar todo el código generado.
+- **Errores o respuestas incorrectas de la IA:** Ideas de presentación poco graficas
+- **Limitaciones detectadas en la IA:** La IA no muestra toda la información
+- **Propuestas de mejora en el uso de IA:** 
 
 #### 7. Evaluación General
 

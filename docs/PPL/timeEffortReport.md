@@ -192,18 +192,15 @@
 
 ## Reporte de tiempo de Jorge Gomez de Tovar
 
-**Periodo:** 27/03/2025 - 09/04/2025
-**Total de tiempo trabajado:** 20:20:00
+**Periodo:** 09/04/2025 - 30/04/2025
+**Total de tiempo trabajado:** 13:00:00
 
 | Descripción                           | Duración  |
 |--------------------------------------|-----------|
 | Clase                                | 08:00:00  |
 | Informes de tiempo e IA              | 00:30:00  |
-| Autenticar hotel owner aprobado      | 02:00:00  |
-| Añadir imágenes reales al seeder     | 02:10:00  |
-| Revisión PR mejorar autorización     | 00:40:00  |
-| Investigar coverage                  | 01:00:00  |
-| Añadir admin a backend               | 06:00:00  |
+| Presentación PPL                     | 04:30:00  |
+
 
 ![grafico-de-tiempos](graficas/jorge.png)
 ---
