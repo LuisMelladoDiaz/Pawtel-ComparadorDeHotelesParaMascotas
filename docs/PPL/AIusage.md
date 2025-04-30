@@ -126,14 +126,14 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Claudio Cortés Carrasco
-- **Sprint:** Sprint3
-- **Rol en el proyecto:** Programador backend, documentación
+- **Sprint:** PPL
+- **Rol en el proyecto:** Programador backend, documentación, marketing
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
 - Generación de código ()
 - Refactorización de código ( )
-- Generación de documentación ( )
+- Generación de documentación (x)
 - Asesoramiento técnico (x)
 
 #### 3. Uso de IA en las Tareas
@@ -142,23 +142,22 @@ Para cada tarea en la que se usó IA, completar la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-------|-----------------------|---------------------------|
-| Ayuda para uso excel para grafos |    ChatGPT | Se utilizo para ayudarnos al tema de generar lineas entre 2 puntos para ver la evolucion de horas y rendimiento de una semana a otra. |
-| Ayuda para pensar en merchandising y temas de inversores |                ChatGPT | Se usó para dar ideas en temas de posibles merchandising de pawtel y para explicarnos temas relacionados con la inversión para cambiar el storyboard de los inversores|
+| Ideas para metricas para la los KPIs que vamos a medir |    ChatGPT | Se utilizo para ayudarnos a darnos ideas sobre las posibles metricas que podíamos usar como KPIs. |
+| Ayuda para generar imagenes merchandising |                Canva ,ChatGPT | Se usó para generar representaciones realistas de los objetos que teniamos por merchandising, pasandoles las instruciones claras sobre lo que queríamos y fotos de ayuda en caso necesario.|
 
 
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas en comparación con trabajo manual:** 2.5 horas
-- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para generarme ideas para el tema de marketing y para ayudarme con el tema de las graficas para la presentación fue vital ya que sin esa ayuda me hubiese llevado bastante mas tiempo el poder llevar a cabo dichas tareas.
+- **Horas estimadas ahorradas en comparación con trabajo manual:** 3 horas
+- **Comparación con trabajo sin IA:** La ayuda que me dió la IA para generarme ideas para el tema de las KPIs y generar las imagenes del merchandising fue vital ya que sin esa ayuda me hubiese llevado bastante mas tiempo el poder llevar a cabo dichas tareas sobre todo el tema de la representación grafica del marketing ya que se me da muy mal dibujar.
 
 #### 5. Prompts Utilizados
 
 Listar los prompts que fueron más efectivos para completar las tareas:
 
-1. Quiero hacer que la grafica de rendimiento y horas, en cada uno de los 2 puntos pertenecientes a cada estudiante, que haya una linea que los una para saber que esos 2 puntos son la evolucion horas/rendimiento de cada uno de los estudiantes, dime como hacer esto.
-2. Podrias darme ideas para merchandising para mi negocio de reserva de alojamiento para mascotas.
-3. Como funciona el tema de la inversión y el porcentaje que se le da al inversor y como se calcula el beneficio que se le da a este inversor con lo generado en mi empresa. ¿Podrías guiarme un poco?.
+1. Quiero generar las imágenes del merchandising de mi app Pawtel. Quiero hacer boli, libretas, pines y llaveros. Vamos a empezar con el boli. Quiero que me generes un boli de un color rosado claro, ya que es la paleta de colores de nuestra aplicación. Y en el boli  escrita la palabra Pawtel como el logo que te paso por imagen, que es el nombre de nuestra aplicación.
+2. Podrias darme ideas para definir las KPIs para mi negocio de reserva de alojamiento para mascotas.Tenemos varias redes sociales para que lo tengas en cuenta.
 
 #### 6. Problemas Encontrados y Limitaciones
 

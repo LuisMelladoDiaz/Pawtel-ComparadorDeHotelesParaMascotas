@@ -340,26 +340,27 @@
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
 
-**Periodo:** 14/03/2025 - 25/03/2025
-**Total de tiempo trabajado:** 28:45:50
+**Periodo:** 11/04/2025 - 02/05/2025
+**Total de tiempo trabajado:** 18:47:50
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Clases | 08:00:00 |
-| Presentación Diapositivas | 01:22:00 |
-| Video anuncio y diapositivas y guión | 01:25:00 |
-| Presentación | 02:05:00 |
-| Hacer documento feedback ispp | 00:16:00 |
-| Añadir ruta de listado de hotel owner no validados y otra ruta para borrar hotel owner no validados | 02:09:06 |
-| cambiar metodo de borrar hotel owner no validados por consistencia| 01:09:00 |
-| graficas rendimiento y correciones varias | 01:45:09 |
-| planificación marketing | 01:26:42 |
-| presentación diapositivas y cambio storyboards| 01:22:23 |
+| Clases | 04:00:00 |
+| Estudiar KPIs y motores SEO y empezar los docs | 00:57:00 |
+| Definir documentos KPIs y definir estrategia SEO | 02:31:00 |
+| Definir costes de marketing y crear imagenes merchandising | 02:46:00 |
+| Definir KPIs principales y comparar terminos del SEO en google trends y añadir gráficas | 01:06:08 |
+| Aplicar feedback a documentos de marketing | 01:34:00 |
+| Merchandising| 01:41:00 |
+| Medición KPIs y campaña marketing global | 02:15:13 |
+| Creación Protopersonas | 00:59:29 |
+| Poner correlaciones/estacionalidad de busquedas estrategia SEO y gráficas más grandes| 00:27:00 |
+| IA Report and Time report| 00:31:00 |
 |
 
-![grafico-de-tiempos](graficas/claudio.png)
+![grafico-de-tiempos](graficas/claudio2.png)
 ---
 
 ## Reporte de tiempo de Andrés Martínez Reviriego
