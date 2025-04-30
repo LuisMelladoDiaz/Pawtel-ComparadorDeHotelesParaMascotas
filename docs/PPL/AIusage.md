@@ -60,6 +60,8 @@
 | 29/04/2025  | v 1.2        | Añadida descripción de Fernando | Fernando Castelló Sánchez |
 | 29/04/2025  | v 1.3        | Añadida descripción de Luis | Luis Mellado Díaz |
 | 29/04/2025  | v 1.4        | Añadida descripción de Francisco | Francisco Miguel Jiménez Morales |
+| 30/04/2025  | v 1.5        | Añadida descripción de Sergio | Sergio Trenado González |
+
 
 
 ---
