@@ -45,7 +45,7 @@
 | 30/04/2025  | v 1.7         | Actualizar parte de David | David González Martínez |
 | 30/04/2025  | v 1.8         | Actualizar parte de Javier García | Javier García Sebastián |
 | 30/04/2025  | v 1.9         | Actualizar parte de Javier Ruiz | Javier Ruiz Garrido |
-
+| 01/05/2025  | v 2.0         | Actualizar parte de Yesica Garate | Yesica Garate Fuentes |
 
 ---
 
@@ -83,25 +83,27 @@
 
 ## Reporte de tiempo de Yesica Leydi Garate Fuentes
 
-**Periodo:** 27/03/2025 - 09/04/2025
-**Total de tiempo trabajado:** 32:11:00
+**Periodo:** 10/04/2025 - 30/04/2025
+**Total de tiempo trabajado:** 32:21:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Mejoras del Storyboard de Inversores | 01:22:00|
-| Desarrollo de Presentación: Planificacíon de Marketing II (SPRINT 03) | 01:55:00|
-| Desarrollo de Presentación: Planificacíon de Marketing - Roles de Equipo (SPRINT 03)  | 00:50:00 |
-| Modificaciones finales y Añadido Pantalla dirigido a Dueños de Alojamientos | 02:48:00|
-| Modificación segun feedback de pantallas Home, Sobre Nosotros y Contact II | 06:12:00 |
-| Modificación segun feedback de pantallas Home, Sobre Nosotros y Contact I | 03:50:00|
-| Desarrollo de Presentación: Modificaciones a video de Anuncio, Planificación de Marketing | 01:57:00 |
-| Clase 28 marzo                                                                                                   | 04:00:00  |
-| Mejoras del Video de Anuncio dirigido a Dueños de Mascotas | 02:10:00|
-| Desarrollo de Presentación: Planificación de Marketing | 01:25:00 |
-| Desarrollo de Presentación: Rendimiento, Planificación de Marketing | 01:22:00|
-| Planificación y Marketing: Investigación y desarrollo de Video de anuncio dirigido a Dueños de Mascotas | 04:20:00 |
+| Actualización de reportes individual personal | 01:10:00 |
+| Diseño de carteles para presentación oficial - Marketing | 03:48:00 |
+| Desarrollo de Presentación II - Marketing (PPL) | 03:59:00 |
+| Gestión de RRSS | 03:34:00 |
+| Recopilar recursos visuales (Post, Stories, Reels, videos, etc) II | 04:15:00 |
+| Corrección de materiales audiovisuales - Video de Inversores | 00:23:00 |
+| Cronograma de publicaciones en RRSS | 02:02:00 |
+| Desarrollo de Presentación: Marketing (PPL) | 02:11:00 |
+| Gestión de RRSS | 03:55:00 |
+| Video anuncio orientado a inversores | 01:00:00  |
+| Recursos Redes Sociales | 01:11:00|
+| Costes de marketing | 01:30:00 |
+| Recopilar recursos visuales (Post, Stories, Reels, videos, etc) I | 05:22:00 |
+| Definir la plantilla para la presentación | 02:01:00 |
 
 
 ![grafico-de-tiempos](graficas/yesica.png)
