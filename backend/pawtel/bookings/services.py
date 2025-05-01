@@ -5,19 +5,19 @@ from decimal import ROUND_HALF_DOWN, ROUND_HALF_UP, Decimal
 import stripe
 from django.conf import settings
 from django.db import transaction
-from django.forms import ValidationError
 from django.http import HttpResponse, JsonResponse
 from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
-from pawtel.booking_holds.models import BookingHold
+from pawtel.booking_holds.services import BookingHoldService
 from pawtel.bookings.models import Booking
 from pawtel.bookings.serializers import BookingSerializer
 from pawtel.customers.services import CustomerService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
-from pawtel.room_types.models import RoomType
+from pawtel.room_types.services import RoomTypeService
 from rest_framework import status
-from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.exceptions import (NotFound, PermissionDenied,
+                                       ValidationError)
 from rest_framework.response import Response
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -62,43 +62,11 @@ class BookingService:
         else:
             raise PermissionDenied("Permiso denegado.")
 
-    # Serialization -----------------------------------------------------------------
+    # Serialization ----------------------------------------------------------
 
     @staticmethod
     def serialize_output_booking(booking, many=False):
         return BookingSerializer(booking, many=many).data
-
-    # Authorization -----------------------------------------------------
-
-    # TODO This auth with the news auth_action_levels
-    @staticmethod
-    def authorize_create_booking(request):
-        return AppUserService._AppUserService__authorize_action_app_user(
-            request, request.user.id
-        )
-
-    #  GET Methods --------------------------------------------------------
-
-    @staticmethod
-    def list_bookings():
-        return Booking.objects.all()
-
-    @staticmethod
-    def retrieve_booking(pk):
-        try:
-            return Booking.objects.get(pk=pk)
-        except Booking.DoesNotExist:
-            raise NotFound(detail="Reserva no encontrada.")
-
-    @staticmethod
-    def count_bookings_of_room_type_at_date(room_type_id, date_to_check):
-        return Booking.objects.filter(
-            room_type_id=room_type_id,
-            start_date__lte=date_to_check,  # Booking started before or on this day
-            end_date__gte=date_to_check,  # Booking ends after or on this day
-        ).count()
-
-    #  POST Methods -------------------------------------------------------
 
     @staticmethod
     def serialize_input_booking_create(request):
@@ -111,8 +79,6 @@ class BookingService:
         room_type = request.data.get("room_type")
         end_date = request.data.get("end_date")
         start_date = request.data.get("start_date")
-
-        from pawtel.room_types.services import RoomTypeService
 
         if room_type and end_date and start_date:
             room_type_price = RoomTypeService.retrieve_room_type(
@@ -140,24 +106,20 @@ class BookingService:
         serializer = BookingSerializer(data=data, context=context)
         return serializer
 
+    # Validations ------------------------------------------------------------
+
     @staticmethod
     def validate_create_booking(request, input_serializer):
         if not input_serializer.is_valid():
             raise ValidationError(input_serializer.errors)
 
         customer = CustomerService.get_current_customer(request)
-
-        room_id = input_serializer.validated_data.get("room_type").id
-
-        try:
-            room_type = RoomType.objects.get(id=room_id)
-        except RoomType.DoesNotExist:
-            raise NotFound("El tipo de habitación no existe.")
-
+        room_type_id = input_serializer.validated_data.get("room_type").id
+        room_type = RoomTypeService.retrieve_room_type(room_type_id)
         start_date = input_serializer.validated_data.get("start_date")
         end_date = input_serializer.validated_data.get("end_date")
 
-        # Validate that the client does not have previous reservations for the same room in the same period
+        # Validate that the client does not already have bookings for the same room in the same period
         overlapping_bookings = Booking.objects.filter(
             customer=customer,
             room_type=room_type,
@@ -167,10 +129,40 @@ class BookingService:
 
         if overlapping_bookings:
             raise ValidationError(
-                "Un cliente puede tener diferentes reservas de la misma habitación pero que no coincidan."
+                "Un cliente puede tener diferentes reservas de la misma habitación pero no pueden coincidir en fecha."
             )
 
-        # TODO: Implement validation for booking_holds
+        """
+        if not BookingHoldService.has_customer_active_booking_hold_of_room_type(
+            customer.id, room_type_id
+        ):
+            raise ValidationError(
+                "Para poder reservar, el cliente debe tener una Booking hold activa en esa habitación."
+            )
+        """
+
+    # GET Methods ------------------------------------------------------------
+
+    @staticmethod
+    def list_bookings():
+        return Booking.objects.all()
+
+    @staticmethod
+    def retrieve_booking(pk):
+        try:
+            return Booking.objects.get(pk=pk)
+        except Booking.DoesNotExist:
+            raise NotFound(detail="Reserva no encontrada.")
+
+    @staticmethod
+    def count_bookings_of_room_type_at_date(room_type_id, date_to_check):
+        return Booking.objects.filter(
+            room_type_id=room_type_id,
+            start_date__lte=date_to_check,  # Booking started before or on this day
+            end_date__gte=date_to_check,  # Booking ends after or on this day
+        ).count()
+
+    #  POST Methods ----------------------------------------------------------
 
     @staticmethod
     def create_booking(input_serializer):
@@ -216,6 +208,7 @@ class BookingService:
             )
 
             return JsonResponse({"url": session.url})
+
         except Exception:
             return Response(
                 {"error": "Algo salió mal."},
@@ -228,9 +221,9 @@ class BookingService:
         event = None
         try:
             event = stripe.Webhook.construct_event(payload, sig_header, secret_endpoint)
-        except ValueError as e:
+        except ValueError:  # as e:
             # Invalid payload
-            print(e)
+            # print(e)
             return HttpResponse(status=400)
 
         if event.type == "checkout.session.completed":
@@ -245,9 +238,7 @@ class BookingService:
             else:
                 return HttpResponse(status=400)
 
-            BookingHold.objects.filter(
-                customer=booking.customer, room_type=booking.room_type
-            ).delete()
+            BookingHoldService.delete_booking_holds_of_customer(booking.customer)
 
             BookingService.__recalculate_paw_points(booking_serializer)
 
