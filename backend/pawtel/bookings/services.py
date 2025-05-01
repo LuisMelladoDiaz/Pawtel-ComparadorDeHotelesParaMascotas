@@ -175,6 +175,8 @@ class BookingService:
     def stripe_checkout_transference(input_serializer):
         total_price = input_serializer.validated_data.get("total_price")
         total_price = int(total_price * 100)
+        discount = input_serializer.validated_data.get("discount")
+        discount = int(discount * 100)
         room_type_name = input_serializer.validated_data.get("room_type").name
         room_type_description = input_serializer.validated_data.get(
             "room_type"
@@ -195,7 +197,7 @@ class BookingService:
                                 "name": room_type_name,
                                 "description": room_type_description,
                             },
-                            "unit_amount": total_price,
+                            "unit_amount": total_price - discount,
                         },
                         "quantity": 1,
                     },

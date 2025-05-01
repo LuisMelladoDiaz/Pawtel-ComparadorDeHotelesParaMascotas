@@ -46,7 +46,7 @@
 | 📆 24/03/2025  | 🔹 v 1.2         | 🏁 #S2 | ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 24/03/2025  | 🔹 v 1.2.1        | 🏁 #S2 Evaluación Individual y trabajo S2 | ✍️ Luis Mellado Diaz |
 | 📆 10/04/2025  | 🔹 v 1.3        | 🏁 #S3 Evaluación Individual y trabajo S3 | ✍️ Luis Mellado Diaz |
-| 📆 29/04/2025  | 🔹 v 1.4        | 🏁 #PPL. Cambiando comunes del documento | ✍️ Daniel Flores de Francisco|
+| 📆 29/04/2025  | 🔹 v 1.4        | 🏁 #PPL. Evaluación Individual y Trabajo PPL | ✍️ Daniel Flores de Francisco y Luis Mellado Díaz|
 
 
 
@@ -55,24 +55,25 @@
 
 ### Evaluación Individual Acordada
 
-| Student                     | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
-|-----------------------------|------|------|------|------|------|------|-------|
-| Flores de Francisco, Daniel | 10   | 10   | 10   |10      |      |      | 40    |
-| Mellado Díaz, Luis          | 10   | 10   | 10   |10      |      |      | 40    |
-| González Martínez, David    | 10   | 10   | 10   |10      |      |      | 40    |
-| Martínez Reviriego, Andrés  | 10   | 10   | 10   |10    |      |      | 40    |
-| Cortés Carrasco, Claudio    | 10   | 9    | 8    |7     |      |      | 34    |
-| Trenado González, Sergio    | 10   | 10   | 10   |10      |      |      | 40    |
-| Jiménez Morales, Francisco Miguel | 10 | 9   | 10    |9      |      |      | 38    |
-| Gómez de Tovar, Jorge       | 10   | 8    | 10   |10     |      |      | 38    |
-| Ruiz Garrido, Javier        | 10   | 8    | 10   |10      |      |      | 38    |
-| Castillo Cebolla, Rafael    | 10   | 10   | 10   |10      |      |      | 40    |
-| Castelló Sánchez, Fernando  | 10   | 10   | 10   |9     |      |      | 39    |
-| García Sebastián, Javier    | 10   | 8    | 9    |7     |      |      | 34    |
-| Garate Fuentes, Yesica      | 10   | 9    | 7    |9     |      |      | 35    |
-| Castillejo Vela, Manuel     | 10   | 10   | 10   |10    |      |      | 40    |
+| Estudiante                          | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
+|-------------------------------------|:----:|:---:|:---:|:---:|:----:|:----:|:-----:|
+| Flores de Francisco, Daniel         |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Mellado Díaz, Luis                  |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| González Martínez, David            |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Martínez Reviriego, Andrés          |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Cortés Carrasco, Claudio            |  10  |  9  |  8  |  7  | 10   |      | 44    |
+| Trenado González, Sergio            |  10  | 10  | 10  | 10  |  9   |      | 49    |
+| Jiménez Morales, Francisco Miguel   |  10  |  9  | 10  |  9  | 10   |      | 48    |
+| Gómez de Tovar, Jorge               |  10  |  8  | 10  | 10  | 10   |      | 48    |
+| Ruiz Garrido, Javier                |  10  |  8  | 10  | 10  |  8   |      | 46    |
+| Castillo Cebolla, Rafael            |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Castelló Sánchez, Fernando          |  10  | 10  | 10  |  9  | 10   |      | 49    |
+| García Sebastián, Javier            |  10  |  8  |  9  |  7  |  7   |      | 41    |
+| Garate Fuentes, Yesica              |  10  |  9  |  7  |  9  | 10   |      | 45    |
+| Castillejo Vela, Manuel             |  10  | 10  | 10  | 10  | 10   |      | 50    |
 
-**Total:** 536 / 560
+
+**Total:** 670 / 700
 
 ---
 
@@ -442,7 +443,80 @@
 
 ## Preparing Project Launch (#PPL)
 
-*(Por completar con las contribuciones de cada miembro.)*
+### Flores de Francisco, Daniel  
+- Preparación de presentación PPL.
+- Organización y gestión del equipo.
+- Estudio de segmentación de mercado con SemRush y Google Trends.
+- Preparación de slides y QA.
+- Optimización de la web (indexación por keywords).
+- Arreglo de test y análisis de tráfico.
+
+### Mellado Díaz, Luis  
+- QA de presentación WPL.
+- Elaboración de guión WPL.
+- Supervisión del equipo y reuniones organizativas.
+- Actualización de landing page.
+- Coordinación general del entregable.
+- feature Paw Points (frontend).
+
+### González Martínez, David  
+- Desarrollo y fixes de funcionalidades Android.
+- Arreglos de bugs y despliegues.
+- Participación en reuniones y organización técnica.
+
+### Martínez Reviriego, Andrés  
+- Desarrollo de presentación PPL.
+- Colaboración con caronte.
+- Video Demo
+
+### Cortés Carrasco, Claudio  
+- Definición de KPIs y estrategia SEO.
+- Creación de gráficas y visuales.
+- Costes de marketing y materiales promocionales.
+- Medición de campañas.
+
+### Trenado González, Sergio  
+- Mejora de pantalla de administrador.
+- Corrección de bugs.
+- QA final del sistema.
+
+### Jiménez Morales, Francisco Miguel  
+- Preparación del Killer Opener y slides de presentación.
+- Corrección de materiales tras feedback.
+- Coordinación de tareas relacionadas con usuarios piloto.
+
+### Gómez de Tovar, Jorge  
+- Elaboración de presentación PPL.
+
+### Ruiz Garrido, Javier  
+- Presentación WPL
+
+### Castillo Cebolla, Rafael  
+- QA general del sistema.
+- Arreglo de errores en backend.
+- Feature Paw Points (backend).
+- Apoyo técnico en presentaciones.
+
+### Castelló Sánchez, Fernando  
+- Presentación wpl.
+- Recopilación de feedback.
+
+### García Sebastián, Javier  
+- Diseño gráfico: carteles, imágenes para redes, posts.
+- Coordinación de RRSS y contenidos audiovisuales.
+- Preparación de presentaciones.
+
+### Garate Fuentes, Yesica  
+- Creación de recursos visuales (posts, reels, vídeos).
+- Maquetación de presentaciones.
+- Planificación de cronograma de redes sociales.
+- Desarrollo de vídeos orientados a marketing e inversores.
+
+### Castillejo Vela, Manuel  
+- Desarrollo Android.
+- SLA.
+- KBReport y QA final.
+
 
 ## World Project Launch (#WPL)
 
