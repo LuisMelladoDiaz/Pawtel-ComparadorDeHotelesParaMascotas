@@ -46,7 +46,7 @@
 | 📆 24/03/2025  | 🔹 v 1.2         | 🏁 #S2 | ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 24/03/2025  | 🔹 v 1.2.1        | 🏁 #S2 Evaluación Individual y trabajo S2 | ✍️ Luis Mellado Diaz |
 | 📆 10/04/2025  | 🔹 v 1.3        | 🏁 #S3 Evaluación Individual y trabajo S3 | ✍️ Luis Mellado Diaz |
-| 📆 29/04/2025  | 🔹 v 1.4        | 🏁 #PPL. Cambiando comunes del documento | ✍️ Daniel Flores de Francisco|
+| 📆 29/04/2025  | 🔹 v 1.4        | 🏁 #PPL. Trabajo PPL | ✍️ Daniel Flores de Francisco y Luis Mellado Díaz|
 
 
 
@@ -442,7 +442,80 @@
 
 ## Preparing Project Launch (#PPL)
 
-*(Por completar con las contribuciones de cada miembro.)*
+### Flores de Francisco, Daniel  
+- Preparación de presentación PPL.
+- Organización y gestión del equipo.
+- Estudio de segmentación de mercado con SemRush y Google Trends.
+- Preparación de slides y QA.
+- Optimización de la web (indexación por keywords).
+- Arreglo de test y análisis de tráfico.
+
+### Mellado Díaz, Luis  
+- QA de presentación WPL.
+- Elaboración de guión WPL.
+- Supervisión del equipo y reuniones organizativas.
+- Actualización de landing page.
+- Coordinación general del entregable.
+- feature Paw Points (frontend).
+
+### González Martínez, David  
+- Desarrollo y fixes de funcionalidades Android.
+- Arreglos de bugs y despliegues.
+- Participación en reuniones y organización técnica.
+
+### Martínez Reviriego, Andrés  
+- Desarrollo de presentación PPL.
+- Colaboración con caronte.
+- Video Demo
+
+### Cortés Carrasco, Claudio  
+- Definición de KPIs y estrategia SEO.
+- Creación de gráficas y visuales.
+- Costes de marketing y materiales promocionales.
+- Medición de campañas.
+
+### Trenado González, Sergio  
+- Mejora de pantalla de administrador.
+- Corrección de bugs.
+- QA final del sistema.
+
+### Jiménez Morales, Francisco Miguel  
+- Preparación del Killer Opener y slides de presentación.
+- Corrección de materiales tras feedback.
+- Coordinación de tareas relacionadas con usuarios piloto.
+
+### Gómez de Tovar, Jorge  
+- Elaboración de presentación PPL.
+
+### Ruiz Garrido, Javier  
+- Presentación WPL
+
+### Castillo Cebolla, Rafael  
+- QA general del sistema.
+- Arreglo de errores en backend.
+- Feature Paw Points (backend).
+- Apoyo técnico en presentaciones.
+
+### Castelló Sánchez, Fernando  
+- Presentación wpl.
+- Recopilación de feedback.
+
+### García Sebastián, Javier  
+- Diseño gráfico: carteles, imágenes para redes, posts.
+- Coordinación de RRSS y contenidos audiovisuales.
+- Preparación de presentaciones.
+
+### Garate Fuentes, Yesica  
+- Creación de recursos visuales (posts, reels, vídeos).
+- Maquetación de presentaciones.
+- Planificación de cronograma de redes sociales.
+- Desarrollo de vídeos orientados a marketing e inversores.
+
+### Castillejo Vela, Manuel  
+- Desarrollo Android.
+- SLA.
+- KBReport y QA final.
+
 
 ## World Project Launch (#WPL)
 
