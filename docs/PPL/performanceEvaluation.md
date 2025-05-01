@@ -46,7 +46,7 @@
 | 📆 24/03/2025  | 🔹 v 1.2         | 🏁 #S2 | ✍️ Daniel Flores de Francisco y Luis Mellado Diaz |
 | 📆 24/03/2025  | 🔹 v 1.2.1        | 🏁 #S2 Evaluación Individual y trabajo S2 | ✍️ Luis Mellado Diaz |
 | 📆 10/04/2025  | 🔹 v 1.3        | 🏁 #S3 Evaluación Individual y trabajo S3 | ✍️ Luis Mellado Diaz |
-| 📆 29/04/2025  | 🔹 v 1.4        | 🏁 #PPL. Trabajo PPL | ✍️ Daniel Flores de Francisco y Luis Mellado Díaz|
+| 📆 29/04/2025  | 🔹 v 1.4        | 🏁 #PPL. Evaluación Individual y Trabajo PPL | ✍️ Daniel Flores de Francisco y Luis Mellado Díaz|
 
 
 
@@ -55,24 +55,25 @@
 
 ### Evaluación Individual Acordada
 
-| Student                     | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
-|-----------------------------|------|------|------|------|------|------|-------|
-| Flores de Francisco, Daniel | 10   | 10   | 10   |10      |      |      | 40    |
-| Mellado Díaz, Luis          | 10   | 10   | 10   |10      |      |      | 40    |
-| González Martínez, David    | 10   | 10   | 10   |10      |      |      | 40    |
-| Martínez Reviriego, Andrés  | 10   | 10   | 10   |10    |      |      | 40    |
-| Cortés Carrasco, Claudio    | 10   | 9    | 8    |7     |      |      | 34    |
-| Trenado González, Sergio    | 10   | 10   | 10   |10      |      |      | 40    |
-| Jiménez Morales, Francisco Miguel | 10 | 9   | 10    |9      |      |      | 38    |
-| Gómez de Tovar, Jorge       | 10   | 8    | 10   |10     |      |      | 38    |
-| Ruiz Garrido, Javier        | 10   | 8    | 10   |10      |      |      | 38    |
-| Castillo Cebolla, Rafael    | 10   | 10   | 10   |10      |      |      | 40    |
-| Castelló Sánchez, Fernando  | 10   | 10   | 10   |9     |      |      | 39    |
-| García Sebastián, Javier    | 10   | 8    | 9    |7     |      |      | 34    |
-| Garate Fuentes, Yesica      | 10   | 9    | 7    |9     |      |      | 35    |
-| Castillejo Vela, Manuel     | 10   | 10   | 10   |10    |      |      | 40    |
+| Estudiante                          | #DP1 | #S1 | #S2 | #S3 | #PPL | #WPL | Total |
+|-------------------------------------|:----:|:---:|:---:|:---:|:----:|:----:|:-----:|
+| Flores de Francisco, Daniel         |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Mellado Díaz, Luis                  |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| González Martínez, David            |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Martínez Reviriego, Andrés          |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Cortés Carrasco, Claudio            |  10  |  9  |  8  |  7  | 10   |      | 44    |
+| Trenado González, Sergio            |  10  | 10  | 10  | 10  |  9   |      | 49    |
+| Jiménez Morales, Francisco Miguel   |  10  |  9  | 10  |  9  | 10   |      | 48    |
+| Gómez de Tovar, Jorge               |  10  |  8  | 10  | 10  | 10   |      | 48    |
+| Ruiz Garrido, Javier                |  10  |  8  | 10  | 10  |  8   |      | 46    |
+| Castillo Cebolla, Rafael            |  10  | 10  | 10  | 10  | 10   |      | 50    |
+| Castelló Sánchez, Fernando          |  10  | 10  | 10  |  9  | 10   |      | 49    |
+| García Sebastián, Javier            |  10  |  8  |  9  |  7  |  7   |      | 41    |
+| Garate Fuentes, Yesica              |  10  |  9  |  7  |  9  | 10   |      | 45    |
+| Castillejo Vela, Manuel             |  10  | 10  | 10  | 10  | 10   |      | 50    |
 
-**Total:** 536 / 560
+
+**Total:** 670 / 700
 
 ---
 
