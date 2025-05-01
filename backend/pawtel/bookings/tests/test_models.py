@@ -114,7 +114,7 @@ class BookingModelTest(TestCase):
                         room_type=self.room_type,
                         start_date=date.today() + timedelta(days=3),
                         end_date=date.today() + timedelta(days=6),
-                        total_price=0.00,
+                        total_price=10.00,
                         discount=discount,
                     )
                     booking.full_clean()

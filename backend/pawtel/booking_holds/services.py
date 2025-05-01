@@ -23,6 +23,7 @@ class BookingHoldService:
 
     # Authorization ----------------------------------------------------------
 
+    @staticmethod
     def authorize_action_booking_hold(
         request, action_name, booking_hold_id=None, check_ownership=False
     ):
@@ -39,6 +40,7 @@ class BookingHoldService:
 
         return role_user
 
+    @staticmethod
     def __check_ownership_booking_hold_service(role_user, booking_hold):
         if role_user.user.role == UserRole.ADMIN:
             return

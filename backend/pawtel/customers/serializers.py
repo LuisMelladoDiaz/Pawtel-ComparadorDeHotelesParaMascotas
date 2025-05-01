@@ -16,6 +16,6 @@ class CustomerSerializer(BaseSerializer):
         fields = ["id", "paw_points", "user"]
         extra_kwargs = {
             "id": {"read_only": True},
-            "paw_points": {"min_value": 0, "max_value": 200, "allow_null": False},
+            "paw_points": {"min_value": 0, "max_value": 100000, "allow_null": False},
             "user": {"read_only": True, "allow_null": False},
         }

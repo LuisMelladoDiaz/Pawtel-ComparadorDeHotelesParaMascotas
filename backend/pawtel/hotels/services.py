@@ -29,6 +29,7 @@ class HotelService:
 
     # Authorization ----------------------------------------------------------
 
+    @staticmethod
     def authorize_action_hotel(
         request, action_name, hotel_id=None, check_ownership=False
     ):
@@ -43,12 +44,14 @@ class HotelService:
 
         return role_user
 
+    @staticmethod
     def __perform_retrieve_hotel(role_user, hotel_id):
         if role_user.user.role == UserRole.ADMIN:
             return HotelService.retrieve_hotel(hotel_id, allow_archived=True)
         else:
             return HotelService.retrieve_hotel(hotel_id)
 
+    @staticmethod
     def __check_ownership_hotel(role_user, hotel):
         if role_user.user.role == UserRole.ADMIN:
             return
@@ -414,7 +417,9 @@ class HotelService:
     @staticmethod
     @transaction.atomic
     def upload_image_to_hotel(input_serializer):
-        hotel = Hotel.objects.select_for_update().get(pk=input_serializer.validated_data["hotel"].id)
+        hotel = Hotel.objects.select_for_update().get(
+            pk=input_serializer.validated_data["hotel"].id
+        )
         current_image_count = hotel.images.count()
         if current_image_count == 0:
             input_serializer.validated_data["is_cover"] = True

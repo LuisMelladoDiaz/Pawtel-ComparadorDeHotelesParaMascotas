@@ -13,6 +13,8 @@ from rest_framework.exceptions import (NotFound, PermissionDenied,
 class CustomerService:
 
     THREE_YEARS = timedelta(days=3 * 365)
+    MAX_PAW_POINTS = 100000
+    MIN_PAW_POINTS = 0
 
     # General processes ------------------------------------------------------
 
@@ -28,6 +30,7 @@ class CustomerService:
 
     # Authorization ----------------------------------------------------------
 
+    @staticmethod
     def authorize_action_customer(
         request, action_name, target_customer_id=None, check_ownership=False
     ):
@@ -43,6 +46,7 @@ class CustomerService:
 
         return role_user
 
+    @staticmethod
     def __perform_retrieve_customer(role_user, target_customer_id):
         if role_user.user.role == UserRole.ADMIN:
             return CustomerService.retrieve_customer(
@@ -51,6 +55,7 @@ class CustomerService:
         else:
             return CustomerService.retrieve_customer(target_customer_id)
 
+    @staticmethod
     def __check_ownership_customer(role_user, target_customer):
         if (role_user.user.role == UserRole.ADMIN) or (
             role_user.user.role == UserRole.HOTEL_OWNER
@@ -112,6 +117,7 @@ class CustomerService:
 
     # DELETE -----------------------------------------------------------------
 
+    @staticmethod
     def validate_customer_deletion(pk):
         today = date.today()
         past_limit = today - CustomerService.THREE_YEARS
@@ -133,3 +139,15 @@ class CustomerService:
             delete = False
 
         return delete
+
+    # Others -----------------------------------------------------------------
+
+    @staticmethod
+    def add_paw_points(customer, amount: int):
+        """Add points limiting to max and min values."""
+        new_paw_points = customer.paw_points + amount
+        new_paw_points = min(new_paw_points, CustomerService.MAX_PAW_POINTS)
+        new_paw_points = max(new_paw_points, CustomerService.MIN_PAW_POINTS)
+        customer.paw_points = new_paw_points
+        customer.full_clean()
+        customer.save()

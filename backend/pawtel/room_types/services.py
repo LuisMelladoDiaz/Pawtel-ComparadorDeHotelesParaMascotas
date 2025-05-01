@@ -22,6 +22,7 @@ class RoomTypeService:
 
     # Authorization ----------------------------------------------------------
 
+    @staticmethod
     def authorize_action_room_type(
         request, action_name, room_type_id=None, check_ownership=False
     ):
@@ -37,12 +38,14 @@ class RoomTypeService:
                 RoomTypeService.__check_ownership_room_type(role_user, room_type)
         return role_user
 
+    @staticmethod
     def __perform_retrieve_room_type(role_user, room_type_id):
         if role_user.user.role == UserRole.ADMIN:
             return RoomTypeService.retrieve_room_type(room_type_id, allow_archived=True)
         else:
             return RoomTypeService.retrieve_room_type(room_type_id)
 
+    @staticmethod
     def __check_ownership_room_type(role_user, room_type):
         if role_user.user.role == UserRole.ADMIN:
             return
