@@ -183,7 +183,7 @@ pre-commit run --all-files
 ### Cómo configurar las variables de entorno para poder ejecutar el proyecto
 
 Añade en el .env la siguiente clave de stripe para poder realizar pagos asociados a nuestra cuenta.
-STRIPE_SECRET_KEY (pongase en contacto con nosotros para obtener la SECRET_KEY)
+STRIPE_SECRET_KEY (póngase en contacto con nosotros para obtener la SECRET_KEY).
 
 **En caso de error darle un valor aleatorio a la variable de entorno STRIPE_SECRET_ENDPOINT**
 
@@ -198,7 +198,7 @@ Tendrás que **acceder a nuestra cuenta de stripe** con las credenciales de pawt
 
 Ahí accede a la url https://dashboard.stripe.com/test/workbench/webhooks/
 
-Una vez dentro, en "destinos de eventos", pulsa "Añade un destino" para añadir tu endpoint de escucha. Te obligará a seleccionar que eventos quieres que escuche; selecciona todos los eventos de **checkout**.
+Una vez dentro, en "destinos de eventos", pulsa "Añade un destino" para añadir tu endpoint de escucha. Luego se comentará cómo abrir el endpoint. Te obligará a seleccionar que eventos quieres que escuche; selecciona todos los eventos de **checkout**.
 
 Selecciona "Punto de conexión de webhook".
 
@@ -208,9 +208,9 @@ Para ello, deberemos **exponer el puerto 8000** (el backend) para que podamos re
 
 Una vez descargado ngrok en https://ngrok.com/downloads/windows
 
-Deberás regitrarte y obtener tu tokken personal de autorización.
+Deberás regitrarte y obtener tu token personal de autorización.
 
-Ejecutar los siguientes comandos
+Ejecutar los siguientes comandos:
 
 ```bash
 ngrok config add-authtoken TU_AUTHTOKEN
@@ -222,7 +222,7 @@ ngrok http 8000
 
 **Esto te proporcionará una URL temporal que cambiará cada vez que vuelvas a abrir el puerto; por lo que si quiere volver a testear que funciona la pasarela deberás modificar el webhook en la página de stripe.**
 
-Ya con la URL creada deberás añadir como endpint **URL/bookings/stripe/**
+Ya con la URL creada deberás añadir como endpoint: **URL/bookings/stripe/** .
 
 Es importante que acabe en / o te saltará un error al probarlo.
 
