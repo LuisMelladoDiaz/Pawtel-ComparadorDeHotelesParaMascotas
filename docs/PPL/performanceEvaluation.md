@@ -64,16 +64,16 @@
 | Cortés Carrasco, Claudio            |  10  |  9  |  8  |  7  | 10   |      | 44    |
 | Trenado González, Sergio            |  10  | 10  | 10  | 10  |  9   |      | 49    |
 | Jiménez Morales, Francisco Miguel   |  10  |  9  | 10  |  9  | 10   |      | 48    |
-| Gómez de Tovar, Jorge               |  10  |  8  | 10  | 10  | 10   |      | 48    |
+| Gómez de Tovar, Jorge               |  10  |  8  | 10  | 10  |  7   |      | 45    |
 | Ruiz Garrido, Javier                |  10  |  8  | 10  | 10  |  8   |      | 46    |
 | Castillo Cebolla, Rafael            |  10  | 10  | 10  | 10  | 10   |      | 50    |
 | Castelló Sánchez, Fernando          |  10  | 10  | 10  |  9  | 10   |      | 49    |
-| García Sebastián, Javier            |  10  |  8  |  9  |  7  |  7   |      | 41    |
+| García Sebastián, Javier            |  10  |  8  |  9  |  7  |  8   |      | 42    |
 | Garate Fuentes, Yesica              |  10  |  9  |  7  |  9  | 10   |      | 45    |
 | Castillejo Vela, Manuel             |  10  | 10  | 10  | 10  | 10   |      | 50    |
 
 
-**Total:** 670 / 700
+**Total:** 668 / 700
 
 ---
 
