@@ -132,15 +132,6 @@ class BookingService:
                 "Un cliente puede tener diferentes reservas de la misma habitación pero no pueden coincidir en fecha."
             )
 
-        """
-        if not BookingHoldService.has_customer_active_booking_hold_of_room_type(
-            customer.id, room_type_id
-        ):
-            raise ValidationError(
-                "Para poder reservar, el cliente debe tener una Booking hold activa en esa habitación."
-            )
-        """
-
     # GET Methods ------------------------------------------------------------
 
     @staticmethod
