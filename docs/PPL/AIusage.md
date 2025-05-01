@@ -651,16 +651,16 @@ Listar los prompts que fueron más efectivos para completar las tareas:
 #### 1. Información General
 
 - **Nombre del programador:** Yesica Leydi Garate Fuentes
-- **Sprint:** 03
-- **Rol en el proyecto:** Frontend, Publicidad y Marketing
+- **Sprint:** PPL
+- **Rol en el proyecto:** Frontend, Publicidad, Marketing y Diseño Visual
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de código (**X**)
+- Generación de código ( )
 - Refactorización de código ( )
 - Generación de documentación (**X**)
 - Asesoramiento técnico (**X**)
-- Otro (especificar): Marketing, Diseño visual, Storytelling (X)
+- Otro (especificar): Marketing, Diseño visual, Storytelling, Planificación estratégica, Producción audiovisual
 
 #### 3. Uso de IA en las Tareas
 
@@ -668,58 +668,55 @@ Para cada tarea en la que se usó IA, se completa la siguiente tabla:
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
 |-----------|--------------------------|------------------------------|
-| SCREEN: Home, Sobre Nosotros, Contacto y Dueños de Alojamientos | ChatGPT | Apoyo en la programación con Tailwind CSS, aplicando estilos, estructura responsive y limpieza del código siguiendo buenas prácticas. |
-| Presentación del Proyecto | ChatGPT | Estructuración de diapositivas, organización del discurso, mejora del enfoque visual y narrativa. |
-| Storyboard del Video Promocional | ChatGPT, Midjourney, ElevenLabs, Filmora | Apoyo en la creación del guion visual, generación de escenas con prompts específicos para cada fotograma, generación de voz sintética, y edición del video |
-| Investigación de Mercado | ChatGPT | Solicitud de análisis sobre el mercado de mascotas en Europa y América, fuentes de estadísticas, e instituciones clave. |
+| Storyboard del Video Promocional | ChatGPT, Midjourney, ElevenLabs, Filmora | Apoyo en la creación del guion visual, diseño de escenas a partir de prompts, generación de voces artificiales para el guion, y edición del video final. |
+| Presentación de Inversión | ChatGPT | Apoyo para estructurar una propuesta narrativa clara y atractiva enfocada en inversión → retorno → usuarios → paquetes → límites → venta. |
+| Maquetación y contenido para redes sociales | ChatGPT, Canva | Asistencia en la generación de ideas para anuncios, redacción de textos persuasivos, y diseño preliminar de layouts para campañas. |
+| Investigación de mercado | ChatGPT | Búsqueda de datos relevantes del sector mascotas en América y Europa, identificación de instituciones clave y análisis de competencia. |
+| Planificación de campaña y presupuesto de marketing | ChatGPT | Apoyo en la organización del cronograma de actividades, estimación de recursos y creación de una estrategia segmentada de difusión. |
 
 #### 4. Impacto en Productividad
 
 - **Horas estimadas ahorradas en comparación con trabajo manual:** Aproximadamente 30 horas o más.
 - **Comparación con trabajo sin IA:**
-  - Sin IA, la búsqueda de información me habría tomado más tiempo.
-  - Aunque la IA me ayudó a resolver dudas rápidamente, en algunos casos tuve inseguridad sobre si las respuestas eran realmente correctas.
-  - Intervención humana para asegurar la coherencia narrativa, emocional y estética del resultado final.
-  - Nos faltaria un enfoque alternativo lo cual nos sirve como punto de partida para nuevas ideas.
-  - Encontrar recursos humanos para los anuncios seria de un esfuerzo y gasto extra.
+  - La generación de ideas creativas para anuncios habría sido mucho más lenta sin IA.
+  - La estructuración de propuestas para presentaciones y pitch fue más ágil con apoyo de IA.
+  - Me permitió visualizar piezas publicitarias antes de producirlas, reduciendo pruebas innecesarias.
+  - Dificultades menores al ajustar emociones o matices narrativos, pero aun así aceleró los procesos iniciales.
 
 #### 5. Prompts Utilizados
 
 Algunos de los prompts más efectivos utilizados:
 
-1. "Recuerdas Pawtel, necesito que me ayudes a valorar la empresa con 15% de comision por reserva, 700 reservas con 7875 ingresos mensuales. A nuestros inversores que porcentaje es lo mas sensato de pedir. Dame propuestas "
-2. "Que podria causar el problema con la ruta /dueños-alojamientos que se rompe al recargar o abrir en incógnito aunque esté en local"
-3. "Hola! porfavor, ayudame ... dame una pagina dirigida a dueños de alojamiento y socios. A ver, puedo crear una pagina para ambos o me recominedas crear paginas diferentes?... Dame una propuesta de maquetación, contenido, etc"
-4. "¿Qué instituciones me pueden ofrecer estadísticas reales acerca de las mascotas? Dame una lista a nivel europeo y americano."
-5. "¿Qué estrategias puedo usar para presentar la tracción inicial en una incubadora si aún no tengo usuarios reales?"
+1. "¿Qué estrategias puedo usar para presentar la tracción inicial en una incubadora si aún no tengo usuarios reales?"
+2. "Recuerdas Pawtel, necesito que me ayudes a valorar la empresa con 15% de comisión por reserva, 700 reservas con 7875 ingresos mensuales..."
+3. "Ayúdame a crear anuncios dirigidos a dueños de alojamientos para mascotas, que transmitan exclusividad y confianza."
+4. "Qué instituciones me pueden ofrecer estadísticas reales sobre mascotas. Lista para Europa y América."
+5. "Dame ejemplos de frases para campañas visuales de marketing emocional que conecten con dueños de mascotas."
 
 #### 6. Problemas Encontrados y Limitaciones
 
 - **Errores o respuestas incorrectas de la IA:**
-  - En programación, la IA no siempre deduce correctamente lo que necesito; suele ser mecánica en sus respuestas.
-  - Algunos ejemplos de código generados no eran aplicables directamente y requerían modificaciones.
-  - Falta de coherencia visual entre imágenes generadas.
-  - las emociones que transmiten en el texto del dialogo no tienen sentido.
-  - Dificil encontrar un generador de voces que transmitan emociones que entendamos.
+  - Algunos textos generados carecían de coherencia emocional o estética.
+  - Las voces IA no siempre transmitían el tono buscado para los anuncios.
+  - Las imágenes con IA eran visualmente útiles, pero a veces no representaban bien el target.
+  - Falta de consistencia entre resultados con pequeños cambios de prompt.
 
 - **Limitaciones detectadas en la IA:**
-  - No siempre relaciona bien el contexto de preguntas anteriores con nuevas solicitudes.
-  - Para obtener respuestas más precisas, a veces es necesario proporcionar mucha información detallada.
-  - Pequeños cambios en el prompt para las imagenes, resultados muy diferentes y se demasiado tiempo em prueba y error.
-  - Aunque use chatgpt para ayudar a estructurar los prompts demasiada precisión no era entendida.
-  - Planes de pago para usar IA muy caros.
+  - Alto coste de herramientas de IA audiovisual.
+  - Dificultad en adaptar resultados IA sin una edición posterior manual.
+  - La IA no reemplaza la intuición publicitaria ni el conocimiento del usuario ideal.
 
 - **Propuestas de mejora en el uso de IA:**
-  - Ser más específica y estructurada en los prompts.
-  - Combinar el uso de IA con otras fuentes como foros, videos o documentación oficial.
-  - Usar la IA como apoyo estructural en narrativa, diseño y storytelling, pero siempre validar con criterio propio.
+ - Afinar los prompts con más precisión narrativa y emocional.
+  - Combinar resultados IA con herramientas tradicionales de marketing y diseño.
+  - Evaluar mejor el público objetivo antes de producir contenido con IA.
 
 #### 7. Evaluación General
 
 - **¿Recomendarías la IA para estas tareas en futuras iteraciones?**
-  - Sí, pero con matices. Es útil para acelerar el trabajo y aportar ideas, pero debe complementarse con análisis crítico y validación humana.
+  - Sí, especialmente para acelerar la ideación, estructuración y pruebas visuales, aunque siempre debe complementarse con análisis humano para ajustar tono, emociones y estética.
 - **Comentarios adicionales sobre la experiencia con IA:**
-  - En este sprint, la IA fue una herramienta importante para avanzar en diseño, contenido visual y preparación de materiales publicitarios. Sin embargo, me encontré con la necesidad de pulir mucho los resultados. Aun así, me permitió encontrar elementos narrativos sueltos que luego pude reinterpretar según el tono y estética deseados para Pawtel.
+  - La IA fue clave en la fase de preparación de campañas de marketing, desde el enfoque estratégico hasta la ejecución visual inicial. Su valor está en agilizar ideas y pruebas, aunque requiere pulido humano para asegurar calidad, coherencia y conexión emocional con el público.
 
 ---
 
