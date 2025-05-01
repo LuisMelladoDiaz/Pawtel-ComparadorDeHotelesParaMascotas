@@ -30,6 +30,8 @@ const validationSchema = yup.object({
 const userDataComputed = computed(() => userData?.value || {});
 const currentCustomerId = computed(() => currentCustomer?.value?.id || null);
 const currentHotelOwnerId = computed(() => currentHotelOwner?.value?.id || null);
+console.log("usuario",userDataComputed);
+
 
 
 // Hooks para actualizar y eliminar
@@ -200,6 +202,16 @@ const logout = () => {
                 <Field as="input" id="phone" name="phone" type="text" class="border border-gray-300 rounded-lg p-2 flex-1" />
                 <ErrorMessage name="phone" class="text-terracota text-sm" />
               </div>
+            </div>
+
+            <div v-if="userDataComputed.role === 'customer'" class="flex flex-col">
+              <label class="block text-sm font-medium text-gray-700 mb-2">paw_points</label>
+              <input
+                type="text"
+                :value="currentCustomer.paw_points"
+                disabled
+                class="border border-gray-300 rounded-lg p-2 bg-gray-100 cursor-not-allowed text-gray-500"
+              />
             </div>
 
             <div class="flex flex-col sm:flex-row gap-5 items-center justify-between">

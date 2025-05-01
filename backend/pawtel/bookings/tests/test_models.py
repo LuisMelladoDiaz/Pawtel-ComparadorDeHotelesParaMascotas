@@ -58,11 +58,15 @@ class BookingModelTest(TestCase):
             start_date=date.today() + timedelta(days=3),
             end_date=date.today() + timedelta(days=6),
             total_price=600.00,
+            use_paw_points=True,
+            discount=20,
         )
         self.assertEqual(booking.customer, self.customer)
         self.assertEqual(booking.room_type, self.room_type)
         self.assertEqual(booking.total_price, 600.00)
         self.assertEqual((booking.end_date - booking.start_date).days, 3)
+        self.assertTrue(booking.use_paw_points)
+        self.assertEqual(booking.discount, 20)
 
     def test_create_booking_invalid_start_date(self):
         with self.assertRaises(ValidationError):
@@ -96,6 +100,21 @@ class BookingModelTest(TestCase):
                         room_type=self.room_type,
                         start_date=date.today() + timedelta(days=3),
                         end_date=date.today() + timedelta(days=6),
-                        total_price=0.00,
+                        total_price=price,
+                    )
+                    booking.full_clean()
+
+    def test_create_booking_invalid_discount(self):
+        invalid_discounts = [-1, None, "A"]
+        for discount in invalid_discounts:
+            with self.subTest(discount=discount):
+                with self.assertRaises(ValidationError):
+                    booking = Booking(
+                        customer=self.customer,
+                        room_type=self.room_type,
+                        start_date=date.today() + timedelta(days=3),
+                        end_date=date.today() + timedelta(days=6),
+                        total_price=10.00,
+                        discount=discount,
                     )
                     booking.full_clean()

@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from decimal import ROUND_HALF_DOWN, ROUND_HALF_UP, Decimal
 
 import stripe
 from django.conf import settings
@@ -25,8 +26,12 @@ secret_endpoint = settings.STRIPE_SECRET_ENDPOINT
 
 class BookingService:
 
+    DISCOUNT_PER_PAW_POINT = Decimal("0.05")
+    PAW_POINTS_PER_EURO_SPENT = Decimal("1.00")
+
     # Authorization ----------------------------------------------------------
 
+    @staticmethod
     def authorize_action_booking(
         request, action_name, booking_id=None, check_ownership=False
     ):
@@ -41,6 +46,7 @@ class BookingService:
 
         return role_user
 
+    @staticmethod
     def __check_ownership_booking_service(role_user, booking):
         if role_user.user.role == UserRole.ADMIN:
             return
@@ -96,27 +102,43 @@ class BookingService:
 
     @staticmethod
     def serialize_input_booking_create(request):
+        context = {"request": request}
+        data = request.data.copy()
+
+        current_customer = CustomerService.get_current_customer(request)
+        data["customer"] = current_customer.id
+
+        room_type = request.data.get("room_type")
+        end_date = request.data.get("end_date")
+        start_date = request.data.get("start_date")
+
         from pawtel.room_types.services import RoomTypeService
 
-        # Hack to get the current customer id
-        if hasattr(request, "user"):
-            current_customer_id = CustomerService.get_current_customer(request).id
-            data = request.data.copy()
-            data["customer"] = current_customer_id
-        else:
-            data = request
-        room_type_price = RoomTypeService.retrieve_room_type(
-            data["room_type"]
-        ).price_per_night
-        total_price = (
-            room_type_price
-            * (
-                datetime.strptime(data["end_date"], "%Y-%m-%d").date()
-                - datetime.strptime(data["start_date"], "%Y-%m-%d").date()
+        if room_type and end_date and start_date:
+            room_type_price = RoomTypeService.retrieve_room_type(
+                room_type
+            ).price_per_night
+            num_days_booking = (
+                datetime.strptime(end_date, "%Y-%m-%d").date()
+                - datetime.strptime(start_date, "%Y-%m-%d").date()
             ).days
-        )
-        data["total_price"] = total_price
-        return BookingSerializer(data=data)
+            total_price = room_type_price * num_days_booking
+            data["total_price"] = total_price
+        else:
+            pass  # Let the validate method raise the error
+
+        discount = 0.00
+        if data.get("use_paw_points") is True:
+            all_paw_points = Decimal(current_customer.paw_points)
+            max_discount = all_paw_points * BookingService.DISCOUNT_PER_PAW_POINT
+            max_discount = max_discount.quantize(
+                Decimal("0.01"), rounding=ROUND_HALF_UP
+            )  # 2 decimals only
+            discount = min(max_discount, total_price)
+        data["discount"] = discount
+
+        serializer = BookingSerializer(data=data, context=context)
+        return serializer
 
     @staticmethod
     def validate_create_booking(request, input_serializer):
@@ -216,13 +238,42 @@ class BookingService:
             booking_json = json.loads(
                 event.data.object.metadata.get("booking")
             )  # metadata contains the booking JSON in plain text
-            booking = BookingService.serialize_input_booking_create(booking_json)
+            booking_serializer = BookingSerializer(data=booking_json)
 
-            if booking.is_valid():
-                booking_instance = booking.save()
+            if booking_serializer.is_valid():
+                booking = booking_serializer.save()
             else:
                 return HttpResponse(status=400)
+
             BookingHold.objects.filter(
-                customer=booking_instance.customer, room_type=booking_instance.room_type
+                customer=booking.customer, room_type=booking.room_type
             ).delete()
+
+            BookingService.__recalculate_paw_points(booking_serializer)
+
         return HttpResponse(status=200)
+
+    @staticmethod
+    def __recalculate_paw_points(booking_serializer):
+        if not booking_serializer.is_valid():
+            return HttpResponse(status=400)
+
+        customer = booking_serializer.validated_data.get("customer")
+        total_price = Decimal(booking_serializer.validated_data.get("total_price"))
+        discount = Decimal(booking_serializer.validated_data.get("discount"))
+        paw_points_increment = 0
+
+        paw_points_spent = discount / BookingService.DISCOUNT_PER_PAW_POINT
+        paw_points_spent = paw_points_spent.quantize(
+            Decimal("1."), rounding=ROUND_HALF_DOWN
+        )  # no decimals
+        paw_points_increment = -paw_points_spent
+
+        new_price = total_price - discount
+        paw_points_earned = new_price * BookingService.PAW_POINTS_PER_EURO_SPENT
+        paw_points_earned = paw_points_earned.quantize(
+            Decimal("1."), rounding=ROUND_HALF_UP
+        )  # no decimals
+        paw_points_increment += paw_points_earned
+
+        CustomerService.add_paw_points(customer, paw_points_increment)

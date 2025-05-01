@@ -56,6 +56,8 @@ class BookingSerializerTest(TestCase):
             "start_date": str(date.today() + timedelta(days=2)),
             "end_date": str(date.today() + timedelta(days=5)),
             "total_price": 600.00,
+            "use_paw_points": True,
+            "discount": 20,
         }
 
     # POST tests --------------------------------------------------------------

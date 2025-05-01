@@ -150,6 +150,8 @@ class BookingServiceTest(TestCase):
             start_date=date.today() + timedelta(days=3),
             end_date=date.today() + timedelta(days=7),
             total_price=1120.00,
+            use_paw_points=True,
+            discount=20.00,
         )
 
     # GET Method Tests
@@ -167,16 +169,8 @@ class BookingServiceTest(TestCase):
         self.assertEqual(len(bookings), 3)
 
     def test_retrieve_booking_valid(self):
-        booking = Booking.objects.create(
-            customer=self.customer,
-            room_type=self.room_type,
-            start_date=date.today() + timedelta(days=2),
-            end_date=date.today() + timedelta(days=5),
-            total_price=600.00,
-        )
-
-        retrieved_booking = BookingService.retrieve_booking(booking.id)
-        self.assertEqual(retrieved_booking.id, booking.id)
+        retrieved_booking = BookingService.retrieve_booking(self.booking1.id)
+        self.assertEqual(retrieved_booking.id, self.booking1.id)
 
     def test_retrieve_booking_not_found(self):
         with self.assertRaises(NotFound):
@@ -199,6 +193,8 @@ class BookingServiceTest(TestCase):
             "end_date": end_date,
             "customer": self.customer.id,
             "total_price": 600.00,
+            "use_paw_points": False,
+            "discount": 0.00,
         }
 
         FakeObject = type(

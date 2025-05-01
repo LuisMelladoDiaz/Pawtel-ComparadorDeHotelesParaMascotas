@@ -30,6 +30,7 @@ class HotelOwnerService:
 
     # Authorize --------------------------------------------------------------
 
+    @staticmethod
     def authorize_action_hotel_owner(
         request, action_name, target_hotel_owner_id=None, check_ownership=False
     ):
@@ -48,12 +49,14 @@ class HotelOwnerService:
 
         return role_user
 
+    @staticmethod
     def __perform_retrieve_hotel_owner(role_user, target_hotel_owner_id):
         if role_user.user.role == UserRole.ADMIN:
             return HotelOwnerService.retrieve_hotel_owner(target_hotel_owner_id, True)
         else:
             return HotelOwnerService.retrieve_hotel_owner(target_hotel_owner_id)
 
+    @staticmethod
     def __check_ownership_hotel_owner(role_user, target_hotel_owner):
         if role_user.user.role == UserRole.ADMIN:
             return
