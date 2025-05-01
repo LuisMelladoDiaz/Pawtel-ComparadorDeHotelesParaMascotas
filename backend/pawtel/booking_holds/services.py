@@ -84,7 +84,7 @@ class BookingHoldService:
         booking_end_date = input_serializer.validated_data.get("booking_end_date")
 
         if BookingHoldService.has_customer_active_booking_hold(customer.id):
-            raise PermissionDenied("El cliente ya tiene un booking hold.")
+            BookingHoldService.delete_booking_holds_of_customer(customer.id)
 
         is_room_type_available = RoomTypeService.is_room_type_available(
             room_type.id, booking_start_date, booking_end_date
@@ -103,11 +103,25 @@ class BookingHoldService:
         try:
             return BookingHold.objects.get(pk=pk)
         except BookingHold.DoesNotExist:
-            raise NotFound(detail="BookingHold no encontrado.")
+            raise NotFound(detail="Booking hold no encontrado.")
 
     @staticmethod
     def list_booking_holds():
         return BookingHold.objects.all()
+
+    @staticmethod
+    def has_customer_active_booking_hold(customer_id):
+        return BookingHold.objects.filter(
+            customer_id=customer_id, hold_expires_at__gt=now()
+        ).exists()
+
+    @staticmethod
+    def has_customer_active_booking_hold_of_room_type(customer_id, room_type_id):
+        return BookingHold.objects.filter(
+            customer_id=customer_id,
+            room_type_id=room_type_id,
+            hold_expires_at__gt=now(),
+        ).exists()
 
     # DELETE -----------------------------------------------------------------
 
@@ -116,17 +130,15 @@ class BookingHoldService:
         booking_hold = BookingHoldService.retrieve_booking_hold(pk)
         booking_hold.delete()
 
+    @staticmethod
+    def delete_booking_holds_of_customer(customer_id):
+        booking_holds_to_delete = BookingHold.objects.filter(customer_id=customer_id)
+        if booking_holds_to_delete.exists():
+            booking_holds_to_delete.delete()
+
     # POST -------------------------------------------------------------------
 
     @staticmethod
     def create_booking_hold(input_serializer):
         booking_hold = input_serializer.save()
         return booking_hold
-
-    # Others -----------------------------------------------------------------
-
-    @staticmethod
-    def has_customer_active_booking_hold(customer_id):
-        return BookingHold.objects.filter(
-            customer_id=customer_id, hold_expires_at__gt=now()
-        ).exists()
