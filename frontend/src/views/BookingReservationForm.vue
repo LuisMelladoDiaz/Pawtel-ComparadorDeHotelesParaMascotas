@@ -147,7 +147,7 @@ const submitBooking = async () => {
               />
             </td>
           </tr>
-          
+
           <tr class="border-t-2 border-gray-300">
             <td class="p-4 font-bold text-2xl text-gray-700">Total:</td>
             <td class="p-4 font-bold text-2xl text-oliva">{{ totalPrice }}€</td>
@@ -161,7 +161,7 @@ const submitBooking = async () => {
               :disabled="paw_points <= 0"
             />
             <label for="usePawPoints" class="text-sm text-gray-700">
-              Aplicar descuento con mis {{ paw_points }} paw_points
+              Aplicar descuento con mis {{ paw_points }} paw points
             </label>
           </div>
         </tbody>
@@ -218,7 +218,7 @@ const submitBooking = async () => {
             :disabled="paw_points <= 0"
           />
           <label for="usePawPoints" class="text-sm text-gray-700">
-            Aplicar descuento con mis {{ paw_points }} paw_points
+            Aplicar descuento con mis {{ paw_points }} paw points
           </label>
         </div>
 

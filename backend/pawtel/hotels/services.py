@@ -1,6 +1,5 @@
 from datetime import date, datetime, timedelta
 
-from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import Max, Min, Q
 from pawtel.app_users.models import UserRole

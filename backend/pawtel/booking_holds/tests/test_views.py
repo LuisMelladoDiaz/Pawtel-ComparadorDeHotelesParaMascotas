@@ -152,7 +152,7 @@ class BookingHoldViewSet(TestCase):
             BookingHold.objects.filter(room_type=self.room_type_no_holds).exists()
         )
 
-    def test_create_booking_hold_invalid_with_existing_active_hold(self):
+    def test_create_booking_hold_with_existing_active_hold(self):
         url = reverse("booking-hold-list")
         data = {
             "room_type": self.room_type_no_holds.id,
@@ -160,10 +160,11 @@ class BookingHoldViewSet(TestCase):
             "booking_end_date": str(date.today() + timedelta(days=3)),
         }
         response = self.client.post(url, data, format="json")
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-        self.assertTrue(
-            not BookingHold.objects.filter(room_type=self.room_type_no_holds).exists()
-        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        booking_holds = BookingHold.objects.filter(
+            room_type=self.room_type_no_holds
+        ).all()
+        self.assertEqual(len(booking_holds), 1)
 
     # test cannot create booking room type unavailable (use rt1 with 1 booking and 1 bookinghold)
     def test_create_booking_hold_invalid_with_unavailable_room_type(self):

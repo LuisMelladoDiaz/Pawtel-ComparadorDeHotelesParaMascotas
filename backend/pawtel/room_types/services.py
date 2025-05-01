@@ -7,7 +7,6 @@ from pawtel.app_users.models import UserRole
 from pawtel.app_users.services import AppUserService
 from pawtel.booking_holds.models import BookingHold
 from pawtel.bookings.models import Booking
-from pawtel.bookings.services import BookingService
 from pawtel.hotel_owners.services import HotelOwnerService
 from pawtel.permission_services import PermissionService
 from pawtel.room_types.models import RoomType
@@ -236,11 +235,14 @@ class RoomTypeService:
         ]
 
         for day in days_to_check:
-            bookings_count = BookingService.count_bookings_of_room_type_at_date(
-                room_type_id, day
-            )
+            # Cannot call function in BookingHoldService due to circular dependency
+            bookings_count = Booking.objects.filter(
+                room_type_id=room_type_id,
+                start_date__lte=day,  # Booking started before or on this day
+                end_date__gte=day,  # Booking ends after or on this day
+            ).count()
 
-            # Cannot call function due to circular dependency
+            # Cannot call function in BookingHoldService due to circular dependency
             active_booking_holds_count = BookingHold.objects.filter(
                 room_type_id=room_type_id,
                 hold_expires_at__gt=now(),

@@ -17,12 +17,8 @@ class PermissionService:
     }
 
     BOOKING_SERVICE_PERMISSIONS = {
-        UserRole.CUSTOMER.value: {
-            "retrieve",
-        },
-        UserRole.HOTEL_OWNER.value: {
-            "retrieve",
-        },
+        UserRole.CUSTOMER.value: {"retrieve", "create"},
+        UserRole.HOTEL_OWNER.value: {"retrieve"},
         UserRole.ADMIN.value: {"list", "retrieve"},
     }
 

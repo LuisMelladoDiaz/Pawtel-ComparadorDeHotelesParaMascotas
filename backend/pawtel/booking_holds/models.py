@@ -41,28 +41,28 @@ class BookingHold(models.Model):
 
         if self.hold_expires_at and self.hold_expires_at < now():
             errors.setdefault("hold_expires_at", []).append(
-                "Hold expiration date cannot be in the past."
+                "La fecha de expiración de la Booking Hold no puede ser pasada."
             )
 
         if self.booking_start_date and self.booking_start_date <= date.today():
             errors.setdefault("booking_start_date", []).append(
-                "Booking start date must be in the future."
+                "La fecha de comienzo de la reserva debe ser futura."
             )
 
         if self.booking_end_date and self.booking_end_date <= date.today():
             errors.setdefault("booking_end_date", []).append(
-                "Booking end date must be in the future."
+                "La fecha de finalización de la reserva debe ser futura."
             )
 
         if self.booking_start_date and self.booking_end_date:
             if self.booking_end_date < self.booking_start_date:
                 errors.setdefault("booking_end_date", []).append(
-                    "Booking end date cannot be earlier than booking start date."
+                    "La fecha de finalización de la reserva no puede ser anterior a la fecha de comienzo de la reserva."
                 )
 
             if (self.booking_end_date - self.booking_start_date).days >= 186:
                 errors.setdefault("booking_end_date", []).append(
-                    "The booking duration cannot exceed 6 months (186 days)."
+                    "La duración de la reserva no puede exceder 6 meses (186 días)."
                 )
 
         if errors:

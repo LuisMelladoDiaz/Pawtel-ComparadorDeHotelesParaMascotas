@@ -7,7 +7,6 @@ fake = Faker("es_ES")
 Faker.seed(2)
 
 
-
 class Command(BaseCommand):
     help = "Seed database with customers"
 
@@ -33,7 +32,7 @@ class Command(BaseCommand):
                 phone=phone1,
                 password="password123",
             )
-            Customer.objects.create(user=user1)
+            Customer.objects.create(user=user1, paw_points=1000)
             self.stdout.write(self.style.SUCCESS(f"Created Customer: {username1}"))
 
         username2 = "customer2"
@@ -47,7 +46,7 @@ class Command(BaseCommand):
                 phone=phone2,
                 password="password123",
             )
-            Customer.objects.create(user=user2)
+            Customer.objects.create(user=user2, paw_points=1000)
             self.stdout.write(self.style.SUCCESS(f"Created Customer: {username2}"))
 
     def create_random_customers(self, num_random):
@@ -60,7 +59,7 @@ class Command(BaseCommand):
                 username=username, email=email, phone=phone, password="password123"
             )
 
-            Customer.objects.create(user=user)
+            Customer.objects.create(user=user, paw_points=100)
 
             self.stdout.write(
                 self.style.SUCCESS(f"Created Customer: {username} ({email})")

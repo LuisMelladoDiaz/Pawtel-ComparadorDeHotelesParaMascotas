@@ -205,7 +205,7 @@ const logout = () => {
             </div>
 
             <div v-if="userDataComputed.role === 'customer'" class="flex flex-col">
-              <label class="block text-sm font-medium text-gray-700 mb-2">paw_points</label>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Paw points:</label>
               <input
                 type="text"
                 :value="currentCustomer.paw_points"

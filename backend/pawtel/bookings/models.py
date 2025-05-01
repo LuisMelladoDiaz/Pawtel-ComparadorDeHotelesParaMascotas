@@ -1,8 +1,8 @@
 from datetime import date
 
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.forms import ValidationError
 from pawtel.customers.models import Customer
 from pawtel.room_types.models import RoomType
 
@@ -53,32 +53,33 @@ class Booking(models.Model):
         errors = {}
 
         if not self.creation_date:
-            self.creation_date = date.today()
+            self.creation_date = today
 
         if self.creation_date > today:
             errors.setdefault("creation_date", []).append(
-                "The date of creation cannot be in the future."
+                "La fecha de comienzo de la reserva debe ser futura."
             )
 
-        if self.start_date <= today:
+        if self.start_date and self.start_date <= today:
             errors.setdefault("start_date", []).append(
-                "The start date must be in the future."
+                "La fecha de comienzo de la reserva debe ser futura."
             )
 
-        if self.end_date <= today:
+        if self.end_date and self.end_date <= today:
             errors.setdefault("end_date", []).append(
-                "The end date must be in the future."
+                "La fecha de finalización de la reserva debe ser futura."
             )
 
-        if self.end_date < self.start_date:
-            errors.setdefault("end_date", []).append(
-                "End date cannot be earlier than start date."
-            )
+        if self.start_date and self.end_date:
+            if self.end_date < self.start_date:
+                errors.setdefault("end_date", []).append(
+                    "La fecha de finalización de la reserva no puede ser anterior a la fecha de comienzo de la reserva."
+                )
 
-        if (self.end_date - self.start_date).days >= 186:
-            errors.setdefault("end_date", []).append(
-                "The booking duration cannot exceed 6 months (186 days)."
-            )
+            if (self.end_date - self.start_date).days >= 186:
+                errors.setdefault("end_date", []).append(
+                    "La duración de la reserva no puede exceder 6 meses (186 días)."
+                )
 
         if errors:
             raise ValidationError(errors)
