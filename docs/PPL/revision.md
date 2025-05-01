@@ -76,7 +76,9 @@ Como cliente:
 - Una vez iniciado sesión, en la home page hago uso del botón haga uso de la brra de filtros. Seleccione una ciudad, un rango de fechas y un tipo de mascota. Pulse "Buscar". Será reconducido a la pantalla de hoteles donde podrá seguir buscando y comparando. Note que tiene un filtro de precios a su izquierda.
 - Una vez encontrado el hotel que se desea reservar, pulse 'Ver disponibilidad'. 
 - Dentro, se podrán ver los detalles y fotos del establecimiento. Haga scroll hacia abajo y seleccione la habitación que mejor se ajuste a sus necesidades. Pulse en "reservar".
-- Será reconducido a la pantalla de confirmación de reserva. Por favor, compruebe que todos los datos son correctos antes de proceder con el pago. Si no seleccionó un rango de fechas en la barra de filtros será necesario que lo haga ahora. En la actualiadad la feature PawPoints (puntos de descuento) se encuentra en desarrollo. Pulse en "ir al pago"
+- Será reconducido a la pantalla de confirmación de reserva. Por favor, compruebe que todos los datos son correctos antes de proceder con el pago. Si no seleccionó un rango de fechas en la barra de filtros será necesario que lo haga ahora.
+- Cada vez que haga una reserva ganara puntos Paw Points, que luego podrá camjear a cambio de descuentos. Si no es su primera reserva contará con cierto número de Paw Points. Si desea gastarlos para reducir su precio de compra marque la casilla de aplicar descuentos con Paw Points.
+- Pulse en "ir al pago".
 - Llegará a la pantalla donde debe elegir el método de pago y rellenar los campos. correspondientes. Como se trata de un entorno de pruebas use datos de pago falsos (use la tarjeta falsa 424242...)
 - Por último, el cliente pulsa el botón de pagar, ¡y listo!
 - Podrá comprobar su reserva en la pantalla de "mis reservas". Tendrá la opción de navegar a la misma en la barra de navegación.
