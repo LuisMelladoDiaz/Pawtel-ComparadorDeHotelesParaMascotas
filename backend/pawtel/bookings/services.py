@@ -164,35 +164,44 @@ class BookingService:
 
     @staticmethod
     def stripe_checkout_transference(input_serializer):
+        """This calls Stripe API and obtains a Stripe payment session with the data of the booking."""
+
         total_price = input_serializer.validated_data.get("total_price")
         total_price = int(total_price * 100)
         discount = input_serializer.validated_data.get("discount")
         discount = int(discount * 100)
+
         room_type_name = input_serializer.validated_data.get("room_type").name
         room_type_description = input_serializer.validated_data.get(
             "room_type"
         ).description
-        # Must save Booking JSON in plain text
+
+        # Booking JSON must be saved in plain text
         output_serializer = BookingService.serialize_output_booking(
             Booking(**input_serializer.validated_data)
         )
         customer = CustomerService.retrieve_customer(output_serializer.get("customer"))
         booking_json_str = json.dumps(output_serializer)
+
+        response = None
+
         try:
-            session = stripe.checkout.Session.create(
-                line_items=[
-                    {
-                        "price_data": {
-                            "currency": "eur",
-                            "product_data": {
-                                "name": room_type_name,
-                                "description": room_type_description,
-                            },
-                            "unit_amount": total_price - discount,
+            line_items = [
+                {
+                    "price_data": {
+                        "currency": "eur",
+                        "product_data": {
+                            "name": room_type_name,
+                            "description": room_type_description,
                         },
-                        "quantity": 1,
+                        "unit_amount": total_price - discount,
                     },
-                ],
+                    "quantity": 1,
+                },
+            ]
+
+            session = stripe.checkout.Session.create(
+                line_items=line_items,
                 metadata={"booking": booking_json_str},
                 mode="payment",
                 success_url=str(settings.FRONTEND_URL + "/"),
@@ -200,13 +209,15 @@ class BookingService:
                 customer_email=customer.user.email,
             )
 
-            return JsonResponse({"url": session.url})
+            response = JsonResponse({"url": session.url})
 
         except Exception:
-            return Response(
+            response = Response(
                 {"error": "Algo salió mal."},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
+
+        return response
 
     @staticmethod
     @transaction.atomic
