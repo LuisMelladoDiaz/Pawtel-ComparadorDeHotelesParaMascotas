@@ -43,9 +43,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         input_serializer = HotelService.serialize_input_hotel_create(request)
         HotelService.validate_create_hotel(input_serializer)
         hotel_created = HotelService.create_hotel(input_serializer)
-        output_serializer_data = HotelService.serialize_output_hotel(
-            hotel_created, context={"request": request}
-        )
+        output_serializer_data = HotelService.serialize_output_hotel(hotel_created)
         return Response(output_serializer_data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
@@ -54,9 +52,7 @@ class HotelViewSet(viewsets.ModelViewSet):
         input_serializer = HotelService.serialize_input_hotel_update(request, pk)
         HotelService.validate_update_hotel(pk, input_serializer)
         hotel_updated = HotelService.update_hotel(pk, input_serializer)
-        output_serializer_data = HotelService.serialize_output_hotel(
-            hotel_updated, context={"request": request}
-        )
+        output_serializer_data = HotelService.serialize_output_hotel(hotel_updated)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def partial_update(self, request, pk=None):

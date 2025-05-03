@@ -79,7 +79,7 @@ class HotelService:
         return serializer
 
     @staticmethod
-    def serialize_output_hotel(hotel, many=False, context=None):
+    def serialize_output_hotel(hotel, many=False, context={}):
         return HotelSerializer(hotel, many=many, context=context).data
 
     # GET --------------------------------------------------------------------
@@ -343,7 +343,7 @@ class HotelService:
         return serializer
 
     @staticmethod
-    def serialize_output_hotel_image(hotel_image, many=False, context=None):
+    def serialize_output_hotel_image(hotel_image, many=False, context={}):
         return HotelImageSerializer(hotel_image, many=many, context=context).data
 
     @staticmethod
