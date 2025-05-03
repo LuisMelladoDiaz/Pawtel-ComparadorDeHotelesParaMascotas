@@ -25,7 +25,7 @@ class RoomType(models.Model):
     )
 
     num_rooms = models.IntegerField(
-        default=0, validators=[MinValueValidator(0), MaxValueValidator(200)], null=False
+        default=1, validators=[MinValueValidator(0), MaxValueValidator(200)], null=False
     )
 
     price_per_night = models.DecimalField(

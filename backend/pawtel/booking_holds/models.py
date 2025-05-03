@@ -32,7 +32,10 @@ class BookingHold(models.Model):
     # Meta configuration -----------------------------------------------------
 
     def __str__(self):
-        return f"Booking hold of {self.room_type.name} by {self.customer.username}"
+        return (
+            f"Booking hold of {self.room_type.name} by {self.customer.user.username}"
+            f" from {self.booking_start_date} to {self.booking_end_date}"
+        )
 
     def clean(self):
         super().clean()

@@ -15,7 +15,8 @@ class BookingHoldService:
 
     # Expiration -------------------------------------------------------------
 
-    __HOLD_EXPIRATION_DURATION = timedelta(minutes=10)
+    __HOLD_EXPIRATION_DURATION = timedelta(minutes=5)
+    # This is the only place it is stated, although in some tests it is manually written
 
     @staticmethod
     def __calculate_hold_expiry():
@@ -142,3 +143,28 @@ class BookingHoldService:
     def create_booking_hold(input_serializer):
         booking_hold = input_serializer.save()
         return booking_hold
+
+    @staticmethod
+    def create_booking_hold_from_booking(booking_serializer):
+        if not booking_serializer.is_valid():
+            raise ValidationError(booking_serializer.errors)
+
+        context = {"request": type("Request", (), {"method": "POST"})}
+
+        hold_expires_at = BookingHoldService.__calculate_hold_expiry()
+        start_date = booking_serializer.validated_data.get("start_date")
+        end_date = booking_serializer.validated_data.get("end_date")
+        customer = booking_serializer.validated_data.get("customer")
+        room_type_id = booking_serializer.validated_data.get("room_type").id
+
+        booking_hold_data = {
+            "hold_expires_at": hold_expires_at,
+            "booking_start_date": start_date,
+            "booking_end_date": end_date,
+            "customer": customer.id,
+            "room_type": room_type_id,
+        }
+
+        serializer = BookingHoldSerializer(data=booking_hold_data, context=context)
+        BookingHoldService.validate_booking_hold_create(serializer, customer)
+        BookingHoldService.create_booking_hold(serializer)

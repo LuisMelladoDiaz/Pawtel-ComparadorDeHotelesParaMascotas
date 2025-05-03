@@ -157,10 +157,11 @@ class BookingService:
 
     @staticmethod
     def create_booking(input_serializer):
-        # Stripe API Call
-        response = BookingService.stripe_checkout_transference(input_serializer)
-        # response = BookingService.stripe_response_manager(transference)
-        return response
+        BookingHoldService.create_booking_hold_from_booking(input_serializer)
+        stripe_api_response = BookingService.stripe_checkout_transference(
+            input_serializer
+        )
+        return stripe_api_response
 
     @staticmethod
     def stripe_checkout_transference(input_serializer):
