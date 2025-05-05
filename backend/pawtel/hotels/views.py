@@ -26,15 +26,13 @@ class HotelViewSet(viewsets.ModelViewSet):
         filters = request.query_params.dict()
         is_admin = AdminService.is_current_user_admin(request)
         hotels = HotelService.list_filtered_hotels(filters, allow_archived=is_admin)
-        serializer = HotelSerializer(hotels, many=True, context={"request": request})
+        serializer = HotelSerializer(hotels, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         is_admin = AdminService.is_current_user_admin(request)
         hotel = HotelService.retrieve_hotel(pk, allow_archived=is_admin)
-        output_serializer_data = HotelService.serialize_output_hotel(
-            hotel, context={"request": request}
-        )
+        output_serializer_data = HotelService.serialize_output_hotel(hotel)
         return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def create(self, request):

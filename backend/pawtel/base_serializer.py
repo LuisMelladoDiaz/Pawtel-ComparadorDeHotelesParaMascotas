@@ -9,18 +9,24 @@ class BaseSerializer(serializers.ModelSerializer):
 
         if not hasattr(self, "fields_required_for_post"):
             raise AttributeError(
-                f"{self.__class__.__name__} must define 'fields_required_for_post'. They are all the fields that must be included with a POST."
+                f"{self.__class__.__name__} must define 'fields_required_for_post'."
+                " They are all the fields that must be included with a POST."
             )
         if not hasattr(self, "fields_editable"):
             raise AttributeError(
-                f"{self.__class__.__name__} must define 'fields_editable'. They are the fields that can be edited with a PUT (all required) or a PATCH (none required)."
+                f"{self.__class__.__name__} must define 'fields_editable'."
+                " They are the fields that can be edited with a PUT (all required) or a PATCH (none required)."
             )
         if not hasattr(self, "fields_not_readable"):
             raise AttributeError(
-                f"{self.__class__.__name__} must define 'fields_not_readable'. They are the fields that WILL NOT be sent as response for read operations, like full GETs, POST, PUT or PATCH."
+                f"{self.__class__.__name__} must define 'fields_not_readable'."
+                " They are the fields that WILL NOT be sent as response for read operations, like full GETs, POST, PUT or PATCH."
             )
 
-        request = kwargs.get("context", {}).get("request", None)
+        if kwargs.get("context", None) is None:
+            kwargs["context"] = {}
+        context = kwargs["context"]
+        request = context.get("request", None)
         request_method = request.method if request else None
 
         super().__init__(*args, **kwargs)
