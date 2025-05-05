@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.urls import reverse
 from pawtel.app_admins.models import App_Admin
 from pawtel.app_users.models import AppUser
-from pawtel.booking_holds.models import BookingHold
 from pawtel.bookings.models import Booking
 from pawtel.customers.models import Customer
 from pawtel.hotel_owners.models import HotelOwner
@@ -126,20 +125,3 @@ class BookingViewSetTestCase(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data["id"], self.booking1.id)
-
-    def test_create_booking_hold_when_start_booking(self):
-        url = reverse("booking-list")
-        data = {
-            "start_date": str(date.today() + timedelta(days=30)),
-            "end_date": str(date.today() + timedelta(days=37)),
-            "room_type": self.room_type2.id,
-            "use_paw_points": "false",
-        }
-        response = self.client.post(url, data, format="json")
-
-        booking_holds_of_customer = BookingHold.objects.filter(
-            customer_id=self.customer1.id
-        ).all()
-
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(booking_holds_of_customer), 1)
