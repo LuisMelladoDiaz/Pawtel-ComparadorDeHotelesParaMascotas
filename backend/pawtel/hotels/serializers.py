@@ -40,7 +40,6 @@ class HotelSerializer(BaseSerializer):
             "images",
             "cover_image",
         ]
-
         extra_kwargs = {
             "id": {"read_only": True},
             "is_archived": {"read_only": True},

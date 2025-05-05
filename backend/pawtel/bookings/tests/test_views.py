@@ -81,6 +81,7 @@ class BookingViewSetTestCase(TestCase):
             name="Habitación Premium",
             description="Habitación de lujo con balcón",
             capacity=2,
+            num_rooms=2,
             price_per_night=250.00,
             pet_type="DOG",
         )
@@ -90,6 +91,7 @@ class BookingViewSetTestCase(TestCase):
             name="Suite Familiar",
             description="Suite con capacidad para toda la familia",
             capacity=4,
+            num_rooms=2,
             price_per_night=400.00,
             pet_type="CAT",
         )
@@ -118,7 +120,6 @@ class BookingViewSetTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_retrieve_booking_valid(self):
-
         url = reverse("booking-detail", kwargs={"pk": self.booking1.id})
         response = self.client.get(url)
 

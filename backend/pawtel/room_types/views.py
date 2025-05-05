@@ -17,11 +17,13 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     def list(self, request):
         filters = request.query_params.dict()
         is_admin = AdminService.is_current_user_admin(request)
-        hotels = RoomTypeService.list_filtered_room_types(
+        room_types = RoomTypeService.list_filtered_room_types(
             filters, allow_archived=is_admin
         )
-        serializer = RoomTypeSerializer(hotels, many=True, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        output_serializer_data = RoomTypeService.serialize_output_room_type(
+            room_types, many=True
+        )
+        return Response(output_serializer_data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, pk=None):
         is_admin = AdminService.is_current_user_admin(request)
