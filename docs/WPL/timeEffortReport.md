@@ -36,6 +36,7 @@
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
 | 22/05/2025  | v 1.0         | Versión inicial del documento - Parte de Luis | Luis Mellado Díaz |
+| 22/05/2025  | v 1.1         | Parte Francisco | Francisco Miguel Jiménez Morales |
 
 
 ---
@@ -221,27 +222,12 @@
 
 | Descripción                                  | Duración   |
 |----------------------------------------------|------------|
-| Clase                                        | 04:00:00   |
-| Gestión de usuarios pilotos                  | 01:49:41   |
-| Preparar presentación                        | 00:21:27   |
-| Gestión de usuarios pilotos                  | 00:06:12   |
-| Preparar presentación                        | 00:37:40   |
-| Preparar presentación                        | 00:38:34   |
-| Preparar Killer Opener                       | 00:29:45   |
-| Preparar presentación                        | 00:44:59   |
-| Preparar presentación                        | 00:24:38   |
-| Preparar presentación                        | 00:16:05   |
-| Clase                                        | 04:00:00   |
-| Aplicar feedback a la presentación           | 00:55:53   |
-| Misc (Revisión de feedback + redacción de docs) | 00:16:47   |
-| Misc (Revisión de feedback + redacción de docs) | 00:35:50   |
-| Preparar presentacion                        | 00:18:53   |
-| Preparar presentacion                        | 00:51:45   |
-| Clase                                        | 04:00:00   |
+| Editar video demo técnica                    | 03:30:00   |
 
 
 
-![grafico-de-tiempos](graficas/francisco4.png)
+
+
 ---
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
