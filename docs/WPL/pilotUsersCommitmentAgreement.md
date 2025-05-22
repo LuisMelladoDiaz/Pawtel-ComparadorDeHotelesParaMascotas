@@ -37,6 +37,8 @@
 | 24/03/2025  | v 1.1         | Revisión #S2 |Daniel Flores de Francisco |
 | 08/04/2025  | v 1.2         | Revisión #S3 |Daniel Flores de Francisco |
 | 29/04/2025  | v 1.3         | Revisión #PPL |Daniel Flores de Francisco |
+| 22/05/2025  | v 1.3         | Revisión #WPL |Luis Mellado Díaz |
+
 
 
 ---
