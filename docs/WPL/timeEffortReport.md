@@ -156,32 +156,20 @@
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 09/04/2025 - 22/05/2025
+**Periodo:** 02/05/2025 - 22/05/2025
 
-**Total de tiempo trabajado:** 18:23:00
+**Total de tiempo trabajado:** 5:28:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                         | Duración  |
 |-------------------------------------|-----------|
-| QA presentación                     | 01:00:00  |
-| Clase 11/4                          | 04:00:00  |
-| Guión WPL                           | 02:03:23  |
-| PawPoints                           | 02:00:00  |
-| Revision WPL                        | 00:26:44  |
-| Reunión y Organización PPL          | 00:51:45  |
-| Equipo WPL                          | 01:25:36  |
-| QA-WPL                              | 00:35:45  |
-| Time Report                         | 00:27:00  |
-| Supervisión WPL                     | 00:46:54  |
-| IA report                           | 00:35:00  |
-| Clase 25/4                          | 03:00:00  |
-| Actualizar Landing                  | 01:11:04  |
+| Entrega WPL                         | 01:20:00  |
+| Presentación WPL                    | 02:18:00  |
+| Presentación de Desempeño           | 01:50:00  |
 
 
-
-
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/b4bf2901-634c-4078-844f-1c15b0b17565" />
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/291faa6e-8e74-4740-876a-ec862b4defba" />
 
 
 
