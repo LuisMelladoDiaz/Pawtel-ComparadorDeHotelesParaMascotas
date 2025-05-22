@@ -171,14 +171,14 @@
 
 ## Reporte de tiempo de Jorge Gomez de Tovar
 
-**Periodo:** 09/04/2025 - 30/04/2025
-**Total de tiempo trabajado:** 13:00:00
+**Periodo:** 02/05/2025 - 22/05/2025
+**Total de tiempo trabajado:** 5:30:00
 
-| Descripción                           | Duración  |
+| Descripción                          | Duración  |
 |--------------------------------------|-----------|
-| Clase                                | 08:00:00  |
-| Informes de tiempo e IA              | 00:30:00  |
-| Presentación PPL                     | 04:30:00  |
+| Clase                                | 04:00:00  |
+| Presentacion rendimiento             | 00:30:00  |
+| Reunión WPL                          | 01:00:00  |
 
 
 ![grafico-de-tiempos](graficas/jorge.png)
