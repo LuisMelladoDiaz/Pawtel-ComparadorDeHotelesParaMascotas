@@ -40,6 +40,7 @@
 | 22/05/2025  | v 1.2         | Parte Fernando | Fernando Castelló Sánchez |
 | 22/05/2025  | v 1.3         | Parte de Sergio | Sergio Trenado González |
 | 22/05/2025  | v 1.4         | Parte de David | David González Martínez|
+| 22/05/2025  | v 1.5         | Parte de Javi | Javier García Sebastián|
 
 ---
 
@@ -50,25 +51,18 @@
 
 ## Reporte de tiempo de Javier García Sebastián
 
-**Periodo:** 09/04/2025 - 30/04/2025
-**Total de tiempo trabajado:** 16:06:05
+**Periodo:** 02/05/2025 - 22/05/2025
+**Total de tiempo trabajado:** 04:33:44
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                                                    | Duración   |
 |----------------------------------------------------------------|------------|
-| creación de protopersonas siguiendo feedback                   | 00:25:00   |
-| creación imágenes posts Instagram                              | 00:52:17   |
-| doblar anuncio Javi y Coco                                     | 02:25:42   |
-| reunión marketing y RRSS                                       | 00:16:00   |
-| creación cartel publicitario Pawtel                            | 01:46:56   |
-| preparar y subir 2do post + presentación                       | 00:46:56   |
-| clase 25/04/2025                                               | 04:00:00   |
-| PRESENTACIÓN: diapositivas presentación 11/04/2025             | 00:40:09   |
-| preparar presentación 25/04                                    | 02:04:42   |
-| últimos informes sprint → IA, horas y feedback usuarios piloto | 00:44:45   |
-| documento de costes de marketing a nivel RRSS                  | 00:35:38   |
-| horario de hoy a mayo RRSS                                     | 01:28:00   |
+| Creación posts instagram                                       | 01:12:19   |
+| Imprimir y colocar carteles publicitarios                      | 00:34:00   |
+| Grabación de la demo técnica del proyecto                      | 01:24:30   |
+| Úlrimos informes sprint: IA y Horas                            | 00:30:55   |
+| Clase / presentación del dia 16/05                             | 00:55:00   |
 
 ![grafico-de-tiempos](graficas/javi_garcia.png)
 
