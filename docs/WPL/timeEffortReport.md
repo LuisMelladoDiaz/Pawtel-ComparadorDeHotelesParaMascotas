@@ -38,6 +38,7 @@
 | 22/05/2025  | v 1.0         | Versión inicial del documento - Parte de Luis | Luis Mellado Díaz |
 | 22/05/2025  | v 1.1         | Parte Francisco | Francisco Miguel Jiménez Morales |
 | 22/05/2025  | v 1.2         | Parte Fernando | Fernando Castelló Sánchez |
+| 22/05/2025  | v 1.3         | Parte de Sergio | Sergio Trenado González |
 
 
 ---
@@ -93,18 +94,17 @@
 
 ## Reporte de tiempo de Sergio Trenado Gonzalez
 
-**Periodo:** 09/04/2025 - 30/04/2025
-**Total de tiempo trabajado:** 11:44:37
+**Periodo:** 01/05/2025 - 22/05/2025
+**Total de tiempo trabajado:** 07:26:55
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                                                                                                      | Duración  |
 |------------------------------------------------------------------------------------------------------------------|-----------|
-| Clase 25 abril                                                                                                   | 04:00:00  |
-| Clase 11 abril                                                                                                   | 04:00:00  |
-| Puliendo ultimos detalles y mejorando pantalla de admin                                                          | 01:46:41  |
-| Mejorando detalles y arreglando bugs  + IA Report                                                                | 01:24:23  |
-| Mejorando detalles y arreglando bugs                                                                             | 00:33:33  |
+| PPL                                                                                                              | 03:30:00  |
+| WPL Presentación + Reunión                                                                                       | 03:00:00  |
+| Sesión de evaluación                                                                                             | 00:30:00  |
+| Feedback presentación                                                                                            | 00:26:55  |
 
 
 ![grafico-de-tiempos](graficas/sergio.png)
