@@ -295,27 +295,19 @@
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
 
-**Periodo:** 11/04/2025 - 02/05/2025
-**Total de tiempo trabajado:** 18:47:50
+**Periodo:** 02/05/2025 - 22/05/2025
+**Total de tiempo trabajado:** 07:08:24
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
 | Clases | 04:00:00 |
-| Estudiar KPIs y motores SEO y empezar los docs | 00:57:00 |
-| Definir documentos KPIs y definir estrategia SEO | 02:31:00 |
-| Definir costes de marketing y crear imagenes merchandising | 02:46:00 |
-| Definir KPIs principales y comparar terminos del SEO en google trends y añadir gráficas | 01:06:08 |
-| Aplicar feedback a documentos de marketing | 01:34:00 |
-| Merchandising| 01:41:00 |
-| Medición KPIs y campaña marketing global | 02:15:13 |
-| Creación Protopersonas | 00:59:29 |
-| Poner correlaciones/estacionalidad de busquedas estrategia SEO y gráficas más grandes| 00:27:00 |
-| IA Report and Time report| 00:31:00 |
+| Presentación individual | 00:25:00 |
+| Presenrtación WPL | 02:43:24 |
 |
 
-![grafico-de-tiempos](graficas/claudio2.png)
+![grafico-de-tiempos](graficas/claudio5.png)
 ---
 
 ## Reporte de tiempo de Andrés Martínez Reviriego
