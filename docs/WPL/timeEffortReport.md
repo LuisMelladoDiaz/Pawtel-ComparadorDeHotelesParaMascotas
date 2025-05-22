@@ -186,23 +186,20 @@
 
 ## Reporte de tiempo de Javier Ruiz Garrido
 
-**Periodo:** 10/04/2025 - 22/05/2025
-**Total de tiempo trabajado:** 22:50:55
+**Periodo:** 01/05/2025 - 22/05/2025
+**Total de tiempo trabajado:** 08:21:13
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| clase | 12:00:00 |
-| Presentacion WPL | 05:19:46 |
+| clase | 4:00:00 |
+| slide evaluacion del desempeño | 00:21:08 |
 | preparacion WPL | 04:00:05 |
-| presentacion | 02:52:27 |
-| informes | 00:53:49 |
-| arreglos presentacion | 00:35:56 |
-| Informe tiempo | 00:17:00 |
 
-![grafico-de-tiempos](graficas/javi_ruiz.png)
+![grafico-de-tiempos](graficas/javierRuiz.png)
 ---
+
 
 ## Reporte de tiempo de Francisco Miguel Jiménez Morales
 
