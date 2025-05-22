@@ -112,31 +112,27 @@ No aplica
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de imágenes (X)
-- Asesoramiento técnico (X)
+- No aplica
 
 #### 3. Uso de IA en las Tareas
 
-| Tarea | Herramienta utilizada | Descripción del uso de IA |
-|-------|-----------------------|---------------------------|
-| Generación imágenes merchandising | Canva, ChatGPT | Generación de representaciones visuales de productos de merchandising |
+No aplica|
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas:** 3 horas
-- **Comparación con trabajo sin IA:** Mayor eficiencia en creación de materiales visuales
+- No aplica
 
 #### 5. Prompts Utilizados
 
-1. "Genera un boli de color rosado claro con el logo Pawtel"
+1. No aplica
 
 #### 6. Problemas Encontrados
 
-- Limitaciones en cantidad de archivos subibles
+- No aplica
 
 #### 7. Evaluación General
 
-- **Recomendación:** Sí
+- No aplica
 
 ---
 
