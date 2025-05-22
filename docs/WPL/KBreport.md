@@ -36,8 +36,8 @@
 2. [📌 Resumen Ejecutivo](#resumen-ejecutivo)
 3. [⚙️ Desarrollo](#desarrollo)
 4. [🗂️ Feedback Aportado](#feedback-aportado)
-   - [Semana 8(Individual) ✏️](#semana-8)
-   - [Semana 9(Individual) 🔍](#semana-9)
+   - [Feedback común 🏁](#feedback-común)
+   - [Semana 10(Individual) ✏️](#semana-10)
 
 ---
 
@@ -69,52 +69,99 @@ Link al repositorio con el feedback recogido por el grupo 11 para el PPL: [https
 
 **Contenido específico del grupo**
 
-El grupo 11 ha contribuido proporcionando el feedback específico recogido de las correspondientes clases. Además del feedback específico el grupo 11 ha seguido con el calendario de feedback estipulado habiendo contribuido ya en semanas anteriores. El feedback proporcionado y recogido por el grupo está adjunto a este documento.
+El grupo 11 ha contribuido proporcionando el feedback específico recogido de las correspondientes clases. Además del feedback específico el grupo 11 ha seguido con el calendario de feedback estipulado contribuyendo con el desarrollo del producto, análisis y garantía de calidad, cumplimiento legal, commitment agreement y el uso de la IA. El feedback proporcionado y recogido por el grupo está adjunto a este documento.
+
 
 **Acciones de consolidación**
+
 ### 📊 Contenido visual y técnico
 
-- **Acción:** Estilizar gráficas con colores y etiquetas para indicar si el aumento o descenso es positivo o negativo.
-  **Beneficio:** Facilita la interpretación de métricas clave por parte de la audiencia.
+- **Acción:** Revisar el audio de todos los vídeos (clientes, inversores, DEMO). Ajustar volumen, eliminar eco, evitar desfases.
+  **Beneficio:** Mejora la comprensión del mensaje y evita distracciones durante la presentación.
 
-- **Acción:** Justificar la inclusión de cada competidor en las tablas y evitar contradicciones.
-  **Beneficio:** Aumenta la credibilidad del análisis de mercado.
+- **Acción:** Cuidar la iluminación y el entorno en los vídeos de clientes, y evitar incluir números de página si hay diapositivas internas.
+  **Beneficio:** Refuerza la calidad visual y profesionalidad del material presentado.
+
+- **Acción:** Dividir diapositivas densas (como posicionamiento digital) y evitar tecnicismos innecesarios.
+  **Beneficio:** Facilita la asimilación de la información por parte del jurado y la audiencia.
+
+- **Acción:** Usar keywords realistas y con búsquedas relevantes para el posicionamiento SEO.
+  **Beneficio:** Aumenta la visibilidad real en motores de búsqueda y justifica mejor el plan digital.
 
 ---
 
 ### 🧠 Producto y demo
 
-- **Acción:** Incluir código limpio y destacar mejoras en calidad y organización.
-  **Beneficio:** Refuerza la solvencia técnica del equipo ante inversores y evaluadores.
+- **Acción:** Asegurar que la DEMO cuente una historia completa sin dependencias entre secciones.
+  **Beneficio:** Garantiza una experiencia fluida y coherente durante la presentación.
 
-- **Acción:** Explicar gráficas de rendimiento y métricas con contexto y coherencia entre backlog y tareas.
-  **Beneficio:** Demuestra un control real del proyecto y mejora la percepción de profesionalidad.
+- **Acción:** Tener preparado un plan B si falla el audio o el vídeo durante la presentación en el WPL.
+  **Beneficio:** Minimiza riesgos técnicos y permite continuar sin interrupciones.
+
+- **Acción:** Mostrar diferenciación funcional con competidores si se destaca una ventaja (ej. registro en 30s).
+  **Beneficio:** Fortalece la propuesta de valor frente a alternativas existentes.
 
 ---
 
 ### 📣 Marketing y PPL
 
-- **Acción:** Detallar la planificación diaria de la campaña de lanzamiento.
-  **Beneficio:** Muestra organización, previsión y compromiso con la estrategia de marketing.
+- **Acción:** Detallar acciones específicas del plan de marketing con fechas y ejemplos concretos (ej. campañas con influencers, sorteos).
+  **Beneficio:** Refleja planificación real y compromiso con el lanzamiento.
 
-- **Acción:** Personalizar contenido y plataformas según cada segmento objetivo.
-  **Beneficio:** Aumenta la relevancia y efectividad del marketing digital.
+- **Acción:** Usar herramientas de métricas como Metricool y explicar su impacto en el seguimiento de redes.
+  **Beneficio:** Aporta datos y profesionalismo en la estrategia digital.
+
+- **Acción:** Preparar el slide para el anuncio en las pantallas de la ETSII siguiendo la plantilla, con diseño atractivo.
+  **Beneficio:** Aumenta la visibilidad y atractivo del proyecto en un entorno físico clave.
 
 ---
 
 ### 💼 Inversores
 
-- **Acción:** Rediseñar los paquetes de inversión para ser más accesibles y realistas.
-  **Beneficio:** Facilita captar un rango más amplio de inversores potenciales.
+- **Acción:** Separar claramente el precio por acción del múltiplo mínimo en los paquetes de inversión.
+  **Beneficio:** Evita confusión y facilita la decisión de inversión.
 
-- **Acción:** Añadir soporte visual claro en la sección de monetización.
-  **Beneficio:** Refuerza el entendimiento de la viabilidad del negocio.
+- **Acción:** Incluir rentabilidad estimada en los paquetes de inversión y explicar cómo se usarán los fondos solicitados.
+  **Beneficio:** Mejora la transparencia y atrae la confianza de los posibles inversores.
+
+- **Acción:** No hacer proyecciones de beneficios sin explicar primero las fuentes de ingreso.
+  **Beneficio:** Refuerza la credibilidad financiera del proyecto.
+
+---
+
+### 📋 Organización y presentación
+
+- **Acción:** Usar términos más genéricos como "equipo de desarrollo" o "coordinadores" en lugar de detallar la estructura interna.
+  **Beneficio:** Evita ruido innecesario y mejora la comunicación con la audiencia.
+
+- **Acción:** Revisar numeración de todas las diapositivas y corregir errores visibles, especialmente en el PPL.
+  **Beneficio:** Refuerza la profesionalidad general del contenido presentado.
+
+## Feedback común
+
+### Desarrollo del producto
+
+Se señaló la necesidad de cuidar el lenguaje utilizado, evitando frases como “esto es muy fácil”, que pueden sonar condescendientes. Asimismo, se valoró muy positivamente el storyboard del anuncio y la ejecución del vídeo, especialmente detalles creativos. Estas decisiones contribuyen a una identidad visual sólida y profesional. No obstante, se hizo énfasis en cuidar la coherencia visual, como el uso correcto de unidades (“10k” en lugar de “10000”) o evitar nombres de archivos sin contexto como Demo_04_04.mp4.
+
+### Análisis y garantía de la calidad
+
+En el apartado de métricas y validación, se presentó una crítica constructiva sobre la gráfica de rendimiento del sprint 3. Se cuestionó la validez de los datos al ver que casi todos los miembros aparecen con un rendimiento del 10, lo cual puede ocultar problemas reales en la productividad. También se mencionó que los números laterales de la gráfica no se leían bien, dificultando la interpretación. Este tipo de observaciones apunta a una mejora en la visualización de datos y una reflexión más crítica sobre su significado real. Por otra parte, se felicitó a los equipos por la priorización del feedback recibido de los usuarios piloto, diferenciando adecuadamente entre errores técnicos, percepciones de UX y nuevas ideas de mejora. Esta categorización es clave para tomar decisiones informadas y mantener el enfoque del producto.
+
+### Cumplimiento Legal
+
+En lo relativo al aspecto legal, se comentó que el enfoque del impacto legal resultaba anticlimático, dado que se centraba en lo que no se debía hacer en lugar de transmitir una visión clara y positiva de cómo se abordaban las normativas. Esta crítica sugiere reformular esta parte del entregable para convertirla en una oportunidad narrativa, demostrando cómo el cumplimiento normativo forma parte del valor del producto y no solo una limitación. También es importante destacar que en semanas anteriores se había mencionado la necesidad de mostrar de forma concreta los acuerdos legales y cómo afectan al modelo de negocio, algo que convendría recuperar en futuras entregas.
+
+### Commitment Agreement
+
+El feedback hizo una llamada implícita a la responsabilidad individual dentro del equipo. Se subrayó que no todos los errores técnicos deben recaer en el usuario piloto y que algunos de los problemas detectados reflejan una falta de control interno más que una validación externa. Esta observación apunta a la necesidad de reforzar el compromiso interno: mantener una cultura de calidad, definir bien los roles y, si es necesario, ajustar el tipo de tareas de algunos miembros para facilitar su implicación. Además, se valoró positivamente la propuesta de designar supervisores dentro del equipo que puedan acompañar a quienes están menos activos, una práctica que fortalece la cohesión grupal.
 
 
+### Uso de la IA
+A lo largo del sprint, se valoró positivamente la integración de la inteligencia artificial siempre que se justificara su uso con impacto directo en la mejora del proyecto. Aunque no se abordó explícitamente en esta sesión, es evidente que herramientas de IA podrían resultar fundamentales para mejorar la presentación de métricas, optimizar la visualización de datos de rendimiento o incluso asistir en la edición y montaje del material audiovisual. Se recomienda seguir profundizando en su uso, especialmente de cara a automatizar análisis del feedback recibido o predecir patrones de uso en futuras pruebas con usuarios piloto.
 
-## Semana 8
+## Semana 10
 
-**Fecha:** 12/04/2025
+**Fecha:** 03/05/2025
 
 
 <br>
@@ -125,66 +172,11 @@ El grupo 11 ha contribuido proporcionando el feedback específico recogido de la
 
 | Grupo                         | Feedback recibido     | Observaciones adicionales |
 |-------------------------------|------------------------|----------------------------|
-| **Grupo 7 - MapYouWorld**     | - Buena energía del presentador. <br> - Le han hecho caso al feedback recibido la semana anterior. <br> - Dar datos que apoyen tanto el negocio como lo que estás diciendo. <br> - Buena DEMO. <br> - Tener en cuenta dónde estará disponible la aplicación para mirar sus restricciones legales. | - Buen killer opener, proyección de beneficios, retrospectiva del sprint anterior y evolución de la productividad. <br> |
-| **Grupo 8 - Nutribaby**       | - Faltan metáforas visuales y sobra texto en las diapositivas. <br> - Buen killer opener. <br> - Hacer un anuncio con todo, recortar un poco del freemium y unirlo al otro. <br> - Video inversores: poner la fuente de cada dato que se ponga. <br> - Intentar abreviar las cifras que se pongan. <br> - Gráficas en la DEMO: decir de dónde se han sacado. <br> - Distinguir código duplicado en backend y frontend. <br> - Métricas: Diferenciar las que es positivo que suban y las que es positivo que bajen (usando colores, metáforas, separarlas...). <br> - Buena categorización del feedback de los usuarios piloto. <br> - Buen plan de contingencia. <br> - Mala métrica para medir el rendimiento del equipo, está "capada". <br> - Mala diapositiva para el análisis de rendimiento. | - Buen killer opener, bien hecho el poner datos para justificar la aplicación, análisis de calidad de código muy completo, categorización feedback usuarios piloto, marketing. <br> |
-| **Grupo 9 - Caronte**         | - Presentación muy bien en general, tanto diapositivas como la presentación. <br> - Tener cuidado con lo que se dice: verificar, no certificar. <br> - Sabiendo que vais bien de tiempo, la DEMO iba demasiado rápida. Quizás no hay que presentar todos los casos de uso, sino los más relevantes. <br> - Video de usuarios muy bien. <br> - Gráficas de rendimiento: Hay dos y una es mucho más clara que la otra. Explicar también las "horas extra". <br> - Cuidado con la duplicidad del código, aunque a veces en tests puede ser útil para entender mejor. <br> - Incoherencia entre gráficas de tareas realizadas - product backlog. Además, requiere mucho esfuerzo entenderlas. | - Buena presentación en general, destacando los anuncios, la demo, y la evaluación de Codacy. <br>  |
-| **Grupo 10 - Go4Surprise**    | - Video storyboard inversor: eso no es un inversor, es otro tipo de cliente, un cliente empresa. <br> - Darle más énfasis al killer opener e innovar. <br> - Análisis de competidores: dejar más claro qué ofreces tú que los otros no, cuáles son las diferencias. <br> - Intentar acortar un poco la presentación del problema en los vídeos. <br> - Mala diapositiva roles del equipo, intentar no repetir “cabezas”. <br> - DEMO: ha faltado zoom en algunos momentos y darle uso a Sorpresín en el video. <br> - Problema 1: hay que entrar de verdad en las causas del problema, no quedarse en la superficie. <br> - Resto de problemas bien. | - Buena DEMO, sprint retrospective y gráfica del rendimiento del equipo. <br>  |
-| **Grupo 11 - Pawtel**         | - Killer opener: Que no obligue al que está escuchando a inferir tanto. <br> - Anuncios bien, pero mejorar el audio. <br> - Muy bien hilado todo, desde los anuncios hasta la demo y el final. <br> - Revisar el orden. El hilo argumental debe ir más continuado. <br> - No poner beneficios/pérdidas, con usar +/- se entiende igual y te ahorras todo el margen izquierdo. <br> - Hall Of Fame muy bien. <br> - Ha sobrado demasiado tiempo. | - |
-| **General**                   | - | - |
-
-
-
-
-<br>
-
-## Para hacer pero no necesariamente para la presentación
-
-## Para la presentación
-### Estructura principal
-Para esta semana hay que elaborar dos presentaciones diferentes, ya que habrá que contar el proyecto de cara a inversores.
-- La presentación que teníamos hibrida hecha hasta ahora se divide:
-    - Presentación 1: WPL (10min): ESTE ES EL ORDEN QUE HAY QUE SEGUIR
-        - De que va el proyecto? Killer opener + anuncio orientado a clientes (Video 1min max) (1min EL APARTADO)
-        - Que hace exactamente? Mas detallado, con DEMO del proyecto basada en una historia realista, normalmente optimista (nada de recuperar correos,... eliminar fricciones). Consistente con lo visto anteriormente.
-        - Hay competencia? Lo de siempre.
-        - Quien hay detras? EL equipo. La estructura será un poco menos relevante.
-        - Podria ser rentable? Puntos principales del modelo de negocio. Fuentes de ingresos, costes, oportunidades de inversión (donde ponemos el video para inversores (Duración máxima del vídeo 1 minuto)).
-        - Donde puedo ver mas informacion? Transparencia final con link a landing page, qr, producto.
-    - P.2: Resto (PPL, marketing) (5min)
-        - Modelo de segmentación: A que segmentos vamos a orientar nuestro producto (Habrá que caracterizar a la audiencia), poner un par de protopersonas.
-        - De qué forma vamos a optimizar nuestra presencia en los motores de búsqueda (palabras clave). Si vamos a tener presencia en rrss que van por población, tirar de las protopersonas.
-        - Campaña de lanzamiento, acciones antes del wpl. Crear nuestras rrss y hacer contenido, que debe seguir un plan. Definir acciones que permitan ganar usuarios, clientes, visibilidad. Buscar partnerships, influencers,...
-        - Objetivos de la gestión de la comunidad: planificar cuando se hacen publicaciones, con que objetivo,...
-        - Costes de marketing: Detalles.
-        - Anuncios dirigidos: Videos, planes,... Actualizar la landing page con este contenido. Se pueden poner videos que no enseñemos en el WPL si no caben ahí.
-        - Se puede añadir a esta el uso de la IA
-
-### Otros
-
-
-
-## Adicional
-Trabajo individual: https://bit.ly/ispp2425-extra (hasta antes del 23 de abril)
-
-
-## Semana 9
-
-**Fecha:** 27/04/2025
-
-
-<br>
-
-## **Desarrollo**
-
-## Feedback de las presentaciones
-
-| Grupo | Feedback recibido | Observaciones adicionales |
-|-------------------------------|------------------------|----------------------------|
-| **Grupo 7 - MapYourWorld**     | - En la semana 30 bajan los gastos y después vuelven a subir, incoherencia, tener claro por qué pasan cosas como esta. <br> - No ha habido killer opener como tal. <br> - Audio de los vídeos mal, cuando se ponga el proyector tiene que estar mute. <br> - DEMO demasiado acelerada y la música de fondo despistaba más que ayudaba. <br> - No puedes decir "por eso a este no lo consideramos un competidor directo" y que aparezca en la tabla de competidores. <br> - Anuncio de inversores: Los paquetes de inversión son demasiado pretenciosos, mejor tener muchos paquetes que valgan menos a un gran inversor. <br> - PPL: Buenos tipos de contenidos en RRSS según usuarios, campañas pre-durante-post lanzamiento. <br> - Hay que ser más específico en una planificación de lanzamiento (qué se va a hacer cada día, cuándo se van a hacer las publicaciones, etc.). <br> - Medir efectividad de publicaciones y reflejar NUESTRA REACCIÓN a ello. <br> - Ver cuánto se espera ganar con anuncios y qué se va a hacer si no se llega a esa cifra. <br> - Buena diapositiva de branding (logo, paleta de colores, tipografía, logos alternativos...), pero falta indicar el peso de cada elemento. | - |
-| **Grupo 8 - Infantem**       | - Falta hilo argumental. <br> - Buen trabajo en general. <br> - Gran mejora del presentador. <br> - DEMO un poco escueta para todas las funcionalidades que tiene la aplicación y que la hacen distinta de los competidores. <br> - Falta mucha información en la diapositiva de costes-ingresos-beneficios (hacerla homogénea en escala y visible). <br> - Vídeo para inversores demasiado escueto. <br> - Bien pensado colaborar con influencers. <br> - Bien pensado el filtro de TikTok, pero que salga un bebé. <br> - Planificación: Han usado a la mascota para marcar los días pero no se explica qué significa que salga (¿hay publicación? ¿cuántas? ¿en todas las plataformas?). | - |
-| **Grupo 9 - Caronte**         | - Muy buena presentación. <br> - El mensaje inicial: Falla la diapositiva, demasiadas cosas; el vídeo explica mejor. Se puede cambiar el orden y usar el vídeo también para la presentación. <br> - Buena DEMO. <br> - Moral del equipo y horas invertidas sobra. <br> - Falta apoyo visual en la monetización. <br> - El vídeo de inversores no se entiende. <br> - Protopersonas: Estado civil /= situación laboral. <br> - Campaña: Igual que el grupo anterior. | - |
-| **Grupo 10 - Go4Surprise**    | - No hacer retrospectiva del desarrollo. <br> - Para el WPL poner en el TCO la estimación esperada/realista. <br> - Comentar modelo de negocio. <br> - No poner "1K = 1000 euros" en la gráfica del TCO. <br> - No publicitarse en LinkedIn si buscamos usuarios finales (solo para buscar empresas como mucho). <br> - Es importante conocer bien el nicho al que apelamos para utilizar su red social óptima de la mejor manera. | - |
-| **Grupo 11 - Pawtel**         | - Si el público objetivo son perros, debemos ir a buscar a ese nicho principalmente. <br> - IMPORTANTE: No repetir el fallo de los vídeos; tener backup. <br> - Enseñar los vídeos en modo presentación (no mostrar todas las diapositivas detrás). <br> - Anuncio Coco: historia no muy realista; falta apoyo visual. Se sugiere usar el perro Curro (de la primitiva) como ejemplo. <br> - Usar demo para explicar cómo Coco usa Pawtel (usar una patita en vez del cursor). <br> - Cuidado con el audio de la demo, estaba demasiado alto. <br> - Considerar puenteo de reservas tradicionales: estrategia de puntos tipo booking (aunque no esté implementado). <br> - Cuidado con el desfase audio-vídeo, ser muy perfeccionista. <br> - El vídeo de inversores está bien. <br> - Protopersonas: Diferenciar problemas de soluciones. ¿Qué problema tienen? <br> - Gráficas de búsquedas: Fechas no se ven bien. Resaltar la estacionalidad y correlaciones observadas. Indicar a qué nivel es la gráfica (España). <br> - Nombrar las IAs usadas en marketing. <br> - Carteles: Van a pedir minicartel para poner en la escuela (ver proporciones en la web de la escuela). | - |
+| **Grupo 7 - MapYourWorld**     | - Buen killer opener, pero tener cuidado en el WPL que es en el salón de actos (sonido, hacer alguna referencia a ello). <br> - Buen video de clientes pero la última frase tiene mucho eco. <br> - DEMO: Bien, pero debe tener una historia completa para toda la presentación, sin dependencias entre aplicaciones. <br> - Si dices que te diferencia crear una cuenta en 30s, entonces debes comparar con los competidores. <br> - Inferir que los paquetes de aparición son para empresas, y explicarlos con más calma. <br> - No se puede hacer una proyección de beneficios sin explicar fuentes de ingreso. <br> - Paquetes de inversión: Separar precio de la acción y múltiplo mínimo. <br> - Hablar de rentabilidad de los paquetes de inversión. <br> - Usar keywords que la gente realmente busque para SEO. <br> - Bien: Seguimiento y KPIs. | - Feedback positivo: Killer opener, que nos diferencia, video inversores, diferenciación entre RRSS, brandboard. <br> |
+| **Grupo 8 - Infantem**         | - Buen anuncio de clientes. <br> - Si la DEMO no tiene sonido hay que acompañarla. <br> - Fuentes de ingresos: El tiempo es clave para ver la evolución del modelo. 13% freemium al principio es demasiado. <br> - Mala diapositiva de costes, ingresos y beneficios. <br> - Protopersonas: Poner más información sobre el bebé. <br> - Marketing: Aterrizarlo en casos concretos, usar datos. <br> - Estadísticas: Usar gráficas aunque sean pocos días. <br> - La campaña de influencers debería tener presupuesto. <br> - Decir en qué se va a gastar el dinero solicitado a inversores y cómo influye. <br> - Buena idea los carteles. | - Feedback positivo: Killer opener, video clientes, diseño diapositivas, carteles, sorteos como campaña de marketing, uso de IA muy completo. <br>  |
+| **Grupo 9 - Caronte**          | - Muy bien, la mejor a nivel de presentación. <br> - Volumen de los videos demasiado alto y compitiendo con la música. <br> - Video de inversores: Eliminar la parodia, hacerlo más neutro. No tiene por qué ser un diálogo. | - Feedback positivo: Video clientes, DEMO, usuarios piloto, concurso de anuncios, camisetas y acreditaciones. <br> |
+| **Grupo 10 - Go4Surprise**     | - Muy bien en general. <br> - ¿Por qué dos videos de clientes? Explicar y situar uno en marketing/publicidad. Cuidar la iluminación y el entorno. <br> - Cambiar cómo se presentan los paquetes en el video de inversores. <br> - Keywords demasiado genéricas. | - Feedback positivo: DEMO con interacción con el presentador, rentabilidad, video de inversores, Fever Futura Tech Prize, uso de métricas Metricool para RRSS. <br> |
+| **Grupo 11 - Pawtel**          | - No detallar tanto la organización de los grupos. Usar términos generales como "equipo de desarrollo", "coordinadores"... <br> - Costes: Aclarar si se han añadido los Pawpoints. Si no están, incluirlos. <br> - Costes: Evitar usar CAPEX y OPEX, términos demasiado técnicos. Usar otros más comprensibles tanto en diapositiva como en presentación oral. <br> - En los anuncios, quitar los números de página si se enseñan diapositivas dentro. <br> - Posicionamiento digital: Buena diapositiva, pero explicarla de forma más sencilla. Puede dividirse en dos. <br> - Buen análisis de redes sociales. <br> - Los números de las diapositivas del PPL están todos mal. | - Feedback positivo: Muy buen recurso el del co-branding en el killer opener. <br> - El audio de los videos: comprobarlo antes del WPL. Tener plan B. <br> |
 | **General**                   | - | - |
 
 
@@ -197,33 +189,19 @@ Trabajo individual: https://bit.ly/ispp2425-extra (hasta antes del 23 de abril)
 
 ## Para la presentación
 ### Estructura principal
-Para la semana pasada fue así:
-- La presentación que teníamos hibrida hecha hasta ahora se divide:
-    - Presentación 1: WPL (10min): ESTE ES EL ORDEN QUE HAY QUE SEGUIR
-        - De que va el proyecto? Killer opener + anuncio orientado a clientes (Video 1min max) (1min EL APARTADO)
-        - Que hace exactamente? Mas detallado, con DEMO del proyecto basada en una historia realista, normalmente optimista (nada de recuperar correos,... eliminar fricciones). Consistente con lo visto anteriormente.
-        - Hay competencia? Lo de siempre.
-        - Quien hay detras? EL equipo. La estructura será un poco menos relevante.
-        - Podria ser rentable? Puntos principales del modelo de negocio. Fuentes de ingresos, costes, oportunidades de inversión (donde ponemos el video para inversores (Duración máxima del vídeo 1 minuto)).
-        - Donde puedo ver mas informacion? Transparencia final con link a landing page, qr, producto.
-    - P.2: Resto (PPL, marketing) (5min)
-        - Modelo de segmentación: A que segmentos vamos a orientar nuestro producto (Habrá que caracterizar a la audiencia), poner un par de protopersonas.
-        - De qué forma vamos a optimizar nuestra presencia en los motores de búsqueda (palabras clave). Si vamos a tener presencia en rrss que van por población, tirar de las protopersonas.
-        - Campaña de lanzamiento, acciones antes del wpl. Crear nuestras rrss y hacer contenido, que debe seguir un plan. Definir acciones que permitan ganar usuarios, clientes, visibilidad. Buscar partnerships, influencers,...
-        - Objetivos de la gestión de la comunidad: planificar cuando se hacen publicaciones, con que objetivo,...
-        - Costes de marketing: Detalles.
-        - Anuncios dirigidos: Videos, planes,... Actualizar la landing page con este contenido. Se pueden poner videos que no enseñemos en el WPL si no caben ahí.
-        - Se puede añadir a esta el uso de la IA
-- Sobre esto:
-    - Aplicando el feedback, se debe ver evolución en la presentación.
-	- Pasar más de plan de marketing a plan de ejecución.
-	- Será importante aprovechar el ensayo del WPL (tema sonido de videos, voz al hablar, etc).
-	- La semana que viene es retrospectiva personal de cada integrante del equipo, vendremos un rato solo.
+Para la semana que viene: El grupo de manera individual
+- Pequeña presentación de máximo 5 minutos de los problemas que ha habido, soluciones aplicadas, nuestra visión, manera de evaluar a los miembros del equipo, notas, cosas a destacar,... Sobre todo el proyecto (no solo la última semana). Nos van a hacer preguntas sobre que ha ido bien, que ha ido mal, como se han solucionado los problemas que han ido surgiendo,...
+- Preparar un slide anunciando nuestro proyecto que se presentará en las pantallas de la etsii. Nos darán una plantilla para saber el formato, pero después no tenemos por qué seguirla.
+- WPL:
+    - Será el dia 23 de mayo de 12:30 a 17:30. No tenemos que ir al turno de mañana.
+    - El ensayo es el Jueves 22 de mayo 13:30-16:30 en el salón de actos.
+    - Presentación 10 minutos. Lo que tenemos ya, añadiendo la parte de marketing.
+    - Nos darán unos premios según el mejor presentador, mejor DEMO, mejor killer opener,...
+    - Evento publico, se puede invitar a gente de fuera.
 
 ### Otros
 
 
 
 ## Adicional
-- Hay una plataforma para sacar al mercado startups.
-- Hay un concurso de la US para presentar startups.
+- Encuesta anónima para hacer cualquier comentario sobre la asignatura: bit.ly/ispp-acp
