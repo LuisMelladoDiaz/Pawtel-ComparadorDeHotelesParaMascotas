@@ -16,8 +16,8 @@
 
 # 📑 **Reporte de Tiempo - PPL** 🚀
 
-**📅 Entregable:** PPL
-**📆 Fecha:** 29/04/2025
+**📅 Entregable:** WPL
+**📆 Fecha:** 22/05/2025
 **👥 Equipo:** G11
 
 |  |   |
@@ -35,17 +35,8 @@
 ## Historial de Versiones
 | Fecha       | N° de Versión | Descripción               | Elaborado por           |
 |-------------|---------------|---------------------------|-------------------------|
-| 29/04/2025  | v 1.0         | Versión inicial del documento - Parte de Dani | Daniel Flores de Francisco |
-| 29/04/2025  | v 1.1         | Parte de Andrés | Andrés Martínez Reviriego |
-| 29/04/2025  | v 1.2         | Parte de Fernando | Fernando Castelló Sánchez |
-| 29/04/2025  | v 1.3         | Parte de Francisco | Francisco Miguel Jiménez Morales |
-| 29/04/2025  | v 1.4         | Parte de Luis | Luis Mellado Díaz |
-| 30/04/2025  | v 1.5         | Parte de Sergio | Sergio Trenado González |
-| 30/04/2025  | v 1.6         | Actualizar parte de Francisco | Francisco Miguel Jiménez Morales |
-| 30/04/2025  | v 1.7         | Actualizar parte de David | David González Martínez |
-| 30/04/2025  | v 1.8         | Actualizar parte de Javier García | Javier García Sebastián |
-| 30/04/2025  | v 1.9         | Actualizar parte de Javier Ruiz | Javier Ruiz Garrido |
-| 01/05/2025  | v 2.0         | Actualizar parte de Yesica Garate | Yesica Garate Fuentes |
+| 22/05/2025  | v 1.0         | Versión inicial del documento - Parte de Luis | Luis Mellado Díaz |
+
 
 ---
 
@@ -165,7 +156,7 @@
 
 ## Reporte de tiempo de Luis Mellado Diaz
 
-**Periodo:** 09/04/2025 - 29/04/2025
+**Periodo:** 09/04/2025 - 22/05/2025
 
 **Total de tiempo trabajado:** 18:23:00
 
@@ -264,7 +255,7 @@
 
 ## Reporte de tiempo de Fernando Castelló Sanchez
 
-**Periodo:** 10/04/2025 - 29/04/2025
+**Periodo:** 10/04/2025 - 22/05/2025
 **Total de tiempo trabajado:** 13:42:59
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -289,7 +280,7 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 10/04/2025 - 29/04/2025
+**Periodo:** 10/04/2025 - 22/05/2025
 **Total de tiempo trabajado:** 16:14:34
 
 ### Proyecto Pawtel - Distribución del tiempo
@@ -367,7 +358,7 @@
 
 ## Reporte de tiempo de Andrés Martínez Reviriego
 
-**Periodo:** 10/04/2025 - 29/04/2025
+**Periodo:** 10/04/2025 - 22/05/2025
 **Total de tiempo trabajado:** 14:47:53
 
 ### Proyecto Pawtel - Distribución del tiempo
