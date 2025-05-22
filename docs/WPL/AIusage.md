@@ -488,40 +488,58 @@ No aplica
 
 #### 1. Información General
 
-- **Nombre del programador:** Yesica Leydi Garate Fuentes
-- **Sprint:** WPL
-- **Rol en el proyecto:** Frontend, Publicidad, Marketing y Diseño Visual
+- **Nombre del programador:** Yesica Leydi Garate Fuentes  
+- **Sprint:** WPL  
+- **Rol en el proyecto:** Frontend, Publicidad y Marketing.
 
 #### 2. Tipo de Tareas en las que se Utilizó IA
 
-- Generación de contenido (X)
-- Diseño visual (X)
-- Marketing (X)
+- Generación de contenido (X)  
+- Diseño visual (X)   
+- Marketing (X)  
+- Edición de video (X)  
+- Identidad de marca (X)  
+- Optimización redes sociales (X) 
 
 #### 3. Uso de IA en las Tareas
 
 | Tarea | Herramienta utilizada | Descripción del uso de IA |
-|-------|-----------------------|---------------------------|
-| Storyboard video promocional | ChatGPT, Midjourney | Creación guion visual y diseño escenas |
-| Contenido redes sociales | ChatGPT, Canva | Generación ideas y diseño layouts |
+|-------|------------------------|----------------------------|
+| Contenido redes sociales | ChatGPT, Canva | Redacción de copies, diseño de plantillas, calendarios |
+| Estrategias de marketing viral | ChatGPT | Análisis de tendencias (Eurovisión, Feria de Sevilla, influencers) |
+| Optimización del perfil de Instagram | ChatGPT | Revisión bio, highlights, llamadas a la acción |
+| Diseño de campañas temáticas | ChatGPT, Canva | Desarrollo de posts “Sabías que…”, storytelling y engagement |
+| Imágenes con estilo realista para reels | MidJourney | Perros en situaciones cómicas/emotivas con maletas, señalando app |
+| Descripciones y hashtags para TikTok e Instagram | ChatGPT | Hashtags virales, descripciones SEO-friendly |
+| Campañas con humor o ironía respetuosa | ChatGPT | Guiones para reels de bloopers, trends de apertura de negocio |
+| Generación de imágenes según análisis de recepción | ChatGPT, MidJourney | Modificación o creación de nuevas imágenes según el tipo de contenido visual que generaba más engagement (emocional, humorístico o viral) |
 
 #### 4. Impacto en Productividad
 
-- **Horas estimadas ahorradas:** 30+ horas
+- **Horas estimadas ahorradas:** 30–40 horas  
+- **Impacto cualitativo:** Mayor variedad creativa, posts más virales, enfoque más estratégico y emocional.
 
 #### 5. Prompts Utilizados
 
-1. "Estrategias para presentar tracción inicial sin usuarios reales"
-2. "Ejemplos frases para campañas de marketing emocional con mascotas"
+1. “Estrategias para presentar tracción inicial sin usuarios reales”  
+2. “Ejemplos frases para campañas de marketing emocional con mascotas”  
+3. “Propuesta de reels viral con humor que explique cómo funciona una app”  
+4. “Ideas de campañas inspiradas en eventos actuales como Eurovisión”  
+5. “Diseña un post que combine humor con storytelling emocional canino”  
+6. “Frases para anunciar el lanzamiento de una app para alojamientos de mascotas”  
+7. “Post para mostrar apoyo a una marca amiga en tono elegante e ingenioso”  
 
 #### 6. Problemas Encontrados
 
-- Falta de coherencia emocional en algunos textos
-- Alto coste herramientas audiovisuales IA
+- Falta de coherencia emocional en algunos textos generados automáticamente  
+- Alto coste de algunas herramientas de generación visual (ej. MidJourney)  
+- Limitaciones de IA para captar tono emocional preciso sin ajustes humanos  
+- Dificultad para adaptar ciertos trends sin perder el foco de marca
+- El contenido generado por IA no garantiza resultados inmediatos. 
 
 #### 7. Evaluación General
 
-- **Recomendación:** Sí, con supervisión humana
+- **Recomendación del uso de IA:** Sí, siempre con supervisión creativa y estratégica humana. Es necesario complementar con estrategias de marketing, análisis humano y una correcta recopilación de datos para que estos puedan ser interpretados y utilizados eficazmente. Ademas, se utilizo herramientas de automatización como Meta Business Suite y Canva Pro para programar publicaciones( para mantener una presencia activa sin necesidad de intervención diaria), organizar contenidos y asegurar consistencia visual.
 
 ---
 

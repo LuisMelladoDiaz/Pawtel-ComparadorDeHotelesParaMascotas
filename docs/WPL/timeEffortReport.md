@@ -76,28 +76,17 @@
 
 ## Reporte de tiempo de Yesica Leydi Garate Fuentes
 
-**Periodo:** 10/04/2025 - 30/04/2025
-**Total de tiempo trabajado:** 32:21:00
+**Periodo:** 05/05/2025 - 22/05/2025
+**Total de tiempo trabajado:** 16:20:00
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Actualización de reportes individual personal | 01:10:00 |
-| Diseño de carteles para presentación oficial - Marketing | 03:48:00 |
-| Desarrollo de Presentación II - Marketing (PPL) | 03:59:00 |
-| Gestión de RRSS | 03:34:00 |
-| Recopilar recursos visuales (Post, Stories, Reels, videos, etc) II | 04:15:00 |
-| Corrección de materiales audiovisuales - Video de Inversores | 00:23:00 |
-| Cronograma de publicaciones en RRSS | 02:02:00 |
-| Desarrollo de Presentación: Marketing (PPL) | 02:11:00 |
-| Gestión de RRSS | 03:55:00 |
-| Video anuncio orientado a inversores | 01:00:00  |
-| Recursos Redes Sociales | 01:11:00|
-| Costes de marketing | 01:30:00 |
-| Recopilar recursos visuales (Post, Stories, Reels, videos, etc) I | 05:22:00 |
-| Definir la plantilla para la presentación | 02:01:00 |
-
+| Desarrollo de Presentación - WPL FINAL (Video) | 05:00:00 |
+| Desarrollo de Presentación - Evaluación de Rendimento individual | 00:20:00 |
+| Gestión de RRSS - Programar publicaciones | 05:00:00 |
+| Gestión de RRSS - Programar publicaciones| 06:00:00 |
 
 ![grafico-de-tiempos](graficas/yesica.png)
 ---
