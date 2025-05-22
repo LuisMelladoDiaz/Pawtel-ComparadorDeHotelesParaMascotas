@@ -39,7 +39,7 @@
 | 22/05/2025  | v 1.1         | Parte Francisco | Francisco Miguel Jiménez Morales |
 | 22/05/2025  | v 1.2         | Parte Fernando | Fernando Castelló Sánchez |
 | 22/05/2025  | v 1.3         | Parte de Sergio | Sergio Trenado González |
-
+| 22/05/2025  | v 1.4         | Parte de David | David González Martínez|
 
 ---
 
@@ -239,28 +239,26 @@
 
 ## Reporte de tiempo de David Gonzalez Martinez
 
-**Periodo:** 10/04/2025 - 22/05/2025
-**Total de tiempo trabajado:** 16:14:34
+**Periodo:** 30/04/2025 - 23/05/2025
+**Total de tiempo trabajado:** 20:08:19
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción                   | Duración  |
-|------------------------------|-----------|
-| Fix bugs                     | 00:02:37  |
-| Class                        | 04:00:00  |
-| Android acc                  | 01:03:00  |
-| Reunion                      | 00:30:00  |
-| Misc + informe IA            | 00:08:50  |
-| Misc                         | 00:14:00  |
-| Android                      | 01:05:00  |
-| Deploy, handlear not approved| 01:05:25  |
-| Checking delivery            | 01:32:28  |
-| Clases                       | 04:00:00  |
-| Fix                          | 01:05:00  |
-| Dont use axios               | 00:57:02  |
-| Arreglar bug                 | 00:24:08  |
+|-------------------------------|-----------|
+| Pawtel                        | 20:08:19  |
+| Android                       | 02:05:00  |
+| Defensa                       | 00:30:00  |
+| Deploy                        | 01:48:38  |
+| Presentacion                  | 03:00:00  |
+| Credenciales android          | 00:24:10  |
+| Misc                          | 03:29:23  |
+| Clases                        | 04:00:00  |
+| Informe de tiempo e IA        | 00:14:33  |
+| WPL                           | 04:00:00  |
+| Release and deploy            | 00:36:35  |
 
-![{634564C3-B806-4ED8-8F25-CBD49A874F3E}](https://github.com/user-attachments/assets/7f5a45ac-a507-464c-9d13-4f58b91161ca)
+![{2B5A3A71-FC33-4D91-BCA1-5C7031A16052}](https://github.com/user-attachments/assets/b0789477-475c-449b-8027-2bf5ca6d25d5)
 
 
 ---
