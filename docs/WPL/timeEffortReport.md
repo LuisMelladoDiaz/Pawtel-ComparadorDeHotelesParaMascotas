@@ -349,14 +349,15 @@
 
 ## Reporte de tiempo de Andrés Martínez Reviriego
 
-**Periodo:** 10/04/2025 - 22/05/2025
-**Total de tiempo trabajado:** 14:47:53
+**Periodo:** 30/04/2025 - 22/05/2025
+**Total de tiempo trabajado:** 05:59:56
 
 ### Proyecto Pawtel - Distribución del tiempo
 
 | Descripción | Duración |
 |-------------|---------|
-| Asistencia a clase | 08:00:00 |
-| Presentación | 06:47:53 |
+| Asistencia a clase | 04:00:00 |
+| Presentación individual | 00:27:22 |
+| Presentación WPL| 01:32:34 |
 
-![grafico-de-tiempos](graficas/andres4.png)
+![grafico-de-tiempos](graficas/andres5.png)
