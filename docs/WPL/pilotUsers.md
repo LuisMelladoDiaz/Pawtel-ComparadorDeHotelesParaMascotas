@@ -14,7 +14,7 @@
 
 # **Usuarios Piloto. Gestión del Feedback y Comunicación**
 
-**📅 Entregable:** PPL
+**📅 Entregable:** WPL
 **📆 Fecha:** 10/03/2025
 **👥 Equipo:** G11
 
@@ -47,6 +47,8 @@
 | 📆 24/03/2025 | 🔹 v 1.2       | 📋 Revisión Sprint 2. Adjuntar informes de Feedback| ✍️ Daniel Flores de Francisco |
 | 📆 08/04/2025 | 🔹 v 1.3       | 📋 Revisión Sprint 3. Adjuntar informes de Feedback de este Sprint| ✍️ Daniel Flores de Francisco |
 | 📆 29/04/2025 | 🔹 v 1.4       | 📋 Revisión PPL. Adjuntar nuevos informes de Feedback| ✍️ Daniel Flores de Francisco |
+| 📆 22/05/2025 | 🔹 v 1.5       | 📋 Revisión WPL | ✍️ Daniel Flores de Francisco |
+
 
 
 

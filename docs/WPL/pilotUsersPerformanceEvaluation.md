@@ -37,8 +37,7 @@
 ## **Tabla de Versiones**
 | Versión | Fecha       | Descripción de Cambios              | Autor                 |
 |---------|-------------|-------------------------------------|-----------------------|
-| 1.1     | 22/05/2025  | Actualización: fin de evaluación de usuarios piloto | Luis Mellado Díaz       |
-| 1.0     | 29/04/2025  | Versión inicial del acuerdo         | Francisco Miguel Jiménez Morales |
+| 1.0     | 22/05/2025  | Actualización: fin de evaluación de usuarios piloto | Luis Mellado Díaz       |
 
 ---
 

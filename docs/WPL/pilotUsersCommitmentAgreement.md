@@ -12,9 +12,9 @@
 
 <br><br>
 
-# 📑 **Acuerdo con Usuarios Piloto - Sprint PPL** 🚀
+# 📑 **Acuerdo con Usuarios Piloto - Sprint WPL** 🚀
 
-**📅 Entregable:** PPL
+**📅 Entregable:** WPL
 **📆 Fecha:** 10/03/2025
 **👥 Equipo:** G11
 

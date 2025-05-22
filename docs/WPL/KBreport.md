@@ -14,7 +14,7 @@
 
 # 📑 **KBReport - PPL** 🚀
 
-**📅 Entregable:** PPL
+**📅 Entregable:** WPL
 **📆 Fecha:** 22/05/2025
 **👥 Equipo:** G11
 

@@ -14,7 +14,7 @@
 
 # 📑 **Compromiso de Participación en la Asignatura ISPP** 🚀
 
-**📅 Entregable:** PPL
+**📅 Entregable:** WPL
 **📆 Fecha:** 02/02/2025
 **👥 Equipo:** G11
 

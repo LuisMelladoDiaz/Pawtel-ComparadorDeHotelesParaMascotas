@@ -14,7 +14,7 @@
 
 <br><br>
 
-# 📑 **Reporte de Tiempo - PPL** 🚀
+# 📑 **Reporte de Tiempo - WPL** 🚀
 
 **📅 Entregable:** WPL
 **📆 Fecha:** 22/05/2025
@@ -41,6 +41,7 @@
 | 22/05/2025  | v 1.3         | Parte de Sergio | Sergio Trenado González |
 | 22/05/2025  | v 1.4         | Parte de David | David González Martínez|
 | 22/05/2025  | v 1.5         | Parte de Javi | Javier García Sebastián|
+| 22/05/2025  | v 1.6         | Parte de Dani | Daniel Flores de Francisco|
 
 ---
 
@@ -255,27 +256,18 @@
 
 ## Reporte de tiempo de Daniel Flores de Francisco
 
-**Periodo:** 11/04/2025 - 2/05/2025
-**Total de tiempo trabajado:** 19:23:22
+**Periodo:** 02/05/2025 - 22/05/2025
+**Total de tiempo trabajado:** 7:30:00
 
-### Proyecto Pawtel - Distribución del tiempo
-
-| Tarea                                      | Tiempo   |
-|--------------------------------------------|----------|
-| Reunion Marketing                          | 01:00:00 |
-| Preparando PPL                             | 00:36:00 |
-| Prsentacion PPL Semana 1.                  | 00:52:00 |
-| Organización PPL y presentaciones          | 01:09:00 |
-| ISPP                                       | 04:00:00 |
-| Indexación de web por keyword              | 01:46:00 |
-| Presentacion y delyvery PPL                | 02:00:00 |
-| Clase ISPP                                 | 08:00:00 |
-| Arreglar Test 1                            | 03:10:00 |
-| SemRush Segmentacion Mercado               | 01:50:00 |
-| Googlw Trends, Slides y QA                 | 04:00:00 |
+| Descripción                          | Duración  |
+|--------------------------------------|-----------|
+| Clase                                | 04:00:00  |
+| Presentacion rendimiento             | 00:30:00  |
+| Presentacion WPL                     | 02:30:00  |
+| Reunión WPL                          | 01:00:00  |
 
 
-![grafico-de-tiempos](graficas/dani2.png)
+![grafico-de-tiempos](graficas/jorge.png)
 ---
 
 ## Reporte de tiempo de Claudio Cortes Carrasco
