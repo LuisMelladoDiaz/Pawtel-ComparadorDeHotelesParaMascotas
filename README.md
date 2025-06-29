@@ -1,6 +1,6 @@
 # 🐾 Pawtel - Comparador de Hoteles para Mascotas
 
-![Logo de PAWTEL](https://raw.githubusercontent.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/refs/heads/main/frontend/src/assets/pawtel-logo-white.png)
+![image](https://github.com/user-attachments/assets/53347f4e-57b2-4758-ad48-b0b9e3f6bb08)
 
 Bienvenido a **Pawtel**, una plataforma innovadora para la busqueda y reserva de hoteles para mascotas. Nuestra misión es ofrecer una experiencia fácil e intuitva que permita encontrar el hospedaje perfecto para su mejor amigo.
 
