@@ -65,23 +65,6 @@ Si accede desde el despliegue en la nube, podría descargar el proyecto como apl
 
 ----
 
-## 📌 Uso
-
-⚠️ **Nota:** Completar con ejemplos de cómo utilizar la plataforma.
-
-1. **Registro e inicio de sesión.**
-2. **Búsqueda y filtrado de hoteles.**
-3. **Reserva de hospedaje.**
-4. **Gestión de reservas y pagos.**
-5. **Reseñas y calificaciones.**
-
----
-
-## 📂 Estructura del Proyecto
-
-⚠️ **Nota:** Completar con la estructura real del proyecto.
-
----
 
 ## 🔗 Enlaces Importantes
 
@@ -93,11 +76,7 @@ Si accede desde el despliegue en la nube, podría descargar el proyecto como apl
 
 ### Contribución y Despliegue
 - 🔹 **Cómo Contribuir y Gestión de la Configuración:**  [Pautas de contribución](https://github.com/LuisMelladoDiaz/Pawtel-ComparadorDeHotelesParaMascotas/blob/main/docs/CONTRIBUTING.md).
-- 🔹 **Despliegue en Producción:** *(Enlace por agregar)*
-
-### Presentaciones
-- 🔹 **[Semana 1](https://docs.google.com/presentation/d/1YIfkJfGKqe_43hg5v4Fm_qdwbAvd6D_e-aXp1oEHZfI/edit#slide=id.g32d71018c15_4_11)** (Idea descartada)
-- 🔹 **[Semana 2](https://onedrive.live.com/edit?id=C3564B5138C1A24C!5804&resid=C3564B5138C1A24C!5804&ithint=file%2cpptx&authkey=!APEWh5z1LH8qmP8&wdo=2&cid=c3564b5138c1a24c)**
+- 🔹 **Despliegue en Producción:** [Despliegue](https:/pawtel.es).
 
 ---
 
@@ -111,8 +90,8 @@ Copyright (c) 2025 Pawtel.
 
 ## 👥 Contribuidores
 
-- **[Daniel Flores De Francisco](https://github.com/DanielFloresDeFrancisco)** (Director del Proyecto)
-- **[Luis Mellado Díaz](https://github.com/LuisMelladoDiaz)** (Director del Proyecto)
+- **[Daniel Flores De Francisco](https://github.com/DanielFloresDeFrancisco)** (Project Manager)
+- **[Luis Mellado Díaz](https://github.com/LuisMelladoDiaz)** (Project Manager)
 - **[Andrés Martínez Reviriego](https://github.com/Andresmarevi)**
 - **[Claudio Cortés Carrasco](https://github.com/claudiocortescarrasco)**
 - **[David González Martínez](https://github.com/davidgonmar)**
